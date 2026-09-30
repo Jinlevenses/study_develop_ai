@@ -1,0 +1,3752 @@
+{
+  "corpus": {
+    "docs": 310,
+    "queries_headline": 40,
+    "probes": 2,
+    "heldout": 20
+  },
+  "mechanism": {
+    "fts5_trigram_available": true,
+    "match_2char_hangul_rows": 0,
+    "match_2char_hangul_rows_via_like_scan": 15,
+    "match_3char_hangul_rows": 3,
+    "match_ascii_case_insensitive_jwt_lower": 2,
+    "match_ascii_k8s_3char": 5,
+    "match_2char_ascii_db": 0,
+    "match_NFD_query_on_NFC_index": 0,
+    "match_NFC_query_on_NFC_index": 3,
+    "match_phrase_with_space_hit": 1,
+    "match_hyphen_slash_unquoted_error": "ERR_SQLITE_ERROR errcode=1: fts5: syntax error near \"/\"",
+    "match_hyphen_quoted_ok": 1,
+    "like_3char_plan_on_fts_column": "SCAN fts_tri VIRTUAL TABLE INDEX 0:L2",
+    "like_2char_plan_on_fts_column": "SCAN fts_tri VIRTUAL TABLE INDEX 0:L2",
+    "like_3char_rows_on_fts_column": 2,
+    "unicode61_prefix_2char_rows": 15,
+    "unicode61_prefix_vs_trigram_midword": {
+      "unicode61_prefix": 0,
+      "trigram": 8
+    },
+    "fts_integrity_check": "ok",
+    "trigger_sync": {
+      "after_update_new_term_hits": 1,
+      "after_update_old_term_hits": 0,
+      "after_delete_hits": 0
+    }
+  },
+  "ground_truth_audit": [
+    {
+      "q": "데드락",
+      "contains_query_but_not_rel": [],
+      "rel_without_literal_hit": [
+        "os.deadlock-conditions"
+      ]
+    },
+    {
+      "q": "REST",
+      "contains_query_but_not_rel": [
+        "js.destructuring"
+      ],
+      "rel_without_literal_hit": []
+    },
+    {
+      "q": "Redis",
+      "contains_query_but_not_rel": [],
+      "rel_without_literal_hit": [
+        "db.cache-aside",
+        "db.cache-invalidation"
+      ]
+    },
+    {
+      "q": "락",
+      "contains_query_but_not_rel": [
+        "sec.idor",
+        "db.n-plus-one"
+      ],
+      "rel_without_literal_hit": []
+    },
+    {
+      "q": "트리",
+      "contains_query_but_not_rel": [
+        "net.udp",
+        "net.grpc",
+        "docker.registry",
+        "db.stored-proc",
+        "os.inode-fs",
+        "web.critical-render",
+        "web.bundler"
+      ],
+      "rel_without_literal_hit": []
+    },
+    {
+      "q": "이벤트루프",
+      "contains_query_but_not_rel": [],
+      "rel_without_literal_hit": [
+        "js.event-loop",
+        "js.microtask"
+      ]
+    },
+    {
+      "q": "그래프",
+      "contains_query_but_not_rel": [
+        "net.graphql"
+      ],
+      "rel_without_literal_hit": []
+    },
+    {
+      "q": "인덱스",
+      "contains_query_but_not_rel": [
+        "algo.two-pointers"
+      ],
+      "rel_without_literal_hit": []
+    }
+  ],
+  "headline40": {
+    "V0_naive_trigram": {
+      "recall_at_10": 0.467,
+      "by_category": {
+        "L": {
+          "n": 10,
+          "recall": 0.783
+        },
+        "E": {
+          "n": 10,
+          "recall": 0.933
+        },
+        "S": {
+          "n": 10,
+          "recall": 0
+        },
+        "M": {
+          "n": 10,
+          "recall": 0.15
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "쿠버네티스 파드 스케줄링",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "트랜잭션 격리 수준",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333
+        },
+        {
+          "q": "캐시",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "해시",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "파드",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "도커",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "큐",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "락",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "소켓",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "세션",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "스택",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "TCP 3-way 핸드셰이크",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "JWT 검증",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "쿠버네티스 스케줄링",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "docker 멀티스테이지",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "DB 인덱스",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "redis 캐시",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "git 리베이스",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "SQL 조인",
+          "cat": "M",
+          "recall": 0.5
+        }
+      ],
+      "queries_full_recall": 16,
+      "rows": [
+        {
+          "q": "쿠버네티스 파드 스케줄링",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "멀티스테이지 빌드",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build"
+          ]
+        },
+        {
+          "q": "스케줄링",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.cpu-scheduling",
+            "k8s.pod-scheduling",
+            "k8s.taint-toleration"
+          ]
+        },
+        {
+          "q": "핸드셰이크",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.tls-handshake",
+            "net.tcp-3way-handshake",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "db.deadlock"
+          ]
+        },
+        {
+          "q": "정규화",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.denormalization",
+            "db.normalization"
+          ]
+        },
+        {
+          "q": "트랜잭션 격리 수준",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "db.isolation-levels"
+          ]
+        },
+        {
+          "q": "이벤트 루프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "js.event-loop",
+            "node.libuv",
+            "js.microtask"
+          ]
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333,
+          "top10": [
+            "os.virtual-memory"
+          ]
+        },
+        {
+          "q": "의존성 주입",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "arch.dependency-injection"
+          ]
+        },
+        {
+          "q": "K8s",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.helm",
+            "k8s.configmap-secret",
+            "k8s.pod",
+            "k8s.hpa",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "JWT",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-structure",
+            "sec.jwt-verify"
+          ]
+        },
+        {
+          "q": "TCP",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-4way-teardown",
+            "net.tcp-flow-control",
+            "net.tcp-3way-handshake",
+            "net.tcp-congestion",
+            "net.osi-model",
+            "net.http2",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "CI/CD",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "ci.cicd-pipeline"
+          ]
+        },
+        {
+          "q": "3-way handshake",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake"
+          ]
+        },
+        {
+          "q": "OAuth",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.oauth2",
+            "sec.oidc"
+          ]
+        },
+        {
+          "q": "Kubernetes",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.ingress",
+            "k8s.service",
+            "k8s.deployment",
+            "k8s.probes",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "REST",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.rest",
+            "js.destructuring"
+          ]
+        },
+        {
+          "q": "B-Tree",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "db.btree-index"
+          ]
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333,
+          "top10": [
+            "db.redis"
+          ]
+        },
+        {
+          "q": "캐시",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "해시",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "파드",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "도커",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "큐",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "락",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "소켓",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "세션",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "스택",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "TCP 3-way 핸드셰이크",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "JWT 검증",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "쿠버네티스 스케줄링",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "docker 멀티스테이지",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "DB 인덱스",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "HTTP 캐시",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.http-caching"
+          ]
+        },
+        {
+          "q": "redis 캐시",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "git 리베이스",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "SQL 조인",
+          "cat": "M",
+          "recall": 0.5,
+          "top10": [
+            "db.join-types"
+          ]
+        }
+      ]
+    },
+    "V1_hybrid_basic": {
+      "recall_at_10": 0.855,
+      "by_category": {
+        "L": {
+          "n": 10,
+          "recall": 0.783
+        },
+        "E": {
+          "n": 10,
+          "recall": 0.933
+        },
+        "S": {
+          "n": 10,
+          "recall": 0.988
+        },
+        "M": {
+          "n": 10,
+          "recall": 0.717
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "쿠버네티스 파드 스케줄링",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "트랜잭션 격리 수준",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0.875
+        },
+        {
+          "q": "쿠버네티스 스케줄링",
+          "cat": "M",
+          "recall": 0.5
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 0.333
+        },
+        {
+          "q": "DB 인덱스",
+          "cat": "M",
+          "recall": 0.5
+        },
+        {
+          "q": "redis 캐시",
+          "cat": "M",
+          "recall": 0.333
+        },
+        {
+          "q": "SQL 조인",
+          "cat": "M",
+          "recall": 0.5
+        }
+      ],
+      "queries_full_recall": 29,
+      "rows": [
+        {
+          "q": "쿠버네티스 파드 스케줄링",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "멀티스테이지 빌드",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build"
+          ]
+        },
+        {
+          "q": "스케줄링",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.cpu-scheduling",
+            "k8s.pod-scheduling",
+            "k8s.taint-toleration"
+          ]
+        },
+        {
+          "q": "핸드셰이크",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.tls-handshake",
+            "net.tcp-3way-handshake",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "db.deadlock"
+          ]
+        },
+        {
+          "q": "정규화",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.normalization",
+            "db.denormalization"
+          ]
+        },
+        {
+          "q": "트랜잭션 격리 수준",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "db.isolation-levels"
+          ]
+        },
+        {
+          "q": "이벤트 루프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "js.event-loop",
+            "node.libuv",
+            "js.microtask"
+          ]
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333,
+          "top10": [
+            "os.virtual-memory"
+          ]
+        },
+        {
+          "q": "의존성 주입",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "arch.dependency-injection"
+          ]
+        },
+        {
+          "q": "K8s",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.helm",
+            "k8s.configmap-secret",
+            "k8s.pod",
+            "k8s.hpa",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "JWT",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-structure",
+            "sec.jwt-verify"
+          ]
+        },
+        {
+          "q": "TCP",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-4way-teardown",
+            "net.tcp-flow-control",
+            "net.tcp-3way-handshake",
+            "net.tcp-congestion",
+            "net.osi-model",
+            "net.http2",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "CI/CD",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "ci.cicd-pipeline"
+          ]
+        },
+        {
+          "q": "3-way handshake",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake"
+          ]
+        },
+        {
+          "q": "OAuth",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.oauth2",
+            "sec.oidc"
+          ]
+        },
+        {
+          "q": "Kubernetes",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.ingress",
+            "k8s.service",
+            "k8s.deployment",
+            "k8s.probes",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "REST",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.rest",
+            "js.destructuring"
+          ]
+        },
+        {
+          "q": "B-Tree",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "db.btree-index"
+          ]
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333,
+          "top10": [
+            "db.redis"
+          ]
+        },
+        {
+          "q": "캐시",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.cache-aside",
+            "db.cache-invalidation",
+            "db.cache-stampede",
+            "algo.cache-policies",
+            "net.http-caching",
+            "algo.lru-cache",
+            "os.cpu-cache",
+            "net.cdn",
+            "docker.image-layers",
+            "ci.artifact"
+          ]
+        },
+        {
+          "q": "해시",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.hash-table",
+            "ds.hash-collision",
+            "sec.hash-functions",
+            "ds.consistent-hashing",
+            "sec.password-hashing",
+            "sec.hmac",
+            "db.join-algorithms",
+            "algo.lru-cache"
+          ]
+        },
+        {
+          "q": "파드",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.pod-scheduling",
+            "k8s.deployment",
+            "k8s.service",
+            "k8s.configmap-secret",
+            "k8s.hpa",
+            "k8s.pv-pvc",
+            "k8s.taint-toleration",
+            "k8s.cni"
+          ]
+        },
+        {
+          "q": "도커",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "docker.image-layers",
+            "docker.multistage-build",
+            "docker.volumes",
+            "docker.networking",
+            "docker.compose"
+          ]
+        },
+        {
+          "q": "큐",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.queue",
+            "ds.priority-queue",
+            "js.microtask",
+            "arch.message-queue",
+            "ds.deque",
+            "js.event-loop",
+            "algo.bfs-dfs",
+            "algo.dijkstra",
+            "os.ipc"
+          ]
+        },
+        {
+          "q": "락",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.locking",
+            "os.file-lock",
+            "db.deadlock",
+            "sec.idor",
+            "db.n-plus-one"
+          ]
+        },
+        {
+          "q": "소켓",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "net.socket",
+            "net.websocket",
+            "os.fd",
+            "os.ipc"
+          ]
+        },
+        {
+          "q": "세션",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "sec.session-vs-token",
+            "net.tls-handshake",
+            "db.redis"
+          ]
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0.875,
+          "top10": [
+            "db.stored-proc",
+            "ds.binary-tree",
+            "ds.bst",
+            "ds.avl-redblack",
+            "ds.segment-tree",
+            "algo.mst",
+            "web.bundler",
+            "docker.registry",
+            "ds.trie",
+            "db.btree-index"
+          ]
+        },
+        {
+          "q": "스택",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.stack",
+            "os.stack-heap",
+            "algo.recursion",
+            "js.event-loop",
+            "algo.bfs-dfs"
+          ]
+        },
+        {
+          "q": "TCP 3-way 핸드셰이크",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake"
+          ]
+        },
+        {
+          "q": "JWT 검증",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-verify"
+          ]
+        },
+        {
+          "q": "쿠버네티스 스케줄링",
+          "cat": "M",
+          "recall": 0.5,
+          "top10": [
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 0.333,
+          "top10": [
+            "ci.cicd-pipeline"
+          ]
+        },
+        {
+          "q": "docker 멀티스테이지",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build"
+          ]
+        },
+        {
+          "q": "DB 인덱스",
+          "cat": "M",
+          "recall": 0.5,
+          "top10": [
+            "db.index-basics",
+            "db.composite-index"
+          ]
+        },
+        {
+          "q": "HTTP 캐시",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.http-caching"
+          ]
+        },
+        {
+          "q": "redis 캐시",
+          "cat": "M",
+          "recall": 0.333,
+          "top10": [
+            "db.redis"
+          ]
+        },
+        {
+          "q": "git 리베이스",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "git.rebase-vs-merge"
+          ]
+        },
+        {
+          "q": "SQL 조인",
+          "cat": "M",
+          "recall": 0.5,
+          "top10": [
+            "db.join-types"
+          ]
+        }
+      ]
+    },
+    "V2_hybrid_full_like": {
+      "recall_at_10": 0.943,
+      "by_category": {
+        "L": {
+          "n": 10,
+          "recall": 0.883
+        },
+        "E": {
+          "n": 10,
+          "recall": 0.933
+        },
+        "S": {
+          "n": 10,
+          "recall": 0.988
+        },
+        "M": {
+          "n": 10,
+          "recall": 0.967
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0.875
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 0.667
+        }
+      ],
+      "queries_full_recall": 35,
+      "rows": [
+        {
+          "q": "쿠버네티스 파드 스케줄링",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "k8s.pod-scheduling",
+            "k8s.service",
+            "k8s.pod",
+            "k8s.taint-toleration",
+            "k8s.deployment",
+            "os.cpu-scheduling",
+            "k8s.rbac",
+            "k8s.operator",
+            "k8s.helm",
+            "k8s.control-loop"
+          ]
+        },
+        {
+          "q": "멀티스테이지 빌드",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build",
+            "ci.artifact",
+            "ci.cicd-pipeline",
+            "ci.monorepo"
+          ]
+        },
+        {
+          "q": "스케줄링",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.cpu-scheduling",
+            "k8s.pod-scheduling",
+            "k8s.taint-toleration"
+          ]
+        },
+        {
+          "q": "핸드셰이크",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.tls-handshake",
+            "net.tcp-3way-handshake",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "db.deadlock"
+          ]
+        },
+        {
+          "q": "정규화",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.normalization",
+            "db.denormalization"
+          ]
+        },
+        {
+          "q": "트랜잭션 격리 수준",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.isolation-levels",
+            "db.transaction-acid",
+            "obs.metrics",
+            "arch.saga",
+            "docker.namespaces-cgroups",
+            "arch.hexagonal",
+            "db.deadlock",
+            "arch.outbox",
+            "db.sqlite-wal-mode"
+          ]
+        },
+        {
+          "q": "이벤트 루프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "js.event-loop",
+            "node.libuv",
+            "js.microtask",
+            "k8s.control-loop",
+            "arch.event-sourcing",
+            "arch.event-driven",
+            "web.dom-events",
+            "db.join-algorithms",
+            "node.event-emitter",
+            "net.sse"
+          ]
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333,
+          "top10": [
+            "os.virtual-memory",
+            "docker.container-vs-vm",
+            "os.mmap",
+            "k8s.service",
+            "web.react-rendering",
+            "os.numa",
+            "os.oom",
+            "os.ipc",
+            "os.stack-heap",
+            "js.weakref"
+          ]
+        },
+        {
+          "q": "의존성 주입",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "arch.dependency-injection",
+            "ci.dependency-mgmt",
+            "obs.chaos",
+            "k8s.configmap-secret",
+            "arch.clean-architecture",
+            "web.react-hooks",
+            "algo.topological-sort",
+            "test.mocking",
+            "ci.artifact",
+            "ci.sbom"
+          ]
+        },
+        {
+          "q": "K8s",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.helm",
+            "k8s.configmap-secret",
+            "k8s.pod",
+            "k8s.hpa",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "JWT",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-structure",
+            "sec.jwt-verify"
+          ]
+        },
+        {
+          "q": "TCP",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-4way-teardown",
+            "net.tcp-flow-control",
+            "net.tcp-3way-handshake",
+            "net.tcp-congestion",
+            "net.osi-model",
+            "net.http2",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "CI/CD",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "ci.cicd-pipeline"
+          ]
+        },
+        {
+          "q": "3-way handshake",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake"
+          ]
+        },
+        {
+          "q": "OAuth",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.oauth2",
+            "sec.oidc"
+          ]
+        },
+        {
+          "q": "Kubernetes",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.ingress",
+            "k8s.service",
+            "k8s.deployment",
+            "k8s.probes",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "REST",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.rest",
+            "js.destructuring"
+          ]
+        },
+        {
+          "q": "B-Tree",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "db.btree-index"
+          ]
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333,
+          "top10": [
+            "db.redis"
+          ]
+        },
+        {
+          "q": "캐시",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.cache-aside",
+            "db.cache-invalidation",
+            "db.cache-stampede",
+            "algo.cache-policies",
+            "net.http-caching",
+            "algo.lru-cache",
+            "os.cpu-cache",
+            "net.cdn",
+            "docker.image-layers",
+            "ci.artifact"
+          ]
+        },
+        {
+          "q": "해시",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.hash-table",
+            "ds.hash-collision",
+            "sec.hash-functions",
+            "ds.consistent-hashing",
+            "sec.password-hashing",
+            "sec.hmac",
+            "db.join-algorithms",
+            "algo.lru-cache"
+          ]
+        },
+        {
+          "q": "파드",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.pod-scheduling",
+            "k8s.deployment",
+            "k8s.service",
+            "k8s.configmap-secret",
+            "k8s.hpa",
+            "k8s.pv-pvc",
+            "k8s.taint-toleration",
+            "k8s.cni"
+          ]
+        },
+        {
+          "q": "도커",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "docker.image-layers",
+            "docker.multistage-build",
+            "docker.volumes",
+            "docker.networking",
+            "docker.compose"
+          ]
+        },
+        {
+          "q": "큐",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.queue",
+            "ds.priority-queue",
+            "js.microtask",
+            "arch.message-queue",
+            "ds.deque",
+            "js.event-loop",
+            "algo.bfs-dfs",
+            "algo.dijkstra",
+            "os.ipc"
+          ]
+        },
+        {
+          "q": "락",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.locking",
+            "os.file-lock",
+            "db.deadlock",
+            "sec.idor",
+            "db.n-plus-one"
+          ]
+        },
+        {
+          "q": "소켓",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "net.socket",
+            "net.websocket",
+            "os.fd",
+            "os.ipc"
+          ]
+        },
+        {
+          "q": "세션",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "sec.session-vs-token",
+            "net.tls-handshake",
+            "db.redis"
+          ]
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0.875,
+          "top10": [
+            "db.stored-proc",
+            "ds.binary-tree",
+            "ds.bst",
+            "ds.avl-redblack",
+            "ds.segment-tree",
+            "algo.mst",
+            "web.bundler",
+            "docker.registry",
+            "ds.trie",
+            "db.btree-index"
+          ]
+        },
+        {
+          "q": "스택",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.stack",
+            "os.stack-heap",
+            "algo.recursion",
+            "js.event-loop",
+            "algo.bfs-dfs"
+          ]
+        },
+        {
+          "q": "TCP 3-way 핸드셰이크",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake",
+            "net.keepalive",
+            "net.tls-handshake",
+            "net.tcp-4way-teardown",
+            "net.tcp-flow-control",
+            "net.tcp-congestion",
+            "net.osi-model",
+            "net.http2"
+          ]
+        },
+        {
+          "q": "JWT 검증",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-verify",
+            "sec.jwt-structure",
+            "ts.zod-validation",
+            "sec.digital-signature",
+            "net.http-caching",
+            "net.tls-handshake",
+            "net.https-cert-chain",
+            "sec.hmac",
+            "sec.idor",
+            "sec.zero-trust"
+          ]
+        },
+        {
+          "q": "쿠버네티스 스케줄링",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "k8s.pod-scheduling",
+            "os.cpu-scheduling",
+            "k8s.rbac",
+            "k8s.operator",
+            "k8s.service",
+            "k8s.taint-toleration",
+            "k8s.helm",
+            "k8s.control-loop",
+            "k8s.pod",
+            "k8s.deployment"
+          ]
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 0.667,
+          "top10": [
+            "ci.cicd-pipeline",
+            "net.subnet-cidr",
+            "ci.artifact",
+            "k8s.control-loop",
+            "db.transaction-acid",
+            "arch.circuit-breaker",
+            "ds.avl-redblack",
+            "ts.strict-mode",
+            "web.react-rendering",
+            "arch.event-sourcing"
+          ]
+        },
+        {
+          "q": "docker 멀티스테이지",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build",
+            "docker.dockerfile-best",
+            "docker.compose",
+            "docker.image-layers"
+          ]
+        },
+        {
+          "q": "DB 인덱스",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.index-basics",
+            "db.composite-index",
+            "db.btree-index",
+            "db.covering-index",
+            "db.sqlite-basics",
+            "web.localstorage",
+            "db.uuid-ulid",
+            "db.explain-plan",
+            "algo.two-pointers",
+            "db.connection-pool"
+          ]
+        },
+        {
+          "q": "HTTP 캐시",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.http-caching",
+            "net.http2",
+            "net.http-status-codes",
+            "net.http-basics",
+            "net.http3-quic",
+            "net.http-methods-idempotency",
+            "db.cache-aside",
+            "db.cache-invalidation",
+            "db.cache-stampede",
+            "algo.cache-policies"
+          ]
+        },
+        {
+          "q": "redis 캐시",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.redis",
+            "db.cache-aside",
+            "db.cache-invalidation",
+            "db.cache-stampede",
+            "algo.cache-policies",
+            "net.http-caching",
+            "algo.lru-cache",
+            "os.cpu-cache",
+            "net.cdn",
+            "docker.image-layers"
+          ]
+        },
+        {
+          "q": "git 리베이스",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "git.rebase-vs-merge",
+            "git.cherry-pick",
+            "git.bisect",
+            "git.stash",
+            "git.reflog",
+            "ci.gitops",
+            "ci.github-actions",
+            "git.internals",
+            "sec.digital-signature"
+          ]
+        },
+        {
+          "q": "SQL 조인",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.join-types",
+            "db.join-algorithms",
+            "sec.sql-injection",
+            "db.sqlite-basics",
+            "db.sqlite-wal-mode",
+            "db.window-functions",
+            "node.sqlite",
+            "db.nosql-types",
+            "db.explain-plan",
+            "db.fts"
+          ]
+        }
+      ]
+    },
+    "V3_hybrid_full_uni": {
+      "recall_at_10": 0.951,
+      "by_category": {
+        "L": {
+          "n": 10,
+          "recall": 0.883
+        },
+        "E": {
+          "n": 10,
+          "recall": 0.933
+        },
+        "S": {
+          "n": 10,
+          "recall": 0.988
+        },
+        "M": {
+          "n": 10,
+          "recall": 1
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0.875
+        }
+      ],
+      "queries_full_recall": 36,
+      "rows": [
+        {
+          "q": "쿠버네티스 파드 스케줄링",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "k8s.pod-scheduling",
+            "k8s.service",
+            "k8s.pod",
+            "k8s.taint-toleration",
+            "k8s.deployment",
+            "os.cpu-scheduling",
+            "k8s.rbac",
+            "k8s.operator",
+            "k8s.helm",
+            "k8s.control-loop"
+          ]
+        },
+        {
+          "q": "멀티스테이지 빌드",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build",
+            "ci.artifact",
+            "ci.monorepo",
+            "ci.cicd-pipeline"
+          ]
+        },
+        {
+          "q": "스케줄링",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.cpu-scheduling",
+            "k8s.pod-scheduling",
+            "k8s.taint-toleration"
+          ]
+        },
+        {
+          "q": "핸드셰이크",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.tls-handshake",
+            "net.tcp-3way-handshake",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "데드락",
+          "cat": "L",
+          "recall": 0.5,
+          "top10": [
+            "db.deadlock"
+          ]
+        },
+        {
+          "q": "정규화",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.normalization",
+            "db.denormalization"
+          ]
+        },
+        {
+          "q": "트랜잭션 격리 수준",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.isolation-levels",
+            "db.transaction-acid",
+            "obs.metrics",
+            "arch.saga",
+            "docker.namespaces-cgroups",
+            "arch.hexagonal",
+            "db.deadlock",
+            "arch.outbox",
+            "db.sqlite-wal-mode"
+          ]
+        },
+        {
+          "q": "이벤트 루프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "js.event-loop",
+            "node.libuv",
+            "js.microtask",
+            "k8s.control-loop",
+            "arch.event-sourcing",
+            "arch.event-driven",
+            "web.dom-events",
+            "db.join-algorithms",
+            "node.event-emitter",
+            "net.sse"
+          ]
+        },
+        {
+          "q": "가상 메모리",
+          "cat": "L",
+          "recall": 0.333,
+          "top10": [
+            "os.virtual-memory",
+            "docker.container-vs-vm",
+            "os.mmap",
+            "web.react-rendering",
+            "k8s.service",
+            "os.numa",
+            "os.oom",
+            "os.ipc",
+            "os.stack-heap",
+            "js.weakref"
+          ]
+        },
+        {
+          "q": "의존성 주입",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "arch.dependency-injection",
+            "ci.dependency-mgmt",
+            "obs.chaos",
+            "k8s.configmap-secret",
+            "arch.clean-architecture",
+            "web.react-hooks",
+            "algo.topological-sort",
+            "test.mocking",
+            "ci.artifact",
+            "ci.sbom"
+          ]
+        },
+        {
+          "q": "K8s",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.helm",
+            "k8s.configmap-secret",
+            "k8s.pod",
+            "k8s.hpa",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "JWT",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-structure",
+            "sec.jwt-verify"
+          ]
+        },
+        {
+          "q": "TCP",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-4way-teardown",
+            "net.tcp-flow-control",
+            "net.tcp-3way-handshake",
+            "net.tcp-congestion",
+            "net.osi-model",
+            "net.http2",
+            "net.keepalive"
+          ]
+        },
+        {
+          "q": "CI/CD",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "ci.cicd-pipeline"
+          ]
+        },
+        {
+          "q": "3-way handshake",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake"
+          ]
+        },
+        {
+          "q": "OAuth",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "sec.oauth2",
+            "sec.oidc"
+          ]
+        },
+        {
+          "q": "Kubernetes",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.ingress",
+            "k8s.service",
+            "k8s.deployment",
+            "k8s.probes",
+            "k8s.pod-scheduling"
+          ]
+        },
+        {
+          "q": "REST",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.rest",
+            "js.destructuring"
+          ]
+        },
+        {
+          "q": "B-Tree",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "db.btree-index"
+          ]
+        },
+        {
+          "q": "Redis",
+          "cat": "E",
+          "recall": 0.333,
+          "top10": [
+            "db.redis"
+          ]
+        },
+        {
+          "q": "캐시",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.cache-stampede",
+            "algo.cache-policies",
+            "db.cache-aside",
+            "db.cache-invalidation",
+            "os.cpu-cache",
+            "algo.lru-cache",
+            "net.http-caching",
+            "net.cdn",
+            "ci.artifact",
+            "db.redis"
+          ]
+        },
+        {
+          "q": "해시",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.hash-table",
+            "ds.hash-collision",
+            "sec.hash-functions",
+            "ds.consistent-hashing",
+            "sec.hmac",
+            "sec.password-hashing",
+            "db.join-algorithms",
+            "algo.lru-cache"
+          ]
+        },
+        {
+          "q": "파드",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.pod-scheduling",
+            "k8s.pv-pvc",
+            "k8s.cni",
+            "k8s.deployment",
+            "k8s.configmap-secret",
+            "k8s.service",
+            "k8s.taint-toleration",
+            "k8s.hpa"
+          ]
+        },
+        {
+          "q": "도커",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "docker.networking",
+            "docker.volumes",
+            "docker.multistage-build",
+            "docker.image-layers",
+            "docker.compose"
+          ]
+        },
+        {
+          "q": "큐",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.queue",
+            "arch.message-queue",
+            "ds.priority-queue",
+            "js.microtask",
+            "ds.deque",
+            "js.event-loop",
+            "algo.dijkstra",
+            "os.ipc",
+            "algo.bfs-dfs"
+          ]
+        },
+        {
+          "q": "락",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.locking",
+            "os.file-lock",
+            "db.deadlock",
+            "sec.idor",
+            "db.n-plus-one"
+          ]
+        },
+        {
+          "q": "소켓",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "net.socket",
+            "os.fd",
+            "os.ipc",
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "세션",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "sec.session-vs-token",
+            "net.tls-handshake",
+            "db.redis"
+          ]
+        },
+        {
+          "q": "트리",
+          "cat": "S",
+          "recall": 0.875,
+          "top10": [
+            "ds.avl-redblack",
+            "web.bundler",
+            "algo.mst",
+            "db.stored-proc",
+            "ds.segment-tree",
+            "ds.binary-tree",
+            "ds.bst",
+            "ds.trie",
+            "web.critical-render",
+            "ds.heap"
+          ]
+        },
+        {
+          "q": "스택",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.stack",
+            "os.stack-heap",
+            "algo.recursion",
+            "js.event-loop",
+            "algo.bfs-dfs"
+          ]
+        },
+        {
+          "q": "TCP 3-way 핸드셰이크",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.tcp-3way-handshake",
+            "net.keepalive",
+            "net.tls-handshake",
+            "net.tcp-4way-teardown",
+            "net.tcp-flow-control",
+            "net.tcp-congestion",
+            "net.osi-model",
+            "net.http2"
+          ]
+        },
+        {
+          "q": "JWT 검증",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-verify",
+            "sec.jwt-structure",
+            "ts.zod-validation",
+            "sec.digital-signature",
+            "test.e2e",
+            "obs.chaos",
+            "sec.hmac",
+            "test.contract",
+            "sec.zero-trust",
+            "test.property-based"
+          ]
+        },
+        {
+          "q": "쿠버네티스 스케줄링",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "k8s.pod-scheduling",
+            "os.cpu-scheduling",
+            "k8s.rbac",
+            "k8s.operator",
+            "k8s.service",
+            "k8s.taint-toleration",
+            "k8s.helm",
+            "k8s.control-loop",
+            "k8s.pod",
+            "k8s.deployment"
+          ]
+        },
+        {
+          "q": "CI 파이프라인",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "ci.cicd-pipeline",
+            "net.subnet-cidr",
+            "arch.circuit-breaker",
+            "ci.artifact",
+            "ci.github-actions"
+          ]
+        },
+        {
+          "q": "docker 멀티스테이지",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "docker.multistage-build",
+            "docker.dockerfile-best",
+            "docker.compose",
+            "docker.image-layers"
+          ]
+        },
+        {
+          "q": "DB 인덱스",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.index-basics",
+            "db.composite-index",
+            "db.btree-index",
+            "db.covering-index",
+            "db.sqlite-basics",
+            "db.uuid-ulid",
+            "db.explain-plan",
+            "algo.two-pointers",
+            "db.connection-pool",
+            "db.cache-stampede"
+          ]
+        },
+        {
+          "q": "HTTP 캐시",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "net.http-caching",
+            "net.http2",
+            "net.http-status-codes",
+            "net.http-basics",
+            "net.http3-quic",
+            "net.http-methods-idempotency",
+            "db.cache-stampede",
+            "algo.cache-policies",
+            "db.cache-aside",
+            "db.cache-invalidation"
+          ]
+        },
+        {
+          "q": "redis 캐시",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.redis",
+            "db.cache-stampede",
+            "algo.cache-policies",
+            "db.cache-aside",
+            "db.cache-invalidation",
+            "os.cpu-cache",
+            "algo.lru-cache",
+            "net.http-caching",
+            "net.cdn",
+            "ci.artifact"
+          ]
+        },
+        {
+          "q": "git 리베이스",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "git.rebase-vs-merge",
+            "git.cherry-pick",
+            "git.bisect",
+            "git.stash",
+            "git.reflog",
+            "ci.gitops",
+            "ci.github-actions",
+            "git.internals",
+            "sec.digital-signature"
+          ]
+        },
+        {
+          "q": "SQL 조인",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.join-types",
+            "db.join-algorithms",
+            "sec.sql-injection",
+            "db.sqlite-basics",
+            "db.sqlite-wal-mode",
+            "db.window-functions",
+            "node.sqlite",
+            "db.nosql-types",
+            "db.explain-plan",
+            "db.fts"
+          ]
+        }
+      ]
+    }
+  },
+  "probes": {
+    "V0_naive_trigram": {
+      "recall_at_10": 0,
+      "by_category": {
+        "F": {
+          "n": 2,
+          "recall": 0
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "이벤트루프",
+          "cat": "F",
+          "recall": 0
+        },
+        {
+          "q": "쿠버네티스에서 파드",
+          "cat": "F",
+          "recall": 0
+        }
+      ],
+      "queries_full_recall": 0,
+      "rows": [
+        {
+          "q": "이벤트루프",
+          "cat": "F",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "쿠버네티스에서 파드",
+          "cat": "F",
+          "recall": 0,
+          "top10": []
+        }
+      ]
+    },
+    "V1_hybrid_basic": {
+      "recall_at_10": 0.25,
+      "by_category": {
+        "F": {
+          "n": 2,
+          "recall": 0.25
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "이벤트루프",
+          "cat": "F",
+          "recall": 0
+        },
+        {
+          "q": "쿠버네티스에서 파드",
+          "cat": "F",
+          "recall": 0.5
+        }
+      ],
+      "queries_full_recall": 0,
+      "rows": [
+        {
+          "q": "이벤트루프",
+          "cat": "F",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "쿠버네티스에서 파드",
+          "cat": "F",
+          "recall": 0.5,
+          "top10": [
+            "k8s.pod"
+          ]
+        }
+      ]
+    },
+    "V2_hybrid_full_like": {
+      "recall_at_10": 1,
+      "by_category": {
+        "F": {
+          "n": 2,
+          "recall": 1
+        }
+      },
+      "queries_below_1": [],
+      "queries_full_recall": 2,
+      "rows": [
+        {
+          "q": "이벤트루프",
+          "cat": "F",
+          "recall": 1,
+          "top10": [
+            "js.event-loop",
+            "node.libuv",
+            "js.microtask"
+          ]
+        },
+        {
+          "q": "쿠버네티스에서 파드",
+          "cat": "F",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.pod-scheduling",
+            "k8s.service",
+            "k8s.deployment",
+            "k8s.rbac",
+            "k8s.operator",
+            "k8s.helm",
+            "k8s.control-loop",
+            "k8s.configmap-secret",
+            "k8s.hpa"
+          ]
+        }
+      ]
+    },
+    "V3_hybrid_full_uni": {
+      "recall_at_10": 1,
+      "by_category": {
+        "F": {
+          "n": 2,
+          "recall": 1
+        }
+      },
+      "queries_below_1": [],
+      "queries_full_recall": 2,
+      "rows": [
+        {
+          "q": "이벤트루프",
+          "cat": "F",
+          "recall": 1,
+          "top10": [
+            "js.event-loop",
+            "node.libuv",
+            "js.microtask"
+          ]
+        },
+        {
+          "q": "쿠버네티스에서 파드",
+          "cat": "F",
+          "recall": 1,
+          "top10": [
+            "k8s.pod",
+            "k8s.pod-scheduling",
+            "k8s.service",
+            "k8s.deployment",
+            "k8s.rbac",
+            "k8s.operator",
+            "k8s.helm",
+            "k8s.control-loop",
+            "k8s.pv-pvc",
+            "k8s.cni"
+          ]
+        }
+      ]
+    }
+  },
+  "heldout20": {
+    "V0_naive_trigram": {
+      "recall_at_10": 0.575,
+      "by_category": {
+        "L": {
+          "n": 8,
+          "recall": 1
+        },
+        "M": {
+          "n": 5,
+          "recall": 0.3
+        },
+        "E": {
+          "n": 3,
+          "recall": 0.667
+        },
+        "S": {
+          "n": 4,
+          "recall": 0
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "CSRF 방어",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "SQL 인젝션 파라미터 바인딩",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "프로세스 스레드 차이",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "gRPC protobuf",
+          "cat": "E",
+          "recall": 0
+        },
+        {
+          "q": "힙",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "토큰",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "백업",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "멱등",
+          "cat": "S",
+          "recall": 0
+        },
+        {
+          "q": "SQLite WAL",
+          "cat": "M",
+          "recall": 0.5
+        }
+      ],
+      "queries_full_recall": 11,
+      "rows": [
+        {
+          "q": "롤링 업데이트",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "infra.rolling-update",
+            "k8s.deployment"
+          ]
+        },
+        {
+          "q": "리버스 프록시",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.reverse-proxy"
+          ]
+        },
+        {
+          "q": "CSRF 방어",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "SQL 인젝션 파라미터 바인딩",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "프로세스 스레드 차이",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "메모이제이션",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "web.memoization-react",
+            "algo.dp"
+          ]
+        },
+        {
+          "q": "LRU",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "algo.lru-cache",
+            "os.page-replacement",
+            "algo.cache-policies"
+          ]
+        },
+        {
+          "q": "websocket",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "웹소켓",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "gRPC protobuf",
+          "cat": "E",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "뮤텍스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.mutex-semaphore"
+          ]
+        },
+        {
+          "q": "힙",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "그래프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "ds.graph",
+            "net.graphql",
+            "algo.dijkstra",
+            "db.nosql-types"
+          ]
+        },
+        {
+          "q": "토큰",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "백업",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "멱등",
+          "cat": "S",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "SQLite WAL",
+          "cat": "M",
+          "recall": 0.5,
+          "top10": [
+            "db.sqlite-wal-mode"
+          ]
+        },
+        {
+          "q": "프로토타입 오염",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "sec.prototype-pollution"
+          ]
+        },
+        {
+          "q": "분산 추적",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "obs.tracing"
+          ]
+        },
+        {
+          "q": "인덱스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.covering-index",
+            "db.btree-index",
+            "db.index-basics",
+            "db.composite-index",
+            "db.uuid-ulid",
+            "db.explain-plan",
+            "algo.two-pointers"
+          ]
+        }
+      ]
+    },
+    "V1_hybrid_basic": {
+      "recall_at_10": 0.925,
+      "by_category": {
+        "L": {
+          "n": 8,
+          "recall": 1
+        },
+        "M": {
+          "n": 5,
+          "recall": 0.7
+        },
+        "E": {
+          "n": 3,
+          "recall": 1
+        },
+        "S": {
+          "n": 4,
+          "recall": 1
+        }
+      },
+      "queries_below_1": [
+        {
+          "q": "프로세스 스레드 차이",
+          "cat": "M",
+          "recall": 0
+        },
+        {
+          "q": "SQLite WAL",
+          "cat": "M",
+          "recall": 0.5
+        }
+      ],
+      "queries_full_recall": 18,
+      "rows": [
+        {
+          "q": "롤링 업데이트",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "infra.rolling-update",
+            "k8s.deployment"
+          ]
+        },
+        {
+          "q": "리버스 프록시",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.reverse-proxy"
+          ]
+        },
+        {
+          "q": "CSRF 방어",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.csrf"
+          ]
+        },
+        {
+          "q": "SQL 인젝션 파라미터 바인딩",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.sql-injection"
+          ]
+        },
+        {
+          "q": "프로세스 스레드 차이",
+          "cat": "M",
+          "recall": 0,
+          "top10": []
+        },
+        {
+          "q": "메모이제이션",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "web.memoization-react",
+            "algo.dp"
+          ]
+        },
+        {
+          "q": "LRU",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "algo.lru-cache",
+            "os.page-replacement",
+            "algo.cache-policies"
+          ]
+        },
+        {
+          "q": "websocket",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "웹소켓",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "gRPC protobuf",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.grpc"
+          ]
+        },
+        {
+          "q": "뮤텍스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.mutex-semaphore"
+          ]
+        },
+        {
+          "q": "힙",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.heap",
+            "os.stack-heap",
+            "ds.priority-queue",
+            "algo.sorting-compare"
+          ]
+        },
+        {
+          "q": "그래프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "ds.graph",
+            "net.graphql",
+            "algo.dijkstra",
+            "db.nosql-types"
+          ]
+        },
+        {
+          "q": "토큰",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-verify",
+            "sec.session-vs-token",
+            "net.rate-limiting",
+            "sec.oidc",
+            "sec.jwt-structure",
+            "sec.csrf"
+          ]
+        },
+        {
+          "q": "백업",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "obs.backup-restore"
+          ]
+        },
+        {
+          "q": "멱등",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.idempotent-writes",
+            "arch.idempotency-key",
+            "net.http-methods-idempotency"
+          ]
+        },
+        {
+          "q": "SQLite WAL",
+          "cat": "M",
+          "recall": 0.5,
+          "top10": [
+            "db.sqlite-wal-mode"
+          ]
+        },
+        {
+          "q": "프로토타입 오염",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "sec.prototype-pollution"
+          ]
+        },
+        {
+          "q": "분산 추적",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "obs.tracing"
+          ]
+        },
+        {
+          "q": "인덱스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.btree-index",
+            "db.covering-index",
+            "db.index-basics",
+            "db.composite-index",
+            "db.uuid-ulid",
+            "db.explain-plan",
+            "algo.two-pointers"
+          ]
+        }
+      ]
+    },
+    "V2_hybrid_full_like": {
+      "recall_at_10": 1,
+      "by_category": {
+        "L": {
+          "n": 8,
+          "recall": 1
+        },
+        "M": {
+          "n": 5,
+          "recall": 1
+        },
+        "E": {
+          "n": 3,
+          "recall": 1
+        },
+        "S": {
+          "n": 4,
+          "recall": 1
+        }
+      },
+      "queries_below_1": [],
+      "queries_full_recall": 20,
+      "rows": [
+        {
+          "q": "롤링 업데이트",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "infra.rolling-update",
+            "k8s.deployment"
+          ]
+        },
+        {
+          "q": "리버스 프록시",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.reverse-proxy",
+            "infra.service-mesh",
+            "net.http-caching"
+          ]
+        },
+        {
+          "q": "CSRF 방어",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.csrf",
+            "sec.rate-limit-bruteforce"
+          ]
+        },
+        {
+          "q": "SQL 인젝션 파라미터 바인딩",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.sql-injection",
+            "node.sqlite",
+            "js.this-binding",
+            "db.sqlite-basics",
+            "db.join-types",
+            "db.sqlite-wal-mode",
+            "db.window-functions",
+            "db.nosql-types",
+            "db.fts"
+          ]
+        },
+        {
+          "q": "프로세스 스레드 차이",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "os.process-vs-thread",
+            "node.cluster-worker",
+            "node.libuv",
+            "node.child-process",
+            "os.ipc",
+            "os.zombie",
+            "node.process-signals",
+            "sec.rbac-abac",
+            "db.locking",
+            "db.join-types"
+          ]
+        },
+        {
+          "q": "메모이제이션",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "web.memoization-react",
+            "algo.dp"
+          ]
+        },
+        {
+          "q": "LRU",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "algo.lru-cache",
+            "os.page-replacement",
+            "algo.cache-policies"
+          ]
+        },
+        {
+          "q": "websocket",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "웹소켓",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "gRPC protobuf",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.grpc"
+          ]
+        },
+        {
+          "q": "뮤텍스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.mutex-semaphore"
+          ]
+        },
+        {
+          "q": "힙",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.heap",
+            "os.stack-heap",
+            "ds.priority-queue",
+            "algo.sorting-compare"
+          ]
+        },
+        {
+          "q": "그래프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "ds.graph",
+            "net.graphql",
+            "algo.dijkstra",
+            "db.nosql-types"
+          ]
+        },
+        {
+          "q": "토큰",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "sec.jwt-verify",
+            "sec.session-vs-token",
+            "net.rate-limiting",
+            "sec.oidc",
+            "sec.jwt-structure",
+            "sec.csrf"
+          ]
+        },
+        {
+          "q": "백업",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "obs.backup-restore"
+          ]
+        },
+        {
+          "q": "멱등",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "db.idempotent-writes",
+            "arch.idempotency-key",
+            "net.http-methods-idempotency"
+          ]
+        },
+        {
+          "q": "SQLite WAL",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.sqlite-wal-mode",
+            "db.wal",
+            "db.sqlite-basics",
+            "node.sqlite",
+            "db.fts"
+          ]
+        },
+        {
+          "q": "프로토타입 오염",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "sec.prototype-pollution",
+            "js.prototype"
+          ]
+        },
+        {
+          "q": "분산 추적",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "obs.tracing",
+            "ci.sbom",
+            "obs.logging",
+            "net.load-balancer",
+            "k8s.etcd",
+            "arch.saga",
+            "net.dns-resolution",
+            "net.cdn",
+            "db.replication",
+            "ds.consistent-hashing"
+          ]
+        },
+        {
+          "q": "인덱스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.btree-index",
+            "db.covering-index",
+            "db.index-basics",
+            "db.composite-index",
+            "db.uuid-ulid",
+            "db.explain-plan",
+            "algo.two-pointers"
+          ]
+        }
+      ]
+    },
+    "V3_hybrid_full_uni": {
+      "recall_at_10": 1,
+      "by_category": {
+        "L": {
+          "n": 8,
+          "recall": 1
+        },
+        "M": {
+          "n": 5,
+          "recall": 1
+        },
+        "E": {
+          "n": 3,
+          "recall": 1
+        },
+        "S": {
+          "n": 4,
+          "recall": 1
+        }
+      },
+      "queries_below_1": [],
+      "queries_full_recall": 20,
+      "rows": [
+        {
+          "q": "롤링 업데이트",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "infra.rolling-update",
+            "k8s.deployment"
+          ]
+        },
+        {
+          "q": "리버스 프록시",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.reverse-proxy",
+            "infra.service-mesh",
+            "net.http-caching"
+          ]
+        },
+        {
+          "q": "CSRF 방어",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.csrf",
+            "sec.rate-limit-bruteforce"
+          ]
+        },
+        {
+          "q": "SQL 인젝션 파라미터 바인딩",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "sec.sql-injection",
+            "node.sqlite",
+            "js.this-binding",
+            "db.sqlite-basics",
+            "db.join-types",
+            "db.sqlite-wal-mode",
+            "db.window-functions",
+            "db.nosql-types",
+            "db.fts"
+          ]
+        },
+        {
+          "q": "프로세스 스레드 차이",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "os.process-vs-thread",
+            "node.cluster-worker",
+            "node.libuv",
+            "node.child-process",
+            "os.ipc",
+            "os.zombie",
+            "node.process-signals",
+            "arch.pagination",
+            "os.io-models",
+            "js.module-esm-cjs"
+          ]
+        },
+        {
+          "q": "메모이제이션",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "web.memoization-react",
+            "algo.dp"
+          ]
+        },
+        {
+          "q": "LRU",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "algo.lru-cache",
+            "os.page-replacement",
+            "algo.cache-policies"
+          ]
+        },
+        {
+          "q": "websocket",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "웹소켓",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "net.websocket"
+          ]
+        },
+        {
+          "q": "gRPC protobuf",
+          "cat": "E",
+          "recall": 1,
+          "top10": [
+            "net.grpc"
+          ]
+        },
+        {
+          "q": "뮤텍스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "os.mutex-semaphore"
+          ]
+        },
+        {
+          "q": "힙",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "ds.heap",
+            "os.stack-heap",
+            "ds.priority-queue",
+            "algo.sorting-compare"
+          ]
+        },
+        {
+          "q": "그래프",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "ds.graph",
+            "net.graphql",
+            "algo.dijkstra",
+            "db.nosql-types"
+          ]
+        },
+        {
+          "q": "토큰",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "sec.session-vs-token",
+            "sec.jwt-verify",
+            "sec.oidc",
+            "net.rate-limiting",
+            "sec.jwt-structure",
+            "sec.csrf"
+          ]
+        },
+        {
+          "q": "백업",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "obs.backup-restore"
+          ]
+        },
+        {
+          "q": "멱등",
+          "cat": "S",
+          "recall": 1,
+          "top10": [
+            "arch.idempotency-key",
+            "db.idempotent-writes",
+            "net.http-methods-idempotency"
+          ]
+        },
+        {
+          "q": "SQLite WAL",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "db.sqlite-wal-mode",
+            "db.wal",
+            "db.sqlite-basics",
+            "node.sqlite",
+            "db.fts"
+          ]
+        },
+        {
+          "q": "프로토타입 오염",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "sec.prototype-pollution",
+            "js.prototype"
+          ]
+        },
+        {
+          "q": "분산 추적",
+          "cat": "M",
+          "recall": 1,
+          "top10": [
+            "obs.tracing",
+            "obs.logging",
+            "ci.sbom",
+            "arch.saga",
+            "k8s.etcd",
+            "net.load-balancer",
+            "db.replication",
+            "arch.microservices",
+            "net.cdn",
+            "ds.consistent-hashing"
+          ]
+        },
+        {
+          "q": "인덱스",
+          "cat": "L",
+          "recall": 1,
+          "top10": [
+            "db.btree-index",
+            "db.covering-index",
+            "db.index-basics",
+            "db.composite-index",
+            "db.uuid-ulid",
+            "db.explain-plan",
+            "algo.two-pointers"
+          ]
+        }
+      ]
+    }
+  },
+  "misses_V2_headline": [
+    {
+      "q": "데드락",
+      "missed": "os.deadlock-conditions",
+      "reason": "lexical gap (absent: 데드락)"
+    },
+    {
+      "q": "가상 메모리",
+      "missed": "os.page-replacement",
+      "reason": "lexical gap (absent: 가상)"
+    },
+    {
+      "q": "가상 메모리",
+      "missed": "os.tlb",
+      "reason": "lexical gap (absent: 가상, 메모리)"
+    },
+    {
+      "q": "Redis",
+      "missed": "db.cache-aside",
+      "reason": "lexical gap (absent: redis)"
+    },
+    {
+      "q": "Redis",
+      "missed": "db.cache-invalidation",
+      "reason": "lexical gap (absent: redis)"
+    },
+    {
+      "q": "트리",
+      "missed": "ds.heap",
+      "reason": "ranking miss (all tokens present)"
+    },
+    {
+      "q": "CI 파이프라인",
+      "missed": "ci.github-actions",
+      "reason": "lexical gap (absent: 파이프라인)"
+    }
+  ],
+  "misses_V2_heldout": [],
+  "combined60_recall": {
+    "V0_naive_trigram": 0.503,
+    "V1_hybrid_basic": 0.878,
+    "V2_hybrid_full_like": 0.962,
+    "V3_hybrid_full_uni": 0.967
+  },
+  "short_1_2char_recall_combined": {
+    "V0_naive_trigram": {
+      "n": 14,
+      "recall": 0
+    },
+    "V1_hybrid_basic": {
+      "n": 14,
+      "recall": 0.991
+    },
+    "V2_hybrid_full_like": {
+      "n": 14,
+      "recall": 0.991
+    },
+    "V3_hybrid_full_uni": {
+      "n": 14,
+      "recall": 0.991
+    }
+  },
+  "scale": {
+    "docs_310": {
+      "build_ms": 42,
+      "db_bytes": 757760,
+      "dbstat_bytes_by_object": {
+        "docs": 143360,
+        "fts_cmp_config": 4096,
+        "fts_cmp_data": 147456,
+        "fts_cmp_docsize": 4096,
+        "fts_cmp_idx": 4096,
+        "fts_tri_config": 4096,
+        "fts_tri_data": 176128,
+        "fts_tri_docsize": 4096,
+        "fts_tri_idx": 4096,
+        "fts_uni_config": 4096,
+        "fts_uni_data": 122880,
+        "fts_uni_docsize": 4096,
+        "fts_uni_idx": 4096
+      },
+      "latency_ms": {
+        "V0_naive_trigram": {
+          "L": {
+            "p50": 0.116,
+            "p95": 0.257,
+            "p99": 0.331,
+            "max": 0.411
+          },
+          "ALL": {
+            "p50": 0.081,
+            "p95": 0.24,
+            "p99": 0.407,
+            "max": 1.296
+          },
+          "E": {
+            "p50": 0.102,
+            "p95": 0.32,
+            "p99": 0.426,
+            "max": 1.296
+          },
+          "S": {
+            "p50": 0.027,
+            "p95": 0.064,
+            "p99": 0.168,
+            "max": 1.013
+          },
+          "M": {
+            "p50": 0.086,
+            "p95": 0.208,
+            "p99": 0.497,
+            "max": 0.703
+          },
+          "F": {
+            "p50": 0.095,
+            "p95": 0.172,
+            "p99": 0.203,
+            "max": 0.203
+          }
+        },
+        "V2_hybrid_full_like": {
+          "L": {
+            "p50": 0.258,
+            "p95": 0.817,
+            "p99": 1.464,
+            "max": 2.265
+          },
+          "ALL": {
+            "p50": 0.298,
+            "p95": 0.823,
+            "p99": 1.284,
+            "max": 2.687
+          },
+          "E": {
+            "p50": 0.193,
+            "p95": 0.762,
+            "p99": 0.851,
+            "max": 1.657
+          },
+          "S": {
+            "p50": 0.275,
+            "p95": 0.424,
+            "p99": 1.914,
+            "max": 2.687
+          },
+          "M": {
+            "p50": 0.468,
+            "p95": 0.864,
+            "p99": 1.2,
+            "max": 1.493
+          },
+          "F": {
+            "p50": 0.314,
+            "p95": 1.185,
+            "p99": 1.229,
+            "max": 1.229
+          }
+        },
+        "V3_hybrid_full_uni": {
+          "L": {
+            "p50": 0.275,
+            "p95": 1.243,
+            "p99": 1.478,
+            "max": 3.175
+          },
+          "ALL": {
+            "p50": 0.259,
+            "p95": 0.86,
+            "p99": 1.359,
+            "max": 3.452
+          },
+          "E": {
+            "p50": 0.187,
+            "p95": 0.792,
+            "p99": 0.976,
+            "max": 3.272
+          },
+          "S": {
+            "p50": 0.199,
+            "p95": 0.47,
+            "p99": 0.878,
+            "max": 3.452
+          },
+          "M": {
+            "p50": 0.409,
+            "p95": 0.701,
+            "p99": 0.967,
+            "max": 1.385
+          },
+          "F": {
+            "p50": 0.304,
+            "p95": 1.22,
+            "p99": 1.591,
+            "max": 1.591
+          }
+        }
+      }
+    },
+    "docs_12310": {
+      "build_ms": 3504,
+      "db_bytes": 24539136,
+      "dbstat_bytes_by_object": {
+        "docs": 7589888,
+        "fts_cmp_config": 4096,
+        "fts_cmp_data": 5099520,
+        "fts_cmp_docsize": 118784,
+        "fts_cmp_idx": 32768,
+        "fts_tri_config": 4096,
+        "fts_tri_data": 6119424,
+        "fts_tri_docsize": 143360,
+        "fts_tri_idx": 36864,
+        "fts_uni_config": 4096,
+        "fts_uni_data": 3637248,
+        "fts_uni_docsize": 143360,
+        "fts_uni_idx": 24576
+      },
+      "latency_ms": {
+        "V0_naive_trigram": {
+          "L": {
+            "p50": 0.509,
+            "p95": 1.258,
+            "p99": 1.437,
+            "max": 1.451
+          },
+          "ALL": {
+            "p50": 0.351,
+            "p95": 1.109,
+            "p99": 1.998,
+            "max": 2.414
+          },
+          "E": {
+            "p50": 0.499,
+            "p95": 1.915,
+            "p99": 2.124,
+            "max": 2.414
+          },
+          "S": {
+            "p50": 0.026,
+            "p95": 0.072,
+            "p99": 0.095,
+            "max": 0.142
+          },
+          "M": {
+            "p50": 0.322,
+            "p95": 0.752,
+            "p99": 0.84,
+            "max": 0.861
+          },
+          "F": {
+            "p50": 0.118,
+            "p95": 0.295,
+            "p99": 0.295,
+            "max": 0.295
+          }
+        },
+        "V2_hybrid_full_like": {
+          "L": {
+            "p50": 2.307,
+            "p95": 30.744,
+            "p99": 45.56,
+            "max": 45.592
+          },
+          "ALL": {
+            "p50": 6.525,
+            "p95": 25.294,
+            "p99": 34.823,
+            "max": 45.592
+          },
+          "E": {
+            "p50": 1.201,
+            "p95": 3.838,
+            "p99": 4.053,
+            "max": 5.48
+          },
+          "S": {
+            "p50": 13.355,
+            "p95": 22.665,
+            "p99": 23.279,
+            "max": 23.851
+          },
+          "M": {
+            "p50": 8.89,
+            "p95": 26.029,
+            "p99": 30.225,
+            "max": 34.823
+          },
+          "F": {
+            "p50": 0.511,
+            "p95": 4.974,
+            "p99": 4.974,
+            "max": 4.974
+          }
+        },
+        "V3_hybrid_full_uni": {
+          "L": {
+            "p50": 3.105,
+            "p95": 19.082,
+            "p99": 22.87,
+            "max": 23.198
+          },
+          "ALL": {
+            "p50": 2.652,
+            "p95": 18.484,
+            "p99": 20.135,
+            "max": 23.198
+          },
+          "E": {
+            "p50": 1.12,
+            "p95": 4.075,
+            "p99": 4.349,
+            "max": 4.623
+          },
+          "S": {
+            "p50": 2.546,
+            "p95": 6.333,
+            "p99": 6.451,
+            "max": 6.752
+          },
+          "M": {
+            "p50": 4.425,
+            "p95": 19.413,
+            "p99": 20.135,
+            "max": 20.283
+          },
+          "F": {
+            "p50": 0.254,
+            "p95": 2.981,
+            "p99": 2.981,
+            "max": 2.981
+          }
+        }
+      }
+    },
+    "docs_50310": {
+      "build_ms": 16248,
+      "db_bytes": 92200960,
+      "dbstat_bytes_by_object": {
+        "docs": 31551488,
+        "fts_cmp_config": 4096,
+        "fts_cmp_data": 18440192,
+        "fts_cmp_docsize": 495616,
+        "fts_cmp_idx": 86016,
+        "fts_tri_config": 4096,
+        "fts_tri_data": 23658496,
+        "fts_tri_docsize": 593920,
+        "fts_tri_idx": 102400,
+        "fts_uni_config": 4096,
+        "fts_uni_data": 14495744,
+        "fts_uni_docsize": 593920,
+        "fts_uni_idx": 61440
+      },
+      "latency_ms": {
+        "V0_naive_trigram": {
+          "L": {
+            "p50": 0.568,
+            "p95": 6.271,
+            "p99": 7.205,
+            "max": 7.205
+          },
+          "ALL": {
+            "p50": 0.432,
+            "p95": 3.818,
+            "p99": 6.573,
+            "max": 7.205
+          },
+          "E": {
+            "p50": 1.074,
+            "p95": 5.105,
+            "p99": 5.385,
+            "max": 5.385
+          },
+          "S": {
+            "p50": 0.025,
+            "p95": 0.042,
+            "p99": 0.067,
+            "max": 0.067
+          },
+          "M": {
+            "p50": 0.329,
+            "p95": 0.778,
+            "p99": 0.966,
+            "max": 0.966
+          },
+          "F": {
+            "p50": 0.094,
+            "p95": 1.361,
+            "p99": 1.361,
+            "max": 1.361
+          }
+        },
+        "V2_hybrid_full_like": {
+          "L": {
+            "p50": 7.294,
+            "p95": 104.581,
+            "p99": 166.059,
+            "max": 166.059
+          },
+          "ALL": {
+            "p50": 9.359,
+            "p95": 73.014,
+            "p99": 131.691,
+            "max": 166.059
+          },
+          "E": {
+            "p50": 4.628,
+            "p95": 7.779,
+            "p99": 8.316,
+            "max": 8.316
+          },
+          "S": {
+            "p50": 47.803,
+            "p95": 66.2,
+            "p99": 79.995,
+            "max": 79.995
+          },
+          "M": {
+            "p50": 17.596,
+            "p95": 72.739,
+            "p99": 74.171,
+            "max": 74.171
+          },
+          "F": {
+            "p50": 0.348,
+            "p95": 2.137,
+            "p99": 2.137,
+            "max": 2.137
+          }
+        },
+        "V3_hybrid_full_uni": {
+          "L": {
+            "p50": 9.071,
+            "p95": 31.552,
+            "p99": 56.066,
+            "max": 56.066
+          },
+          "ALL": {
+            "p50": 7.655,
+            "p95": 27.405,
+            "p99": 31.997,
+            "max": 56.066
+          },
+          "E": {
+            "p50": 4.603,
+            "p95": 9.534,
+            "p99": 12.365,
+            "max": 12.365
+          },
+          "S": {
+            "p50": 7.957,
+            "p95": 15.755,
+            "p99": 16.03,
+            "max": 16.03
+          },
+          "M": {
+            "p50": 11.333,
+            "p95": 29.908,
+            "p99": 31.997,
+            "max": 31.997
+          },
+          "F": {
+            "p50": 0.484,
+            "p95": 2.74,
+            "p99": 2.74,
+            "max": 2.74
+          }
+        }
+      }
+    }
+  },
+  "elapsed_s": 43.7
+}

@@ -1,0 +1,416 @@
+{
+  "surface": {
+    "node": "v22.22.2",
+    "sqlite_version": "3.51.2",
+    "module_exports": [
+      "DatabaseSync",
+      "StatementSync",
+      "backup",
+      "constants",
+      "default"
+    ],
+    "constants": [
+      "SQLITE_CHANGESET_OMIT",
+      "SQLITE_CHANGESET_REPLACE",
+      "SQLITE_CHANGESET_ABORT",
+      "SQLITE_CHANGESET_DATA",
+      "SQLITE_CHANGESET_NOTFOUND",
+      "SQLITE_CHANGESET_CONFLICT",
+      "SQLITE_CHANGESET_CONSTRAINT",
+      "SQLITE_CHANGESET_FOREIGN_KEY"
+    ],
+    "DatabaseSync_prototype": [
+      "open",
+      "close",
+      "prepare",
+      "exec",
+      "function",
+      "location",
+      "aggregate",
+      "createSession",
+      "applyChangeset",
+      "enableLoadExtension",
+      "loadExtension"
+    ],
+    "StatementSync_prototype": [
+      "iterate",
+      "all",
+      "get",
+      "run",
+      "columns",
+      "setAllowBareNamedParameters",
+      "setAllowUnknownNamedParameters",
+      "setReadBigInts",
+      "setReturnArrays"
+    ],
+    "compile_options_interesting": [
+      "DEFAULT_MEMSTATUS=0",
+      "DEFAULT_WAL_AUTOCHECKPOINT=1000",
+      "DEFAULT_WAL_SYNCHRONOUS=2",
+      "ENABLE_DBSTAT_VTAB",
+      "ENABLE_FTS3",
+      "ENABLE_FTS3_PARENTHESIS",
+      "ENABLE_FTS5",
+      "ENABLE_MATH_FUNCTIONS",
+      "ENABLE_PREUPDATE_HOOK",
+      "ENABLE_SESSION",
+      "MAX_ATTACHED=10",
+      "MAX_LENGTH=1000000000",
+      "THREADSAFE=1"
+    ],
+    "compile_options_count": 49,
+    "has_isOpen": true,
+    "has_isTransaction": true,
+    "has_Symbol_dispose": true,
+    "generate_series_available": "no such table: generate_series",
+    "has_columns": true
+  },
+  "constructor_options": {
+    "timeout_option_readback": {
+      "timeout": 4321
+    },
+    "default_busy_timeout": {
+      "timeout": 0
+    },
+    "open_false_then_open": {
+      "before_open_call": {
+        "error": "ERR_INVALID_STATE: database is not open"
+      },
+      "after_open": {
+        "x": 1
+      }
+    },
+    "enableForeignKeyConstraints_default": {
+      "foreign_keys": 1
+    },
+    "enableForeignKeyConstraints_false": {
+      "foreign_keys": 0
+    },
+    "enableDoubleQuotedStringLiterals_default": {
+      "error": "ERR_SQLITE_ERROR errcode=1 (SQL logic error): no such column: \"abc\" - should this be a string literal in single-quotes?"
+    },
+    "enableDoubleQuotedStringLiterals_true": {
+      "x": "abc"
+    },
+    "readBigInts_option": "bigint",
+    "returnArrays_option": [
+      1,
+      2
+    ],
+    "allowExtension_default_load": {
+      "error": "ERR_INVALID_STATE: extension loading is not allowed"
+    },
+    "allowExtension_true_enable": "enableLoadExtension ok",
+    "unknown_option_ignored": "silently accepted"
+  },
+  "statements": {
+    "run_result": {
+      "lastInsertRowid": 1,
+      "changes": 1
+    },
+    "run_result_types": {
+      "changes": "number",
+      "lastInsertRowid": "number"
+    },
+    "get_blob_type": "Uint8Array",
+    "all_shape": [
+      {
+        "id": 1,
+        "name": "a"
+      }
+    ],
+    "iterate": [
+      {
+        "id": 1
+      }
+    ],
+    "named_params_with_prefix": {
+      "a": 1,
+      "b": 2,
+      "c": 3
+    },
+    "named_params_bare": {
+      "a": 1,
+      "b": 2,
+      "c": 3
+    },
+    "unknown_named_param": {
+      "error": "ERR_INVALID_STATE: Unknown named parameter 'zzz'"
+    },
+    "sourceSQL": "SELECT $a AS a, :b AS b, @c AS c",
+    "columns": [
+      {
+        "column": "id",
+        "database": "main",
+        "name": "i",
+        "table": "t",
+        "type": "INTEGER"
+      },
+      {
+        "column": "name",
+        "database": "main",
+        "name": "name",
+        "table": "t",
+        "type": "TEXT"
+      }
+    ],
+    "bigint_out_of_range": {
+      "error": "ERR_OUT_OF_RANGE: Value is too large to be represented as a JavaScript number: 9007199254740993"
+    },
+    "bigint_with_setReadBigInts": "9007199254740993",
+    "bigint_param": {
+      "error": "ERR_OUT_OF_RANGE: Value is too large to be represented as a JavaScript number: 4611686018427387904"
+    },
+    "undefined_param": {
+      "error": "ERR_INVALID_ARG_TYPE: Provided value cannot be bound to SQLite parameter 1."
+    },
+    "boolean_param": {
+      "error": "ERR_INVALID_ARG_TYPE: Provided value cannot be bound to SQLite parameter 1."
+    },
+    "date_param": {
+      "x": null
+    },
+    "object_null_prototype_rows": true,
+    "multi_statement_prepare": [
+      {
+        "a": 1
+      }
+    ],
+    "exec_multi_statement": "ok",
+    "finalized_after_close": {
+      "error": "ERR_INVALID_STATE: statement has been finalized"
+    },
+    "double_close": {
+      "error": "ERR_INVALID_STATE: database is not open"
+    }
+  },
+  "performance": {
+    "select_reused_stmt_ops_per_s": 871418,
+    "select_reprepare_each_time_ops_per_s": 129256,
+    "insert_200k_in_one_txn_rows_per_s": 604023,
+    "file_wal_normal_autocommit_inserts_per_s": 47149
+  },
+  "transactions": {
+    "rollback_keeps_zero_rows": 0,
+    "nested_begin_error": {
+      "error": "ERR_SQLITE_ERROR errcode=1 (SQL logic error): cannot start a transaction within a transaction"
+    },
+    "savepoint_rollback_rows": [
+      2
+    ],
+    "begin_immediate_supported": true,
+    "constraint_error_detail": {
+      "error": "ERR_SQLITE_ERROR errcode=1555 (constraint failed): UNIQUE constraint failed: a.x"
+    },
+    "isTransaction_property": false,
+    "tx_helper_commit": 1,
+    "tx_helper_rollback": {
+      "error": "Error: boom"
+    },
+    "rows_after_helper": [
+      2,
+      10
+    ]
+  },
+  "user_functions": {
+    "function_basic": {
+      "x": 5
+    },
+    "function_deterministic_in_index": "expression index on deterministic user function ok",
+    "function_varargs": {
+      "x": "a|b|c"
+    },
+    "function_regexp_operator": {
+      "x": 1
+    },
+    "function_korean_choseong_like": {
+      "x": "ㅋㅂㄴㅌㅅ ㅍㄷ"
+    },
+    "function_throwing": {
+      "error": "Error: user fn failed"
+    },
+    "function_bigint_arg": {
+      "x": "bigint"
+    },
+    "aggregate_exists": "function",
+    "aggregate_sumsq": {
+      "x": 14
+    },
+    "aggregate_window_inverse": [
+      1,
+      3,
+      5
+    ]
+  },
+  "sql_features": {
+    "json_extract": {
+      "g": 3,
+      "k": "review",
+      "tags": "[\"a\",\"b\"]"
+    },
+    "json_each": [
+      "a",
+      "b"
+    ],
+    "json_group_array": {
+      "x": "[3]"
+    },
+    "jsonb": {
+      "t": "blob",
+      "j": "{\"a\":1}"
+    },
+    "json_valid_check_rejects": {
+      "error": "ERR_SQLITE_ERROR errcode=275 (constraint failed): CHECK constraint failed: json_valid(data)"
+    },
+    "json_index_expression": "SEARCH ev USING COVERING INDEX ev_kind (<expr>=?)",
+    "strict_text_into_integer": {
+      "error": "ERR_SQLITE_ERROR errcode=3091 (constraint failed): cannot store TEXT value in INTEGER column s.n"
+    },
+    "strict_numeric_string_coerced": {
+      "n": 42,
+      "tn": "integer"
+    },
+    "strict_bad_column_type": {
+      "error": "ERR_SQLITE_ERROR errcode=1 (SQL logic error): unknown datatype for s2.x: \"VARCHAR(10)\""
+    },
+    "strict_boolean_hint": "STRICT allows only INT/INTEGER/REAL/TEXT/BLOB/ANY; store booleans as INTEGER with CHECK(x IN (0,1))",
+    "returning_clause": [
+      {
+        "id": 1
+      }
+    ],
+    "upsert": [
+      {
+        "id": 2,
+        "v": "a"
+      }
+    ],
+    "window_function": [
+      {
+        "id": 1,
+        "rn": 1
+      },
+      {
+        "id": 2,
+        "rn": 2
+      }
+    ],
+    "recursive_cte": [
+      {
+        "s": 15
+      }
+    ],
+    "generated_column": {
+      "b": 42
+    },
+    "math_functions": {
+      "a": 2,
+      "b": 1024,
+      "c": 4,
+      "d": 3
+    },
+    "unixepoch_subsec": {
+      "ok": 1
+    },
+    "iif_and_ifnull": {
+      "a": "y"
+    },
+    "attach_other_file": {
+      "c": 0
+    },
+    "pragma_user_version": {
+      "user_version": 7
+    },
+    "pragma_application_id": {
+      "application_id": 1178686536
+    }
+  },
+  "read_only": {
+    "wal_files_after_clean_close": {
+      "wal": false,
+      "shm": false
+    },
+    "read_ok": {
+      "c": 1
+    },
+    "write_error": {
+      "error": "ERR_SQLITE_ERROR errcode=8 (attempt to write a readonly database): attempt to write a readonly database"
+    },
+    "pragma_query_only_like": {
+      "error": "ERR_SQLITE_ERROR errcode=8 (attempt to write a readonly database): attempt to write a readonly database"
+    },
+    "journal_mode_seen": {
+      "journal_mode": "wal"
+    },
+    "open_missing_file_readOnly": {
+      "error": "ERR_SQLITE_ERROR errcode=14 (unable to open database file): unable to open database file"
+    },
+    "open_missing_file_default_creates": true,
+    "readOnly_while_writer_open_in_wal": {
+      "c": 2
+    }
+  },
+  "backup_api": {
+    "exported": "function",
+    "result_type": {
+      "resolved_with": 13,
+      "type": "number"
+    },
+    "progress_callback": {
+      "resolved_with": 13,
+      "calls": 2,
+      "first": {
+        "totalPages": 13,
+        "remainingPages": 8
+      },
+      "last": {
+        "totalPages": 13,
+        "remainingPages": 3
+      }
+    },
+    "dest_verify": {
+      "count": 5000,
+      "integrity": "ok"
+    },
+    "dest_journal_mode": {
+      "journal_mode": "wal"
+    },
+    "dest_as_database_object": {
+      "error": "ERR_INVALID_ARG_TYPE: The \"destination\" argument must be a string."
+    },
+    "vacuum_into": {
+      "rows": 5000
+    },
+    "vacuum_into_existing_file": {
+      "error": "ERR_SQLITE_ERROR errcode=1 (SQL logic error): output file already exists"
+    }
+  },
+  "session_changeset": {
+    "session": {
+      "changeset_bytes": 34,
+      "applied": true,
+      "rows_in_b": 2
+    }
+  },
+  "paths_on_linux": {
+    "korean_and_space_path": {
+      "ok": true,
+      "size": 8192
+    },
+    "url_object_path": true,
+    "buffer_path": true,
+    "file_uri_string_mode_ro": {
+      "opened": true,
+      "write_result": {
+        "error": "ERR_SQLITE_ERROR errcode=8 (attempt to write a readonly database): attempt to write a readonly database"
+      }
+    },
+    "relative_path": true,
+    "long_path_300_chars": {
+      "path_length": 378,
+      "ok": true
+    },
+    "location_method": "/home/user/study_develop_ai/spikes/sp4-node-sqlite/.work/features/loc.db",
+    "location_memory": null
+  }
+}

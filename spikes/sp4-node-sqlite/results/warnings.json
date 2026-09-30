@@ -1,0 +1,194 @@
+{
+  "node": "v22.22.2",
+  "cases": [
+    {
+      "label": "1 default (no flag)",
+      "command": "node <dir>/plain.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26369) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "2 --disable-warning=ExperimentalWarning",
+      "command": "node --disable-warning=ExperimentalWarning <dir>/plain.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "3 --disable-warning=ExperimentalWarning (CJS require)",
+      "command": "node --disable-warning=ExperimentalWarning <dir>/plain.cjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "4 --no-warnings",
+      "command": "node --no-warnings <dir>/plain.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "5 NODE_OPTIONS=--disable-warning=ExperimentalWarning",
+      "command": "node <dir>/plain.mjs   [env NODE_OPTIONS=--disable-warning=ExperimentalWarning]",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "6 NODE_NO_WARNINGS=1",
+      "command": "node <dir>/plain.mjs   [env NODE_NO_WARNINGS=1]",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "7 process.on('warning') handler only (dynamic import)",
+      "command": "node <dir>/handler.mjs",
+      "exit": 0,
+      "stdout": "OK handler_saw=[\"ExperimentalWarning\"]",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26413) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "8 process.on('warning') + static import",
+      "command": "node <dir>/staticImportWithHandler.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26423) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "9 process.removeAllListeners('warning') then dynamic import",
+      "command": "node <dir>/removeAll.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "10 process.emitWarning override then dynamic import",
+      "command": "node <dir>/emitOverride.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "11 flag typo --disable-warning=Experimental",
+      "command": "node --disable-warning=Experimental <dir>/plain.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26444) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "12 tsx, default",
+      "command": "/home/user/study_develop_ai/spikes/sp4-node-sqlite/node_modules/.bin/tsx <dir>/plain.ts",
+      "exit": 0,
+      "stdout": "OK 1",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26462) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "13 tsx --disable-warning=ExperimentalWarning",
+      "command": "/home/user/study_develop_ai/spikes/sp4-node-sqlite/node_modules/.bin/tsx --disable-warning=ExperimentalWarning <dir>/plain.ts",
+      "exit": 0,
+      "stdout": "OK 1",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "14 node --disable-warning=... --import tsx file.ts",
+      "command": "node --disable-warning=ExperimentalWarning --import tsx <dir>/plain.ts",
+      "exit": 0,
+      "stdout": "OK 1",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "15 NODE_OPTIONS via tsx",
+      "command": "/home/user/study_develop_ai/spikes/sp4-node-sqlite/node_modules/.bin/tsx <dir>/plain.ts   [env NODE_OPTIONS=--disable-warning=ExperimentalWarning]",
+      "exit": 0,
+      "stdout": "OK 1",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "16 fork(): parent has --disable-warning (execArgv inherited?)",
+      "command": "node --disable-warning=ExperimentalWarning <dir>/forkParent.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "17 spawn(process.execPath): parent has flag, child gets no flag",
+      "command": "node --disable-warning=ExperimentalWarning <dir>/spawnParent.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26538) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "18 spawn(): parent has NODE_OPTIONS (env inherited)",
+      "command": "node <dir>/spawnParent.mjs   [env NODE_OPTIONS=--disable-warning=ExperimentalWarning]",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "19 worker_threads: parent has --disable-warning",
+      "command": "node --disable-warning=ExperimentalWarning <dir>/workerParent.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    },
+    {
+      "label": "20 worker_threads: no flag",
+      "command": "node <dir>/workerParent.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": true,
+      "warning_count": 1,
+      "stderr_head": "(node:26567) ExperimentalWarning: SQLite is an experimental feature and might change at any time"
+    },
+    {
+      "label": "21 shebang env -S node --disable-warning",
+      "command": "/home/user/study_develop_ai/spikes/sp4-node-sqlite/.work/warn/shebang.mjs",
+      "exit": 0,
+      "stdout": "OK",
+      "warning_printed": false,
+      "warning_count": 0,
+      "stderr_head": ""
+    }
+  ]
+}

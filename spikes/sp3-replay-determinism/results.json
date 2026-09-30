@@ -1,0 +1,1038 @@
+{
+  "env": {
+    "node": "v22.22.2",
+    "platform": "Linux 6.18.44-fc-v50 x64",
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+    "cores": 4,
+    "memGB": 15.7,
+    "tz": "(unset)",
+    "quick": false,
+    "days": 5479,
+    "tsFsrs": "5.4.2"
+  },
+  "gen_only": {
+    "events": 554066,
+    "ms": 18083,
+    "eventsPerSec": 30640,
+    "liveHash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888",
+    "chainHead": "108a861d6af48eac57baeb302ed86ccf",
+    "cards": 13779,
+    "concepts": 270,
+    "corrections": 462,
+    "rssMB": 567
+  },
+  "main_run": {
+    "events": 554066,
+    "msTotal": 34800,
+    "msLedgerInsert": 11503,
+    "msSimOnlyApprox": 23297,
+    "liveHash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888",
+    "chainHead": "108a861d6af48eac57baeb302ed86ccf",
+    "sameSeedSameLog": true,
+    "dbMB": 352,
+    "baseCount": 546926,
+    "reviewsPerYear": [
+      25376,
+      29252,
+      30928,
+      36141,
+      32886,
+      33250,
+      38185,
+      40016,
+      41477,
+      40690,
+      37508,
+      42033,
+      41496,
+      41805,
+      42087,
+      474
+    ],
+    "corrections": 462,
+    "avgPayloadBytes": 304,
+    "bytesPerEventOnDisk": 665.8,
+    "reviewsPerDayAvg": 101.1
+  },
+  "replay": {
+    "events": 554066,
+    "ms": 9930,
+    "eventsPerSec": 55796,
+    "voidedApplied": 462,
+    "replayHash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888",
+    "liveHash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888",
+    "byteEqual": true,
+    "cardsDiff": 0,
+    "conceptsDiff": 0,
+    "cards": 13779,
+    "concepts": 270,
+    "matchPct": 100
+  },
+  "chain": {
+    "events": 554066,
+    "brokenLinks": 0,
+    "devices": 1,
+    "ms": 5253.014127000002
+  },
+  "append_only_triggers": {
+    "UPDATE events SET client_ts=0 WHERE rowid=1": "rejected: ledger is append-only",
+    "DELETE FROM events WHERE rowid=1": "rejected: ledger is append-only"
+  },
+  "mastery": {
+    "concepts": 270,
+    "masteredFlag": 267,
+    "note": "Elo/mastery accuracy vs true theta is NOT validated here (sim couples ability weakly to correctness); it only gives the projection non-trivial order-dependent state."
+  },
+  "fuzz_variants": [
+    {
+      "mode": "off",
+      "days": 730,
+      "events": 54681,
+      "replayMs": 1022,
+      "byteEqual": true,
+      "cardsDiff": 0,
+      "cards": 3327,
+      "conceptsDiff": 0
+    },
+    {
+      "mode": "embedded",
+      "days": 730,
+      "events": 55731,
+      "replayMs": 1245,
+      "byteEqual": true,
+      "cardsDiff": 0,
+      "cards": 3380,
+      "conceptsDiff": 0
+    },
+    {
+      "mode": "default",
+      "days": 730,
+      "events": 54818,
+      "replayMs": 1334,
+      "byteEqual": true,
+      "cardsDiff": 0,
+      "cards": 3270,
+      "conceptsDiff": 0
+    },
+    {
+      "mode": "random",
+      "days": 730,
+      "events": 55866,
+      "replayMs": 1447,
+      "byteEqual": false,
+      "cardsDiff": 3040,
+      "cards": 3316,
+      "conceptsDiff": 0
+    },
+    {
+      "mode": "embedded",
+      "days": 5479,
+      "events": 560990,
+      "replayMs": 14990,
+      "byteEqual": true,
+      "cardsDiff": 0,
+      "cards": 13960,
+      "conceptsDiff": 0
+    }
+  ],
+  "tz_independence": [
+    {
+      "tz": "(parent, unset=UTC)",
+      "hash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888"
+    },
+    {
+      "tz": "Asia/Seoul",
+      "offsetMin": -540,
+      "hash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888",
+      "events": 554066,
+      "ms": 8842,
+      "equalToParent": true
+    },
+    {
+      "tz": "America/Los_Angeles",
+      "offsetMin": 420,
+      "hash": "5d6dd51c986122dd5575168a0cd434a6b3dd2882fbd3ace6882c8f94616a8888",
+      "events": 554066,
+      "ms": 9015,
+      "equalToParent": true
+    }
+  ],
+  "merge": {
+    "baseEvents": 546926,
+    "deviceA_events": 6910,
+    "deviceB_events": 6563,
+    "cardsTouchedByBoth": 2607,
+    "divergenceDays": 60,
+    "deviceB_clockSkew": "B clock -30h from day +30 (client_ts clamped monotonic per device)",
+    "deviceA_localReplayEqualsLive": true,
+    "deviceA_replayMs": 11459,
+    "incrementalImport": {
+      "inserted": 6563,
+      "cards": 2607,
+      "concepts": 267,
+      "ms": 9064
+    },
+    "M1_A_then_B": {
+      "fullReplayMs": 11197,
+      "hash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345",
+      "incrementalHash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345",
+      "incrementalEqualsFull": true,
+      "count": 560399
+    },
+    "idempotentReimport": {
+      "inserted": 0,
+      "projectionUnchanged": true
+    },
+    "crossDeviceSameTs": 206,
+    "crossDeviceSameCardSameTs": 4,
+    "M1_rowidOrder_strictReplay": "FSRSValidationError: Invalid delta_t \"-54\"",
+    "M1_rowidOrder_negativeElapsedClamped": 4257,
+    "M1_rowidOrder_hash": "598d35af88cd21378f29e84d9e7f99904e650eeccffa9d04975bebfd5e80bb98",
+    "M1_rowidOrder_ms": 21486,
+    "M1_ambiguousKey_hash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345",
+    "M1_tieByRowid_hash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345",
+    "rowidVsTotalOrder_cardsDiffer": 1408,
+    "M2_B_then_A": {
+      "fullReplayMs": 10448,
+      "hash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345"
+    },
+    "M2_ambiguousKey_hash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345",
+    "M2_tieByRowid_hash": "d6660a7ced08c6db2ce4a5f33030d3d29c093a5deb81354071adc15955c617c9",
+    "M3_shuffled_with_dups": {
+      "delivered": 672479,
+      "inserted": 560399,
+      "fullReplayMs": 12345,
+      "hash": "494f1cc2cad0c954fce66a224c3c482c3cccef7cf33c41efb09f9b4d05368345"
+    },
+    "allMergeOrdersEqual": true,
+    "negativeControls": {
+      "rowidOrderEqualsTotalOrder": false,
+      "ambiguousKey_clientTsOnly_M1_equals_M2": true,
+      "tieBrokenByArrivalRowid_M1_equals_M2": false
+    },
+    "mergedDiffersFromDeviceLocalViews": true
+  },
+  "forecast_main": {
+    "label": "main (seed 20260930, memMean .95, 15y)",
+    "cutoffs": 16,
+    "medianAbs": {
+      "model": 0.0386,
+      "observed": 0.0581
+    },
+    "summaryWindowsWith20plusActiveDays": {
+      "model": {
+        "windows": 14,
+        "meanAbs": 0.0434,
+        "maxAbs": 0.1205,
+        "within15pct": "14/14"
+      },
+      "observed": {
+        "windows": 14,
+        "meanAbs": 0.0779,
+        "maxAbs": 0.1876,
+        "within15pct": "13/14"
+      }
+    },
+    "summary": {
+      "model": {
+        "meanAbs": 0.0703,
+        "maxAbs": 0.4548,
+        "p90Abs": 0.1205,
+        "within15pct": "15/16",
+        "meanAbs_fromYear2": 0.0701,
+        "maxAbs_fromYear2": 0.4548,
+        "within15pct_fromYear2": "13/14"
+      },
+      "observed": {
+        "meanAbs": 0.1147,
+        "maxAbs": 0.5474,
+        "p90Abs": 0.198,
+        "within15pct": "13/16",
+        "meanAbs_fromYear2": 0.1243,
+        "maxAbs_fromYear2": 0.5474,
+        "within15pct_fromYear2": "11/14"
+      },
+      "naive": {
+        "meanAbs": 0.5612,
+        "maxAbs": 0.7705,
+        "p90Abs": 0.6843,
+        "within15pct": "0/16",
+        "meanAbs_fromYear2": 0.5374,
+        "maxAbs_fromYear2": 0.6295,
+        "within15pct_fromYear2": "0/14"
+      }
+    },
+    "dailyMAPE_model_mean": 0.359,
+    "weeklyMAPE_model_mean": 0.152,
+    "rows": [
+      {
+        "day": 180,
+        "activeDays": 26,
+        "cards": 999,
+        "actual30": 2322,
+        "actualExisting": 1260,
+        "actualNew": 1062,
+        "naiveDueCount": 533,
+        "forecastModel": 2042.3,
+        "forecastObserved": 2204.2,
+        "errModel": -0.1205,
+        "errObserved": -0.0508,
+        "errNaive": -0.7705,
+        "errExistingOnlyModel": -0.0934,
+        "dailyMAPE_model": 0.335,
+        "weeklyMAPE_model": 0.214,
+        "week1Err_model": 0.278,
+        "forecastMs": 902,
+        "stats": {
+          "pFirst": 0.261,
+          "pStep": 0.982,
+          "pReview": 0.855,
+          "newPerDay": 4.9
+        }
+      },
+      {
+        "day": 365,
+        "activeDays": 28,
+        "cards": 1935,
+        "actual30": 2604,
+        "actualExisting": 1701,
+        "actualNew": 903,
+        "naiveDueCount": 822,
+        "forecastModel": 2546,
+        "forecastObserved": 2720.6,
+        "errModel": -0.0223,
+        "errObserved": 0.0448,
+        "errNaive": -0.6843,
+        "errExistingOnlyModel": -0.0032,
+        "dailyMAPE_model": 0.257,
+        "weeklyMAPE_model": 0.024,
+        "week1Err_model": 0.012,
+        "forecastMs": 1231,
+        "stats": {
+          "pFirst": 0.305,
+          "pStep": 0.989,
+          "pReview": 0.863,
+          "newPerDay": 4.73
+        }
+      },
+      {
+        "day": 730,
+        "activeDays": 10,
+        "cards": 3327,
+        "actual30": 2093,
+        "actualExisting": 1958,
+        "actualNew": 135,
+        "naiveDueCount": 1226,
+        "forecastModel": 3045,
+        "forecastObserved": 3238.6,
+        "errModel": 0.4548,
+        "errObserved": 0.5474,
+        "errNaive": -0.4142,
+        "errExistingOnlyModel": 0.2264,
+        "dailyMAPE_model": 0.463,
+        "weeklyMAPE_model": 0.929,
+        "week1Err_model": 1.973,
+        "forecastMs": 1525,
+        "stats": {
+          "pFirst": 0.288,
+          "pStep": 0.982,
+          "pReview": 0.863,
+          "newPerDay": 3.54
+        }
+      },
+      {
+        "day": 1095,
+        "activeDays": 24,
+        "cards": 4498,
+        "actual30": 2872,
+        "actualExisting": 2385,
+        "actualNew": 487,
+        "naiveDueCount": 1064,
+        "forecastModel": 2795,
+        "forecastObserved": 3024.8,
+        "errModel": -0.0268,
+        "errObserved": 0.0532,
+        "errNaive": -0.6295,
+        "errExistingOnlyModel": -0.0441,
+        "dailyMAPE_model": 0.345,
+        "weeklyMAPE_model": 0.065,
+        "week1Err_model": 0.166,
+        "forecastMs": 1641,
+        "stats": {
+          "pFirst": 0.265,
+          "pStep": 0.984,
+          "pReview": 0.862,
+          "newPerDay": 2.81
+        }
+      },
+      {
+        "day": 1460,
+        "activeDays": 24,
+        "cards": 5621,
+        "actual30": 2876,
+        "actualExisting": 2495,
+        "actualNew": 381,
+        "naiveDueCount": 1319,
+        "forecastModel": 2965.8,
+        "forecastObserved": 3262.7,
+        "errModel": 0.0312,
+        "errObserved": 0.1345,
+        "errNaive": -0.5414,
+        "errExistingOnlyModel": -0.0054,
+        "dailyMAPE_model": 0.31,
+        "weeklyMAPE_model": 0.095,
+        "week1Err_model": 0.057,
+        "forecastMs": 1463,
+        "stats": {
+          "pFirst": 0.28,
+          "pStep": 0.979,
+          "pReview": 0.86,
+          "newPerDay": 2.66
+        }
+      },
+      {
+        "day": 1825,
+        "activeDays": 26,
+        "cards": 6493,
+        "actual30": 3052,
+        "actualExisting": 2438,
+        "actualNew": 614,
+        "naiveDueCount": 1308,
+        "forecastModel": 2934.3,
+        "forecastObserved": 3135.8,
+        "errModel": -0.0386,
+        "errObserved": 0.0274,
+        "errNaive": -0.5714,
+        "errExistingOnlyModel": -0.0096,
+        "dailyMAPE_model": 0.291,
+        "weeklyMAPE_model": 0.127,
+        "week1Err_model": 0.191,
+        "forecastMs": 1532,
+        "stats": {
+          "pFirst": 0.297,
+          "pStep": 0.983,
+          "pReview": 0.87,
+          "newPerDay": 2.88
+        }
+      },
+      {
+        "day": 2190,
+        "activeDays": 24,
+        "cards": 7327,
+        "actual30": 3380,
+        "actualExisting": 3049,
+        "actualNew": 331,
+        "naiveDueCount": 1604,
+        "forecastModel": 3487,
+        "forecastObserved": 3724.1,
+        "errModel": 0.0317,
+        "errObserved": 0.1018,
+        "errNaive": -0.5254,
+        "errExistingOnlyModel": -0.0071,
+        "dailyMAPE_model": 0.452,
+        "weeklyMAPE_model": 0.096,
+        "week1Err_model": 0.165,
+        "forecastMs": 1863,
+        "stats": {
+          "pFirst": 0.301,
+          "pStep": 0.976,
+          "pReview": 0.866,
+          "newPerDay": 2.54
+        }
+      },
+      {
+        "day": 2555,
+        "activeDays": 24,
+        "cards": 8270,
+        "actual30": 3298,
+        "actualExisting": 2632,
+        "actualNew": 666,
+        "naiveDueCount": 1421,
+        "forecastModel": 3153.4,
+        "forecastObserved": 3489.8,
+        "errModel": -0.0438,
+        "errObserved": 0.0581,
+        "errNaive": -0.5691,
+        "errExistingOnlyModel": 0.015,
+        "dailyMAPE_model": 0.28,
+        "weeklyMAPE_model": 0.073,
+        "week1Err_model": 0.033,
+        "forecastMs": 1551,
+        "stats": {
+          "pFirst": 0.161,
+          "pStep": 0.974,
+          "pReview": 0.857,
+          "newPerDay": 2.48
+        }
+      },
+      {
+        "day": 2920,
+        "activeDays": 19,
+        "cards": 9066,
+        "actual30": 3110,
+        "actualExisting": 2972,
+        "actualNew": 138,
+        "naiveDueCount": 1521,
+        "forecastModel": 3303.6,
+        "forecastObserved": 3725.7,
+        "errModel": 0.0623,
+        "errObserved": 0.198,
+        "errNaive": -0.5109,
+        "errExistingOnlyModel": -0.0096,
+        "dailyMAPE_model": 0.299,
+        "weeklyMAPE_model": 0.112,
+        "week1Err_model": 0.251,
+        "forecastMs": 2100,
+        "stats": {
+          "pFirst": 0.341,
+          "pStep": 0.968,
+          "pReview": 0.852,
+          "newPerDay": 2.02
+        }
+      },
+      {
+        "day": 3285,
+        "activeDays": 22,
+        "cards": 9762,
+        "actual30": 3178,
+        "actualExisting": 2847,
+        "actualNew": 331,
+        "naiveDueCount": 1523,
+        "forecastModel": 3205.6,
+        "forecastObserved": 3564.7,
+        "errModel": 0.0087,
+        "errObserved": 0.1217,
+        "errNaive": -0.5208,
+        "errExistingOnlyModel": 0.0046,
+        "dailyMAPE_model": 0.383,
+        "weeklyMAPE_model": 0.047,
+        "week1Err_model": -0.057,
+        "forecastMs": 1742,
+        "stats": {
+          "pFirst": 0.216,
+          "pStep": 0.95,
+          "pReview": 0.857,
+          "newPerDay": 1.8
+        }
+      },
+      {
+        "day": 3650,
+        "activeDays": 21,
+        "cards": 10511,
+        "actual30": 3201,
+        "actualExisting": 2907,
+        "actualNew": 294,
+        "naiveDueCount": 1560,
+        "forecastModel": 3416,
+        "forecastObserved": 3801.4,
+        "errModel": 0.0672,
+        "errObserved": 0.1876,
+        "errNaive": -0.5127,
+        "errExistingOnlyModel": 0.0223,
+        "dailyMAPE_model": 0.391,
+        "weeklyMAPE_model": 0.164,
+        "week1Err_model": 0.306,
+        "forecastMs": 1984,
+        "stats": {
+          "pFirst": 0.244,
+          "pStep": 0.967,
+          "pReview": 0.855,
+          "newPerDay": 2.37
+        }
+      },
+      {
+        "day": 4015,
+        "activeDays": 24,
+        "cards": 11104,
+        "actual30": 3378,
+        "actualExisting": 3069,
+        "actualNew": 309,
+        "naiveDueCount": 1391,
+        "forecastModel": 3084.5,
+        "forecastObserved": 3462.3,
+        "errModel": -0.0869,
+        "errObserved": 0.025,
+        "errNaive": -0.5882,
+        "errExistingOnlyModel": -0.0539,
+        "dailyMAPE_model": 0.414,
+        "weeklyMAPE_model": 0.126,
+        "week1Err_model": 0.092,
+        "forecastMs": 2077,
+        "stats": {
+          "pFirst": 0.244,
+          "pStep": 0.952,
+          "pReview": 0.852,
+          "newPerDay": 0.96
+        }
+      },
+      {
+        "day": 4380,
+        "activeDays": 25,
+        "cards": 11890,
+        "actual30": 3511,
+        "actualExisting": 3235,
+        "actualNew": 276,
+        "naiveDueCount": 1678,
+        "forecastModel": 3506.7,
+        "forecastObserved": 3890.6,
+        "errModel": -0.0012,
+        "errObserved": 0.1081,
+        "errNaive": -0.5221,
+        "errExistingOnlyModel": -0.0321,
+        "dailyMAPE_model": 0.376,
+        "weeklyMAPE_model": 0.06,
+        "week1Err_model": 0.025,
+        "forecastMs": 1900,
+        "stats": {
+          "pFirst": 0.269,
+          "pStep": 0.964,
+          "pReview": 0.858,
+          "newPerDay": 2.02
+        }
+      },
+      {
+        "day": 4745,
+        "activeDays": 23,
+        "cards": 12552,
+        "actual30": 3505,
+        "actualExisting": 3332,
+        "actualNew": 173,
+        "naiveDueCount": 1680,
+        "forecastModel": 3462.7,
+        "forecastObserved": 3839.7,
+        "errModel": -0.0121,
+        "errObserved": 0.0955,
+        "errNaive": -0.5207,
+        "errExistingOnlyModel": -0.0619,
+        "dailyMAPE_model": 0.337,
+        "weeklyMAPE_model": 0.07,
+        "week1Err_model": 0.065,
+        "forecastMs": 2035,
+        "stats": {
+          "pFirst": 0.379,
+          "pStep": 0.974,
+          "pReview": 0.859,
+          "newPerDay": 1.93
+        }
+      },
+      {
+        "day": 5110,
+        "activeDays": 28,
+        "cards": 13143,
+        "actual30": 3801,
+        "actualExisting": 3404,
+        "actualNew": 397,
+        "naiveDueCount": 1659,
+        "forecastModel": 3537.2,
+        "forecastObserved": 3958.6,
+        "errModel": -0.0694,
+        "errObserved": 0.0415,
+        "errNaive": -0.5635,
+        "errExistingOnlyModel": -0.0733,
+        "dailyMAPE_model": 0.449,
+        "weeklyMAPE_model": 0.11,
+        "week1Err_model": 0.06,
+        "forecastMs": 2304,
+        "stats": {
+          "pFirst": 0.18,
+          "pStep": 0.966,
+          "pReview": 0.854,
+          "newPerDay": 1.98
+        }
+      },
+      {
+        "day": 5445,
+        "activeDays": 27,
+        "cards": 13704,
+        "actual30": 3607,
+        "actualExisting": 3195,
+        "actualNew": 412,
+        "naiveDueCount": 1681,
+        "forecastModel": 3435.9,
+        "forecastObserved": 3753.1,
+        "errModel": -0.0474,
+        "errObserved": 0.0405,
+        "errNaive": -0.534,
+        "errExistingOnlyModel": -0.036,
+        "dailyMAPE_model": 0.369,
+        "weeklyMAPE_model": 0.122,
+        "week1Err_model": 0.176,
+        "forecastMs": 1676,
+        "stats": {
+          "pFirst": 0.331,
+          "pStep": 0.965,
+          "pReview": 0.864,
+          "newPerDay": 1.98
+        }
+      }
+    ]
+  },
+  "forecast_alt": [
+    {
+      "label": "alt1: learner forgets faster (memMean .80), seed 7, 10y",
+      "cutoffs": 10,
+      "medianAbs": {
+        "model": 0.0458,
+        "observed": 0.1223
+      },
+      "summaryWindowsWith20plusActiveDays": {
+        "model": {
+          "windows": 9,
+          "meanAbs": 0.0607,
+          "maxAbs": 0.1375,
+          "within15pct": "9/9"
+        },
+        "observed": {
+          "windows": 9,
+          "meanAbs": 0.0919,
+          "maxAbs": 0.1626,
+          "within15pct": "7/9"
+        }
+      },
+      "summary": {
+        "model": {
+          "meanAbs": 0.0747,
+          "maxAbs": 0.2007,
+          "p90Abs": 0.1375,
+          "within15pct": "9/10",
+          "meanAbs_fromYear2": 0.0766,
+          "maxAbs_fromYear2": 0.2007,
+          "within15pct_fromYear2": "7/8"
+        },
+        "observed": {
+          "meanAbs": 0.1142,
+          "maxAbs": 0.3149,
+          "p90Abs": 0.1626,
+          "within15pct": "7/10",
+          "meanAbs_fromYear2": 0.124,
+          "maxAbs_fromYear2": 0.3149,
+          "within15pct_fromYear2": "5/8"
+        },
+        "naive": {
+          "meanAbs": 0.5885,
+          "maxAbs": 0.7352,
+          "p90Abs": 0.7085,
+          "within15pct": "0/10",
+          "meanAbs_fromYear2": 0.5552,
+          "maxAbs_fromYear2": 0.618,
+          "within15pct_fromYear2": "0/8"
+        }
+      },
+      "dailyMAPE_model_mean": 0.327,
+      "weeklyMAPE_model_mean": 0.123,
+      "rows": [
+        {
+          "day": 180,
+          "activeDays": 24,
+          "actual30": 2311,
+          "forecastModel": 2324.9,
+          "errModel": 0.006,
+          "errObserved": 0.1223,
+          "errNaive": -0.7352
+        },
+        {
+          "day": 365,
+          "activeDays": 26,
+          "actual30": 2779,
+          "forecastModel": 2424.1,
+          "errModel": -0.1277,
+          "errObserved": -0.0274,
+          "errNaive": -0.7085
+        },
+        {
+          "day": 730,
+          "activeDays": 16,
+          "actual30": 2406,
+          "forecastModel": 2888.9,
+          "errModel": 0.2007,
+          "errObserved": 0.3149,
+          "errNaive": -0.5233
+        },
+        {
+          "day": 1095,
+          "activeDays": 28,
+          "actual30": 3173,
+          "forecastModel": 2736.7,
+          "errModel": -0.1375,
+          "errObserved": -0.0166,
+          "errNaive": -0.618
+        },
+        {
+          "day": 1460,
+          "activeDays": 21,
+          "actual30": 2976,
+          "forecastModel": 3112.4,
+          "errModel": 0.0458,
+          "errObserved": 0.1377,
+          "errNaive": -0.5507
+        },
+        {
+          "day": 1825,
+          "activeDays": 27,
+          "actual30": 3444,
+          "forecastModel": 3080.9,
+          "errModel": -0.1054,
+          "errObserved": -0.0115,
+          "errNaive": -0.592
+        },
+        {
+          "day": 2190,
+          "activeDays": 26,
+          "actual30": 3234,
+          "forecastModel": 3334.3,
+          "errModel": 0.031,
+          "errObserved": 0.1592,
+          "errNaive": -0.5353
+        },
+        {
+          "day": 2555,
+          "activeDays": 26,
+          "actual30": 3428,
+          "forecastModel": 3261.7,
+          "errModel": -0.0485,
+          "errObserved": 0.0671,
+          "errNaive": -0.5697
+        },
+        {
+          "day": 2920,
+          "activeDays": 22,
+          "actual30": 3259,
+          "forecastModel": 3355.8,
+          "errModel": 0.0297,
+          "errObserved": 0.1626,
+          "errNaive": -0.5222
+        },
+        {
+          "day": 3285,
+          "activeDays": 26,
+          "actual30": 3483,
+          "forecastModel": 3533,
+          "errModel": 0.0144,
+          "errObserved": 0.1227,
+          "errNaive": -0.5306
+        }
+      ]
+    },
+    {
+      "label": "alt2: better memory (memMean 1.05) + less active (0.75x), seed 11, 10y",
+      "cutoffs": 10,
+      "medianAbs": {
+        "model": 0.1474,
+        "observed": 0.1866
+      },
+      "summaryWindowsWith20plusActiveDays": {
+        "model": {
+          "windows": 0,
+          "meanAbs": null,
+          "maxAbs": null,
+          "within15pct": "0/0"
+        },
+        "observed": {
+          "windows": 0,
+          "meanAbs": null,
+          "maxAbs": null,
+          "within15pct": "0/0"
+        }
+      },
+      "summary": {
+        "model": {
+          "meanAbs": 0.2355,
+          "maxAbs": 0.8907,
+          "p90Abs": 0.3073,
+          "within15pct": "5/10",
+          "meanAbs_fromYear2": 0.1646,
+          "maxAbs_fromYear2": 0.3073,
+          "within15pct_fromYear2": "4/8"
+        },
+        "observed": {
+          "meanAbs": 0.3159,
+          "maxAbs": 0.9973,
+          "p90Abs": 0.5561,
+          "within15pct": "1/10",
+          "meanAbs_fromYear2": 0.2469,
+          "maxAbs_fromYear2": 0.5561,
+          "within15pct_fromYear2": "1/8"
+        },
+        "naive": {
+          "meanAbs": 0.608,
+          "maxAbs": 0.7177,
+          "p90Abs": 0.7174,
+          "within15pct": "0/10",
+          "meanAbs_fromYear2": 0.6262,
+          "maxAbs_fromYear2": 0.7177,
+          "within15pct_fromYear2": "0/8"
+        }
+      },
+      "dailyMAPE_model_mean": 0.738,
+      "weeklyMAPE_model_mean": 0.556,
+      "rows": [
+        {
+          "day": 180,
+          "activeDays": 15,
+          "actual30": 1408,
+          "forecastModel": 1615.5,
+          "errModel": 0.1474,
+          "errObserved": 0.1866,
+          "errNaive": -0.6875
+        },
+        {
+          "day": 365,
+          "activeDays": 7,
+          "actual30": 996,
+          "forecastModel": 1883.1,
+          "errModel": 0.8907,
+          "errObserved": 0.9973,
+          "errNaive": -0.3825
+        },
+        {
+          "day": 730,
+          "activeDays": 17,
+          "actual30": 1905,
+          "forecastModel": 2077.2,
+          "errModel": 0.0904,
+          "errObserved": 0.1684,
+          "errNaive": -0.5738
+        },
+        {
+          "day": 1095,
+          "activeDays": 16,
+          "actual30": 1759,
+          "forecastModel": 2299.5,
+          "errModel": 0.3073,
+          "errObserved": 0.3627,
+          "errNaive": -0.4684
+        },
+        {
+          "day": 1460,
+          "activeDays": 18,
+          "actual30": 2207,
+          "forecastModel": 2399.4,
+          "errModel": 0.0872,
+          "errObserved": 0.1615,
+          "errNaive": -0.5406
+        },
+        {
+          "day": 1825,
+          "activeDays": 19,
+          "actual30": 3904,
+          "forecastModel": 2953,
+          "errModel": -0.2436,
+          "errObserved": -0.0633,
+          "errNaive": -0.7177
+        },
+        {
+          "day": 2190,
+          "activeDays": 15,
+          "actual30": 3669,
+          "forecastModel": 2895.4,
+          "errModel": -0.2109,
+          "errObserved": 0.1707,
+          "errNaive": -0.7174
+        },
+        {
+          "day": 2555,
+          "activeDays": 14,
+          "actual30": 2749,
+          "forecastModel": 2994.4,
+          "errModel": 0.0893,
+          "errObserved": 0.5561,
+          "errNaive": -0.5999
+        },
+        {
+          "day": 2920,
+          "activeDays": 15,
+          "actual30": 3519,
+          "forecastModel": 3178.3,
+          "errModel": -0.0968,
+          "errObserved": 0.2976,
+          "errNaive": -0.6854
+        },
+        {
+          "day": 3285,
+          "activeDays": 16,
+          "actual30": 3890,
+          "forecastModel": 3144.5,
+          "errModel": -0.1916,
+          "errObserved": 0.1952,
+          "errNaive": -0.7064
+        }
+      ]
+    }
+  ],
+  "incremental": {
+    "ldiFullReadoutMs": 14.2,
+    "appendMs_syncNORMAL": {
+      "n": 1415,
+      "p50": 0.112,
+      "p95": 0.642,
+      "p99": 11.26,
+      "max": 16.229,
+      "mean": 0.358
+    },
+    "appendMs_syncFULL": {
+      "n": 300,
+      "p50": 0.521,
+      "p95": 3.567,
+      "p99": 8.035,
+      "max": 11.645,
+      "mean": 0.914
+    },
+    "ldiConceptDeltaMs": {
+      "n": 1715,
+      "p50": 0.139,
+      "p95": 0.308,
+      "p99": 0.503,
+      "max": 15.006,
+      "mean": 0.194
+    },
+    "paths": {
+      "fast": 1715
+    },
+    "ldi": {
+      "incremental": 746.7988134773667,
+      "fullRecompute": 746.7988134773663,
+      "relDiff": 6.08928860999384e-16
+    },
+    "fullReplayAfterExtraMs": 11075,
+    "threeWay": {
+      "persistedIncremental": "576d8ef419c9ab46093c3f8b09a0cc0bf2913e2a0a7e4f0df18abfa157b47519",
+      "liveSimulator": "576d8ef419c9ab46093c3f8b09a0cc0bf2913e2a0a7e4f0df18abfa157b47519",
+      "fullReplay": "576d8ef419c9ab46093c3f8b09a0cc0bf2913e2a0a7e4f0df18abfa157b47519",
+      "allEqual": true
+    },
+    "extraEvents": 1715,
+    "lateEventAppendMs": {
+      "n": 200,
+      "p50": 16.678,
+      "p95": 35.368,
+      "p99": 45.286,
+      "max": 165.944,
+      "mean": 17.259
+    },
+    "latePaths": {
+      "slow": 171,
+      "fast": 29
+    },
+    "afterLate": {
+      "persistedEqualsFullReplay": true
+    }
+  },
+  "criteria": {
+    "gen<=60s": {
+      "ms": 18083,
+      "pass": true
+    },
+    "replay==live": true,
+    "merge order invariant": true,
+    "forecast<=15% (main, model)": {
+      "meanAbs": 0.0703,
+      "maxAbs": 0.4548,
+      "p90Abs": 0.1205,
+      "within15pct": "15/16",
+      "meanAbs_fromYear2": 0.0701,
+      "maxAbs_fromYear2": 0.4548,
+      "within15pct_fromYear2": "13/14"
+    },
+    "incremental<=1s (p99)": true
+  }
+}

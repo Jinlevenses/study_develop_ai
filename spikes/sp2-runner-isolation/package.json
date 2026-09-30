@@ -1,0 +1,14 @@
+{
+  "name": "sp2-runner-isolation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fathom SP-2: local JS/TS + SQL runner isolation spike (Node 22.22, --permission + preload guard + RSS watchdog)",
+  "engines": { "node": ">=22.22" },
+  "scripts": {
+    "spike": "node src/spike.mjs",
+    "spike:attacks": "node src/spike.mjs --only=attacks",
+    "spike:latency": "node src/spike.mjs --only=latency",
+    "test:tokenizer": "node src/sql-tokenizer.test.mjs"
+  }
+}

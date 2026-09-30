@@ -1,0 +1,22 @@
+{
+  "name": "sp4-node-sqlite",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Fathom SP-4: node:sqlite capacity spike (multi-process WAL, FTS5 trigram Korean search, warnings, DatabaseSync features)",
+  "engines": {
+    "node": ">=22.22"
+  },
+  "scripts": {
+    "spike": "node --disable-warning=ExperimentalWarning src/spike.mjs",
+    "spike:features": "node --disable-warning=ExperimentalWarning src/spike.mjs --only=features",
+    "spike:warnings": "node --disable-warning=ExperimentalWarning src/spike.mjs --only=warnings",
+    "spike:concurrency": "node --disable-warning=ExperimentalWarning src/spike.mjs --only=concurrency",
+    "spike:search": "node --disable-warning=ExperimentalWarning src/spike.mjs --only=search",
+    "clean": "node -e \"require('fs').rmSync('.work',{recursive:true,force:true})\"",
+    "spike:hazard": "node --disable-warning=ExperimentalWarning src/hazard-live-harness.mjs 8"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15"
+  }
+}

@@ -1,0 +1,1 @@
+{"name":"sp3-replay-determinism","version":"0.0.1","private":true,"type":"module","scripts":{"spike":"node --no-warnings --import tsx src/spike.ts","spike:quick":"node --no-warnings --import tsx src/spike.ts --quick --keep"},"dependencies":{"ts-fsrs":"^5.4.2","tsx":"^4.23.0","typescript":"^7.0.2"}}

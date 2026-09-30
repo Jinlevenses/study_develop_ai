@@ -1,0 +1,19 @@
+{
+  "name": "sp6-promotion-reachability",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "SP-6 promotion reachability simulation (Fathom). Pure promotion module + Monte-Carlo agents.",
+  "scripts": {
+    "spike": "node --no-warnings --import tsx src/run.ts",
+    "spike:quick": "node --no-warnings --import tsx src/run.ts --quick",
+    "test": "node --no-warnings --import tsx --test src/promotion.test.ts",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "ts-fsrs": "^5.4.2",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2",
+    "@types/node": "^22.0.0"
+  }
+}

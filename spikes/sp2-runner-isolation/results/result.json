@@ -1,0 +1,1936 @@
+{
+  "env": {
+    "node": "v22.22.2",
+    "os": "Linux 6.18.44-fc-v50",
+    "arch": "x64",
+    "cpus": 4,
+    "platform": "linux",
+    "uid": 0
+  },
+  "attacks": {
+    "total": 52,
+    "pass": 52,
+    "fail": [],
+    "acceptedRisk": [
+      "RES-14"
+    ],
+    "matrix": {
+      "controlNone_escaped": 37,
+      "permissionOnly_escaped": [
+        "FS-12",
+        "PR-06",
+        "PR-07",
+        "NET-01",
+        "NET-02",
+        "NET-03",
+        "NET-04",
+        "NET-05",
+        "NET-06",
+        "NET-07",
+        "NET-08",
+        "NET-10",
+        "MOD-02",
+        "MOD-03",
+        "MOD-04",
+        "MOD-05",
+        "MOD-06",
+        "MOD-07",
+        "ENV-01"
+      ],
+      "full_escaped": [],
+      "controlInvalid": []
+    },
+    "rows": [
+      {
+        "id": "FS-01",
+        "cat": "fs",
+        "name": "read ~/.ssh (canary key + real home dir)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ssh canary leaked in output",
+            "ESCAPED marker x2: ESCAPED:CANARY-SSH-KEY-cdadf5e339f177ef | ESCAPED:0 entries"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 58.5,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-02",
+        "cat": "fs",
+        "name": "read /etc/passwd, /etc/hostname",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "/etc/passwd content leaked",
+            "ESCAPED marker x2: ESCAPED:root:x:0:0:root:/root:/bin/bash | ESCAPED:vm"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 52.8,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-03",
+        "cat": "fs",
+        "name": "read /proc/self/environ and /proc/<ppid>/environ (parent secrets)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x3: ESCAPED:0 | ESCAPED:false | ESCAPED:node\u0000src/spike.mjs\u0000"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 74.6,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 3
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-04",
+        "cat": "fs",
+        "name": "write file outside temp (absolute path)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "file created outside: pwn.txt,pwn2.txt",
+            "ESCAPED marker x2: ESCAPED:undefined | ESCAPED:promises"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 54.7,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-05",
+        "cat": "fs",
+        "name": "write outside via relative ../ from cwd + mkdir + rename",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "file created outside: append.txt",
+            "file created in RUN_ROOT: pwn-rel.txt",
+            "file created in RUN_ROOT: pwn-dir",
+            "ESCAPED marker x3: ESCAPED:undefined | ESCAPED:undefined | ESCAPED:undefined"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 70,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 3
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-06",
+        "cat": "fs",
+        "name": "list sibling run dirs, /, tmp root",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x3: ESCAPED:run-f5WSni | ESCAPED:24 | ESCAPED:1"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 62,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 3
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-07",
+        "cat": "fs",
+        "name": "path traversal / proc root tricks to reach /etc",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x4: ESCAPED:1238 | ESCAPED:1238 | ESCAPED:3"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 60.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 4
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-08",
+        "cat": "fs",
+        "name": "process.chdir(/) then read relative",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:1238"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 54.5,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-09",
+        "cat": "fs",
+        "name": "symlink/hardlink escape from WRITABLE tmp",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "file created outside: via-symlink.txt",
+            "ssh canary leaked in output",
+            "ESCAPED marker x4: ESCAPED:CANARY-SSH-KEY-cdadf5e339f177ef | ESCAPED:CANARY-SSH-KEY-cdadf5e339f177ef | ESCAPED:CANARY-SSH-KEY-cdadf5e339f177ef"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 58.5,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 4
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-10",
+        "cat": "fs",
+        "name": "writable tmp: write inside OK, outside/../ blocked, 50MB disk fill capped",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "file created outside: w.txt",
+            "file created in RUN_ROOT: outside-of-tmp.txt",
+            "ESCAPED marker x3: ESCAPED:undefined | ESCAPED:undefined | ESCAPED:52428800"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 88.2,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 2,
+            "EFBIG": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-11",
+        "cat": "fs",
+        "name": "process.report.writeReport outside",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "file created outside: report.json",
+            "ESCAPED marker x1: ESCAPED:/home/user/study_develop_ai/spikes/sp2-runner-isolation/fixtures/outside/report."
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 51.7,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_ACCESS_DENIED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "FS-12",
+        "cat": "fs",
+        "name": "JS uses node:sqlite ATTACH / VACUUM INTO to create files (permission bypass)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "file created outside: js-attach.db,js-vacuum.db",
+            "ESCAPED marker x2: ESCAPED:attached | ESCAPED:vacuumed"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "file created outside: js-attach.db,js-vacuum.db",
+            "ESCAPED marker x2: ESCAPED:attached | ESCAPED:vacuumed"
+          ]
+        },
+        "full": {
+          "status": "error",
+          "ms": 74.5,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": "  const e = new Error(`Access to module '${name}' is blocked by the Fathom runner`);"
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-01",
+        "cat": "process",
+        "name": "child_process.spawnSync via dynamic import",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:uid=0(root) gid=0(root) groups=0(root)"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 80,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-02",
+        "cat": "process",
+        "name": "child_process via createRequire / require",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:uid=0(root) gid=0(root) groups=0(root)"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "error",
+          "ms": 55,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": "  const e = new Error(`Access to module '${name}' is blocked by the Fathom runner`);"
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-03",
+        "cat": "process",
+        "name": "child_process via process.getBuiltinModule / process.binding(spawn_sync)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x3: ESCAPED:uid=0(root) gid=0(root) groups=0(root) | ESCAPED:[object Object] | ESCAPED:[object Object]"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 55.1,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 3
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-04",
+        "cat": "process",
+        "name": "bounded fork bomb (6 x spawn of self)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:spawned 6"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 68.1,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-05",
+        "cat": "process",
+        "name": "worker_threads Worker (file + eval)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:worker"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 51.6,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-06",
+        "cat": "process",
+        "name": "process.kill(ppid, SIGUSR2) (signal the runner parent)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "sigusr2 hit x2",
+            "ESCAPED marker x2: ESCAPED:true | ESCAPED:0"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "sigusr2 hit x2",
+            "ESCAPED marker x2: ESCAPED:true | ESCAPED:0"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 53.1,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-07",
+        "cat": "process",
+        "name": "process.execve / dlopen / _debugProcess(ppid) / setuid",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:execve"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "sigusr1 hit x1",
+            "ESCAPED marker x2: ESCAPED:undefined | ESCAPED:undefined"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 51.2,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 4
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "PR-08",
+        "cat": "process",
+        "name": "ignore SIGTERM + busy loop (must die by SIGKILL)",
+        "full": {
+          "status": "timeout",
+          "ms": 804.9,
+          "peakRssMB": 49,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"timeout\"] got timeout; peakRSS 49MB; 804.9ms"
+      },
+      {
+        "id": "NET-01",
+        "cat": "net",
+        "name": "net.connect to local TCP listener (dynamic import)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x1",
+            "ESCAPED marker x1: ESCAPED:connected"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x1",
+            "ESCAPED marker x1: ESCAPED:connected"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 103.2,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-02",
+        "cat": "net",
+        "name": "net.Socket via process.stdout.constructor / stdout.connect",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x1",
+            "ESCAPED marker x1: ESCAPED:connect issued"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x1",
+            "ESCAPED marker x1: ESCAPED:connect issued"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 260.8,
+          "peakRssMB": 43.9,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-03",
+        "cat": "net",
+        "name": "http.get to local HTTP server",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "http hit x1",
+            "ESCAPED marker x1: ESCAPED:status 200"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "http hit x1",
+            "ESCAPED marker x1: ESCAPED:status 200"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 57,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-04",
+        "cat": "net",
+        "name": "global fetch() to local HTTP server",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "http hit x1",
+            "ESCAPED marker x1: ESCAPED:status 200"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "http hit x1",
+            "ESCAPED marker x1: ESCAPED:status 200"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 51.9,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-05",
+        "cat": "net",
+        "name": "WebSocket / EventSource globals",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x1",
+            "ESCAPED marker x1: ESCAPED:ws 0"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x1",
+            "ESCAPED marker x1: ESCAPED:ws 0"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 258.5,
+          "peakRssMB": 43.9,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-06",
+        "cat": "net",
+        "name": "dgram UDP send to local listener",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "udp hit x1",
+            "ESCAPED marker x1: ESCAPED:sent"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "udp hit x1",
+            "ESCAPED marker x1: ESCAPED:sent"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 103.9,
+          "peakRssMB": 39.5,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-07",
+        "cat": "net",
+        "name": "dns.lookup / dns.promises.resolve4 (localhost)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:127.0.0.1 | ESCAPED:127.0.0.1"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:127.0.0.1 | ESCAPED:127.0.0.1"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 76.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-08",
+        "cat": "net",
+        "name": "tls.connect / https.get / http2.connect to local port",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x2",
+            "ESCAPED marker x3: ESCAPED:tls issued | ESCAPED:https issued | ESCAPED:h2 issued"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "tcp hit x2",
+            "ESCAPED marker x3: ESCAPED:tls issued | ESCAPED:https issued | ESCAPED:h2 issued"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 387.2,
+          "peakRssMB": 43.9,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 3
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-09",
+        "cat": "net",
+        "name": "inspector.open() (debug port = full control) / Session",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:ws://127.0.0.1:33251/c52836ba-1eff-4bd3-a887-e97c4d26ca24"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 63.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "NET-10",
+        "cat": "net",
+        "name": "net.createServer().listen (open a listening port)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:listening 40281"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:listening 41649"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 74.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-01",
+        "cat": "module",
+        "name": "eval / new Function / AsyncFunction / Function.prototype.constructor",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x5: ESCAPED:2 | ESCAPED:1 | ESCAPED:[object Object]"
+          ]
+        },
+        "permission": {
+          "escaped": false,
+          "effects": []
+        },
+        "full": {
+          "status": "ok",
+          "ms": 84.3,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "EvalError": 5
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-02",
+        "cat": "module",
+        "name": "vm.runInNewContext / vm.Script escape (this.constructor.constructor)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:object | ESCAPED:object"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:object"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 111,
+          "peakRssMB": 43.8,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-03",
+        "cat": "module",
+        "name": "blocked-module spelling variants (NET, node:NET, net/, node:net?x, dns/promises)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x6: ESCAPED:net -> 19 | ESCAPED:node:net -> 19 | ESCAPED:dns/promises -> 47"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x6: ESCAPED:net -> 19 | ESCAPED:node:net -> 19 | ESCAPED:dns/promises -> 47"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 53.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 9,
+            "ERR_MODULE_NOT_FOUND": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-04",
+        "cat": "module",
+        "name": "CJS entry: require.main / module.constructor._load / process.mainModule",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x5: ESCAPED:require net | ESCAPED:_load cp | ESCAPED:mainModule http"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x5: ESCAPED:require net | ESCAPED:_load cp | ESCAPED:mainModule http"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 72.1,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 5
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-05",
+        "cat": "module",
+        "name": "nested/data: URL import of blocked module",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:imported net via data: | ESCAPED:imported cp via data:"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:imported net via data: | ESCAPED:imported cp via data:"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 107.8,
+          "peakRssMB": 44.1,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-06",
+        "cat": "module",
+        "name": "load module/v8/os/wasi/tty (hook tamper, flags, info leak)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x7: ESCAPED:node:module -> 31 | ESCAPED:node:v8 -> 23 | ESCAPED:node:os -> 24"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x7: ESCAPED:node:module -> 31 | ESCAPED:node:v8 -> 23 | ESCAPED:node:os -> 24"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 65,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 7
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "MOD-07",
+        "cat": "module",
+        "name": "tamper with guard (overwrite/delete getBuiltinModule, fetch, process.binding, Socket.connect) then use net",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:connect after tamper"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x1: ESCAPED:connect after tamper"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 102.3,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "ERR_FATHOM_BLOCKED": 2
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "ENV-01",
+        "cat": "env",
+        "name": "read secrets from env (process.env, report.getReport)",
+        "none": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:env keys: FATHOM_TEST_SECRET | ESCAPED:report env: FATHOM_TEST_SECRET"
+          ]
+        },
+        "permission": {
+          "escaped": true,
+          "effects": [
+            "ESCAPED marker x2: ESCAPED:env keys: FATHOM_TEST_SECRET | ESCAPED:report env: FATHOM_TEST_SECRET"
+          ]
+        },
+        "full": {
+          "status": "ok",
+          "ms": 88.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {
+            "EMPTY_ENV": 2,
+            "UNSET": 1
+          },
+          "stderrHead": ""
+        },
+        "pass": true,
+        "controlValid": true
+      },
+      {
+        "id": "RES-01",
+        "cat": "resource",
+        "name": "infinite synchronous loop",
+        "full": {
+          "status": "timeout",
+          "ms": 804.7,
+          "peakRssMB": 49,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"timeout\"] got timeout; peakRSS 49MB; 804.7ms"
+      },
+      {
+        "id": "RES-02",
+        "cat": "resource",
+        "name": "never-ending timers + microtask storm",
+        "full": {
+          "status": "timeout",
+          "ms": 805.1,
+          "peakRssMB": 51.1,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"timeout\"] got timeout; peakRSS 51.1MB; 805.1ms"
+      },
+      {
+        "id": "RES-03",
+        "cat": "resource",
+        "name": "Atomics.wait forever (0% CPU, defeats RLIMIT_CPU)",
+        "full": {
+          "status": "timeout",
+          "ms": 803.9,
+          "peakRssMB": 43.8,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"timeout\"] got timeout; peakRSS 43.8MB; 803.9ms"
+      },
+      {
+        "id": "RES-04",
+        "cat": "resource",
+        "name": "Buffer.alloc(2GB) untouched (calloc, virtual only)",
+        "full": {
+          "status": "ok",
+          "ms": 79.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"error\",\"ok\",\"memory_limit\"] got ok; peakRSS 0MB; 79.4ms"
+      },
+      {
+        "id": "RES-05",
+        "cat": "resource",
+        "name": "Buffer.alloc(2GB, 1) touched (RSS)",
+        "full": {
+          "status": "error",
+          "ms": 108.1,
+          "peakRssMB": 43.7,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": "RangeError: Array buffer allocation failed"
+        },
+        "pass": true,
+        "note": "expected [\"error\",\"memory_limit\"] got error; peakRSS 43.7MB; 108.1ms"
+      },
+      {
+        "id": "RES-06",
+        "cat": "resource",
+        "name": "Buffer.alloc(2GB,1) touched, OS backstop disabled (watchdog alone)",
+        "full": {
+          "status": "memory_limit",
+          "ms": 1417.9,
+          "peakRssMB": 261.9,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"memory_limit\"] got memory_limit; peakRSS 261.9MB; 1417.9ms"
+      },
+      {
+        "id": "RES-07",
+        "cat": "resource",
+        "name": "incremental 16MB Buffer hoarding until OOM (watchdog alone)",
+        "full": {
+          "status": "memory_limit",
+          "ms": 215.1,
+          "peakRssMB": 268.8,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"memory_limit\"] got memory_limit; peakRSS 268.8MB; 215.1ms"
+      },
+      {
+        "id": "RES-08",
+        "cat": "resource",
+        "name": "JS heap bomb (arrays) until V8 OOM",
+        "full": {
+          "status": "memory_limit",
+          "ms": 271.5,
+          "peakRssMB": 160,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": " 1: 0xe42d60 node::OOMErrorHandler(char const*, v8::OOMDetails const&) [/opt/node22/bin/node]"
+        },
+        "pass": true,
+        "note": "expected [\"error\",\"memory_limit\",\"killed_SIGABRT\",\"killed_SIGTRAP\"] got memory_limit; peakRSS 160MB; 271.5ms"
+      },
+      {
+        "id": "RES-09",
+        "cat": "resource",
+        "name": "deep recursion (stack overflow)",
+        "full": {
+          "status": "error",
+          "ms": 93.4,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": "RangeError: Maximum call stack size exceeded"
+        },
+        "pass": true,
+        "note": "expected [\"ok\",\"error\"] got error; peakRSS 0MB; 93.4ms"
+      },
+      {
+        "id": "RES-10",
+        "cat": "resource",
+        "name": "stdout flood (endless console.log)",
+        "full": {
+          "status": "output_limit",
+          "ms": 52,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"output_limit\",\"memory_limit\"] got output_limit; peakRSS 0MB; 52ms"
+      },
+      {
+        "id": "RES-11",
+        "cat": "resource",
+        "name": "stderr flood",
+        "full": {
+          "status": "output_limit",
+          "ms": 68.5,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"output_limit\"] got output_limit; peakRSS 0MB; 68.5ms"
+      },
+      {
+        "id": "RES-12",
+        "cat": "resource",
+        "name": "single 200MB stdout write",
+        "full": {
+          "status": "memory_limit",
+          "ms": 613.8,
+          "peakRssMB": 263.4,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"output_limit\",\"memory_limit\",\"error\"] got memory_limit; peakRSS 263.4MB; 613.8ms"
+      },
+      {
+        "id": "RES-13",
+        "cat": "resource",
+        "name": "zlib decompression bomb (40 x 64MB gunzip, kept)",
+        "full": {
+          "status": "memory_limit",
+          "ms": 527.8,
+          "peakRssMB": 274.2,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "pass": true,
+        "note": "expected [\"memory_limit\",\"error\",\"output_limit\"] got memory_limit; peakRSS 274.2MB; 527.8ms"
+      },
+      {
+        "id": "RES-14",
+        "cat": "resource",
+        "name": "process.exit(0) after forging a PASS line (result forgery, accepted risk)",
+        "full": {
+          "status": "ok",
+          "ms": 63.1,
+          "peakRssMB": 0,
+          "tmpCleaned": true,
+          "escaped": false,
+          "effects": [],
+          "blocked": {},
+          "stderrHead": ""
+        },
+        "accepted": true,
+        "pass": true,
+        "note": "forged stdout is delivered as-is (status ok); documented as RSK-RUN (grader must not trust learner stdout)"
+      }
+    ]
+  },
+  "sql": {
+    "total": 16,
+    "pass": 16,
+    "fail": [],
+    "functional": [
+      {
+        "name": "window function",
+        "ok": true,
+        "status": "ok",
+        "ms": 72.1
+      },
+      {
+        "name": "recursive CTE",
+        "ok": true,
+        "status": "ok",
+        "ms": 57.9
+      },
+      {
+        "name": "DDL/DML/drop",
+        "ok": true,
+        "status": "ok",
+        "ms": 61.1
+      },
+      {
+        "name": "safe PRAGMA table_info",
+        "ok": true,
+        "status": "ok",
+        "ms": 60.8
+      },
+      {
+        "name": "string containing keyword",
+        "ok": true,
+        "status": "ok",
+        "ms": 81.2
+      },
+      {
+        "name": "SQLite syntax error is reported, runner does not crash",
+        "ok": true,
+        "status": "ok",
+        "ms": 63.1
+      },
+      {
+        "name": "row cap 1000",
+        "ok": true,
+        "status": "ok",
+        "ms": 63.5
+      }
+    ],
+    "rows": [
+      {
+        "id": "SQL-01",
+        "name": "ATTACH DATABASE to absolute path",
+        "status": "rejected",
+        "reason": "statement type ATTACH not allowed",
+        "ms": 0.7,
+        "filesCreated": [],
+        "pass": true,
+        "control_noTokenizer": {
+          "status": "ok",
+          "fileCreated": true
+        },
+        "leftover": 0
+      },
+      {
+        "id": "SQL-02",
+        "name": "ATTACH obfuscation (case, comments, newline)",
+        "status": "rejected",
+        "reason": "statement type ATTACH not allowed",
+        "ms": 0.1,
+        "filesCreated": [],
+        "pass": true,
+        "control_noTokenizer": {
+          "status": "ok",
+          "fileCreated": true
+        },
+        "leftover": 0
+      },
+      {
+        "id": "SQL-03",
+        "name": "ATTACH smuggled as 2nd statement",
+        "status": "rejected",
+        "reason": "statement type ATTACH not allowed",
+        "ms": 0.2,
+        "filesCreated": [],
+        "pass": true,
+        "control_noTokenizer": {
+          "status": "ok",
+          "fileCreated": true
+        },
+        "leftover": 0
+      },
+      {
+        "id": "SQL-04",
+        "name": "NUL byte smuggle",
+        "status": "rejected",
+        "reason": "NUL byte",
+        "ms": 0.2,
+        "filesCreated": [],
+        "pass": true,
+        "control_noTokenizer": {
+          "status": "ok",
+          "fileCreated": false
+        },
+        "leftover": 0
+      },
+      {
+        "id": "SQL-05",
+        "name": "DETACH",
+        "status": "rejected",
+        "reason": "statement type DETACH not allowed",
+        "ms": 0.1,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-06",
+        "name": "PRAGMA writable_schema / journal_mode / page_size (unsafe)",
+        "status": "rejected",
+        "reason": "PRAGMA WRITABLE_SCHEMA not allowed",
+        "ms": 0.2,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-07",
+        "name": "VACUUM INTO file",
+        "status": "rejected",
+        "reason": "statement type VACUUM not allowed",
+        "ms": 0.1,
+        "filesCreated": [],
+        "pass": true,
+        "control_noTokenizer": {
+          "status": "ok",
+          "fileCreated": true
+        },
+        "leftover": 0
+      },
+      {
+        "id": "SQL-08",
+        "name": "load_extension()",
+        "status": "rejected",
+        "reason": "keyword LOAD_EXTENSION not allowed",
+        "ms": 0.1,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-09",
+        "name": "quoted load_extension / fts3_tokenizer / readfile",
+        "status": "rejected",
+        "reason": "identifier load_extension not allowed",
+        "ms": 0,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-10",
+        "name": "file-path literal / CREATE VIRTUAL TABLE",
+        "status": "rejected",
+        "reason": "keyword VIRTUAL not allowed",
+        "ms": 0.1,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-11",
+        "name": "> 20 statements (statement budget)",
+        "status": "rejected",
+        "reason": "too many statements (25 > 20)",
+        "ms": 0.3,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-12",
+        "name": "unbounded recursive CTE aggregate (time budget 2s)",
+        "status": "timeout",
+        "reason": null,
+        "ms": 2005.7,
+        "peakRssMB": 46.8,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-13",
+        "name": "unbounded recursive CTE SELECT rows (row cap)",
+        "status": "ok",
+        "reason": null,
+        "ms": 69.2,
+        "peakRssMB": 0,
+        "filesCreated": [],
+        "pass": true,
+        "rowsReturned": 1000,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-14",
+        "name": "hex(zeroblob(400MB)) memory bomb",
+        "status": "memory_limit",
+        "reason": null,
+        "ms": 1217,
+        "peakRssMB": 263.4,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-15",
+        "name": "string-doubling memory bomb",
+        "status": "ok",
+        "reason": "disk I/O error",
+        "ms": 187.1,
+        "peakRssMB": 71,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      },
+      {
+        "id": "SQL-16",
+        "name": "table-growth bomb (INSERT ... recursive) hits max_page_count",
+        "status": "ok",
+        "reason": "database or disk is full",
+        "ms": 70,
+        "peakRssMB": 0,
+        "filesCreated": [],
+        "pass": true,
+        "leftover": 0
+      }
+    ],
+    "loadExtensionRaw": {
+      "stdout": "{\"ok\":false,\"results\":[],\"error\":{\"code\":\"ERR_SQLITE_ERROR\",\"message\":\"not authorized\"},\"ms\":0.87}\n",
+      "stderr": ""
+    }
+  },
+  "premise": {
+    "P2_heapFlagDoesNotCapBuffer": {
+      "status": "ok",
+      "stdout": "held 1200000000 1185",
+      "stderr": ""
+    },
+    "P5_rlimitAsBlocksBigBuffer": {
+      "status": "ok",
+      "stdout": "ALLOC-FAIL Array buffer allocation failed"
+    },
+    "P6_netnsWithoutGuard": [
+      {
+        "id": "NET-01",
+        "hits": 0,
+        "stdout": "BLOCKED:ENETUNREACH",
+        "status": "ok",
+        "stderr": ""
+      },
+      {
+        "id": "NET-03",
+        "hits": 0,
+        "stdout": "BLOCKED:ENETUNREACH",
+        "status": "ok",
+        "stderr": ""
+      },
+      {
+        "id": "NET-04",
+        "hits": 0,
+        "stdout": "BLOCKED:TypeError",
+        "status": "ok",
+        "stderr": ""
+      },
+      {
+        "id": "NET-06",
+        "hits": 0,
+        "stdout": "BLOCKED:ENETUNREACH",
+        "status": "timeout",
+        "stderr": ""
+      },
+      {
+        "id": "NET-07",
+        "hits": 0,
+        "stdout": "ESCAPED:127.0.0.1\nESCAPED:127.0.0.1",
+        "status": "ok",
+        "stderr": ""
+      },
+      {
+        "id": "NET-10",
+        "hits": 0,
+        "stdout": "ESCAPED:listening 46775",
+        "status": "ok",
+        "stderr": ""
+      }
+    ]
+  },
+  "watchdog": [
+    {
+      "intervalMs": 100,
+      "shape": "single_1GB_touch",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        267.2,
+        283.8,
+        299.4,
+        306.7,
+        261.8
+      ],
+      "max": 306.7
+    },
+    {
+      "intervalMs": 100,
+      "shape": "incremental_16MB",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        260.4,
+        310.1,
+        343.6,
+        323.3,
+        265.3
+      ],
+      "max": 343.6
+    },
+    {
+      "intervalMs": 100,
+      "shape": "heap_arrays",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        305.1,
+        287,
+        259.3,
+        271.5,
+        282.5
+      ],
+      "max": 305.1
+    },
+    {
+      "intervalMs": 50,
+      "shape": "single_1GB_touch",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        270.5,
+        263.2,
+        264.2,
+        258.8,
+        290
+      ],
+      "max": 290
+    },
+    {
+      "intervalMs": 50,
+      "shape": "incremental_16MB",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        332.7,
+        291.5,
+        266.4,
+        274.8,
+        262.1
+      ],
+      "max": 332.7
+    },
+    {
+      "intervalMs": 50,
+      "shape": "heap_arrays",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        276.6,
+        281.3,
+        261.9,
+        268.9,
+        276.5
+      ],
+      "max": 281.3
+    },
+    {
+      "intervalMs": 25,
+      "shape": "single_1GB_touch",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        286.7,
+        266.2,
+        264.4,
+        256.1,
+        257.5
+      ],
+      "max": 286.7
+    },
+    {
+      "intervalMs": 25,
+      "shape": "incremental_16MB",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        272.9,
+        283.8,
+        262.7,
+        259.9,
+        292.6
+      ],
+      "max": 292.6
+    },
+    {
+      "intervalMs": 25,
+      "shape": "heap_arrays",
+      "statuses": {
+        "memory_limit": 5
+      },
+      "peakSampledRssMB": [
+        258.3,
+        259.3,
+        259.6,
+        269.1,
+        267
+      ],
+      "max": 269.1
+    }
+  ],
+  "latency": {
+    "bare_node_startup": {
+      "n": 50,
+      "p50": 32.8,
+      "p95": 43.7,
+      "max": 46.3,
+      "mean": 34.2
+    },
+    "first_run_ms": 48.3,
+    "js_hello_full": {
+      "n": 50,
+      "p50": 54,
+      "p95": 70.8,
+      "max": 74.3,
+      "mean": 56.8
+    },
+    "js_typical_full": {
+      "n": 50,
+      "p50": 62.5,
+      "p95": 81.3,
+      "max": 85.1,
+      "mean": 64.8
+    },
+    "js_hello_permission_only": {
+      "n": 50,
+      "p50": 50.8,
+      "p95": 64.2,
+      "max": 67.7,
+      "mean": 52.8
+    },
+    "ts_typical_full": {
+      "n": 50,
+      "p50": 175.4,
+      "p95": 196.9,
+      "max": 218.9,
+      "mean": 175
+    },
+    "sql_typical_full": {
+      "n": 50,
+      "p50": 63.5,
+      "p95": 84.8,
+      "max": 93.9,
+      "mean": 66.3
+    },
+    "js_typical_prewarmed_spare": {
+      "n": 50,
+      "p50": 14.7,
+      "p95": 20.7,
+      "max": 23.5,
+      "mean": 15.6
+    },
+    "js_typical_full_concurrency4": {
+      "n": 50,
+      "p50": 90.2,
+      "p95": 147.7,
+      "max": 154.2,
+      "mean": 96.3
+    },
+    "tmp_root_entries_after": 0
+  },
+  "tmpRootEntriesAtEnd": 0
+}

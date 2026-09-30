@@ -1,0 +1,71 @@
+{
+  "env": {
+    "node": "v22.22.2",
+    "os": "Linux 6.18.44-fc-v50",
+    "arch": "x64",
+    "cpus": 4,
+    "platform": "linux",
+    "uid": 0
+  },
+  "latency": {
+    "bare_node_startup": {
+      "n": 50,
+      "p50": 32.9,
+      "p95": 43.3,
+      "max": 45.2,
+      "mean": 34.3
+    },
+    "first_run_ms": 53.7,
+    "js_hello_full": {
+      "n": 50,
+      "p50": 55.5,
+      "p95": 74.1,
+      "max": 80.6,
+      "mean": 58.4
+    },
+    "js_typical_full": {
+      "n": 50,
+      "p50": 64.6,
+      "p95": 83,
+      "max": 85.1,
+      "mean": 66.6
+    },
+    "js_hello_permission_only": {
+      "n": 50,
+      "p50": 57.4,
+      "p95": 71.8,
+      "max": 80.9,
+      "mean": 58.3
+    },
+    "ts_typical_full": {
+      "n": 50,
+      "p50": 186.5,
+      "p95": 287.6,
+      "max": 318.6,
+      "mean": 193.9
+    },
+    "sql_typical_full": {
+      "n": 50,
+      "p50": 72.2,
+      "p95": 123.1,
+      "max": 141.7,
+      "mean": 78.5
+    },
+    "js_typical_prewarmed_spare": {
+      "n": 50,
+      "p50": 14.5,
+      "p95": 22.8,
+      "max": 27.4,
+      "mean": 15.8
+    },
+    "js_typical_full_concurrency4": {
+      "n": 50,
+      "p50": 81.4,
+      "p95": 156.2,
+      "max": 169.6,
+      "mean": 91.6
+    },
+    "tmp_root_entries_after": 0
+  },
+  "tmpRootEntriesAtEnd": 0
+}
