@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// check:jev-index  -- STD-01 "객체 키 참조 lint (Jev 배열 인덱스 금지)"  (FR-STD-019, SP-1 precondition: all Jev references are object keys)
+// check:jev-index  -- STD-01 "객체 키 참조 lint (Jev 배열 인덱스 금지)"  (FR-AI-005, SP-1 precondition: all Jev references are object keys)
 // Scope (Jev code): path contains /jev/, file name *.jev.*, or file imports @typesafe-ai/sdk. Prompt files (.md/.txt) under /jev/ too.
 // Rules:
 //   jev/index-literal  candidates[3], options.at(0), res.items[2]      (identifier from CANDIDATE_NAME, literal index)   error

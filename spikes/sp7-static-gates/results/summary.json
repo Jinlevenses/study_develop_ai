@@ -9,29 +9,29 @@
     "esModuleLexer": "3.0.2",
     "typescriptPkg": "7.0.2"
   },
-  "generated": "2026-09-30T15:46:18.790Z",
+  "generated": "2026-09-30T23:33:35.889Z",
   "typecheck": {
     "tsc": "Version 7.0.2",
     "projects": {
       "clean": {
         "exit": 0,
-        "ms": 368.2,
+        "ms": 505.7,
         "diagnostics": 0
       },
       "violations": {
         "exit": 0,
-        "ms": 371.9,
+        "ms": 375.6,
         "diagnostics": 0
       },
       "evasions": {
         "exit": 0,
-        "ms": 292.9,
+        "ms": 262.3,
         "diagnostics": 0
       }
     },
     "negative_control": {
       "exit": 1,
-      "first_error": "../../../../../tmp/sp7-tscneg-P5PQ2J/fx/services/a/src/broken.ts(1,14): error TS2322: Type 'string' is not assignable to type 'number'.",
+      "first_error": "../../../../../tmp/sp7-tscneg-RRXOnK/fx/services/a/src/broken.ts(1,14): error TS2322: Type 'string' is not assignable to type 'number'.",
       "ln_status": 0
     },
     "require_typescript": {
@@ -42,11 +42,11 @@
       "createProgram": "undefined"
     },
     "unstable_sync_api": {
-      "openMs": 262.111853,
+      "openMs": 139.714915,
       "files": 32,
       "semanticDiagnostics": 0,
-      "semMs": 32.20718800000003,
-      "wall_ms": 442
+      "semMs": 27.134064999999993,
+      "wall_ms": 264.1
     }
   },
   "boundaries": {
@@ -55,8 +55,8 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 98.6,
-      "ms_clean": 98.5,
+      "ms_violations": 122.5,
+      "ms_clean": 76.7,
       "errors_violations": 12,
       "warnings_violations": 0,
       "errors_clean": 0,
@@ -91,8 +91,8 @@
       "exit_violations": 1,
       "exit_clean": 1,
       "gate_ok": false,
-      "ms_violations": 78.8,
-      "ms_clean": 73.1,
+      "ms_violations": 63,
+      "ms_clean": 58.9,
       "errors_violations": 11,
       "warnings_violations": 0,
       "errors_clean": 1,
@@ -137,8 +137,8 @@
       "exit_violations": 1,
       "exit_clean": 1,
       "gate_ok": false,
-      "ms_violations": 104,
-      "ms_clean": 80.9,
+      "ms_violations": 56.5,
+      "ms_clean": 56.7,
       "errors_violations": 14,
       "warnings_violations": 0,
       "errors_clean": 4,
@@ -192,8 +192,40 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 489.6,
-      "ms_clean": 442.9,
+      "ms_violations": 290.8,
+      "ms_clean": 304.8,
+      "errors_violations": 13,
+      "warnings_violations": 0,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 13,
+        "tp": 13,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 13,
+        "tp": 13,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "clean_false_positives": []
+    },
+    "both": {
+      "engine": "boundaries/tokens+tsgo",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 288.2,
+      "ms_clean": 274.7,
       "errors_violations": 13,
       "warnings_violations": 0,
       "errors_clean": 0,
@@ -224,7 +256,7 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 117.5,
+      "ms_violations": 85.5,
       "errors_violations": 10,
       "errors_clean": 0,
       "score_line": {
@@ -262,7 +294,7 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 98.3,
+      "ms_violations": 72.4,
       "errors_violations": 10,
       "errors_clean": 0,
       "score_line": {
@@ -300,8 +332,8 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_including_graphify_extract_violations": 744.5,
-      "ms_including_graphify_extract_clean": 719.8,
+      "ms_including_graphify_extract_violations": 1503.3,
+      "ms_including_graphify_extract_clean": 462.8,
       "graph": {
         "nodes": 182,
         "edges": 256
@@ -333,8 +365,8 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 99.9,
-      "ms_clean": 113.9,
+      "ms_violations": 87.8,
+      "ms_clean": 72.7,
       "errors_violations": 20,
       "warnings_violations": 1,
       "errors_clean": 0,
@@ -365,7 +397,7 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 96.9,
+      "ms_violations": 69.6,
       "errors_violations": 18,
       "errors_clean": 0,
       "score_line": {
@@ -442,8 +474,8 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 98.3,
-      "ms_clean": 98.2,
+      "ms_violations": 82.9,
+      "ms_clean": 79.5,
       "errors_violations": 11,
       "warnings_violations": 0,
       "errors_clean": 0,
@@ -474,8 +506,8 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 569,
-      "ms_clean": 451.3,
+      "ms_violations": 432.1,
+      "ms_clean": 293,
       "errors_violations": 11,
       "warnings_violations": 0,
       "errors_clean": 0,
@@ -516,7 +548,7 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 100.6,
+      "ms_violations": 67,
       "errors_violations": 11,
       "errors_clean": 0,
       "score_line": {
@@ -578,8 +610,8 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 96.8,
-      "ms_clean": 99.8,
+      "ms_violations": 92.9,
+      "ms_clean": 86.3,
       "errors_violations": 41,
       "warnings_violations": 0,
       "errors_clean": 0,
@@ -610,7 +642,7 @@
       "exit_violations": 1,
       "exit_clean": 0,
       "gate_ok": true,
-      "ms_violations": 137.4,
+      "ms_violations": 115.9,
       "errors_violations": 37,
       "errors_clean": 0,
       "score_line": {
@@ -656,8 +688,8 @@
     "exit_clean": 0,
     "errors_violations": 76,
     "errors_clean": 0,
-    "ms_violations": 181.8,
-    "biome_scan_ms": 76
+    "ms_violations": 129,
+    "biome_scan_ms": 55
   },
   "evasions": [
     {
@@ -1028,39 +1060,39 @@
     "files_ts": 822,
     "services": 102,
     "boundaries_tokens": {
-      "median_ms": 209.5,
+      "median_ms": 129.2,
       "exit": 0
     },
     "boundaries_lexer": {
-      "median_ms": 118.2,
+      "median_ms": 90.4,
       "exit": 1
     },
     "boundaries_tsgo": {
-      "median_ms": 965.7,
+      "median_ms": 643.3,
       "exit": 0
     },
     "jev_index_tokens": {
-      "median_ms": 166.7,
+      "median_ms": 133.5,
       "exit": 0
     },
     "sql_tokens": {
-      "median_ms": 175.5,
+      "median_ms": 123,
       "exit": 0
     },
     "ng_g_tokens": {
-      "median_ms": 246.4,
+      "median_ms": 218.5,
       "exit": 0
     },
     "tsc7_typecheck": {
-      "median_ms": 493.4,
+      "median_ms": 357.1,
       "exit": 0
     },
     "biome_grit_all_plugins": {
-      "median_ms": 1814.3,
+      "median_ms": 1672.5,
       "exit": 0
     },
     "graphify_extract": {
-      "ms": 4303.7,
+      "ms": 3394.8,
       "exit": 0
     }
   },
