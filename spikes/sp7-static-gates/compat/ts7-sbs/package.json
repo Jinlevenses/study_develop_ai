@@ -1,0 +1,14 @@
+{
+  "name": "sp7-compat-ts7-side-by-side",
+  "private": true,
+  "type": "module",
+  "scripts": { "probe": "node ../probe.mjs", "tsc": "tsc -v" },
+  "devDependencies": {
+    "typescript": "npm:@typescript/typescript6@6.0.2",
+    "typescript7": "npm:typescript@7.0.2",
+    "eslint": "^10.11.0",
+    "typescript-eslint": "8.71.0",
+    "ts-morph": "^28.0.0",
+    "dependency-cruiser": "^18.4.0"
+  }
+}

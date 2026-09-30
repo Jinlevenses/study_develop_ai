@@ -1,0 +1,8 @@
+// NG-G6 (scope: packages/contracts): no video body type.
+or {
+  JsStringLiteralExpression() as $hit where { $hit <: r"(?i)^[\"'](?:video|video/.+|lecture_video|youtube|vimeo)[\"']$" },
+  JsLiteralMemberName() as $hit where { $hit <: r"(?i).*video.*" },
+  JsIdentifierBinding() as $hit where { $hit <: r"(?i).*video.*" }
+} where {
+  register_diagnostic(span = $hit, message = "ng-g6/video: contracts must not define a video content type", severity = "error")
+}

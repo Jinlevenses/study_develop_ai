@@ -1,0 +1,8 @@
+// NG-G7 (scope: **/blank-note/** excluding post-submit): no AI generation reachable before submit.
+or {
+  `import $_ from $src` as $hit where { $src <: r".*(?:ai-gateway|anthropic|openai|typesafe-ai|llm-provider).*" },
+  JsIdentifierBinding() as $hit where { $hit <: r"(?i)^(?:auto_?write|autocomplete|ai_?assist|suggest_?(?:note|text)|generate_?(?:note|text|summary)|complete_?note|draft_?with_?ai)\w*$" },
+  `generate($_)` as $hit
+} where {
+  register_diagnostic(span = $hit, message = "ng-g7/presubmit-ai-call: AI generation reachable from blank-note pre-submit code", severity = "error")
+}

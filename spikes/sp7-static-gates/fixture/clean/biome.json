@@ -1,0 +1,20 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+  "root": true,
+  "vcs": { "enabled": false },
+  "files": { "includes": ["services/**", "packages/**", "apps/**"] },
+  "formatter": { "enabled": false },
+  "linter": { "enabled": true, "rules": { "preset": "none" } },
+  "plugins": [
+    "../../biome-plugins/boundaries.grit",
+    "../../biome-plugins/sql-template.grit",
+    { "path": "../../biome-plugins/jev-index.grit", "includes": ["**/jev/**", "**/*.jev.*"] },
+    { "path": "../../biome-plugins/ng-g-ts.grit", "includes": ["**/*.ts", "**/*.tsx", "!**/design-tokens/**"] },
+    { "path": "../../biome-plugins/ng-g-css.grit", "includes": ["**/*.css", "!**/design-tokens/**"] },
+    { "path": "../../biome-plugins/ng-g3-presubmit.grit", "includes": ["**/pre-submit/**"] },
+    { "path": "../../biome-plugins/ng-g3-presubmit-named.grit", "includes": ["**/*.ts"] },
+    { "path": "../../biome-plugins/ng-g4-routing.grit", "includes": ["**/routing/**", "**/router/**"] },
+    { "path": "../../biome-plugins/ng-g6-contracts.grit", "includes": ["**/packages/contracts/**"] },
+    { "path": "../../biome-plugins/ng-g7-blank-note.grit", "includes": ["**/blank-note/**", "!**/post-submit/**"] }
+  ]
+}

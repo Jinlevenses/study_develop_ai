@@ -1,0 +1,1076 @@
+{
+  "env": {
+    "node": "v22.22.2",
+    "os": "Linux 6.18.44-fc-v50 x64",
+    "cpus": 4,
+    "tsc": "Version 7.0.2",
+    "biome": "Version: 2.5.14",
+    "graphify": "graphify 0.9.72",
+    "esModuleLexer": "3.0.2",
+    "typescriptPkg": "7.0.2"
+  },
+  "generated": "2026-09-30T15:46:18.790Z",
+  "typecheck": {
+    "tsc": "Version 7.0.2",
+    "projects": {
+      "clean": {
+        "exit": 0,
+        "ms": 368.2,
+        "diagnostics": 0
+      },
+      "violations": {
+        "exit": 0,
+        "ms": 371.9,
+        "diagnostics": 0
+      },
+      "evasions": {
+        "exit": 0,
+        "ms": 292.9,
+        "diagnostics": 0
+      }
+    },
+    "negative_control": {
+      "exit": 1,
+      "first_error": "../../../../../tmp/sp7-tscneg-P5PQ2J/fx/services/a/src/broken.ts(1,14): error TS2322: Type 'string' is not assignable to type 'number'.",
+      "ln_status": 0
+    },
+    "require_typescript": {
+      "keys": [
+        "version",
+        "versionMajorMinor"
+      ],
+      "createProgram": "undefined"
+    },
+    "unstable_sync_api": {
+      "openMs": 262.111853,
+      "files": 32,
+      "semanticDiagnostics": 0,
+      "semMs": 32.20718800000003,
+      "wall_ms": 442
+    }
+  },
+  "boundaries": {
+    "tokens": {
+      "engine": "boundaries/tokens",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 98.6,
+      "ms_clean": 98.5,
+      "errors_violations": 12,
+      "warnings_violations": 0,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 12,
+        "tp": 12,
+        "fp": [],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2:boundary/cross-service-import"
+        ],
+        "precision": 1,
+        "recall": 0.9231
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 12,
+        "tp": 12,
+        "fp": [],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2"
+        ],
+        "precision": 1,
+        "recall": 0.9231
+      },
+      "clean_false_positives": []
+    },
+    "lexer": {
+      "engine": "boundaries/es-module-lexer",
+      "exit_violations": 1,
+      "exit_clean": 1,
+      "gate_ok": false,
+      "ms_violations": 78.8,
+      "ms_clean": 73.1,
+      "errors_violations": 11,
+      "warnings_violations": 0,
+      "errors_clean": 1,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 11,
+        "tp": 10,
+        "fp": [
+          "apps/web/src/App.tsx:1:boundary/unparseable"
+        ],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2:boundary/cross-service-import",
+          "services/b/src/db.ts:7:boundary/db-path",
+          "services/b/src/db.ts:10:boundary/db-path"
+        ],
+        "precision": 0.9091,
+        "recall": 0.7692
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 11,
+        "tp": 10,
+        "fp": [
+          "apps/web/src/App.tsx:1"
+        ],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2",
+          "services/b/src/db.ts:7",
+          "services/b/src/db.ts:10"
+        ],
+        "precision": 0.9091,
+        "recall": 0.7692
+      },
+      "clean_false_positives": [
+        "apps/web/src/App.tsx:1:boundary/unparseable"
+      ]
+    },
+    "regex": {
+      "engine": "boundaries/regex",
+      "exit_violations": 1,
+      "exit_clean": 1,
+      "gate_ok": false,
+      "ms_violations": 104,
+      "ms_clean": 80.9,
+      "errors_violations": 14,
+      "warnings_violations": 0,
+      "errors_clean": 4,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 14,
+        "tp": 10,
+        "fp": [
+          "services/a/src/index.ts:6:boundary/cross-service-import",
+          "services/a/src/index.ts:7:boundary/cross-service-import",
+          "services/a/src/index.ts:8:boundary/cross-service-import",
+          "services/a/src/index.ts:9:boundary/cross-service-import"
+        ],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2:boundary/cross-service-import",
+          "services/b/src/db.ts:7:boundary/db-path",
+          "services/b/src/db.ts:10:boundary/db-path"
+        ],
+        "precision": 0.7142999999999999,
+        "recall": 0.7692
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 14,
+        "tp": 10,
+        "fp": [
+          "services/a/src/index.ts:6",
+          "services/a/src/index.ts:7",
+          "services/a/src/index.ts:8",
+          "services/a/src/index.ts:9"
+        ],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2",
+          "services/b/src/db.ts:7",
+          "services/b/src/db.ts:10"
+        ],
+        "precision": 0.7142999999999999,
+        "recall": 0.7692
+      },
+      "clean_false_positives": [
+        "services/a/src/index.ts:6:boundary/cross-service-import",
+        "services/a/src/index.ts:7:boundary/cross-service-import",
+        "services/a/src/index.ts:8:boundary/cross-service-import",
+        "services/a/src/index.ts:9:boundary/cross-service-import"
+      ]
+    },
+    "tsgo": {
+      "engine": "boundaries/tsgo-api",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 489.6,
+      "ms_clean": 442.9,
+      "errors_violations": 13,
+      "warnings_violations": 0,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 13,
+        "tp": 13,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 13,
+        "tp": 13,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "clean_false_positives": []
+    },
+    "biome_grit": {
+      "engine": "boundaries/biome-grit",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 117.5,
+      "errors_violations": 10,
+      "errors_clean": 0,
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 10,
+        "tp": 10,
+        "fp": [],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2",
+          "services/b/src/db.ts:7",
+          "services/b/src/db.ts:10"
+        ],
+        "precision": 1,
+        "recall": 0.7692
+      },
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 10,
+        "tp": 10,
+        "fp": [],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2:boundary/cross-service-import",
+          "services/b/src/db.ts:7:boundary/db-path",
+          "services/b/src/db.ts:10:boundary/db-path"
+        ],
+        "precision": 1,
+        "recall": 0.7692
+      },
+      "clean_false_positives": []
+    },
+    "biome_noRestrictedImports": {
+      "engine": "boundaries/biome-noRestrictedImports",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 98.3,
+      "errors_violations": 10,
+      "errors_clean": 0,
+      "score_line": {
+        "mode": "line",
+        "expected": 13,
+        "reported": 10,
+        "tp": 10,
+        "fp": [],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2",
+          "services/b/src/db.ts:7",
+          "services/b/src/db.ts:10"
+        ],
+        "precision": 1,
+        "recall": 0.7692
+      },
+      "score_rule": {
+        "mode": "rule",
+        "expected": 13,
+        "reported": 10,
+        "tp": 10,
+        "fp": [],
+        "fn": [
+          "services/a/src/alias-evasion.ts:2:boundary/cross-service-import",
+          "services/b/src/db.ts:7:boundary/db-path",
+          "services/b/src/db.ts:10:boundary/db-path"
+        ],
+        "precision": 1,
+        "recall": 0.7692
+      },
+      "clean_false_positives": []
+    },
+    "graphify": {
+      "engine": "boundaries/graphify-edges",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_including_graphify_extract_violations": 744.5,
+      "ms_including_graphify_extract_clean": 719.8,
+      "graph": {
+        "nodes": 182,
+        "edges": 256
+      },
+      "file_level": {
+        "expected_files": [
+          "apps/web/src/leak.ts",
+          "packages/contracts/src/leak.ts",
+          "services/a/src/alias-evasion.ts",
+          "services/a/src/cross.ts",
+          "services/b/src/db.ts"
+        ],
+        "flagged_files": [
+          "apps/web/src/leak.ts",
+          "packages/contracts/src/leak.ts",
+          "services/a/src/alias-evasion.ts",
+          "services/a/src/cross.ts",
+          "services/b/src/db.ts"
+        ],
+        "missed": [],
+        "extra": []
+      },
+      "clean_false_positives": 0
+    }
+  },
+  "jev_index": {
+    "tokens": {
+      "engine": "jev/tokens",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 99.9,
+      "ms_clean": 113.9,
+      "errors_violations": 20,
+      "warnings_violations": 1,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 21,
+        "reported": 21,
+        "tp": 21,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 21,
+        "reported": 21,
+        "tp": 21,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "clean_false_positives": []
+    },
+    "biome_grit": {
+      "engine": "jev/biome-grit",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 96.9,
+      "errors_violations": 18,
+      "errors_clean": 0,
+      "score_line": {
+        "mode": "line",
+        "expected": 21,
+        "reported": 18,
+        "tp": 18,
+        "fp": [],
+        "fn": [
+          "services/a/src/jev/bad.ts:22",
+          "services/a/src/jev/prompts/grade.md:3",
+          "services/a/src/uses-sdk.ts:3"
+        ],
+        "precision": 1,
+        "recall": 0.8571
+      },
+      "score_rule": {
+        "mode": "rule",
+        "expected": 21,
+        "reported": 18,
+        "tp": 0,
+        "fp": [
+          "services/a/src/jev/bad.ts:3:jev/index-x",
+          "services/a/src/jev/bad.ts:4:jev/index-x",
+          "services/a/src/jev/bad.ts:5:jev/index-x",
+          "services/a/src/jev/bad.ts:6:jev/index-x",
+          "services/a/src/jev/bad.ts:7:jev/index-x",
+          "services/a/src/jev/bad.ts:8:jev/index-x",
+          "services/a/src/jev/bad.ts:11:jev/index-x",
+          "services/a/src/jev/bad.ts:12:jev/index-x",
+          "services/a/src/jev/bad.ts:17:jev/index-x",
+          "services/a/src/jev/bad.ts:18:jev/index-x",
+          "services/a/src/jev/bad.ts:19:jev/index-x",
+          "services/a/src/jev/bad.ts:20:jev/index-x",
+          "services/a/src/jev/bad.ts:26:jev/index-x",
+          "services/a/src/jev/bad.ts:27:jev/index-x",
+          "services/a/src/jev/bad.ts:31:jev/index-x",
+          "services/a/src/jev/bad.ts:32:jev/index-x",
+          "services/a/src/rubric.jev.ts:1:jev/index-x",
+          "services/a/src/rubric.jev.ts:3:jev/index-x"
+        ],
+        "fn": [
+          "services/a/src/jev/bad.ts:3:jev/index-string",
+          "services/a/src/jev/bad.ts:4:jev/index-string",
+          "services/a/src/jev/bad.ts:5:jev/index-string",
+          "services/a/src/jev/bad.ts:6:jev/index-string",
+          "services/a/src/jev/bad.ts:7:jev/index-string",
+          "services/a/src/jev/bad.ts:8:jev/index-string",
+          "services/a/src/jev/bad.ts:11:jev/index-interp",
+          "services/a/src/jev/bad.ts:12:jev/index-interp",
+          "services/a/src/jev/bad.ts:17:jev/index-literal",
+          "services/a/src/jev/bad.ts:18:jev/index-literal",
+          "services/a/src/jev/bad.ts:19:jev/index-literal",
+          "services/a/src/jev/bad.ts:20:jev/index-literal",
+          "services/a/src/jev/bad.ts:22:jev/index-var",
+          "services/a/src/jev/bad.ts:26:jev/index-field",
+          "services/a/src/jev/bad.ts:27:jev/index-literal",
+          "services/a/src/jev/bad.ts:31:jev/index-field",
+          "services/a/src/jev/bad.ts:32:jev/index-field",
+          "services/a/src/jev/prompts/grade.md:3:jev/index-string",
+          "services/a/src/rubric.jev.ts:1:jev/index-string",
+          "services/a/src/rubric.jev.ts:3:jev/index-literal",
+          "services/a/src/uses-sdk.ts:3:jev/index-literal"
+        ],
+        "precision": 0,
+        "recall": 0
+      },
+      "clean_false_positives": []
+    }
+  },
+  "sql_template": {
+    "tokens": {
+      "engine": "sql/tokens",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 98.3,
+      "ms_clean": 98.2,
+      "errors_violations": 11,
+      "warnings_violations": 0,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 11,
+        "reported": 11,
+        "tp": 11,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 11,
+        "reported": 11,
+        "tp": 11,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "clean_false_positives": []
+    },
+    "tsgo_typed": {
+      "engine": "sql/tsgo-typed",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 569,
+      "ms_clean": 451.3,
+      "errors_violations": 11,
+      "warnings_violations": 0,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 11,
+        "reported": 11,
+        "tp": 9,
+        "fp": [
+          "services/a/src/store-bad.ts:15:sql/dynamic-arg",
+          "services/a/src/store-bad.ts:24:sql/dynamic-arg"
+        ],
+        "fn": [
+          "services/a/src/store-bad.ts:15:sql/concat",
+          "services/a/src/store-bad.ts:23:sql/tainted-var"
+        ],
+        "precision": 0.8182,
+        "recall": 0.8182
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 11,
+        "reported": 11,
+        "tp": 10,
+        "fp": [
+          "services/a/src/store-bad.ts:24"
+        ],
+        "fn": [
+          "services/a/src/store-bad.ts:23"
+        ],
+        "precision": 0.9091,
+        "recall": 0.9091
+      },
+      "clean_false_positives": []
+    },
+    "biome_grit": {
+      "engine": "sql/biome-grit",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 100.6,
+      "errors_violations": 11,
+      "errors_clean": 0,
+      "score_line": {
+        "mode": "line",
+        "expected": 11,
+        "reported": 11,
+        "tp": 9,
+        "fp": [
+          "services/a/src/store-bad.ts:19",
+          "services/a/src/store-bad.ts:24"
+        ],
+        "fn": [
+          "services/a/src/store-bad.ts:18",
+          "services/a/src/store-bad.ts:23"
+        ],
+        "precision": 0.8182,
+        "recall": 0.8182
+      },
+      "score_rule": {
+        "mode": "rule",
+        "expected": 11,
+        "reported": 11,
+        "tp": 0,
+        "fp": [
+          "services/a/src/store-bad.ts:4:sql/x",
+          "services/a/src/store-bad.ts:7:sql/x",
+          "services/a/src/store-bad.ts:10:sql/x",
+          "services/a/src/store-bad.ts:15:sql/x",
+          "services/a/src/store-bad.ts:19:sql/x",
+          "services/a/src/store-bad.ts:24:sql/x",
+          "services/a/src/store-bad.ts:27:sql/x",
+          "services/a/src/store-bad.ts:30:sql/x",
+          "services/a/src/store-bad.ts:33:sql/x",
+          "services/a/src/store-bad.ts:37:sql/x",
+          "services/a/src/store-bad.ts:41:sql/x"
+        ],
+        "fn": [
+          "services/a/src/store-bad.ts:4:sql/template-interp",
+          "services/a/src/store-bad.ts:7:sql/concat",
+          "services/a/src/store-bad.ts:10:sql/concat",
+          "services/a/src/store-bad.ts:15:sql/concat",
+          "services/a/src/store-bad.ts:18:sql/tainted-var",
+          "services/a/src/store-bad.ts:23:sql/tainted-var",
+          "services/a/src/store-bad.ts:27:sql/dynamic-arg",
+          "services/a/src/store-bad.ts:30:sql/dynamic-arg",
+          "services/a/src/store-bad.ts:33:sql/dynamic-arg",
+          "services/a/src/store-bad.ts:37:sql/dynamic-arg",
+          "services/a/src/store-bad.ts:41:sql/template-interp"
+        ],
+        "precision": 0,
+        "recall": 0
+      },
+      "clean_false_positives": []
+    }
+  },
+  "ng_g": {
+    "tokens": {
+      "engine": "ng-g/tokens",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 96.8,
+      "ms_clean": 99.8,
+      "errors_violations": 41,
+      "warnings_violations": 0,
+      "errors_clean": 0,
+      "score_rule": {
+        "mode": "rule",
+        "expected": 41,
+        "reported": 41,
+        "tp": 41,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "score_line": {
+        "mode": "line",
+        "expected": 40,
+        "reported": 40,
+        "tp": 40,
+        "fp": [],
+        "fn": [],
+        "precision": 1,
+        "recall": 1
+      },
+      "clean_false_positives": []
+    },
+    "biome_grit": {
+      "engine": "ng-g/biome-grit",
+      "exit_violations": 1,
+      "exit_clean": 0,
+      "gate_ok": true,
+      "ms_violations": 137.4,
+      "errors_violations": 37,
+      "errors_clean": 0,
+      "score_line": {
+        "mode": "line",
+        "expected": 40,
+        "reported": 34,
+        "tp": 34,
+        "fp": [],
+        "fn": [
+          "apps/web/package.json:7",
+          "apps/web/package.json:8",
+          "apps/web/package.json:9",
+          "packages/contracts/src/ai-gateway-policy.ts:2",
+          "packages/contracts/src/named-presubmit.ts:16",
+          "services/a/src/routing/prereq.ts:2"
+        ],
+        "precision": 1,
+        "recall": 0.85
+      },
+      "score_rule": {
+        "mode": "rule",
+        "expected": 41,
+        "reported": 34,
+        "tp": 34,
+        "fp": [],
+        "fn": [
+          "apps/web/package.json:7:ng-g1/reward-vocab",
+          "apps/web/package.json:8:ng-g5/push-api",
+          "apps/web/package.json:9:ng-g6/video",
+          "apps/web/src/App.tsx:13:ng-g5/danger-due",
+          "packages/contracts/src/ai-gateway-policy.ts:2:ng-g7/policy-missing-deny",
+          "packages/contracts/src/named-presubmit.ts:16:ng-g3/presubmit-spread",
+          "services/a/src/routing/prereq.ts:2:ng-g4/prereq-redirect"
+        ],
+        "precision": 1,
+        "recall": 0.8292999999999999
+      },
+      "clean_false_positives": []
+    }
+  },
+  "biome_fixture_config": {
+    "exit_violations": 1,
+    "exit_clean": 0,
+    "errors_violations": 76,
+    "errors_clean": 0,
+    "ms_violations": 181.8,
+    "biome_scan_ms": 76
+  },
+  "evasions": [
+    {
+      "where": "apps/web/src/evade.ts:1",
+      "kind": "EVADES",
+      "rule": "design/raw-color",
+      "note": "named colour keyword",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "apps/web/src/evade.ts:2",
+      "kind": "EVADES",
+      "rule": "design/raw-color",
+      "note": "computed hex",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "apps/web/src/evade.ts:3",
+      "kind": "EVADES",
+      "rule": "design/raw-color",
+      "note": "assembled at runtime",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "apps/web/src/evade.ts:4",
+      "kind": "EVADES",
+      "rule": "ng-g1/reward-vocab",
+      "note": "reward mechanic hidden in a string key",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "apps/web/src/evade.ts:5",
+      "kind": "EVADES",
+      "rule": "ng-g5/push-api",
+      "note": "bracket access",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "apps/web/src/evade.ts:6",
+      "kind": "EVADES",
+      "rule": "ng-g5/push-api",
+      "note": "service-worker notification",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "packages/contracts/src/evade.ts:4",
+      "kind": "EVADES",
+      "rule": "ng-g3/presubmit-field",
+      "note": "widened after declaration",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "packages/contracts/src/evade.ts:5",
+      "kind": "EVADES",
+      "rule": "ng-g3/presubmit-field",
+      "note": "computed key (name is not PreSubmit)",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade-sql.ts:4",
+      "kind": "EVADES",
+      "rule": "sql/template-interp",
+      "note": "bracket property access",
+      "tokens": "silent",
+      "tsgo": "flagged",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade-sql.ts:8",
+      "kind": "EVADES",
+      "rule": "sql/template-interp",
+      "note": "method aliased/bound before the call",
+      "tokens": "silent",
+      "tsgo": "flagged",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade-sql.ts:11",
+      "kind": "EVADES",
+      "rule": "sql/template-interp",
+      "note": "Function.prototype.call",
+      "tokens": "silent",
+      "tsgo": "flagged",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade-sql.ts:14",
+      "kind": "DETECTS",
+      "rule": "sql/dynamic-arg",
+      "note": "tagged template",
+      "tokens": "flagged",
+      "tsgo": "flagged",
+      "grit": "flagged"
+    },
+    {
+      "where": "services/a/src/evade-sql.ts:17",
+      "kind": "SAFE",
+      "rule": "*",
+      "note": "must not be flagged",
+      "tokens": "silent",
+      "tsgo": "silent",
+      "grit": "flagged"
+    },
+    {
+      "where": "services/a/src/evade.ts:6",
+      "kind": "EVADES",
+      "rule": "boundary/cross-service-import",
+      "note": "non-literal dynamic import (tokens: warn only)",
+      "tokens": "warn-only",
+      "tsgo": "silent",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade.ts:8",
+      "kind": "EVADES",
+      "rule": "boundary/cross-service-import",
+      "note": "path reference, not an import",
+      "tokens": "silent",
+      "tsgo": "silent",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade.ts:9",
+      "kind": "EVADES",
+      "rule": "boundary/cross-service-import",
+      "note": "require through createRequire()",
+      "tokens": "silent",
+      "tsgo": "silent",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/evade.ts:10",
+      "kind": "DETECTS",
+      "rule": "boundary/cross-service-import",
+      "note": "type-position import()",
+      "tokens": "flagged",
+      "tsgo": "flagged",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/jev/evade.ts:2",
+      "kind": "EVADES",
+      "rule": "jev/index-literal",
+      "note": "positional destructuring",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/jev/evade.ts:6",
+      "kind": "EVADES",
+      "rule": "jev/index-literal",
+      "note": "index on a call result",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/jev/evade.ts:10",
+      "kind": "EVADES",
+      "rule": "jev/index-literal",
+      "note": "alias with a name outside the candidate-name list",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/jev/evade.ts:13",
+      "kind": "EVADES",
+      "rule": "jev/index-string",
+      "note": "number added by concatenation",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/jev/evade.ts:16",
+      "kind": "EVADES",
+      "rule": "jev/index-literal",
+      "note": "positional consume",
+      "tokens": "silent",
+      "tsgo": "n/a",
+      "grit": "silent"
+    },
+    {
+      "where": "services/a/src/jev/evade.ts:18",
+      "kind": "DETECTS",
+      "rule": "jev/index-string",
+      "note": "digit ordinal",
+      "tokens": "flagged",
+      "tsgo": "n/a",
+      "grit": "flagged"
+    }
+  ],
+  "compat": {
+    "ts7": {
+      "typescript.version": {
+        "ok": true,
+        "detail": "7.0.2"
+      },
+      "typescript.createProgram()": {
+        "ok": false,
+        "detail": "missing; exports = version,versionMajorMinor"
+      },
+      "node_modules/.bin/tsc -v": {
+        "ok": true,
+        "detail": "Version 7.0.2"
+      },
+      "typescript-eslint": {
+        "ok": false,
+        "detail": "typescript-eslint does not support TS 7.0."
+      },
+      "ts-morph": {
+        "ok": true,
+        "detail": "files=22 imports=21 diagnostics=0"
+      },
+      "dependency-cruiser (clean fixture)": {
+        "ok": true,
+        "detail": "modules=0 violations=0"
+      },
+      "dependency-cruiser (violations fixture)": {
+        "ok": true,
+        "detail": "modules=0 violations=0"
+      }
+    },
+    "ts7-swc": {
+      "typescript.version": {
+        "ok": true,
+        "detail": "7.0.2"
+      },
+      "typescript.createProgram()": {
+        "ok": false,
+        "detail": "missing; exports = version,versionMajorMinor"
+      },
+      "node_modules/.bin/tsc -v": {
+        "ok": true,
+        "detail": "Version 7.0.2"
+      },
+      "typescript-eslint": {
+        "ok": false,
+        "detail": "typescript-eslint does not support TS 7.0."
+      },
+      "ts-morph": {
+        "ok": true,
+        "detail": "files=22 imports=21 diagnostics=0"
+      },
+      "dependency-cruiser (clean fixture)": {
+        "ok": true,
+        "detail": "modules=113 violations=0"
+      },
+      "dependency-cruiser (violations fixture)": {
+        "ok": true,
+        "detail": "modules=125 violations=1"
+      }
+    },
+    "ts5": {
+      "typescript.version": {
+        "ok": true,
+        "detail": "5.9.3"
+      },
+      "typescript.createProgram()": {
+        "ok": true,
+        "detail": "present"
+      },
+      "node_modules/.bin/tsc -v": {
+        "ok": true,
+        "detail": "Version 5.9.3"
+      },
+      "typescript-eslint (syntactic)": {
+        "ok": true,
+        "detail": "parsed, messages=0, fatal=0"
+      },
+      "typescript-eslint (type-aware, projectService)": {
+        "ok": true,
+        "detail": "ok, 0 messages"
+      },
+      "ts-morph": {
+        "ok": true,
+        "detail": "files=22 imports=21 diagnostics=0"
+      },
+      "dependency-cruiser (clean fixture)": {
+        "ok": true,
+        "detail": "modules=113 violations=0"
+      },
+      "dependency-cruiser (violations fixture)": {
+        "ok": true,
+        "detail": "modules=125 violations=1"
+      }
+    },
+    "ts7-sbs": {
+      "typescript.version": {
+        "ok": true,
+        "detail": "6.0.3"
+      },
+      "typescript.createProgram()": {
+        "ok": true,
+        "detail": "present"
+      },
+      "node_modules/.bin/tsc -v": {
+        "ok": true,
+        "detail": "Version 6.0.3"
+      },
+      "typescript7 alias: tsc -v": {
+        "ok": true,
+        "detail": "Version 7.0.2"
+      },
+      "typescript-eslint (syntactic)": {
+        "ok": true,
+        "detail": "parsed, messages=0, fatal=0"
+      },
+      "typescript-eslint (type-aware, projectService)": {
+        "ok": true,
+        "detail": "ok, 0 messages"
+      },
+      "ts-morph": {
+        "ok": true,
+        "detail": "files=22 imports=21 diagnostics=0"
+      },
+      "dependency-cruiser (clean fixture)": {
+        "ok": true,
+        "detail": "modules=113 violations=0"
+      },
+      "dependency-cruiser (violations fixture)": {
+        "ok": true,
+        "detail": "modules=125 violations=1"
+      }
+    },
+    "ts7-more": {
+      "vitest 5 + vite 8": {
+        "ok": true,
+        "detail": " Test Files 1 passed (1) | Tests 1 passed (1)"
+      },
+      "madge (TS)": {
+        "ok": false,
+        "detail": "TypeError: Cannot read properties of undefined (reading 'Cjs')"
+      },
+      "knip": {
+        "ok": true,
+        "detail": "exit=1 (findings expected: no entry config); stderr=Configuration hints (1) . (root) . Create knip.json configuration file, and "
+      },
+      "tsx (esbuild)": {
+        "ok": true,
+        "detail": "\"x\""
+      },
+      "biome": {
+        "ok": true,
+        "detail": "Version: 2.5.15"
+      }
+    }
+  },
+  "scale": {
+    "files_ts": 822,
+    "services": 102,
+    "boundaries_tokens": {
+      "median_ms": 209.5,
+      "exit": 0
+    },
+    "boundaries_lexer": {
+      "median_ms": 118.2,
+      "exit": 1
+    },
+    "boundaries_tsgo": {
+      "median_ms": 965.7,
+      "exit": 0
+    },
+    "jev_index_tokens": {
+      "median_ms": 166.7,
+      "exit": 0
+    },
+    "sql_tokens": {
+      "median_ms": 175.5,
+      "exit": 0
+    },
+    "ng_g_tokens": {
+      "median_ms": 246.4,
+      "exit": 0
+    },
+    "tsc7_typecheck": {
+      "median_ms": 493.4,
+      "exit": 0
+    },
+    "biome_grit_all_plugins": {
+      "median_ms": 1814.3,
+      "exit": 0
+    },
+    "graphify_extract": {
+      "ms": 4303.7,
+      "exit": 0
+    }
+  },
+  "verdict": {
+    "primary_gates_exit_codes_ok": {
+      "check:boundaries": true,
+      "check:jev-index": true,
+      "check:sql": true,
+      "check:ng-g": true
+    },
+    "all_ok": true
+  }
+}

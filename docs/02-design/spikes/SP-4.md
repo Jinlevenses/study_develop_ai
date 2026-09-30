@@ -52,7 +52,7 @@
 - B1 커밋 지연: p50 0.027ms, p95 0.064ms, p99 0.15ms, max 63~64ms(체크포인트 시점). 3,448,780행 삽입, 종료 후 3개 파일 `integrity_check` = ok, 찢어진 배치 0.
 - B1 **읽기 프로세스**(3개 파일 `readOnly:true`, 연속 조회): 3,654회, **오류 0**, 카운트 역행 0, 일관성 검사 37회에서 찢어진 배치 0. 읽기 p50 0.5ms, p95 30.6ms(쓰기 3개+읽기 1개가 4 vCPU를 포화시킨 상태에서 110만 행 `count(*)` 전체 스캔 포함이므로 하한이 아닌 상한 근사).
 - WAL 파일 최대 크기(200ms 표본): 47 / 46 / 63 MB(11k txn/s×20s 극단 부하 + 읽기 스냅샷 공존 상태). DB 파일 274~288MB.
-- 쓰기 부하는 실제 Fathom(학습 이벤트, 사람 속도)보다 **3~4자릿수** 높다. busy_timeout이 0이어도 파일이 분리되어 있으면 경합이 없다(B2). 다만 읽기 프로세스와 체크포인트도 WAL에서는 쓰기를 막지 않았다.
+- 쓰기 부하는 실제 Fathom(학습 이벤트, 사람 속도)보다 **수 자릿수** 높은 것으로 추정한다. busy_timeout이 0이어도 파일이 분리되어 있으면 경합이 없다(B2). 읽기 프로세스가 쓰기를 막지도 않았다.
 
 ### 4.2 동시성 — 같은 파일에 쓰는 두 프로세스 (단일 쓰기 규칙 특성화)
 
@@ -64,7 +64,7 @@
 | C4 7.0s 쓰기 트랜잭션 vs 대기자 busy_timeout 3000 | 대기자 32,033 | — | 대기자 **2건**, 각 **3,008~3,010ms 후** 실패 | 타임아웃은 정확히 준수. 홀더 커밋 후 대기자는 정상 재개 |
 
 - 모든 C 시나리오에서 데이터 손상 0(`integrity_check` ok, 찢어진 배치 0). 경합은 **오류로만** 나타나며 조용한 손상은 없다.
-- 결론: 같은 파일을 두 프로세스가 써도 **`BEGIN IMMEDIATE` + busy_timeout** 조합이면 오류 0이다. 쓰기 락이 파일당 1개이므로 합산 처리량은 늘지 않고(단일 14.6k, 2프로세스 23.7k는 자식 CPU 병렬성 덕분에 일부 겹친 값) 꼬리 지연만 커진다.
+- 결론: 같은 파일을 두 프로세스가 써도 **`BEGIN IMMEDIATE` + busy_timeout** 조합이면 오류 0이다. 쓰기 락은 파일당 1개이므로 처리량 이득이 아니라 **꼬리 지연 증가(p99 약 10배)**가 비용이다(합 23.7k txn/s는 단일 14.6k보다 높게 나왔는데, 락 대기 중 다른 프로세스의 준비 작업이 겹치기 때문으로 보이며 이 값에 의미를 두지 않는다).
 
 ### 4.3 동시성 — 크래시 복구(D)
 
@@ -154,7 +154,7 @@
 | 6 | `NODE_NO_WARNINGS=1` | 억제(모든 경고) |
 | 7, 8 | `process.on('warning', …)` 핸들러만 등록(동적/정적 import) | **억제되지 않음**(핸들러는 이벤트를 받지만 기본 출력은 그대로) |
 | 9 | `process.removeAllListeners('warning')` 후 동적 import | 억제(기본 출력 리스너까지 제거 — 모든 경고 손실) |
-| 10 | `process.emitWarning` 재정의로 `ExperimentalWarning`만 필터 후 **동적 import** | **억제**(정적 import는 호이스팅되어 재정의 전에 실행되므로 불가) |
+| 10 | `process.emitWarning` 재정의로 `ExperimentalWarning`만 필터 후 **동적 import** | **억제**(정적 import는 호이스팅되어 본문보다 먼저 평가되므로 같은 파일에서는 동적 import 필수 — 정적 import+재정의 조합은 미검증) |
 | 11 | 오타 `--disable-warning=Experimental` | 억제 안 됨(유형명 정확 일치) |
 | 12~15 | tsx: 기본은 경고 / `tsx --disable-warning=…` / `node --disable-warning=… --import tsx` / `NODE_OPTIONS` | 기본만 경고, 나머지 **억제** |
 | 16 | `fork()` 자식(부모에 플래그) | **억제**(`execArgv` 상속) |
@@ -168,7 +168,7 @@
 | 항목 | 결과 |
 |---|---|
 | 표면 API | `DatabaseSync`(`open/close/prepare/exec/function/aggregate/location/createSession/applyChangeset/enableLoadExtension/loadExtension`, `isOpen`, `isTransaction`, `Symbol.dispose`), `StatementSync`(`run/get/all/iterate/columns/setReadBigInts/setReturnArrays/setAllowBareNamedParameters/setAllowUnknownNamedParameters`, `sourceSQL`), `backup`, `constants` |
-| 준비된 문장 재사용 | 조회 **618,745 ops/s**(재사용) vs 131,728 ops/s(매번 prepare) = **4.7배**. 메모리 DB 단일 트랜잭션 삽입 707,251행/s. 파일 WAL+NORMAL 자동 커밋 삽입 47,718행/s |
+| 준비된 문장 재사용 | 조회 **871,418 ops/s**(재사용) vs 129,256 ops/s(매번 prepare) = **6.7배**(이전 실행 618,745 vs 131,728 = 4.7배; 실행마다 변동). 메모리 DB 단일 트랜잭션 삽입 604,023행/s. 파일 WAL+NORMAL 자동 커밋 삽입 47,149행/s |
 | 트랜잭션 | `BEGIN [IMMEDIATE]`/`COMMIT`/`ROLLBACK`/`SAVEPOINT`/`ROLLBACK TO` 정상. 중첩 `BEGIN`은 `cannot start a transaction within a transaction`. `db.isTransaction` 존재(boolean) |
 | 사용자 함수 | `db.function(name, {deterministic, varargs, useBigIntArguments}, fn)` 정상. **deterministic 함수 위 표현식 인덱스 생성 가능**. `REGEXP` 연산자 구현 가능. 함수 안 예외는 SQL 오류로 전파. 예: 초성 추출 함수(`쿠버네티스 파드`→`ㅋㅂㄴㅌㅅ ㅍㄷ`) |
 | 사용자 집계 | `db.aggregate(name, {start, step, result, inverse})` 정상(윈도우 `inverse` 포함) |
@@ -276,7 +276,7 @@ CREATE VIRTUAL TABLE fts_cmp USING fts5(compact,            content='docs', cont
 
 ### 6.4 SqlitePort 표면 (NFR-PORT-009)
 
-어댑터가 노출할 최소 표면: `open(path, {readOnly})`, `exec(sql)`, `prepare(sql) → {run,get,all,iterate}`(문장 캐시로 재사용 4.7배), `tx(fn)`, `function(name, opts, fn)`, `backupTo(path)`, `close()`. 오류는 `{kind:'busy'|'constraint'|'readonly'|'other', errcode}`로 정규화. `node:sqlite`가 experimental이므로 doctor가 Node 22 EOL(2027-04-30)과 API 변화를 경고한다(NFR-PORT-009).
+어댑터가 노출할 최소 표면: `open(path, {readOnly})`, `exec(sql)`, `prepare(sql) → {run,get,all,iterate}`(문장 캐시로 재사용 4.7~6.7배), `tx(fn)`, `function(name, opts, fn)`, `backupTo(path)`, `close()`. 오류는 `{kind:'busy'|'constraint'|'readonly'|'other', errcode}`로 정규화. `node:sqlite`가 experimental이므로 doctor가 Node 22 EOL(2027-04-30)과 API 변화를 경고한다(NFR-PORT-009).
 
 ### 6.5 백업 (`fathom backup`, 복원 검증)
 
@@ -319,7 +319,7 @@ process.env.NODE_OPTIONS = [process.env.NODE_OPTIONS, F].filter(Boolean).join(' 
 |---|---|---|
 | R-1 | **Windows·macOS 미검증**(경로, 필수 잠금, 백신 잠금, `-shm`, 시그널, 셔뱅) | V-live pending. §5.5 체크리스트를 Windows CI/실기에서 재현. 실패 시 어댑터·플래그 수준(경로, timeout, 종료 절차)으로 대응 |
 | R-2 | 검색 평가의 **낙관 편향**(작성자=평가자, 310건 소형 코퍼스, 헤드라인은 휴리스틱 튜닝 후 값) | DCP-01 120질의로 재평가(같은 하니스). 홀드아웃과의 차이를 확인 |
-| R-3 | **원인 미규명 네이티브 크래시(SIGSEGV) 2회**: 단계를 한 프로세스에서 순차 실행한 초기 하니스 3회 실행 중 2회에서 발생(1회는 백업 단계, 1회는 검색 단계), 이후 단계별 분리 실행 및 개별 재현 시도(백업 중 `close()` 6회, 라이브 쓰기+백업 중 `close()` 8회, 기능+검색 4회, 경고 제외 전체 3회, 분리 전체 3회)에서는 **0회**. GC 시점 문제로 추정하나 미확정 | 백업 Promise 완료 전 원본 `close()` 금지, 백업·대량 작업은 **별도 프로세스**, 서비스는 감독자 자동 재시작 + 크래시 후 `integrity_check`(SIGKILL 복구는 안전함, §4.3). 필요 시 `npm run spike:hazard`로 재현 시도. 릴리스 전 22.x 최신 패치로 재확인 |
+| R-3 | **원인 미규명 네이티브 크래시(SIGSEGV) 2회**: 모든 단계를 한 프로세스에서 순차 실행한 초기 하니스의 전체 실행 **2회 모두**에서 발생(1회는 백업 단계 중, 1회는 검색 단계 중; 백업 단계 코드는 당시 타임아웃 후 진행 중인 `backup()` Promise를 두고 `db.close()`를 호출했음). 이후 단계별 프로세스 분리 전체 실행 2회, 검색 단독 2회, 기능+검색 4회, 동시성 단독 1회, 경고 제외 전체 3회, 백업 중 `close()` 5회, 라이브 쓰기+백업 중 `close()` 8회, GC 압박 시나리오 11종(세션·사용자 함수·집계·닫힌 문장 등)에서는 **0회**. 원인 미확정(GC 시점 또는 진행 중 백업 중 close 가설) | 백업 Promise 완료 전 원본 `close()` 금지, 백업·대량 작업은 **별도 프로세스**, 서비스는 감독자 자동 재시작 + 크래시 후 `integrity_check`(SIGKILL 복구는 안전함, §4.3). 필요 시 `npm run spike:hazard`로 재현 시도. 릴리스 전 22.x 최신 패치로 재확인 |
 | R-4 | `node:sqlite`는 experimental: API 변경·22.x EOL(2027-04-30) | `SqlitePort` 어댑터 + doctor 경고 + LTS 매트릭스 CI(NFR-PORT-009) |
 | R-5 | 실제 사용자 KU 규모·문서 길이가 합성 가정보다 크면 V2의 짧은 토큰 스캔이 선형으로 느려짐 | 약 4만 건 도달 시 V3 경로로 교체(설계에 스위치 확보). 문서 평균 길이가 4배가 되면 임계도 1/4로 본다 |
 | R-6 | 어휘 격차(별칭 부재)가 재현율 손실의 주원인 | 콘텐츠 lint에 영문 alias·동의어 필수 규칙(R1) |
@@ -335,7 +335,7 @@ cd /home/user/study_develop_ai/spikes/sp4-node-sqlite
 npm install                 # devDependency: tsx 만
 npm run spike               # 전체(약 4분): features → warnings → search → concurrency. 요약 JSON 출력, 상세는 results/*.json
 npm run spike -- --seconds=5            # 20초 시나리오를 5초로 단축(빠른 확인)
-npm run spike:concurrency   # 동시성만 (B1/C1 20s 포함 약 2분)
+npm run spike:concurrency   # 동시성+백업만 (약 3분)
 npm run spike:search        # 검색 재현율·지연만 (약 45s)
 npm run spike:warnings      # 경고 억제 21조합
 npm run spike:features      # DatabaseSync 기능 점검

@@ -1,0 +1,37 @@
+{
+  "name": "sp7-static-gates",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "spike": "node src/run-spike.mjs",
+    "spike:quick": "SP7_SKIP_SCALE=1 node src/run-spike.mjs",
+    "typecheck": "tsc -p fixture/clean/tsconfig.json",
+    "check:boundaries": "node src/check-boundaries.mjs --engine=both",
+    "check:jev-index": "node src/check-jev-index.mjs",
+    "check:sql": "node src/check-sql-template.mjs",
+    "check:sql:typed": "node src/check-sql-typed.mjs",
+    "check:ng-g": "node src/check-ng-g.mjs",
+    "check:graphify": "node src/check-graphify-edges.mjs",
+    "check:all": "node src/run-gates.mjs",
+    "demo:clean": "node src/run-gates.mjs --root fixture/clean",
+    "demo:violations": "node src/run-gates.mjs --root fixture/violations",
+    "biome:clean": "cd fixture/clean && biome lint .",
+    "biome:violations": "cd fixture/violations && biome lint --max-diagnostics=200 .",
+    "compat:install": "for d in ts7 ts7-swc ts5 ts7-sbs ts7-more; do npm --prefix compat/$d install --legacy-peer-deps || exit 1; done"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "22.20.4",
+    "@types/react": "19.3.0",
+    "es-module-lexer": "3.0.2",
+    "react": "19.3.0",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "zod": "4.6.5"
+  },
+  "description": "Fathom SP-7: static gates (boundaries, Jev index, SQL template, NG-G/design) without the TypeScript compiler API (TS 7 / tsgo generation)",
+  "engines": {
+    "node": ">=22.22"
+  }
+}

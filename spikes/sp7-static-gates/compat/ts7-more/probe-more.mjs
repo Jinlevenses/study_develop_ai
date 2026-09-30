@@ -1,0 +1,28 @@
+// Smoke-test more tools against typescript@7.0.2 (cwd = compat/ts7-more). Prints JSON {tool: {ok, detail}}.
+import { spawnSync } from "node:child_process";
+import { cpSync, mkdirSync, rmSync, writeFileSync, symlinkSync } from "node:fs";
+import path from "node:path";
+const cwd = process.cwd();
+const proj = path.join(cwd, ".proj");
+rmSync(proj, { recursive: true, force: true }); mkdirSync(proj, { recursive: true });
+const fx = path.resolve(cwd, "../../fixture/clean");
+for (const d of ["services", "packages"]) cpSync(path.join(fx, d), path.join(proj, d), { recursive: true });
+cpSync(path.join(fx, "tsconfig.json"), path.join(proj, "tsconfig.json"));
+writeFileSync(path.join(proj, "package.json"), '{"name":"proj","type":"module","private":true}');
+writeFileSync(path.join(proj, "a.test.ts"), 'import { test, expect } from "vitest";\nimport { ident } from "./packages/shared-kernel/src/sql.ts";\ntest("ident", () => { expect(ident("cards")).toBe(\'"cards"\'); });\n');
+symlinkSync(path.join(cwd, "node_modules"), path.join(proj, "node_modules"));
+const run = (bin, args) => spawnSync(path.join(cwd, "node_modules/.bin", bin), args, { cwd: proj, encoding: "utf8" });
+const out = {};
+const rec = (k, ok, detail) => { out[k] = { ok, detail: String(detail).replace(/\s+/g, " ").slice(0, 200) }; };
+let r = run("vitest", ["run", "--reporter=dot"]);
+rec("vitest 5 + vite 8", r.status === 0, (r.stdout + r.stderr).split("\n").filter((l) => /Tests|passed|Error/.test(l)).join(" | "));
+r = run("madge", ["--extensions", "ts", "--ts-config", "tsconfig.json", "--json", "services", "packages"]);
+rec("madge (TS)", r.status === 0, r.status === 0 ? "ok" : (r.stderr.split("\n").find((l) => /TypeError|Error/.test(l)) ?? r.stderr));
+r = run("knip", ["--no-progress"]);
+rec("knip", r.status !== null && !/TypeError|Cannot read/.test(r.stderr), `exit=${r.status} (findings expected: no entry config); stderr=${r.stderr.slice(0, 80)}`);
+r = run("tsx", ["-e", 'import { ident } from "./packages/shared-kernel/src/sql.ts"; console.log(ident("x"))']);
+rec("tsx (esbuild)", r.status === 0, r.stdout.trim() || r.stderr);
+r = run("biome", ["--version"]);
+rec("biome", r.status === 0, r.stdout.trim());
+rmSync(proj, { recursive: true, force: true });
+console.log(JSON.stringify(out, null, 2));

@@ -1,0 +1,5 @@
+{
+  "name": "@fathom/web",
+  "private": true,
+  "dependencies": { "react": "^19.3.0", "zod": "^4.6.5" }
+}

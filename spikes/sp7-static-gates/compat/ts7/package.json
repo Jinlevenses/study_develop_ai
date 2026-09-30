@@ -1,0 +1,1 @@
+{"name":"sp7-compat-ts7","private":true,"type":"module","scripts":{"probe":"node ../probe.mjs"},"devDependencies":{"dependency-cruiser":"^18.4.0","eslint":"^10.11.0","ts-morph":"^28.0.0","typescript":"^7.0.2","typescript-eslint":"^8.71.0"}}

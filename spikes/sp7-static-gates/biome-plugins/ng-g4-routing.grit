@@ -1,0 +1,5 @@
+// NG-G4 (scope: routing/router dirs): no lock semantics.
+or { JsIdentifierBinding() as $hit, JsReferenceIdentifier() as $hit, JsLiteralMemberName() as $hit, TsPropertySignatureTypeMember() as $hit } where {
+  $hit <: r"(?i)^\s*(?:is)?(?:locked|lock|unlock|hardGate|forceLock|blockedUntil)\b\??.*",
+  register_diagnostic(span = $hit, message = "ng-g4/hard-lock: routing code must not lock on prerequisites (soft gate only)", severity = "error")
+}

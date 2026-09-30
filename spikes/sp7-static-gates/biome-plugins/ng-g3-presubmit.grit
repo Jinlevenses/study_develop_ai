@@ -1,0 +1,8 @@
+// NG-G3 (scope: **/pre-submit/**): pre-submit schemas must not carry answer/explanation fields.
+or {
+  JsPropertyObjectMember() as $hit,
+  TsPropertySignatureTypeMember() as $hit
+} where {
+  $hit <: r"(?s)^\s*[\"']?(?:answer_key|answerKey|explanation|correct_option|correct_options|correct_answer|correctAnswer|is_correct|isCorrect|model_answer|modelAnswer|exemplar_note|exemplarNote|rubric_answer|solution)[\"']?\??\s*:.*",
+  register_diagnostic(span = $hit, message = "ng-g3/presubmit-field: answer/explanation only after submission", severity = "error")
+}

@@ -1,0 +1,13 @@
+// NG-G3 by NAME: schema/interface whose declared name contains PreSubmit (any file). Uses `within`.
+or {
+  JsPropertyObjectMember() as $hit,
+  TsPropertySignatureTypeMember() as $hit
+} where {
+  $hit <: r"(?s)^\s*[\"']?(?:answer_key|answerKey|explanation|correct_option|correct_options|correct_answer|correctAnswer|is_correct|isCorrect|model_answer|modelAnswer|exemplar_note|exemplarNote|rubric_answer|solution)[\"']?\??\s*:.*",
+  or {
+    $hit <: within `const $name = $_` where { $name <: r".*PreSubmit.*" },
+    $hit <: within `export const $name = $_` where { $name <: r".*PreSubmit.*" },
+    $hit <: within TsInterfaceDeclaration() as $i where { $i <: r"(?s)^(?:export\s+)?interface\s+\w*PreSubmit.*" }
+  },
+  register_diagnostic(span = $hit, message = "ng-g3/presubmit-field: answer/explanation only after submission (by schema name)", severity = "error")
+}

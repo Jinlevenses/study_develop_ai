@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@fathom/contracts": [
+        "./packages/contracts/src/index.ts"
+      ],
+      "@fathom/contracts/*": [
+        "./packages/contracts/src/*"
+      ],
+      "@fathom/shared-kernel": [
+        "./packages/shared-kernel/src/index.ts"
+      ],
+      "@fathom/shared-kernel/*": [
+        "./packages/shared-kernel/src/*"
+      ],
+      "@fathom/svc-a": [
+        "./services/a/src/index.ts"
+      ],
+      "@fathom/svc-a/*": [
+        "./services/a/src/*"
+      ],
+      "@fathom/svc-b": [
+        "./services/b/src/index.ts"
+      ],
+      "@fathom/svc-b/*": [
+        "./services/b/src/*"
+      ],
+      "@legacy/b": [
+        "./services/b/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "services",
+    "packages",
+    "apps"
+  ]
+}

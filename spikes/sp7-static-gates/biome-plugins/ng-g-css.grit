@@ -1,0 +1,21 @@
+engine biome(1.0)
+language css;
+// NG-G lint on CSS (scope in biome.json; design tokens excluded there)
+or {
+  CssDeclaration() as $d where {
+    $d <: r"(?is).*(?:#[0-9a-f]{8}|#[0-9a-f]{6}|#[0-9a-f]{3,4}\b|\b(?:rgba?|hsla?|oklch|oklab|hwb)\().*",
+    register_diagnostic(span = $d, message = "design/raw-color: use a design token (var(--color-*))", severity = "error")
+  },
+  CssDeclaration() as $d where {
+    $d <: r"(?is).*(?:coin|confetti|firework|sparkle|leaderboard).*",
+    register_diagnostic(span = $d, message = "ng-g1/reward-vocab: reward animation/token in CSS", severity = "error")
+  },
+  CssAtRule() as $k where {
+    $k <: r"(?is)^@keyframes\s+[\w-]*(?:coin|confetti|firework|sparkle|xp)[\w-]*.*",
+    register_diagnostic(span = $k, message = "ng-g1/reward-vocab: reward @keyframes", severity = "error")
+  },
+  CssQualifiedRule() as $r where {
+    $r <: r"(?is)^[^{]*\b(?:overdue|due|streak)\b[^{]*\{[^}]*(?:danger|destructive|\bred\b)[^}]*\}.*",
+    register_diagnostic(span = $r, message = "ng-g5/danger-due: danger colour on due/overdue/streak", severity = "error")
+  }
+}

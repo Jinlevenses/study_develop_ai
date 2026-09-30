@@ -104,6 +104,8 @@ export interface PromotionRules {
     depthEvidenceMin: number; // 1
     /** [FIX F2] when the level's A/B item pool is empty/short, borrow items from these sources. */
     fallbackPool: 'none' | 'adjacent_level_ab';
+    /** "해당 트랙 깊이 자산 증거 1건": literal reading = any depth asset of the TRACK; 'level' = stricter, same-level asset only. */
+    depthScope: 'track' | 'level';
   };
   assessment: {
     items: number; // 12
@@ -157,6 +159,11 @@ export interface MasteryRules {
     /** Guess-corrected expectation P = c + (1-c) * sigmoid(theta - beta). */
     guessCorrection: boolean;
     theta0: number; // [ASSUME] prior for an untouched concept relative to median item difficulty
+    /**
+     * [FIX F4] Effective theta = min(theta_all, theta_q + ceiling), where theta_q only sees qualifying-engine events
+     * (w_grader>=0.6, w_format>=0.7). null = as written (theta_all). Blocks self-mark farming from inflating P.
+     */
+    unqualifiedCeiling: number | null;
     thetaMin: number;
     thetaMax: number;
   };
@@ -181,7 +188,7 @@ export const DEFAULT_POLICY: MasteryRules = {
     formatCounts: { wFormatMin: 0.7, wGraderMin: 0.6 },
     refBeta: 0,
   },
-  elo: { alpha: 0.8, b: 0.05, guessCorrection: true, theta0: -0.5, thetaMin: -4, thetaMax: 4 },
+  elo: { alpha: 0.8, b: 0.05, guessCorrection: true, theta0: -0.5, unqualifiedCeiling: null, thetaMin: -4, thetaMax: 4 },
   weights: {
     grader: {
       deterministic: 1.0,
@@ -200,7 +207,7 @@ export const DEFAULT_POLICY: MasteryRules = {
   promotion: {
     requiredMasteredRatio: 0.85,
     minRequiredForConceptGate: 3,
-    sparse: { lkAccuracyMin: 0.8, depthEvidenceMin: 1, fallbackPool: 'none' },
+    sparse: { lkAccuracyMin: 0.8, depthEvidenceMin: 1, fallbackPool: 'none', depthScope: 'track' },
     assessment: { items: 12, formatsMin: 4, cbmMin: { 1: 0.7, 2: 0.7, 3: 0.7, 4: 0.75 }, retryDays: 14 },
     d4: { conceptsCap: 5, conceptsFloor: 2, scope: 'level_le_k', floorMode: 'hard', consecutiveMcqOffline: 2 },
     caseGate: {
@@ -247,15 +254,19 @@ export const DEFAULT_POLICY: MasteryRules = {
 };
 
 /** Minimal fixes proposed by SP-6 (each is one policy/parameter flip; content Briefs are handled in inventory). */
-export function withFixes(base: MasteryRules, fixes: { F1?: boolean; F2?: boolean; F3?: boolean }): MasteryRules {
-  const p: MasteryRules = structuredClone(base) as MasteryRules;
-  // structuredClone drops functions; restore ai profiles
-  p.aiProfiles = base.aiProfiles;
-  if (fixes.F1) p.promotion.emptyLevel = 'skip';
-  if (fixes.F2) p.promotion.sparse.fallbackPool = 'adjacent_level_ab';
-  if (fixes.F3) p.promotion.d4.floorMode = 'min_with_possible';
-  p.version = `${base.version}+fixes[${Object.entries(fixes).filter(([, v]) => v).map(([k]) => k).join(',')}]`;
-  return p;
+export function withFixes(base: MasteryRules, fixes: { F1?: boolean; F2?: boolean; F3?: boolean; F4?: boolean }): MasteryRules {
+  const tags = Object.entries(fixes).filter(([, v]) => v).map(([k]) => k).join(',');
+  return {
+    ...base,
+    elo: { ...base.elo, unqualifiedCeiling: fixes.F4 ? 0 : base.elo.unqualifiedCeiling },
+    version: tags ? `${base.version}+fixes[${tags}]` : base.version,
+    promotion: {
+      ...base.promotion,
+      emptyLevel: fixes.F1 ? 'skip' : base.promotion.emptyLevel,
+      sparse: { ...base.promotion.sparse, fallbackPool: fixes.F2 ? 'adjacent_level_ab' : base.promotion.sparse.fallbackPool },
+      d4: { ...base.promotion.d4, floorMode: fixes.F3 ? 'min_with_possible' : base.promotion.d4.floorMode },
+    },
+  };
 }
 
 /** JSON-serialisable view of the policy (functions expanded) for hashing / the report. */

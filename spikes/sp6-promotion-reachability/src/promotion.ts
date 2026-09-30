@@ -101,6 +101,9 @@ export function expectedCorrect(policy: MasteryRules, theta: number, beta: numbe
 
 export interface ConceptEvidence {
   theta: number;
+  /** theta fed only by qualifying-engine events (F4); equals theta when nothing else is recorded */
+  thetaQ: number;
+  nQ: number;
   /** number of observations with w > 0 (drives the K schedule) */
   n: number;
   /** formats that already have a qualifying correct event (w_format>=0.7 AND w_grader>=0.6, w>0, not pending) */
@@ -110,8 +113,14 @@ export interface ConceptEvidence {
   provisional: boolean;
 }
 
+/** The theta the system acts on (Mastered, adaptive difficulty, LDI input). */
+export function effectiveTheta(policy: MasteryRules, st: ConceptEvidence): number {
+  const c = policy.elo.unqualifiedCeiling;
+  return c === null ? st.theta : Math.min(st.theta, st.thetaQ + c);
+}
+
 export const newConceptEvidence = (policy: MasteryRules): ConceptEvidence => ({
-  theta: policy.elo.theta0, n: 0, qualifiedFormats: [], qualifiedDays: [], provisional: false,
+  theta: policy.elo.theta0, thetaQ: policy.elo.theta0, nQ: 0, n: 0, qualifiedFormats: [], qualifiedDays: [], provisional: false,
 });
 
 export interface ResponseEvent {
@@ -149,6 +158,13 @@ export function applyResponse(
   const P = expectedCorrect(policy, st.theta, ev.beta, guessFloor(ev.format, ev.nOptions));
   next.theta = clamp(st.theta + K * weight.w * ((ev.correct ? 1 : 0) - P), policy.elo.thetaMin, policy.elo.thetaMax);
   next.n = st.n + 1;
+  const q = policy.mastered.formatCounts;
+  if (geq(weight.wFormat, q.wFormatMin) && geq(weight.wGrader, q.wGraderMin)) {
+    const Kq = policy.elo.alpha / (1 + policy.elo.b * st.nQ);
+    const Pq = expectedCorrect(policy, st.thetaQ, ev.beta, guessFloor(ev.format, ev.nOptions));
+    next.thetaQ = clamp(st.thetaQ + Kq * weight.w * ((ev.correct ? 1 : 0) - Pq), policy.elo.thetaMin, policy.elo.thetaMax);
+    next.nQ = st.nQ + 1;
+  }
   if (countsAsFormatEvidence(policy, weight, ev)) {
     if (!next.qualifiedFormats.includes(ev.format)) next.qualifiedFormats.push(ev.format);
     if (!next.qualifiedDays.includes(ev.day)) next.qualifiedDays.push(ev.day);
@@ -168,7 +184,7 @@ export interface MasteryStatus {
 
 export function masteryStatus(policy: MasteryRules, st: ConceptEvidence): MasteryStatus {
   const m = policy.mastered;
-  const p = sigmoid(st.theta - m.refBeta);
+  const p = sigmoid(effectiveTheta(policy, st) - m.refBeta);
   const missing: string[] = [];
   if (!geq(p, m.pMin)) missing.push(`P ${p.toFixed(3)} < ${m.pMin}`);
   if (st.qualifiedFormats.length < m.formatsMin) missing.push(`formats ${st.qualifiedFormats.length} < ${m.formatsMin}`);
@@ -425,8 +441,9 @@ export function structuralFeasibility(
       if (q.length < policy.mastered.formatsMin) blockers.push(`MASTERY_FORMATS<3:${c.id}(${q.length})`);
     }
   } else {
-    const hasA = required.some((c) => c.tier === 'A');
-    const caseOk = from >= 3 && inv.cases.some((c) => c.level >= from);
+    const trackScope = P.sparse.depthScope === 'track';
+    const hasA = trackScope ? inv.concepts.some((c) => c.tier === 'A') : required.some((c) => c.tier === 'A');
+    const caseOk = trackScope ? inv.cases.length > 0 : from >= 3 && inv.cases.some((c) => c.level >= from);
     if (!hasA && !caseOk) blockers.push(`NO_DEPTH_ASSET:L${from}`);
   }
   if (from === 2) {
