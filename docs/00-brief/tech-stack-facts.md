@@ -31,7 +31,7 @@
 | SRS | ts-fsrs | 5.4.2 | FSRS 구현체 |
 | AI | @anthropic-ai/sdk 0.129.0 / openai 7.25.0 / @typesafe-ai/sdk 0.6.0 | | Jev = @typesafe-ai/sdk |
 | 테스트 | vitest | 5.0.2 | vite ^6~^8 peer |
-| E2E | @playwright/test | 1.63.0 | 컨테이너에 Chromium 사전설치(/opt/pw-browsers) |
+| E2E | @playwright/test | ~~1.63.0~~ → **1.56.1**(CR-47, 2026-10-01 정정) | 컨테이너 사전설치 `/opt/pw-browsers/chromium-1194`(Chromium 141)는 1.56.x 짝. 1.63.0은 revision 1243을 요구해 오프라인 실행 불가 |
 | 모노레포 | turbo 2.11.5 / pnpm 10.33 | | |
 | 실행 | tsx | 4.23.15 | TS 직접 실행 |
 | 린트/포맷 | @biomejs/biome 2.5.14 | | ESLint 10.11 / Prettier 3.9 대안 |
