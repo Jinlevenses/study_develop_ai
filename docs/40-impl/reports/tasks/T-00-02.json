@@ -1,0 +1,272 @@
+{
+  "taskId": "T-00-02",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "packages/contracts/manifests/modes.manifest.json",
+    "packages/contracts/manifests/verification-class.json",
+    "packages/contracts/src/admin/admin-routes.ts",
+    "packages/contracts/src/admin/epoch-manifest.ts",
+    "packages/contracts/src/admin/ipc.ts",
+    "packages/contracts/src/admin/jobs.ts",
+    "packages/contracts/src/common/degraded.ts",
+    "packages/contracts/src/common/domain.ts",
+    "packages/contracts/src/common/errors.ts",
+    "packages/contracts/src/common/ids.ts",
+    "packages/contracts/src/common/ndjson.ts",
+    "packages/contracts/src/common/pagination.ts",
+    "packages/contracts/src/common/practice.ts",
+    "packages/contracts/src/common/problem.ts",
+    "packages/contracts/src/common/route.ts",
+    "packages/contracts/src/common/schema.ts",
+    "packages/contracts/src/common/time.ts",
+    "packages/contracts/src/db-hooks.ts",
+    "packages/contracts/src/events/consumer-manifest.ts",
+    "packages/contracts/src/events/envelope.ts",
+    "packages/contracts/src/events/inbox.ts",
+    "packages/contracts/src/ledger/envelope.ts",
+    "packages/contracts/src/ledger/payloads/ai-mode-observed.ts",
+    "packages/contracts/src/ledger/payloads/attempt-graded.ts",
+    "packages/contracts/src/ledger/payloads/card-enrolled.ts",
+    "packages/contracts/src/ledger/payloads/card-status-changed.ts",
+    "packages/contracts/src/ledger/payloads/declaration-sealed.ts",
+    "packages/contracts/src/ledger/payloads/evidence-regraded.ts",
+    "packages/contracts/src/ledger/payloads/evidence-upgraded.ts",
+    "packages/contracts/src/ledger/payloads/evidence-voided.ts",
+    "packages/contracts/src/ledger/payloads/evidence-weight-adjusted.ts",
+    "packages/contracts/src/ledger/payloads/lesson-completed.ts",
+    "packages/contracts/src/ledger/payloads/level-promoted.ts",
+    "packages/contracts/src/ledger/payloads/level-provisional-resolved.ts",
+    "packages/contracts/src/ledger/payloads/policy-switched.ts",
+    "packages/contracts/src/ledger/payloads/pretest-answered.ts",
+    "packages/contracts/src/ledger/payloads/profile-setting-changed.ts",
+    "packages/contracts/src/ledger/payloads/promotion-exam-completed.ts",
+    "packages/contracts/src/ledger/payloads/self-assessment-recorded.ts",
+    "packages/contracts/src/ledger/payloads/verdict-carried.ts",
+    "packages/contracts/src/ledger/types.ts",
+    "packages/contracts/src/ledger/versions.ts",
+    "packages/contracts/src/manifests/modes.ts",
+    "packages/contracts/src/manifests/verification-class.ts",
+    "packages/contracts/src/policy/lock.ts",
+    "packages/contracts/src/policy/mastery_rules.ts",
+    "packages/contracts/test/unit/admin/admin-routes.spec.ts",
+    "packages/contracts/test/unit/admin/epoch-ipc.spec.ts",
+    "packages/contracts/test/unit/common/ids.spec.ts",
+    "packages/contracts/test/unit/common/practice.spec.ts",
+    "packages/contracts/test/unit/common/presubmit-guard.spec.ts",
+    "packages/contracts/test/unit/common/problem-page.spec.ts",
+    "packages/contracts/test/unit/common/time-domain.spec.ts",
+    "packages/contracts/test/unit/events-core/events-core.spec.ts",
+    "packages/contracts/test/unit/ledger/ledger-core.spec.ts",
+    "packages/contracts/test/unit/ledger/payloads.spec.ts",
+    "packages/contracts/test/unit/ledger/samples.ts",
+    "packages/contracts/test/unit/manifests/db-hooks.spec.ts",
+    "packages/contracts/test/unit/manifests/manifests.spec.ts",
+    "packages/contracts/test/unit/policy/policy.spec.ts",
+    "docs/40-impl/reports/tasks/T-00-02.json"
+  ],
+  "testsAdded": [
+    "UT-CON-001",
+    "UT-CON-002",
+    "UT-CON-003",
+    "UT-CON-005",
+    "UT-CON-006",
+    "UT-CON-010",
+    "UT-CON-011",
+    "UT-CON-012",
+    "UT-CON-013",
+    "UT-CON-014",
+    "UT-CON-015",
+    "UT-CON-016",
+    "UT-CON-017",
+    "UT-CON-018",
+    "UT-CON-019",
+    "UT-CON-020",
+    "UT-CON-021",
+    "UT-CON-022",
+    "UT-CON-023",
+    "UT-CON-024",
+    "UT-CON-025",
+    "UT-CON-030",
+    "UT-CON-031",
+    "UT-CON-032",
+    "UT-CON-033",
+    "UT-CON-034",
+    "UT-CON-035",
+    "UT-CON-036",
+    "UT-CON-037",
+    "UT-CON-040",
+    "UT-CON-041",
+    "UT-CON-042",
+    "UT-CON-043",
+    "UT-CON-044",
+    "UT-CON-045",
+    "UT-CON-046",
+    "UT-CON-047",
+    "UT-CON-048",
+    "UT-CON-049",
+    "UT-CON-050",
+    "UT-CON-051",
+    "UT-CON-052",
+    "UT-CON-053",
+    "UT-CON-054",
+    "UT-CON-055",
+    "UT-CON-056",
+    "UT-CON-057",
+    "UT-CON-058",
+    "UT-CON-059",
+    "UT-CON-060",
+    "UT-CON-061",
+    "UT-CON-065",
+    "UT-CON-066",
+    "UT-CON-067",
+    "UT-CON-068",
+    "UT-CON-069",
+    "UT-CON-070",
+    "UT-CON-071",
+    "UT-CON-072",
+    "UT-CON-073",
+    "UT-CON-074",
+    "UT-CON-075",
+    "UT-CON-076",
+    "UT-CON-077",
+    "UT-CON-078",
+    "UT-CON-079",
+    "UT-CON-080",
+    "UT-CON-081",
+    "UT-CON-082",
+    "UT-CON-083",
+    "UT-CON-084",
+    "UT-CON-085",
+    "UT-CON-086",
+    "UT-CON-087",
+    "UT-CON-088",
+    "UT-CON-089",
+    "UT-CON-090",
+    "UT-CON-091",
+    "UT-CON-092",
+    "UT-CON-095",
+    "UT-CON-096",
+    "UT-CON-097",
+    "UT-CON-098",
+    "UT-CON-099"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/contracts typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/contracts test",
+      "exit": 0
+    },
+    {
+      "cmd": "npx biome ci packages/contracts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "notes": "workspace-wide biome ci fails only in other lanes' in-progress files (tools/gates/lib/*.mjs: format + noImportCycles); 0 diagnostics under packages/contracts"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": null,
+      "skipped": "gate-not-yet-present"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-02",
+      "exit": null,
+      "skipped": "gate-not-yet-present"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "Brief UT-CON-030 says AttemptResponse has 13 discriminators; the IF-01 §5.1 block has 14 (ox, choice, text, cloze, matching, code, sql, positions, numeric, essay, cond_pair, review, authoring, case_decision). Block transcribed verbatim; test asserts 14.",
+    "Test ID groups in common/ merged (several scalars per UT-CON-010..029 test) because the 20-ID range cannot hold one test per scalar group; UT-CON-003 is one test with real-file scan + synthetic violation checks.",
+    "Unused spare test IDs left unreused per numbering rule: UT-CON-026..029 are not used in common/ (010..025 used), 062..064 and 093..094 unused."
+  ],
+  "escalations": [],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-03",
+      "pgm": "PGM-CON-001",
+      "req": [
+        "IR-015",
+        "NFR-SEC-012"
+      ],
+      "tests": [
+        "UT-CON-002",
+        "UT-CON-003",
+        "UT-CON-010..025",
+        "UT-CON-030..037"
+      ]
+    },
+    {
+      "wp": "WP-00-03",
+      "pgm": "PGM-CON-002",
+      "req": [
+        "NFR-SEC-003",
+        "NFR-DATA-012"
+      ],
+      "tests": [
+        "UT-CON-040..054"
+      ]
+    },
+    {
+      "wp": "WP-00-03",
+      "pgm": "PGM-CON-003",
+      "req": [
+        "NFR-DATA-013"
+      ],
+      "tests": [
+        "UT-CON-001",
+        "UT-CON-055..061"
+      ]
+    },
+    {
+      "wp": "WP-00-03",
+      "pgm": "PGM-CON-009",
+      "req": [
+        "FR-PRG-001",
+        "FR-PRG-002",
+        "FR-PRG-003",
+        "FR-PRG-027",
+        "NFR-DATA-001"
+      ],
+      "tests": [
+        "UT-CON-065..089"
+      ]
+    },
+    {
+      "wp": "WP-00-03",
+      "pgm": "PGM-CON-018",
+      "req": [
+        "FR-STD-033",
+        "DR-020",
+        "DR-028"
+      ],
+      "tests": [
+        "UT-CON-005",
+        "UT-CON-006",
+        "UT-CON-090..092"
+      ]
+    },
+    {
+      "wp": "WP-00-03",
+      "pgm": "PGM-CON-017",
+      "req": [
+        "FR-CUR-017"
+      ],
+      "tests": [
+        "UT-CON-095..099"
+      ]
+    }
+  ],
+  "notes": "frozen.lock pending (owner T-00-02): common/*, admin/*, ledger/*, events/{envelope,consumer-manifest,inbox}.ts, db-hooks.ts, policy/{lock,mastery_rules}.ts, manifests/*.json + src/manifests/*. IF-01 blocks transcribed verbatim (biome-formatted); only difference: Brief 4.4 decisions (local H copy in jobs.ts, VerdictCarried shape file, LEDGER_PAYLOADS/CURRENT_SCHEMA_VERSION concrete, errors.ts, IF-COM routes). UT-CON-004 etc. intentionally absent. Gates (run-gates/check-scope) not present yet."
+}

@@ -1,0 +1,387 @@
+/* @fathom/design-tokens — tokens.css · DS-01 §14 · 원색 리터럴이 허용되는 유일한 파일군(design/raw-color) */
+
+/* ── 0. 변형 ───────────────────────────────────────────────────────────── */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
+@custom-variant compact (&:where([data-density="compact"], [data-density="compact"] *));
+@custom-variant motion-reduce-app (&:where([data-motion="reduce"], [data-motion="reduce"] *));
+
+/* ── 1. 원시 색 — 다크(기본, Bathymetry) ─────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: oklch(0.20 0.02 245);
+  --surface-1: oklch(0.225 0.022 245);
+  --surface-2: oklch(0.26 0.024 245);
+  --surface-3: oklch(0.30 0.026 245);
+  --border: oklch(0.33 0.024 245);
+  --border-strong: oklch(0.42 0.028 245);
+  --border-input: oklch(0.56 0.028 245);
+  --fg: oklch(0.955 0.008 230);
+  --fg-muted: oklch(0.77 0.018 235);
+  --fg-subtle: oklch(0.67 0.02 240);
+
+  --depth-1: oklch(0.88 0.09 185);
+  --depth-2: oklch(0.81 0.11 200);
+  --depth-3: oklch(0.74 0.125 222);
+  --depth-4: oklch(0.68 0.14 250);
+  --depth-5: oklch(0.63 0.15 280);
+  --depth-fog: oklch(0.34 0.022 245);
+  --on-depth: var(--bg);
+
+  --focus: oklch(0.82 0.12 205);
+  --due: oklch(0.82 0.14 75);
+  --due-ink: var(--due);
+  --correct: oklch(0.78 0.15 155);
+  --incorrect: oklch(0.72 0.16 25);
+  --partial: var(--fg-muted);
+  --danger: var(--incorrect);
+  --on-danger: var(--bg);
+  --primary: var(--fg);
+  --on-primary: var(--bg);
+
+  --syn-keyword: oklch(0.78 0.10 280);
+  --syn-string: oklch(0.82 0.09 160);
+  --syn-number: oklch(0.83 0.10 75);
+  --syn-function: oklch(0.84 0.09 215);
+  --syn-type: oklch(0.80 0.08 190);
+  --syn-comment: oklch(0.67 0.02 240);
+
+  --viz-seq-1: oklch(0.42 0.10 240);
+  --viz-seq-2: oklch(0.52 0.12 238);
+  --viz-seq-3: oklch(0.62 0.13 236);
+  --viz-seq-4: oklch(0.72 0.12 234);
+  --viz-seq-5: oklch(0.82 0.10 232);
+  --viz-div-neg: oklch(0.66 0.13 70);
+  --viz-div-mid: oklch(0.45 0.015 245);
+  --viz-div-pos: oklch(0.62 0.12 236);
+
+  --scrim: oklch(0.12 0.02 245 / 0.62);
+  --elev-panel: 0 0 transparent;   /* 다크는 명도로 엘리베이션 — box-shadow 목록에서 유효한 빈 그림자 */
+  --elev-popover: 0 8px 24px oklch(0 0 0 / 0.35);
+  --elev-modal: 0 24px 64px oklch(0 0 0 / 0.5);
+}
+
+/* ── 2. 원시 색 — 라이트(Chart Paper) ──────────────────────────────────── */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: oklch(0.985 0.004 230);
+  --surface-1: oklch(1 0 0);
+  --surface-2: oklch(0.962 0.007 230);
+  --surface-3: oklch(0.935 0.009 232);
+  --border: oklch(0.90 0.01 235);
+  --border-strong: oklch(0.80 0.014 235);
+  --border-input: oklch(0.64 0.016 235);
+  --fg: oklch(0.23 0.03 250);
+  --fg-muted: oklch(0.45 0.03 245);
+  --fg-subtle: oklch(0.52 0.025 245);
+
+  --depth-1: oklch(0.55 0.09 185);
+  --depth-2: oklch(0.53 0.08 200);
+  --depth-3: oklch(0.50 0.095 232);
+  --depth-4: oklch(0.46 0.14 258);
+  --depth-5: oklch(0.43 0.16 284);
+  --depth-fog: oklch(0.88 0.012 235);
+  --on-depth: oklch(1 0 0);
+
+  --focus: oklch(0.51 0.095 232);
+  --due: oklch(0.58 0.12 65);
+  --due-ink: oklch(0.50 0.11 62);
+  --correct: oklch(0.51 0.12 155);
+  --incorrect: oklch(0.54 0.18 25);
+  --partial: var(--fg-muted);
+  --danger: var(--incorrect);
+  --on-danger: oklch(1 0 0);
+  --primary: var(--fg);
+  --on-primary: oklch(1 0 0);
+
+  --syn-keyword: oklch(0.45 0.15 285);
+  --syn-string: oklch(0.47 0.10 155);
+  --syn-number: oklch(0.50 0.12 55);
+  --syn-function: oklch(0.45 0.10 240);
+  --syn-type: oklch(0.48 0.08 195);
+  --syn-comment: oklch(0.54 0.02 245);
+
+  --viz-seq-1: oklch(0.76 0.075 232);
+  --viz-seq-2: oklch(0.66 0.10 234);
+  --viz-seq-3: oklch(0.56 0.12 236);
+  --viz-seq-4: oklch(0.46 0.12 238);
+  --viz-seq-5: oklch(0.36 0.10 240);
+  --viz-div-neg: oklch(0.58 0.12 65);
+  --viz-div-mid: oklch(0.86 0.008 240);
+  --viz-div-pos: oklch(0.50 0.11 236);
+
+  --scrim: oklch(0.23 0.03 250 / 0.32);
+  --elev-panel: 0 1px 2px oklch(0.23 0.03 250 / 0.06);
+  --elev-popover: 0 8px 24px oklch(0.23 0.03 250 / 0.12);
+  --elev-modal: 0 24px 64px oklch(0.23 0.03 250 / 0.18);
+}
+
+/* ── 3. 고대비(선택) ──────────────────────────────────────────────────── */
+[data-contrast="more"] {
+  --fg-muted: oklch(0.85 0.014 235);
+  --fg-subtle: oklch(0.76 0.018 240);
+  --border-input: oklch(0.64 0.026 245);
+  --border-strong: oklch(0.52 0.028 245);
+}
+[data-theme="light"][data-contrast="more"] {
+  --fg-muted: oklch(0.36 0.03 245);
+  --fg-subtle: oklch(0.42 0.028 245);
+  --border-input: oklch(0.52 0.02 235);
+  --border-strong: oklch(0.66 0.016 235);
+}
+
+/* ── 4. 파생 상태(테마 공통 식) ───────────────────────────────────────── */
+:root {
+  --state-hover: color-mix(in oklch, var(--fg) 6%, transparent);
+  --state-press: color-mix(in oklch, var(--fg) 10%, transparent);
+  --state-selected: var(--surface-3);
+  --correct-wash: color-mix(in oklch, var(--correct) 12%, var(--surface-2));
+  --incorrect-wash: color-mix(in oklch, var(--incorrect) 12%, var(--surface-2));
+  --due-wash: color-mix(in oklch, var(--due) 12%, var(--surface-2));
+  --focus-wash: color-mix(in oklch, var(--focus) 8%, transparent);
+  --selection: color-mix(in oklch, var(--focus) 28%, transparent);
+  --depth-1-wash: color-mix(in oklch, var(--depth-1) 8%, var(--bg));
+  --depth-2-wash: color-mix(in oklch, var(--depth-2) 8%, var(--bg));
+  --depth-3-wash: color-mix(in oklch, var(--depth-3) 8%, var(--bg));
+  --depth-4-wash: color-mix(in oklch, var(--depth-4) 8%, var(--bg));
+  --depth-5-wash: color-mix(in oklch, var(--depth-5) 8%, var(--bg));
+  --viz-ink: var(--fg-muted);
+  --viz-ink-2: var(--fg-subtle);
+  --viz-pending: var(--border-strong);
+  --viz-hatch: repeating-linear-gradient(45deg, currentColor 0 1px, transparent 1px 6px);
+}
+
+/* ── 5. 레이아웃 · z · 밀도 · 모션(원시) ──────────────────────────────── */
+:root {
+  --shell-header-h: 48px;
+  --shell-header-h-focus: 40px;
+  --shell-rail-w: 56px;
+  --shell-rail-w-wide: 200px;
+  --shell-context-w: 320px;
+  --measure-read: 68ch;
+  --measure-ui: 72ch;
+  --content-max: 1200px;
+
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-rail: 20;
+  --z-drawer: 30;
+  --z-popover: 40;
+  --z-modal: 50;
+  --z-palette: 60;
+  --z-toast: 70;
+  --z-overlay-system: 80;
+
+  --dur-instant: 90ms;
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-exit: 160ms;
+  --dur-moment: 720ms;
+  --dur-reduced: 120ms;
+}
+:root,
+[data-density="comfortable"] {
+  --row-h: 36px;
+  --control-h: 36px;
+  --control-px: 12px;
+  --panel-p: 20px;
+  --body-size: 1rem;          /* 16px Guided */
+  --body-lh: 1.625rem;        /* 26px */
+  --read-size: 1.125rem;      /* 18px */
+  --kbd-hints: block;
+}
+[data-density="compact"] {
+  --row-h: 28px;
+  --control-h: 30px;
+  --control-px: 10px;
+  --panel-p: 16px;
+  --body-size: 0.9375rem;     /* 15px */
+  --body-lh: 1.5rem;          /* 24px */
+  --read-size: 1.0625rem;     /* 17px */
+  --kbd-hints: none;
+}
+[data-motion="reduce"] {
+  --dur-instant: 0ms;
+  --dur-fast: 0ms;
+  --dur-base: 0ms;
+  --dur-exit: 0ms;
+  --dur-moment: 0ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) {
+    --dur-instant: 0ms;
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-exit: 0ms;
+    --dur-moment: 0ms;
+  }
+}
+
+/* ── 6. Tailwind 테마(정적) — 기본 팔레트·폰트·그림자 제거 후 재정의 ───── */
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --blur-*: initial;
+  --ease-*: initial;
+  --animate-*: initial;
+  --breakpoint-*: initial;
+
+  --spacing: 0.25rem;
+
+  --breakpoint-sm: 22.5rem;   /* 360 */
+  --breakpoint-md: 48rem;     /* 768 */
+  --breakpoint-lg: 80rem;     /* 1280 */
+  --breakpoint-xl: 90rem;     /* 1440 */
+
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-display: "Geist Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "D2Coding", "Pretendard Variable", ui-monospace, monospace;
+
+  --font-weight-regular: 400;
+  --font-weight-book: 450;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-strong: 650;
+  --font-weight-bold: 700;
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-2xs--letter-spacing: 0.01em;
+  --text-2xs--font-weight: 500;
+  --text-xs: 0.78125rem;
+  --text-xs--line-height: 1.125rem;
+  --text-xs--font-weight: 450;
+  --text-sm: 0.84375rem;
+  --text-sm--line-height: 1.25rem;
+  --text-sm--font-weight: 450;
+  --text-base: 0.9375rem;
+  --text-base--line-height: 1.5rem;
+  --text-base--font-weight: 400;
+  --text-read: 1.0625rem;
+  --text-read--line-height: 1.7;
+  --text-read--letter-spacing: -0.005em;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.625rem;
+  --text-lg--letter-spacing: -0.01em;
+  --text-lg--font-weight: 600;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.3;
+  --text-xl--letter-spacing: -0.01em;
+  --text-xl--font-weight: 650;
+  --text-2xl: 1.6875rem;
+  --text-2xl--line-height: 1.3;
+  --text-2xl--letter-spacing: -0.01em;
+  --text-2xl--font-weight: 700;
+  --text-3xl: 2.125rem;
+  --text-3xl--line-height: 1.3;
+  --text-3xl--letter-spacing: -0.01em;
+  --text-3xl--font-weight: 700;
+  --text-display: 2.75rem;
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 600;
+
+  --radius-inline: 4px;
+  --radius-control: 6px;
+  --radius-panel: 10px;
+  --radius-popover: 12px;
+  --radius-modal: 16px;
+  --radius-pill: 999px;
+
+  --blur-glass: 12px;
+
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+
+  --animate-fade-in: fade-in var(--dur-fast) var(--ease-standard) both;
+  --animate-fade-out: fade-out var(--dur-exit) var(--ease-exit) both;
+  --animate-tag-in: tag-in var(--dur-fast) var(--ease-standard) both;
+  --animate-panel-in: panel-in var(--dur-base) var(--ease-standard) both;
+
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes tag-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes panel-in { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
+}
+
+/* ── 7. Tailwind 테마(역할 → 원시 변수 참조, 테마·밀도 전환을 따른다) ─── */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-border-input: var(--border-input);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+
+  --color-depth-1: var(--depth-1);
+  --color-depth-2: var(--depth-2);
+  --color-depth-3: var(--depth-3);
+  --color-depth-4: var(--depth-4);
+  --color-depth-5: var(--depth-5);
+  --color-depth-fog: var(--depth-fog);
+  --color-depth-1-wash: var(--depth-1-wash);
+  --color-depth-2-wash: var(--depth-2-wash);
+  --color-depth-3-wash: var(--depth-3-wash);
+  --color-depth-4-wash: var(--depth-4-wash);
+  --color-depth-5-wash: var(--depth-5-wash);
+  --color-on-depth: var(--on-depth);
+
+  --color-focus: var(--focus);
+  --color-focus-wash: var(--focus-wash);
+  --color-due: var(--due);
+  --color-due-ink: var(--due-ink);
+  --color-due-wash: var(--due-wash);
+  --color-correct: var(--correct);
+  --color-correct-wash: var(--correct-wash);
+  --color-incorrect: var(--incorrect);
+  --color-incorrect-wash: var(--incorrect-wash);
+  --color-partial: var(--partial);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+
+  --color-state-hover: var(--state-hover);
+  --color-state-press: var(--state-press);
+  --color-state-selected: var(--state-selected);
+  --color-scrim: var(--scrim);
+
+  --color-syn-keyword: var(--syn-keyword);
+  --color-syn-string: var(--syn-string);
+  --color-syn-number: var(--syn-number);
+  --color-syn-function: var(--syn-function);
+  --color-syn-type: var(--syn-type);
+  --color-syn-comment: var(--syn-comment);
+
+  --color-viz-seq-1: var(--viz-seq-1);
+  --color-viz-seq-2: var(--viz-seq-2);
+  --color-viz-seq-3: var(--viz-seq-3);
+  --color-viz-seq-4: var(--viz-seq-4);
+  --color-viz-seq-5: var(--viz-seq-5);
+  --color-viz-div-neg: var(--viz-div-neg);
+  --color-viz-div-mid: var(--viz-div-mid);
+  --color-viz-div-pos: var(--viz-div-pos);
+  --color-viz-ink: var(--viz-ink);
+  --color-viz-ink-2: var(--viz-ink-2);
+  --color-viz-pending: var(--viz-pending);
+
+  --shadow-panel: var(--elev-panel);
+  --shadow-popover: var(--elev-popover);
+  --shadow-modal: var(--elev-modal);
+
+  --text-body: var(--body-size);
+  --text-body--line-height: var(--body-lh);
+  --text-read-adaptive: var(--read-size);
+  --text-read-adaptive--line-height: 1.7;
+}
