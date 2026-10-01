@@ -274,3 +274,20 @@ export async function withTempHome<T>(fn: (home: TempHome) => Promise<T>): Promi
     await home.cleanup();
   }
 }
+
+/** DB-01의 `-- <NAME> …` 주석 다음 문장(빈 줄·펜스 전까지). */
+export function docSql(name: string): string {
+  const lines = readFileSync(`${REPO_ROOT}docs/02-design/03-database-design.md`, 'utf8').split('\n');
+  const at = lines.findIndex((l) => l === `-- ${name}` || l.startsWith(`-- ${name} `));
+  if (at < 0) {
+    throw new Error(`doc statement not found: ${name}`);
+  }
+  const body: string[] = [];
+  for (const line of lines.slice(at + 1)) {
+    if (line === '' || line.startsWith('```') || line.startsWith('-- ')) {
+      break;
+    }
+    body.push(line);
+  }
+  return body.join('\n');
+}
