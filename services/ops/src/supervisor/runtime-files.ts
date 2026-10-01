@@ -90,21 +90,34 @@ export function isProcessAlive(pid: number): boolean {
 
 export type LockResult = { readonly acquired: true; readonly previousCrashed: boolean } | { readonly acquired: false };
 
-async function createExclusive(lockPath: string, line: string): Promise<boolean> {
+/**
+ * 잠금 경로는 **내용이 다 쓰인 뒤에만** 존재한다 — `run/`의 임시 파일에 한 줄을 쓰고 fsync한 다음 `link(tmp, lockPath)`로 원자적으로 건다.
+ * `link`는 대상이 있으면 `EEXIST`로 실패하므로 `wx`와 같은 배타성을 가지면서, 빈 잠금 파일이 잠깐 보이는 창이 없다(ADR-012 단일 supervisor).
+ */
+async function createExclusive(
+  lockPath: string,
+  tmpPath: string,
+  line: string,
+  beforeLink?: () => Promise<void>,
+): Promise<boolean> {
   try {
-    const handle = await open(lockPath, 'wx', 0o600);
+    const handle = await open(tmpPath, 'w', 0o600);
     try {
       await handle.writeFile(line);
       await handle.sync();
     } finally {
       await handle.close();
     }
+    await beforeLink?.();
+    await link(tmpPath, lockPath);
     return true;
   } catch (e) {
     if (errnoCode(e) === 'EEXIST') {
       return false;
     }
     throw e;
+  } finally {
+    await rm(tmpPath, { force: true });
   }
 }
 
@@ -128,23 +141,25 @@ function parseHolder(raw: string): SupervisorLockFile | null {
 const TAKEOVER_ATTEMPTS = 3;
 
 /**
- * `wx` 배타 생성 → 필드 5개 1줄 기록 → fsync. `EEXIST`면 읽어 판정: 파싱 실패·죽은 pid = stale, 생존 + 다른 pid = 미획득(main이 exit 75).
- * stale 인수는 원자적이다 — 덮어쓰지 않고 stale 파일을 **rename으로 치운 뒤** 다시 `wx`로 만든다. 두 supervisor가 같은 stale 잠금을 보아도
- * `wx`를 이기는 쪽은 하나다. 치운 파일이 우리가 판정한 stale 내용과 다르면(그 사이 다른 쪽이 새 잠금을 만듦) 되돌리고 미획득으로 끝낸다.
+ * 임시 파일에 필드 5개 1줄 기록 → fsync → `link`로 배타 생성(잠금 경로는 빈 채로 존재한 적이 없다). `EEXIST`면 읽어 판정:
+ * 파싱 실패·죽은 pid = stale, 생존 + 다른 pid = 미획득(main이 exit 75).
+ * stale 인수는 원자적이다 — 덮어쓰지 않고 stale 파일을 **rename으로 치운 뒤** 다시 `link`로 만든다. 두 supervisor가 같은 stale 잠금을 보아도
+ * `link`를 이기는 쪽은 하나다. 치운 파일이 우리가 판정한 stale 내용과 다르면(그 사이 다른 쪽이 새 잠금을 만듦) 되돌리고 미획득으로 끝낸다.
  * 경합에서 상대가 stale을 먼저 치웠다면 이긴 쪽은 `previousCrashed:false`를 볼 수 있다(크래시 사실은 한쪽만 안다).
  */
 export async function acquireLock(
   home: string,
   info: SupervisorLockFile,
-  deps?: { isAlive?: (pid: number) => boolean },
+  deps?: { isAlive?: (pid: number) => boolean; beforeLink?: () => Promise<void> },
 ): Promise<LockResult> {
   const isAlive = deps?.isAlive ?? isProcessAlive;
   const lockPath = homePath(home, 'run', 'supervisor.lock');
   const gravePath = homePath(home, 'run', `supervisor.lock.stale-${info.pid}`);
+  const tmpPath = homePath(home, 'run', `supervisor.lock.tmp-${info.pid}-${info.boot_id}`);
   const line = `${JSON.stringify(SupervisorLockFile.parse(info))}\n`;
   let tookOver = false;
   for (let attempt = 0; attempt < TAKEOVER_ATTEMPTS; attempt++) {
-    if (await createExclusive(lockPath, line)) {
+    if (await createExclusive(lockPath, tmpPath, line, deps?.beforeLink)) {
       return { acquired: true, previousCrashed: tookOver };
     }
     const raw = await readRawOrNull(lockPath);

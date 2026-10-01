@@ -74,7 +74,8 @@
     "services/ops/test/unit/supervisor/runtime-files.spec.ts",
     "services/ops/test/unit/supervisor/security-env.spec.ts",
     "services/ops/test/unit/supervisor/shutdown.spec.ts",
-    "services/ops/test/unit/supervisor/start.spec.ts"
+    "services/ops/test/unit/supervisor/start.spec.ts",
+    "services/ops/test/contract/ipc/supervisor-job-ipc.contract.spec.ts"
   ],
   "testsAdded": [
     "UT-SUP-001",
@@ -286,6 +287,46 @@
       "cmd": "npx biome ci apps/cli services/ops",
       "exit": 0,
       "note": "re-run after supplement round 1"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops typecheck",
+      "exit": 0,
+      "note": "supplement round 2"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops test",
+      "exit": 0,
+      "note": "89 tests, supplement round 2 (contract spec now 2 files)"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops test:integration",
+      "exit": 0,
+      "note": "15 tests, supplement round 2"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-cli typecheck && pnpm --filter @fathom/app-cli test && pnpm --filter @fathom/app-cli test:integration",
+      "exit": 0,
+      "note": "32 unit + 10 integration, supplement round 2"
+    },
+    {
+      "cmd": "biome check (T-00-11 paths)",
+      "exit": 0,
+      "note": "root pnpm lint fails repo-wide on other lanes' files (CSS/tailwind parse etc.), none in T-00-11 paths"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "failures only in other lanes: check:deps (apps/web, ui, testkit, packc), check:security (shared-kernel redact.spec); no findings in T-00-11 paths"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-11",
+      "exit": 1,
+      "note": "only untracked packages/contracts/test/** files from a parallel lane; no T-00-11 violations"
+    },
+    {
+      "cmd": "si-docs ids (tsx) filtered to services/ops + apps/cli",
+      "exit": 0,
+      "note": "0 findings; UT-SUP-060~066 titles now carry [FR-SET-001]"
     }
   ],
   "graphify": "unavailable",
@@ -303,7 +344,13 @@
     "Supplement round 1 — run_mode guard: supervisor tracks runModeActive per service from run_mode entry (before the stop); svc.start/svc.restart return ack{ok:false,error:'run_mode_busy'} and dev watcher restarts are skipped while active (UT-SUP-058).",
     "Supplement round 1 — stale lock takeover is now rename-away + retry open('wx') (up to 3 attempts, restores a displaced fresh lock); in a race the winner may report previousCrashed:false because the other contender removed the stale file first. fathom down only signals lock.pid when registry boot_id and supervisor_pid match the lock (pid-reuse guard); otherwise exit 1 with a warning (UT-CLI-037 extended).",
     "Supplement round 1 — errors no longer swallowed (STD-TS-34/SEC-32): log-sink takes onError (deduped per kind; stream error drops the writer so the next line reopens it; sync open failures no longer throw out of line()); ChildHandle gains onError (child 'error' events and pipe errors -> supervisor warn log 'supervisor.child.error'); run-mode runner gains onError; '// detached:' comments added in messages.ts and supervisor.ts onDevImpact.",
-    "Supplement round 1 — NOT changed (recorded for T1): (a) LoC/STD-TS-25 factory-closure size deviation stands (core 566 vs 400, whole src/supervisor ~2,2xx vs 1,000); verdict left to T1. (b) Known gap: in the dev profile Vite is spawned detached without an IPC channel, so a SIGKILLed supervisor orphans Vite on 5173 (ADR-012 §4 disconnect-exit cannot reach it); suggested remedy = stdin pipe + EOF watchdog or non-detached Vite, dev-profile orphan check in T-00-16 — needs CR/Brief note."
+    "Supplement round 1 — NOT changed (recorded for T1): (a) LoC/STD-TS-25 factory-closure size deviation stands (core 566 vs 400, whole src/supervisor ~2,2xx vs 1,000); verdict left to T1. (b) Known gap: in the dev profile Vite is spawned detached without an IPC channel, so a SIGKILLed supervisor orphans Vite on 5173 (ADR-012 §4 disconnect-exit cannot reach it); suggested remedy = stdin pipe + EOF watchdog or non-detached Vite, dev-profile orphan check in T-00-16 — needs CR/Brief note.",
+    "Supplement round 2: (major) supervisor.lock acquisition no longer uses open('wx')+write. The full line is written+fsynced to run/supervisor.lock.tmp-<pid>-<boot_id> (0600) and published with link(tmp, lockPath) (EEXIST = atomic exclusive); the lock path never exists empty. Stale takeover keeps rename-away + retry through the same link path. acquireLock gained a test hook deps.beforeLink. Test coverage added inside UT-SUP-068 (no new IDs in range): contender cannot take a lock whose writer is paused before link; 6-way race has exactly one winner and the lock is always valid JSON when observed.",
+    "Supplement round 2: DevWatchFactory takes a third onError(root, e) arg; realDevWatch reports watcher 'error' events and non-ENOENT watch() failures, supervisor logs warn 'supervisor.dev_watch.error' (asserted in UT-SUP-063). UT-SUP-060~066 titles gained [FR-SET-001] so si-docs ids no longer reports no-req.",
+    "Supplement round 2: gateway-client now has a total-duration timer (timeoutMs) in addition to the socket idle timeout; UT-CLI-031 covers a dripping server.",
+    "Supplement round 2: controlApi.runMode returns exit_code 75 / tail ['supervisor: shutting_down'] while shutting down (also re-checked after stopping the live service); runShutdown calls runner.abortAll() which tree-kills active run_mode children and settles them as exit_code 70 'supervisor: run_mode aborted'. Covered in UT-SUP-049. T-00-13 handover: a run_mode job interrupted by supervisor shutdown reports 70 (operator must re-run migrate/restore).",
+    "Supplement round 2: supervisor-ipc.contract.spec.ts split (job IPC CT-SUP-718~722 moved to supervisor-job-ipc.contract.spec.ts) to meet the 400-line file limit. Size deviation of lifecycle.ts/log-sink.ts closures (STD-TS-25 [S]) remains accepted as recorded; T1 may decide on further splitting.",
+    "Supplement round 2 (not fixed, needs T1 CR/Brief note): in the dev profile Vite is spawned detached with no IPC, so SIGKILL of the supervisor orphans Vite on 5173 and the next `pnpm dev` crash-loops on --strictPort. Brief spawn spec + ADR-012 §4 gap; suggested options: stdin pipe + EOF watchdog wrapper, or non-detached spawn, plus a dev orphan check in T-00-16."
   ],
   "escalations": [],
   "rtmUpdates": [

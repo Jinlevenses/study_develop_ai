@@ -120,6 +120,23 @@ describe('gateway-client (로컬 node:http 서버)', () => {
     const slow = await serve(() => ({ status: 200, body: '{}', delayMs: 400 }));
     const res = await createGatewayClient({ port: slow.port, token: TOKEN, appVersion: '1', timeoutMs: 80 }).get('/x');
     expect(res).toEqual({ ok: false, error: { kind: 'timeout' } });
+    // 소켓 유휴 시간이 아니라 요청 전체 시간 — 30ms마다 1바이트씩 흘려도 timeoutMs(150)에서 끊는다.
+    const drip = createServer((_req, res) => {
+      res.writeHead(200, { 'content-type': 'application/json' });
+      const timer = setInterval(() => res.write(' '), 30);
+      res.on('close', () => clearInterval(timer));
+    });
+    servers.push(drip);
+    await new Promise<void>((resolve) => drip.listen(0, '127.0.0.1', () => resolve()));
+    const started = Date.now();
+    const dripped = await createGatewayClient({
+      port: (drip.address() as AddressInfo).port,
+      token: TOKEN,
+      appVersion: '1',
+      timeoutMs: 150,
+    }).get('/x');
+    expect(dripped).toEqual({ ok: false, error: { kind: 'timeout' } });
+    expect(Date.now() - started).toBeLessThan(1000);
     expect(pickOpenUrl({ open_url: OPEN_URL })).toEqual({ ok: true, value: OPEN_URL });
     for (const body of [
       {},

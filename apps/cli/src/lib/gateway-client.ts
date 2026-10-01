@@ -93,9 +93,15 @@ export function createGatewayClient(o: GatewayClientOptions): GatewayClient {
         headers['content-length'] = String(Buffer.byteLength(payload, 'utf8'));
       }
       let settled = false;
+      // `timeout` 옵션은 소켓 유휴 시간일 뿐이다 — 몇 초마다 몇 바이트씩 흘리는 gateway에 매이지 않도록 요청 전체에 상한을 둔다.
+      const total = setTimeout(() => {
+        done(err({ kind: 'timeout' }));
+        req.destroy();
+      }, timeoutMs);
       const done = (r: GatewayResult): void => {
         if (!settled) {
           settled = true;
+          clearTimeout(total);
           resolve(r);
         }
       };

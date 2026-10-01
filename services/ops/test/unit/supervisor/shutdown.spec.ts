@@ -1,3 +1,4 @@
+import { ulid } from '@fathom/shared-kernel/ids/ids';
 import { describe, expect, it } from 'vitest';
 import type { Harness } from './fakes.js';
 import { createHarness, flush } from './fakes.js';
@@ -55,13 +56,42 @@ describe('종료 순서 (ADR-012 §8)', () => {
     }
   });
 
-  it('UT-SUP-049 shutdownAll 2회 = 같은 Promise, 끝에 registry stopped·lock·cli.token 삭제·싱크 close·done = 0 [NFR-AVL-003]', async () => {
+  it('UT-SUP-049 shutdownAll 2회 = 같은 Promise, 끝에 registry stopped·lock·cli.token 삭제·싱크 close·done = 0 [NFR-AVL-003]·종료 중 run_mode는 거부(75)·실행 중 run_mode 자식은 중단 [NFR-AVL-003][FR-SET-007]', async () => {
     const h = createHarness();
     await h.up();
     autoExit(h, []);
+    // 실행 중 run_mode 자식은 종료 시 treeKill로 마감된다
+    const runId = ulid();
+    const ops = h.spawn.last('ops-api');
+    ops.message({
+      v: 1,
+      id: runId,
+      type: 'svc.run_mode',
+      svc: 'content',
+      args: { mode: 'migrate', dry_run: true, db_copy_dir: null, app_dir: null },
+    });
+    await flush();
+    await flush(); // autoExit이 라이브 content를 정지시키면 run_mode 자식이 spawn된다
+    const job = h.spawn.last('content');
+    expect(job.spec.args[0]).toBe('--mode=migrate');
     const a = h.sup.shutdownAll(3000);
     const b = h.sup.shutdownAll(500);
     expect(b).toBe(a);
+    // 종료 중 새 run_mode는 spawn 없이 75 + shutting_down
+    const lateId = ulid();
+    ops.message({
+      v: 1,
+      id: lateId,
+      type: 'svc.run_mode',
+      svc: 'learning',
+      args: { mode: 'migrate', dry_run: true, db_copy_dir: null, app_dir: null },
+    });
+    await flush();
+    expect(ops.sent.find((m) => m.re === lateId)).toMatchObject({ exit_code: 75, tail: ['supervisor: shutting_down'] });
+    expect(h.spawn.of('learning').filter((c) => c.spec.args[0] === '--mode=migrate')).toHaveLength(0);
+    await flush();
+    expect(job.killed).toBe(1);
+    expect(ops.sent.find((m) => m.re === runId)).toMatchObject({ type: 'svc.run_mode.result', exit_code: 70 });
     await a;
     expect(await h.sup.done).toBe(0);
     const last = h.files.last();
@@ -72,6 +102,8 @@ describe('종료 순서 (ADR-012 §8)', () => {
     expect(h.sup.statusRows()[0]).toMatchObject({ svc: 'supervisor', state: 'stopped' });
     expect(h.files.registries.some((r) => r.state === 'stopping')).toBe(true);
     // 종료 중에는 fork하지 않는다
-    expect(h.spawn.children.filter((c) => c.spec.svc === 'content')).toHaveLength(1);
+    expect(
+      h.spawn.children.filter((c) => c.spec.svc === 'content' && c.spec.args[0] !== '--mode=migrate'),
+    ).toHaveLength(1);
   });
 });

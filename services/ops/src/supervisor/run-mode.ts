@@ -57,13 +57,21 @@ export type RunModeRunnerDeps = {
 
 export interface RunModeRunner {
   isBusy(svc: ServiceName): boolean;
+  /** 종료 중 — 실행 중인 run_mode 자식을 모두 트리 종료하고 각 결과를 exit_code 70·`supervisor: run_mode aborted`로 마감한다. */
+  abortAll(): void;
   run(svc: ServiceName, args: RunModeArgs, base: RunModeEntry): Promise<RunModeResult>;
 }
 
 export function createRunModeRunner(d: RunModeRunnerDeps): RunModeRunner {
   const busy = new Set<ServiceName>();
+  const aborts = new Set<() => void>();
   return {
     isBusy: (svc) => busy.has(svc),
+    abortAll(): void {
+      for (const abort of [...aborts]) {
+        abort();
+      }
+    },
     run(svc, args, base): Promise<RunModeResult> {
       if (busy.has(svc)) {
         return Promise.resolve({ exit_code: 75, tail: ['supervisor: run_mode busy'] });
@@ -93,12 +101,18 @@ export function createRunModeRunner(d: RunModeRunnerDeps): RunModeRunner {
         let child: ReturnType<SpawnChild>;
         let cancel: () => void = () => undefined;
         let settled = false;
+        const abort = (): void => {
+          push('supervisor: run_mode aborted');
+          child.treeKill();
+          finish(70);
+        };
         const finish = (exitCode: number): void => {
           if (settled) {
             return;
           }
           settled = true;
           cancel();
+          aborts.delete(abort);
           busy.delete(svc);
           resolve({ exit_code: exitCode, tail: [...tail] });
         };
@@ -109,6 +123,7 @@ export function createRunModeRunner(d: RunModeRunnerDeps): RunModeRunner {
           finish(70);
           return;
         }
+        aborts.add(abort);
         child.onLine((stream, line) => {
           push(line);
           d.onLine(svc, stream, line);

@@ -6,13 +6,18 @@ import { startViteProbe } from '../../../src/supervisor/vite.js';
 import type { Harness } from './fakes.js';
 import { createFakeTimers, createHarness, flush } from './fakes.js';
 
-type Watcher = { roots: readonly string[]; emit(p: string): void; closed: number };
+type Watcher = {
+  roots: readonly string[];
+  emit(p: string): void;
+  fail(root: string, e: unknown): void;
+  closed: number;
+};
 function watcherFactory(): { factory: DevWatchFactory; watchers: Watcher[] } {
   const watchers: Watcher[] = [];
   return {
     watchers,
-    factory: (roots, onEvent) => {
-      const w: Watcher = { roots, emit: onEvent, closed: 0 };
+    factory: (roots, onEvent, onError) => {
+      const w: Watcher = { roots, emit: onEvent, fail: onError, closed: 0 };
       watchers.push(w);
       return {
         close: (): void => {
@@ -36,7 +41,7 @@ async function devHarness(): Promise<{ h: Harness; w: Watcher }> {
 }
 
 describe('dev 감시 · Vite (AP-12·CR-07)', () => {
-  it('UT-SUP-060 300ms debounce로 여러 이벤트를 1회로 처리 [AP-12][CR-07]', async () => {
+  it('UT-SUP-060 300ms debounce로 여러 이벤트를 1회로 처리 [FR-SET-001][AP-12][CR-07]', async () => {
     const { h, w } = await devHarness();
     expect(DEV_DEBOUNCE_MS).toBe(300);
     const before = h.spawn.of('content').length;
@@ -54,7 +59,7 @@ describe('dev 감시 · Vite (AP-12·CR-07)', () => {
     expect(h.spawn.of('content')).toHaveLength(before + 1); // 1회만
   });
 
-  it('UT-SUP-061 경로 → 서비스 매핑(ops → ops-api) [AP-12][CR-07]', () => {
+  it('UT-SUP-061 경로 → 서비스 매핑(ops → ops-api) [FR-SET-001][AP-12][CR-07]', () => {
     expect(mapChanges('/app', ['/app/services/ops/src/http/x.ts']).services).toEqual(['ops-api']);
     expect(mapChanges('/app', ['/app/services/learning/src/a.ts', '/app/services/gateway/src/b.ts']).services).toEqual([
       'gateway',
@@ -66,7 +71,7 @@ describe('dev 감시 · Vite (AP-12·CR-07)', () => {
     });
   });
 
-  it('UT-SUP-062 packages/** 변경 → 서비스 5개 전부 재기동 [AP-12][CR-07]', async () => {
+  it('UT-SUP-062 packages/** 변경 → 서비스 5개 전부 재기동 [FR-SET-001][AP-12][CR-07]', async () => {
     const { h, w } = await devHarness();
     w.emit('/app/packages/contracts/src/admin/ipc.ts');
     await h.timers.advance(300);
@@ -76,7 +81,7 @@ describe('dev 감시 · Vite (AP-12·CR-07)', () => {
     expect(mapChanges('/app', ['/app/packages/shared-kernel/src/a.ts']).services).toHaveLength(5);
   });
 
-  it('UT-SUP-063 services/<dir>/src/supervisor/** 변경 → warn만(재기동 0) [AP-12][CR-07]', async () => {
+  it('UT-SUP-063 services/<dir>/src/supervisor/** 변경 → warn만(재기동 0)·watcher 오류는 supervisor.dev_watch.error warn [FR-SET-001][AP-12][CR-07]', async () => {
     const { h, w } = await devHarness();
     w.emit('/app/services/ops/src/supervisor/supervisor.ts');
     await h.timers.advance(300);
@@ -85,9 +90,13 @@ describe('dev 감시 · Vite (AP-12·CR-07)', () => {
     for (const child of h.spawn.children) {
       expect(child.sentOfType('shutdown')).toHaveLength(0);
     }
+    // watcher 오류(EMFILE 등)는 삼키지 않고 warn으로 보고한다.
+    w.fail('/app/services/content/src', Object.assign(new Error('too many open files'), { code: 'EMFILE' }));
+    expect(h.events('supervisor.dev_watch.error')).toHaveLength(1);
+    expect(h.events('supervisor.dev_watch.error')[0]).toMatchObject({ level: 'warn' });
   });
 
-  it('UT-SUP-064 dev 재기동은 크래시 이력에 포함되지 않는다(restarts 불변) [AP-12][CR-07]', async () => {
+  it('UT-SUP-064 dev 재기동은 크래시 이력에 포함되지 않는다(restarts 불변) [FR-SET-001][AP-12][CR-07]', async () => {
     const { h, w } = await devHarness();
     for (let i = 0; i < 5; i++) {
       w.emit('/app/services/content/src/a.ts');
@@ -101,7 +110,7 @@ describe('dev 감시 · Vite (AP-12·CR-07)', () => {
     expect(h.sup.statusRows().find((s) => s.svc === 'content')?.restarts_60s).toBe(0);
   });
 
-  it('UT-SUP-065 종료 시 watcher close·대기 중 debounce 취소 [AP-12][CR-07]', async () => {
+  it('UT-SUP-065 종료 시 watcher close·대기 중 debounce 취소 [FR-SET-001][AP-12][CR-07]', async () => {
     const { h, w } = await devHarness();
     expect(w.roots.some((r) => r.endsWith('/packages/shared-kernel/src'))).toBe(true);
     expect(w.roots).toHaveLength(7);
@@ -115,7 +124,7 @@ describe('dev 감시 · Vite (AP-12·CR-07)', () => {
     expect(h.spawn.of('content')).toHaveLength(1);
   });
 
-  it('UT-SUP-066 vite: spawn 사양(--strictPort·cwd)·TCP 탐침으로 ready·prod/test 미기동 [AP-12][CR-07]', async () => {
+  it('UT-SUP-066 vite: spawn 사양(--strictPort·cwd)·TCP 탐침으로 ready·prod/test 미기동 [FR-SET-001][AP-12][CR-07]', async () => {
     let up = false;
     const probes: number[] = [];
     const h = createHarness({

@@ -78,6 +78,7 @@ export function createSupervisor(opts: SupervisorOptions, deps: SupervisorDeps):
     ctx.state.shuttingDown = true;
     watcher?.close();
     watcher = null;
+    runner.abortAll(); // 종료 직전 시작된 run_mode 자식이 supervisor보다 오래 살지 않게 한다.
     ctx.persist();
     const stopAll = async (list: readonly SupervisedService[]): Promise<void> => {
       await Promise.all(list.filter((s) => ctx.managed.includes(s)).map((s) => life.stopService(s, graceMs)));
@@ -130,11 +131,17 @@ export function createSupervisor(opts: SupervisorOptions, deps: SupervisorDeps):
       });
     },
     runMode: async (svc, args) => {
+      if (ctx.state.shuttingDown) {
+        return { exit_code: 75, tail: ['supervisor: shutting_down'] };
+      }
       const owner = !runModeActive.has(svc);
       runModeActive.add(svc);
       try {
         if (owner) {
           await life.serialize(svc, () => life.stopService(svc, DEFAULT_GRACE_MS));
+        }
+        if (ctx.state.shuttingDown) {
+          return { exit_code: 75, tail: ['supervisor: shutting_down'] };
         }
         const spec = life.specFor(svc);
         return await runner.run(svc, args, { entry: spec.entry, execArgv: spec.execArgv, cwd: spec.cwd });
@@ -191,6 +198,7 @@ export function createSupervisor(opts: SupervisorOptions, deps: SupervisorDeps):
           factory: deps.watch,
           timers: deps.timers,
           onImpact: onDevImpact,
+          onError: (root, e) => deps.log.warn({ event: 'supervisor.dev_watch.error', root, err: e }, 'dev watch error'),
         });
       }
     }
