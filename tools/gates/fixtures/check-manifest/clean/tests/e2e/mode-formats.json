@@ -1,0 +1,22 @@
+{
+  "M-01": [
+    "lesson"
+  ],
+  "M-02": [
+    "ox"
+  ],
+  "M-03": [
+    "mcq",
+    "cloze"
+  ],
+  "M-04": [
+    "lab",
+    "code_task"
+  ],
+  "M-05": [
+    "blank_note"
+  ],
+  "M-06": [
+    "dialog"
+  ]
+}

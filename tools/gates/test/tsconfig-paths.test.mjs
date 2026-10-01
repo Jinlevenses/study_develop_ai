@@ -71,8 +71,9 @@ test('UT-GATE-061 compilerOptions.paths·baseUrl은 줄 번호와 함께 위반�
       ]);
     },
   );
-  withRepo({ 'tsconfig.json': ROOT_OK, 'services/a/tsconfig.json': '{ "compilerOptions": { "strict": true } }\n' }, (dir) =>
-    assert.equal(run(dir).status, 0),
+  withRepo(
+    { 'tsconfig.json': ROOT_OK, 'services/a/tsconfig.json': '{ "compilerOptions": { "strict": true } }\n' },
+    (dir) => assert.equal(run(dir).status, 0),
   );
   // tsconfig.build.json 같은 변종 파일도 검사한다. 파일 이름이 tsconfig*.json이 아니면 무시한다.
   withRepo(
@@ -136,7 +137,8 @@ test('UT-GATE-063 패키지 이름은 단위 형식(@fathom/svc-x·app-x·tool-x
 test('UT-GATE-064 tsconfig는 JSONC(주석·끝 쉼표)로 파싱하고 tsconfig가 하나도 없거나 깨지면 exit 2다 [NFR-MAINT-001]', () => {
   withRepo(
     {
-      'tsconfig.json': '{\n  // line comment\n  "compilerOptions": { /* block */ "strict": true, },\n  "include": ["apps/*/src", "services/*/src", "packages/*/src",],\n}\n',
+      'tsconfig.json':
+        '{\n  // line comment\n  "compilerOptions": { /* block */ "strict": true, },\n  "include": ["apps/*/src", "services/*/src", "packages/*/src",],\n}\n',
     },
     (dir) => assert.equal(run(dir).status, 0),
   );

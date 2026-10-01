@@ -42,7 +42,10 @@ export function checkFile(rel, src, cfg) {
       if (x === 'REPLACE') {
         add('ledger/replace', `INSERT OR REPLACE INTO ${cfg.ledger.table}: evidence rows are never overwritten`);
       } else if (x !== 'IGNORE') {
-        add('ledger/insert-form', `INSERT${x ? ` OR ${x}` : ''} INTO ${cfg.ledger.table}: use INSERT OR IGNORE only (STD-SQL-11)`);
+        add(
+          'ledger/insert-form',
+          `INSERT${x ? ` OR ${x}` : ''} INTO ${cfg.ledger.table}: use INSERT OR IGNORE only (STD-SQL-11)`,
+        );
       }
     }
     if (rep && !(ins && ins[1] === 'REPLACE')) {
@@ -52,7 +55,10 @@ export function checkFile(rel, src, cfg) {
       add('ledger/upsert', `ON CONFLICT … DO UPDATE on ${cfg.ledger.table}: evidence is append-only`);
     }
     if (upd || del) {
-      add('ledger/mutation', `${upd ? 'UPDATE' : 'DELETE FROM'} ${cfg.ledger.table}: evidence is append-only (DB-01 §3.7)`);
+      add(
+        'ledger/mutation',
+        `${upd ? 'UPDATE' : 'DELETE FROM'} ${cfg.ledger.table}: evidence is append-only (DB-01 §3.7)`,
+      );
     }
     if (/DROP TRIGGER/.test(n)) {
       add('ledger/drop-trigger', 'DROP TRIGGER is forbidden in src: ledger immutability triggers must stay');
@@ -61,7 +67,7 @@ export function checkFile(rel, src, cfg) {
   return out;
 }
 
-export async function analyze(root, opts = {}) {
+export function analyze(root, opts = {}) {
   const cfg = loadSqlConfig(opts.config);
   const files = srcFiles(root);
   const violations = [];

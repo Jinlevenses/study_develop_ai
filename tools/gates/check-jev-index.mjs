@@ -62,7 +62,12 @@ export function checkSource(rel, src) {
       if (idx.t === 'num' && close.v === ']') {
         add(t.line, 'jev/index-literal', `${t.v}[${idx.v}]: reference items by object key, not array position`);
       } else if (idx.t === 'id' && INDEX_VARS.has(idx.v) && close.v === ']') {
-        add(t.line, 'jev/index-var', `${t.v}[${idx.v}]: positional lookup inside Jev code; prefer keyed record`, 'warn');
+        add(
+          t.line,
+          'jev/index-var',
+          `${t.v}[${idx.v}]: positional lookup inside Jev code; prefer keyed record`,
+          'warn',
+        );
       }
     } else if (n.v === '.' && all[i + 2]?.v === 'at' && all[i + 3]?.v === '(' && all[i + 4]?.t === 'num') {
       add(t.line, 'jev/index-literal', `${t.v}.at(${all[i + 4].v}): positional access`);
@@ -90,7 +95,11 @@ export function checkSource(rel, src) {
         INDEX_VARS.has(e[0].v) &&
         (e.length === 1 || (e.length === 3 && (e[1].v === '+' || e[1].v === '-') && e[2].t === 'num'))
       ) {
-        add(t.line, 'jev/index-interp', `template numbers an item by position (\${${e.map((x) => x.v).join(' ')}}); interpolate the object key instead`);
+        add(
+          t.line,
+          'jev/index-interp',
+          `template numbers an item by position (\${${e.map((x) => x.v).join(' ')}}); interpolate the object key instead`,
+        );
       }
     }
   }
@@ -133,17 +142,11 @@ export function checkText(rel, text) {
   return out;
 }
 
-export async function analyze(root) {
+export function analyze(root) {
   const sources = srcFiles(root);
   const prompts = walk(root, {
     exts: ['.md'],
-    include: [
-      'apps/*/src/**',
-      'services/*/src/**',
-      'packages/*/src/**',
-      'tools/*/src/**',
-      'services/*/assets/**',
-    ],
+    include: ['apps/*/src/**', 'services/*/src/**', 'packages/*/src/**', 'tools/*/src/**', 'services/*/assets/**'],
   }).filter((f) => PROMPT_MD_RE.test(f));
   const violations = [];
   for (const f of sources) {

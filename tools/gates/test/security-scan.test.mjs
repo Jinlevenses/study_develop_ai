@@ -70,15 +70,44 @@ test('UT-GATE-066 ADR-010 8규칙(eval·new Function·child_process exec·shell:
     ['security/eval', 'eval(code);', 'obj.eval(code); const eval2 = 1;'],
     ['security/eval', 'globalThis.eval(code);', 'type T = { eval(x: string): void };'],
     ['security/new-function', "const f = new Function('a', 'return a');", 'const F = Function; type X = Function;'],
-    ['security/child-process-exec', "import { exec } from 'node:child_process';", "import { spawn, execFile } from 'node:child_process';"],
-    ['security/child-process-exec', "import { execSync as run } from 'child_process';", "import { exec } from 'node:util';"],
-    ['security/child-process-exec', "import cp from 'node:child_process'; cp.exec('ls');", "import cp from 'node:child_process'; cp.spawn('ls', []);"],
-    ['security/child-process-exec', "import * as cp from 'child_process'; cp.execSync('ls');", "import * as cp from 'child_process'; const x = { exec: 1 }; x.exec;"],
+    [
+      'security/child-process-exec',
+      "import { exec } from 'node:child_process';",
+      "import { spawn, execFile } from 'node:child_process';",
+    ],
+    [
+      'security/child-process-exec',
+      "import { execSync as run } from 'child_process';",
+      "import { exec } from 'node:util';",
+    ],
+    [
+      'security/child-process-exec',
+      "import cp from 'node:child_process'; cp.exec('ls');",
+      "import cp from 'node:child_process'; cp.spawn('ls', []);",
+    ],
+    [
+      'security/child-process-exec',
+      "import * as cp from 'child_process'; cp.execSync('ls');",
+      "import * as cp from 'child_process'; const x = { exec: 1 }; x.exec;",
+    ],
     ['security/shell-true', "spawn('ls', [], { shell: true });", "spawn('ls', [], { shell: false });"],
-    ['security/dangerously-set-inner-html', '<div dangerouslySetInnerHTML={{ __html: h }} />', '<div>{h}</div>', 'apps/web/src/x.tsx'],
-    ['security/tls-reject-env', "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';", "process.env.NODE_EXTRA_CA_CERTS = 'x';"],
+    [
+      'security/dangerously-set-inner-html',
+      '<div dangerouslySetInnerHTML={{ __html: h }} />',
+      '<div>{h}</div>',
+      'apps/web/src/x.tsx',
+    ],
+    [
+      'security/tls-reject-env',
+      "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';",
+      "process.env.NODE_EXTRA_CA_CERTS = 'x';",
+    ],
     ['security/tls-reject-env', "const k = 'NODE_TLS_REJECT_UNAUTHORIZED';", "const k = 'NODE_TLS';"],
-    ['security/reject-unauthorized', 'const a = { rejectUnauthorized: false };', 'const a = { rejectUnauthorized: true };'],
+    [
+      'security/reject-unauthorized',
+      'const a = { rejectUnauthorized: false };',
+      'const a = { rejectUnauthorized: true };',
+    ],
     ['security/buffer-alloc-unsafe', 'Buffer.allocUnsafe(4);', 'Buffer.alloc(4); Buffer.from([1]);'],
     ['security/buffer-alloc-unsafe', 'Buffer.allocUnsafeSlow(4);', 'const allocUnsafe = 1;'],
   ]);
@@ -88,12 +117,20 @@ test('UT-GATE-067 CR-60 규칙(innerHTML·insertAdjacentHTML·document.write·ne
   table([
     ['security/inner-html', 'el.innerHTML = x;', 'const o = { innerHTML: 1 };'],
     ['security/inner-html', 'const s = el.outerHTML;', "const s = 'outerHTML';"],
-    ['security/insert-adjacent-html', "el.insertAdjacentHTML('beforeend', x);", "el.insertAdjacentElement('beforeend', x);"],
+    [
+      'security/insert-adjacent-html',
+      "el.insertAdjacentHTML('beforeend', x);",
+      "el.insertAdjacentElement('beforeend', x);",
+    ],
     ['security/document-write', 'document.write(x);', 'document.writer(x); const document2 = { write: 1 };'],
     ['security/document-write', 'document.writeln(x);', 'document.getElementById(x);'],
     ['security/new-buffer', 'const b = new Buffer(8);', 'const b = Buffer.from([8]);'],
     ['security/url-parse', 'const u = url.parse(s);', 'const u = new URL(s); JSON.parse(s);'],
-    ['security/url-parse', "import * as u from 'node:url'; u.parse(s);", "import * as u from 'node:url'; u.fileURLToPath(s);"],
+    [
+      'security/url-parse',
+      "import * as u from 'node:url'; u.parse(s);",
+      "import * as u from 'node:url'; u.fileURLToPath(s);",
+    ],
     ['security/url-parse', "import { parse } from 'url'; parse(s);", "import { parse } from 'yaml'; parse(s);"],
     ['security/create-cipher', "createCipher('aes', k);", "createCipheriv('aes-256-gcm', k, iv);"],
     ['security/weak-hash', "createHash('md5');", "createHash('sha256');"],
@@ -151,8 +188,9 @@ test('UT-GATE-069 secret-literal 6패턴은 src 문자열·테스트·evals 텍�
       );
     },
   );
-  withRepo({ 'services/a/src/ok.ts': 'export const ok = 1;\n', 'evals/sets/secrets-50/leaks.txt': `sk-ant-${X(24)}\n` }, (dir) =>
-    assert.equal(run(dir).status, 0, 'secrets-50은 무시'),
+  withRepo(
+    { 'services/a/src/ok.ts': 'export const ok = 1;\n', 'evals/sets/secrets-50/leaks.txt': `sk-ant-${X(24)}\n` },
+    (dir) => assert.equal(run(dir).status, 0, 'secrets-50은 무시'),
   );
 });
 
@@ -173,7 +211,10 @@ test('UT-GATE-071 fetch(·new EventSource( 는 apps/web/src/lib/** 밖에서만 
   ]);
   assert.deepEqual(rulesOf(bad, 'apps/web/src/lib/api.ts'), []);
   assert.deepEqual(rulesOf(bad, 'services/gateway/src/http/x.ts'), []);
-  assert.deepEqual(rulesOf('client.fetch(u); window.fetch(u); const c = { fetch(u) { return u; } };', 'apps/web/src/x.ts'), []);
+  assert.deepEqual(
+    rulesOf('client.fetch(u); window.fetch(u); const c = { fetch(u) { return u; } };', 'apps/web/src/x.ts'),
+    [],
+  );
   assert.deepEqual(rulesOf('async function fetch(u) { return u; }', 'apps/web/src/x.ts'), []);
 });
 

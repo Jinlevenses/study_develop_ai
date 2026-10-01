@@ -17,7 +17,17 @@ const LOCK_FORMAT = 'fathom-frozen-lock/1';
 const CR_RE = /^CR:\s*CR-\d{2,3}\s*$/m;
 const ADR_RE = /^ADR:\s*ADR-\d{3}\s*$/m;
 const TASK_TOKEN_RE = /T-\d{2}-\d{2}/g;
-const NUMERIC_KEYS = ['const', 'pattern', 'format', 'minLength', 'maxLength', 'minimum', 'maximum', 'minItems', 'maxItems'];
+const NUMERIC_KEYS = [
+  'const',
+  'pattern',
+  'format',
+  'minLength',
+  'maxLength',
+  'minimum',
+  'maximum',
+  'minItems',
+  'maxItems',
+];
 
 const isObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 const sameJson = (a, b) => JSON.stringify(a) === JSON.stringify(b);
@@ -136,7 +146,10 @@ function loadLock(lockAbs) {
   }
   const lock = readJsonc(lockAbs);
   if (!isObject(lock) || lock.format !== LOCK_FORMAT) {
-    throw new GateEngineError('engine/config', `${lockAbs}: format must be "${LOCK_FORMAT}" (got ${JSON.stringify(lock?.format)})`);
+    throw new GateEngineError(
+      'engine/config',
+      `${lockAbs}: format must be "${LOCK_FORMAT}" (got ${JSON.stringify(lock?.format)})`,
+    );
   }
   if (!Array.isArray(lock.files) || lock.files.length === 0) {
     throw new GateEngineError('engine/config', `${lockAbs}: files[] must be a non-empty array`);
@@ -149,13 +162,15 @@ function loadLock(lockAbs) {
   return {
     files: lock.files,
     pending: Array.isArray(lock.pending) ? lock.pending : [],
-    excluded: new Set((Array.isArray(lock.excluded) ? lock.excluded : []).map((e) => e?.path).filter((p) => typeof p === 'string')),
+    excluded: new Set(
+      (Array.isArray(lock.excluded) ? lock.excluded : []).map((e) => e?.path).filter((p) => typeof p === 'string'),
+    ),
   };
 }
 
 const toRel = (root, abs) => path.relative(root, abs).split(path.sep).join('/');
 
-export async function analyze(root, opts) {
+export function analyze(root, opts) {
   const lockAbs = path.resolve(root, opts.lock ?? 'docs/02-design/frozen.lock');
   const lock = loadLock(lockAbs);
   const lockRel = toRel(root, lockAbs);
@@ -168,8 +183,7 @@ export async function analyze(root, opts) {
   const hasTrailer = CR_RE.test(msgs) || ADR_RE.test(msgs);
   const hasAdr = ADR_RE.test(msgs);
   const violations = [];
-  const add = (file, rule, message, severity = 'error') =>
-    violations.push({ file, line: 0, rule, message, severity });
+  const add = (file, rule, message, severity = 'error') => violations.push({ file, line: 0, rule, message, severity });
 
   // 1. 동결 파일 sha256
   for (const f of lock.files) {
@@ -183,9 +197,18 @@ export async function analyze(root, opts) {
     }
     if (sha256(readFileSync(abs)) !== f.sha256) {
       if (hasTrailer) {
-        add(f.path, 'frozen/changed-with-trailer', `${f.path} differs from frozen.lock; CR/ADR trailer present — T1 must regenerate frozen.lock`, 'warn');
+        add(
+          f.path,
+          'frozen/changed-with-trailer',
+          `${f.path} differs from frozen.lock; CR/ADR trailer present — T1 must regenerate frozen.lock`,
+          'warn',
+        );
       } else {
-        add(f.path, 'frozen/changed-without-trailer', `${f.path} differs from frozen.lock and no \`CR: CR-<nn>\` / \`ADR: ADR-<nnn>\` trailer (ADR-000)`);
+        add(
+          f.path,
+          'frozen/changed-without-trailer',
+          `${f.path} differs from frozen.lock and no \`CR: CR-<nn>\` / \`ADR: ADR-<nnn>\` trailer (ADR-000)`,
+        );
       }
     }
   }
@@ -200,11 +223,20 @@ export async function analyze(root, opts) {
         break;
       }
       if (taskBase === undefined) {
-        add(f, 'frozen/pending-changed', `${f} matches pending ${p.glob} (owner ${p.owner_task ?? '?'}); no --task to verify ownership`, 'warn');
+        add(
+          f,
+          'frozen/pending-changed',
+          `${f} matches pending ${p.glob} (owner ${p.owner_task ?? '?'}); no --task to verify ownership`,
+          'warn',
+        );
       } else {
         const owners = String(p.owner_task ?? '').match(TASK_TOKEN_RE) ?? [];
         if (!owners.includes(taskBase)) {
-          add(f, 'frozen/pending-not-owner', `${f} matches pending ${p.glob} owned by ${owners.join(', ') || '?'}; ${task} may not change it`);
+          add(
+            f,
+            'frozen/pending-not-owner',
+            `${f} matches pending ${p.glob} owned by ${owners.join(', ') || '?'}; ${task} may not change it`,
+          );
         }
       }
       break;
@@ -255,9 +287,17 @@ export async function analyze(root, opts) {
       }
     }
     if (kind === 'destructive' && !hasAdr) {
-      add(f, 'frozen/destructive-without-adr', `destructive contract change without \`ADR: ADR-<nnn>\` trailer: ${pointers.join('; ')}`);
+      add(
+        f,
+        'frozen/destructive-without-adr',
+        `destructive contract change without \`ADR: ADR-<nnn>\` trailer: ${pointers.join('; ')}`,
+      );
     } else if (kind === 'additive' && !hasTrailer) {
-      add(f, 'frozen/additive-without-cr', `additive contract change without \`CR: CR-<nn>\` trailer: ${pointers.join('; ')}`);
+      add(
+        f,
+        'frozen/additive-without-cr',
+        `additive contract change without \`CR: CR-<nn>\` trailer: ${pointers.join('; ')}`,
+      );
     }
   }
   return { files: lock.files.length, violations, extra: { task: task ?? null } };

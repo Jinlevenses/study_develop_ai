@@ -153,7 +153,7 @@ function checkWorkspace({ add, bnd, section, name, spec, unit }) {
   }
 }
 
-export async function analyze(root, opts = {}) {
+export function analyze(root, opts = {}) {
   const cfg = loadDepsConfig(opts.config);
   const bnd = loadBoundaries();
   const pkgs = packageFiles(root);
@@ -181,7 +181,11 @@ export async function analyze(root, opts = {}) {
         const spec = String(specRaw);
         // forbidden
         const reason = cfg.forbiddenNames.get(name);
-        if (reason !== undefined || cfg.patterns.some((re) => re.test(name)) || spec.includes('@typescript/typescript6')) {
+        if (
+          reason !== undefined ||
+          cfg.patterns.some((re) => re.test(name)) ||
+          spec.includes('@typescript/typescript6')
+        ) {
           add(section, name, 'deps/forbidden', `${name}@${spec} is forbidden${reason ? ` (${reason})` : ''}`);
           continue;
         }

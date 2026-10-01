@@ -45,9 +45,13 @@ function withRepo(files, fn) {
 }
 
 test('UT-GATE-121 check:jev-index selftest가 통과하고 SP-7 21건(20 error + 1 warn)이 기대 집합과 일치한다 [FR-AI-005][UR-16][IF-EXT-01]', () => {
-  const r = spawnSync(process.execPath, [path.join(GATES_DIR, 'check-gate-selftest.mjs'), '--only', 'check:jev-index'], {
-    encoding: 'utf8',
-  });
+  const r = spawnSync(
+    process.execPath,
+    [path.join(GATES_DIR, 'check-gate-selftest.mjs'), '--only', 'check:jev-index'],
+    {
+      encoding: 'utf8',
+    },
+  );
   assert.equal(r.status, 0, r.stdout + r.stderr);
   const viol = run(path.join(FIX, 'violations'));
   assert.equal(viol.status, 1);
@@ -62,7 +66,10 @@ test('UT-GATE-121 check:jev-index selftest가 통과하고 SP-7 21건(20 error +
   );
   assert.equal(ported.length, 21);
   assert.equal(ported.filter((v) => v.severity === 'error').length, 20);
-  assert.deepEqual(ported.filter((v) => v.severity === 'warn').map((v) => v.rule), ['jev/index-var']);
+  assert.deepEqual(
+    ported.filter((v) => v.severity === 'warn').map((v) => v.rule),
+    ['jev/index-var'],
+  );
   assert.equal(run(path.join(FIX, 'clean')).status, 0);
 });
 
@@ -70,13 +77,22 @@ test('UT-GATE-122 범위 ① 경로에 /jev/가 있는 src 파일 ② *.jev.ts �
   const bad = 'export const a = candidates[3];';
   assert.deepEqual(rules('services/a/src/jev/x.ts', bad), ['jev/index-literal']);
   assert.deepEqual(rules('services/a/src/application/grading/judge-input.jev.ts', bad), ['jev/index-literal']);
-  assert.deepEqual(rules('services/a/src/other.ts', `import { jev } from '@typesafe-ai/sdk';\n${bad}`), ['jev/index-literal']);
-  assert.deepEqual(rules('services/a/src/other.ts', `import { x } from '@typesafe-ai/sdk/runtime';\n${bad}`), ['jev/index-literal']);
-  assert.deepEqual(rules('services/a/src/other.ts', "import { x } from '@typesafe-ai/sdk-extra';\nexport const a = candidates[3];"), [], '이름만 비슷한 패키지는 범위 밖');
+  assert.deepEqual(rules('services/a/src/other.ts', `import { jev } from '@typesafe-ai/sdk';\n${bad}`), [
+    'jev/index-literal',
+  ]);
+  assert.deepEqual(rules('services/a/src/other.ts', `import { x } from '@typesafe-ai/sdk/runtime';\n${bad}`), [
+    'jev/index-literal',
+  ]);
+  assert.deepEqual(
+    rules('services/a/src/other.ts', "import { x } from '@typesafe-ai/sdk-extra';\nexport const a = candidates[3];"),
+    [],
+    '이름만 비슷한 패키지는 범위 밖',
+  );
 });
 
 test('UT-GATE-123 범위 밖의 items[0]·"item 2"는 통과한다 [FR-AI-005][UR-16]', () => {
-  const src = "export const a = items[0]; export const b = 'Compare item 2 with item 3'; export const c = { index: 0 };";
+  const src =
+    "export const a = items[0]; export const b = 'Compare item 2 with item 3'; export const c = { index: 0 };";
   assert.deepEqual(rules('services/a/src/application/x.ts', src), []);
   assert.deepEqual(rules('apps/web/src/lib/x.ts', src), []);
   assert.deepEqual(rules('services/a/src/jevelin/x.ts', src), [], '디렉터리 이름이 jev 가 아니면 범위 밖');
@@ -90,7 +106,10 @@ test('UT-GATE-124 jev/index-literal·index-var 는 후보 이름 식별자에만
     'jev/index-literal',
   ]);
   const v = checkSource(JEV, 'for (let i = 0; i < units.length; i++) void units[i];');
-  assert.deepEqual(v.map((x) => `${x.rule}:${x.severity}`), ['jev/index-var:warn']);
+  assert.deepEqual(
+    v.map((x) => `${x.rule}:${x.severity}`),
+    ['jev/index-var:warn'],
+  );
   assert.deepEqual(rules(JEV, 'const m = /(\\d+)/.exec(t); m[1]; out.units.u01;'), []);
   assert.deepEqual(rules(JEV, '// candidates[3] in a comment\nconst a = 1;'), []);
 });
@@ -108,16 +127,22 @@ test('UT-GATE-125 jev/index-string — 영어·한국어 위치 표현(item 2·2
   ]) {
     assert.deepEqual(rules(JEV, `export const t = ${JSON.stringify(text)};`), ['jev/index-string'], text);
   }
-  for (const text of ['item2vec is unrelated', 'keys look like u01, opt_a', 'units.u01 and units.u02', 'first of all', 'last resort']) {
+  for (const text of [
+    'item2vec is unrelated',
+    'keys look like u01, opt_a',
+    'units.u01 and units.u02',
+    'first of all',
+    'last resort',
+  ]) {
     assert.deepEqual(rules(JEV, `export const t = ${JSON.stringify(text)};`), [], text);
   }
   assert.deepEqual(rules(JEV, 'export const t = `Judge Option 1 first`;'), ['jev/index-string']);
 });
 
-test('UT-GATE-126 jev/index-interp·index-field — `${i + 1}.` 번호 매김과 { index: 0 }·best_index·selectedIndex 위치 필드 [FR-AI-005][UR-16]', () => {
-  assert.deepEqual(rules(JEV, 'const l = cs.map((c, i) => `${i + 1}. ${c}`);'), ['jev/index-interp']);
-  assert.deepEqual(rules(JEV, 'const l = os.map((o, idx) => `[${idx}] ${o}`);'), ['jev/index-interp']);
-  assert.deepEqual(rules(JEV, 'const l = `${key}: ${text}`;'), []);
+test('UT-GATE-126 jev/index-interp·index-field — `i + 1` 번호 번호 매김과 { index: 0 }·best_index·selectedIndex 위치 필드 [FR-AI-005][UR-16]', () => {
+  assert.deepEqual(rules(JEV, `const l = cs.map((c, i) => \`\${i + 1}. \${c}\`);`), ['jev/index-interp']);
+  assert.deepEqual(rules(JEV, `const l = os.map((o, idx) => \`[\${idx}] \${o}\`);`), ['jev/index-interp']);
+  assert.deepEqual(rules(JEV, `const l = \`\${key}: \${text}\`;`), []);
   assert.deepEqual(rules(JEV, 'export const F = { best_index: 0, selectedIndex: 1, "idx": 2 };'), [
     'jev/index-field',
     'jev/index-field',
@@ -130,9 +155,19 @@ test('UT-GATE-127 `// jev-ok: 사유`는 같은 줄·윗줄 면제이고 사유�
   assert.deepEqual(rules(JEV, '// jev-ok: 정렬이 보장된 내부 배열\nconst a = candidates[0];'), []);
   assert.deepEqual(rules(JEV, 'const a = candidates[0]; // jev-ok: 정렬 보장'), []);
   assert.deepEqual(rules(JEV, '// jev-ok:\nconst a = candidates[0];'), ['jev/index-literal']);
-  assert.deepEqual(rules(JEV, '// sql-ok: 다른 탈출구\nconst a = candidates[0];'), ['jev/index-literal'], '다른 게이트의 탈출구는 무효');
-  assert.deepEqual(checkText('p.md', '<!-- jev-ok: 레거시 -->\n항목 2 를 본다.').map((v) => v.rule), []);
-  assert.deepEqual(checkText('p.md', '<!-- jev-ok: -->\n항목 2 를 본다.').map((v) => v.rule), ['jev/index-string']);
+  assert.deepEqual(
+    rules(JEV, '// sql-ok: 다른 탈출구\nconst a = candidates[0];'),
+    ['jev/index-literal'],
+    '다른 게이트의 탈출구는 무효',
+  );
+  assert.deepEqual(
+    checkText('p.md', '<!-- jev-ok: 레거시 -->\n항목 2 를 본다.').map((v) => v.rule),
+    [],
+  );
+  assert.deepEqual(
+    checkText('p.md', '<!-- jev-ok: -->\n항목 2 를 본다.').map((v) => v.rule),
+    ['jev/index-string'],
+  );
 });
 
 test('UT-GATE-128 프롬프트 md는 **/jev/prompts/**/*.md 만 검사하고 services/*/assets/** 도 포함한다 [FR-AI-005][UR-16][IF-EXT-01]', () => {
@@ -172,6 +207,9 @@ test('UT-GATE-129 src 파일이 0개면 exit 2(범위 파일 0개여도 src 전�
   withRepo({ 'services/a/src/jev/x.ts': 'export const x = items[0];\n' }, (dir) => {
     const res = run(dir);
     assert.equal(res.status, 1);
-    assert.deepEqual(res.json.violations.map((v) => `${v.file}:${v.line}:${v.rule}`), ['services/a/src/jev/x.ts:1:jev/index-literal']);
+    assert.deepEqual(
+      res.json.violations.map((v) => `${v.file}:${v.line}:${v.rule}`),
+      ['services/a/src/jev/x.ts:1:jev/index-literal'],
+    );
   });
 });

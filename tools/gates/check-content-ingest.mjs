@@ -60,7 +60,7 @@ export function checkFile(rel, src, cfg) {
   return out;
 }
 
-export async function analyze(root, opts = {}) {
+export function analyze(root, opts = {}) {
   const cfg = loadSqlConfig(opts.config);
   const files = srcFiles(root);
   const violations = [];

@@ -60,33 +60,12 @@
   "push_import": {
     "source": "^(web-push|node-notifier|firebase/messaging|onesignal|@novu/)"
   },
-  "push_allow_paths": [
-    "apps/web/src/features/settings/notify/**"
-  ],
+  "push_allow_paths": ["apps/web/src/features/settings/notify/**"],
   "deps": {
-    "ng-g1/reward-vocab": [
-      "canvas-confetti",
-      "react-confetti",
-      "js-confetti",
-      "party-js",
-      "react-rewards"
-    ],
-    "ng-g5/push-api": [
-      "web-push",
-      "node-notifier",
-      "onesignal-node",
-      "react-onesignal"
-    ],
-    "ng-g6/video": [
-      "react-player",
-      "video.js",
-      "hls.js",
-      "plyr",
-      "video-react"
-    ],
-    "ng-g2/social-vocab": [
-      "react-share"
-    ]
+    "ng-g1/reward-vocab": ["canvas-confetti", "react-confetti", "js-confetti", "party-js", "react-rewards"],
+    "ng-g5/push-api": ["web-push", "node-notifier", "onesignal-node", "react-onesignal"],
+    "ng-g6/video": ["react-player", "video.js", "hls.js", "plyr", "video-react"],
+    "ng-g2/social-vocab": ["react-share"]
   },
   "due_words": {
     "source": "\\b(due|overdue|streak|backlog|missed)\\b",
@@ -144,10 +123,7 @@
   "push_api": {
     "object": "Notification",
     "member": "requestPermission",
-    "identifiers": [
-      "pushManager",
-      "PushManager"
-    ],
+    "identifiers": ["pushManager", "PushManager"],
     "ctor": "Notification"
   },
   "policy": {
@@ -158,14 +134,8 @@
     }
   },
   "g3_web": {
-    "scope": [
-      "apps/web/src/features/**/renderers/**"
-    ],
-    "exclude": [
-      "**/post-submit/**"
-    ],
-    "forbid_import": [
-      "@fathom/contracts/http/*/v1/post-submit/*"
-    ]
+    "scope": ["apps/web/src/features/**/renderers/**"],
+    "exclude": ["**/post-submit/**"],
+    "forbid_import": ["@fathom/contracts/http/*/v1/post-submit/*"]
   }
 }

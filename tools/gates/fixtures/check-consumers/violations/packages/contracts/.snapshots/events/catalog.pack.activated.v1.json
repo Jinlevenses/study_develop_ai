@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "pack_id": {
+      "type": "string"
+    },
+    "verdict": {
+      "$ref": "#/$defs/Verdict"
+    },
+    "result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "band": {
+              "type": "string"
+            }
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "pack_id"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Verdict": {
+      "type": "object",
+      "properties": {
+        "band": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

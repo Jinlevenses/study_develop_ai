@@ -48,7 +48,7 @@ function lineOfKey(lines, key) {
   return i >= 0 ? i + 1 : 1;
 }
 
-export async function analyze(root) {
+export function analyze(root) {
   const violations = [];
   const add = (file, line, rule, message) => violations.push({ file, line, rule, message, severity: 'error' });
   let tsconfigs = 0;
@@ -67,7 +67,12 @@ export async function analyze(root) {
       const lines = text.split('\n');
       const co = isObject(cfg) && isObject(cfg.compilerOptions) ? cfg.compilerOptions : {};
       if ('paths' in co) {
-        add(rel, lineOfKey(lines, 'paths'), 'tsconfig/paths', 'compilerOptions.paths is forbidden; use package exports (STD-TS-03)');
+        add(
+          rel,
+          lineOfKey(lines, 'paths'),
+          'tsconfig/paths',
+          'compilerOptions.paths is forbidden; use package exports (STD-TS-03)',
+        );
       }
       if ('baseUrl' in co) {
         add(rel, lineOfKey(lines, 'baseUrl'), 'tsconfig/base-url', 'compilerOptions.baseUrl is forbidden (STD-TS-03)');

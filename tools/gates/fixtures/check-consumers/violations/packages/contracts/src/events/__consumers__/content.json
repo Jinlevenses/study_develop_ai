@@ -1,0 +1,49 @@
+{
+  "consumer": "content",
+  "subscriptions": [
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [
+        1
+      ],
+      "mode": "durable",
+      "on_poison": "drop",
+      "reads": [
+        "pack_id"
+      ]
+    },
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [
+        1
+      ],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": [
+        "verdict.nope"
+      ]
+    },
+    {
+      "type": "catalog.pack.missing",
+      "schema_versions": [
+        1
+      ],
+      "mode": "durable",
+      "on_poison": "halt",
+      "reads": [
+        "pack_id"
+      ]
+    },
+    {
+      "type": "catalog.pack.stale",
+      "schema_versions": [
+        1
+      ],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": [
+        "payload.k"
+      ]
+    }
+  ]
+}

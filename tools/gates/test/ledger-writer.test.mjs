@@ -27,13 +27,20 @@ function run(root, ...args) {
   return { status: r.status, json };
 }
 
-const rules = (rel, src) => checkFile(rel, src, cfg).map((v) => v.rule).sort();
+const rules = (rel, src) =>
+  checkFile(rel, src, cfg)
+    .map((v) => v.rule)
+    .sort();
 const sql = (s) => `db.prepare(${JSON.stringify(s)});`;
 
 test('UT-GATE-105 check:ledger-writer selftest(clean 0·violations 1 + 기대 집합 일치·빈 root 2·없는 root 2)가 통과한다 [NFR-DATA-013][CR-27]', () => {
-  const r = spawnSync(process.execPath, [path.join(GATES_DIR, 'check-gate-selftest.mjs'), '--only', 'check:ledger-writer'], {
-    encoding: 'utf8',
-  });
+  const r = spawnSync(
+    process.execPath,
+    [path.join(GATES_DIR, 'check-gate-selftest.mjs'), '--only', 'check:ledger-writer'],
+    {
+      encoding: 'utf8',
+    },
+  );
   assert.equal(r.status, 0, r.stdout + r.stderr);
   const viol = run(path.join(FIX, 'violations'));
   assert.equal(viol.status, 1);
@@ -45,7 +52,10 @@ test('UT-GATE-105 check:ledger-writer selftest(clean 0·violations 1 + 기대 �
 test('UT-GATE-106 writer 파일의 INSERT OR IGNORE INTO lr_event(문자열·템플릿·인용 식별자)는 통과한다 [NFR-DATA-013][CR-27]', () => {
   assert.deepEqual(rules(WRITER, sql('INSERT OR IGNORE INTO lr_event (event_id) VALUES (?)')), []);
   assert.deepEqual(rules(WRITER, sql('insert or ignore into lr_event (event_id) values (?)')), []);
-  assert.deepEqual(rules(WRITER, 'db.prepare(`INSERT OR IGNORE INTO "lr_event" (a) VALUES (${placeholders(1)})`);'), []);
+  assert.deepEqual(
+    rules(WRITER, `db.prepare(\`INSERT OR IGNORE INTO "lr_event" (a) VALUES (\${placeholders(1)})\`);`),
+    [],
+  );
   assert.deepEqual(rules(WRITER, sql('SELECT * FROM lr_event WHERE event_id = ?')), []);
 });
 
@@ -59,14 +69,26 @@ test('UT-GATE-107 writer 파일의 INSERT INTO·INSERT OR ABORT/FAIL·INSERT OR 
     rules(WRITER, sql('INSERT OR IGNORE INTO lr_event (a) VALUES (?) ON CONFLICT(event_id) DO UPDATE SET a = 1')),
     ['ledger/upsert'],
   );
-  assert.deepEqual(rules(WRITER, sql('INSERT INTO other (a) VALUES (?) ON CONFLICT(a) DO UPDATE SET a = 1')), [], 'lr_event가 아닌 upsert는 대상 아님');
+  assert.deepEqual(
+    rules(WRITER, sql('INSERT INTO other (a) VALUES (?) ON CONFLICT(a) DO UPDATE SET a = 1')),
+    [],
+    'lr_event가 아닌 upsert는 대상 아님',
+  );
 });
 
 test('UT-GATE-108 writer 밖의 INSERT OR IGNORE도 ledger/writer-location 위반이고 형태 위반은 함께 보고한다 [NFR-DATA-013][CR-27]', () => {
   assert.deepEqual(rules(OTHER, sql('INSERT OR IGNORE INTO lr_event (a) VALUES (?)')), ['ledger/writer-location']);
-  assert.deepEqual(rules(OTHER, sql('INSERT INTO lr_event (a) VALUES (?)')), ['ledger/insert-form', 'ledger/writer-location']);
-  assert.deepEqual(rules(OTHER, sql('INSERT OR REPLACE INTO lr_event (a) VALUES (?)')), ['ledger/replace', 'ledger/writer-location']);
-  assert.deepEqual(rules('packages/shared-kernel/src/x.ts', sql('INSERT OR IGNORE INTO lr_event (a) VALUES (?)')), ['ledger/writer-location']);
+  assert.deepEqual(rules(OTHER, sql('INSERT INTO lr_event (a) VALUES (?)')), [
+    'ledger/insert-form',
+    'ledger/writer-location',
+  ]);
+  assert.deepEqual(rules(OTHER, sql('INSERT OR REPLACE INTO lr_event (a) VALUES (?)')), [
+    'ledger/replace',
+    'ledger/writer-location',
+  ]);
+  assert.deepEqual(rules('packages/shared-kernel/src/x.ts', sql('INSERT OR IGNORE INTO lr_event (a) VALUES (?)')), [
+    'ledger/writer-location',
+  ]);
   assert.deepEqual(rules(OTHER, sql('SELECT * FROM lr_event')), [], '읽기는 어디서나 허용');
 });
 
@@ -98,5 +120,8 @@ test('UT-GATE-112 여러 줄 템플릿·`+` 사슬 리터럴도 판정하고 진
   assert.ok(v.every((x) => x.line === 1));
   const chain = "\n\ndb.exec('INSERT INTO ' + 'lr_event (a) ' + 'VALUES (1)');";
   const c = checkFile(WRITER, chain, cfg);
-  assert.deepEqual(c.map((x) => `${x.line}:${x.rule}`), ['3:ledger/insert-form']);
+  assert.deepEqual(
+    c.map((x) => `${x.line}:${x.rule}`),
+    ['3:ledger/insert-form'],
+  );
 });

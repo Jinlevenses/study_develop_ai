@@ -1,0 +1,16 @@
+{
+  "consumer": "gateway",
+  "subscriptions": [
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [
+        1
+      ],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": [
+        "pack_id"
+      ]
+    }
+  ]
+}

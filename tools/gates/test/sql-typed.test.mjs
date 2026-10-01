@@ -40,12 +40,17 @@ function withSource(src, fn) {
   }
 }
 
-const HEAD = "import { DatabaseSync } from 'node:sqlite';\ninterface SqlitePort { prepare(sql: string): unknown; exec(sql: string): void }\n";
+const HEAD =
+  "import { DatabaseSync } from 'node:sqlite';\ninterface SqlitePort { prepare(sql: string): unknown; exec(sql: string): void }\n";
 
 test('UT-GATE-090 check:sql-typed selftest(clean 0·violations 1 + 기대 집합 일치·빈 root 2·없는 root 2)가 통과한다 [NFR-SEC-016]', () => {
-  const r = spawnSync(process.execPath, [path.join(GATES_DIR, 'check-gate-selftest.mjs'), '--only', 'check:sql-typed'], {
-    encoding: 'utf8',
-  });
+  const r = spawnSync(
+    process.execPath,
+    [path.join(GATES_DIR, 'check-gate-selftest.mjs'), '--only', 'check:sql-typed'],
+    {
+      encoding: 'utf8',
+    },
+  );
   assert.equal(r.status, 0, r.stdout + r.stderr);
   const viol = run(VIOL);
   assert.equal(viol.status, 1);

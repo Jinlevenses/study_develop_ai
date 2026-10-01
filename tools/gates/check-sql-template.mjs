@@ -36,7 +36,14 @@ export function loadSqlConfig(configPath) {
   if (cfg.version !== 1) {
     bad(`version must be 1 (got ${JSON.stringify(cfg.version)})`);
   }
-  for (const k of ['sanctioned_helpers', 'pragma_allow', 'begin_allow', 'like_scope', 'outbox_allow', 'db_paths_exempt']) {
+  for (const k of [
+    'sanctioned_helpers',
+    'pragma_allow',
+    'begin_allow',
+    'like_scope',
+    'outbox_allow',
+    'db_paths_exempt',
+  ]) {
     if (!isStrArray(cfg[k])) {
       bad(`${k} must be a string array`);
     }
@@ -67,8 +74,8 @@ export function loadSqlConfig(configPath) {
 export function sqlLiterals(tokens) {
   const out = [];
   // 토큰 텍스트는 이스케이프가 원문 그대로다: `\"`→`"`, `\n`→공백(SQL 비교용)
-  const unescape = (s) => s.replace(/\\([\s\S])/g, (_m, c) => (c === 'n' || c === 't' || c === 'r' ? ' ' : c));
-  const textOf = (t) => unescape(t.t === 'str' ? t.v : t.quasis.map((q) => q.v).join('?'));
+  const unescapeSql = (s) => s.replace(/\\([\s\S])/g, (_m, c) => (c === 'n' || c === 't' || c === 'r' ? ' ' : c));
+  const textOf = (t) => unescapeSql(t.t === 'str' ? t.v : t.quasis.map((q) => q.v).join('?'));
   const rec = (list) => {
     for (let i = 0; i < list.length; i++) {
       const t = list[i];
@@ -82,14 +89,19 @@ export function sqlLiterals(tokens) {
       }
       out.push({ text: textOf(t), line: t.line });
       // 사슬: lit + lit (+ lit)* — 첫 토큰에서만 시작(앞이 `+`+리터럴이면 이미 사슬의 일부)
-      const prevIsChain = list[i - 1]?.t === 'p' && list[i - 1].v === '+' && (list[i - 2]?.t === 'str' || list[i - 2]?.t === 'tpl');
+      const prevIsChain =
+        list[i - 1]?.t === 'p' && list[i - 1].v === '+' && (list[i - 2]?.t === 'str' || list[i - 2]?.t === 'tpl');
       if (prevIsChain) {
         continue;
       }
       let joined = textOf(t);
       let k = i;
       let links = 0;
-      while (list[k + 1]?.t === 'p' && list[k + 1].v === '+' && (list[k + 2]?.t === 'str' || list[k + 2]?.t === 'tpl')) {
+      while (
+        list[k + 1]?.t === 'p' &&
+        list[k + 1].v === '+' &&
+        (list[k + 2]?.t === 'str' || list[k + 2]?.t === 'tpl')
+      ) {
         joined += textOf(list[k + 2]);
         k += 2;
         links++;
@@ -271,11 +283,29 @@ function importedNames(tokens) {
   return set;
 }
 
+/** 정규식 리터럴·`new RegExp(`로 초기화된 이름(RegExp#exec 수신자 판정 보조, 같은 파일 안에서만). */
+function regexBoundNames(tokens) {
+  const names = new Set();
+  for (let k = 0; k < tokens.length - 2; k++) {
+    const t = tokens[k];
+    const eq = tokens[k + 1];
+    const rhs = tokens[k + 2];
+    if (t.t !== 'id' || eq?.t !== 'p' || eq.v !== '=') {
+      continue;
+    }
+    if (rhs?.t === 're' || (rhs?.t === 'id' && rhs.v === 'new' && tokens[k + 3]?.v === 'RegExp')) {
+      names.add(t.v);
+    }
+  }
+  return names;
+}
+
 /** `.prepare(`·`.exec(` 호출 판정(런타임 SQL 조립). */
 function scanCalls(rel, src, tokens, cfg, push) {
   const sanctioned = new Set(cfg.sanctioned_helpers);
   const methods = new Set(cfg.receivers.methods);
   const imported = importedNames(tokens);
+  const regexNames = regexBoundNames(tokens);
   const lines = src.split('\n');
   const escaped = (line) => ESCAPE_TAGS.some((tag) => hasEscape(lines, line, tag));
   const scan = (list) => {
@@ -290,16 +320,16 @@ function scanCalls(rel, src, tokens, cfg, push) {
         continue;
       }
       const dot = list[i - 1];
-      if (!dot || dot.t !== 'p' || (dot.v !== '.' && dot.v !== '?.') || list[i + 1]?.v !== '(') {
+      if (dot?.t !== 'p' || (dot.v !== '.' && dot.v !== '?.') || list[i + 1]?.v !== '(') {
         continue;
       }
       const recv = list[i - 2];
-      if (recv?.t === 're' || (recv?.t === 'id' && REGEX_RECEIVER.test(recv.v))) {
+      if (recv?.t === 're' || (recv?.t === 'id' && (REGEX_RECEIVER.test(recv.v) || regexNames.has(recv.v)))) {
         continue; // RegExp#exec
       }
       const { args } = callArgs(list, i + 1);
       const a = args[0];
-      if (!a || !a.length) {
+      if (!a?.length) {
         continue;
       }
       const callLine = a[0].line;
@@ -315,7 +345,11 @@ function scanCalls(rel, src, tokens, cfg, push) {
         }
       };
       if (c.kind === 'interp') {
-        add(c.line, 'sql/template-interp', `.${which}() argument interpolates \${...} into SQL text; bind with ?/:name or wrap identifiers in ident()`);
+        add(
+          c.line,
+          'sql/template-interp',
+          `.${which}() argument interpolates \${...} into SQL text; bind with ?/:name or wrap identifiers in ident()`,
+        );
       } else if (c.kind === 'concat') {
         add(callLine, 'sql/concat', `.${which}() argument is built by string concatenation`);
       } else if (c.kind === 'ident') {
@@ -324,19 +358,31 @@ function scanCalls(rel, src, tokens, cfg, push) {
           if (imported.has(c.name) && /^[A-Z][A-Z0-9_]*$/.test(c.name)) {
             continue; // import한 상수: 자기 모듈에서 검증
           }
-          add(callLine, 'sql/dynamic-arg', `.${which}(${c.name}): argument is not a provable constant (parameter/unknown). Use a literal or add "// sql-ok: <reason>"`);
+          add(
+            callLine,
+            'sql/dynamic-arg',
+            `.${which}(${c.name}): argument is not a provable constant (parameter/unknown). Use a literal or add "// sql-ok: <reason>"`,
+          );
         } else {
           for (const s of asg) {
             const k = classify(s.rhs, sanctioned);
             if (k.kind === 'interp' || k.kind === 'concat') {
-              add(s.rhs[0]?.line ?? callLine, 'sql/tainted-var', `"${c.name}" is built with ${k.kind} and later passed to .${which}()`);
+              add(
+                s.rhs[0]?.line ?? callLine,
+                'sql/tainted-var',
+                `"${c.name}" is built with ${k.kind} and later passed to .${which}()`,
+              );
             } else if (k.kind !== 'ok' && s.op === '=') {
               add(callLine, 'sql/dynamic-arg', `.${which}(${c.name}): assigned from a non-constant expression`);
             }
           }
         }
       } else {
-        add(callLine, 'sql/dynamic-arg', `.${which}() argument is a dynamic expression (call/member/array). Use a literal or add "// sql-ok: <reason>"`);
+        add(
+          callLine,
+          'sql/dynamic-arg',
+          `.${which}() argument is a dynamic expression (call/member/array). Use a literal or add "// sql-ok: <reason>"`,
+        );
       }
     }
   };
@@ -380,7 +426,7 @@ export function checkFile(rel, src, cfg) {
   return out;
 }
 
-export async function analyze(root, opts = {}) {
+export function analyze(root, opts = {}) {
   const cfg = loadSqlConfig(opts.config);
   const files = srcFiles(root);
   const violations = [];

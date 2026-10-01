@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "int": "INT-3",
+  "generated_at": 1790000000000,
+  "commit": "unknown",
+  "summary": {
+    "requirements": 4
+  },
+  "requirements": [
+    {
+      "id": "FR-AI-001",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "met",
+      "tests": [
+        {
+          "id": "UT-AI-001",
+          "status": "pass",
+          "suite": "ut",
+          "file": "services/a/test/unit/x.spec.ts"
+        }
+      ]
+    },
+    {
+      "id": "FR-AI-002",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-5",
+      "deferred": false,
+      "status": "future",
+      "tests": []
+    },
+    {
+      "id": "FR-AI-003",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": true,
+      "status": "deferred",
+      "tests": []
+    },
+    {
+      "id": "NFR-SEC-001",
+      "kind": "NFR",
+      "priority": "Could",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "orphan",
+      "tests": []
+    }
+  ],
+  "unknown_refs": [],
+  "title_errors": [],
+  "v_mismatch": []
+}

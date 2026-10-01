@@ -1,0 +1,17 @@
+{
+  "consumer": "learning",
+  "extra": true,
+  "subscriptions": [
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [
+        1
+      ],
+      "mode": "durable",
+      "on_poison": "halt",
+      "reads": [
+        "Pack_Id"
+      ]
+    }
+  ]
+}

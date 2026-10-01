@@ -1,0 +1,109 @@
+{
+  "nodes": [
+    {
+      "id": "a",
+      "label": "a",
+      "source_file": "services/a/src/x.ts"
+    },
+    {
+      "id": "a2",
+      "label": "a2",
+      "source_file": "services/a/src/y.ts"
+    },
+    {
+      "id": "b",
+      "label": "b",
+      "source_file": "services/b/src/x.ts"
+    },
+    {
+      "id": "c",
+      "label": "c",
+      "source_file": "packages/contracts/src/index.ts"
+    },
+    {
+      "id": "sk",
+      "label": "sk",
+      "source_file": "packages/shared-kernel/src/index.ts"
+    },
+    {
+      "id": "ui",
+      "label": "ui",
+      "source_file": "packages/ui/src/button.ts"
+    },
+    {
+      "id": "dt",
+      "label": "dt",
+      "source_file": "packages/design-tokens/src/index.ts"
+    },
+    {
+      "id": "web",
+      "label": "web",
+      "source_file": "apps/web/src/main.ts"
+    },
+    {
+      "id": "pkg",
+      "label": "pkg",
+      "source_file": "services/a/package.json"
+    },
+    {
+      "id": "t",
+      "label": "t",
+      "source_file": "tests/x.spec.ts"
+    },
+    {
+      "id": "ref_zod",
+      "label": "zod"
+    }
+  ],
+  "edges": [
+    {
+      "source": "ui",
+      "target": "sk",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L4"
+    },
+    {
+      "source": "a",
+      "target": "b",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L9"
+    },
+    {
+      "source": "web",
+      "target": "a",
+      "relation": "dynamic_import",
+      "confidence": "EXTRACTED",
+      "source_location": "L2"
+    },
+    {
+      "source": "c",
+      "target": "a",
+      "relation": "re_exports",
+      "confidence": "EXTRACTED",
+      "source_location": "L3"
+    },
+    {
+      "source": "sk",
+      "target": "web",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L11"
+    },
+    {
+      "source": "a",
+      "target": "c",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L1"
+    },
+    {
+      "source": "pkg",
+      "target": "b",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L1"
+    }
+  ]
+}

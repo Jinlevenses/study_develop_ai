@@ -68,7 +68,11 @@ export function checkCss(rel, src) {
       if (!inTokens) {
         for (const m of value.matchAll(/\b(\d+(?:\.\d+)?)px\b/g)) {
           if (m[1] !== '0' && m[1] !== '1') {
-            add(line, 'typo-ko/px-literal', `${m[0]} literal outside design-tokens: use a token (hairline 0px·1px only)`);
+            add(
+              line,
+              'typo-ko/px-literal',
+              `${m[0]} literal outside design-tokens: use a token (hairline 0px·1px only)`,
+            );
           }
         }
       }
@@ -219,11 +223,16 @@ export function checkSource(rel, src) {
       add(line, 'typo-ko/no-italic', '<i> renders italic; use <em> or font-weight 600 (K6)');
     }
     const inner = tokens.slice(tag.from, tag.to);
-    const hasNumeric = inner.some((t, k) => t.t === 'id' && t.v === 'data' && isP(inner[k + 1], '-') && inner[k + 2]?.v === 'numeric');
+    const hasNumeric = inner.some(
+      (t, k) => t.t === 'id' && t.v === 'data' && isP(inner[k + 1], '-') && inner[k + 2]?.v === 'numeric',
+    );
     if (hasNumeric && !tagClassTokens(tokens, tag, lineOf).includes('num')) {
       add(line, 'typo-ko/tabular-nums', `<${tag.name} data-numeric> lacks the "num" class (tabular-nums, K7)`);
     }
-    if (tag.name === 'p' && tagClassTokens(tokens, tag, lineOf).some((c) => ['text-2xs', 'text-xs', 'text-sm'].includes(c))) {
+    if (
+      tag.name === 'p' &&
+      tagClassTokens(tokens, tag, lineOf).some((c) => ['text-2xs', 'text-xs', 'text-sm'].includes(c))
+    ) {
       add(line, 'typo-ko/body-min', '<p> body text below the 15px minimum: text-2xs/xs/sm (K11)');
     }
   }
@@ -239,7 +248,7 @@ export function checkSource(rel, src) {
   return out;
 }
 
-export async function analyze(root) {
+export function analyze(root) {
   const files = walk(root, { exts: ['.css', '.ts', '.tsx'], include: INCLUDE });
   const violations = [];
   for (const f of files) {

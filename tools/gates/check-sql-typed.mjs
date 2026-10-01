@@ -164,9 +164,19 @@ export async function analyze(root, opts = {}) {
             const ok = c.kind === 'ok' || escaped(abs, line) || escaped(abs, lineOf(sf, n));
             if (!ok) {
               if (c.kind === 'interp') {
-                violations.push({ file, line: lineOf(sf, c.node), rule: 'sql/template-interp', message: `.${t.method}(): \${...} interpolated into SQL (${t.via})` });
+                violations.push({
+                  file,
+                  line: lineOf(sf, c.node),
+                  rule: 'sql/template-interp',
+                  message: `.${t.method}(): \${...} interpolated into SQL (${t.via})`,
+                });
               } else if (c.kind === 'concat') {
-                violations.push({ file, line, rule: 'sql/concat', message: `.${t.method}(): SQL built by concatenation (${t.via})` });
+                violations.push({
+                  file,
+                  line,
+                  rule: 'sql/concat',
+                  message: `.${t.method}(): SQL built by concatenation (${t.via})`,
+                });
               } else if (c.kind === 'tainted') {
                 violations.push({
                   file: rel(c.sf.fileName),
@@ -175,7 +185,12 @@ export async function analyze(root, opts = {}) {
                   message: `constant built with ${c.via} is passed to .${t.method}() in ${file}:${line}`,
                 });
               } else {
-                violations.push({ file, line, rule: 'sql/dynamic-arg', message: `.${t.method}(): argument is not a provable constant (${t.via})` });
+                violations.push({
+                  file,
+                  line,
+                  rule: 'sql/dynamic-arg',
+                  message: `.${t.method}(): argument is not a provable constant (${t.via})`,
+                });
               }
             }
           }

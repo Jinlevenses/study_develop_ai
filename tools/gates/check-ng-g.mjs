@@ -12,11 +12,11 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isMain, readJsonc, runGate, snake, SRC_EXT } from './lib/common.mjs';
+import { isMain, readJsonc, runGate, SRC_EXT, snake } from './lib/common.mjs';
 import { GateEngineError } from './lib/errors.mjs';
 import { matchAny, matchGlob } from './lib/glob.mjs';
 import { extractImports } from './lib/imports.mjs';
-import { deepTokens, matchClose, maskComments, stringPieces, tokenize } from './lib/lex.mjs';
+import { deepTokens, maskComments, matchClose, stringPieces, tokenize } from './lib/lex.mjs';
 import { walk } from './lib/walk.mjs';
 
 const isObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -134,7 +134,7 @@ export function checkSource(rel, src, cfg) {
     }
     const w = snake(t.v);
     if (cfg.reward_words.test(w)) {
-      push(t.line, 'ng-g1/reward-vocab', `identifier "${t.v}" implements a reward mechanic (XP/coin/confetti)`);
+      push(t.line, 'ng-g1/reward-vocab', `identifier "${t.v}" implements a reward mechanic (NG-G1)`);
     }
     if (cfg.social_words.test(w)) {
       push(t.line, 'ng-g2/social-vocab', `identifier "${t.v}" implies social comparison`);
@@ -198,7 +198,14 @@ export function checkSource(rel, src, cfg) {
       const colorCtx = key && (key.t === 'id' || key.t === 'str') && cfg.color_key.test(key.v);
       for (const p of pieces) {
         if (cfg.hex_long.test(p) || cfg.color_fn.test(p) || (colorCtx && cfg.hex_short_whole.test(p.trim()))) {
-          v.push(V(rel, t.line, 'design/raw-color', `raw colour literal "${p.slice(0, 30)}": use a design token (var(--color-*))`));
+          v.push(
+            V(
+              rel,
+              t.line,
+              'design/raw-color',
+              `raw colour literal "${p.slice(0, 30)}": use a design token (var(--color-*))`,
+            ),
+          );
           break;
         }
       }
@@ -220,11 +227,17 @@ export function checkSource(rel, src, cfg) {
         dueDanger([n.v], n.line);
       } else if (n?.v === '{') {
         const c = matchClose(tokens, i + 2);
-        dueDanger([...stringPieces(tokens.slice(i + 3, c), lineOf)].map((p) => p.text), t.line);
+        dueDanger(
+          [...stringPieces(tokens.slice(i + 3, c), lineOf)].map((p) => p.text),
+          t.line,
+        );
       }
     } else if (t.t === 'id' && cfg.class_fns.test(t.v) && tokens[i + 1]?.v === '(') {
       const c = matchClose(tokens, i + 1);
-      dueDanger([...stringPieces(tokens.slice(i + 2, c), lineOf)].map((p) => p.text), t.line);
+      dueDanger(
+        [...stringPieces(tokens.slice(i + 2, c), lineOf)].map((p) => p.text),
+        t.line,
+      );
     } else if (t.t === 'str' && !(tokens[i - 1]?.v === '=' && tokens[i - 2]?.v === 'className')) {
       if (tokens[i - 1]?.v === '(' && cfg.class_fns.test(tokens[i - 2]?.v ?? '')) {
         continue;
@@ -240,7 +253,12 @@ export function checkSource(rel, src, cfg) {
   }
   for (let i = 0; i < tokens.length - 2; i++) {
     const t = tokens[i];
-    if (t.t === 'id' && ['const', 'interface', 'type', 'class'].includes(t.v) && tokens[i + 1]?.t === 'id' && /pre_?submit/.test(snake(tokens[i + 1].v))) {
+    if (
+      t.t === 'id' &&
+      ['const', 'interface', 'type', 'class'].includes(t.v) &&
+      tokens[i + 1]?.t === 'id' &&
+      /pre_?submit/.test(snake(tokens[i + 1].v))
+    ) {
       let d = 0;
       let j = i + 2;
       let opened = false;
@@ -283,10 +301,24 @@ export function checkSource(rel, src, cfg) {
         (tokens[k + 1].v === ':' || (tokens[k + 1].v === '?' && tokens[k + 2]?.v === ':')) &&
         ['{', ',', ';'].includes(tokens[k - 1]?.v ?? '{')
       ) {
-        v.push(V(rel, x.line, 'ng-g3/pre-submit-fields', `pre-submit schema "${r.name}" declares "${x.v}" (answer/explanation only after submission)`));
+        v.push(
+          V(
+            rel,
+            x.line,
+            'ng-g3/pre-submit-fields',
+            `pre-submit schema "${r.name}" declares "${x.v}" (answer/explanation only after submission)`,
+          ),
+        );
       }
       if (x.t === 'id' && cfg.reveal_ident.test(x.v) && x.v !== r.name && tokens[k - 1]?.v !== '.') {
-        v.push(V(rel, x.line, 'ng-g3/pre-submit-fields', `pre-submit schema "${r.name}" derives from post-submit shape "${x.v}"`));
+        v.push(
+          V(
+            rel,
+            x.line,
+            'ng-g3/pre-submit-fields',
+            `pre-submit schema "${r.name}" derives from post-submit shape "${x.v}"`,
+          ),
+        );
       }
     }
   }
@@ -295,7 +327,14 @@ export function checkSource(rel, src, cfg) {
   if (matchAny(rel, g3.scope) && !matchAny(rel, g3.exclude)) {
     for (const imp of extractImports(src)) {
       if (typeof imp.spec === 'string' && g3.forbid_import.some((g) => matchGlob(imp.spec, g))) {
-        v.push(V(rel, imp.line, 'ng-g3/web-renderer-reveal', `renderer outside post-submit/ imports the reveal contract "${imp.spec}" (NG-G3)`));
+        v.push(
+          V(
+            rel,
+            imp.line,
+            'ng-g3/web-renderer-reveal',
+            `renderer outside post-submit/ imports the reveal contract "${imp.spec}" (NG-G3)`,
+          ),
+        );
       }
     }
   }
@@ -308,7 +347,9 @@ export function checkSource(rel, src, cfg) {
         continue;
       }
       if (cfg.lock_words.test(snake(t.v))) {
-        v.push(V(rel, t.line, 'ng-g4/hard-lock', `routing code contains lock semantics "${t.v}" (soft gate only, NG-G4)`));
+        v.push(
+          V(rel, t.line, 'ng-g4/hard-lock', `routing code contains lock semantics "${t.v}" (soft gate only, NG-G4)`),
+        );
       }
       if (t.v === 'redirect' && all[i + 1]?.v === '(') {
         let hit = false;
@@ -322,7 +363,9 @@ export function checkSource(rel, src, cfg) {
           }
         }
         if (hit) {
-          v.push(V(rel, t.line, 'ng-g4/prereq-redirect', 'redirect() conditioned on prerequisites = forced lock (NG-G4)'));
+          v.push(
+            V(rel, t.line, 'ng-g4/prereq-redirect', 'redirect() conditioned on prerequisites = forced lock (NG-G4)'),
+          );
         }
       }
     }
@@ -331,8 +374,13 @@ export function checkSource(rel, src, cfg) {
   // NG-G6: contracts의 video 어휘
   if (isContracts) {
     for (const t of all) {
-      if ((t.t === 'id' || t.t === 'str') && cfg.video_word.test(snake(t.t === 'str' ? t.v.replace(/[^\w]/g, '_') : t.v))) {
-        v.push(V(rel, t.line, 'ng-g6/video', `contracts mention "${t.v}": content schema has no video body type (NG-G6)`));
+      if (
+        (t.t === 'id' || t.t === 'str') &&
+        cfg.video_word.test(snake(t.t === 'str' ? t.v.replace(/[^\w]/g, '_') : t.v))
+      ) {
+        v.push(
+          V(rel, t.line, 'ng-g6/video', `contracts mention "${t.v}": content schema has no video body type (NG-G6)`),
+        );
       }
     }
   }
@@ -341,7 +389,14 @@ export function checkSource(rel, src, cfg) {
   if (cfg.blank_note_path.test(rel) && !cfg.post_submit_path.test(rel)) {
     for (const s of imports) {
       if (cfg.ai_import.test(s.v)) {
-        v.push(V(rel, s.line, 'ng-g7/blank-note-ai', `blank-note pre-submit code imports AI gateway client "${s.v}" (NG-G7)`));
+        v.push(
+          V(
+            rel,
+            s.line,
+            'ng-g7/blank-note-ai',
+            `blank-note pre-submit code imports AI gateway client "${s.v}" (NG-G7)`,
+          ),
+        );
       }
     }
     for (let i = 0; i < all.length; i++) {
@@ -350,7 +405,14 @@ export function checkSource(rel, src, cfg) {
         continue;
       }
       if (cfg.ai_call_ident.test(t.v) || (t.v === 'generate' && all[i + 1]?.v === '(')) {
-        v.push(V(rel, t.line, 'ng-g7/blank-note-ai', `blank-note pre-submit code calls/defines AI generation "${t.v}" (NG-G7)`));
+        v.push(
+          V(
+            rel,
+            t.line,
+            'ng-g7/blank-note-ai',
+            `blank-note pre-submit code calls/defines AI generation "${t.v}" (NG-G7)`,
+          ),
+        );
       }
     }
   }
@@ -379,12 +441,26 @@ export function checkCss(rel, src, cfg) {
     if (!inTokens) {
       for (const d of body.matchAll(/([\w-]+)\s*:\s*([^;]+)(;|$)/g)) {
         if (cfg.hex_long.test(d[2]) || cfg.hex_short.test(d[2]) || cfg.color_fn.test(d[2])) {
-          v.push(V(rel, lineAt(bodyStart + d.index), 'design/raw-color', `raw colour "${d[2].trim().slice(0, 30)}" in ${d[1]}: use a design token`));
+          v.push(
+            V(
+              rel,
+              lineAt(bodyStart + d.index),
+              'design/raw-color',
+              `raw colour "${d[2].trim().slice(0, 30)}" in ${d[1]}: use a design token`,
+            ),
+          );
         }
       }
     }
     if (cfg.due_words.test(selector) && cfg.danger_words.test(body)) {
-      v.push(V(rel, lineAt(m.index + m[0].search(/\S/)), 'ng-g5/due-danger', `CSS rule "${selector.slice(0, 30)}" paints due/overdue/streak with a danger colour (NG-G5)`));
+      v.push(
+        V(
+          rel,
+          lineAt(m.index + m[0].search(/\S/)),
+          'ng-g5/due-danger',
+          `CSS rule "${selector.slice(0, 30)}" paints due/overdue/streak with a danger colour (NG-G5)`,
+        ),
+      );
     }
   }
   return v;
@@ -420,10 +496,19 @@ export function checkPolicy(root, cfg) {
   try {
     text = readFileSync(path.join(root, pol.file), 'utf8');
   } catch {
-    return [V('(repo)', 0, 'ng-g7/policy-file-missing', `${pol.file} not found: the gateway must deny blank-note generation before submit`)];
+    return [
+      V(
+        '(repo)',
+        0,
+        'ng-g7/policy-file-missing',
+        `${pol.file} not found: the gateway must deny blank-note generation before submit`,
+      ),
+    ];
   }
   const { tokens } = tokenize(text);
-  const k = tokens.findIndex((t, idx) => (t.t === 'id' || t.t === 'str') && t.v === pol.deny_key && tokens[idx + 1]?.v === ':');
+  const k = tokens.findIndex(
+    (t, idx) => (t.t === 'id' || t.t === 'str') && t.v === pol.deny_key && tokens[idx + 1]?.v === ':',
+  );
   if (k < 0) {
     return [V(pol.file, 1, 'ng-g7/policy-missing-deny', `policy has no ${pol.deny_key} list`)];
   }
@@ -432,18 +517,31 @@ export function checkPolicy(root, cfg) {
     return [V(pol.file, tokens[k].line, 'ng-g7/policy-missing-deny', `${pol.deny_key} must be an array literal`)];
   }
   const close = matchClose(tokens, open);
-  const denied = tokens.slice(open, close).filter((t) => t.t === 'str').map((t) => t.v);
+  const denied = tokens
+    .slice(open, close)
+    .filter((t) => t.t === 'str')
+    .map((t) => t.v);
   if (!denied.some((s) => pol.required_prefix.test(s))) {
-    v.push(V(pol.file, tokens[k].line, 'ng-g7/policy-missing-deny', `${pol.deny_key} lacks a blank_note.* generation task (has: ${denied.join(', ') || 'none'})`));
+    v.push(
+      V(
+        pol.file,
+        tokens[k].line,
+        'ng-g7/policy-missing-deny',
+        `${pol.deny_key} lacks a blank_note.* generation task (has: ${denied.join(', ') || 'none'})`,
+      ),
+    );
   }
   return v;
 }
 
-export async function analyze(root, opts = {}) {
+export function analyze(root, opts = {}) {
   const cfg = loadNgConfig(opts.config);
   const inc = ['apps/*/src/**', 'services/*/src/**', 'packages/*/src/**'];
   const sources = walk(root, { exts: [...SRC_EXT, '.css'], include: inc });
-  const pkgs = walk(root, { exts: ['.json'], include: ['apps/*/package.json', 'services/*/package.json', 'packages/*/package.json'] });
+  const pkgs = walk(root, {
+    exts: ['.json'],
+    include: ['apps/*/package.json', 'services/*/package.json', 'packages/*/package.json'],
+  });
   const violations = [];
   for (const f of sources) {
     const text = readFileSync(path.join(root, f), 'utf8');

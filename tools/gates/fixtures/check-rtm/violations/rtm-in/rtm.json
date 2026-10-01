@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "int": "INT-3",
+  "generated_at": 1790000000000,
+  "commit": "unknown",
+  "summary": {
+    "requirements": 5
+  },
+  "requirements": [
+    {
+      "id": "FR-AI-001",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "orphan",
+      "tests": []
+    },
+    {
+      "id": "FR-AI-002",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "unmet",
+      "tests": [
+        {
+          "id": "UT-AI-002",
+          "status": "fail",
+          "suite": "ut",
+          "file": "services/a/test/unit/x.spec.ts"
+        },
+        {
+          "id": "UT-AI-003",
+          "status": "skip",
+          "suite": "ut",
+          "file": "services/a/test/unit/x.spec.ts"
+        }
+      ]
+    },
+    {
+      "id": "FR-AI-003",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "untested",
+      "tests": [
+        {
+          "id": "UT-AI-004",
+          "status": "unknown",
+          "suite": "ut",
+          "file": "services/a/test/unit/x.spec.ts"
+        }
+      ]
+    },
+    {
+      "id": "FR-AI-004",
+      "kind": "FR",
+      "priority": "Must",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "met",
+      "tests": [
+        {
+          "id": "UT-AI-005",
+          "status": "pass",
+          "suite": "ut",
+          "file": "services/a/test/unit/x.spec.ts"
+        }
+      ]
+    },
+    {
+      "id": "NFR-SEC-001",
+      "kind": "NFR",
+      "priority": "Should",
+      "slice": "R0",
+      "v": "B+V-live",
+      "v_build": true,
+      "first_int": "INT-1a",
+      "deferred": false,
+      "status": "orphan",
+      "tests": []
+    }
+  ],
+  "unknown_refs": [
+    {
+      "test": "UT-X-001",
+      "ref": "FR-FOO-999",
+      "file": "services/a/test/unit/x.spec.ts",
+      "line": 7
+    }
+  ],
+  "title_errors": [
+    {
+      "file": "services/a/test/unit/y.spec.ts",
+      "line": 3,
+      "title": "UT-A-001 no requirement",
+      "reason": "no-req"
+    }
+  ],
+  "v_mismatch": [
+    {
+      "id": "FR-AI-004",
+      "rtm": "V-build",
+      "manifest": "B+V-live"
+    }
+  ]
+}

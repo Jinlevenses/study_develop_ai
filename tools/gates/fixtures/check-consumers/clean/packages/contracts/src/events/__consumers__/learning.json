@@ -1,0 +1,19 @@
+{
+  "consumer": "learning",
+  "subscriptions": [
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [
+        1
+      ],
+      "mode": "durable",
+      "on_poison": "halt",
+      "reads": [
+        "pack_id",
+        "verdict.band",
+        "result.band",
+        "items.score"
+      ]
+    }
+  ]
+}

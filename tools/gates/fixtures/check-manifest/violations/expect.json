@@ -1,0 +1,27 @@
+[
+  {
+    "file": "packages/contracts/manifests/modes.manifest.json",
+    "line": 5,
+    "rule": "manifest/e2e-missing"
+  },
+  {
+    "file": "packages/contracts/manifests/modes.manifest.json",
+    "line": 15,
+    "rule": "manifest/renderer-missing"
+  },
+  {
+    "file": "packages/contracts/manifests/modes.manifest.json",
+    "line": 45,
+    "rule": "manifest/e2e-deferred"
+  },
+  {
+    "file": "packages/contracts/manifests/modes.manifest.json",
+    "line": 1,
+    "rule": "manifest/family-missing"
+  },
+  {
+    "file": "packages/contracts/manifests/modes.manifest.json",
+    "line": 25,
+    "rule": "manifest/renderer-missing"
+  }
+]

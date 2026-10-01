@@ -1,0 +1,8 @@
+[
+  "--int",
+  "INT-2",
+  "--schedule",
+  "tests/e2e/mode-schedule.json",
+  "--mode-formats",
+  "tests/e2e/mode-formats.json"
+]

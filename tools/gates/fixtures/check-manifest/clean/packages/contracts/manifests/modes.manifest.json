@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "modes": [
+    {
+      "mode_id": "M-01",
+      "name_ko": "모드 1",
+      "ur14_family": "개념이해",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-301",
+        "SCN-01"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-02",
+      "name_ko": "모드 2",
+      "ur14_family": "OX",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-303"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-03",
+      "name_ko": "모드 3",
+      "ur14_family": "문제",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-304"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-04",
+      "name_ko": "모드 4",
+      "ur14_family": "실습",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-310"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-05",
+      "name_ko": "모드 5",
+      "ur14_family": "백지노트",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-313"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-06",
+      "name_ko": "모드 6",
+      "ur14_family": "개념 디깅",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-314"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-07",
+      "name_ko": "모드 7",
+      "ur14_family": "문제",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-307"
+      ],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-08",
+      "name_ko": "모드 8",
+      "ur14_family": "문제",
+      "offline_path": "결정적",
+      "e2e_ids": [
+        "E2E-399"
+      ],
+      "status": "deferred"
+    }
+  ]
+}

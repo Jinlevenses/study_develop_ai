@@ -1,0 +1,27 @@
+[
+  {
+    "file": "(repo)",
+    "line": 0,
+    "rule": "rtm/orphan"
+  },
+  {
+    "file": "(repo)",
+    "line": 0,
+    "rule": "rtm/unmet"
+  },
+  {
+    "file": "(repo)",
+    "line": 0,
+    "rule": "rtm/untested"
+  },
+  {
+    "file": "services/a/test/unit/x.spec.ts",
+    "line": 7,
+    "rule": "rtm/unknown-ref"
+  },
+  {
+    "file": "services/a/test/unit/y.spec.ts",
+    "line": 3,
+    "rule": "rtm/title"
+  }
+]

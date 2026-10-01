@@ -120,19 +120,19 @@ function readConst(tokens, name) {
 }
 
 const strOf = (node, what) => {
-  if (!node || node.k !== 'str') {
+  if (node?.k !== 'str') {
     throw new GateEngineError('engine/input-missing', `${HOOKS_FILE}: ${what} must be a string literal`);
   }
   return node;
 };
 const arrOf = (node, what) => {
-  if (!node || node.k !== 'arr') {
+  if (node?.k !== 'arr') {
     throw new GateEngineError('engine/input-missing', `${HOOKS_FILE}: ${what} must be an array literal`);
   }
   return node.items;
 };
 const objOf = (node, what) => {
-  if (!node || node.k !== 'obj') {
+  if (node?.k !== 'obj') {
     throw new GateEngineError('engine/input-missing', `${HOOKS_FILE}: ${what} must be an object literal`);
   }
   return node.props;
@@ -296,13 +296,15 @@ export function parseDdl(sqlText) {
     tables.set(m[1], entry);
   }
   const alters = [];
-  for (const m of sql.matchAll(/ALTER\s+TABLE\s+["`[]?(\w+)["`\]]?\s+ADD\s+(?:COLUMN\s+)?["`[]?(\w+)["`\]]?\s+([^;]*)/gi)) {
+  for (const m of sql.matchAll(
+    /ALTER\s+TABLE\s+["`[]?(\w+)["`\]]?\s+ADD\s+(?:COLUMN\s+)?["`[]?(\w+)["`\]]?\s+([^;]*)/gi,
+  )) {
     alters.push({ table: m[1], col: m[2], def: m[3].trim(), line: lineAt(m.index) });
   }
   return { tables, alters };
 }
 
-export async function analyze(root) {
+export function analyze(root) {
   const hooksAbs = path.join(root, HOOKS_FILE);
   if (!existsSync(hooksAbs)) {
     throw new GateEngineError('engine/input-missing', `${HOOKS_FILE} not found`);
@@ -323,7 +325,9 @@ export async function analyze(root) {
   };
   /** DB의 검색 대상 파일(자기 디렉터리 + 공통 infra-migrations). */
   const filesOfDb = (db) =>
-    sqlFiles.filter((f) => (DB_DIRS[db] !== undefined && f.startsWith(`${DB_DIRS[db]}/`)) || f.startsWith(`${SHARED_DIR}/`));
+    sqlFiles.filter(
+      (f) => (DB_DIRS[db] !== undefined && f.startsWith(`${DB_DIRS[db]}/`)) || f.startsWith(`${SHARED_DIR}/`),
+    );
 
   const violations = [];
   const add = (file, line, rule, message) => violations.push({ file, line, rule, message, severity: 'error' });
@@ -389,7 +393,12 @@ export async function analyze(root) {
       const hasCheck = jsonValid(extDef) || found.constraints.some(jsonValid);
       const bare = normDef(`ext ${extDef}`.replace(/CHECK\s*\(\s*json_valid\s*\(\s*ext\s*\)\s*\)/gi, ''));
       if (bare !== EXT_DEF) {
-        add(foundFile, found.line, 'hooks/ext-shape', `${e.table.v}.ext must be \`ext TEXT NOT NULL DEFAULT '{}'\` (found: ${bare.toLowerCase()})`);
+        add(
+          foundFile,
+          found.line,
+          'hooks/ext-shape',
+          `${e.table.v}.ext must be \`ext TEXT NOT NULL DEFAULT '{}'\` (found: ${bare.toLowerCase()})`,
+        );
       }
       if (!hasCheck) {
         add(foundFile, found.line, 'hooks/ext-shape', `${e.table.v}.ext lacks CHECK (json_valid(ext))`);

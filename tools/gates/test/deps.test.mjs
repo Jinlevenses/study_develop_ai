@@ -101,12 +101,18 @@ test('UT-GATE-052 @fathom/*는 workspace:* 만 허용하고 testkit은 devDepend
   );
   // 테스트킷은 어떤 단위의 devDependencies에도 허용(packages/contracts 포함)
   withRepo(
-    { 'packages/contracts/package.json': { name: '@fathom/contracts', devDependencies: { '@fathom/testkit': 'workspace:*' } } },
+    {
+      'packages/contracts/package.json': {
+        name: '@fathom/contracts',
+        devDependencies: { '@fathom/testkit': 'workspace:*' },
+      },
+    },
     (dir) => assert.equal(run(dir).status, 0),
   );
   // 허용표(boundaries.json) 밖 단위 의존
-  withRepo({ 'services/a/package.json': pkg({ '@fathom/svc-b': 'workspace:*', '@fathom/ui': 'workspace:*' }, {}) }, (dir) =>
-    assert.deepEqual(rulesOf(run(dir)), ['deps/workspace-unit', 'deps/workspace-unit']),
+  withRepo(
+    { 'services/a/package.json': pkg({ '@fathom/svc-b': 'workspace:*', '@fathom/ui': 'workspace:*' }, {}) },
+    (dir) => assert.deepEqual(rulesOf(run(dir)), ['deps/workspace-unit', 'deps/workspace-unit']),
   );
 });
 
@@ -128,22 +134,37 @@ test('UT-GATE-053 ^7.0.2 는 range-spec과 version-mismatch를 함께 보고한�
 });
 
 test('UT-GATE-054 npm:@typescript/typescript6 별칭·금지 이름·금지 패턴은 forbidden이다 [NFR-MAINT-001][AP-08]', () => {
-  withRepo({ 'services/a/package.json': { name: '@fathom/svc-a', devDependencies: { typescript: 'npm:@typescript/typescript6@6.0.3' } } }, (dir) =>
-    assert.deepEqual(rulesOf(run(dir)), ['deps/forbidden']),
+  withRepo(
+    {
+      'services/a/package.json': {
+        name: '@fathom/svc-a',
+        devDependencies: { typescript: 'npm:@typescript/typescript6@6.0.3' },
+      },
+    },
+    (dir) => assert.deepEqual(rulesOf(run(dir)), ['deps/forbidden']),
   );
   withRepo(
     {
       'package.json': {
         name: 'w',
-        devDependencies: { prettier: '3.0.0', 'typescript-eslint': '8.0.0', '@typescript-eslint/parser': '8.0.0', 'eslint-plugin-x': '1.0.0' },
+        devDependencies: {
+          prettier: '3.0.0',
+          'typescript-eslint': '8.0.0',
+          '@typescript-eslint/parser': '8.0.0',
+          'eslint-plugin-x': '1.0.0',
+        },
       },
     },
-    (dir) => assert.deepEqual(rulesOf(run(dir)), ['deps/forbidden', 'deps/forbidden', 'deps/forbidden', 'deps/forbidden']),
+    (dir) =>
+      assert.deepEqual(rulesOf(run(dir)), ['deps/forbidden', 'deps/forbidden', 'deps/forbidden', 'deps/forbidden']),
   );
 });
 
 test('UT-GATE-055 import_paths가 있는 SDK는 지정 glob 안에서만 import할 수 있다 [NFR-MAINT-001][AP-07]', () => {
-  const pkg = { name: '@fathom/svc-ai-gateway', dependencies: { '@typesafe-ai/sdk': '0.6.0', '@anthropic-ai/sdk': '0.129.0' } };
+  const pkg = {
+    name: '@fathom/svc-ai-gateway',
+    dependencies: { '@typesafe-ai/sdk': '0.6.0', '@anthropic-ai/sdk': '0.129.0' },
+  };
   withRepo(
     {
       'services/ai-gateway/package.json': pkg,
@@ -205,13 +226,18 @@ test('UT-GATE-058 units 와일드카드(`*`·`services/*`·`(root)`)와 표 밖 
   // zod는 모든 단위, fastify는 services/* , vitest는 모든 단위(dev), pino는 shared-kernel만
   withRepo(
     {
-      'services/a/package.json': { name: '@fathom/svc-a', dependencies: { zod: '4.6.5', fastify: '5.12.5' }, devDependencies: { vitest: '5.0.2' } },
+      'services/a/package.json': {
+        name: '@fathom/svc-a',
+        dependencies: { zod: '4.6.5', fastify: '5.12.5' },
+        devDependencies: { vitest: '5.0.2' },
+      },
       'packages/contracts/package.json': { name: '@fathom/contracts', dependencies: { zod: '4.6.5' } },
     },
     (dir) => assert.equal(run(dir).status, 0),
   );
-  withRepo({ 'packages/contracts/package.json': { name: '@fathom/contracts', dependencies: { fastify: '5.12.5' } } }, (dir) =>
-    assert.deepEqual(rulesOf(run(dir)), ['deps/unit-not-allowed']),
+  withRepo(
+    { 'packages/contracts/package.json': { name: '@fathom/contracts', dependencies: { fastify: '5.12.5' } } },
+    (dir) => assert.deepEqual(rulesOf(run(dir)), ['deps/unit-not-allowed']),
   );
   withRepo({ 'package.json': { name: 'w', devDependencies: { typescript: '7.0.2', 'left-pad': '1.0.0' } } }, (dir) =>
     assert.deepEqual(rulesOf(run(dir)), ['deps/not-allowed']),
@@ -223,7 +249,8 @@ test('UT-GATE-058 units 와일드카드(`*`·`services/*`·`(root)`)와 표 밖 
 
 test('UT-GATE-059 선언 줄 번호와 정렬·텍스트 출력 형식이 계약대로다 [NFR-MAINT-001]', () => {
   const dir = makeRepo({
-    'package.json': '{\n  "name": "w",\n  "dependencies": {\n    "zod": "4.6.5"\n  },\n  "devDependencies": {\n    "zod": "4.6.4"\n  }\n}\n',
+    'package.json':
+      '{\n  "name": "w",\n  "dependencies": {\n    "zod": "4.6.5"\n  },\n  "devDependencies": {\n    "zod": "4.6.4"\n  }\n}\n',
   });
   try {
     const res = run(dir);

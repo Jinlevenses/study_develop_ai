@@ -48,24 +48,38 @@ test('UT-GATE-080 check:sql selftest가 통과하고 SP-7 11건(템플릿·연�
   );
 });
 
-test('UT-GATE-081 clean 대조군(RegExp#exec·리터럴+리터럴·${ident}·${placeholders}·${sqlInt}·*.sql.ts 상수)은 위반이 아니다 [NFR-SEC-016]', () => {
+test('UT-GATE-081 clean 대조군(RegExp#exec·리터럴+리터럴·ident()·placeholders()·sqlInt()·*.sql.ts 상수)은 위반이 아니다 [NFR-SEC-016]', () => {
   assert.equal(run(path.join(FIX, 'clean')).status, 0);
-  assert.deepEqual(rulesOf("const RE = /a/; RE.exec(s); /b/.exec(s); regexp.exec(s); const m = pattern.exec(s);"), []);
+  assert.deepEqual(rulesOf('const RE = /a/; RE.exec(s); /b/.exec(s); regexp.exec(s); const m = pattern.exec(s);'), []);
   assert.deepEqual(rulesOf(dbPrepare("'SELECT ' + 'id FROM t'")), []);
-  assert.deepEqual(rulesOf(dbPrepare('`SELECT * FROM ${ident(t)} WHERE id IN (${placeholders(n)}) LIMIT ${sqlInt(k)}`')), []);
-  assert.deepEqual(rulesOf(dbPrepare('`SELECT * FROM ${sqlIdent(t)}`')), []);
+  assert.deepEqual(
+    rulesOf(dbPrepare(`\`SELECT * FROM \${ident(t)} WHERE id IN (\${placeholders(n)}) LIMIT \${sqlInt(k)}\``)),
+    [],
+  );
+  assert.deepEqual(rulesOf(dbPrepare(`\`SELECT * FROM \${sqlIdent(t)}\``)), []);
   assert.deepEqual(rulesOf(dbPrepare("asc ? 'SELECT 1 ORDER BY 1 ASC' : 'SELECT 1 ORDER BY 1 DESC'")), []);
-  assert.deepEqual(rulesOf("import { INSERT_KU } from './x.sql.ts';\nexport const f = (db) => db.prepare(INSERT_KU);"), []);
+  assert.deepEqual(
+    rulesOf("import { INSERT_KU } from './x.sql.ts';\nexport const f = (db) => db.prepare(INSERT_KU);"),
+    [],
+  );
   assert.deepEqual(rulesOf("export const f = (db) => db.exec('x'.concat('y'));"), []);
+  // 같은 파일에서 정규식으로 초기화된 이름은 이름 휴리스틱과 무관하게 RegExp#exec 수신자다
+  assert.deepEqual(rulesOf('const DIGIT = /(\\d+)/;\nexport const f = (s) => DIGIT.exec(s);'), []);
+  assert.deepEqual(rulesOf("const word = new RegExp('a');\nexport const f = (s) => word.exec(s);"), []);
+  assert.deepEqual(rulesOf('const DIGIT = 1;\nexport const f = (db, s) => DIGIT.exec(s);'), ['sql/dynamic-arg']);
   // 비 UPPER_SNAKE import 이름은 증명 불가
-  assert.deepEqual(rulesOf("import { sql } from './x.ts';\nexport const f = (db) => db.prepare(sql);"), ['sql/dynamic-arg']);
+  assert.deepEqual(rulesOf("import { sql } from './x.ts';\nexport const f = (db) => db.prepare(sql);"), [
+    'sql/dynamic-arg',
+  ]);
 });
 
 test('UT-GATE-082 위반 형태 4규칙(template-interp·concat·tainted-var·dynamic-arg)이 토큰 줄 번호와 함께 분류된다 [NFR-SEC-016]', () => {
-  assert.deepEqual(rulesOf(dbPrepare('`SELECT ${x}`')), ['sql/template-interp']);
+  assert.deepEqual(rulesOf(dbPrepare(`\`SELECT \${x}\``)), ['sql/template-interp']);
   assert.deepEqual(rulesOf(dbPrepare("'a' + x")), ['sql/concat']);
   assert.deepEqual(rulesOf(dbPrepare("'a'.concat(x)")), ['sql/concat']);
-  assert.deepEqual(rulesOf("const q = `SELECT ${c}`;\nexport const f = (db) => db.prepare(q);"), ['sql/tainted-var']);
+  assert.deepEqual(rulesOf(`const q = \`SELECT \${c}\`;\nexport const f = (db) => db.prepare(q);`), [
+    'sql/tainted-var',
+  ]);
   assert.deepEqual(rulesOf("let q = 'a';\nq += ' b' + x;\nexport const f = (db) => db.exec(q);"), ['sql/tainted-var']);
   assert.deepEqual(rulesOf(dbPrepare('sql')), ['sql/dynamic-arg']);
   assert.deepEqual(rulesOf(dbPrepare('o.sql')), ['sql/dynamic-arg']);
@@ -80,7 +94,11 @@ test('UT-GATE-083 `// sql-ok: 사유`·`// biome-ignore lint/plugin: 사유`는 
   assert.deepEqual(rulesOf('// biome-ignore lint/plugin: 같은 사유\nexport const f = (db, s) => db.exec(s);'), []);
   assert.deepEqual(rulesOf('// sql-ok:\nexport const f = (db, s) => db.exec(s);'), ['sql/dynamic-arg']);
   assert.deepEqual(rulesOf('// sql-ok:   \nexport const f = (db, s) => db.exec(s);'), ['sql/dynamic-arg']);
-  assert.deepEqual(rulesOf('// sql-ok: 사유\n\nexport const f = (db, s) => db.exec(s);'), ['sql/dynamic-arg'], '두 줄 위는 무효');
+  assert.deepEqual(
+    rulesOf('// sql-ok: 사유\n\nexport const f = (db, s) => db.exec(s);'),
+    ['sql/dynamic-arg'],
+    '두 줄 위는 무효',
+  );
   assert.deepEqual(rulesOf("// sql-ok: pragma 점검\ndb.exec('PRAGMA user_version');"), []);
 });
 
@@ -114,7 +132,9 @@ test('UT-GATE-087 sql/outbox-insert — INSERT INTO outbox는 shared-kernel/even
   const src = "db.prepare('INSERT INTO outbox (event_id) VALUES (?)');";
   assert.deepEqual(rulesOf(src, 'services/learning/src/x.ts'), ['sql/outbox-insert']);
   assert.deepEqual(rulesOf(src, 'packages/shared-kernel/src/eventing/outbox.ts'), []);
-  assert.deepEqual(rulesOf("db.prepare('INSERT OR IGNORE INTO \"outbox\" (event_id) VALUES (?)');"), ['sql/outbox-insert']);
+  assert.deepEqual(rulesOf('db.prepare(\'INSERT OR IGNORE INTO "outbox" (event_id) VALUES (?)\');'), [
+    'sql/outbox-insert',
+  ]);
   assert.deepEqual(rulesOf("db.prepare('SELECT * FROM outbox');"), []);
   assert.deepEqual(rulesOf("db.prepare('INSERT INTO outbox_archive (event_id) VALUES (?)');"), []);
 });
@@ -122,10 +142,21 @@ test('UT-GATE-087 sql/outbox-insert — INSERT INTO outbox는 shared-kernel/even
 test('UT-GATE-088 sqlLiterals는 문자열·템플릿·`+` 사슬을 모으고 normalizeSql은 공백 1칸·대문자로 정규화한다 [NFR-SEC-016]', () => {
   const lits = (src) => sqlLiterals(tokenize(src).tokens);
   const a = lits("db.exec('DELETE ' + 'FROM ' + `cards`);");
-  assert.ok(a.some((l) => l.text === 'DELETE FROM cards'), '사슬을 이어 붙인다');
+  assert.ok(
+    a.some((l) => l.text === 'DELETE FROM cards'),
+    '사슬을 이어 붙인다',
+  );
   assert.ok(a.some((l) => l.text === 'DELETE ') && a.some((l) => l.text === 'cards'), '각 조각도 포함');
-  assert.deepEqual(lits('x(`a ${b} c`)').map((l) => l.text), ['a ? c'], '템플릿 보간은 ? 자리표시자');
-  assert.deepEqual(lits("x('a' + y + 'b')").map((l) => l.text), ['a', 'b'], '리터럴이 아닌 항이 끼면 사슬이 아니다');
+  assert.deepEqual(
+    lits(`x(\`a \${b} c\`)`).map((l) => l.text),
+    ['a ? c'],
+    '템플릿 보간은 ? 자리표시자',
+  );
+  assert.deepEqual(
+    lits("x('a' + y + 'b')").map((l) => l.text),
+    ['a', 'b'],
+    '리터럴이 아닌 항이 끼면 사슬이 아니다',
+  );
   assert.equal(normalizeSql('  select  *\n\tfrom   t  '), 'SELECT * FROM T');
   assert.equal(lits('\n\nx("q");')[0].line, 3);
 });
@@ -136,10 +167,13 @@ test('UT-GATE-089 sql.json 부재·version 오류·필수 키 누락은 exit 2�
     for (const rel of ['services/a/src', 'packages/contracts/src']) {
       mkdirSync(path.join(dir, rel), { recursive: true });
     }
-    writeFileSync(path.join(dir, 'services/a/src/x.ts'), "export const f = (db, s) => db.exec(s);\n");
+    writeFileSync(path.join(dir, 'services/a/src/x.ts'), 'export const f = (db, s) => db.exec(s);\n');
     const res = run(dir);
     assert.equal(res.status, 1);
-    assert.deepEqual(res.json.violations.map((v) => v.rule), ['sql/dynamic-arg']);
+    assert.deepEqual(
+      res.json.violations.map((v) => v.rule),
+      ['sql/dynamic-arg'],
+    );
     const good = JSON.parse(JSON.stringify(cfg));
     writeFileSync(path.join(dir, 'v2.json'), JSON.stringify({ ...good, version: 2 }));
     const { ledger: _l, ...noLedger } = good;

@@ -66,7 +66,7 @@ test('UT-GATE-074 allowed_paths를 yaml 펜스 안·밖, 따옴표·뒤 주석·
   assert.deepEqual(parseAllowedPaths(BRIEF), [
     'tools/gates/{check-a,check-b}.mjs',
     'tools/gates/config/a.json',
-    "packages/contracts/src/events/{registry.gen.ts,routing.gen.ts}".replace(/^/, ''),
+    'packages/contracts/src/events/{registry.gen.ts,routing.gen.ts}'.replace(/^/, ''),
     'packages/contracts/src/http/**',
   ]);
   // 펜스 밖(일반 마크다운 목록)
@@ -84,40 +84,68 @@ test('UT-GATE-074 allowed_paths를 yaml 펜스 안·밖, 따옴표·뒤 주석·
 });
 
 test('UT-GATE-075 allowed_paths 밖 파일은 scope/outside-allowed, 안의 파일은 통과한다 [PR-006][UR-06]', () => {
-  withRepo(['tools/gates/check-a.mjs', 'tools/gates/check-b.mjs', 'tools/gates/config/a.json', 'packages/contracts/src/http/x.ts'], (dir, args) => {
-    const res = run(dir, ...args);
-    assert.equal(res.status, 0, JSON.stringify(res.json));
-    assert.equal(res.json.files, 4);
-  });
+  withRepo(
+    [
+      'tools/gates/check-a.mjs',
+      'tools/gates/check-b.mjs',
+      'tools/gates/config/a.json',
+      'packages/contracts/src/http/x.ts',
+    ],
+    (dir, args) => {
+      const res = run(dir, ...args);
+      assert.equal(res.status, 0, JSON.stringify(res.json));
+      assert.equal(res.json.files, 4);
+    },
+  );
   withRepo(['tools/gates/check-a.mjs', 'tools/gates/check-c.mjs', 'services/x/src/y.ts'], (dir, args) => {
     const res = run(dir, ...args);
     assert.equal(res.status, 1);
-    assert.deepEqual(rules(res), ['services/x/src/y.ts|scope/outside-allowed', 'tools/gates/check-c.mjs|scope/outside-allowed']);
+    assert.deepEqual(rules(res), [
+      'services/x/src/y.ts|scope/outside-allowed',
+      'tools/gates/check-c.mjs|scope/outside-allowed',
+    ]);
     assert.ok(res.json.violations.every((v) => v.line === 0));
   });
 });
 
 test('UT-GATE-076 graphify-out/·spikes/ 변경은 allowed_paths와 무관하게 항상 위반이다 [PR-006][UR-06]', () => {
   const brief = BRIEF.replace('  - packages/contracts/src/http/**', '  - graphify-out/**\n  - spikes/**');
-  withRepo(['graphify-out/graph.json', 'spikes/sp1/x.ts', 'tools/gates/check-a.mjs'], (dir, args) => {
-    const res = run(dir, ...args);
-    assert.equal(res.status, 1);
-    assert.deepEqual(rules(res), ['graphify-out/graph.json|scope/graphify-out', 'spikes/sp1/x.ts|scope/spikes']);
-  }, brief);
+  withRepo(
+    ['graphify-out/graph.json', 'spikes/sp1/x.ts', 'tools/gates/check-a.mjs'],
+    (dir, args) => {
+      const res = run(dir, ...args);
+      assert.equal(res.status, 1);
+      assert.deepEqual(rules(res), ['graphify-out/graph.json|scope/graphify-out', 'spikes/sp1/x.ts|scope/spikes']);
+    },
+    brief,
+  );
 });
 
 test('UT-GATE-077 생성물은 allowed_paths가 파일을 명시했을 때만 허용한다(넓은 glob 우연 포함은 scope/generated) [PR-006][UR-06]', () => {
   const wide = BRIEF.replace('  - packages/contracts/src/http/**', '  - packages/contracts/src/**');
-  withRepo(['packages/contracts/src/events/registry.gen.ts'], (dir, args) => {
-    const res = run(dir, ...args);
-    assert.deepEqual(rules(res), ['packages/contracts/src/events/registry.gen.ts|scope/generated']);
-  }, wide.replace("  - 'packages/contracts/src/events/{registry.gen.ts,routing.gen.ts}'\n", ''));
+  withRepo(
+    ['packages/contracts/src/events/registry.gen.ts'],
+    (dir, args) => {
+      const res = run(dir, ...args);
+      assert.deepEqual(rules(res), ['packages/contracts/src/events/registry.gen.ts|scope/generated']);
+    },
+    wide.replace("  - 'packages/contracts/src/events/{registry.gen.ts,routing.gen.ts}'\n", ''),
+  );
   // 명시(중괄호 안 파일 이름) → 통과
-  withRepo(['packages/contracts/src/events/registry.gen.ts', 'packages/contracts/src/events/routing.gen.ts'], (dir, args) => {
-    assert.equal(run(dir, ...args).status, 0);
-  }, wide);
+  withRepo(
+    ['packages/contracts/src/events/registry.gen.ts', 'packages/contracts/src/events/routing.gen.ts'],
+    (dir, args) => {
+      assert.equal(run(dir, ...args).status, 0);
+    },
+    wide,
+  );
   // 다른 생성물 4종의 판정
-  const gens = ['packages/contracts/.snapshots/events/x.v1.json', 'docs/40-impl/graph/g.json', 'docs/40-impl/reports/RTM-INT-1a.md', 'x/y.gen.ts'];
+  const gens = [
+    'packages/contracts/.snapshots/events/x.v1.json',
+    'docs/40-impl/graph/g.json',
+    'docs/40-impl/reports/RTM-INT-1a.md',
+    'x/y.gen.ts',
+  ];
   const broad = evaluateScope(gens, ['**'], 'T-00-06');
   assert.deepEqual(
     broad.map((v) => v.rule),
@@ -125,7 +153,12 @@ test('UT-GATE-077 생성물은 allowed_paths가 파일을 명시했을 때만 �
   );
   const named = evaluateScope(
     gens,
-    ['packages/contracts/.snapshots/events/**', 'docs/40-impl/graph/**', 'docs/40-impl/reports/RTM-*.md', 'x/{y.gen.ts}'],
+    [
+      'packages/contracts/.snapshots/events/**',
+      'docs/40-impl/graph/**',
+      'docs/40-impl/reports/RTM-*.md',
+      'x/{y.gen.ts}',
+    ],
     'T-00-06',
   );
   assert.deepEqual(named, []);
@@ -159,10 +192,7 @@ test('UT-GATE-078 완료 보고 JSON은 자동 허용(해당 Task 것만)이고 
     assert.match(empty.json.error, /no allowed_paths/);
   });
   // -r1 형식 허용
-  assert.equal(
-    evaluateScope(['a'], ['a'], 'T-00-06-r1').length,
-    0,
-  );
+  assert.equal(evaluateScope(['a'], ['a'], 'T-00-06-r1').length, 0);
 });
 
 test('UT-GATE-079 임시 git 저장소에서 git 경로(추적 안 된 파일 포함)와 --base 로 변경 파일을 읽는다 [PR-006][UR-06]', () => {

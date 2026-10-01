@@ -88,7 +88,10 @@ function isMethodDefinition(tokens, openIdx) {
   const close = matchClose(tokens, openIdx);
   const after = tokens[close + 1];
   const before = tokens[openIdx - 2];
-  return isP(after, '{') || (isP(after, ':') && before !== undefined && before.t === 'p' && ['{', ',', ';'].includes(before.v));
+  return (
+    isP(after, '{') ||
+    (isP(after, ':') && before !== undefined && before.t === 'p' && ['{', ',', ';'].includes(before.v))
+  );
 }
 
 /** 소스 한 파일의 위험 API 판정. */
@@ -104,7 +107,10 @@ export function scanSource(rel, src) {
     const next = all[i + 1];
     if (t.t === 'id') {
       if (t.v === 'eval' && isP(next, '(')) {
-        if ((!isMember(prev) || (isP(prev, '.') && isId(all[i - 2], 'globalThis'))) && !isMethodDefinition(all, i + 1)) {
+        if (
+          (!isMember(prev) || (isP(prev, '.') && isId(all[i - 2], 'globalThis'))) &&
+          !isMethodDefinition(all, i + 1)
+        ) {
           add(t.line, 'security/eval', 'eval() executes arbitrary code (STD-SEC-35)');
         }
       } else if (t.v === 'new' && isId(next, 'Function') && isP(all[i + 2], '(')) {
@@ -147,7 +153,12 @@ export function scanSource(rel, src) {
         }
       } else if (t.v === 'backup' && isMember(prev) && isP(next, '(')) {
         add(t.line, 'security/sqlite-backup', '.backup() is forbidden (STD-SQL-12): use VACUUM INTO via shared-kernel');
-      } else if (t.v === 'Math' && isP(next, '.') && isId(all[i + 2], 'random') && /^services\/[^/]+\/src\/domain\//.test(rel)) {
+      } else if (
+        t.v === 'Math' &&
+        isP(next, '.') &&
+        isId(all[i + 2], 'random') &&
+        /^services\/[^/]+\/src\/domain\//.test(rel)
+      ) {
         add(t.line, 'security/domain-math-random', 'Math.random in domain code: inject an Rng port (STD-TS)');
       } else if (
         t.v === 'url' &&
@@ -264,7 +275,7 @@ export function scanSecretText(rel, text) {
   return out;
 }
 
-export async function analyze(root) {
+export function analyze(root) {
   const srcs = srcFiles(root, SRC_EXT);
   const srcSet = new Set(srcs);
   const violations = [];

@@ -1,0 +1,42 @@
+[
+  {
+    "file": "packages/contracts/src/events/__consumers__/learning.json",
+    "line": 3,
+    "rule": "consumers/schema"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/learning.json",
+    "line": 13,
+    "rule": "consumers/schema"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/wrongname.json",
+    "line": 2,
+    "rule": "consumers/file-name"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/content.json",
+    "line": 5,
+    "rule": "consumers/drop-not-notify"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/content.json",
+    "line": 5,
+    "rule": "consumers/reads-missing"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/content.json",
+    "line": 27,
+    "rule": "consumers/no-producer-schema"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/content.json",
+    "line": 38,
+    "rule": "consumers/routing-stale"
+  },
+  {
+    "file": "packages/contracts/src/events/__consumers__/content.json",
+    "line": 27,
+    "rule": "consumers/routing-stale"
+  }
+]

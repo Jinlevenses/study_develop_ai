@@ -5,8 +5,8 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { isMain, runGate } from './lib/common.mjs';
 import { GateEngineError } from './lib/errors.mjs';
-import { expandBraces, matchAny } from './lib/glob.mjs';
 import { changedFiles } from './lib/git.mjs';
+import { expandBraces, matchAny } from './lib/glob.mjs';
 
 const TASK_RE = /^T-(\d{2})-\d{2}(-r\d+)?$/;
 
@@ -101,7 +101,7 @@ export function evaluateScope(changed, allowed, task) {
   return out;
 }
 
-export async function analyze(root, opts) {
+export function analyze(root, opts) {
   const task = opts.task;
   if (task === undefined) {
     throw new GateEngineError('engine/usage', '--task <T-nn-mm> is required');
