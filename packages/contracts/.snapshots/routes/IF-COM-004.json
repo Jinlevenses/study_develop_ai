@@ -1,0 +1,184 @@
+{
+  "$comment": "common.inbox.deliver",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "common.inbox.deliver"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/inbox"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway",
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R0"
+    },
+    "fr": {
+      "enum": []
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": 8388608
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "producer": {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "events": {
+              "minItems": 1,
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "event_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "type": {
+                    "type": "string",
+                    "pattern": "^[a-z]+\\.[a-z_]+\\.[a-z_]+$"
+                  },
+                  "schema_version": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "producer": {
+                    "type": "string",
+                    "enum": [
+                      "gateway",
+                      "content",
+                      "learning",
+                      "ai-gateway",
+                      "ops-api"
+                    ]
+                  },
+                  "producer_seq": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "occurred_at": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  },
+                  "correlation_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "causation_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "traceparent": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^00-[0-9a-f]{32}-[0-9a-f]{16}-0[01]$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "payload": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {}
+                  }
+                },
+                "required": [
+                  "event_id",
+                  "type",
+                  "schema_version",
+                  "producer",
+                  "producer_seq",
+                  "occurred_at",
+                  "correlation_id",
+                  "causation_id",
+                  "traceparent",
+                  "payload"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "producer",
+            "events"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "acked_through_seq": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "acked_through_seq"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

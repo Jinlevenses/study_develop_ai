@@ -1,0 +1,251 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^TB-\\d{2}$"
+    },
+    "levels": {
+      "minItems": 1,
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 5
+      }
+    },
+    "knowledge_types": {
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "D",
+          "C",
+          "P",
+          "S"
+        ]
+      }
+    },
+    "effect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "exclude_formats"
+            },
+            "formats": {
+              "minItems": 1,
+              "maxItems": 33,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "embedded",
+                  "ox",
+                  "mcq",
+                  "cloze",
+                  "short",
+                  "matching",
+                  "code_task",
+                  "blank_note",
+                  "digging_d4_mcq",
+                  "error_find",
+                  "confusable",
+                  "fermi",
+                  "cond_reversal",
+                  "infra_lite",
+                  "kata",
+                  "audit",
+                  "case_decision",
+                  "code_predict",
+                  "sql_task",
+                  "essay",
+                  "digging",
+                  "feynman",
+                  "pr_review",
+                  "reverse_item",
+                  "artifact",
+                  "case_postmortem",
+                  "micro_judgment",
+                  "ml_predict",
+                  "mcq_multi",
+                  "order",
+                  "parsons",
+                  "log_read",
+                  "config_review"
+                ]
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "formats"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "max_share"
+            },
+            "formats": {
+              "minItems": 1,
+              "maxItems": 33,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "embedded",
+                  "ox",
+                  "mcq",
+                  "cloze",
+                  "short",
+                  "matching",
+                  "code_task",
+                  "blank_note",
+                  "digging_d4_mcq",
+                  "error_find",
+                  "confusable",
+                  "fermi",
+                  "cond_reversal",
+                  "infra_lite",
+                  "kata",
+                  "audit",
+                  "case_decision",
+                  "code_predict",
+                  "sql_task",
+                  "essay",
+                  "digging",
+                  "feynman",
+                  "pr_review",
+                  "reverse_item",
+                  "artifact",
+                  "case_postmortem",
+                  "micro_judgment",
+                  "ml_predict",
+                  "mcq_multi",
+                  "order",
+                  "parsons",
+                  "log_read",
+                  "config_review"
+                ]
+              }
+            },
+            "share_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "kind",
+            "formats",
+            "share_max"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "digging_depth_max"
+            },
+            "depth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 7
+            }
+          },
+          "required": [
+            "kind",
+            "depth"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "evidence_weight"
+            },
+            "formats": {
+              "minItems": 1,
+              "maxItems": 33,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "embedded",
+                  "ox",
+                  "mcq",
+                  "cloze",
+                  "short",
+                  "matching",
+                  "code_task",
+                  "blank_note",
+                  "digging_d4_mcq",
+                  "error_find",
+                  "confusable",
+                  "fermi",
+                  "cond_reversal",
+                  "infra_lite",
+                  "kata",
+                  "audit",
+                  "case_decision",
+                  "code_predict",
+                  "sql_task",
+                  "essay",
+                  "digging",
+                  "feynman",
+                  "pr_review",
+                  "reverse_item",
+                  "artifact",
+                  "case_postmortem",
+                  "micro_judgment",
+                  "ml_predict",
+                  "mcq_multi",
+                  "order",
+                  "parsons",
+                  "log_read",
+                  "config_review"
+                ]
+              }
+            },
+            "w": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "kind",
+            "formats",
+            "w"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "reason_ko": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    }
+  },
+  "required": [
+    "id",
+    "levels",
+    "knowledge_types",
+    "effect",
+    "reason_ko"
+  ],
+  "additionalProperties": false
+}

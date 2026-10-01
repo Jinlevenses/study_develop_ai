@@ -1,0 +1,127 @@
+{
+  "$comment": "gateway.settings.declarations",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.settings.declarations"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/api/v1/settings/declarations"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R3"
+    },
+    "fr": {
+      "enum": [
+        "FR-STD-027",
+        "FR-PRG-025",
+        "FR-DSH-012"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "declaration_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "time_capsule",
+                "season_goal",
+                "self_declaration"
+              ]
+            },
+            "payload": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            },
+            "unseal_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "declaration_id",
+            "kind",
+            "payload",
+            "unseal_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "201": {
+          "type": "object",
+          "properties": {
+            "declaration_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "ledger_event_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "content_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "declaration_id",
+            "ledger_event_id",
+            "content_hash"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

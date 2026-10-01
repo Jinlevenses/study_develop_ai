@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "properties": {
+    "active_policy_version": {
+      "type": "string",
+      "pattern": "^ps_[0-9a-f]{16}$"
+    },
+    "members": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "owner": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "sha256",
+          "owner"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "available": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "versions"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overrides": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "request_retention": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "number",
+                  "minimum": 0.7,
+                  "maximum": 0.97
+                },
+                "B": {
+                  "type": "number",
+                  "minimum": 0.7,
+                  "maximum": 0.97
+                },
+                "C": {
+                  "type": "number",
+                  "minimum": 0.7,
+                  "maximum": 0.97
+                }
+              },
+              "additionalProperties": false
+            },
+            "daily_new_limit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "daily_review_limit": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "provisional": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+      }
+    }
+  },
+  "required": [
+    "active_policy_version",
+    "members",
+    "available",
+    "overrides",
+    "provisional"
+  ],
+  "additionalProperties": false
+}

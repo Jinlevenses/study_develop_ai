@@ -1,0 +1,335 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "header"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "exporting_device_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "generated_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        "app_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        "since_checkpoint_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "devices": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "seq": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991
+              },
+              "head_hash": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "seq",
+              "head_hash"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "schema_versions": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "attempt.graded",
+              "evidence.upgraded",
+              "evidence.regraded",
+              "evidence.voided",
+              "evidence.weight_adjusted",
+              "pretest.answered",
+              "lesson.completed",
+              "self_assessment.recorded",
+              "card.enrolled",
+              "card.status_changed",
+              "profile.setting_changed",
+              "policy.switched",
+              "ai_mode.observed",
+              "declaration.sealed",
+              "promotion.exam_completed",
+              "level.promoted",
+              "level.provisional_resolved"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "required": [
+            "attempt.graded",
+            "evidence.upgraded",
+            "evidence.regraded",
+            "evidence.voided",
+            "evidence.weight_adjusted",
+            "pretest.answered",
+            "lesson.completed",
+            "self_assessment.recorded",
+            "card.enrolled",
+            "card.status_changed",
+            "profile.setting_changed",
+            "policy.switched",
+            "ai_mode.observed",
+            "declaration.sealed",
+            "promotion.exam_completed",
+            "level.promoted",
+            "level.provisional_resolved"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "v",
+        "exporting_device_id",
+        "generated_at",
+        "app_version",
+        "since_checkpoint_id",
+        "devices",
+        "schema_versions"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "policy_set"
+        },
+        "policy_version": {
+          "type": "string",
+          "pattern": "^ps_[0-9a-f]{16}$"
+        },
+        "members": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "version",
+              "sha256"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "documents": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "yaml": {
+                "type": "string",
+                "maxLength": 1000000
+              }
+            },
+            "required": [
+              "sha256",
+              "yaml"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "policy_version",
+        "members",
+        "documents"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "event"
+        },
+        "event": {
+          "type": "object",
+          "properties": {
+            "event_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "device_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "device_seq": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "client_ts": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "attempt.graded",
+                "evidence.upgraded",
+                "evidence.regraded",
+                "evidence.voided",
+                "evidence.weight_adjusted",
+                "pretest.answered",
+                "lesson.completed",
+                "self_assessment.recorded",
+                "card.enrolled",
+                "card.status_changed",
+                "profile.setting_changed",
+                "policy.switched",
+                "ai_mode.observed",
+                "declaration.sealed",
+                "promotion.exam_completed",
+                "level.promoted",
+                "level.provisional_resolved"
+              ]
+            },
+            "schema_version": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "idempotency_key": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 200
+            },
+            "payload": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string"
+              },
+              "additionalProperties": {}
+            },
+            "prev_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "experiment_arm": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "recorded_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "event_id",
+            "device_id",
+            "device_seq",
+            "client_ts",
+            "type",
+            "schema_version",
+            "idempotency_key",
+            "payload",
+            "prev_hash",
+            "hash",
+            "experiment_arm",
+            "recorded_at"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "kind",
+        "event"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "end"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "kind",
+        "count",
+        "sha256"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

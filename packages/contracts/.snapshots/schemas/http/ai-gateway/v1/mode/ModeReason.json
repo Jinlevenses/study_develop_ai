@@ -1,0 +1,19 @@
+{
+  "type": "string",
+  "enum": [
+    "first_boot",
+    "no_consent",
+    "consent_granted",
+    "consent_revoked",
+    "probe_ok",
+    "probe_failed",
+    "breaker_open",
+    "breaker_closed",
+    "budget_exhausted",
+    "quota_exhausted",
+    "safe_mode",
+    "key_added",
+    "key_removed",
+    "gateway_unreachable"
+  ]
+}

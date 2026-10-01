@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "같은 키의 요청이 처리 중"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

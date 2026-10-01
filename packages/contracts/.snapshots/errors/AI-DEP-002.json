@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 504
+    },
+    "title": {
+      "const": "제공자 데드라인 초과"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

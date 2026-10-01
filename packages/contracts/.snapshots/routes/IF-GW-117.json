@@ -1,0 +1,177 @@
+{
+  "$comment": "gateway.ai.budget",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ai.budget"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/ai/budget"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-007"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "monthly_krw": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "warn_ratio": {
+              "type": "number"
+            },
+            "hard_stop_ratio": {
+              "type": "number"
+            },
+            "degrade_day": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 31
+            },
+            "per_call_usd_cap": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "bulk_threshold": {
+              "type": "object",
+              "properties": {
+                "calls": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "krw": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "quota_pct": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "calls",
+                "krw",
+                "quota_pct"
+              ],
+              "additionalProperties": false
+            },
+            "subscription_windows": {
+              "type": "object",
+              "properties": {
+                "five_hour_calls": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "weekly_calls": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "five_hour_calls",
+                "weekly_calls"
+              ],
+              "additionalProperties": false
+            },
+            "batch_window": {
+              "type": "object",
+              "properties": {
+                "idle_min": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "require_ac": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "idle_min",
+                "require_ac"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "monthly_krw",
+            "warn_ratio",
+            "hard_stop_ratio",
+            "degrade_day",
+            "per_call_usd_cap",
+            "bulk_threshold",
+            "subscription_windows",
+            "batch_window"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,228 @@
+{
+  "type": "object",
+  "properties": {
+    "services": {
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "svc": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              {
+                "type": "string",
+                "const": "supervisor"
+              }
+            ]
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "starting",
+              "ready",
+              "restarting",
+              "degraded",
+              "stopped"
+            ]
+          },
+          "restarts_60s": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "svc",
+          "state",
+          "restarts_60s"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "degraded": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 60
+      }
+    },
+    "outbox_lag": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "svc": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "dest": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "oldest_age_ms": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "svc",
+          "dest",
+          "oldest_age_ms"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "banners": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "banner_id": {
+            "type": "string",
+            "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+          },
+          "code": {
+            "type": "string",
+            "enum": [
+              "service_degraded",
+              "service_restarting",
+              "ai_offline",
+              "ai_budget_80",
+              "ai_budget_100",
+              "ai_quota",
+              "ai_drift",
+              "backup_failed",
+              "backup_aborted",
+              "secondary_missing",
+              "secondary_locked",
+              "rpo_exceeded",
+              "outbox_lag",
+              "inbox_dead",
+              "ledger_halt",
+              "ledger_integrity",
+              "projection_mismatch",
+              "integrity_check_failed",
+              "runner_platform_disabled",
+              "policy_lock_mismatch",
+              "prompt_lock_mismatch",
+              "disk_low",
+              "data_path_risk",
+              "node_eol",
+              "job_failed",
+              "slo_violation",
+              "tripwire",
+              "maintenance"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "info",
+              "warn",
+              "critical"
+            ]
+          },
+          "message_ko": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "since": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8640000000000000
+          },
+          "dismissible": {
+            "type": "boolean"
+          },
+          "action": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "label_ko": {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  "href": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 200
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cli": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "label_ko",
+                  "href",
+                  "cli"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "banner_id",
+          "code",
+          "severity",
+          "message_ko",
+          "since",
+          "dismissible",
+          "action"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "services",
+    "degraded",
+    "outbox_lag",
+    "banners"
+  ],
+  "additionalProperties": false
+}

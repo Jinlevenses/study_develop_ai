@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "target_kind": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "ku",
+        "misconception",
+        "item",
+        "case",
+        "source"
+      ]
+    },
+    "target_id": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "cursor": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,512}$"
+    },
+    "limit": {
+      "default": 50,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    }
+  },
+  "required": [
+    "limit"
+  ],
+  "additionalProperties": false
+}

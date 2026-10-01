@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "variants": {
+      "minItems": 1,
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stem_md": {
+            "type": "string",
+            "maxLength": 4000
+          },
+          "options": {
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                },
+                "text_md": {
+                  "type": "string",
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "key",
+                "text_md"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "answer_keys": {
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{1,31}$"
+            }
+          }
+        },
+        "required": [
+          "stem_md",
+          "options",
+          "answer_keys"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "variants"
+  ],
+  "additionalProperties": false
+}

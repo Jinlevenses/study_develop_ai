@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 401
+    },
+    "title": {
+      "const": "내부 호출자 토큰 없음 또는 무효"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

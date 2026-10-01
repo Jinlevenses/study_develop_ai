@@ -1,0 +1,236 @@
+{
+  "$comment": "gateway.ai.preferences_put",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ai.preferences_put"
+    },
+    "method": {
+      "const": "PUT"
+    },
+    "path": {
+      "const": "/api/v1/ai/preferences"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-023",
+        "FR-AI-022"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "local_only_families": {
+              "maxItems": 5,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "generation",
+                  "explanation",
+                  "dialog",
+                  "import",
+                  "judge"
+                ]
+              }
+            },
+            "pinned": {
+              "type": "object",
+              "properties": {
+                "generation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "explanation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "dialog": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "import": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "generation",
+                "explanation",
+                "dialog",
+                "import"
+              ],
+              "additionalProperties": false
+            },
+            "batch_enabled": {
+              "type": "boolean"
+            },
+            "yield_to_interactive_cli": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "local_only_families",
+            "pinned",
+            "batch_enabled",
+            "yield_to_interactive_cli"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "local_only_families": {
+              "maxItems": 5,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "generation",
+                  "explanation",
+                  "dialog",
+                  "import",
+                  "judge"
+                ]
+              }
+            },
+            "pinned": {
+              "type": "object",
+              "properties": {
+                "generation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "explanation": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "dialog": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "import": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "generation",
+                "explanation",
+                "dialog",
+                "import"
+              ],
+              "additionalProperties": false
+            },
+            "batch_enabled": {
+              "type": "boolean"
+            },
+            "yield_to_interactive_cli": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "local_only_families",
+            "pinned",
+            "batch_enabled",
+            "yield_to_interactive_cli"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

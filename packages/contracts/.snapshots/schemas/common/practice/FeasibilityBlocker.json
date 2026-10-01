@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "pattern": "^(NO_ASSESSMENT_POOL|EMPTY_LEVEL|D4_POSSIBLE<REQUIRED|CASE_L4\\+<2|MASTERY_FORMATS<3:[a-z0-9.-]{3,128})$"
+    },
+    "detail_ko": {
+      "type": "string",
+      "maxLength": 300
+    }
+  },
+  "required": [
+    "code",
+    "detail_ko"
+  ],
+  "additionalProperties": false
+}

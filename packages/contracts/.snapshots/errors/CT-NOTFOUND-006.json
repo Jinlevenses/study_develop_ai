@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "Inbox 항목 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "$comment": "learning.settings.pause_delete",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.settings.pause_delete"
+    },
+    "method": {
+      "const": "DELETE"
+    },
+    "path": {
+      "const": "/internal/v1/settings/pause"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-PRG-020",
+        "FR-PRG-021"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "pause": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "mode": {
+                      "type": "string",
+                      "enum": [
+                        "pause",
+                        "crunch"
+                      ]
+                    },
+                    "from": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                    },
+                    "to": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                    },
+                    "crunch_scope": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "mvd",
+                            "core"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "mode",
+                    "from",
+                    "to",
+                    "crunch_scope"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "dday": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "target_date": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                    },
+                    "scope": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "kind": {
+                              "type": "string",
+                              "const": "concepts"
+                            },
+                            "concept_ids": {
+                              "minItems": 1,
+                              "maxItems": 500,
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 64,
+                                "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                              }
+                            }
+                          },
+                          "required": [
+                            "kind",
+                            "concept_ids"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "kind": {
+                              "type": "string",
+                              "const": "tag"
+                            },
+                            "tag": {
+                              "type": "string",
+                              "pattern": "^cert:[a-z0-9-]{2,40}$"
+                            }
+                          },
+                          "required": [
+                            "kind",
+                            "tag"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "kind": {
+                              "type": "string",
+                              "const": "blueprint"
+                            },
+                            "blueprint_id": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
+                            }
+                          },
+                          "required": [
+                            "kind",
+                            "blueprint_id"
+                          ],
+                          "additionalProperties": false
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "target_date",
+                    "scope"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "return_mode": {
+              "type": "object",
+              "properties": {
+                "active": {
+                  "type": "boolean"
+                },
+                "since": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "gap_days": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "active",
+                "since",
+                "gap_days"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "pause",
+            "dday",
+            "return_mode"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

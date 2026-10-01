@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "inbox_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "source_url": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "captured_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "inbox_id",
+    "text",
+    "source_url",
+    "captured_at"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "calls": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "krw": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "quota_pct": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "duration_s": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "calls",
+    "krw",
+    "quota_pct",
+    "duration_s"
+  ],
+  "additionalProperties": false
+}

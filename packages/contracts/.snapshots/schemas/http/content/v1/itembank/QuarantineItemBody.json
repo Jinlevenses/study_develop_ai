@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "reason_ko": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "item",
+        "family"
+      ]
+    },
+    "evidence_policy": {
+      "type": "string",
+      "enum": [
+        "void",
+        "halve",
+        "keep"
+      ]
+    }
+  },
+  "required": [
+    "reason_ko",
+    "scope",
+    "evidence_policy"
+  ],
+  "additionalProperties": false
+}

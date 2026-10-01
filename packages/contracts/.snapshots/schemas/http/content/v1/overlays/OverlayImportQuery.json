@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "import_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    }
+  },
+  "required": [
+    "import_id"
+  ],
+  "additionalProperties": false
+}

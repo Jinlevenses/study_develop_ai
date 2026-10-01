@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "alias"
+    },
+    "entity_kind": {
+      "type": "string",
+      "enum": [
+        "concept",
+        "ku",
+        "misconception",
+        "item"
+      ]
+    },
+    "alias_id": {
+      "type": "string",
+      "maxLength": 140
+    },
+    "target_id": {
+      "type": "string",
+      "maxLength": 140
+    }
+  },
+  "required": [
+    "kind",
+    "entity_kind",
+    "alias_id",
+    "target_id"
+  ],
+  "additionalProperties": false
+}

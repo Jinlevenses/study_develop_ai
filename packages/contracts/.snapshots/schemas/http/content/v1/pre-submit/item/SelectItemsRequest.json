@@ -1,0 +1,239 @@
+{
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "ai_mode_observed": {
+      "type": "string",
+      "enum": [
+        "FULL",
+        "JUDGE_ONLY",
+        "LLM_ONLY",
+        "OFFLINE"
+      ]
+    },
+    "slots": {
+      "minItems": 1,
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "slot_id": {
+            "type": "string",
+            "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "items",
+              "blank_note",
+              "lab",
+              "case",
+              "artifact",
+              "d4_mcq",
+              "embedded",
+              "pretest"
+            ]
+          },
+          "concept_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "mode_id": {
+            "type": "string",
+            "pattern": "^M-(0[1-9]|1\\d|2[01])$"
+          },
+          "format_candidates": {
+            "minItems": 1,
+            "maxItems": 10,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "embedded",
+                "ox",
+                "mcq",
+                "cloze",
+                "short",
+                "matching",
+                "code_task",
+                "blank_note",
+                "digging_d4_mcq",
+                "error_find",
+                "confusable",
+                "fermi",
+                "cond_reversal",
+                "infra_lite",
+                "kata",
+                "audit",
+                "case_decision",
+                "code_predict",
+                "sql_task",
+                "essay",
+                "digging",
+                "feynman",
+                "pr_review",
+                "reverse_item",
+                "artifact",
+                "case_postmortem",
+                "micro_judgment",
+                "ml_predict",
+                "mcq_multi",
+                "order",
+                "parsons",
+                "log_read",
+                "config_review"
+              ]
+            }
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "target_beta": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "response_mode": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "recognition",
+                  "production"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "facet": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-z][a-z_]{0,31}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "case_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.case\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "variant_seed": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "artifact_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.art\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "engine_constraints": {
+            "type": "object",
+            "properties": {
+              "calibrated_only": {
+                "type": "boolean"
+              },
+              "deterministic_only": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "calibrated_only",
+              "deterministic_only"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "slot_id",
+          "kind",
+          "concept_id",
+          "level",
+          "mode_id",
+          "format_candidates",
+          "count",
+          "target_beta",
+          "response_mode",
+          "facet",
+          "case_id",
+          "variant_seed",
+          "artifact_id",
+          "engine_constraints"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "exclude_item_ids": {
+      "maxItems": 2000,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 140,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+      }
+    },
+    "exclude_stem_families": {
+      "maxItems": 500,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80
+      }
+    }
+  },
+  "required": [
+    "session_id",
+    "ai_mode_observed",
+    "slots",
+    "exclude_item_ids",
+    "exclude_stem_families"
+  ],
+  "additionalProperties": false
+}

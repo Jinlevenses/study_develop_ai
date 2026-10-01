@@ -1,0 +1,120 @@
+{
+  "$comment": "gateway.ops.slo",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ops.slo"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/ops/slo"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "NFR-PERF-*",
+        "TW-12"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "computed_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "window": {
+              "type": "string",
+              "const": "1h"
+            },
+            "slos": {
+              "maxItems": 10,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "enum": [
+                      "first_item_p95",
+                      "grading_p95",
+                      "outbox_oldest_age",
+                      "restart_time",
+                      "eventloop_p99"
+                    ]
+                  },
+                  "target_ms": {
+                    "type": "number"
+                  },
+                  "value_ms": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "ok": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "target_ms",
+                  "value_ms",
+                  "ok"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "computed_at",
+            "window",
+            "slos"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

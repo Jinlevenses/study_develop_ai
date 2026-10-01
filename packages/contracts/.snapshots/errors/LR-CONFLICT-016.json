@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "대화 종료됨"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

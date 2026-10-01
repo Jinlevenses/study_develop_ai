@@ -1,0 +1,20 @@
+{
+  "anyOf": [
+    {
+      "type": "string",
+      "enum": [
+        "ok",
+        "error",
+        "timeout",
+        "memory_limit",
+        "output_limit",
+        "rejected",
+        "platform_disabled"
+      ]
+    },
+    {
+      "type": "string",
+      "pattern": "^killed_[a-z_]{1,30}$"
+    }
+  ]
+}

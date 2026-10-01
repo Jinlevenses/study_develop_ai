@@ -1,0 +1,222 @@
+{
+  "$comment": "gateway.cards.list",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.cards.list"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/cards"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": true
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R3"
+    },
+    "fr": {
+      "enum": [
+        "FR-PRG-030",
+        "FR-PRG-031"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "cursor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,512}$"
+            },
+            "limit": {
+              "default": 50,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "active",
+                "suspended",
+                "retired",
+                "leech"
+              ]
+            },
+            "concept_id": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+            }
+          },
+          "required": [
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "card_id": {
+                    "type": "string",
+                    "maxLength": 120,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*):[a-z][a-z_]{0,31}:(?:r|p))$"
+                  },
+                  "concept_id": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  },
+                  "facet": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z_]{0,31}$"
+                  },
+                  "response_mode": {
+                    "type": "string",
+                    "enum": [
+                      "recognition",
+                      "production"
+                    ]
+                  },
+                  "tier": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C"
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "active",
+                      "suspended",
+                      "retired"
+                    ]
+                  },
+                  "due_at": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 8640000000000000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "retrievability": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "stability_days": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "reps": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "lapses": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "leech": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "card_id",
+                  "concept_id",
+                  "facet",
+                  "response_mode",
+                  "tier",
+                  "status",
+                  "due_at",
+                  "retrievability",
+                  "stability_days",
+                  "reps",
+                  "lapses",
+                  "leech"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "items",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

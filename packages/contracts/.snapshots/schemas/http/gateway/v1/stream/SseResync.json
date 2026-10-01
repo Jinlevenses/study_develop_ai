@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "reason": {
+      "type": "string",
+      "enum": [
+        "gateway_restarted",
+        "ring_overflow",
+        "unknown_last_event_id"
+      ]
+    }
+  },
+  "required": [
+    "reason"
+  ],
+  "additionalProperties": false
+}

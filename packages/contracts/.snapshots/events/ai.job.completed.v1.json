@@ -1,0 +1,99 @@
+{
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "task_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "AI-J01",
+            "AI-J02",
+            "AI-J03",
+            "AI-J04",
+            "AI-J05",
+            "AI-J06",
+            "AI-J07",
+            "AI-J08",
+            "AI-J09",
+            "AI-J10",
+            "AI-J11",
+            "AI-J12",
+            "AI-J13",
+            "AI-J14",
+            "AI-J15",
+            "AI-J16",
+            "AI-J17",
+            "AI-J18",
+            "AI-J19"
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "AI-G01",
+            "AI-G02",
+            "AI-G03",
+            "AI-G04",
+            "AI-G05",
+            "AI-G06",
+            "AI-G07",
+            "AI-G08",
+            "AI-G09",
+            "AI-G10",
+            "AI-G11",
+            "AI-G12",
+            "AI-G13"
+          ]
+        }
+      ]
+    },
+    "work_order_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "failed",
+        "cancelled",
+        "deferred"
+      ]
+    },
+    "result_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "prompt_version": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "job_id",
+    "task_id",
+    "work_order_id",
+    "outcome",
+    "result_ref",
+    "prompt_version"
+  ],
+  "additionalProperties": false
+}

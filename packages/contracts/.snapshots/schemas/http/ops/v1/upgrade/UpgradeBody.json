@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "bundle_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    }
+  },
+  "required": [
+    "op_id",
+    "bundle_path"
+  ],
+  "additionalProperties": false
+}

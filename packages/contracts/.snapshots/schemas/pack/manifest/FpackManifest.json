@@ -1,0 +1,181 @@
+{
+  "type": "object",
+  "properties": {
+    "pack_id": {
+      "type": "string",
+      "maxLength": 48,
+      "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)|x\\.[a-z0-9]+(?:-[a-z0-9]+)*|u\\.[a-z0-9]+)$"
+    },
+    "track": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "seed",
+        "local",
+        "user"
+      ]
+    },
+    "schema_v": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "packc_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "files": {
+      "minItems": 3,
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "enum": [
+              "bundle.jsonl",
+              "report.json",
+              "layout.json"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "merkle_root": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "concepts": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "kus": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "misconceptions": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "items": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "cases": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "concepts",
+        "kus",
+        "misconceptions",
+        "items",
+        "cases"
+      ],
+      "additionalProperties": false
+    },
+    "required_for_level": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 9007199254740991
+      },
+      "required": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "offline_cap_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "pack_id",
+    "track",
+    "version",
+    "channel",
+    "schema_v",
+    "packc_version",
+    "files",
+    "merkle_root",
+    "counts",
+    "required_for_level",
+    "offline_cap_level",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

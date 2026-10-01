@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "local_device_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "event_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "devices": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "head_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "last_client_ts": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8640000000000000
+          }
+        },
+        "required": [
+          "seq",
+          "head_hash",
+          "last_client_ts"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "local_device_id",
+    "event_count",
+    "devices"
+  ],
+  "additionalProperties": false
+}

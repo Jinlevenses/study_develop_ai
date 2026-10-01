@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean"
+    },
+    "billing_mode": {
+      "type": "string",
+      "enum": [
+        "metered",
+        "subscription",
+        "free",
+        "local"
+      ]
+    },
+    "models_by_tier": {
+      "type": "object",
+      "properties": {
+        "low": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[\\w.\\-:/]{1,80}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[\\w.\\-:/]{1,80}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "high": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[\\w.\\-:/]{1,80}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "low",
+        "mid",
+        "high"
+      ],
+      "additionalProperties": false
+    },
+    "base_url": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "max_concurrency": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 20
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pinned_model": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 80
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "enabled",
+    "billing_mode",
+    "models_by_tier",
+    "base_url",
+    "max_concurrency",
+    "pinned_model"
+  ],
+  "additionalProperties": false
+}

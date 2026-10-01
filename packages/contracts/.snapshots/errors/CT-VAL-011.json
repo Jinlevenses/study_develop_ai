@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": ".fpack sha256·merkle·스키마 검증 실패"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

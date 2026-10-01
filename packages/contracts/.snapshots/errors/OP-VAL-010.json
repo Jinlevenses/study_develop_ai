@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "경로 무효"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "properties": {
+    "task_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "AI-J01",
+            "AI-J02",
+            "AI-J03",
+            "AI-J04",
+            "AI-J05",
+            "AI-J06",
+            "AI-J07",
+            "AI-J08",
+            "AI-J09",
+            "AI-J10",
+            "AI-J11",
+            "AI-J12",
+            "AI-J13",
+            "AI-J14",
+            "AI-J15",
+            "AI-J16",
+            "AI-J17",
+            "AI-J18",
+            "AI-J19"
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "AI-G01",
+            "AI-G02",
+            "AI-G03",
+            "AI-G04",
+            "AI-G05",
+            "AI-G06",
+            "AI-G07",
+            "AI-G08",
+            "AI-G09",
+            "AI-G10",
+            "AI-G11",
+            "AI-G12",
+            "AI-G13"
+          ]
+        }
+      ]
+    },
+    "provider_id": {
+      "type": "string",
+      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "error",
+        "timeout",
+        "fallback",
+        "cache_hit"
+      ]
+    },
+    "cursor": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,512}$"
+    },
+    "limit": {
+      "default": 50,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    }
+  },
+  "required": [
+    "limit"
+  ],
+  "additionalProperties": false
+}

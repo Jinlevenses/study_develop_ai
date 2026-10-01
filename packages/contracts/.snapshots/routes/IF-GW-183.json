@@ -1,0 +1,77 @@
+{
+  "$comment": "gateway.cli.rotate_session_key",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.cli.rotate_session_key"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/api/v1/cli/session-key:rotate"
+    },
+    "allowedCallers": {
+      "enum": [
+        "cli"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "NFR-SEC-019"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "rotated_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "sessions_invalidated": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "rotated_at",
+            "sessions_invalidated"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "$comment": "ai-gateway.mode.get",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.mode.get"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/mode"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway",
+        "content",
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R0"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-002",
+        "FR-AI-003",
+        "FR-AI-017"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "FULL",
+                "JUDGE_ONLY",
+                "LLM_ONLY",
+                "OFFLINE"
+              ]
+            },
+            "previous_mode": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "FULL",
+                    "JUDGE_ONLY",
+                    "LLM_ONLY",
+                    "OFFLINE"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "reasons": {
+              "maxItems": 10,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "first_boot",
+                  "no_consent",
+                  "consent_granted",
+                  "consent_revoked",
+                  "probe_ok",
+                  "probe_failed",
+                  "breaker_open",
+                  "breaker_closed",
+                  "budget_exhausted",
+                  "quota_exhausted",
+                  "safe_mode",
+                  "key_added",
+                  "key_removed",
+                  "gateway_unreachable"
+                ]
+              }
+            },
+            "providers": {
+              "maxItems": 32,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "jev",
+                      "llm_api",
+                      "llm_cli",
+                      "generic_cli",
+                      "local_llm"
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "ok",
+                      "degraded",
+                      "down",
+                      "unconsented",
+                      "disabled"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "kind",
+                  "status"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "changed_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "safe_mode": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "mode",
+            "previous_mode",
+            "reasons",
+            "providers",
+            "changed_at",
+            "safe_mode"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

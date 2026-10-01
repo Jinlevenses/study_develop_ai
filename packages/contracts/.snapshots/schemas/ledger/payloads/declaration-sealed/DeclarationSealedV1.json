@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "declaration_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "time_capsule",
+        "anchor_0",
+        "season_goal",
+        "self_declaration"
+      ]
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sealed_payload": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "unseal_at": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "study_day": {
+      "type": "string",
+      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+    }
+  },
+  "required": [
+    "declaration_id",
+    "kind",
+    "content_hash",
+    "sealed_payload",
+    "unseal_at",
+    "study_day"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,90 @@
+{
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "masked",
+        "force_local",
+        "block"
+      ]
+    },
+    "data_class": {
+      "type": "string",
+      "enum": [
+        "C0",
+        "C1",
+        "C2",
+        "C3"
+      ]
+    },
+    "masks": {
+      "maxItems": 500,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "block_key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "end": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "token": {
+            "type": "string",
+            "pattern": "^⟨SECRET_\\d{1,4}⟩$"
+          },
+          "rule_id": {
+            "type": "string",
+            "maxLength": 60
+          }
+        },
+        "required": [
+          "block_key",
+          "start",
+          "end",
+          "token",
+          "rule_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "masked_blocks": {
+      "maxItems": 16,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "action",
+    "data_class",
+    "masks",
+    "masked_blocks"
+  ],
+  "additionalProperties": false
+}

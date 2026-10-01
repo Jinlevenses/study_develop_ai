@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "epoch_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "completed",
+        "aborted"
+      ]
+    }
+  },
+  "required": [
+    "epoch_id",
+    "outcome"
+  ],
+  "additionalProperties": false
+}

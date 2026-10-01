@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "search_params@v1"
+    },
+    "bm25": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "alias": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "body": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      },
+      "required": [
+        "title",
+        "alias",
+        "body"
+      ],
+      "additionalProperties": false
+    },
+    "strip_chars": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "short_token_len": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "v3_switch_docs": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "version",
+    "bm25",
+    "strip_chars",
+    "short_token_len",
+    "v3_switch_docs"
+  ],
+  "additionalProperties": false
+}

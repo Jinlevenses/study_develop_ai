@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "원장 이벤트 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "type": "object",
+  "properties": {
+    "blueprints": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "blueprint_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
+          },
+          "title_ko": {
+            "type": "string"
+          },
+          "edition": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "source_edition": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "git",
+                  "user_file",
+                  "manual"
+                ]
+              },
+              "commit_sha": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{40}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "kind",
+              "commit_sha",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "domains": {
+            "maxItems": 40,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                },
+                "title_ko": {
+                  "type": "string"
+                },
+                "weight": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "concept_ids": {
+                  "maxItems": 200,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  }
+                }
+              },
+              "required": [
+                "key",
+                "title_ko",
+                "weight",
+                "concept_ids"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "blueprint_id",
+          "title_ko",
+          "edition",
+          "source_edition",
+          "domains"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "blueprints"
+  ],
+  "additionalProperties": false
+}

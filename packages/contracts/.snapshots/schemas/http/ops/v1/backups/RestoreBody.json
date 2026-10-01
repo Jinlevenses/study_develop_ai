@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "epoch": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "id"
+            },
+            "epoch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "kind",
+            "epoch_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "latest"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "rehearse": {
+      "type": "boolean"
+    },
+    "apply_incrementals": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "op_id",
+    "epoch",
+    "rehearse",
+    "apply_incrementals"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "러너 출처 정책 위반"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "seq": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 4000
+    }
+  },
+  "required": [
+    "seq",
+    "text"
+  ],
+  "additionalProperties": false
+}

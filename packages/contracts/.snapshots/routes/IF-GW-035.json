@@ -1,0 +1,489 @@
+{
+  "$comment": "gateway.verdicts.get",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.verdicts.get"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/verdicts/{verdict_id}"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-011",
+        "FR-UX-007"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "verdict_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "verdict_id"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "verdict_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "attempt_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "item_id": {
+              "type": "string",
+              "maxLength": 140,
+              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "embedded",
+                "ox",
+                "mcq",
+                "cloze",
+                "short",
+                "matching",
+                "code_task",
+                "blank_note",
+                "digging_d4_mcq",
+                "error_find",
+                "confusable",
+                "fermi",
+                "cond_reversal",
+                "infra_lite",
+                "kata",
+                "audit",
+                "case_decision",
+                "code_predict",
+                "sql_task",
+                "essay",
+                "digging",
+                "feynman",
+                "pr_review",
+                "reverse_item",
+                "artifact",
+                "case_postmortem",
+                "micro_judgment",
+                "ml_predict",
+                "mcq_multi",
+                "order",
+                "parsons",
+                "log_read",
+                "config_review"
+              ]
+            },
+            "engine": {
+              "type": "string",
+              "enum": [
+                "D",
+                "J",
+                "LJ",
+                "H",
+                "S",
+                "PENDING"
+              ]
+            },
+            "badge": {
+              "type": "string",
+              "enum": [
+                "none",
+                "ai",
+                "ai_uncalibrated",
+                "ai_confirm",
+                "ai_estimate_confirm",
+                "heuristic",
+                "self",
+                "pending"
+              ]
+            },
+            "calibrated": {
+              "type": "boolean"
+            },
+            "confidence": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "model_version": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "prompt_version": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "judge_log_ref": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "units": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{1,31}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "label_ko": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "kp",
+                      "misconception",
+                      "dimension",
+                      "solo",
+                      "injection",
+                      "rationale"
+                    ]
+                  },
+                  "outcome": {
+                    "type": "string",
+                    "enum": [
+                      "covered",
+                      "partial",
+                      "missing",
+                      "present",
+                      "absent",
+                      "scored"
+                    ]
+                  },
+                  "p": {
+                    "anyOf": [
+                      {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "score": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "ku_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 96,
+                        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "mc_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 80,
+                        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.m\\d{2})$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "label_ko",
+                  "kind",
+                  "outcome",
+                  "p",
+                  "score",
+                  "ku_id",
+                  "mc_id"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "cited_ku_ids": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+              }
+            },
+            "supersedes": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "superseded_by": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "appeal": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "appeal_id": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    },
+                    "verdict_id": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    },
+                    "reason": {
+                      "type": "string",
+                      "enum": [
+                        "key_wrong",
+                        "ambiguous",
+                        "outdated",
+                        "learner_right",
+                        "other"
+                      ]
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "received",
+                        "classifying",
+                        "regrading",
+                        "upheld",
+                        "rejected",
+                        "user_decision_required"
+                      ]
+                    },
+                    "classification": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "label": {
+                              "type": "string",
+                              "enum": [
+                                "key_wrong",
+                                "ambiguous",
+                                "outdated",
+                                "learner_wrong"
+                              ]
+                            },
+                            "engine": {
+                              "type": "string",
+                              "enum": [
+                                "D",
+                                "J",
+                                "LJ",
+                                "H",
+                                "S",
+                                "PENDING"
+                              ]
+                            },
+                            "confidence": {
+                              "anyOf": [
+                                {
+                                  "type": "number",
+                                  "minimum": 0,
+                                  "maximum": 1
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "label",
+                            "engine",
+                            "confidence"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "new_verdict_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "rejection_reason_ko": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "maxLength": 500
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "created_at": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 8640000000000000
+                    },
+                    "decided_at": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 8640000000000000
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "appeal_id",
+                    "verdict_id",
+                    "reason",
+                    "state",
+                    "classification",
+                    "new_verdict_id",
+                    "rejection_reason_ko",
+                    "created_at",
+                    "decided_at"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "issued_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "verdict_id",
+            "attempt_id",
+            "item_id",
+            "format",
+            "engine",
+            "badge",
+            "calibrated",
+            "confidence",
+            "model_version",
+            "prompt_version",
+            "judge_log_ref",
+            "units",
+            "cited_ku_ids",
+            "supersedes",
+            "superseded_by",
+            "appeal",
+            "issued_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

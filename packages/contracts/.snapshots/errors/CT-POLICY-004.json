@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "출제 불가 상태"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

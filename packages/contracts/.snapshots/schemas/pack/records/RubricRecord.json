@@ -1,0 +1,116 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "rubric"
+    },
+    "rubric_id": {
+      "type": "string",
+      "maxLength": 96,
+      "pattern": "^(?:rb\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+    },
+    "dims": {
+      "type": "object",
+      "properties": {
+        "dims": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "levels": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^l[0-5]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              }
+            },
+            "required": [
+              "name",
+              "weight",
+              "levels"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "dims"
+      ],
+      "additionalProperties": false
+    },
+    "ext": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^pack\\.[a-z_]+$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema0"
+      }
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "kind",
+    "rubric_id",
+    "dims",
+    "ext",
+    "content_hash"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema0"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      ]
+    }
+  }
+}

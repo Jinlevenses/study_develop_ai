@@ -1,0 +1,243 @@
+{
+  "$comment": "content.acquisition.inbox.triage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.acquisition.inbox.triage"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/acquisition/inbox/{inbox_id}:triage"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-IMP-014"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "inbox_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "inbox_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "const": "link"
+                },
+                "concept_id": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                }
+              },
+              "required": [
+                "action",
+                "concept_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "const": "probe"
+                }
+              },
+              "required": [
+                "action"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "const": "import"
+                },
+                "job_id": {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                }
+              },
+              "required": [
+                "action",
+                "job_id"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "type": "string",
+                  "const": "discard"
+                }
+              },
+              "required": [
+                "action"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "inbox_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "text_masked": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "masking": {
+              "type": "string",
+              "enum": [
+                "full",
+                "partial"
+              ]
+            },
+            "source_url": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uri"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "new",
+                "triaged",
+                "linked",
+                "imported",
+                "discarded"
+              ]
+            },
+            "matches": {
+              "maxItems": 10,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "concept_id": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  },
+                  "score": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "concept_id",
+                  "score"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "linked_concept_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64,
+                  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "created_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "triaged_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "inbox_id",
+            "text_masked",
+            "masking",
+            "source_url",
+            "state",
+            "matches",
+            "linked_concept_id",
+            "created_at",
+            "triaged_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

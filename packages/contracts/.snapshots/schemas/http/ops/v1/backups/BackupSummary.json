@@ -1,0 +1,111 @@
+{
+  "type": "object",
+  "properties": {
+    "epoch_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "snapshot",
+        "incremental"
+      ]
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "outcome": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "aborted",
+        "failed"
+      ]
+    },
+    "size_bytes": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "app_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "manifest_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rehearsal": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "ok": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "at",
+            "ok"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "secondary": {
+      "type": "object",
+      "properties": {
+        "copied_at": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "encrypted": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "copied_at",
+        "encrypted"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "epoch_id",
+    "kind",
+    "created_at",
+    "outcome",
+    "size_bytes",
+    "app_version",
+    "manifest_sha256",
+    "rehearsal",
+    "secondary"
+  ],
+  "additionalProperties": false
+}

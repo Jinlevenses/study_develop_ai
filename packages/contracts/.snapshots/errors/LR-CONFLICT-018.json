@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "원장 병합·리플레이 job 실행 중"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

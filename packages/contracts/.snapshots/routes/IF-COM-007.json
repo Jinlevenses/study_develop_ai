@@ -1,0 +1,97 @@
+{
+  "$comment": "common.admin.resume",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "common.admin.resume"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/admin/resume"
+    },
+    "allowedCallers": {
+      "enum": [
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": []
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "epoch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "outcome": {
+              "type": "string",
+              "enum": [
+                "completed",
+                "aborted"
+              ]
+            }
+          },
+          "required": [
+            "epoch_id",
+            "outcome"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "epoch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "resumed_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "epoch_id",
+            "resumed_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

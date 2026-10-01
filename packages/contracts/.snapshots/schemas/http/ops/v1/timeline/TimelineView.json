@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "entries": {
+      "maxItems": 1000,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ts": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8640000000000000
+          },
+          "svc": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "outbox",
+              "inbox",
+              "inbox_dead",
+              "log"
+            ]
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-z]+\\.[a-z_]+\\.[a-z_]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "event_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "causation_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "summary": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "level": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "debug",
+                  "info",
+                  "warn",
+                  "error",
+                  "fatal"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "ts",
+          "svc",
+          "kind",
+          "type",
+          "event_id",
+          "causation_id",
+          "summary",
+          "level"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "correlation_id",
+    "entries"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "서킷 open"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

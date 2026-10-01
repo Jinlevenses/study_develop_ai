@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "source_kind": {
+      "type": "string",
+      "enum": [
+        "url",
+        "paste",
+        "file",
+        "inbox"
+      ]
+    },
+    "diff_summary": {
+      "type": "object",
+      "properties": {
+        "concepts": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "kus": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "items": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "concepts",
+        "kus",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "requires_approval": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "job_id",
+    "source_kind",
+    "diff_summary",
+    "requires_approval"
+  ],
+  "additionalProperties": false
+}

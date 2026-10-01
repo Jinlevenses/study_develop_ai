@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "consumer": {
+      "type": "string",
+      "enum": [
+        "gateway",
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ]
+    },
+    "subscriptions": {
+      "maxItems": 40,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "pattern": "^[a-z]+\\.[a-z_]+\\.[a-z_]+$"
+          },
+          "schema_versions": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "durable",
+              "notify"
+            ]
+          },
+          "on_poison": {
+            "type": "string",
+            "enum": [
+              "halt",
+              "dead_letter",
+              "drop"
+            ]
+          },
+          "reads": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^(\\*|[a-z_]+(\\.[a-z_]+)*)$"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "schema_versions",
+          "mode",
+          "on_poison",
+          "reads"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "consumer",
+    "subscriptions"
+  ],
+  "additionalProperties": false
+}

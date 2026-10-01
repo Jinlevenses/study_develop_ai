@@ -1,0 +1,371 @@
+{
+  "$comment": "learning.learner.tracks.promotion",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.learner.tracks.promotion"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/learner/tracks/{track}/promotion"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-PRG-012",
+        "FR-PRG-013",
+        "FR-PRG-032",
+        "FR-PRG-033",
+        "CR-18~21"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "track": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            }
+          },
+          "required": [
+            "track"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "track": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            },
+            "from_level": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "to_level": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "decision": {
+              "type": "string",
+              "enum": [
+                "promote",
+                "promote_provisional",
+                "not_ready",
+                "cap_reached"
+              ]
+            },
+            "gates": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "gate_id": {
+                    "type": "string",
+                    "pattern": "^[A-Z][A-Z0-9_]{1,40}$"
+                  },
+                  "label_ko": {
+                    "type": "string",
+                    "maxLength": 80
+                  },
+                  "met": {
+                    "type": "boolean"
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "threshold": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "evidence_event_ids": {
+                    "maxItems": 50,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    }
+                  },
+                  "shortfall_ko": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 300
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "gate_id",
+                  "label_ko",
+                  "met",
+                  "value",
+                  "threshold",
+                  "evidence_event_ids",
+                  "shortfall_ko"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "blockers": {
+              "maxItems": 50,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "pattern": "^(NO_ASSESSMENT_POOL|EMPTY_LEVEL|D4_POSSIBLE<REQUIRED|CASE_L4\\+<2|MASTERY_FORMATS<3:[a-z0-9.-]{3,128})$"
+                  },
+                  "detail_ko": {
+                    "type": "string",
+                    "maxLength": 300
+                  }
+                },
+                "required": [
+                  "code",
+                  "detail_ko"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "exam": {
+              "type": "object",
+              "properties": {
+                "eligible": {
+                  "type": "boolean"
+                },
+                "retry_after": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 8640000000000000
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "last": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "exam_id": {
+                          "type": "string",
+                          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        },
+                        "passed": {
+                          "type": "boolean"
+                        },
+                        "correct_count": {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        "cbm_ratio": {
+                          "type": "number"
+                        },
+                        "at": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 8640000000000000
+                        }
+                      },
+                      "required": [
+                        "exam_id",
+                        "passed",
+                        "correct_count",
+                        "cbm_ratio",
+                        "at"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "eligible",
+                "retry_after",
+                "last"
+              ],
+              "additionalProperties": false
+            },
+            "profile": {
+              "type": "object",
+              "properties": {
+                "policy_version": {
+                  "type": "string",
+                  "pattern": "^ps_[0-9a-f]{16}$"
+                },
+                "ai_mode": {
+                  "type": "string",
+                  "enum": [
+                    "FULL",
+                    "JUDGE_ONLY",
+                    "LLM_ONLY",
+                    "OFFLINE"
+                  ]
+                },
+                "sp1_state": {
+                  "type": "string",
+                  "enum": [
+                    "pass",
+                    "fail",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [
+                "policy_version",
+                "ai_mode",
+                "sp1_state"
+              ],
+              "additionalProperties": false
+            },
+            "cap": {
+              "type": "object",
+              "properties": {
+                "declared": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "offline": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "oracle": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "display": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                }
+              },
+              "required": [
+                "declared",
+                "offline",
+                "oracle",
+                "display"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "track",
+            "from_level",
+            "to_level",
+            "decision",
+            "gates",
+            "blockers",
+            "exam",
+            "profile",
+            "cap"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

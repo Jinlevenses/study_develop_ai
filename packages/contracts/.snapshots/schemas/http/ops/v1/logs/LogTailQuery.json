@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "svc": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "gateway",
+            "content",
+            "learning",
+            "ai-gateway",
+            "ops-api"
+          ]
+        },
+        {
+          "type": "string",
+          "const": "supervisor"
+        }
+      ]
+    },
+    "n": {
+      "default": 200,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5000
+    }
+  },
+  "required": [
+    "svc",
+    "n"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "오버레이 패치·충돌 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

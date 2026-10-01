@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "하위 서비스 연결 실패"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

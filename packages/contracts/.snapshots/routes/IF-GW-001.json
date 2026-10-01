@@ -1,0 +1,100 @@
+{
+  "$comment": "gateway.cli.bootstrap_token",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.cli.bootstrap_token"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/api/v1/cli/bootstrap-token"
+    },
+    "allowedCallers": {
+      "enum": [
+        "cli"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R0"
+    },
+    "fr": {
+      "enum": [
+        "NFR-SEC-019",
+        "FR-SET-023"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string",
+              "enum": [
+                "up",
+                "open"
+              ]
+            }
+          },
+          "required": [
+            "purpose"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "201": {
+          "type": "object",
+          "properties": {
+            "bootstrap_token": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{43}$"
+            },
+            "expires_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "open_url": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "bootstrap_token",
+            "expires_at",
+            "open_url"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

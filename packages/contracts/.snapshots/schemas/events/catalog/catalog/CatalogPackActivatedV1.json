@@ -1,0 +1,114 @@
+{
+  "type": "object",
+  "properties": {
+    "pack_id": {
+      "type": "string",
+      "maxLength": 48,
+      "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)|x\\.[a-z0-9]+(?:-[a-z0-9]+)*|u\\.[a-z0-9]+)$"
+    },
+    "track": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "seed",
+        "local",
+        "user"
+      ]
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "merkle_root": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "previous_version": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "changed_concept_ids": {
+      "maxItems": 2000,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 64,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+      }
+    },
+    "changed_ku_ids": {
+      "maxItems": 20000,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 96,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+      }
+    },
+    "offline_cap_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "catalog_version": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "activated_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "pack_id",
+    "track",
+    "version",
+    "channel",
+    "manifest_hash",
+    "merkle_root",
+    "previous_version",
+    "changed_concept_ids",
+    "changed_ku_ids",
+    "offline_cap_level",
+    "catalog_version",
+    "activated_at"
+  ],
+  "additionalProperties": false
+}

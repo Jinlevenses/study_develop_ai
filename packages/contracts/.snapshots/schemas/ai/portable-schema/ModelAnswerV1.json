@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "properties": {
+    "body_md": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "kp_coverage": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "covered": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "key",
+          "covered"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "body_md",
+    "kp_coverage"
+  ],
+  "additionalProperties": false
+}

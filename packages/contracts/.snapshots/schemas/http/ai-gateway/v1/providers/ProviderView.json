@@ -1,0 +1,293 @@
+{
+  "type": "object",
+  "properties": {
+    "provider_id": {
+      "type": "string",
+      "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "jev",
+        "llm_api",
+        "llm_cli",
+        "generic_cli",
+        "local_llm"
+      ]
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "anthropic",
+        "openai",
+        "google",
+        "typesafe",
+        "local",
+        "other"
+      ]
+    },
+    "display_name": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "degraded",
+        "down",
+        "unconsented",
+        "disabled"
+      ]
+    },
+    "consent": {
+      "type": "object",
+      "properties": {
+        "granted": {
+          "type": "boolean"
+        },
+        "granted_at": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "judge",
+              "generate",
+              "batch"
+            ]
+          }
+        }
+      },
+      "required": [
+        "granted",
+        "granted_at",
+        "scopes"
+      ],
+      "additionalProperties": false
+    },
+    "probe": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "installed": {
+              "type": "boolean"
+            },
+            "version": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 60
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "logged_in": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "flags_ok": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "missing_flags": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 60
+              }
+            },
+            "key_present": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "models": {
+              "maxItems": 50,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 80
+              }
+            },
+            "latency_ms": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "checked_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "reason_code": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 60
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "installed",
+            "version",
+            "logged_in",
+            "flags_ok",
+            "missing_flags",
+            "key_present",
+            "models",
+            "latency_ms",
+            "checked_at",
+            "reason_code"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "breaker": {
+      "type": "string",
+      "enum": [
+        "closed",
+        "open",
+        "half_open"
+      ]
+    },
+    "billing_mode": {
+      "type": "string",
+      "enum": [
+        "metered",
+        "subscription",
+        "free",
+        "local"
+      ]
+    },
+    "trust": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "unverified"
+      ]
+    },
+    "models_by_tier": {
+      "type": "object",
+      "properties": {
+        "low": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "high": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "low",
+        "mid",
+        "high"
+      ],
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "structured_output": {
+          "type": "boolean"
+        },
+        "json_schema_flag": {
+          "type": "boolean"
+        },
+        "streaming": {
+          "type": "boolean"
+        },
+        "multi_turn": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "structured_output",
+        "json_schema_flag",
+        "streaming",
+        "multi_turn"
+      ],
+      "additionalProperties": false
+    },
+    "external_processor": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "provider_id",
+    "kind",
+    "family",
+    "display_name",
+    "status",
+    "consent",
+    "probe",
+    "breaker",
+    "billing_mode",
+    "trust",
+    "models_by_tier",
+    "capabilities",
+    "external_processor"
+  ],
+  "additionalProperties": false
+}

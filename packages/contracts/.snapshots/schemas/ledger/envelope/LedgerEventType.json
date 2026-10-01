@@ -1,0 +1,22 @@
+{
+  "type": "string",
+  "enum": [
+    "attempt.graded",
+    "evidence.upgraded",
+    "evidence.regraded",
+    "evidence.voided",
+    "evidence.weight_adjusted",
+    "pretest.answered",
+    "lesson.completed",
+    "self_assessment.recorded",
+    "card.enrolled",
+    "card.status_changed",
+    "profile.setting_changed",
+    "policy.switched",
+    "ai_mode.observed",
+    "declaration.sealed",
+    "promotion.exam_completed",
+    "level.promoted",
+    "level.provisional_resolved"
+  ]
+}

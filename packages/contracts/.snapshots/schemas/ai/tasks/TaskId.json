@@ -1,0 +1,46 @@
+{
+  "anyOf": [
+    {
+      "type": "string",
+      "enum": [
+        "AI-J01",
+        "AI-J02",
+        "AI-J03",
+        "AI-J04",
+        "AI-J05",
+        "AI-J06",
+        "AI-J07",
+        "AI-J08",
+        "AI-J09",
+        "AI-J10",
+        "AI-J11",
+        "AI-J12",
+        "AI-J13",
+        "AI-J14",
+        "AI-J15",
+        "AI-J16",
+        "AI-J17",
+        "AI-J18",
+        "AI-J19"
+      ]
+    },
+    {
+      "type": "string",
+      "enum": [
+        "AI-G01",
+        "AI-G02",
+        "AI-G03",
+        "AI-G04",
+        "AI-G05",
+        "AI-G06",
+        "AI-G07",
+        "AI-G08",
+        "AI-G09",
+        "AI-G10",
+        "AI-G11",
+        "AI-G12",
+        "AI-G13"
+      ]
+    }
+  ]
+}

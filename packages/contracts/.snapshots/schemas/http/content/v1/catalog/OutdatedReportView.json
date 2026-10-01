@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "report_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "received",
+        "revalidating",
+        "resolved"
+      ]
+    },
+    "cl_x": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "report_id",
+    "concept_id",
+    "state",
+    "cl_x",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

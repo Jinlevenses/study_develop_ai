@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 504
+    },
+    "title": {
+      "const": "데드라인 소진"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

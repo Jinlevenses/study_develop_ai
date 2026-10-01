@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "due_overflow",
+        "return_mode",
+        "paused",
+        "promotion_ready",
+        "verify_suggested",
+        "weekly_review_due",
+        "pending_grades",
+        "rating_confirm",
+        "policy_switch_available",
+        "onboarding"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "warn",
+        "critical"
+      ]
+    },
+    "message_ko": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "action": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "label_ko": {
+              "type": "string",
+              "maxLength": 40
+            },
+            "href": {
+              "type": "string",
+              "pattern": "^\\/[A-Za-z0-9/_$.?=&-]*$"
+            }
+          },
+          "required": [
+            "label_ko",
+            "href"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "code",
+    "severity",
+    "message_ko",
+    "action"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "제공자 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

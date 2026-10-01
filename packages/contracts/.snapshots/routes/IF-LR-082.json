@@ -1,0 +1,244 @@
+{
+  "$comment": "learning.ledger.import_get",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.ledger.import_get"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/ledger/imports/{import_id}"
+    },
+    "allowedCallers": {
+      "enum": [
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-SET-022"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "import_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "import_id"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "import_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "receiving",
+                "verifying",
+                "inserting",
+                "replaying",
+                "swapping",
+                "done",
+                "rejected",
+                "failed"
+              ]
+            },
+            "received_lines": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "inserted": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "skipped_duplicates": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "devices": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "seq": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "head_hash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "seq",
+                  "head_hash"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "checkpoint_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "projection_hash": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "violations": {
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "device_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "device_seq": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "chain_break",
+                      "anchor_mismatch",
+                      "tail_truncated",
+                      "schema_version_unknown",
+                      "policy_set_missing",
+                      "end_line_missing",
+                      "sha256_mismatch",
+                      "event_invalid"
+                    ]
+                  },
+                  "detail": {
+                    "type": "string",
+                    "maxLength": 300
+                  }
+                },
+                "required": [
+                  "device_id",
+                  "device_seq",
+                  "kind",
+                  "detail"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "started_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "finished_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "import_id",
+            "state",
+            "received_lines",
+            "inserted",
+            "skipped_duplicates",
+            "devices",
+            "checkpoint_id",
+            "projection_hash",
+            "violations",
+            "started_at",
+            "finished_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

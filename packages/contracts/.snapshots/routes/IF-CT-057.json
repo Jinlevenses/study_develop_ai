@@ -1,0 +1,283 @@
+{
+  "$comment": "content.itembank.reports.create",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.itembank.reports.create"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/itembank/reports"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-QST-016"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "report_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "item_id": {
+              "type": "string",
+              "maxLength": 140,
+              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+            },
+            "reason": {
+              "type": "string",
+              "enum": [
+                "key_wrong",
+                "ambiguous",
+                "outdated",
+                "other"
+              ]
+            },
+            "text": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 2000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "attempt_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "session_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "report_id",
+            "item_id",
+            "reason",
+            "text",
+            "attempt_id",
+            "session_id"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "201": {
+          "type": "object",
+          "properties": {
+            "report_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "item_id": {
+              "type": "string",
+              "maxLength": 140,
+              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+            },
+            "reason": {
+              "type": "string",
+              "enum": [
+                "key_wrong",
+                "ambiguous",
+                "outdated",
+                "other"
+              ]
+            },
+            "text": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "received",
+                "classified",
+                "resolved"
+              ]
+            },
+            "classification": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "enum": [
+                        "key_wrong",
+                        "ambiguous",
+                        "outdated",
+                        "learner_wrong"
+                      ]
+                    },
+                    "engine": {
+                      "type": "string",
+                      "enum": [
+                        "D",
+                        "J",
+                        "LJ",
+                        "H",
+                        "S",
+                        "PENDING"
+                      ]
+                    },
+                    "confidence": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "label",
+                    "engine",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "resolution": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "fixed_overlay",
+                        "retired",
+                        "kept"
+                      ]
+                    },
+                    "reason_ko": {
+                      "type": "string"
+                    },
+                    "patch_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "reason_ko",
+                    "patch_id"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "excluded_from_queue": {
+              "type": "boolean",
+              "const": true
+            },
+            "evidence_voided": {
+              "type": "boolean"
+            },
+            "created_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "resolved_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "report_id",
+            "item_id",
+            "reason",
+            "text",
+            "state",
+            "classification",
+            "resolution",
+            "excluded_from_queue",
+            "evidence_voided",
+            "created_at",
+            "resolved_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

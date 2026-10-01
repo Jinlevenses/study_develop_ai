@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "이미 active 세션 있음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "$comment": "learning.practice.seasons.create",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.practice.seasons.create"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/practice/seasons"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R3"
+    },
+    "fr": {
+      "enum": [
+        "FR-DSH-012"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "season_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "starts_on": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+            },
+            "weeks": {
+              "type": "integer",
+              "minimum": 6,
+              "maximum": 8
+            },
+            "goals": {
+              "minItems": 1,
+              "maxItems": 6,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "track": {
+                    "type": "string",
+                    "enum": [
+                      "alg",
+                      "cs",
+                      "net",
+                      "lang",
+                      "fe",
+                      "be",
+                      "db",
+                      "linux",
+                      "docker",
+                      "k8s",
+                      "cicd",
+                      "sre",
+                      "cloud",
+                      "sec",
+                      "ml",
+                      "llm",
+                      "arch",
+                      "eng",
+                      "lead",
+                      "data"
+                    ]
+                  },
+                  "target_level": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  }
+                },
+                "required": [
+                  "track",
+                  "target_level"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "premortem_ko": {
+              "maxItems": 5,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 300
+              }
+            }
+          },
+          "required": [
+            "season_id",
+            "starts_on",
+            "weeks",
+            "goals",
+            "premortem_ko"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "201": {
+          "type": "object",
+          "properties": {
+            "season": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "season_id": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    },
+                    "starts_on": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                    },
+                    "ends_on": {
+                      "type": "string",
+                      "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                    },
+                    "weeks": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "state": {
+                      "type": "string",
+                      "enum": [
+                        "active",
+                        "closed"
+                      ]
+                    },
+                    "goals": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "track": {
+                            "type": "string",
+                            "enum": [
+                              "alg",
+                              "cs",
+                              "net",
+                              "lang",
+                              "fe",
+                              "be",
+                              "db",
+                              "linux",
+                              "docker",
+                              "k8s",
+                              "cicd",
+                              "sre",
+                              "cloud",
+                              "sec",
+                              "ml",
+                              "llm",
+                              "arch",
+                              "eng",
+                              "lead",
+                              "data"
+                            ]
+                          },
+                          "target_level": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 5
+                          },
+                          "probability": {
+                            "anyOf": [
+                              {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "required_minutes_per_week": {
+                            "anyOf": [
+                              {
+                                "type": "integer",
+                                "minimum": -9007199254740991,
+                                "maximum": 9007199254740991
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "track",
+                          "target_level",
+                          "probability",
+                          "required_minutes_per_week"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "premortem_ko": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "retro_md": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "season_id",
+                    "starts_on",
+                    "ends_on",
+                    "weeks",
+                    "state",
+                    "goals",
+                    "premortem_ko",
+                    "retro_md"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "history": {
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "season_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "starts_on": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                  },
+                  "ends_on": {
+                    "type": "string",
+                    "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+                  },
+                  "achieved_ratio": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "season_id",
+                  "starts_on",
+                  "ends_on",
+                  "achieved_ratio"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "ldi": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "number"
+                    },
+                    "delta": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    },
+                    "params": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+                    },
+                    "params_provisional": {
+                      "type": "boolean"
+                    },
+                    "computed_at": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 8640000000000000
+                    }
+                  },
+                  "required": [
+                    "value",
+                    "delta",
+                    "params",
+                    "params_provisional",
+                    "computed_at"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "season",
+            "history",
+            "ldi"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "grace_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    }
+  },
+  "required": [
+    "op_id",
+    "grace_ms"
+  ],
+  "additionalProperties": false
+}

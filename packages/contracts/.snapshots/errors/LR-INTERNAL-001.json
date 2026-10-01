@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 500
+    },
+    "title": {
+      "const": "원장 무결성 경보"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

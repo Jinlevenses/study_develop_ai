@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "Verdict가 이미 대체됨·같은 Verdict 이의 진행 중"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

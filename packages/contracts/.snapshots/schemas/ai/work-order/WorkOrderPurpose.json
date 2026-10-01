@@ -1,0 +1,15 @@
+{
+  "type": "string",
+  "enum": [
+    "import",
+    "generation",
+    "regate",
+    "tier_promotion",
+    "pack_refresh",
+    "calibration",
+    "canary",
+    "warming",
+    "appeal_regrade",
+    "pending_regrade"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "string",
+  "enum": [
+    "AI-G01",
+    "AI-G02",
+    "AI-G03",
+    "AI-G04",
+    "AI-G05",
+    "AI-G06",
+    "AI-G07",
+    "AI-G08",
+    "AI-G09",
+    "AI-G10",
+    "AI-G11",
+    "AI-G12",
+    "AI-G13"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "정지 중 또는 쓰기 게이트 닫힘"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

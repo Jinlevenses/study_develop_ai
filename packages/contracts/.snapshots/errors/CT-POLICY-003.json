@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "SSRF 가드 거부"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

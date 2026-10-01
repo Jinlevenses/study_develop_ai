@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "session_established": {
+      "type": "boolean",
+      "const": true
+    },
+    "port": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "app_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "profile": {
+      "type": "string",
+      "enum": [
+        "prod",
+        "dev",
+        "test"
+      ]
+    }
+  },
+  "required": [
+    "session_established",
+    "port",
+    "app_version",
+    "profile"
+  ],
+  "additionalProperties": false
+}

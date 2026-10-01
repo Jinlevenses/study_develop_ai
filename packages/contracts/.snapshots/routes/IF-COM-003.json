@@ -1,0 +1,59 @@
+{
+  "$comment": "common.metrics.get",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "common.metrics.get"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/metrics"
+    },
+    "allowedCallers": {
+      "enum": [
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": []
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "text"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

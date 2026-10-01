@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "assessment_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "self_grade",
+        "bias_probe"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "item",
+            "attempt"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "value": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 4
+    }
+  },
+  "required": [
+    "assessment_id",
+    "kind",
+    "target",
+    "value"
+  ],
+  "additionalProperties": false
+}

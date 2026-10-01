@@ -1,0 +1,21 @@
+{
+  "type": "string",
+  "enum": [
+    "AUTH_MISSING",
+    "AUTH_INVALID",
+    "RATE_LIMITED",
+    "TIMEOUT",
+    "NETWORK",
+    "PROVIDER_5XX",
+    "BAD_REQUEST",
+    "MODEL_NOT_FOUND",
+    "OUTPUT_UNPARSEABLE",
+    "SCHEMA_VIOLATION",
+    "OUTPUT_OVERFLOW",
+    "BUDGET_EXCEEDED",
+    "CLI_NOT_FOUND",
+    "CLI_CAPABILITY_MISSING",
+    "CANCELLED",
+    "CONTENT_REFUSED"
+  ]
+}

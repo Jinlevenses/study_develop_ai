@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "알 수 없는 서비스 이름"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

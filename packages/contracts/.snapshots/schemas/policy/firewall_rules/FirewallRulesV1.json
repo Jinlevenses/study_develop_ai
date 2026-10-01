@@ -1,0 +1,172 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "firewall_rules@v1"
+    },
+    "mask_token": {
+      "type": "string",
+      "const": "⟨SECRET_{n}⟩"
+    },
+    "allow_literals": {
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 100
+      }
+    },
+    "rules": {
+      "minItems": 1,
+      "maxItems": 100,
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^FW-(SEC|PII|NET|USR|LCL|LOC)-\\d{3}$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{1,40}$"
+              },
+              "pattern": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "action": {
+                "type": "string",
+                "enum": [
+                  "mask",
+                  "block",
+                  "force_local"
+                ]
+              },
+              "group": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9
+              },
+              "c0_action": {
+                "type": "string",
+                "const": "mask"
+              },
+              "span": {
+                "type": "string",
+                "const": "until_end_marker"
+              },
+              "except_allow_literals": {
+                "type": "boolean",
+                "const": true
+              },
+              "validate": {
+                "type": "string",
+                "const": "luhn"
+              },
+              "class": {
+                "type": "string",
+                "enum": [
+                  "C0",
+                  "C1",
+                  "C2",
+                  "C3"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "pattern",
+              "action"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^FW-(SEC|PII|NET|USR|LCL|LOC)-\\d{3}$"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{1,40}$"
+              },
+              "source": {
+                "type": "string",
+                "enum": [
+                  "ai_firewall_pattern",
+                  "SYS-FWCLS",
+                  "request.local_only"
+                ]
+              },
+              "action": {
+                "type": "string",
+                "const": "force_local"
+              },
+              "when": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "class": {
+                "type": "string",
+                "enum": [
+                  "C0",
+                  "C1",
+                  "C2",
+                  "C3"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "source",
+              "action"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "injection_patterns": {
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 500
+      }
+    },
+    "data_class_defaults": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,40}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "C0",
+          "C1",
+          "C2",
+          "C3"
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "mask_token",
+    "allow_literals",
+    "rules",
+    "injection_patterns"
+  ],
+  "additionalProperties": false
+}

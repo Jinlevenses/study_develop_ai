@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "번들 sha256·Node 호환 불일치"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

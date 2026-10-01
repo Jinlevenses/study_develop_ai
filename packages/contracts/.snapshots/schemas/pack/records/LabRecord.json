@@ -1,0 +1,199 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "lab"
+    },
+    "lab_id": {
+      "type": "string",
+      "maxLength": 96,
+      "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+    },
+    "track_id": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "lab_kind": {
+      "type": "string",
+      "enum": [
+        "code",
+        "kata",
+        "algorithm",
+        "security_patch",
+        "infra",
+        "sql",
+        "predict"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "js",
+        "ts",
+        "sql",
+        "yaml",
+        "dockerfile",
+        "python_view"
+      ]
+    },
+    "task_md": {
+      "type": "string",
+      "maxLength": 40000
+    },
+    "starter_code": {
+      "type": "string",
+      "maxLength": 65536
+    },
+    "public_tests": {
+      "type": "string",
+      "maxLength": 65536
+    },
+    "hidden_tests": {
+      "type": "string",
+      "maxLength": 262144
+    },
+    "complexity": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/__schema0"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "oracle_log_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ext": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^pack\\.[a-z_]+$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema1"
+      }
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "kind",
+    "lab_id",
+    "track_id",
+    "level",
+    "lab_kind",
+    "language",
+    "task_md",
+    "starter_code",
+    "public_tests",
+    "hidden_tests",
+    "complexity",
+    "oracle_log_sha256",
+    "ext",
+    "content_hash"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema0"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      ]
+    },
+    "__schema1": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema1"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema1"
+          }
+        }
+      ]
+    }
+  }
+}

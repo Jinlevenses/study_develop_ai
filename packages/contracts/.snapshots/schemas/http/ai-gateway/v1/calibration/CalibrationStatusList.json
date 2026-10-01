@@ -1,0 +1,174 @@
+{
+  "type": "object",
+  "properties": {
+    "tasks": {
+      "maxItems": 19,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "enum": [
+              "AI-J01",
+              "AI-J02",
+              "AI-J03",
+              "AI-J04",
+              "AI-J05",
+              "AI-J06",
+              "AI-J07",
+              "AI-J08",
+              "AI-J09",
+              "AI-J10",
+              "AI-J11",
+              "AI-J12",
+              "AI-J13",
+              "AI-J14",
+              "AI-J15",
+              "AI-J16",
+              "AI-J17",
+              "AI-J18",
+              "AI-J19"
+            ]
+          },
+          "engine": {
+            "type": "string",
+            "enum": [
+              "J",
+              "LJ"
+            ]
+          },
+          "calibrated": {
+            "type": "boolean"
+          },
+          "sp1_state": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "unknown"
+            ]
+          },
+          "gold": {
+            "type": "object",
+            "properties": {
+              "draft": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "confirmed": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "required": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "draft",
+              "confirmed",
+              "required"
+            ],
+            "additionalProperties": false
+          },
+          "metrics": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "idea_unit_accuracy": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "precision_at_conf06": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "rubric_kappa": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "paraphrase": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "verbosity_bias": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "idea_unit_accuracy",
+                  "precision_at_conf06",
+                  "rubric_kappa",
+                  "paraphrase",
+                  "verbosity_bias"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "model_version": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "drift": {
+            "type": "boolean"
+          },
+          "last_run_at": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 8640000000000000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "task_id",
+          "engine",
+          "calibrated",
+          "sp1_state",
+          "gold",
+          "metrics",
+          "model_version",
+          "drift",
+          "last_run_at"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "tasks"
+  ],
+  "additionalProperties": false
+}

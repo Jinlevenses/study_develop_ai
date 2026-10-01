@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": [
+    "pending",
+    "active",
+    "awaiting_grade",
+    "done",
+    "skipped",
+    "swapped"
+  ]
+}

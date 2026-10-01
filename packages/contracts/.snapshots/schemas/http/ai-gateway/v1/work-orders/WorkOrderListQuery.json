@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "state": {
+      "type": "string",
+      "enum": [
+        "approval_required",
+        "approved",
+        "rejected",
+        "exhausted",
+        "expired",
+        "completed"
+      ]
+    },
+    "cursor": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,512}$"
+    },
+    "limit": {
+      "default": 50,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    }
+  },
+  "required": [
+    "limit"
+  ],
+  "additionalProperties": false
+}

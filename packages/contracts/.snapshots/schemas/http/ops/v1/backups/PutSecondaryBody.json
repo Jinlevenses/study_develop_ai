@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "path": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "encrypt": {
+      "type": "boolean"
+    },
+    "passphrase": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 1024
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "path",
+    "encrypt",
+    "passphrase"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "verify_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "replay": {
+      "type": "boolean"
+    },
+    "anchors": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "epoch",
+              "checkpoint",
+              "export_header"
+            ]
+          },
+          "ref": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "heads": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "seq": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "hash": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              },
+              "required": [
+                "seq",
+                "hash"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "source",
+          "ref",
+          "heads"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "verify_id",
+    "replay",
+    "anchors"
+  ],
+  "additionalProperties": false
+}

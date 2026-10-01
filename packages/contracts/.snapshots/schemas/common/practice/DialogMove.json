@@ -1,0 +1,20 @@
+{
+  "type": "string",
+  "enum": [
+    "probe_why",
+    "probe_how",
+    "probe_what_if",
+    "probe_edge",
+    "probe_internal",
+    "target_missing_ku",
+    "counterexample",
+    "hint_concept",
+    "hint_ku",
+    "hint_example",
+    "refocus",
+    "switch_to_explain",
+    "student_question",
+    "rebut",
+    "wrap_up"
+  ]
+}

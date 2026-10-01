@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "appeal_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "verdict_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "key_wrong",
+        "ambiguous",
+        "outdated",
+        "learner_right",
+        "other"
+      ]
+    },
+    "text": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 2000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "appeal_id",
+    "verdict_id",
+    "reason",
+    "text"
+  ],
+  "additionalProperties": false
+}

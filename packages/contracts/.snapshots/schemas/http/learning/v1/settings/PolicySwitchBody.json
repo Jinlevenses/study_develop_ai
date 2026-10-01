@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "preview_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    }
+  },
+  "required": [
+    "preview_id"
+  ],
+  "additionalProperties": false
+}

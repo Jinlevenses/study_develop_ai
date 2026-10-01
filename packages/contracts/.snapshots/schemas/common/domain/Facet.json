@@ -1,0 +1,4 @@
+{
+  "type": "string",
+  "pattern": "^[a-z][a-z_]{0,31}$"
+}

@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "properties": {
+    "monthly_krw": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000000
+    },
+    "per_call_usd_cap": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bulk_threshold": {
+      "type": "object",
+      "properties": {
+        "calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "krw": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "quota_pct": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "calls",
+        "krw",
+        "quota_pct"
+      ],
+      "additionalProperties": false
+    },
+    "subscription_windows": {
+      "type": "object",
+      "properties": {
+        "five_hour_calls": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "weekly_calls": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "five_hour_calls",
+        "weekly_calls"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "monthly_krw",
+    "per_call_usd_cap"
+  ],
+  "additionalProperties": false
+}

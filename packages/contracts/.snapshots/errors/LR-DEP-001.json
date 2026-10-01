@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "content 연결 실패 — retry-after: 1"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

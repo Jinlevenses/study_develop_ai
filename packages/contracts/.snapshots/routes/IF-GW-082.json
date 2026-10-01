@@ -1,0 +1,108 @@
+{
+  "$comment": "gateway.review.portfolio",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.review.portfolio"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/review/portfolio"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R3"
+    },
+    "fr": {
+      "enum": [
+        "FR-DSH-014"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "format": {
+              "default": "md",
+              "type": "string",
+              "enum": [
+                "md",
+                "json"
+              ]
+            }
+          },
+          "required": [
+            "format"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string",
+              "enum": [
+                "md",
+                "json"
+              ]
+            },
+            "content": {
+              "type": "string",
+              "maxLength": 5000000
+            },
+            "generated_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          },
+          "required": [
+            "format",
+            "content",
+            "generated_at",
+            "sha256"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

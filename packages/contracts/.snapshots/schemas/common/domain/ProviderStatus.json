@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "enum": [
+    "ok",
+    "degraded",
+    "down",
+    "unconsented",
+    "disabled"
+  ]
+}

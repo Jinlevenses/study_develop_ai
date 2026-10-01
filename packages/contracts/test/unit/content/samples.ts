@@ -1,0 +1,107 @@
+// 테스트 전용 유효 샘플(무네트워크). 계약 스키마의 "유효 1건" 단언에만 쓴다.
+export const ULID = '01HZX3Y5K7M9N2P4Q6R8S0T1V2';
+export const ULID_B = '01J0A1B2C3D4E5F6G7H8J9K0M1';
+export const SHA = 'a'.repeat(64);
+
+export const conceptRef = {
+  concept_id: 'k8s.probes',
+  track: 'k8s',
+  level: 2,
+  tier: 'A',
+  knowledge_type: 'C',
+  title_ko: '프로브',
+  title_en: 'Probes',
+  summary_ko: '컨테이너 상태 점검',
+  prereq_ids: ['k8s.pods'],
+  required_for_level: 2,
+  aliases: ['헬스체크'],
+  deprecated_by: null,
+  volatility: 'stable',
+  tags: ['cert:cka'],
+  version: 3,
+  content_hash: SHA,
+};
+
+export const conceptSummary = {
+  concept_id: 'k8s.probes',
+  track: 'k8s',
+  level: 2,
+  tier: 'A',
+  knowledge_type: 'C',
+  title_ko: '프로브',
+  title_en: 'Probes',
+  summary_ko: '컨테이너 상태 점검',
+  aliases: [],
+  required_for_level: 2,
+  deprecated_by: null,
+  volatility: 'stable',
+  tags: [],
+};
+
+export const itemDelivery = {
+  item_id: 'k8s.probes.i01',
+  item_content_hash: SHA,
+  format: 'ox',
+  mode_id: 'M-01',
+  concept_id: 'k8s.probes',
+  ku_ids: ['k8s.probes.k01'],
+  facet: 'concept',
+  response_mode: 'recognition',
+  tier: 'A',
+  level: 2,
+  stakes: 'S0',
+  n_options: 2,
+  stem_md: 'liveness probe 실패 시 컨테이너가 재시작된다.',
+  body: { kind: 'ox' },
+  confidence_required: false,
+  time_limit_ms: null,
+  hints_available: 0,
+  lineage: { source_kind: 'seed', trust: 'seed' },
+};
+
+export const verdict = {
+  verdict_id: ULID,
+  attempt_id: ULID_B,
+  session_id: ULID,
+  block_id: null,
+  item_id: 'k8s.probes.i01',
+  item_content_hash: SHA,
+  item_beta_snapshot: 0.2,
+  item_n_options: 2,
+  gate_result_id: null,
+  stakes: 'S0',
+  concept_id: 'k8s.probes',
+  ku_ids: ['k8s.probes.k01'],
+  mc_ids: [],
+  facet: 'concept',
+  format: 'ox',
+  response_mode: 'recognition',
+  tier: 'A',
+  result: 'correct',
+  band: 'right',
+  score: 1,
+  confidence: 2,
+  latency_ms: 1200,
+  rapid: false,
+  hints_used: 0,
+  grader_engine: 'D',
+  calibrated: false,
+  grader_confidence: null,
+  pending: false,
+  provisional: false,
+  w_format: 0.5,
+  w_grader: 1,
+  gaming_factor: 1,
+  recommended_grade: 3,
+  ai_mode: 'OFFLINE',
+  content_policy_version: 'ps_0123456789abcdef',
+  judge_log_ref: null,
+  prompt_version: null,
+  issued_at: 1_700_000_000_000,
+};
+
+/** 객체의 얕은 복사에 필드를 덮어쓴 새 객체(테스트 입력 변형용). */
+export const withFields = (base: object, over: Record<string, unknown>): Record<string, unknown> => ({
+  ...base,
+  ...over,
+});

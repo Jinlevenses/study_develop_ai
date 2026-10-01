@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": [
+    "code",
+    "retrieval",
+    "implement",
+    "blank_note",
+    "digging",
+    "case"
+  ]
+}

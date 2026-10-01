@@ -1,0 +1,111 @@
+{
+  "$comment": "learning.ledger.heads",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.ledger.heads"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/ledger/heads"
+    },
+    "allowedCallers": {
+      "enum": [
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-PRG-003",
+        "CR-27"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "local_device_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "event_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "devices": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "seq": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "head_hash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  },
+                  "last_client_ts": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  }
+                },
+                "required": [
+                  "seq",
+                  "head_hash",
+                  "last_client_ts"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "local_device_id",
+            "event_count",
+            "devices"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

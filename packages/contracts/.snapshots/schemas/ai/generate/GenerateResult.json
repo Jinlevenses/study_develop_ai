@@ -1,0 +1,189 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "ok"
+        },
+        "output": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        },
+        "schema_id": {
+          "type": "string",
+          "pattern": "^ai\\/[A-Za-z]+@\\d+$"
+        },
+        "provider_id": {
+          "type": "string",
+          "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+        },
+        "model": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "prompt_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        "repaired": {
+          "type": "boolean"
+        },
+        "cache_hit": {
+          "type": "boolean"
+        },
+        "call_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "firewall_decision_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "cost": {
+          "type": "object",
+          "properties": {
+            "basis": {
+              "type": "string",
+              "enum": [
+                "reported",
+                "computed",
+                "subscription",
+                "free"
+              ]
+            },
+            "krw": {
+              "type": "number",
+              "minimum": 0
+            },
+            "usd": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "basis",
+            "krw",
+            "usd"
+          ],
+          "additionalProperties": false
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "status",
+        "output",
+        "schema_id",
+        "provider_id",
+        "model",
+        "prompt_version",
+        "repaired",
+        "cache_hit",
+        "call_id",
+        "firewall_decision_id",
+        "cost",
+        "latency_ms"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "streaming"
+        },
+        "stream_ref": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        "provider_id": {
+          "type": "string",
+          "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+        },
+        "prompt_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        "call_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      },
+      "required": [
+        "status",
+        "stream_ref",
+        "expires_at",
+        "provider_id",
+        "prompt_version",
+        "call_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "const": "unavailable"
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "offline",
+            "no_consented_provider",
+            "auth_invalid",
+            "breaker_open",
+            "deadline",
+            "firewall_blocked",
+            "budget_exhausted",
+            "quota_exhausted",
+            "task_disabled",
+            "provider_error",
+            "schema_violation",
+            "content_refused",
+            "busy"
+          ]
+        },
+        "retry_after_ms": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reason",
+        "retry_after_ms"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

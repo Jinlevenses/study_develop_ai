@@ -1,0 +1,8 @@
+{
+  "type": "string",
+  "enum": [
+    "V-ci",
+    "V-live",
+    "V-field"
+  ]
+}

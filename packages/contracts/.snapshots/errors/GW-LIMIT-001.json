@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 429
+    },
+    "title": {
+      "const": "세션·CLI 토큰 300 req/min 초과"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

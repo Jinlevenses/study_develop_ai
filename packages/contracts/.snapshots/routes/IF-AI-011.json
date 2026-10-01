@@ -1,0 +1,386 @@
+{
+  "$comment": "ai-gateway.jobs.list",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.jobs.list"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/jobs"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway",
+        "content"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": true
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-010"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "enum": [
+                "queued",
+                "waiting_window",
+                "running",
+                "done",
+                "failed",
+                "cancelled",
+                "deferred"
+              ]
+            },
+            "task_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "AI-J01",
+                    "AI-J02",
+                    "AI-J03",
+                    "AI-J04",
+                    "AI-J05",
+                    "AI-J06",
+                    "AI-J07",
+                    "AI-J08",
+                    "AI-J09",
+                    "AI-J10",
+                    "AI-J11",
+                    "AI-J12",
+                    "AI-J13",
+                    "AI-J14",
+                    "AI-J15",
+                    "AI-J16",
+                    "AI-J17",
+                    "AI-J18",
+                    "AI-J19"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AI-G01",
+                    "AI-G02",
+                    "AI-G03",
+                    "AI-G04",
+                    "AI-G05",
+                    "AI-G06",
+                    "AI-G07",
+                    "AI-G08",
+                    "AI-G09",
+                    "AI-G10",
+                    "AI-G11",
+                    "AI-G12",
+                    "AI-G13"
+                  ]
+                }
+              ]
+            },
+            "cursor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,512}$"
+            },
+            "limit": {
+              "default": 50,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "job_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "judge",
+                      "generate"
+                    ]
+                  },
+                  "task_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "AI-J01",
+                          "AI-J02",
+                          "AI-J03",
+                          "AI-J04",
+                          "AI-J05",
+                          "AI-J06",
+                          "AI-J07",
+                          "AI-J08",
+                          "AI-J09",
+                          "AI-J10",
+                          "AI-J11",
+                          "AI-J12",
+                          "AI-J13",
+                          "AI-J14",
+                          "AI-J15",
+                          "AI-J16",
+                          "AI-J17",
+                          "AI-J18",
+                          "AI-J19"
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "AI-G01",
+                          "AI-G02",
+                          "AI-G03",
+                          "AI-G04",
+                          "AI-G05",
+                          "AI-G06",
+                          "AI-G07",
+                          "AI-G08",
+                          "AI-G09",
+                          "AI-G10",
+                          "AI-G11",
+                          "AI-G12",
+                          "AI-G13"
+                        ]
+                      }
+                    ]
+                  },
+                  "work_order_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "queued",
+                      "waiting_window",
+                      "running",
+                      "done",
+                      "failed",
+                      "cancelled",
+                      "deferred"
+                    ]
+                  },
+                  "items_total": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "items_done": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "items_failed": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "attempts": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "created_at": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  },
+                  "started_at": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 8640000000000000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "finished_at": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 8640000000000000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "next_attempt_at": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 8640000000000000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "outcome": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "ok",
+                          "failed",
+                          "cancelled",
+                          "deferred"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "result_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "prompt_version": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "last_error": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "AUTH_MISSING",
+                          "AUTH_INVALID",
+                          "RATE_LIMITED",
+                          "TIMEOUT",
+                          "NETWORK",
+                          "PROVIDER_5XX",
+                          "BAD_REQUEST",
+                          "MODEL_NOT_FOUND",
+                          "OUTPUT_UNPARSEABLE",
+                          "SCHEMA_VIOLATION",
+                          "OUTPUT_OVERFLOW",
+                          "BUDGET_EXCEEDED",
+                          "CLI_NOT_FOUND",
+                          "CLI_CAPABILITY_MISSING",
+                          "CANCELLED",
+                          "CONTENT_REFUSED"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "job_id",
+                  "kind",
+                  "task_id",
+                  "work_order_id",
+                  "state",
+                  "items_total",
+                  "items_done",
+                  "items_failed",
+                  "attempts",
+                  "created_at",
+                  "started_at",
+                  "finished_at",
+                  "next_attempt_at",
+                  "outcome",
+                  "result_ref",
+                  "prompt_version",
+                  "last_error"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "items",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

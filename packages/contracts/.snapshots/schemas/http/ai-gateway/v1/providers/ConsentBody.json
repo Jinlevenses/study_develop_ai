@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "granted": {
+      "type": "boolean"
+    },
+    "scopes": {
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "judge",
+          "generate",
+          "batch"
+        ]
+      }
+    }
+  },
+  "required": [
+    "granted",
+    "scopes"
+  ],
+  "additionalProperties": false
+}

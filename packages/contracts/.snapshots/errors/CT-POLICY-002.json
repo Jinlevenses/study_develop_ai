@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "이 OS에서 러너 형식 비활성"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "$comment": "ops.backups.secondary_unlock",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ops.backups.secondary_unlock"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/backups/secondary:unlock"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "NFR-SEC-018"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "passphrase": {
+              "type": "string",
+              "minLength": 12,
+              "maxLength": 1024
+            }
+          },
+          "required": [
+            "passphrase"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "encrypt": {
+              "type": "boolean"
+            },
+            "locked": {
+              "type": "boolean"
+            },
+            "last_copied_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "lag_s": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "warnings": {
+              "maxItems": 5,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "inside_fathom_home",
+                  "sync_folder",
+                  "network_path",
+                  "not_writable",
+                  "missing"
+                ]
+              }
+            }
+          },
+          "required": [
+            "path",
+            "encrypt",
+            "locked",
+            "last_copied_at",
+            "lag_s",
+            "warnings"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

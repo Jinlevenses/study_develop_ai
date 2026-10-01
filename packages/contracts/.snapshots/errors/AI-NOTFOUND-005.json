@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "스트림 ref 없음·만료"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

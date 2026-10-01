@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "last_user_activity_at": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "idle_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "active_streams": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "last_user_activity_at",
+    "idle_ms",
+    "active_streams"
+  ],
+  "additionalProperties": false
+}

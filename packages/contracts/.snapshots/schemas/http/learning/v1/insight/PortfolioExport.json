@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "format": {
+      "type": "string",
+      "enum": [
+        "md",
+        "json"
+      ]
+    },
+    "content": {
+      "type": "string",
+      "maxLength": 5000000
+    },
+    "generated_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "format",
+    "content",
+    "generated_at",
+    "sha256"
+  ],
+  "additionalProperties": false
+}

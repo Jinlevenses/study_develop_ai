@@ -1,0 +1,336 @@
+{
+  "$comment": "gateway.imports.resume",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.imports.resume"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/api/v1/imports/{job_id}:resume"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-IMP-003"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "job_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "job_id"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "202": {
+          "type": "object",
+          "properties": {
+            "job_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "source_kind": {
+              "type": "string",
+              "enum": [
+                "url",
+                "paste",
+                "file",
+                "inbox",
+                "folder",
+                "blueprint",
+                "pack_refresh",
+                "case_foundry"
+              ]
+            },
+            "title": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "queued",
+                "running",
+                "awaiting_work_order",
+                "awaiting_approval",
+                "published",
+                "rejected",
+                "failed",
+                "cancelled"
+              ]
+            },
+            "stage": {
+              "type": "string",
+              "enum": [
+                "I1",
+                "I1.5",
+                "I2",
+                "I3",
+                "I4",
+                "I5",
+                "I6",
+                "I7",
+                "COPY_GUARD",
+                "I8",
+                "I9"
+              ]
+            },
+            "stages": {
+              "maxItems": 11,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "stage": {
+                    "type": "string",
+                    "enum": [
+                      "I1",
+                      "I1.5",
+                      "I2",
+                      "I3",
+                      "I4",
+                      "I5",
+                      "I6",
+                      "I7",
+                      "COPY_GUARD",
+                      "I8",
+                      "I9"
+                    ]
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "running",
+                      "done",
+                      "failed",
+                      "skipped"
+                    ]
+                  },
+                  "engine": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "D",
+                          "H",
+                          "J",
+                          "L",
+                          "LJ"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "started_at": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 8640000000000000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "finished_at": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 8640000000000000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "error_code": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 40
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "stage",
+                  "state",
+                  "engine",
+                  "started_at",
+                  "finished_at",
+                  "error_code"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "trust": {
+              "type": "string",
+              "enum": [
+                "user",
+                "llm_unverified",
+                "verified"
+              ]
+            },
+            "masking": {
+              "type": "string",
+              "enum": [
+                "full",
+                "partial"
+              ]
+            },
+            "data_class": {
+              "type": "string",
+              "enum": [
+                "C0",
+                "C1",
+                "C2",
+                "C3"
+              ]
+            },
+            "work_order_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "quarantined_chunks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "diff_summary": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "concepts": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "kus": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "items": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "conflicts": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "concepts",
+                    "kus",
+                    "items",
+                    "conflicts"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "created_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "updated_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "job_id",
+            "source_kind",
+            "title",
+            "state",
+            "stage",
+            "stages",
+            "trust",
+            "masking",
+            "data_class",
+            "work_order_id",
+            "quarantined_chunks",
+            "diff_summary",
+            "created_at",
+            "updated_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

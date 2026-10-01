@@ -1,0 +1,290 @@
+{
+  "type": "object",
+  "properties": {
+    "track": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "alg",
+            "cs",
+            "net",
+            "lang",
+            "fe",
+            "be",
+            "db",
+            "linux",
+            "docker",
+            "k8s",
+            "cicd",
+            "sre",
+            "cloud",
+            "sec",
+            "ml",
+            "llm",
+            "arch",
+            "eng",
+            "lead",
+            "data"
+          ]
+        },
+        {
+          "type": "string",
+          "const": "all"
+        }
+      ]
+    },
+    "as_of": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "layers": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "mastery",
+          "retention",
+          "illusion",
+          "foundation_crack",
+          "revalidation",
+          "rusty",
+          "blueprint"
+        ]
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "version",
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    },
+    "cells": {
+      "maxItems": 2000,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "concept_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+          },
+          "track": {
+            "type": "string",
+            "enum": [
+              "alg",
+              "cs",
+              "net",
+              "lang",
+              "fe",
+              "be",
+              "db",
+              "linux",
+              "docker",
+              "k8s",
+              "cicd",
+              "sre",
+              "cloud",
+              "sec",
+              "ml",
+              "llm",
+              "arch",
+              "eng",
+              "lead",
+              "data"
+            ]
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "lifecycle": {
+            "type": "string",
+            "enum": [
+              "CL-0",
+              "CL-1",
+              "CL-2",
+              "CL-3",
+              "CL-4",
+              "CL-5",
+              "CL-6",
+              "CL-7",
+              "CL-8",
+              "CL-X"
+            ]
+          },
+          "mastery": {
+            "type": "string",
+            "enum": [
+              "unseen",
+              "learning",
+              "mastered"
+            ]
+          },
+          "provisional": {
+            "type": "boolean"
+          },
+          "retention": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rusty": {
+            "type": "boolean"
+          },
+          "illusion": {
+            "type": "boolean"
+          },
+          "foundation_crack": {
+            "type": "boolean"
+          },
+          "needs_revalidation": {
+            "type": "boolean"
+          },
+          "depth_ring": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4
+          },
+          "star": {
+            "type": "boolean"
+          },
+          "blueprint_weight": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "concept_id",
+          "track",
+          "level",
+          "x",
+          "y",
+          "lifecycle",
+          "mastery",
+          "provisional",
+          "retention",
+          "rusty",
+          "illusion",
+          "foundation_crack",
+          "needs_revalidation",
+          "depth_ring",
+          "star",
+          "blueprint_weight"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "maxItems": 5000,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+          },
+          "to": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+          }
+        },
+        "required": [
+          "from",
+          "to"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "degraded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "part": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.]{1,63}$"
+          },
+          "dependency": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "code": {
+            "type": "string",
+            "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
+          }
+        },
+        "required": [
+          "part",
+          "dependency",
+          "code"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "track",
+    "as_of",
+    "layers",
+    "layout",
+    "cells",
+    "edges",
+    "degraded"
+  ],
+  "additionalProperties": false
+}

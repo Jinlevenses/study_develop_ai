@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "enum": [
+    "practice",
+    "pretest",
+    "embedded",
+    "verify",
+    "promotion_exam",
+    "placement",
+    "boss"
+  ]
+}

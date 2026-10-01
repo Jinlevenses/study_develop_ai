@@ -1,0 +1,216 @@
+{
+  "$comment": "ai-gateway.firewall.preview",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.firewall.preview"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/firewall:preview"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-019",
+        "FR-IMP-010"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "blocks": {
+              "minItems": 1,
+              "maxItems": 16,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                  },
+                  "text": {
+                    "type": "string",
+                    "maxLength": 200000
+                  },
+                  "data_class": {
+                    "type": "string",
+                    "enum": [
+                      "C0",
+                      "C1",
+                      "C2",
+                      "C3"
+                    ]
+                  },
+                  "untrusted": {
+                    "type": "boolean"
+                  },
+                  "source_ref": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 200
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "key",
+                  "text",
+                  "data_class",
+                  "untrusted",
+                  "source_ref"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "route": {
+              "type": "string",
+              "enum": [
+                "external",
+                "local_only"
+              ]
+            }
+          },
+          "required": [
+            "blocks",
+            "route"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "action": {
+              "type": "string",
+              "enum": [
+                "pass",
+                "masked",
+                "force_local",
+                "block"
+              ]
+            },
+            "data_class": {
+              "type": "string",
+              "enum": [
+                "C0",
+                "C1",
+                "C2",
+                "C3"
+              ]
+            },
+            "masks": {
+              "maxItems": 500,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "block_key": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                  },
+                  "start": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "end": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "token": {
+                    "type": "string",
+                    "pattern": "^⟨SECRET_\\d{1,4}⟩$"
+                  },
+                  "rule_id": {
+                    "type": "string",
+                    "maxLength": 60
+                  }
+                },
+                "required": [
+                  "block_key",
+                  "start",
+                  "end",
+                  "token",
+                  "rule_id"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "masked_blocks": {
+              "maxItems": 16,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key",
+                  "text"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "action",
+            "data_class",
+            "masks",
+            "masked_blocks"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

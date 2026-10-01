@@ -1,0 +1,28 @@
+{
+  "type": "string",
+  "enum": [
+    "node_version",
+    "node_eol",
+    "sqlite_experimental",
+    "data_path",
+    "disk",
+    "ports",
+    "integrity_quick",
+    "integrity_full",
+    "ledger_chain",
+    "ledger_anchor",
+    "projection_hash",
+    "policy_lock",
+    "prompts_lock",
+    "runner_platform",
+    "prlimit",
+    "docker",
+    "graphify",
+    "providers_live",
+    "keychain",
+    "backups",
+    "secondary",
+    "autostart",
+    "session_key"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "background 호출에 승인된 work_order_id 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

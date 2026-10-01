@@ -1,0 +1,416 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "mastery_rules@v1"
+    },
+    "epsilon": {
+      "type": "number"
+    },
+    "elo": {
+      "type": "object",
+      "properties": {
+        "alpha": {
+          "type": "number"
+        },
+        "b": {
+          "type": "number"
+        },
+        "guess_correction": {
+          "type": "boolean"
+        },
+        "unqualified_ceiling": {
+          "type": "number"
+        },
+        "theta_q": {
+          "type": "object",
+          "properties": {
+            "w_format_min": {
+              "type": "number"
+            },
+            "w_grader_min": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "w_format_min",
+            "w_grader_min"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "alpha",
+        "b",
+        "guess_correction",
+        "unqualified_ceiling",
+        "theta_q"
+      ],
+      "additionalProperties": false
+    },
+    "theta_shrink": {
+      "type": "object",
+      "properties": {
+        "theta_prior": {
+          "type": "number"
+        },
+        "theta_shrink_n0": {
+          "type": "number"
+        },
+        "theta_display_min_events": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "theta_prior",
+        "theta_shrink_n0",
+        "theta_display_min_events"
+      ],
+      "additionalProperties": false
+    },
+    "mastery": {
+      "type": "object",
+      "properties": {
+        "p_min": {
+          "type": "number"
+        },
+        "formats_min": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "distinct_days_min": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "format_counts": {
+          "type": "object",
+          "properties": {
+            "w_format_min": {
+              "type": "number"
+            },
+            "w_grader_min": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "w_format_min",
+            "w_grader_min"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "p_min",
+        "formats_min",
+        "distinct_days_min",
+        "format_counts"
+      ],
+      "additionalProperties": false
+    },
+    "w_grader": {
+      "type": "object",
+      "properties": {
+        "D": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "J_calibrated": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "J_uncalibrated": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "J_low_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "LJ": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "H": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "S": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "PENDING": {
+          "type": "number",
+          "const": 0
+        }
+      },
+      "required": [
+        "D",
+        "J_calibrated",
+        "J_uncalibrated",
+        "J_low_confidence",
+        "LJ",
+        "H",
+        "S",
+        "PENDING"
+      ],
+      "additionalProperties": false
+    },
+    "promotion": {
+      "type": "object",
+      "properties": {
+        "empty_level": {
+          "type": "string",
+          "enum": [
+            "skip",
+            "block"
+          ]
+        },
+        "required_mastered": {
+          "type": "object",
+          "properties": {
+            "all_if_n_le": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "ratio": {
+              "type": "number"
+            },
+            "allow_misses": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "all_if_n_le",
+            "ratio",
+            "allow_misses"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "empty_level",
+        "required_mastered"
+      ],
+      "additionalProperties": false
+    },
+    "sparse": {
+      "type": "object",
+      "properties": {
+        "depth_scope": {
+          "type": "string",
+          "enum": [
+            "track",
+            "level"
+          ]
+        }
+      },
+      "required": [
+        "depth_scope"
+      ],
+      "additionalProperties": false
+    },
+    "d4": {
+      "type": "object",
+      "properties": {
+        "floor_mode": {
+          "type": "string",
+          "enum": [
+            "min_with_possible",
+            "fixed"
+          ]
+        },
+        "possible_scope": {
+          "type": "string",
+          "enum": [
+            "level_le_k",
+            "all"
+          ]
+        }
+      },
+      "required": [
+        "floor_mode",
+        "possible_scope"
+      ],
+      "additionalProperties": false
+    },
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "formats_min": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "selection": {
+          "type": "string",
+          "const": "round_robin_by_format"
+        },
+        "engines": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "deterministic",
+              "calibrated_jev_if_sp1_pass"
+            ]
+          }
+        },
+        "accuracy_min_correct": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "cbm_denominator": {
+          "type": "string",
+          "const": "chosen_confidence_max"
+        },
+        "cbm_min": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "additionalProperties": {
+            "type": "number"
+          },
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "retry_days": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "items",
+        "formats_min",
+        "selection",
+        "engines",
+        "accuracy_min_correct",
+        "cbm_denominator",
+        "cbm_min",
+        "retry_days"
+      ],
+      "additionalProperties": false
+    },
+    "ai_profiles": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "FULL",
+          "JUDGE_ONLY",
+          "LLM_ONLY",
+          "OFFLINE"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "rubric_engine": {
+            "type": "object",
+            "properties": {
+              "sp1_pass": {
+                "type": "string",
+                "enum": [
+                  "J",
+                  "LJ",
+                  "S_provisional"
+                ]
+              },
+              "sp1_fail": {
+                "type": "string",
+                "enum": [
+                  "J",
+                  "LJ",
+                  "S_provisional"
+                ]
+              }
+            },
+            "required": [
+              "sp1_pass",
+              "sp1_fail"
+            ],
+            "additionalProperties": false
+          },
+          "provisional_if_self_only": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "rubric_engine",
+          "provisional_if_self_only"
+        ],
+        "additionalProperties": false
+      },
+      "required": [
+        "FULL",
+        "JUDGE_ONLY",
+        "LLM_ONLY",
+        "OFFLINE"
+      ]
+    }
+  },
+  "required": [
+    "version",
+    "epsilon",
+    "elo",
+    "theta_shrink",
+    "mastery",
+    "w_grader",
+    "promotion",
+    "sparse",
+    "d4",
+    "assessment",
+    "ai_profiles"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "epoch_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "quiesced_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "in_flight_drained": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "epoch_id",
+    "quiesced_at",
+    "in_flight_drained"
+  ],
+  "additionalProperties": false
+}

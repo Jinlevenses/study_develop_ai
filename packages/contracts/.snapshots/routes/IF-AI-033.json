@@ -1,0 +1,93 @@
+{
+  "$comment": "ai-gateway.secrets.unlock",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.secrets.unlock"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/secrets:unlock"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "NFR-SEC-004"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "passphrase": {
+              "type": "string",
+              "minLength": 12,
+              "maxLength": 1024
+            }
+          },
+          "required": [
+            "passphrase"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "unlocked": {
+              "type": "boolean"
+            },
+            "providers": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+              }
+            }
+          },
+          "required": [
+            "unlocked",
+            "providers"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

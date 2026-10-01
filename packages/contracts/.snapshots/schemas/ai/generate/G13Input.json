@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "artifact_kind": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "adr",
+            "runbook",
+            "postmortem",
+            "design_review",
+            "standard_clause"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "concept_id",
+    "artifact_kind"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "상호 배타 작업 실행 중"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

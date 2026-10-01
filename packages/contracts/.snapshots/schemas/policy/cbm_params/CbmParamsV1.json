@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "cbm_params@v1"
+    },
+    "score": {
+      "type": "object",
+      "properties": {
+        "correct": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "wrong": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "items": false,
+          "minItems": 3,
+          "maxItems": 3
+        }
+      },
+      "required": [
+        "correct",
+        "wrong"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "score"
+  ],
+  "additionalProperties": false
+}

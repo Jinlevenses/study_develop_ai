@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "grade 확인 대기 상태 아님"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

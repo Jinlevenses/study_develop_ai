@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "서비스 job 슬롯 사용 중 — retry-after"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

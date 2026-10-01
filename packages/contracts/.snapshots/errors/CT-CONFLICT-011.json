@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "오버레이 base_version 낡음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

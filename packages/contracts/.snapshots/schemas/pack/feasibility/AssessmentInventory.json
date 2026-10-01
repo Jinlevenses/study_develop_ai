@@ -1,0 +1,294 @@
+{
+  "type": "object",
+  "properties": {
+    "track": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "concepts": {
+      "maxItems": 300,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "concept_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "tier": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "required_for_level": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "d4_possible": {
+            "type": "boolean"
+          },
+          "formats_by_mode": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "enum": [
+                "FULL",
+                "JUDGE_ONLY",
+                "LLM_ONLY",
+                "OFFLINE"
+              ]
+            },
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "embedded",
+                  "ox",
+                  "mcq",
+                  "cloze",
+                  "short",
+                  "matching",
+                  "code_task",
+                  "blank_note",
+                  "digging_d4_mcq",
+                  "error_find",
+                  "confusable",
+                  "fermi",
+                  "cond_reversal",
+                  "infra_lite",
+                  "kata",
+                  "audit",
+                  "case_decision",
+                  "code_predict",
+                  "sql_task",
+                  "essay",
+                  "digging",
+                  "feynman",
+                  "pr_review",
+                  "reverse_item",
+                  "artifact",
+                  "case_postmortem",
+                  "micro_judgment",
+                  "ml_predict",
+                  "mcq_multi",
+                  "order",
+                  "parsons",
+                  "log_read",
+                  "config_review"
+                ]
+              }
+            },
+            "required": [
+              "FULL",
+              "JUDGE_ONLY",
+              "LLM_ONLY",
+              "OFFLINE"
+            ]
+          }
+        },
+        "required": [
+          "concept_id",
+          "level",
+          "tier",
+          "required_for_level",
+          "d4_possible",
+          "formats_by_mode"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assessment_pool": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string",
+          "enum": [
+            "FULL",
+            "JUDGE_ONLY",
+            "LLM_ONLY",
+            "OFFLINE"
+          ]
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "formats": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "embedded",
+                  "ox",
+                  "mcq",
+                  "cloze",
+                  "short",
+                  "matching",
+                  "code_task",
+                  "blank_note",
+                  "digging_d4_mcq",
+                  "error_find",
+                  "confusable",
+                  "fermi",
+                  "cond_reversal",
+                  "infra_lite",
+                  "kata",
+                  "audit",
+                  "case_decision",
+                  "code_predict",
+                  "sql_task",
+                  "essay",
+                  "digging",
+                  "feynman",
+                  "pr_review",
+                  "reverse_item",
+                  "artifact",
+                  "case_postmortem",
+                  "micro_judgment",
+                  "ml_predict",
+                  "mcq_multi",
+                  "order",
+                  "parsons",
+                  "log_read",
+                  "config_review"
+                ]
+              }
+            }
+          },
+          "required": [
+            "items",
+            "formats"
+          ],
+          "additionalProperties": false
+        },
+        "required": [
+          "FULL",
+          "JUDGE_ONLY",
+          "LLM_ONLY",
+          "OFFLINE"
+        ]
+      },
+      "required": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "cases": {
+      "maxItems": 60,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "maxLength": 96,
+            "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.case\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "tracks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            }
+          }
+        },
+        "required": [
+          "case_id",
+          "level",
+          "tracks"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "track",
+    "concepts",
+    "assessment_pool",
+    "cases"
+  ],
+  "additionalProperties": false
+}

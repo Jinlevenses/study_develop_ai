@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "since": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "device_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    }
+  },
+  "additionalProperties": false
+}

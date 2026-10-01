@@ -1,0 +1,123 @@
+{
+  "type": "object",
+  "properties": {
+    "items": {
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "concept",
+              "ku",
+              "misconception",
+              "case",
+              "path"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "concept_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 64,
+                "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title_ko": {
+            "type": "string"
+          },
+          "snippet_ko": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "track": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "alg",
+                  "cs",
+                  "net",
+                  "lang",
+                  "fe",
+                  "be",
+                  "db",
+                  "linux",
+                  "docker",
+                  "k8s",
+                  "cicd",
+                  "sre",
+                  "cloud",
+                  "sec",
+                  "ml",
+                  "llm",
+                  "arch",
+                  "eng",
+                  "lead",
+                  "data"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "level": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "score": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "concept_id",
+          "title_ko",
+          "snippet_ko",
+          "track",
+          "level",
+          "score"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "engine": {
+      "type": "string",
+      "enum": [
+        "v2",
+        "v3"
+      ]
+    },
+    "took_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "items",
+    "engine",
+    "took_ms"
+  ],
+  "additionalProperties": false
+}

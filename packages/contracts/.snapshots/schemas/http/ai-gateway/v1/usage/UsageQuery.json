@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "period": {
+      "default": "month",
+      "type": "string",
+      "enum": [
+        "day",
+        "month"
+      ]
+    }
+  },
+  "required": [
+    "period"
+  ],
+  "additionalProperties": false
+}

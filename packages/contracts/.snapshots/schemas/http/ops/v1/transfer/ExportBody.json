@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "since": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "all"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "checkpoint"
+            },
+            "checkpoint_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "kind",
+            "checkpoint_id"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "out_dir": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "include": {
+      "minItems": 1,
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "ledger",
+          "overlays",
+          "settings",
+          "gold",
+          "markdown_notes"
+        ]
+      }
+    }
+  },
+  "required": [
+    "op_id",
+    "since",
+    "out_dir",
+    "include"
+  ],
+  "additionalProperties": false
+}

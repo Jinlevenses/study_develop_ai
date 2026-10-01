@@ -1,0 +1,12 @@
+{
+  "consumer": "ai-gateway",
+  "subscriptions": [
+    {
+      "type": "ops.host_state.changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["idle_window_open", "power", "interactive_cli", "sampled_at"]
+    }
+  ]
+}

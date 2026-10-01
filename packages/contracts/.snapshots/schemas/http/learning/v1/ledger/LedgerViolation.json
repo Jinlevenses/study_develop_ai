@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "device_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "device_seq": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "chain_break",
+        "anchor_mismatch",
+        "tail_truncated",
+        "schema_version_unknown",
+        "policy_set_missing",
+        "end_line_missing",
+        "sha256_mismatch",
+        "event_invalid"
+      ]
+    },
+    "detail": {
+      "type": "string",
+      "maxLength": 300
+    }
+  },
+  "required": [
+    "device_id",
+    "device_seq",
+    "kind",
+    "detail"
+  ],
+  "additionalProperties": false
+}

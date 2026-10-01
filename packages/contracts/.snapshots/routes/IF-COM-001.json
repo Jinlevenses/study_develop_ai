@@ -1,0 +1,94 @@
+{
+  "$comment": "common.health.live",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "common.health.live"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/healthz"
+    },
+    "allowedCallers": {
+      "enum": []
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R0"
+    },
+    "fr": {
+      "enum": []
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "ok": {
+              "type": "boolean",
+              "const": true
+            },
+            "svc": {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "version": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+            },
+            "boot_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "uptime_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "ok",
+            "svc",
+            "version",
+            "boot_id",
+            "uptime_ms"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "svc": {
+      "type": "string",
+      "enum": [
+        "gateway",
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ]
+    },
+    "level": {
+      "type": "string",
+      "enum": [
+        "quick",
+        "full"
+      ]
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "check": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "ok"
+              },
+              {
+                "maxItems": 100,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 300
+                }
+              }
+            ]
+          },
+          "foreign_key_violations": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "file",
+          "check",
+          "foreign_key_violations"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "checked_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "duration_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "svc",
+    "level",
+    "ok",
+    "files",
+    "checked_at",
+    "duration_ms"
+  ],
+  "additionalProperties": false
+}

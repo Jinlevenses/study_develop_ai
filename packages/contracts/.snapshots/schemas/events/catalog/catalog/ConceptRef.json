@@ -1,0 +1,154 @@
+{
+  "type": "object",
+  "properties": {
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "track": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "knowledge_type": {
+      "type": "string",
+      "enum": [
+        "D",
+        "C",
+        "P",
+        "S"
+      ]
+    },
+    "title_ko": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "title_en": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "summary_ko": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "prereq_ids": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 64,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+      }
+    },
+    "required_for_level": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "aliases": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80
+      }
+    },
+    "deprecated_by": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "volatility": {
+      "type": "string",
+      "enum": [
+        "stable",
+        "evolving",
+        "volatile"
+      ]
+    },
+    "tags": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+      }
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "concept_id",
+    "track",
+    "level",
+    "tier",
+    "knowledge_type",
+    "title_ko",
+    "title_en",
+    "summary_ko",
+    "prereq_ids",
+    "required_for_level",
+    "aliases",
+    "deprecated_by",
+    "volatility",
+    "tags",
+    "version",
+    "content_hash"
+  ],
+  "additionalProperties": false
+}

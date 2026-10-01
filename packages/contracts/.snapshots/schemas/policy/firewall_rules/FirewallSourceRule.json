@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^FW-(SEC|PII|NET|USR|LCL|LOC)-\\d{3}$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{1,40}$"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "ai_firewall_pattern",
+        "SYS-FWCLS",
+        "request.local_only"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "const": "force_local"
+    },
+    "when": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "class": {
+      "type": "string",
+      "enum": [
+        "C0",
+        "C1",
+        "C2",
+        "C3"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "action"
+  ],
+  "additionalProperties": false
+}

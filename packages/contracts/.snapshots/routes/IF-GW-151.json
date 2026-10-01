@@ -1,0 +1,221 @@
+{
+  "$comment": "gateway.ops.logs_tail",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ops.logs_tail"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/ops/logs/tail"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-SET-016"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "svc": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "gateway",
+                    "content",
+                    "learning",
+                    "ai-gateway",
+                    "ops-api"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "const": "supervisor"
+                }
+              ]
+            },
+            "n": {
+              "default": 200,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5000
+            }
+          },
+          "required": [
+            "svc",
+            "n"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "svc": {
+              "type": "string"
+            },
+            "lines": {
+              "maxItems": 5000,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "ts": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  },
+                  "level": {
+                    "type": "string",
+                    "enum": [
+                      "debug",
+                      "info",
+                      "warn",
+                      "error",
+                      "fatal"
+                    ]
+                  },
+                  "svc": {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  "msg": {
+                    "type": "string",
+                    "maxLength": 2000
+                  },
+                  "req_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "event": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 80
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "err_code": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 40
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "correlation_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "trace_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{32}$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "job": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 40
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "raw": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "ts",
+                  "level",
+                  "svc",
+                  "msg",
+                  "req_id",
+                  "event",
+                  "err_code",
+                  "correlation_id",
+                  "trace_id",
+                  "job",
+                  "raw"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "svc",
+            "lines"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "utterance_ko": {
+      "type": "string",
+      "maxLength": 600
+    },
+    "move": {
+      "type": "string",
+      "enum": [
+        "probe_why",
+        "probe_how",
+        "probe_what_if",
+        "probe_edge",
+        "probe_internal",
+        "target_missing_ku",
+        "counterexample",
+        "hint_concept",
+        "hint_ku",
+        "hint_example",
+        "refocus",
+        "switch_to_explain",
+        "student_question",
+        "rebut",
+        "wrap_up"
+      ]
+    },
+    "reveals_answer": {
+      "type": "boolean",
+      "const": false
+    }
+  },
+  "required": [
+    "utterance_ko",
+    "move",
+    "reveals_answer"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": [
+    "remember",
+    "understand",
+    "apply",
+    "analyze",
+    "evaluate",
+    "create"
+  ]
+}

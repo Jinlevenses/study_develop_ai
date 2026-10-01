@@ -1,0 +1,133 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "track"
+    },
+    "track_id": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "name_ko": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "name_en": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "track_group": {
+      "type": "string",
+      "enum": [
+        "foundation",
+        "app",
+        "infra",
+        "security",
+        "ai",
+        "design_lead"
+      ]
+    },
+    "sort_order": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 99
+    },
+    "offline_cap_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "oracle_cap_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "summary_ko": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "ext": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^pack\\.[a-z_]+$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema0"
+      }
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "kind",
+    "track_id",
+    "name_ko",
+    "name_en",
+    "track_group",
+    "sort_order",
+    "offline_cap_level",
+    "oracle_cap_level",
+    "summary_ko",
+    "ext",
+    "content_hash"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema0"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      ]
+    }
+  }
+}

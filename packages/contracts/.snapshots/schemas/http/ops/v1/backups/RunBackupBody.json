@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "snapshot",
+        "incremental"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "scheduled",
+        "pre_migration",
+        "pre_doctor_fix",
+        "pre_upgrade"
+      ]
+    }
+  },
+  "required": [
+    "op_id",
+    "kind",
+    "reason"
+  ],
+  "additionalProperties": false
+}

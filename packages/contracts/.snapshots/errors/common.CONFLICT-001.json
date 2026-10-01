@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "같은 Idempotency-Key에 다른 본문"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

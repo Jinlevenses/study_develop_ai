@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": [
+    "D",
+    "J",
+    "LJ",
+    "H",
+    "S",
+    "PENDING"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "원장 import 거부: 체인·앵커·스키마 버전 위반"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

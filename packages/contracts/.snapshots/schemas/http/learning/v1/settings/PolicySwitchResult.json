@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "policy_version": {
+      "type": "string",
+      "pattern": "^ps_[0-9a-f]{16}$"
+    },
+    "ledger_event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "switched_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "policy_version",
+    "ledger_event_id",
+    "switched_at"
+  ],
+  "additionalProperties": false
+}

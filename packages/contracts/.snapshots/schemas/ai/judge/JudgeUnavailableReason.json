@@ -1,0 +1,18 @@
+{
+  "type": "string",
+  "enum": [
+    "offline",
+    "no_consented_provider",
+    "auth_invalid",
+    "breaker_open",
+    "deadline",
+    "firewall_blocked",
+    "budget_exhausted",
+    "quota_exhausted",
+    "task_disabled",
+    "provider_error",
+    "bad_request",
+    "calibrated_engine_unavailable",
+    "busy"
+  ]
+}

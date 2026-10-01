@@ -1,0 +1,60 @@
+{
+  "consumer": "content",
+  "subscriptions": [
+    {
+      "type": "learning.evidence.recorded",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": [
+        "ledger_event_id",
+        "verdict_id",
+        "item_id",
+        "format",
+        "result",
+        "latency_ms",
+        "rapid",
+        "confidence",
+        "selected_option_key",
+        "recorded_at",
+        "phase",
+        "item_beta_after"
+      ]
+    },
+    {
+      "type": "learning.session.completed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["session_id", "modes", "completed_at"]
+    },
+    {
+      "type": "learning.demand.forecasted",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["window_days", "demand", "computed_at"]
+    },
+    {
+      "type": "ai.mode.changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["mode", "changed_at"]
+    },
+    {
+      "type": "ai.job.completed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["job_id", "task_id", "work_order_id", "outcome", "result_ref", "prompt_version"]
+    },
+    {
+      "type": "ai.work_order.decided",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["work_order_id", "decision", "reservation"]
+    }
+  ]
+}

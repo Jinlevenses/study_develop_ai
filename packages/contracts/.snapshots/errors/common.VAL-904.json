@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 415
+    },
+    "title": {
+      "const": "지원하지 않는 Content-Type"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

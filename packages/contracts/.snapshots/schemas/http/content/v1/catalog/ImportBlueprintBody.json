@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "blueprint_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
+    },
+    "file_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "edition": {
+      "type": "string",
+      "maxLength": 40
+    }
+  },
+  "required": [
+    "blueprint_id",
+    "file_path",
+    "edition"
+  ],
+  "additionalProperties": false
+}

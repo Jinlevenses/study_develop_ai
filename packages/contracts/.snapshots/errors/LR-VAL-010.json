@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "응답 kind가 블록 문항 형식과 맞지 않음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

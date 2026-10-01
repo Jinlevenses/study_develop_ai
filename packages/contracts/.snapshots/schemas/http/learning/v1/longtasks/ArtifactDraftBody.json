@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "maxLength": 40000
+    },
+    "updated_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "text",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

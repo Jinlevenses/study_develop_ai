@@ -1,0 +1,109 @@
+{
+  "$comment": "gateway.session.status",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.session.status"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/session"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R0"
+    },
+    "fr": {
+      "enum": [
+        "FR-SET-023"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "authenticated": {
+              "type": "boolean",
+              "const": true
+            },
+            "port": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "app_version": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+            },
+            "boot_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "profile": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "dev",
+                "test"
+              ]
+            },
+            "safe_mode": {
+              "type": "boolean"
+            },
+            "maintenance": {
+              "type": "string",
+              "enum": [
+                "none",
+                "restore",
+                "upgrade"
+              ]
+            }
+          },
+          "required": [
+            "authenticated",
+            "port",
+            "app_version",
+            "boot_id",
+            "profile",
+            "safe_mode",
+            "maintenance"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

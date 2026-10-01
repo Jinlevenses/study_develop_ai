@@ -1,0 +1,150 @@
+{
+  "type": "object",
+  "properties": {
+    "title_ko": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "scenario_md": {
+      "type": "string",
+      "maxLength": 12000
+    },
+    "question_md": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "options": {
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "text_md": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "key",
+          "text_md"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "rubric": {
+      "type": "object",
+      "properties": {
+        "dimensions": {
+          "minItems": 1,
+          "maxItems": 8,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{1,31}$"
+              },
+              "label_ko": {
+                "type": "string",
+                "maxLength": 60
+              },
+              "levels": {
+                "minItems": 2,
+                "maxItems": 5,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "key",
+              "label_ko",
+              "levels",
+              "weight"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "key_points": {
+          "maxItems": 20,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_]{1,31}$"
+              },
+              "statement_ko": {
+                "type": "string",
+                "maxLength": 500
+              },
+              "ku_id": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 96,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "key",
+              "statement_ko",
+              "ku_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "dimensions",
+        "key_points"
+      ],
+      "additionalProperties": false
+    },
+    "cited_ku_ids": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 96,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+      }
+    },
+    "assumptions": {
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 300
+      }
+    }
+  },
+  "required": [
+    "title_ko",
+    "scenario_md",
+    "question_md",
+    "options",
+    "rubric",
+    "cited_ku_ids",
+    "assumptions"
+  ],
+  "additionalProperties": false
+}

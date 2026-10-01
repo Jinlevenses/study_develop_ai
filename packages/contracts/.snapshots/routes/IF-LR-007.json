@@ -1,0 +1,270 @@
+{
+  "$comment": "learning.practice.blocks.skip",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.practice.blocks.skip"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/practice/sessions/{session_id}/blocks/{block_id}:skip"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-STD-006"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "session_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "block_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "session_id",
+            "block_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "too_hard",
+                    "too_easy",
+                    "not_now",
+                    "irrelevant",
+                    "other"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "block_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "ord": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "slot": {
+              "type": "string",
+              "enum": [
+                "W",
+                "R",
+                "N",
+                "D",
+                "S",
+                "C"
+              ]
+            },
+            "mode_id": {
+              "type": "string",
+              "pattern": "^M-(0[1-9]|1\\d|2[01])$"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "lesson",
+                "items",
+                "blank_note",
+                "dialog",
+                "lab",
+                "case",
+                "artifact",
+                "jol",
+                "reflection",
+                "triage"
+              ]
+            },
+            "concept_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 64,
+                  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "reason_chips": {
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "enum": [
+                      "due",
+                      "keystone",
+                      "new",
+                      "weekly_quota",
+                      "wildcard",
+                      "boss",
+                      "warmup",
+                      "closer",
+                      "nba",
+                      "scope",
+                      "interleave",
+                      "dday",
+                      "return",
+                      "verify",
+                      "promotion",
+                      "placement",
+                      "weak"
+                    ]
+                  },
+                  "label_ko": {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 40
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "code",
+                  "label_ko",
+                  "value"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "locked": {
+              "type": "boolean"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "active",
+                "awaiting_grade",
+                "done",
+                "skipped",
+                "swapped"
+              ]
+            },
+            "est_minutes": {
+              "type": "number",
+              "minimum": 0
+            },
+            "item_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "done_count": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "wildcard": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 60
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "boss": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "block_id",
+            "ord",
+            "slot",
+            "mode_id",
+            "kind",
+            "concept_id",
+            "reason_chips",
+            "locked",
+            "state",
+            "est_minutes",
+            "item_count",
+            "done_count",
+            "wildcard",
+            "boss"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

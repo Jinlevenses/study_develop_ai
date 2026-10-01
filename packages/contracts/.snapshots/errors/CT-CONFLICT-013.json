@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "팩 설치 진행 중·하향 설치 거부"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

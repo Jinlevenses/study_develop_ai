@@ -1,0 +1,404 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "svc.stop"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "svc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            {
+              "type": "string",
+              "const": "vite"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "svc"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "svc.start"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "svc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            {
+              "type": "string",
+              "const": "vite"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "svc"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "svc.restart"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "svc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            {
+              "type": "string",
+              "const": "vite"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "svc"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "svc.run_mode"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "svc": {
+          "type": "string",
+          "enum": [
+            "gateway",
+            "content",
+            "learning",
+            "ai-gateway",
+            "ops-api"
+          ]
+        },
+        "args": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "migrate"
+                },
+                "dry_run": {
+                  "type": "boolean"
+                },
+                "db_copy_dir": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "app_dir": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "mode",
+                "dry_run",
+                "db_copy_dir",
+                "app_dir"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "restore"
+                },
+                "from": {
+                  "type": "string",
+                  "maxLength": 1024
+                },
+                "rewind_cursors": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "enum": [
+                      "gateway",
+                      "content",
+                      "learning",
+                      "ai-gateway",
+                      "ops-api"
+                    ]
+                  },
+                  "additionalProperties": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "required": [
+                    "gateway",
+                    "content",
+                    "learning",
+                    "ai-gateway",
+                    "ops-api"
+                  ]
+                }
+              },
+              "required": [
+                "mode",
+                "from",
+                "rewind_cursors"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "verify"
+                },
+                "replay": {
+                  "type": "boolean"
+                },
+                "db_copy_dir": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 1024
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "mode",
+                "replay",
+                "db_copy_dir"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "svc",
+        "args"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "status.get"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      },
+      "required": [
+        "type",
+        "v"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "logs.tail"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "svc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            {
+              "type": "string",
+              "const": "supervisor"
+            }
+          ]
+        },
+        "n": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5000
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "svc",
+        "n"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "shutdown.all"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "grace_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "grace_ms"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

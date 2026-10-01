@@ -1,0 +1,456 @@
+{
+  "$comment": "gateway.ai.calls",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ai.calls"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/ai/calls"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": true
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-021"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "task_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "AI-J01",
+                    "AI-J02",
+                    "AI-J03",
+                    "AI-J04",
+                    "AI-J05",
+                    "AI-J06",
+                    "AI-J07",
+                    "AI-J08",
+                    "AI-J09",
+                    "AI-J10",
+                    "AI-J11",
+                    "AI-J12",
+                    "AI-J13",
+                    "AI-J14",
+                    "AI-J15",
+                    "AI-J16",
+                    "AI-J17",
+                    "AI-J18",
+                    "AI-J19"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AI-G01",
+                    "AI-G02",
+                    "AI-G03",
+                    "AI-G04",
+                    "AI-G05",
+                    "AI-G06",
+                    "AI-G07",
+                    "AI-G08",
+                    "AI-G09",
+                    "AI-G10",
+                    "AI-G11",
+                    "AI-G12",
+                    "AI-G13"
+                  ]
+                }
+              ]
+            },
+            "provider_id": {
+              "type": "string",
+              "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+            },
+            "outcome": {
+              "type": "string",
+              "enum": [
+                "ok",
+                "error",
+                "timeout",
+                "fallback",
+                "cache_hit"
+              ]
+            },
+            "cursor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,512}$"
+            },
+            "limit": {
+              "default": 50,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "call_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "ts": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  },
+                  "task_id": {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "enum": [
+                              "AI-J01",
+                              "AI-J02",
+                              "AI-J03",
+                              "AI-J04",
+                              "AI-J05",
+                              "AI-J06",
+                              "AI-J07",
+                              "AI-J08",
+                              "AI-J09",
+                              "AI-J10",
+                              "AI-J11",
+                              "AI-J12",
+                              "AI-J13",
+                              "AI-J14",
+                              "AI-J15",
+                              "AI-J16",
+                              "AI-J17",
+                              "AI-J18",
+                              "AI-J19"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "enum": [
+                              "AI-G01",
+                              "AI-G02",
+                              "AI-G03",
+                              "AI-G04",
+                              "AI-G05",
+                              "AI-G06",
+                              "AI-G07",
+                              "AI-G08",
+                              "AI-G09",
+                              "AI-G10",
+                              "AI-G11",
+                              "AI-G12",
+                              "AI-G13"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "SYS-CANARY",
+                          "SYS-SMOKE",
+                          "SYS-FWCLS"
+                        ]
+                      }
+                    ]
+                  },
+                  "provider_id": {
+                    "type": "string",
+                    "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                  },
+                  "model": {
+                    "type": "string",
+                    "maxLength": 80
+                  },
+                  "family": {
+                    "type": "string",
+                    "enum": [
+                      "anthropic",
+                      "openai",
+                      "google",
+                      "typesafe",
+                      "local",
+                      "other"
+                    ]
+                  },
+                  "transport": {
+                    "type": "string",
+                    "enum": [
+                      "api",
+                      "cli",
+                      "jev",
+                      "local"
+                    ]
+                  },
+                  "input_tokens": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "output_tokens": {
+                    "anyOf": [
+                      {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cost": {
+                    "type": "object",
+                    "properties": {
+                      "basis": {
+                        "type": "string",
+                        "enum": [
+                          "reported",
+                          "computed",
+                          "subscription",
+                          "free"
+                        ]
+                      },
+                      "krw": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "usd": {
+                        "anyOf": [
+                          {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "basis",
+                      "krw",
+                      "usd"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "latency_ms": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  },
+                  "outcome": {
+                    "type": "string",
+                    "enum": [
+                      "ok",
+                      "error",
+                      "timeout",
+                      "fallback",
+                      "cache_hit"
+                    ]
+                  },
+                  "error_class": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "AUTH_MISSING",
+                          "AUTH_INVALID",
+                          "RATE_LIMITED",
+                          "TIMEOUT",
+                          "NETWORK",
+                          "PROVIDER_5XX",
+                          "BAD_REQUEST",
+                          "MODEL_NOT_FOUND",
+                          "OUTPUT_UNPARSEABLE",
+                          "SCHEMA_VIOLATION",
+                          "OUTPUT_OVERFLOW",
+                          "BUDGET_EXCEEDED",
+                          "CLI_NOT_FOUND",
+                          "CLI_CAPABILITY_MISSING",
+                          "CANCELLED",
+                          "CONTENT_REFUSED"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cache_hit": {
+                    "type": "boolean"
+                  },
+                  "prompt_version": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "firewall_action": {
+                    "type": "string",
+                    "enum": [
+                      "pass",
+                      "masked",
+                      "force_local",
+                      "block"
+                    ]
+                  },
+                  "firewall_decision_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "data_class": {
+                    "type": "string",
+                    "enum": [
+                      "C0",
+                      "C1",
+                      "C2",
+                      "C3"
+                    ]
+                  },
+                  "external_processor": {
+                    "type": "boolean"
+                  },
+                  "route_trace": {
+                    "maxItems": 16,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "provider_id": {
+                          "type": "string",
+                          "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                        },
+                        "decision": {
+                          "type": "string",
+                          "enum": [
+                            "selected",
+                            "skipped"
+                          ]
+                        },
+                        "reason": {
+                          "type": "string",
+                          "maxLength": 60
+                        }
+                      },
+                      "required": [
+                        "provider_id",
+                        "decision",
+                        "reason"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "call_id",
+                  "ts",
+                  "task_id",
+                  "provider_id",
+                  "model",
+                  "family",
+                  "transport",
+                  "input_tokens",
+                  "output_tokens",
+                  "cost",
+                  "latency_ms",
+                  "outcome",
+                  "error_class",
+                  "cache_hit",
+                  "prompt_version",
+                  "firewall_action",
+                  "firewall_decision_id",
+                  "data_class",
+                  "external_processor",
+                  "route_trace"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "items",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

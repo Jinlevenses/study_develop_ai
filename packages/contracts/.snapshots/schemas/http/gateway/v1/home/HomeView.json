@@ -1,0 +1,445 @@
+{
+  "type": "object",
+  "properties": {
+    "primary_action": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "start_session",
+            "resume_session",
+            "onboarding",
+            "return_mode",
+            "paused"
+          ]
+        },
+        "label_ko": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "suggested": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "minutes": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "const": 5
+                    },
+                    {
+                      "type": "number",
+                      "const": 15
+                    },
+                    {
+                      "type": "number",
+                      "const": 25
+                    },
+                    {
+                      "type": "number",
+                      "const": 45
+                    },
+                    {
+                      "type": "number",
+                      "const": 90
+                    }
+                  ]
+                },
+                "energy": {
+                  "type": "string",
+                  "enum": [
+                    "light",
+                    "normal",
+                    "deep"
+                  ]
+                }
+              },
+              "required": [
+                "minutes",
+                "energy"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "session_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "label_ko",
+        "suggested",
+        "session_id"
+      ],
+      "additionalProperties": false
+    },
+    "alerts": {
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "due_overflow",
+              "return_mode",
+              "paused",
+              "promotion_ready",
+              "verify_suggested",
+              "weekly_review_due",
+              "pending_grades",
+              "rating_confirm",
+              "policy_switch_available",
+              "onboarding"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "info",
+              "warn",
+              "critical"
+            ]
+          },
+          "message_ko": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "action": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "label_ko": {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  "href": {
+                    "type": "string",
+                    "pattern": "^\\/[A-Za-z0-9/_$.?=&-]*$"
+                  }
+                },
+                "required": [
+                  "label_ko",
+                  "href"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "message_ko",
+          "action"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "energy_default": {
+      "type": "string",
+      "enum": [
+        "light",
+        "normal",
+        "deep"
+      ]
+    },
+    "minutes_default": {
+      "anyOf": [
+        {
+          "type": "number",
+          "const": 5
+        },
+        {
+          "type": "number",
+          "const": 15
+        },
+        {
+          "type": "number",
+          "const": 25
+        },
+        {
+          "type": "number",
+          "const": 45
+        },
+        {
+          "type": "number",
+          "const": 90
+        }
+      ]
+    },
+    "today": {
+      "type": "object",
+      "properties": {
+        "due_cards": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "new_budget": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "est_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "due_cards",
+        "new_budget",
+        "est_minutes"
+      ],
+      "additionalProperties": false
+    },
+    "weekly_goal": {
+      "type": "object",
+      "properties": {
+        "target_sessions": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 14
+        },
+        "done_sessions": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "streak_weeks": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "rest_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "target_sessions",
+        "done_sessions",
+        "streak_weeks",
+        "rest_tokens"
+      ],
+      "additionalProperties": false
+    },
+    "ai_chip": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "FULL",
+            "JUDGE_ONLY",
+            "LLM_ONLY",
+            "OFFLINE"
+          ]
+        },
+        "label_ko": {
+          "type": "string",
+          "enum": [
+            "AI: 전체",
+            "AI: 판단만",
+            "AI: 생성만",
+            "AI: 오프라인"
+          ]
+        },
+        "degraded_badge": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "mode",
+        "label_ko",
+        "degraded_badge"
+      ],
+      "additionalProperties": false
+    },
+    "banners": {
+      "maxItems": 5,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "banner_id": {
+            "type": "string",
+            "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+          },
+          "code": {
+            "type": "string",
+            "enum": [
+              "service_degraded",
+              "service_restarting",
+              "ai_offline",
+              "ai_budget_80",
+              "ai_budget_100",
+              "ai_quota",
+              "ai_drift",
+              "backup_failed",
+              "backup_aborted",
+              "secondary_missing",
+              "secondary_locked",
+              "rpo_exceeded",
+              "outbox_lag",
+              "inbox_dead",
+              "ledger_halt",
+              "ledger_integrity",
+              "projection_mismatch",
+              "integrity_check_failed",
+              "runner_platform_disabled",
+              "policy_lock_mismatch",
+              "prompt_lock_mismatch",
+              "disk_low",
+              "data_path_risk",
+              "node_eol",
+              "job_failed",
+              "slo_violation",
+              "tripwire",
+              "maintenance"
+            ]
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "info",
+              "warn",
+              "critical"
+            ]
+          },
+          "message_ko": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "since": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8640000000000000
+          },
+          "dismissible": {
+            "type": "boolean"
+          },
+          "action": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "label_ko": {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  "href": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 200
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cli": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 120
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "label_ko",
+                  "href",
+                  "cli"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "banner_id",
+          "code",
+          "severity",
+          "message_ko",
+          "since",
+          "dismissible",
+          "action"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "degraded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "part": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.]{1,63}$"
+          },
+          "dependency": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "code": {
+            "type": "string",
+            "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
+          }
+        },
+        "required": [
+          "part",
+          "dependency",
+          "code"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "primary_action",
+    "alerts",
+    "energy_default",
+    "minutes_default",
+    "today",
+    "weekly_goal",
+    "ai_chip",
+    "banners",
+    "degraded"
+  ],
+  "additionalProperties": false
+}

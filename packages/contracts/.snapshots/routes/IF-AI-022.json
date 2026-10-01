@@ -1,0 +1,389 @@
+{
+  "$comment": "ai-gateway.work_orders.decide",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.work_orders.decide"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/work-orders/{work_order_id}:decide"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-026"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "work_order_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "work_order_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": [
+                "approve",
+                "reject"
+              ]
+            },
+            "cap": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "calls": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "krw": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "calls",
+                    "krw"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "decision",
+            "cap"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "work_order_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "purpose": {
+              "type": "string",
+              "enum": [
+                "import",
+                "generation",
+                "regate",
+                "tier_promotion",
+                "pack_refresh",
+                "calibration",
+                "canary",
+                "warming",
+                "appeal_regrade",
+                "pending_regrade"
+              ]
+            },
+            "requested_by": {
+              "type": "string",
+              "enum": [
+                "content",
+                "user",
+                "system"
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "approval_required",
+                "approved",
+                "rejected",
+                "exhausted",
+                "expired",
+                "completed"
+              ]
+            },
+            "tasks": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "task_id": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "enum": [
+                          "AI-J01",
+                          "AI-J02",
+                          "AI-J03",
+                          "AI-J04",
+                          "AI-J05",
+                          "AI-J06",
+                          "AI-J07",
+                          "AI-J08",
+                          "AI-J09",
+                          "AI-J10",
+                          "AI-J11",
+                          "AI-J12",
+                          "AI-J13",
+                          "AI-J14",
+                          "AI-J15",
+                          "AI-J16",
+                          "AI-J17",
+                          "AI-J18",
+                          "AI-J19"
+                        ]
+                      },
+                      {
+                        "type": "string",
+                        "enum": [
+                          "AI-G01",
+                          "AI-G02",
+                          "AI-G03",
+                          "AI-G04",
+                          "AI-G05",
+                          "AI-G06",
+                          "AI-G07",
+                          "AI-G08",
+                          "AI-G09",
+                          "AI-G10",
+                          "AI-G11",
+                          "AI-G12",
+                          "AI-G13"
+                        ]
+                      }
+                    ]
+                  },
+                  "calls": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "task_id",
+                  "calls"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "estimate": {
+              "type": "object",
+              "properties": {
+                "calls": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "krw": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "quota_pct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "duration_s": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "calls",
+                "krw",
+                "quota_pct",
+                "duration_s"
+              ],
+              "additionalProperties": false
+            },
+            "threshold_exceeded": {
+              "type": "object",
+              "properties": {
+                "calls": {
+                  "type": "boolean"
+                },
+                "krw": {
+                  "type": "boolean"
+                },
+                "quota": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "calls",
+                "krw",
+                "quota"
+              ],
+              "additionalProperties": false
+            },
+            "reservation": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "calls": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "krw": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "expires_at": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 8640000000000000
+                    }
+                  },
+                  "required": [
+                    "calls",
+                    "krw",
+                    "expires_at"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "usage": {
+              "type": "object",
+              "properties": {
+                "calls": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "krw": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "calls",
+                "krw"
+              ],
+              "additionalProperties": false
+            },
+            "created_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "decided_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "decided_by": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "user"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "work_order_id",
+            "purpose",
+            "requested_by",
+            "state",
+            "tasks",
+            "estimate",
+            "threshold_exceeded",
+            "reservation",
+            "usage",
+            "created_at",
+            "decided_at",
+            "decided_by"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

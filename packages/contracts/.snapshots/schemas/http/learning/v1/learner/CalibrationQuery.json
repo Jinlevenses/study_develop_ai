@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "window_days": {
+      "default": 30,
+      "type": "integer",
+      "minimum": 7,
+      "maximum": 365
+    }
+  },
+  "required": [
+    "window_days"
+  ],
+  "additionalProperties": false
+}

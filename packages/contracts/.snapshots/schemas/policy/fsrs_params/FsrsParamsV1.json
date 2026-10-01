@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "fsrs_params@v1"
+    },
+    "impl": {
+      "type": "string",
+      "const": "ts-fsrs@5.4.2"
+    },
+    "w": {
+      "minItems": 21,
+      "maxItems": 21,
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "enable_fuzz": {
+      "type": "boolean",
+      "const": false
+    },
+    "enable_short_term": {
+      "type": "boolean"
+    },
+    "request_retention": {
+      "type": "object",
+      "properties": {
+        "A": {
+          "type": "number",
+          "minimum": 0.7,
+          "maximum": 0.97
+        },
+        "B": {
+          "type": "number",
+          "minimum": 0.7,
+          "maximum": 0.97
+        },
+        "C": {
+          "type": "number",
+          "minimum": 0.7,
+          "maximum": 0.97
+        }
+      },
+      "required": [
+        "A",
+        "B",
+        "C"
+      ],
+      "additionalProperties": false
+    },
+    "forecast": {
+      "type": "object",
+      "properties": {
+        "window_days": {
+          "type": "number",
+          "const": 30
+        },
+        "band": {
+          "type": "object",
+          "properties": {
+            "min_history_windows": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "default_pct": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "min_history_windows",
+            "default_pct"
+          ],
+          "additionalProperties": false
+        },
+        "governor": {
+          "type": "string",
+          "const": "lower_bound"
+        }
+      },
+      "required": [
+        "window_days",
+        "band",
+        "governor"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "impl",
+    "w",
+    "enable_fuzz",
+    "enable_short_term",
+    "request_retention",
+    "forecast"
+  ],
+  "additionalProperties": false
+}

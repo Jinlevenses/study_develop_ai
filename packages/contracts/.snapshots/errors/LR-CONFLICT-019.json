@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "정책 미리보기 만료·불일치"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

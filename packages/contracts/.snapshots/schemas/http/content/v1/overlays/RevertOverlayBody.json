@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "revert_patch_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "reason_ko": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    }
+  },
+  "required": [
+    "revert_patch_id",
+    "reason_ko"
+  ],
+  "additionalProperties": false
+}

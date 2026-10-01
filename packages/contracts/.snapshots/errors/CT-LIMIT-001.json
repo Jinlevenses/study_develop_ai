@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 429
+    },
+    "title": {
+      "const": "러너 대기 큐 > 20"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

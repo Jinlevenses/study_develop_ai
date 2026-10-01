@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "maxLength": 96,
+      "pattern": "^(?:src\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "grade": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "P"
+      ]
+    },
+    "url": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "edition": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 60
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "license": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "retrieved_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "source_id",
+    "title",
+    "grade",
+    "url",
+    "edition",
+    "license",
+    "retrieved_at"
+  ],
+  "additionalProperties": false
+}

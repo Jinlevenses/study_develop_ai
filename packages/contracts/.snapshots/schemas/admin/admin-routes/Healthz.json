@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "ok": {
+      "type": "boolean",
+      "const": true
+    },
+    "svc": {
+      "type": "string",
+      "enum": [
+        "gateway",
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "boot_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "uptime_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "ok",
+    "svc",
+    "version",
+    "boot_id",
+    "uptime_ms"
+  ],
+  "additionalProperties": false
+}

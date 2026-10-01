@@ -1,0 +1,54 @@
+{
+  "consumer": "ops-api",
+  "subscriptions": [
+    {
+      "type": "learning.session.completed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["session_id", "duration_ms", "first_item_latency_ms", "completed_at"]
+    },
+    {
+      "type": "learning.level.promoted",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["track", "to_level", "provisional"]
+    },
+    {
+      "type": "learning.ledger.merged",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["checkpoint_id", "imported_events"]
+    },
+    {
+      "type": "ai.mode.changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["mode", "previous_mode", "reasons", "changed_at"]
+    },
+    {
+      "type": "ai.provider.status_changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["provider_id", "status", "breaker"]
+    },
+    {
+      "type": "ai.budget.threshold_reached",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["scope", "provider_id", "ratio", "period"]
+    },
+    {
+      "type": "ai.judge.drift_detected",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["provider_id", "task_id", "model_version_new"]
+    }
+  ]
+}

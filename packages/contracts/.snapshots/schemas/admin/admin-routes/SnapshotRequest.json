@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "epoch_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "dir": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    }
+  },
+  "required": [
+    "epoch_id",
+    "dir"
+  ],
+  "additionalProperties": false
+}

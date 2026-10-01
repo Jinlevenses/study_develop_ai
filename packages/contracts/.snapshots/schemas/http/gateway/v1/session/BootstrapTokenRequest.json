@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "purpose": {
+      "type": "string",
+      "enum": [
+        "up",
+        "open"
+      ]
+    }
+  },
+  "required": [
+    "purpose"
+  ],
+  "additionalProperties": false
+}

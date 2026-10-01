@@ -1,0 +1,298 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "install"
+        },
+        "install_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "source": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "bundled"
+                },
+                "track": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "alg",
+                        "cs",
+                        "net",
+                        "lang",
+                        "fe",
+                        "be",
+                        "db",
+                        "linux",
+                        "docker",
+                        "k8s",
+                        "cicd",
+                        "sre",
+                        "cloud",
+                        "sec",
+                        "ml",
+                        "llm",
+                        "arch",
+                        "eng",
+                        "lead",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "track"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "file"
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                }
+              },
+              "required": [
+                "kind",
+                "path"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "user_dir"
+                },
+                "dir": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                }
+              },
+              "required": [
+                "kind",
+                "dir"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "action",
+        "install_id",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "upgrade"
+        },
+        "install_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "source": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "bundled"
+                },
+                "track": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "alg",
+                        "cs",
+                        "net",
+                        "lang",
+                        "fe",
+                        "be",
+                        "db",
+                        "linux",
+                        "docker",
+                        "k8s",
+                        "cicd",
+                        "sre",
+                        "cloud",
+                        "sec",
+                        "ml",
+                        "llm",
+                        "arch",
+                        "eng",
+                        "lead",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "kind",
+                "track"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "file"
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                }
+              },
+              "required": [
+                "kind",
+                "path"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "user_dir"
+                },
+                "dir": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024
+                }
+              },
+              "required": [
+                "kind",
+                "dir"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "action",
+        "install_id",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "add"
+        },
+        "install_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "dir": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "action",
+        "install_id",
+        "dir"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "const": "refresh"
+        },
+        "install_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "track": {
+          "type": "string",
+          "enum": [
+            "alg",
+            "cs",
+            "net",
+            "lang",
+            "fe",
+            "be",
+            "db",
+            "linux",
+            "docker",
+            "k8s",
+            "cicd",
+            "sre",
+            "cloud",
+            "sec",
+            "ml",
+            "llm",
+            "arch",
+            "eng",
+            "lead",
+            "data"
+          ]
+        },
+        "work_order_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "action",
+        "install_id",
+        "track",
+        "work_order_id"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "default": {
+      "type": "string",
+      "const": "V-build"
+    },
+    "exceptions": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^(FR|NFR)-[A-Z]+-\\d{3}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "build": {
+            "type": "boolean"
+          },
+          "beyond": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "V-ci",
+                "V-live",
+                "V-field"
+              ]
+            }
+          }
+        },
+        "required": [
+          "build",
+          "beyond"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "default",
+    "exceptions"
+  ],
+  "additionalProperties": false
+}

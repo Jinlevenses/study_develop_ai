@@ -1,0 +1,9 @@
+{
+  "type": "string",
+  "enum": [
+    "turn_limit",
+    "fail_limit",
+    "learner",
+    "completed"
+  ]
+}

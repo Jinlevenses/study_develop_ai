@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "enum": [
+    "snapshot",
+    "integrity",
+    "pack-load",
+    "pipeline",
+    "replay-verify",
+    "merge",
+    "rebuild",
+    "fsrs-optimize"
+  ]
+}

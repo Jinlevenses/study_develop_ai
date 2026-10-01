@@ -1,0 +1,60 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "static"
+        },
+        "text_md": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "question_bank",
+            "template",
+            "rebuttal_bank"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "text_md",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "stream"
+        },
+        "stream_ref": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        "fallback_text_md": {
+          "type": "string",
+          "maxLength": 4000
+        }
+      },
+      "required": [
+        "kind",
+        "stream_ref",
+        "expires_at",
+        "fallback_text_md"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

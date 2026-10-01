@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "쿠키로 /api/v1/cli/* 호출 또는 CLI 토큰으로 브라우저 라우트 호출"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

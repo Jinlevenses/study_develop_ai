@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 401
+    },
+    "title": {
+      "const": "세션 쿠키 없음·MAC 불일치·버전 불명"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

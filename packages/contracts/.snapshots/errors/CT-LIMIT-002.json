@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 413
+    },
+    "title": {
+      "const": "가져오기 원문 > 2 MiB"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

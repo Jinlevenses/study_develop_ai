@@ -1,0 +1,193 @@
+{
+  "$comment": "content.runner.platform",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.runner.platform"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/runner/platform"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway",
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-LAB-012",
+        "NFR-PORT-001",
+        "CR-02"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "platform": {
+              "type": "object",
+              "properties": {
+                "os": {
+                  "type": "string",
+                  "enum": [
+                    "linux",
+                    "darwin",
+                    "win32"
+                  ]
+                },
+                "arch": {
+                  "type": "string",
+                  "maxLength": 20
+                },
+                "node": {
+                  "type": "string",
+                  "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                }
+              },
+              "required": [
+                "os",
+                "arch",
+                "node"
+              ],
+              "additionalProperties": false
+            },
+            "verified_platforms": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "os": {
+                    "type": "string",
+                    "enum": [
+                      "linux",
+                      "darwin",
+                      "win32"
+                    ]
+                  },
+                  "arch": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "node": {
+                    "type": "string",
+                    "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                  }
+                },
+                "required": [
+                  "os",
+                  "arch",
+                  "node"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "watchdog_period_ms": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "not_verified",
+                    "watchdog_period_exceeded",
+                    "helper_unavailable"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "docker_recommended": {
+              "type": "boolean"
+            },
+            "queue": {
+              "type": "object",
+              "properties": {
+                "running": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "queued": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "max_concurrency": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "running",
+                "queued",
+                "max_concurrency"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "enabled",
+            "platform",
+            "verified_platforms",
+            "watchdog_period_ms",
+            "reason",
+            "docker_recommended",
+            "queue"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

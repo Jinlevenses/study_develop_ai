@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "rotated_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "sessions_invalidated": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "rotated_at",
+    "sessions_invalidated"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,100 @@
+{
+  "type": "object",
+  "properties": {
+    "verdict_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "item_id": {
+      "type": "string",
+      "maxLength": 140,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "embedded",
+        "ox",
+        "mcq",
+        "cloze",
+        "short",
+        "matching",
+        "code_task",
+        "blank_note",
+        "digging_d4_mcq",
+        "error_find",
+        "confusable",
+        "fermi",
+        "cond_reversal",
+        "infra_lite",
+        "kata",
+        "audit",
+        "case_decision",
+        "code_predict",
+        "sql_task",
+        "essay",
+        "digging",
+        "feynman",
+        "pr_review",
+        "reverse_item",
+        "artifact",
+        "case_postmortem",
+        "micro_judgment",
+        "ml_predict",
+        "mcq_multi",
+        "order",
+        "parsons",
+        "log_read",
+        "config_review"
+      ]
+    },
+    "queued_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "offline",
+        "deadline",
+        "provider_down",
+        "self_grade_skipped",
+        "low_confidence",
+        "appeal"
+      ]
+    },
+    "attempts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "next_try_at": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "verdict_id",
+    "attempt_id",
+    "item_id",
+    "format",
+    "queued_at",
+    "reason",
+    "attempts",
+    "next_try_at"
+  ],
+  "additionalProperties": false
+}

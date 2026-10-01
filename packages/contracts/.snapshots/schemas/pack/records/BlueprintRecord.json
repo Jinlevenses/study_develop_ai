@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "blueprint"
+    },
+    "blueprint_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
+    },
+    "exam": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "edition": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "source_url": {
+      "type": "string",
+      "maxLength": 1024
+    },
+    "source_edition": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "title_ko": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "ext": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^pack\\.[a-z_]+$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema0"
+      }
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "kind",
+    "blueprint_id",
+    "exam",
+    "edition",
+    "source_url",
+    "source_edition",
+    "title_ko",
+    "ext",
+    "content_hash"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema0"
+          }
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      ]
+    }
+  }
+}

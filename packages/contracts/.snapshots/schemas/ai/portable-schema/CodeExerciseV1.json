@@ -1,0 +1,81 @@
+{
+  "type": "object",
+  "properties": {
+    "lang": {
+      "type": "string",
+      "enum": [
+        "js",
+        "ts"
+      ]
+    },
+    "title_ko": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "task_md": {
+      "type": "string",
+      "maxLength": 8000
+    },
+    "starter": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "tests": {
+      "minItems": 1,
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "input_json": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "expected_json": {
+            "type": "string",
+            "maxLength": 8000
+          },
+          "hidden": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "key",
+          "input_json",
+          "expected_json",
+          "hidden"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "reference_code": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "complexity_target": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "lang",
+    "title_ko",
+    "task_md",
+    "starter",
+    "tests",
+    "reference_code",
+    "complexity_target"
+  ],
+  "additionalProperties": false
+}

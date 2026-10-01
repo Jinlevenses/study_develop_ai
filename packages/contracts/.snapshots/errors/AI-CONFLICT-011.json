@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "job 취소 불가 상태"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

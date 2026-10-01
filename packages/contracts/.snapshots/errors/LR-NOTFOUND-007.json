@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "장기 과제 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

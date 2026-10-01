@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "reason_ko": {
+      "type": "string",
+      "maxLength": 500
+    }
+  },
+  "required": [
+    "reason_ko"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "locked": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "locked"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,388 @@
+{
+  "taskId": "T-00-09",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "packages/contracts/src/ai/ai-gateway-policy.ts",
+    "packages/contracts/src/ai/data-class.ts",
+    "packages/contracts/src/ai/errors.ts",
+    "packages/contracts/src/ai/generate.ts",
+    "packages/contracts/src/ai/judge-keys.ts",
+    "packages/contracts/src/ai/judge.ts",
+    "packages/contracts/src/ai/portable-schema.ts",
+    "packages/contracts/src/ai/stream.ts",
+    "packages/contracts/src/ai/tasks.ts",
+    "packages/contracts/src/ai/work-order.ts",
+    "packages/contracts/src/events/__consumers__/ai-gateway.json",
+    "packages/contracts/src/events/__consumers__/content.json",
+    "packages/contracts/src/events/__consumers__/ops-api.json",
+    "packages/contracts/src/events/catalog/acquisition.ts",
+    "packages/contracts/src/events/catalog/ai.ts",
+    "packages/contracts/src/events/catalog/catalog.ts",
+    "packages/contracts/src/events/catalog/grading.ts",
+    "packages/contracts/src/events/catalog/itembank.ts",
+    "packages/contracts/src/events/catalog/ops.ts",
+    "packages/contracts/src/http/ai-gateway/v1/calibration.ts",
+    "packages/contracts/src/http/ai-gateway/v1/errors.ts",
+    "packages/contracts/src/http/ai-gateway/v1/firewall.ts",
+    "packages/contracts/src/http/ai-gateway/v1/generate.ts",
+    "packages/contracts/src/http/ai-gateway/v1/jobs.ts",
+    "packages/contracts/src/http/ai-gateway/v1/judge.ts",
+    "packages/contracts/src/http/ai-gateway/v1/mode.ts",
+    "packages/contracts/src/http/ai-gateway/v1/providers.ts",
+    "packages/contracts/src/http/ai-gateway/v1/secrets.ts",
+    "packages/contracts/src/http/ai-gateway/v1/streams.ts",
+    "packages/contracts/src/http/ai-gateway/v1/usage.ts",
+    "packages/contracts/src/http/ai-gateway/v1/work-orders.ts",
+    "packages/contracts/src/http/content/v1/acquisition.ts",
+    "packages/contracts/src/http/content/v1/catalog.ts",
+    "packages/contracts/src/http/content/v1/errors.ts",
+    "packages/contracts/src/http/content/v1/grading.ts",
+    "packages/contracts/src/http/content/v1/itembank.ts",
+    "packages/contracts/src/http/content/v1/overlays.ts",
+    "packages/contracts/src/http/content/v1/post-submit/grading.ts",
+    "packages/contracts/src/http/content/v1/post-submit/judge-card.ts",
+    "packages/contracts/src/http/content/v1/pre-submit/case.ts",
+    "packages/contracts/src/http/content/v1/pre-submit/concept.ts",
+    "packages/contracts/src/http/content/v1/pre-submit/hint.ts",
+    "packages/contracts/src/http/content/v1/pre-submit/item.ts",
+    "packages/contracts/src/http/content/v1/runner.ts",
+    "packages/contracts/src/http/learning/v1/attempts.ts",
+    "packages/contracts/src/http/ops/v1/autostart.ts",
+    "packages/contracts/src/http/ops/v1/backups.ts",
+    "packages/contracts/src/http/ops/v1/doctor.ts",
+    "packages/contracts/src/http/ops/v1/errors.ts",
+    "packages/contracts/src/http/ops/v1/health.ts",
+    "packages/contracts/src/http/ops/v1/logs.ts",
+    "packages/contracts/src/http/ops/v1/operations.ts",
+    "packages/contracts/src/http/ops/v1/system.ts",
+    "packages/contracts/src/http/ops/v1/telemetry.ts",
+    "packages/contracts/src/http/ops/v1/timeline.ts",
+    "packages/contracts/src/http/ops/v1/transfer.ts",
+    "packages/contracts/src/http/ops/v1/upgrade.ts",
+    "packages/contracts/src/pack/delta.ts",
+    "packages/contracts/src/pack/feasibility.ts",
+    "packages/contracts/src/pack/manifest.ts",
+    "packages/contracts/src/pack/records.ts",
+    "packages/contracts/src/policy/ai_policy.ts",
+    "packages/contracts/src/policy/firewall_rules.ts",
+    "packages/contracts/src/policy/gate_thresholds.ts",
+    "packages/contracts/src/policy/ops_policy.ts",
+    "packages/contracts/src/policy/search_params.ts",
+    "packages/contracts/test/unit/ai/events.spec.ts",
+    "packages/contracts/test/unit/ai/gateway-http.spec.ts",
+    "packages/contracts/test/unit/ai/generate-portable.spec.ts",
+    "packages/contracts/test/unit/ai/policies.spec.ts",
+    "packages/contracts/test/unit/ai/routes.spec.ts",
+    "packages/contracts/test/unit/ai/samples.ts",
+    "packages/contracts/test/unit/ai/stream-judge.spec.ts",
+    "packages/contracts/test/unit/ai/tasks-context.spec.ts",
+    "packages/contracts/test/unit/content/catalog.spec.ts",
+    "packages/contracts/test/unit/content/cycles.spec.ts",
+    "packages/contracts/test/unit/content/events.spec.ts",
+    "packages/contracts/test/unit/content/grading.spec.ts",
+    "packages/contracts/test/unit/content/overlays-acquisition.spec.ts",
+    "packages/contracts/test/unit/content/policies.spec.ts",
+    "packages/contracts/test/unit/content/presubmit-guard.spec.ts",
+    "packages/contracts/test/unit/content/routes.spec.ts",
+    "packages/contracts/test/unit/content/runner-item-itembank.spec.ts",
+    "packages/contracts/test/unit/content/samples.ts",
+    "packages/contracts/test/unit/ops/events-policy.spec.ts",
+    "packages/contracts/test/unit/ops/http.spec.ts",
+    "packages/contracts/test/unit/ops/routes.spec.ts",
+    "packages/contracts/test/unit/ops/samples.ts",
+    "packages/contracts/test/unit/pack/feasibility.spec.ts",
+    "packages/contracts/test/unit/pack/inventory.ts",
+    "packages/contracts/test/unit/pack/records-samples.ts",
+    "packages/contracts/test/unit/pack/records.spec.ts",
+    "docs/40-impl/reports/tasks/T-00-09.json"
+  ],
+  "testsAdded": [
+    "UT-CON-004",
+    "UT-CON-100",
+    "UT-CON-101",
+    "UT-CON-102",
+    "UT-CON-103",
+    "UT-CON-104",
+    "UT-CON-105",
+    "UT-CON-106",
+    "UT-CON-107",
+    "UT-CON-108",
+    "UT-CON-109",
+    "UT-CON-110",
+    "UT-CON-111",
+    "UT-CON-112",
+    "UT-CON-113",
+    "UT-CON-114",
+    "UT-CON-115",
+    "UT-CON-116",
+    "UT-CON-117",
+    "UT-CON-118",
+    "UT-CON-119",
+    "UT-CON-120",
+    "UT-CON-121",
+    "UT-CON-122",
+    "UT-CON-123",
+    "UT-CON-124",
+    "UT-CON-125",
+    "UT-CON-126",
+    "UT-CON-127",
+    "UT-CON-128",
+    "UT-CON-129",
+    "UT-CON-130",
+    "UT-CON-131",
+    "UT-CON-132",
+    "UT-CON-133",
+    "UT-CON-134",
+    "UT-CON-135",
+    "UT-CON-136",
+    "UT-CON-137",
+    "UT-CON-138",
+    "UT-CON-139",
+    "UT-CON-140",
+    "UT-CON-141",
+    "UT-CON-142",
+    "UT-CON-143",
+    "UT-CON-144",
+    "UT-CON-145",
+    "UT-CON-146",
+    "UT-CON-147",
+    "UT-CON-148",
+    "UT-CON-149",
+    "UT-CON-150",
+    "UT-CON-151",
+    "UT-CON-152",
+    "UT-CON-153",
+    "UT-CON-154",
+    "UT-CON-155",
+    "UT-CON-160",
+    "UT-CON-161",
+    "UT-CON-162",
+    "UT-CON-163",
+    "UT-CON-164",
+    "UT-CON-165",
+    "UT-CON-166",
+    "UT-CON-167",
+    "UT-CON-168",
+    "UT-CON-169",
+    "UT-CON-170"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/contracts typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/contracts test",
+      "exit": 0,
+      "notes": "34 files / 152 tests pass"
+    },
+    {
+      "cmd": "npx biome ci <T-00-09 allowed paths>",
+      "exit": 0,
+      "notes": "0 diagnostics under packages/contracts"
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "notes": "workspace-wide biome ci fails only in other lanes' in-progress files (apps/cli, packages/shared-kernel tests, packages/design-tokens css); 0 diagnostics under packages/contracts"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "notes": "check:deps (apps/web, packages/ui, tools/packc, root vite) and check:security (shared-kernel redact.spec) fail outside this task's paths; gate-selftest/boundaries/tsconfig-paths PASS"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-09",
+      "exit": 1,
+      "notes": "117 violations all in other lanes' files (services/ops/**, T-00-08/T-00-11 concurrent work); 0 violations under packages/contracts"
+    },
+    {
+      "cmd": "node tools/gates/check-frozen.mjs --task T-00-09",
+      "exit": 1,
+      "notes": "errors only for other lanes' pending paths (services/ops/**); records.ts and ai_policy.ts (owner T-00-09) clean"
+    },
+    {
+      "cmd": "node tools/gates/check-consumers.mjs",
+      "exit": 1,
+      "notes": "only consumers/no-producer-schema (needs T-00-10 contracts:gen .snapshots); no schema/format errors for content.json, ai-gateway.json, ops-api.json"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "providers.ts GenericCliDefinition.bin regex: removed the useless escape `\\/` inside the character class ([A-Za-z0-9_.\\/\\\\:-] -> [A-Za-z0-9_./\\\\:-]); identical character set, needed because biome noUselessEscapeInRegex is an error rule.",
+    "judge.ts D2: canonicalJson/stateDepth are private helpers; depth counts the top-level record as 1; JudgeState keeps arrays rejected by the JudgeStateValue union.",
+    "Brief 4.3 slice parsing: IF-AI-001 slice cell 'R1(훅·OFFLINE 즉답)·D → R2' yields freeze D (parenthetical text ignored), matching the Brief example R1·D.",
+    "UT-CON-112 and other multi-aspect IDs are single it() blocks (si/duplicate-id gate forbids repeating an ID); a few titles carry an extra FR/NFR/IR ref because the title gate does not accept [STD-*]/[AQ-*]/[CR-*] as the only ref.",
+    "ai/portable-schema.ts toPortableJsonSchema strips only the keyword keys $schema/pattern/format, never property names inside `properties` (ItemBatch.items[].format property must survive)."
+  ],
+  "escalations": [
+    {
+      "type": "repeated_failure",
+      "detail": "biome suspicious/noImportCycles (error) flags the 10 cyclic import statements that Brief D1 mandates (C1~C5, getters 19). Rule was NOT disabled; each import carries `// biome-ignore lint/suspicious/noImportCycles: [Brief 결정 D1] ...`. T1 review should confirm this suppression is acceptable or open a CR/ADR for a no-cycle layout (STD-TS-26)."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-06",
+      "pgm": "PGM-CON-012",
+      "req": [
+        "FR-CUR-002",
+        "FR-QST-017",
+        "FR-QST-022",
+        "FR-IMP-001",
+        "FR-LAB-001"
+      ],
+      "tests": [
+        "UT-CON-100..115"
+      ]
+    },
+    {
+      "wp": "WP-00-06",
+      "pgm": "PGM-CON-004",
+      "req": [
+        "FR-CUR-002",
+        "FR-QST-011",
+        "FR-QST-015"
+      ],
+      "tests": [
+        "UT-CON-116..118"
+      ]
+    },
+    {
+      "wp": "WP-00-06",
+      "pgm": "PGM-CON-016",
+      "req": [
+        "FR-CUR-002",
+        "FR-CUR-016",
+        "FR-CUR-020",
+        "FR-CUR-025",
+        "CR-10"
+      ],
+      "tests": [
+        "UT-CON-004",
+        "UT-CON-120..127"
+      ]
+    },
+    {
+      "wp": "WP-00-06",
+      "pgm": "PGM-CON-017",
+      "req": [
+        "FR-CUR-017",
+        "NFR-MAINT-007"
+      ],
+      "tests": [
+        "UT-CON-128",
+        "UT-CON-129"
+      ]
+    },
+    {
+      "wp": "WP-00-07",
+      "pgm": "PGM-CON-015",
+      "req": [
+        "FR-AI-004",
+        "FR-AI-005",
+        "FR-AI-006",
+        "FR-AI-019",
+        "FR-AI-020",
+        "UR-16"
+      ],
+      "tests": [
+        "UT-CON-130..143"
+      ]
+    },
+    {
+      "wp": "WP-00-07",
+      "pgm": "PGM-CON-013",
+      "req": [
+        "FR-AI-002",
+        "FR-AI-007",
+        "FR-AI-013",
+        "FR-AI-024"
+      ],
+      "tests": [
+        "UT-CON-144..150"
+      ]
+    },
+    {
+      "wp": "WP-00-07",
+      "pgm": "PGM-CON-006",
+      "req": [
+        "FR-AI-002",
+        "FR-AI-007",
+        "FR-AI-026"
+      ],
+      "tests": [
+        "UT-CON-151",
+        "UT-CON-152"
+      ]
+    },
+    {
+      "wp": "WP-00-07",
+      "pgm": "PGM-CON-017",
+      "req": [
+        "FR-AI-007",
+        "FR-AI-019"
+      ],
+      "tests": [
+        "UT-CON-154",
+        "UT-CON-155"
+      ]
+    },
+    {
+      "wp": "WP-00-08",
+      "pgm": "PGM-CON-014",
+      "req": [
+        "FR-SET-001",
+        "FR-SET-003",
+        "FR-SET-004",
+        "FR-SET-005",
+        "FR-SET-007",
+        "FR-SET-016"
+      ],
+      "tests": [
+        "UT-CON-160..167"
+      ]
+    },
+    {
+      "wp": "WP-00-08",
+      "pgm": "PGM-CON-006",
+      "req": [
+        "FR-SET-001",
+        "FR-SET-004"
+      ],
+      "tests": [
+        "UT-CON-168"
+      ]
+    },
+    {
+      "wp": "WP-00-08",
+      "pgm": "PGM-CON-017",
+      "req": [
+        "NFR-MAINT-007"
+      ],
+      "tests": [
+        "UT-CON-170"
+      ]
+    },
+    {
+      "wp": "WP-00-06·07·08",
+      "pgm": "PGM-CON-019",
+      "req": [
+        "NFR-MAINT-003",
+        "AQ-02"
+      ],
+      "tests": [
+        "UT-CON-119",
+        "UT-CON-153",
+        "UT-CON-169"
+      ]
+    }
+  ],
+  "notes": "1) T-00-15 notice (D8): ai_policy@v1.cache_ttl_days.per_task must list all 35 keys (AI-J01~J19 = 30, AI-G01~G13 = 7 except G06 = 1, G07 = 0, G09 = 0, SYS-* = 0). 2) frozen pending records.ts and ai_policy.ts: 0 differences vs IF-01 blocks (verified by token-normalized comparison; all other differences = documented D1~D7 decisions). 3) D1 getter sites = 19 (schemas 15: C1 2, C2 6, C3 4, C4 1, C5 2; routes 4: CT-006 res, CT-041 body, CT-043 body, CT-045 res). 4) routes 55/39/28 = 122; errors 26/19/9; event maps in 6 catalog files (content 7, ai 7, ops 3 events); consumers 6/1/7. 5) Other-lane concurrent work in the tree makes workspace lint/gates/scope fail outside packages/contracts."
+}

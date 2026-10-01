@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "enum": [
+    "jev",
+    "llm_api",
+    "llm_cli",
+    "generic_cli",
+    "local_llm"
+  ]
+}

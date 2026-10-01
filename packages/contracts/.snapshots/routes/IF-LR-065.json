@@ -1,0 +1,207 @@
+{
+  "$comment": "learning.settings.policies_preview",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.settings.policies_preview"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/settings/policies:preview"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-SET-018",
+        "FR-PRG-028",
+        "FR-PRG-029"
+      ]
+    },
+    "deadlineMs": {
+      "const": 60000
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "preview_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "target": {
+              "type": "object",
+              "properties": {
+                "members": {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+                  }
+                },
+                "overrides": {
+                  "type": "object",
+                  "properties": {
+                    "request_retention": {
+                      "type": "object",
+                      "properties": {
+                        "A": {
+                          "type": "number",
+                          "minimum": 0.7,
+                          "maximum": 0.97
+                        },
+                        "B": {
+                          "type": "number",
+                          "minimum": 0.7,
+                          "maximum": 0.97
+                        },
+                        "C": {
+                          "type": "number",
+                          "minimum": 0.7,
+                          "maximum": 0.97
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "daily_new_limit": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    "daily_review_limit": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 1000
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "preview_id",
+            "target"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "preview_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "current_policy_version": {
+              "type": "string",
+              "pattern": "^ps_[0-9a-f]{16}$"
+            },
+            "target_policy_version": {
+              "type": "string",
+              "pattern": "^ps_[0-9a-f]{16}$"
+            },
+            "expires_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "report": {
+              "type": "object",
+              "properties": {
+                "events_replayed": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "queue_size_delta": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "mastered_delta": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "ldi_delta": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "changed_concepts": {
+                  "maxItems": 200,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  }
+                },
+                "duration_ms": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "events_replayed",
+                "queue_size_delta",
+                "mastered_delta",
+                "ldi_delta",
+                "changed_concepts",
+                "duration_ms"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "preview_id",
+            "current_policy_version",
+            "target_policy_version",
+            "expires_at",
+            "report"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

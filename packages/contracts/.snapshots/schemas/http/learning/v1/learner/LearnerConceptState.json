@@ -1,0 +1,362 @@
+{
+  "type": "object",
+  "properties": {
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "CL-0",
+        "CL-1",
+        "CL-2",
+        "CL-3",
+        "CL-4",
+        "CL-5",
+        "CL-6",
+        "CL-7",
+        "CL-8",
+        "CL-X"
+      ]
+    },
+    "mastery": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "unseen",
+            "learning",
+            "mastered"
+          ]
+        },
+        "provisional": {
+          "type": "boolean"
+        },
+        "needs_reconfirmation": {
+          "type": "boolean"
+        },
+        "p": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "formats_counted": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "embedded",
+              "ox",
+              "mcq",
+              "cloze",
+              "short",
+              "matching",
+              "code_task",
+              "blank_note",
+              "digging_d4_mcq",
+              "error_find",
+              "confusable",
+              "fermi",
+              "cond_reversal",
+              "infra_lite",
+              "kata",
+              "audit",
+              "case_decision",
+              "code_predict",
+              "sql_task",
+              "essay",
+              "digging",
+              "feynman",
+              "pr_review",
+              "reverse_item",
+              "artifact",
+              "case_postmortem",
+              "micro_judgment",
+              "ml_predict",
+              "mcq_multi",
+              "order",
+              "parsons",
+              "log_read",
+              "config_review"
+            ]
+          }
+        },
+        "distinct_study_days": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "status",
+        "provisional",
+        "needs_reconfirmation",
+        "p",
+        "formats_counted",
+        "distinct_study_days"
+      ],
+      "additionalProperties": false
+    },
+    "theta": {
+      "type": "object",
+      "properties": {
+        "display": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "n_graded": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "evidence_sufficient": {
+          "type": "boolean"
+        },
+        "display_min_events": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "display",
+        "n_graded",
+        "evidence_sufficient",
+        "display_min_events"
+      ],
+      "additionalProperties": false
+    },
+    "competence": {
+      "type": "object",
+      "properties": {
+        "mastered": {
+          "type": "boolean"
+        },
+        "retained": {
+          "type": "boolean"
+        },
+        "deepened": {
+          "type": "boolean"
+        },
+        "transferred": {
+          "type": "boolean"
+        },
+        "taught": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "mastered",
+        "retained",
+        "deepened",
+        "transferred",
+        "taught"
+      ],
+      "additionalProperties": false
+    },
+    "cards": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "card_id": {
+            "type": "string",
+            "maxLength": 120,
+            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*):[a-z][a-z_]{0,31}:(?:r|p))$"
+          },
+          "concept_id": {
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+          },
+          "facet": {
+            "type": "string",
+            "pattern": "^[a-z][a-z_]{0,31}$"
+          },
+          "response_mode": {
+            "type": "string",
+            "enum": [
+              "recognition",
+              "production"
+            ]
+          },
+          "tier": {
+            "type": "string",
+            "enum": [
+              "A",
+              "B",
+              "C"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "suspended",
+              "retired"
+            ]
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 8640000000000000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "retrievability": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stability_days": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reps": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "lapses": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "leech": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "card_id",
+          "concept_id",
+          "facet",
+          "response_mode",
+          "tier",
+          "status",
+          "due_at",
+          "retrievability",
+          "stability_days",
+          "reps",
+          "lapses",
+          "leech"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "track_level": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rusty": {
+      "type": "boolean"
+    },
+    "entry_stage": {
+      "type": "string",
+      "enum": [
+        "theory",
+        "pretest",
+        "problem",
+        "problem_definition"
+      ]
+    },
+    "nba": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "learn",
+                "practice",
+                "verify",
+                "dig",
+                "case",
+                "review",
+                "revalidate"
+              ]
+            },
+            "label_ko": {
+              "type": "string",
+              "maxLength": 60
+            }
+          },
+          "required": [
+            "kind",
+            "label_ko"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "last_activity_at": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "concept_id",
+    "lifecycle",
+    "mastery",
+    "theta",
+    "competence",
+    "cards",
+    "track_level",
+    "rusty",
+    "entry_stage",
+    "nba",
+    "last_activity_at"
+  ],
+  "additionalProperties": false
+}

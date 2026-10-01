@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "enum": [
+    "mastery",
+    "retention",
+    "illusion",
+    "foundation_crack",
+    "revalidation",
+    "rusty",
+    "blueprint"
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "type": "string",
+  "pattern": "^(FR|NFR)-[A-Z]+-\\d{3}$"
+}

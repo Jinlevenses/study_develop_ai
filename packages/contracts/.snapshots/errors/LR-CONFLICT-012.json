@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "curriculum_ref 미초기화"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

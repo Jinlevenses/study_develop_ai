@@ -1,0 +1,270 @@
+{
+  "$comment": "ai-gateway.calibration.gold_confirm",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.calibration.gold_confirm"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/calibration/gold/{gold_id}:confirm"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-027"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "gold_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^gold\\.AI-J\\d{2}\\.\\d{3}$"
+                }
+              ]
+            }
+          },
+          "required": [
+            "gold_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": [
+                "confirm",
+                "correct",
+                "skip"
+              ]
+            },
+            "corrected_label": {
+              "anyOf": [
+                {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "noul"
+                        },
+                        "p_yes": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "p_yes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "choice"
+                        },
+                        "choice": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "probabilities": {
+                          "type": "object",
+                          "propertyNames": {
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                          },
+                          "additionalProperties": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          }
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "choice",
+                        "confidence",
+                        "probabilities"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "const": "score"
+                        },
+                        "score": {
+                          "type": "number",
+                          "minimum": 0
+                        },
+                        "confidence": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 1
+                        },
+                        "probabilities": {
+                          "type": "object",
+                          "propertyNames": {
+                            "type": "string",
+                            "pattern": "^\\d{1,2}$"
+                          },
+                          "additionalProperties": {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          }
+                        },
+                        "levels": {
+                          "type": "integer",
+                          "minimum": 2,
+                          "maximum": 10
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "score",
+                        "confidence",
+                        "probabilities",
+                        "levels"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "decision",
+            "corrected_label"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "gold_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "string",
+                  "pattern": "^gold\\.AI-J\\d{2}\\.\\d{3}$"
+                }
+              ]
+            },
+            "task_id": {
+              "type": "string",
+              "enum": [
+                "AI-J01",
+                "AI-J02",
+                "AI-J03",
+                "AI-J04",
+                "AI-J05",
+                "AI-J06",
+                "AI-J07",
+                "AI-J08",
+                "AI-J09",
+                "AI-J10",
+                "AI-J11",
+                "AI-J12",
+                "AI-J13",
+                "AI-J14",
+                "AI-J15",
+                "AI-J16",
+                "AI-J17",
+                "AI-J18",
+                "AI-J19"
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "model_labeled_draft",
+                "user_confirmed",
+                "user_corrected",
+                "skipped"
+              ]
+            },
+            "updated_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "gold_id",
+            "task_id",
+            "state",
+            "updated_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

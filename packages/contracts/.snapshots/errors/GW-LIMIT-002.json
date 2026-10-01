@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 429
+    },
+    "title": {
+      "const": "세션당 SSE 연결 > 8"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

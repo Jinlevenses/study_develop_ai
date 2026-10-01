@@ -1,0 +1,223 @@
+{
+  "type": "object",
+  "properties": {
+    "packs": {
+      "maxItems": 100,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pack_id": {
+            "type": "string",
+            "maxLength": 48,
+            "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)|x\\.[a-z0-9]+(?:-[a-z0-9]+)*|u\\.[a-z0-9]+)$"
+          },
+          "track": {
+            "type": "string",
+            "enum": [
+              "alg",
+              "cs",
+              "net",
+              "lang",
+              "fe",
+              "be",
+              "db",
+              "linux",
+              "docker",
+              "k8s",
+              "cicd",
+              "sre",
+              "cloud",
+              "sec",
+              "ml",
+              "llm",
+              "arch",
+              "eng",
+              "lead",
+              "data"
+            ]
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "seed",
+              "local",
+              "user"
+            ]
+          },
+          "manifest_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "merkle_root": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "activated_at": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 8640000000000000
+          },
+          "counts": {
+            "type": "object",
+            "properties": {
+              "concepts": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "kus": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "misconceptions": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "items": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "cases": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "concepts",
+              "kus",
+              "misconceptions",
+              "items",
+              "cases"
+            ],
+            "additionalProperties": false
+          },
+          "report": {
+            "type": "object",
+            "properties": {
+              "kpi": {
+                "type": "object",
+                "properties": {
+                  "three_stage": {
+                    "type": "object",
+                    "properties": {
+                      "full": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "lite": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "skeleton": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    },
+                    "required": [
+                      "full",
+                      "lite",
+                      "skeleton"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "offline_learnable": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "three_stage",
+                  "offline_learnable"
+                ],
+                "additionalProperties": false
+              },
+              "tier_counts": {
+                "type": "object",
+                "properties": {
+                  "A": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "B": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "C": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "A",
+                  "B",
+                  "C"
+                ],
+                "additionalProperties": false
+              },
+              "cap_blockers": {
+                "maxItems": 100,
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "pattern": "^(NO_ASSESSMENT_POOL|EMPTY_LEVEL|D4_POSSIBLE<REQUIRED|CASE_L4\\+<2|MASTERY_FORMATS<3:[a-z0-9.-]{3,128})$"
+                    },
+                    "detail_ko": {
+                      "type": "string",
+                      "maxLength": 300
+                    }
+                  },
+                  "required": [
+                    "code",
+                    "detail_ko"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "kpi",
+              "tier_counts",
+              "cap_blockers"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "pack_id",
+          "track",
+          "version",
+          "channel",
+          "manifest_hash",
+          "merkle_root",
+          "activated_at",
+          "counts",
+          "report"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "packs"
+  ],
+  "additionalProperties": false
+}

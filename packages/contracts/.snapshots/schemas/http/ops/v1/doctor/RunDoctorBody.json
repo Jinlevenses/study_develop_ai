@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "op_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "fix": {
+      "type": "boolean"
+    },
+    "live": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "op_id",
+    "fix",
+    "live"
+  ],
+  "additionalProperties": false
+}

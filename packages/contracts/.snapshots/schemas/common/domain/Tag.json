@@ -1,0 +1,4 @@
+{
+  "type": "string",
+  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+}

@@ -1,0 +1,124 @@
+{
+  "consumer": "gateway",
+  "subscriptions": [
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "catalog.overlay.conflicted",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "acquisition.import.staged",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "grading.verdict.revised",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "itembank.item.corrected",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "learning.session.completed",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "learning.mastery.changed",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "learning.level.promoted",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "learning.ledger.merged",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ai.mode.changed",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ai.provider.status_changed",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ai.work_order.approval_requested",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ai.work_order.decided",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ai.budget.threshold_reached",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ai.judge.drift_detected",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ops.health.changed",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    },
+    {
+      "type": "ops.backup.completed",
+      "schema_versions": [1],
+      "mode": "notify",
+      "on_poison": "drop",
+      "reads": ["*"]
+    }
+  ]
+}

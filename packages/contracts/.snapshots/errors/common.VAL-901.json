@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 400
+    },
+    "title": {
+      "const": "Idempotency-Key 없음 또는 형식 오류"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

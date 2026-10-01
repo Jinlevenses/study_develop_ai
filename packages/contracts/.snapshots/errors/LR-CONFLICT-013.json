@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "블록 상태가 동작과 맞지 않음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

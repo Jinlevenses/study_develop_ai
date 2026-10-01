@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "enum": [
+        "due",
+        "keystone",
+        "new",
+        "weekly_quota",
+        "wildcard",
+        "boss",
+        "warmup",
+        "closer",
+        "nba",
+        "scope",
+        "interleave",
+        "dday",
+        "return",
+        "verify",
+        "promotion",
+        "placement",
+        "weak"
+      ]
+    },
+    "label_ko": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "value": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 40
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "code",
+    "label_ko",
+    "value"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,4 @@
+{
+  "type": "string",
+  "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+}

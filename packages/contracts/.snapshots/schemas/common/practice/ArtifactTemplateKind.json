@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "enum": [
+    "adr",
+    "runbook",
+    "postmortem",
+    "design_review",
+    "standard_clause"
+  ]
+}

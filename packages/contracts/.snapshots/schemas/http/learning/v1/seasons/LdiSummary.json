@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "number"
+    },
+    "delta": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "params": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+    },
+    "params_provisional": {
+      "type": "boolean"
+    },
+    "computed_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "value",
+    "delta",
+    "params",
+    "params_provisional",
+    "computed_at"
+  ],
+  "additionalProperties": false
+}

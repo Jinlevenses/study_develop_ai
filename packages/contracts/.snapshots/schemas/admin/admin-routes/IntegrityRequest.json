@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "level": {
+      "type": "string",
+      "enum": [
+        "quick",
+        "full"
+      ]
+    }
+  },
+  "required": [
+    "level"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 401
+    },
+    "title": {
+      "const": "CLI 토큰 무효"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

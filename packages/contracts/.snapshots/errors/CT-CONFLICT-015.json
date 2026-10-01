@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "S2 3요건 미충족 상태에서 승인 시도 또는 이미 결정됨"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

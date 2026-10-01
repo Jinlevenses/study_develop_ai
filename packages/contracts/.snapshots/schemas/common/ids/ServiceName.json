@@ -1,0 +1,10 @@
+{
+  "type": "string",
+  "enum": [
+    "gateway",
+    "content",
+    "learning",
+    "ai-gateway",
+    "ops-api"
+  ]
+}

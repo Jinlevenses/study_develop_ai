@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "block_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "saved_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "block_id",
+    "saved_at"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "응답의 item_id가 블록에 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

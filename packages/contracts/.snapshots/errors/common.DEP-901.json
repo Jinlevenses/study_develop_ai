@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "준비되지 않음"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

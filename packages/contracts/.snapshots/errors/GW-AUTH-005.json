@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 421
+    },
+    "title": {
+      "const": "Host ∉ {127.0.0.1:<port>, localhost:<port>}"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

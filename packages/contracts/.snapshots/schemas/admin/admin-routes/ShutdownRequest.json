@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "grace_ms": {
+      "default": 3000,
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10000
+    }
+  },
+  "required": [
+    "grace_ms"
+  ],
+  "additionalProperties": false
+}

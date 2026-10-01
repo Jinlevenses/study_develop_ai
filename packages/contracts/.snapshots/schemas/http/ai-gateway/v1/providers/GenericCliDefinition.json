@@ -1,0 +1,203 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^gcli-[a-z0-9-]{2,24}$"
+    },
+    "display_name": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "bin": {
+      "type": "string",
+      "maxLength": 260,
+      "pattern": "^[A-Za-z0-9_./\\\\:-]+$"
+    },
+    "args": {
+      "maxItems": 32,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 200
+      }
+    },
+    "stdin": {
+      "type": "string",
+      "const": "prompt"
+    },
+    "extract": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "json_pointer"
+            },
+            "pointer": {
+              "type": "string",
+              "pattern": "^(\\/[^/]*)*$"
+            }
+          },
+          "required": [
+            "kind",
+            "pointer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "text"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "probe": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "maxItems": 4,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 60
+          }
+        },
+        "expect_regex": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "args",
+        "expect_regex"
+      ],
+      "additionalProperties": false
+    },
+    "isolation": {
+      "type": "object",
+      "properties": {
+        "flags": {
+          "maxItems": 16,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 100
+          }
+        },
+        "home": {
+          "type": "string",
+          "enum": [
+            "empty_tmp",
+            "fathom_cli_home"
+          ]
+        }
+      },
+      "required": [
+        "flags",
+        "home"
+      ],
+      "additionalProperties": false
+    },
+    "models": {
+      "type": "object",
+      "properties": {
+        "low": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mid": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "high": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 80
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "low",
+        "mid",
+        "high"
+      ],
+      "additionalProperties": false
+    },
+    "timeout_ms": {
+      "type": "integer",
+      "minimum": 1000,
+      "maximum": 600000
+    },
+    "family": {
+      "type": "string",
+      "enum": [
+        "anthropic",
+        "openai",
+        "google",
+        "typesafe",
+        "local",
+        "other"
+      ]
+    },
+    "billing_mode": {
+      "type": "string",
+      "enum": [
+        "subscription",
+        "metered",
+        "free",
+        "local"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "display_name",
+    "bin",
+    "args",
+    "stdin",
+    "extract",
+    "probe",
+    "isolation",
+    "models",
+    "timeout_ms",
+    "family",
+    "billing_mode"
+  ],
+  "additionalProperties": false
+}

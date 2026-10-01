@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "cross_judge_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "span_check_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "curator_decision": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ]
+    },
+    "s2_mode": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "cross_family",
+            "same_family",
+            "v7_review"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "cross_judge_id",
+    "span_check_id",
+    "curator_decision",
+    "s2_mode"
+  ],
+  "additionalProperties": false
+}

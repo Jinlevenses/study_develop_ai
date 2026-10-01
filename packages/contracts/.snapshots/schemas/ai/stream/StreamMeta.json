@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "ref": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "task_id": {
+      "type": "string",
+      "enum": [
+        "AI-G01",
+        "AI-G02",
+        "AI-G03",
+        "AI-G04",
+        "AI-G05",
+        "AI-G06",
+        "AI-G07",
+        "AI-G08",
+        "AI-G09",
+        "AI-G10",
+        "AI-G11",
+        "AI-G12",
+        "AI-G13"
+      ]
+    },
+    "prompt_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "provider_kind": {
+      "type": "string",
+      "enum": [
+        "llm_api",
+        "llm_cli",
+        "local_llm"
+      ]
+    },
+    "started_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "ref",
+    "task_id",
+    "prompt_version",
+    "provider_kind",
+    "started_at"
+  ],
+  "additionalProperties": false
+}

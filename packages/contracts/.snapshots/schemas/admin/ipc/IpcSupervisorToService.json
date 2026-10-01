@@ -1,0 +1,325 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "bootstrap"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "svc": {
+          "type": "string",
+          "enum": [
+            "gateway",
+            "content",
+            "learning",
+            "ai-gateway",
+            "ops-api"
+          ]
+        },
+        "boot_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "app_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        "contracts_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "profile": {
+          "type": "string",
+          "enum": [
+            "prod",
+            "dev",
+            "test"
+          ]
+        },
+        "home": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "web_root": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 1024
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "listen": {
+          "type": "object",
+          "properties": {
+            "host": {
+              "type": "string",
+              "const": "127.0.0.1"
+            },
+            "port": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 65535
+            }
+          },
+          "required": [
+            "host",
+            "port"
+          ],
+          "additionalProperties": false
+        },
+        "self_token": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "callers": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "required": [
+            "gateway",
+            "content",
+            "learning",
+            "ai-gateway",
+            "ops-api"
+          ]
+        },
+        "peers": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          },
+          "required": [
+            "gateway",
+            "content",
+            "learning",
+            "ai-gateway",
+            "ops-api"
+          ]
+        },
+        "flags": {
+          "type": "object",
+          "properties": {
+            "safe_mode": {
+              "type": "boolean"
+            },
+            "batch_enabled": {
+              "type": "boolean"
+            },
+            "after_crash": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "safe_mode",
+            "batch_enabled",
+            "after_crash"
+          ],
+          "additionalProperties": false
+        },
+        "log_level": {
+          "type": "string",
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "svc",
+        "boot_id",
+        "app_version",
+        "contracts_hash",
+        "profile",
+        "home",
+        "web_root",
+        "listen",
+        "self_token",
+        "callers",
+        "peers",
+        "flags",
+        "log_level"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "registry.updated"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "peers": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "gateway",
+              "content",
+              "learning",
+              "ai-gateway",
+              "ops-api"
+            ]
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          },
+          "required": [
+            "gateway",
+            "content",
+            "learning",
+            "ai-gateway",
+            "ops-api"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "peers"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "shutdown"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "grace_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "grace_ms"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "log.level"
+        },
+        "v": {
+          "type": "number",
+          "const": 1
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "re": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "v",
+        "level"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

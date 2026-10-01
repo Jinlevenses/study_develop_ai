@@ -1,0 +1,150 @@
+{
+  "type": "object",
+  "propertyNames": {
+    "type": "string",
+    "enum": [
+      "embedded",
+      "ox",
+      "mcq",
+      "cloze",
+      "short",
+      "matching",
+      "code_task",
+      "blank_note",
+      "digging_d4_mcq",
+      "error_find",
+      "confusable",
+      "fermi",
+      "cond_reversal",
+      "infra_lite",
+      "kata",
+      "audit",
+      "case_decision",
+      "code_predict",
+      "sql_task",
+      "essay",
+      "digging",
+      "feynman",
+      "pr_review",
+      "reverse_item",
+      "artifact",
+      "case_postmortem",
+      "micro_judgment",
+      "ml_predict",
+      "mcq_multi",
+      "order",
+      "parsons",
+      "log_read",
+      "config_review"
+    ]
+  },
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "w_format": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "grade_class": {
+        "type": "string",
+        "enum": [
+          "D",
+          "J",
+          "S",
+          "H"
+        ]
+      },
+      "response_mode": {
+        "type": "string",
+        "enum": [
+          "recognition",
+          "production"
+        ]
+      },
+      "n_options": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "max": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "min",
+          "max"
+        ],
+        "additionalProperties": false
+      },
+      "credit_eligible": {
+        "type": "boolean"
+      },
+      "runner": {
+        "type": "boolean"
+      },
+      "tiers": {
+        "minItems": 1,
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      }
+    },
+    "required": [
+      "w_format",
+      "grade_class",
+      "response_mode",
+      "n_options",
+      "credit_eligible",
+      "runner",
+      "tiers"
+    ],
+    "additionalProperties": false
+  },
+  "required": [
+    "embedded",
+    "ox",
+    "mcq",
+    "cloze",
+    "short",
+    "matching",
+    "code_task",
+    "blank_note",
+    "digging_d4_mcq",
+    "error_find",
+    "confusable",
+    "fermi",
+    "cond_reversal",
+    "infra_lite",
+    "kata",
+    "audit",
+    "case_decision",
+    "code_predict",
+    "sql_task",
+    "essay",
+    "digging",
+    "feynman",
+    "pr_review",
+    "reverse_item",
+    "artifact",
+    "case_postmortem",
+    "micro_judgment",
+    "ml_predict",
+    "mcq_multi",
+    "order",
+    "parsons",
+    "log_read",
+    "config_review"
+  ]
+}

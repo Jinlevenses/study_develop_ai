@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "가져오기 작업 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

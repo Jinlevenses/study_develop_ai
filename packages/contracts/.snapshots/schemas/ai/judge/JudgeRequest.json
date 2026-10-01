@@ -1,0 +1,208 @@
+{
+  "type": "object",
+  "properties": {
+    "template_version": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "active"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        }
+      ]
+    },
+    "state": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/__schema0"
+      }
+    },
+    "state_classes": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "C0",
+          "C1",
+          "C2",
+          "C3"
+        ]
+      }
+    },
+    "untrusted_keys": {
+      "maxItems": 32,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      }
+    },
+    "questions": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "template": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "vars": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{0,31}$"
+            },
+            "additionalProperties": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{1,31}(\\.[a-z][a-z0-9_]{1,31}){0,3}$"
+            }
+          }
+        },
+        "required": [
+          "template",
+          "vars"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "lane": {
+      "type": "string",
+      "enum": [
+        "interactive",
+        "background"
+      ]
+    },
+    "deadline_ms": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 10000
+    },
+    "context_ref": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "attempt",
+            "dialog_turn",
+            "blank_note",
+            "item",
+            "import",
+            "pack",
+            "calibration",
+            "appeal",
+            "system"
+          ]
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "pre_submit",
+            "post_submit",
+            "n_a"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "kind",
+        "phase",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "calibrated_only": {
+      "type": "boolean"
+    },
+    "family_exclude": {
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "anthropic",
+          "openai",
+          "google",
+          "typesafe",
+          "local",
+          "other"
+        ]
+      }
+    },
+    "local_only": {
+      "type": "boolean"
+    },
+    "work_order_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "template_version",
+    "state",
+    "state_classes",
+    "untrusted_keys",
+    "questions",
+    "lane",
+    "deadline_ms",
+    "context_ref",
+    "calibrated_only",
+    "family_exclude",
+    "local_only",
+    "work_order_id"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      ]
+    }
+  }
+}

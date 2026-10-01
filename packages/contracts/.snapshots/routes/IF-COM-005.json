@@ -1,0 +1,101 @@
+{
+  "$comment": "common.admin.quiesce",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "common.admin.quiesce"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/admin/quiesce"
+    },
+    "allowedCallers": {
+      "enum": [
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": []
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "epoch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "ack_deadline_ms": {
+              "default": 2000,
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 10000
+            }
+          },
+          "required": [
+            "epoch_id",
+            "ack_deadline_ms"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "epoch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "quiesced_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "in_flight_drained": {
+              "type": "boolean",
+              "const": true
+            }
+          },
+          "required": [
+            "epoch_id",
+            "quiesced_at",
+            "in_flight_drained"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

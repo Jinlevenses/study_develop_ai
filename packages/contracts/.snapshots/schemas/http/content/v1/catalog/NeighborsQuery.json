@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "depth": {
+      "default": 1,
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 2
+    }
+  },
+  "required": [
+    "depth"
+  ],
+  "additionalProperties": false
+}

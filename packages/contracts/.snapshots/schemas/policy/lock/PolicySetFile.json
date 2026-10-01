@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "policy_version": {
+      "type": "string",
+      "pattern": "^ps_[0-9a-f]{16}$"
+    },
+    "members": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "version",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "overrides_sha256": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "policy_version",
+    "members",
+    "overrides_sha256",
+    "created_at"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "허용되지 않은 호출자"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

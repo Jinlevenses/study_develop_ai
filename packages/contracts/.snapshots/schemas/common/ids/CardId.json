@@ -1,0 +1,5 @@
+{
+  "type": "string",
+  "maxLength": 120,
+  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*):[a-z][a-z_]{0,31}:(?:r|p))$"
+}

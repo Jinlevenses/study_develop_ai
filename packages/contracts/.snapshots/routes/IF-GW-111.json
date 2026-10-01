@@ -1,0 +1,141 @@
+{
+  "$comment": "gateway.ai.secret_put",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ai.secret_put"
+    },
+    "method": {
+      "const": "PUT"
+    },
+    "path": {
+      "const": "/api/v1/ai/secrets/{provider_id}"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "NFR-SEC-004",
+        "FR-SET-008"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "provider_id": {
+              "type": "string",
+              "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+            }
+          },
+          "required": [
+            "provider_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "secret": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 4096
+            },
+            "store": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "keychain",
+                "file"
+              ]
+            },
+            "verify": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "secret",
+            "store",
+            "verify"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "provider_id": {
+              "type": "string",
+              "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+            },
+            "source": {
+              "type": "string",
+              "enum": [
+                "keychain",
+                "file",
+                "env"
+              ]
+            },
+            "last4": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 4
+            },
+            "verified_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "provider_id",
+            "source",
+            "last4",
+            "verified_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

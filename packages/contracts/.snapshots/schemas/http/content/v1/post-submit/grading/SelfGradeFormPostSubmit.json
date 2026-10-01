@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "properties": {
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "overall_required": {
+      "type": "boolean"
+    },
+    "rubric": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label_ko": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "kp",
+              "dimension"
+            ]
+          },
+          "ku_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "levels": {
+            "minItems": 2,
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 100
+            }
+          }
+        },
+        "required": [
+          "label_ko",
+          "kind",
+          "ku_id",
+          "levels"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "attempt_id",
+    "overall_required",
+    "rubric"
+  ],
+  "additionalProperties": false
+}

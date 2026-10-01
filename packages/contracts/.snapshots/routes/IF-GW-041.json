@@ -1,0 +1,909 @@
+{
+  "$comment": "gateway.tracks.get",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.tracks.get"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/tracks/{track}"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-CUR-001",
+        "FR-CUR-025",
+        "FR-STD-032"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "track": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            }
+          },
+          "required": [
+            "track"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "track": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            },
+            "title_ko": {
+              "type": "string"
+            },
+            "cap": {
+              "type": "object",
+              "properties": {
+                "declared": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "offline": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "oracle": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                },
+                "display": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                }
+              },
+              "required": [
+                "declared",
+                "offline",
+                "oracle",
+                "display"
+              ],
+              "additionalProperties": false
+            },
+            "levels": {
+              "minItems": 5,
+              "maxItems": 5,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "level": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "concepts": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "concept": {
+                          "type": "object",
+                          "properties": {
+                            "concept_id": {
+                              "type": "string",
+                              "maxLength": 64,
+                              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                            },
+                            "track": {
+                              "type": "string",
+                              "enum": [
+                                "alg",
+                                "cs",
+                                "net",
+                                "lang",
+                                "fe",
+                                "be",
+                                "db",
+                                "linux",
+                                "docker",
+                                "k8s",
+                                "cicd",
+                                "sre",
+                                "cloud",
+                                "sec",
+                                "ml",
+                                "llm",
+                                "arch",
+                                "eng",
+                                "lead",
+                                "data"
+                              ]
+                            },
+                            "level": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 5
+                            },
+                            "tier": {
+                              "type": "string",
+                              "enum": [
+                                "A",
+                                "B",
+                                "C"
+                              ]
+                            },
+                            "knowledge_type": {
+                              "type": "string",
+                              "enum": [
+                                "D",
+                                "C",
+                                "P",
+                                "S"
+                              ]
+                            },
+                            "title_ko": {
+                              "type": "string",
+                              "maxLength": 120
+                            },
+                            "title_en": {
+                              "type": "string",
+                              "maxLength": 120
+                            },
+                            "summary_ko": {
+                              "type": "string",
+                              "maxLength": 300
+                            },
+                            "aliases": {
+                              "maxItems": 20,
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "maxLength": 80
+                              }
+                            },
+                            "required_for_level": {
+                              "anyOf": [
+                                {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 5
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "deprecated_by": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "maxLength": 64,
+                                  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "volatility": {
+                              "type": "string",
+                              "enum": [
+                                "stable",
+                                "evolving",
+                                "volatile"
+                              ]
+                            },
+                            "tags": {
+                              "maxItems": 20,
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                              }
+                            }
+                          },
+                          "required": [
+                            "concept_id",
+                            "track",
+                            "level",
+                            "tier",
+                            "knowledge_type",
+                            "title_ko",
+                            "title_en",
+                            "summary_ko",
+                            "aliases",
+                            "required_for_level",
+                            "deprecated_by",
+                            "volatility",
+                            "tags"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "learner": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "concept_id": {
+                                  "type": "string",
+                                  "maxLength": 64,
+                                  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                                },
+                                "lifecycle": {
+                                  "type": "string",
+                                  "enum": [
+                                    "CL-0",
+                                    "CL-1",
+                                    "CL-2",
+                                    "CL-3",
+                                    "CL-4",
+                                    "CL-5",
+                                    "CL-6",
+                                    "CL-7",
+                                    "CL-8",
+                                    "CL-X"
+                                  ]
+                                },
+                                "mastery": {
+                                  "type": "string",
+                                  "enum": [
+                                    "unseen",
+                                    "learning",
+                                    "mastered"
+                                  ]
+                                },
+                                "provisional": {
+                                  "type": "boolean"
+                                },
+                                "rusty": {
+                                  "type": "boolean"
+                                }
+                              },
+                              "required": [
+                                "concept_id",
+                                "lifecycle",
+                                "mastery",
+                                "provisional",
+                                "rusty"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "concept",
+                        "learner"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "level",
+                  "concepts"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "learner": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "track": {
+                      "type": "string",
+                      "enum": [
+                        "alg",
+                        "cs",
+                        "net",
+                        "lang",
+                        "fe",
+                        "be",
+                        "db",
+                        "linux",
+                        "docker",
+                        "k8s",
+                        "cicd",
+                        "sre",
+                        "cloud",
+                        "sec",
+                        "ml",
+                        "llm",
+                        "arch",
+                        "eng",
+                        "lead",
+                        "data"
+                      ]
+                    },
+                    "level": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 1,
+                          "maximum": 5
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "provisional": {
+                      "type": "boolean"
+                    },
+                    "needs_reconfirmation": {
+                      "type": "boolean"
+                    },
+                    "promoted_at": {
+                      "anyOf": [
+                        {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 8640000000000000
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "mastered_by_level": {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 5,
+                      "maxItems": 5
+                    },
+                    "required_by_level": {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": -9007199254740991,
+                          "maximum": 9007199254740991
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 5,
+                      "maxItems": 5
+                    },
+                    "concepts": {
+                      "maxItems": 200,
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "concept_id": {
+                            "type": "string",
+                            "maxLength": 64,
+                            "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                          },
+                          "lifecycle": {
+                            "type": "string",
+                            "enum": [
+                              "CL-0",
+                              "CL-1",
+                              "CL-2",
+                              "CL-3",
+                              "CL-4",
+                              "CL-5",
+                              "CL-6",
+                              "CL-7",
+                              "CL-8",
+                              "CL-X"
+                            ]
+                          },
+                          "mastery": {
+                            "type": "string",
+                            "enum": [
+                              "unseen",
+                              "learning",
+                              "mastered"
+                            ]
+                          },
+                          "provisional": {
+                            "type": "boolean"
+                          },
+                          "rusty": {
+                            "type": "boolean"
+                          }
+                        },
+                        "required": [
+                          "concept_id",
+                          "lifecycle",
+                          "mastery",
+                          "provisional",
+                          "rusty"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "promotion": {
+                      "anyOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "track": {
+                              "type": "string",
+                              "enum": [
+                                "alg",
+                                "cs",
+                                "net",
+                                "lang",
+                                "fe",
+                                "be",
+                                "db",
+                                "linux",
+                                "docker",
+                                "k8s",
+                                "cicd",
+                                "sre",
+                                "cloud",
+                                "sec",
+                                "ml",
+                                "llm",
+                                "arch",
+                                "eng",
+                                "lead",
+                                "data"
+                              ]
+                            },
+                            "from_level": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 5
+                            },
+                            "to_level": {
+                              "type": "integer",
+                              "minimum": 1,
+                              "maximum": 5
+                            },
+                            "decision": {
+                              "type": "string",
+                              "enum": [
+                                "promote",
+                                "promote_provisional",
+                                "not_ready",
+                                "cap_reached"
+                              ]
+                            },
+                            "gates": {
+                              "maxItems": 20,
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "gate_id": {
+                                    "type": "string",
+                                    "pattern": "^[A-Z][A-Z0-9_]{1,40}$"
+                                  },
+                                  "label_ko": {
+                                    "type": "string",
+                                    "maxLength": 80
+                                  },
+                                  "met": {
+                                    "type": "boolean"
+                                  },
+                                  "value": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ]
+                                  },
+                                  "threshold": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ]
+                                  },
+                                  "evidence_event_ids": {
+                                    "maxItems": 50,
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                                    }
+                                  },
+                                  "shortfall_ko": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string",
+                                        "maxLength": 300
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "gate_id",
+                                  "label_ko",
+                                  "met",
+                                  "value",
+                                  "threshold",
+                                  "evidence_event_ids",
+                                  "shortfall_ko"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "blockers": {
+                              "maxItems": 50,
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "code": {
+                                    "type": "string",
+                                    "pattern": "^(NO_ASSESSMENT_POOL|EMPTY_LEVEL|D4_POSSIBLE<REQUIRED|CASE_L4\\+<2|MASTERY_FORMATS<3:[a-z0-9.-]{3,128})$"
+                                  },
+                                  "detail_ko": {
+                                    "type": "string",
+                                    "maxLength": 300
+                                  }
+                                },
+                                "required": [
+                                  "code",
+                                  "detail_ko"
+                                ],
+                                "additionalProperties": false
+                              }
+                            },
+                            "exam": {
+                              "type": "object",
+                              "properties": {
+                                "eligible": {
+                                  "type": "boolean"
+                                },
+                                "retry_after": {
+                                  "anyOf": [
+                                    {
+                                      "type": "integer",
+                                      "minimum": 0,
+                                      "maximum": 8640000000000000
+                                    },
+                                    {
+                                      "type": "null"
+                                    }
+                                  ]
+                                },
+                                "last": {
+                                  "anyOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "exam_id": {
+                                          "type": "string",
+                                          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                                        },
+                                        "passed": {
+                                          "type": "boolean"
+                                        },
+                                        "correct_count": {
+                                          "type": "integer",
+                                          "minimum": -9007199254740991,
+                                          "maximum": 9007199254740991
+                                        },
+                                        "cbm_ratio": {
+                                          "type": "number"
+                                        },
+                                        "at": {
+                                          "type": "integer",
+                                          "minimum": 0,
+                                          "maximum": 8640000000000000
+                                        }
+                                      },
+                                      "required": [
+                                        "exam_id",
+                                        "passed",
+                                        "correct_count",
+                                        "cbm_ratio",
+                                        "at"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    {
+                                      "type": "null"
+                                    }
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "eligible",
+                                "retry_after",
+                                "last"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "profile": {
+                              "type": "object",
+                              "properties": {
+                                "policy_version": {
+                                  "type": "string",
+                                  "pattern": "^ps_[0-9a-f]{16}$"
+                                },
+                                "ai_mode": {
+                                  "type": "string",
+                                  "enum": [
+                                    "FULL",
+                                    "JUDGE_ONLY",
+                                    "LLM_ONLY",
+                                    "OFFLINE"
+                                  ]
+                                },
+                                "sp1_state": {
+                                  "type": "string",
+                                  "enum": [
+                                    "pass",
+                                    "fail",
+                                    "unknown"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "policy_version",
+                                "ai_mode",
+                                "sp1_state"
+                              ],
+                              "additionalProperties": false
+                            },
+                            "cap": {
+                              "type": "object",
+                              "properties": {
+                                "declared": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 5
+                                },
+                                "offline": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 5
+                                },
+                                "oracle": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 5
+                                },
+                                "display": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "maximum": 5
+                                }
+                              },
+                              "required": [
+                                "declared",
+                                "offline",
+                                "oracle",
+                                "display"
+                              ],
+                              "additionalProperties": false
+                            }
+                          },
+                          "required": [
+                            "track",
+                            "from_level",
+                            "to_level",
+                            "decision",
+                            "gates",
+                            "blockers",
+                            "exam",
+                            "profile",
+                            "cap"
+                          ],
+                          "additionalProperties": false
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "track",
+                    "level",
+                    "provisional",
+                    "needs_reconfirmation",
+                    "promoted_at",
+                    "mastered_by_level",
+                    "required_by_level",
+                    "concepts",
+                    "promotion"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "degraded": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "part": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_.]{1,63}$"
+                  },
+                  "dependency": {
+                    "type": "string",
+                    "enum": [
+                      "gateway",
+                      "content",
+                      "learning",
+                      "ai-gateway",
+                      "ops-api"
+                    ]
+                  },
+                  "code": {
+                    "type": "string",
+                    "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
+                  }
+                },
+                "required": [
+                  "part",
+                  "dependency",
+                  "code"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "track",
+            "title_ko",
+            "cap",
+            "levels",
+            "learner",
+            "degraded"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

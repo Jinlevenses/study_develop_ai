@@ -1,0 +1,146 @@
+{
+  "$comment": "gateway.ai.firewall_patterns",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.ai.firewall_patterns"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/ai/firewall/patterns"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-019"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "builtin_policy": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+            },
+            "builtin_rule_ids": {
+              "maxItems": 200,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 60
+              }
+            },
+            "user_patterns": {
+              "maxItems": 500,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pattern_id": {
+                    "type": "string",
+                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "domain",
+                      "employee_id",
+                      "project_code",
+                      "regex",
+                      "literal"
+                    ]
+                  },
+                  "value": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 500
+                  },
+                  "created_at": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  }
+                },
+                "required": [
+                  "pattern_id",
+                  "kind",
+                  "value",
+                  "created_at"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "local_classifier": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "provider_id": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "const": "ollama"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "enabled",
+                "provider_id"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "builtin_policy",
+            "builtin_rule_ids",
+            "user_patterns",
+            "local_classifier"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

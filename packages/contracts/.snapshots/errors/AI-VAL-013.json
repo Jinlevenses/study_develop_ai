@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "키가 제공자 probe에서 거부됨"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

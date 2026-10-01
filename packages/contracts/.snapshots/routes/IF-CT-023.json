@@ -1,0 +1,346 @@
+{
+  "$comment": "content.catalog.packs.refresh",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.catalog.packs.refresh"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/catalog/packs:refresh"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R3"
+    },
+    "fr": {
+      "enum": [
+        "FR-CUR-023",
+        "FR-AI-026"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "install_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "track": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            },
+            "work_order_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "install_id",
+            "track",
+            "work_order_id"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "202": {
+          "type": "object",
+          "properties": {
+            "install_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "verifying",
+                "compiling",
+                "loading",
+                "reapplying_overlays",
+                "activating",
+                "activated",
+                "failed",
+                "awaiting_work_order"
+              ]
+            },
+            "packs": {
+              "maxItems": 25,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pack_id": {
+                    "type": "string",
+                    "maxLength": 48,
+                    "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)|x\\.[a-z0-9]+(?:-[a-z0-9]+)*|u\\.[a-z0-9]+)$"
+                  },
+                  "track": {
+                    "type": "string",
+                    "enum": [
+                      "alg",
+                      "cs",
+                      "net",
+                      "lang",
+                      "fe",
+                      "be",
+                      "db",
+                      "linux",
+                      "docker",
+                      "k8s",
+                      "cicd",
+                      "sre",
+                      "cloud",
+                      "sec",
+                      "ml",
+                      "llm",
+                      "arch",
+                      "eng",
+                      "lead",
+                      "data"
+                    ]
+                  },
+                  "version": {
+                    "type": "string",
+                    "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                  },
+                  "previous_version": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "conflicts": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "pack_id",
+                  "track",
+                  "version",
+                  "previous_version",
+                  "conflicts"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "problem": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "pattern": "^urn:fathom:problem:[a-z]+-[a-z]+-\\d{3}$"
+                    },
+                    "title": {
+                      "type": "string",
+                      "maxLength": 120
+                    },
+                    "status": {
+                      "type": "integer",
+                      "minimum": 400,
+                      "maximum": 599
+                    },
+                    "detail": {
+                      "type": "string",
+                      "maxLength": 1000
+                    },
+                    "instance": {
+                      "type": "string",
+                      "maxLength": 300
+                    },
+                    "code": {
+                      "type": "string",
+                      "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
+                    },
+                    "error_id": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    },
+                    "request_id": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    },
+                    "retryable": {
+                      "type": "boolean"
+                    },
+                    "retry_after_ms": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "errors": {
+                      "maxItems": 50,
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "path": {
+                            "type": "string",
+                            "maxLength": 200
+                          },
+                          "message": {
+                            "type": "string",
+                            "maxLength": 300
+                          },
+                          "rule": {
+                            "type": "string",
+                            "maxLength": 60
+                          }
+                        },
+                        "required": [
+                          "path",
+                          "message",
+                          "rule"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "dependency": {
+                      "type": "string",
+                      "enum": [
+                        "gateway",
+                        "content",
+                        "learning",
+                        "ai-gateway",
+                        "ops-api"
+                      ]
+                    },
+                    "acked_through_seq": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "active_session_id": {
+                      "type": "string",
+                      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                    },
+                    "violations": {
+                      "maxItems": 100,
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string"
+                        },
+                        "additionalProperties": {}
+                      }
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "title",
+                    "status",
+                    "code",
+                    "error_id",
+                    "request_id",
+                    "retryable"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "started_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "finished_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "install_id",
+            "state",
+            "packs",
+            "problem",
+            "started_at",
+            "finished_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

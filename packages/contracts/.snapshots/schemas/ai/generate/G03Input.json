@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "lab_spec_md": {
+      "type": "string",
+      "maxLength": 8000
+    },
+    "lang": {
+      "type": "string",
+      "enum": [
+        "js",
+        "ts"
+      ]
+    },
+    "complexity_target": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "lab_spec_md",
+    "lang",
+    "complexity_target"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "epoch 매니페스트 무효·조합 불일치·앵커 불일치"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

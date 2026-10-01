@@ -1,0 +1,964 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "gate_thresholds@v1"
+    },
+    "gates": {
+      "type": "object",
+      "properties": {
+        "G2": {
+          "type": "object",
+          "properties": {
+            "grounded_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "grounded_min"
+          ],
+          "additionalProperties": false
+        },
+        "G3": {
+          "type": "object",
+          "properties": {
+            "key_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "other_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "repair_band": {
+              "type": "object",
+              "properties": {
+                "gt": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "le": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "gt",
+                "le"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "key_min",
+            "other_max",
+            "repair_band"
+          ],
+          "additionalProperties": false
+        },
+        "G4": {
+          "type": "object",
+          "properties": {
+            "require_key_match": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "require_key_match"
+          ],
+          "additionalProperties": false
+        },
+        "G5": {
+          "type": "object",
+          "properties": {
+            "ambiguous_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "ambiguous_max"
+          ],
+          "additionalProperties": false
+        },
+        "G6": {
+          "type": "object",
+          "properties": {
+            "mean_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "each_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "mean_min",
+            "each_min"
+          ],
+          "additionalProperties": false
+        },
+        "G7": {
+          "type": "object",
+          "properties": {
+            "leak_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "leak_max"
+          ],
+          "additionalProperties": false
+        },
+        "G8": {
+          "type": "object",
+          "properties": {
+            "duplicate_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "judge_band": {
+              "type": "object",
+              "properties": {
+                "ge": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "lt": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "ge",
+                "lt"
+              ],
+              "additionalProperties": false
+            },
+            "same_knowledge_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "duplicate_min",
+            "judge_band",
+            "same_knowledge_min"
+          ],
+          "additionalProperties": false
+        },
+        "G9": {
+          "type": "object",
+          "properties": {
+            "target_p_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "adjacent_ok": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "target_p_min",
+            "adjacent_ok"
+          ],
+          "additionalProperties": false
+        },
+        "G11": {
+          "type": "object",
+          "properties": {
+            "explanation_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "explanation_min"
+          ],
+          "additionalProperties": false
+        },
+        "G13": {
+          "type": "object",
+          "properties": {
+            "each_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "each_max"
+          ],
+          "additionalProperties": false
+        },
+        "regate": {
+          "type": "object",
+          "properties": {
+            "G3": {
+              "type": "string",
+              "enum": [
+                "void",
+                "halve",
+                "keep"
+              ]
+            },
+            "G5": {
+              "type": "string",
+              "enum": [
+                "void",
+                "halve",
+                "keep"
+              ]
+            }
+          },
+          "required": [
+            "G3",
+            "G5"
+          ],
+          "additionalProperties": false
+        },
+        "llm_only": {
+          "type": "object",
+          "properties": {
+            "G2": {
+              "type": "object",
+              "properties": {
+                "grounded_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "grounded_min"
+              ],
+              "additionalProperties": false
+            },
+            "G3": {
+              "type": "object",
+              "properties": {
+                "key_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "other_max": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "key_min",
+                "other_max"
+              ],
+              "additionalProperties": false
+            },
+            "G5": {
+              "type": "object",
+              "properties": {
+                "ambiguous_max": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "ambiguous_max"
+              ],
+              "additionalProperties": false
+            },
+            "G7": {
+              "type": "object",
+              "properties": {
+                "leak_max": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "leak_max"
+              ],
+              "additionalProperties": false
+            },
+            "require_G4": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "G2",
+            "G3",
+            "G5",
+            "G7",
+            "require_G4"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "G9",
+        "G11",
+        "G13",
+        "regate",
+        "llm_only"
+      ],
+      "additionalProperties": false
+    },
+    "judge_bands": {
+      "type": "object",
+      "properties": {
+        "AI-J01": {
+          "type": "object",
+          "properties": {
+            "targets_mc": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reject": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "accept",
+                "reject"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "targets_mc"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J02": {
+          "type": "object",
+          "properties": {
+            "equiv": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reject": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "accept",
+                "reject"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "equiv"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J03": {
+          "type": "object",
+          "properties": {
+            "cov": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reject": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "accept",
+                "reject"
+              ],
+              "additionalProperties": false
+            },
+            "mc": {
+              "type": "object",
+              "properties": {
+                "present": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "present"
+              ],
+              "additionalProperties": false
+            },
+            "bps": {
+              "type": "object",
+              "properties": {
+                "w": {
+                  "type": "object",
+                  "properties": {
+                    "coverage": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "accuracy": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "structure": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "depth": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "coverage",
+                    "accuracy",
+                    "structure",
+                    "depth"
+                  ],
+                  "additionalProperties": false
+                },
+                "partial_credit": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "deep_level_min": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 5
+                }
+              },
+              "required": [
+                "w",
+                "partial_credit",
+                "deep_level_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "cov",
+            "mc",
+            "bps"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J04": {
+          "type": "object",
+          "properties": {
+            "kp": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reject": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "accept",
+                "reject"
+              ],
+              "additionalProperties": false
+            },
+            "defect": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "reject": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "accept",
+                "reject"
+              ],
+              "additionalProperties": false
+            },
+            "mc": {
+              "type": "object",
+              "properties": {
+                "present": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "present"
+              ],
+              "additionalProperties": false
+            },
+            "partial_credit": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "kp",
+            "defect",
+            "mc",
+            "partial_credit"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J05": {
+          "type": "object",
+          "properties": {
+            "fixes_mc": {
+              "type": "object",
+              "properties": {
+                "accept": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "accept"
+              ],
+              "additionalProperties": false
+            },
+            "teaching": {
+              "type": "object",
+              "properties": {
+                "w": {
+                  "type": "object",
+                  "properties": {
+                    "accuracy": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "simplicity": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "examples": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "gaps": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "fixes_mc": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "accuracy",
+                    "simplicity",
+                    "examples",
+                    "gaps",
+                    "fixes_mc"
+                  ],
+                  "additionalProperties": false
+                },
+                "taught_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "w",
+                "taught_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "fixes_mc",
+            "teaching"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J06": {
+          "type": "object",
+          "properties": {
+            "which_mc": {
+              "type": "object",
+              "properties": {
+                "confidence_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "confidence_min"
+              ],
+              "additionalProperties": false
+            },
+            "error_cause": {
+              "type": "object",
+              "properties": {
+                "confidence_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "confidence_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "which_mc",
+            "error_cause"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J12": {
+          "type": "object",
+          "properties": {
+            "same_concept": {
+              "type": "object",
+              "properties": {
+                "merge_candidate_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "merge_candidate_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "same_concept"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J13": {
+          "type": "object",
+          "properties": {
+            "section": {
+              "type": "object",
+              "properties": {
+                "auto_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "auto_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "section"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J14": {
+          "type": "object",
+          "properties": {
+            "supported": {
+              "type": "object",
+              "properties": {
+                "verified_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "verified_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "supported"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J15": {
+          "type": "object",
+          "properties": {
+            "contradict": {
+              "type": "object",
+              "properties": {
+                "conflict_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "review_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "conflict_min",
+                "review_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "contradict"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J16": {
+          "type": "object",
+          "properties": {
+            "injection": {
+              "type": "object",
+              "properties": {
+                "quarantine_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "quarantine_min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "injection"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J17": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "object",
+              "properties": {
+                "confidence_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "below": {
+                  "type": "string",
+                  "const": "partial"
+                }
+              },
+              "required": [
+                "confidence_min",
+                "below"
+              ],
+              "additionalProperties": false
+            },
+            "asks_answer": {
+              "type": "object",
+              "properties": {
+                "flag": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "flag"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "label",
+            "asks_answer"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J18": {
+          "type": "object",
+          "properties": {
+            "gates_as": {
+              "minItems": 1,
+              "maxItems": 6,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "G2",
+                  "G3",
+                  "G5",
+                  "G6",
+                  "G7",
+                  "G11"
+                ]
+              }
+            },
+            "centrality": {
+              "type": "object",
+              "properties": {
+                "min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 3
+                }
+              },
+              "required": [
+                "min"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "gates_as",
+            "centrality"
+          ],
+          "additionalProperties": false
+        },
+        "AI-J19": {
+          "type": "object",
+          "properties": {
+            "appeal_label": {
+              "type": "object",
+              "properties": {
+                "confidence_min": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "confidence_min_judge_only": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "below": {
+                  "type": "string",
+                  "const": "user_decision_required"
+                }
+              },
+              "required": [
+                "confidence_min",
+                "confidence_min_judge_only",
+                "below"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "appeal_label"
+          ],
+          "additionalProperties": false
+        },
+        "injection": {
+          "type": "object",
+          "properties": {
+            "flag": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "flag"
+          ],
+          "additionalProperties": false
+        },
+        "jev_low_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "AI-J01",
+        "AI-J02",
+        "AI-J03",
+        "AI-J04",
+        "AI-J05",
+        "AI-J06",
+        "AI-J12",
+        "AI-J13",
+        "AI-J14",
+        "AI-J15",
+        "AI-J16",
+        "AI-J17",
+        "AI-J18",
+        "AI-J19",
+        "injection",
+        "jev_low_confidence"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "gates",
+    "judge_bands"
+  ],
+  "additionalProperties": false
+}

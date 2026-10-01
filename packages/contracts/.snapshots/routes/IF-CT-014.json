@@ -1,0 +1,266 @@
+{
+  "$comment": "content.catalog.overlays.create",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.catalog.overlays.create"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/catalog/overlays"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-CUR-020",
+        "FR-QST-016"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "patch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "target_kind": {
+              "type": "string",
+              "enum": [
+                "concept",
+                "ku",
+                "misconception",
+                "item",
+                "case",
+                "source"
+              ]
+            },
+            "target_id": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "field": {
+              "type": "string",
+              "pattern": "^[a-z_]+(\\.[a-z_]+){0,3}$"
+            },
+            "base_version": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "new_value": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "reason_ko": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
+          },
+          "required": [
+            "patch_id",
+            "target_kind",
+            "target_id",
+            "field",
+            "base_version",
+            "new_value",
+            "reason_ko"
+          ],
+          "additionalProperties": false,
+          "$defs": {
+            "__schema0": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/__schema0"
+                  }
+                },
+                {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "$ref": "#/$defs/__schema0"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "201": {
+          "type": "object",
+          "properties": {
+            "patch_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "target_kind": {
+              "type": "string",
+              "enum": [
+                "concept",
+                "ku",
+                "misconception",
+                "item",
+                "case",
+                "source"
+              ]
+            },
+            "target_id": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string"
+            },
+            "base_version": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "new_value": {
+              "$ref": "#/$defs/__schema0"
+            },
+            "reason_ko": {
+              "type": "string"
+            },
+            "device_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "ts": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "revert_of": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "applied",
+                "conflicted",
+                "reverted"
+              ]
+            },
+            "conflict_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "patch_id",
+            "target_kind",
+            "target_id",
+            "field",
+            "base_version",
+            "new_value",
+            "reason_ko",
+            "device_id",
+            "ts",
+            "revert_of",
+            "state",
+            "conflict_id"
+          ],
+          "additionalProperties": false,
+          "$defs": {
+            "__schema0": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/__schema0"
+                  }
+                },
+                {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string"
+                  },
+                  "additionalProperties": {
+                    "$ref": "#/$defs/__schema0"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

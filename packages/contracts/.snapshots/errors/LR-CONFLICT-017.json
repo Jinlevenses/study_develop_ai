@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "승급 평가 자격 없음·재도전 대기"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

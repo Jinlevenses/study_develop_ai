@@ -1,0 +1,655 @@
+{
+  "$comment": "ai-gateway.jobs.result",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.jobs.result"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/jobs/{job_id}/result"
+    },
+    "allowedCallers": {
+      "enum": [
+        "content"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": true
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-AI-010"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "job_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "job_id"
+          ],
+          "additionalProperties": false
+        },
+        "query": {
+          "type": "object",
+          "properties": {
+            "cursor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,512}$"
+            },
+            "limit": {
+              "default": 50,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "job_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "task_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "AI-J01",
+                    "AI-J02",
+                    "AI-J03",
+                    "AI-J04",
+                    "AI-J05",
+                    "AI-J06",
+                    "AI-J07",
+                    "AI-J08",
+                    "AI-J09",
+                    "AI-J10",
+                    "AI-J11",
+                    "AI-J12",
+                    "AI-J13",
+                    "AI-J14",
+                    "AI-J15",
+                    "AI-J16",
+                    "AI-J17",
+                    "AI-J18",
+                    "AI-J19"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "AI-G01",
+                    "AI-G02",
+                    "AI-G03",
+                    "AI-G04",
+                    "AI-G05",
+                    "AI-G06",
+                    "AI-G07",
+                    "AI-G08",
+                    "AI-G09",
+                    "AI-G10",
+                    "AI-G11",
+                    "AI-G12",
+                    "AI-G13"
+                  ]
+                }
+              ]
+            },
+            "items": {
+              "maxItems": 200,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "item_key": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9][a-z0-9_.:#!~-]{0,159}$"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "ok",
+                      "failed",
+                      "unavailable"
+                    ]
+                  },
+                  "judge": {
+                    "anyOf": [
+                      {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "const": "ok"
+                              },
+                              "engine": {
+                                "type": "string",
+                                "enum": [
+                                  "J",
+                                  "LJ"
+                                ]
+                              },
+                              "calibrated": {
+                                "type": "boolean"
+                              },
+                              "confidence": {
+                                "type": "number",
+                                "minimum": 0,
+                                "maximum": 1
+                              },
+                              "answers": {
+                                "type": "object",
+                                "propertyNames": {
+                                  "type": "string",
+                                  "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                                },
+                                "additionalProperties": {
+                                  "oneOf": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "const": "noul"
+                                        },
+                                        "p_yes": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1
+                                        }
+                                      },
+                                      "required": [
+                                        "type",
+                                        "p_yes"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "const": "choice"
+                                        },
+                                        "choice": {
+                                          "type": "string",
+                                          "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                                        },
+                                        "confidence": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1
+                                        },
+                                        "probabilities": {
+                                          "type": "object",
+                                          "propertyNames": {
+                                            "type": "string",
+                                            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                                          },
+                                          "additionalProperties": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                          }
+                                        }
+                                      },
+                                      "required": [
+                                        "type",
+                                        "choice",
+                                        "confidence",
+                                        "probabilities"
+                                      ],
+                                      "additionalProperties": false
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "type": {
+                                          "type": "string",
+                                          "const": "score"
+                                        },
+                                        "score": {
+                                          "type": "number",
+                                          "minimum": 0
+                                        },
+                                        "confidence": {
+                                          "type": "number",
+                                          "minimum": 0,
+                                          "maximum": 1
+                                        },
+                                        "probabilities": {
+                                          "type": "object",
+                                          "propertyNames": {
+                                            "type": "string",
+                                            "pattern": "^\\d{1,2}$"
+                                          },
+                                          "additionalProperties": {
+                                            "type": "number",
+                                            "minimum": 0,
+                                            "maximum": 1
+                                          }
+                                        },
+                                        "levels": {
+                                          "type": "integer",
+                                          "minimum": 2,
+                                          "maximum": 10
+                                        }
+                                      },
+                                      "required": [
+                                        "type",
+                                        "score",
+                                        "confidence",
+                                        "probabilities",
+                                        "levels"
+                                      ],
+                                      "additionalProperties": false
+                                    }
+                                  ]
+                                }
+                              },
+                              "model_version": {
+                                "type": "string",
+                                "maxLength": 80
+                              },
+                              "provider_id": {
+                                "type": "string",
+                                "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                              },
+                              "prompt_version": {
+                                "type": "string",
+                                "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                              },
+                              "judge_log_id": {
+                                "type": "string",
+                                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              },
+                              "firewall_decision_id": {
+                                "type": "string",
+                                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              },
+                              "cache_hit": {
+                                "type": "boolean"
+                              },
+                              "latency_ms": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "engine",
+                              "calibrated",
+                              "confidence",
+                              "answers",
+                              "model_version",
+                              "provider_id",
+                              "prompt_version",
+                              "judge_log_id",
+                              "firewall_decision_id",
+                              "cache_hit",
+                              "latency_ms"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "const": "unavailable"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "enum": [
+                                  "offline",
+                                  "no_consented_provider",
+                                  "auth_invalid",
+                                  "breaker_open",
+                                  "deadline",
+                                  "firewall_blocked",
+                                  "budget_exhausted",
+                                  "quota_exhausted",
+                                  "task_disabled",
+                                  "provider_error",
+                                  "bad_request",
+                                  "calibrated_engine_unavailable",
+                                  "busy"
+                                ]
+                              },
+                              "retry_after_ms": {
+                                "anyOf": [
+                                  {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 9007199254740991
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "reason",
+                              "retry_after_ms"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "const": "deferred"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "enum": [
+                                  "background_queued",
+                                  "batch_window_closed",
+                                  "work_order_pending"
+                                ]
+                              },
+                              "job_id": {
+                                "anyOf": [
+                                  {
+                                    "type": "string",
+                                    "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "reason",
+                              "job_id"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "generate": {
+                    "anyOf": [
+                      {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "const": "ok"
+                              },
+                              "output": {
+                                "type": "object",
+                                "propertyNames": {
+                                  "type": "string"
+                                },
+                                "additionalProperties": {}
+                              },
+                              "schema_id": {
+                                "type": "string",
+                                "pattern": "^ai\\/[A-Za-z]+@\\d+$"
+                              },
+                              "provider_id": {
+                                "type": "string",
+                                "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                              },
+                              "model": {
+                                "type": "string",
+                                "maxLength": 80
+                              },
+                              "prompt_version": {
+                                "type": "string",
+                                "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                              },
+                              "repaired": {
+                                "type": "boolean"
+                              },
+                              "cache_hit": {
+                                "type": "boolean"
+                              },
+                              "call_id": {
+                                "type": "string",
+                                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              },
+                              "firewall_decision_id": {
+                                "type": "string",
+                                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              },
+                              "cost": {
+                                "type": "object",
+                                "properties": {
+                                  "basis": {
+                                    "type": "string",
+                                    "enum": [
+                                      "reported",
+                                      "computed",
+                                      "subscription",
+                                      "free"
+                                    ]
+                                  },
+                                  "krw": {
+                                    "type": "number",
+                                    "minimum": 0
+                                  },
+                                  "usd": {
+                                    "anyOf": [
+                                      {
+                                        "type": "number",
+                                        "minimum": 0
+                                      },
+                                      {
+                                        "type": "null"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "basis",
+                                  "krw",
+                                  "usd"
+                                ],
+                                "additionalProperties": false
+                              },
+                              "latency_ms": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 9007199254740991
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "output",
+                              "schema_id",
+                              "provider_id",
+                              "model",
+                              "prompt_version",
+                              "repaired",
+                              "cache_hit",
+                              "call_id",
+                              "firewall_decision_id",
+                              "cost",
+                              "latency_ms"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "const": "streaming"
+                              },
+                              "stream_ref": {
+                                "type": "string",
+                                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              },
+                              "expires_at": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 8640000000000000
+                              },
+                              "provider_id": {
+                                "type": "string",
+                                "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+                              },
+                              "prompt_version": {
+                                "type": "string",
+                                "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+                              },
+                              "call_id": {
+                                "type": "string",
+                                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "stream_ref",
+                              "expires_at",
+                              "provider_id",
+                              "prompt_version",
+                              "call_id"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "status": {
+                                "type": "string",
+                                "const": "unavailable"
+                              },
+                              "reason": {
+                                "type": "string",
+                                "enum": [
+                                  "offline",
+                                  "no_consented_provider",
+                                  "auth_invalid",
+                                  "breaker_open",
+                                  "deadline",
+                                  "firewall_blocked",
+                                  "budget_exhausted",
+                                  "quota_exhausted",
+                                  "task_disabled",
+                                  "provider_error",
+                                  "schema_violation",
+                                  "content_refused",
+                                  "busy"
+                                ]
+                              },
+                              "retry_after_ms": {
+                                "anyOf": [
+                                  {
+                                    "type": "integer",
+                                    "minimum": 0,
+                                    "maximum": 9007199254740991
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "status",
+                              "reason",
+                              "retry_after_ms"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "item_key",
+                  "status",
+                  "judge",
+                  "generate"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "job_id",
+            "task_id",
+            "items",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "supervisor IPC 불가"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

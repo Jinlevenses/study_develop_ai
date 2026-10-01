@@ -1,0 +1,250 @@
+{
+  "$comment": "content.itembank.health",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.itembank.health"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/itembank/health"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": true
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-QST-014"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "flag": {
+              "type": "string",
+              "enum": [
+                "too_easy",
+                "too_hard",
+                "distractor_dead",
+                "discrimination_low",
+                "key_suspect",
+                "latency_outlier"
+              ]
+            },
+            "cursor": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,512}$"
+            },
+            "limit": {
+              "default": 50,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "limit"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "item_id": {
+                    "type": "string",
+                    "maxLength": 140,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+                  },
+                  "concept_id": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "embedded",
+                      "ox",
+                      "mcq",
+                      "cloze",
+                      "short",
+                      "matching",
+                      "code_task",
+                      "blank_note",
+                      "digging_d4_mcq",
+                      "error_find",
+                      "confusable",
+                      "fermi",
+                      "cond_reversal",
+                      "infra_lite",
+                      "kata",
+                      "audit",
+                      "case_decision",
+                      "code_predict",
+                      "sql_task",
+                      "essay",
+                      "digging",
+                      "feynman",
+                      "pr_review",
+                      "reverse_item",
+                      "artifact",
+                      "case_postmortem",
+                      "micro_judgment",
+                      "ml_predict",
+                      "mcq_multi",
+                      "order",
+                      "parsons",
+                      "log_read",
+                      "config_review"
+                    ]
+                  },
+                  "gate_status": {
+                    "type": "string",
+                    "enum": [
+                      "authored",
+                      "seed_reviewed",
+                      "draft",
+                      "deferred",
+                      "gated_pass",
+                      "gated_fail",
+                      "jev_verified",
+                      "flagged",
+                      "demoted",
+                      "quarantined",
+                      "retired"
+                    ]
+                  },
+                  "flags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "too_easy",
+                        "too_hard",
+                        "distractor_dead",
+                        "discrimination_low",
+                        "key_suspect",
+                        "latency_outlier"
+                      ]
+                    }
+                  },
+                  "stats": {
+                    "type": "object",
+                    "properties": {
+                      "n": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991
+                      },
+                      "p_correct": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "mean_latency_ms": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "option_freq": {
+                        "type": "object",
+                        "propertyNames": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                        },
+                        "additionalProperties": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "required": [
+                      "n",
+                      "p_correct",
+                      "mean_latency_ms",
+                      "option_freq"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "updated_at": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 8640000000000000
+                  }
+                },
+                "required": [
+                  "item_id",
+                  "concept_id",
+                  "format",
+                  "gate_status",
+                  "flags",
+                  "stats",
+                  "updated_at"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "items",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

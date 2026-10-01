@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "제출 전 생성 금지"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

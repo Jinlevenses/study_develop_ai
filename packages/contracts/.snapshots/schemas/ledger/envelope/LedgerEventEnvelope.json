@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "device_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "device_seq": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "client_ts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "attempt.graded",
+        "evidence.upgraded",
+        "evidence.regraded",
+        "evidence.voided",
+        "evidence.weight_adjusted",
+        "pretest.answered",
+        "lesson.completed",
+        "self_assessment.recorded",
+        "card.enrolled",
+        "card.status_changed",
+        "profile.setting_changed",
+        "policy.switched",
+        "ai_mode.observed",
+        "declaration.sealed",
+        "promotion.exam_completed",
+        "level.promoted",
+        "level.provisional_resolved"
+      ]
+    },
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200
+    },
+    "payload": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "prev_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "experiment_arm": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 40
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "recorded_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "event_id",
+    "device_id",
+    "device_seq",
+    "client_ts",
+    "type",
+    "schema_version",
+    "idempotency_key",
+    "payload",
+    "prev_hash",
+    "hash",
+    "experiment_arm",
+    "recorded_at"
+  ],
+  "additionalProperties": false
+}

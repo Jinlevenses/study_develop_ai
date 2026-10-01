@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "주간 리뷰·시즌·미리보기 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

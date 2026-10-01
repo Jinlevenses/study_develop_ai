@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "idle_window_open": {
+      "type": "boolean"
+    },
+    "idle_since": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "power": {
+      "type": "string",
+      "enum": [
+        "ac",
+        "battery",
+        "unknown"
+      ]
+    },
+    "interactive_cli": {
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
+      }
+    },
+    "sampled_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "idle_window_open",
+    "idle_since",
+    "power",
+    "interactive_cli",
+    "sampled_at"
+  ],
+  "additionalProperties": false
+}

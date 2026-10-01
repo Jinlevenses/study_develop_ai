@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "mode_id": {
+      "type": "string",
+      "pattern": "^M-(0[1-9]|1\\d|2[01])$"
+    },
+    "name_ko": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40
+    },
+    "ur14_family": {
+      "type": "string",
+      "enum": [
+        "개념이해",
+        "실습",
+        "문제",
+        "개념 디깅",
+        "OX",
+        "백지노트"
+      ]
+    },
+    "offline_path": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "e2e_ids": {
+      "minItems": 1,
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(E2E-\\d{3}|SCN-\\d{2})$"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "included",
+        "deferred"
+      ]
+    }
+  },
+  "required": [
+    "mode_id",
+    "name_ko",
+    "ur14_family",
+    "offline_path",
+    "e2e_ids",
+    "status"
+  ],
+  "additionalProperties": false
+}

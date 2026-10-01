@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "유지보수 모드"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

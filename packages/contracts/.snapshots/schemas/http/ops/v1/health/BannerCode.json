@@ -1,0 +1,33 @@
+{
+  "type": "string",
+  "enum": [
+    "service_degraded",
+    "service_restarting",
+    "ai_offline",
+    "ai_budget_80",
+    "ai_budget_100",
+    "ai_quota",
+    "ai_drift",
+    "backup_failed",
+    "backup_aborted",
+    "secondary_missing",
+    "secondary_locked",
+    "rpo_exceeded",
+    "outbox_lag",
+    "inbox_dead",
+    "ledger_halt",
+    "ledger_integrity",
+    "projection_mismatch",
+    "integrity_check_failed",
+    "runner_platform_disabled",
+    "policy_lock_mismatch",
+    "prompt_lock_mismatch",
+    "disk_low",
+    "data_path_risk",
+    "node_eol",
+    "job_failed",
+    "slo_violation",
+    "tripwire",
+    "maintenance"
+  ]
+}

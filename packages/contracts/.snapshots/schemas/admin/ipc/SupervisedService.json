@@ -1,0 +1,18 @@
+{
+  "anyOf": [
+    {
+      "type": "string",
+      "enum": [
+        "gateway",
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ]
+    },
+    {
+      "type": "string",
+      "const": "vite"
+    }
+  ]
+}

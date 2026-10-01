@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 401
+    },
+    "title": {
+      "const": "부트스트랩 토큰 무효·만료·재사용"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

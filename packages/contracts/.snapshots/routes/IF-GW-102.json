@@ -1,0 +1,161 @@
+{
+  "$comment": "gateway.curation.warming",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.curation.warming"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/curation/warming"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-QST-013"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "pools": {
+              "maxItems": 5000,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "concept_id": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": [
+                      "embedded",
+                      "ox",
+                      "mcq",
+                      "cloze",
+                      "short",
+                      "matching",
+                      "code_task",
+                      "blank_note",
+                      "digging_d4_mcq",
+                      "error_find",
+                      "confusable",
+                      "fermi",
+                      "cond_reversal",
+                      "infra_lite",
+                      "kata",
+                      "audit",
+                      "case_decision",
+                      "code_predict",
+                      "sql_task",
+                      "essay",
+                      "digging",
+                      "feynman",
+                      "pr_review",
+                      "reverse_item",
+                      "artifact",
+                      "case_postmortem",
+                      "micro_judgment",
+                      "ml_predict",
+                      "mcq_multi",
+                      "order",
+                      "parsons",
+                      "log_read",
+                      "config_review"
+                    ]
+                  },
+                  "level": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 5
+                  },
+                  "have": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "need": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": [
+                  "concept_id",
+                  "format",
+                  "level",
+                  "have",
+                  "need"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "last_forecast_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "last_computed_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "pools",
+            "last_forecast_at",
+            "last_computed_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

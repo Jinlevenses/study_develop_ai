@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "properties": {
+    "gold_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "string",
+          "pattern": "^gold\\.AI-J\\d{2}\\.\\d{3}$"
+        }
+      ]
+    },
+    "task_id": {
+      "type": "string",
+      "enum": [
+        "AI-J01",
+        "AI-J02",
+        "AI-J03",
+        "AI-J04",
+        "AI-J05",
+        "AI-J06",
+        "AI-J07",
+        "AI-J08",
+        "AI-J09",
+        "AI-J10",
+        "AI-J11",
+        "AI-J12",
+        "AI-J13",
+        "AI-J14",
+        "AI-J15",
+        "AI-J16",
+        "AI-J17",
+        "AI-J18",
+        "AI-J19"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "model_labeled_draft",
+        "user_confirmed",
+        "user_corrected",
+        "skipped"
+      ]
+    },
+    "updated_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "gold_id",
+    "task_id",
+    "state",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

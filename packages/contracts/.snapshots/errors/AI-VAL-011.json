@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "질문 > 15 또는 0"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

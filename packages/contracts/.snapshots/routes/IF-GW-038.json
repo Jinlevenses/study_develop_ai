@@ -1,0 +1,323 @@
+{
+  "$comment": "gateway.labs.run",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.labs.run"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/api/v1/labs/runs"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-LAB-001~003",
+        "FR-LAB-006",
+        "FR-LAB-007",
+        "FR-LAB-013",
+        "FR-LAB-016"
+      ]
+    },
+    "deadlineMs": {
+      "const": 6000
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "item_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 140,
+                  "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "code",
+                "sql"
+              ]
+            },
+            "lang": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "js",
+                    "ts"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "code": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 65536
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "stdout",
+                "public_tests"
+              ]
+            }
+          },
+          "required": [
+            "run_id",
+            "item_id",
+            "kind",
+            "lang",
+            "code",
+            "mode"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "run_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "status": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "error",
+                    "timeout",
+                    "memory_limit",
+                    "output_limit",
+                    "rejected",
+                    "platform_disabled"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "pattern": "^killed_[a-z_]{1,30}$"
+                }
+              ]
+            },
+            "stdout": {
+              "type": "string",
+              "maxLength": 65536
+            },
+            "stderr": {
+              "type": "string",
+              "maxLength": 65536
+            },
+            "exit_code": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "duration_ms": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "peak_rss_mb": {
+              "type": "number",
+              "minimum": 0
+            },
+            "output_truncated": {
+              "type": "boolean"
+            },
+            "reason": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 300
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "public_tests": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "passed": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "failed": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "cases": {
+                      "maxItems": 50,
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "case_key": {
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                          },
+                          "ok": {
+                            "type": "boolean"
+                          },
+                          "message_ko": {
+                            "anyOf": [
+                              {
+                                "type": "string",
+                                "maxLength": 500
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          }
+                        },
+                        "required": [
+                          "case_key",
+                          "ok",
+                          "message_ko"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "passed",
+                    "failed",
+                    "cases"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "sql": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "columns": {
+                      "maxItems": 64,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 128
+                      }
+                    },
+                    "rows": {
+                      "maxItems": 1000,
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "maxLength": 1024
+                            },
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "truncated": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "columns",
+                    "rows",
+                    "truncated"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "run_id",
+            "status",
+            "stdout",
+            "stderr",
+            "exit_code",
+            "duration_ms",
+            "peak_rss_mb",
+            "output_truncated",
+            "reason",
+            "public_tests",
+            "sql"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

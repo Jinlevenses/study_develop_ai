@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 500
+    },
+    "title": {
+      "const": "처리되지 않은 서버 오류"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$comment": "ai-gateway.streams.get",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ai-gateway.streams.get"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/streams/{ref}"
+    },
+    "allowedCallers": {
+      "enum": [
+        "content"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-STD-020",
+        "FR-QST-023",
+        "IR-016"
+      ]
+    },
+    "deadlineMs": {
+      "const": 120000
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "sse"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "ref": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "ref"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

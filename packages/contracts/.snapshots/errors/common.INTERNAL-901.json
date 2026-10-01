@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 500
+    },
+    "title": {
+      "const": "응답이 계약을 위반함"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

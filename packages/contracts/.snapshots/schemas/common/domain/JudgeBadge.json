@@ -1,0 +1,13 @@
+{
+  "type": "string",
+  "enum": [
+    "none",
+    "ai",
+    "ai_uncalibrated",
+    "ai_confirm",
+    "ai_estimate_confirm",
+    "heuristic",
+    "self",
+    "pending"
+  ]
+}

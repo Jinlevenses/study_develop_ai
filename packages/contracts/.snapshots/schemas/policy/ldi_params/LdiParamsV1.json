@@ -1,0 +1,169 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "ldi_params@v1"
+    },
+    "provisional": {
+      "type": "boolean"
+    },
+    "retention_weights": {
+      "type": "object",
+      "properties": {
+        "core": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "standard": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "breadth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "archive": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "retired": {
+          "type": "number",
+          "const": 0
+        }
+      },
+      "required": [
+        "core",
+        "standard",
+        "breadth",
+        "archive",
+        "retired"
+      ],
+      "additionalProperties": false
+    },
+    "depth_by_level": {
+      "type": "object",
+      "properties": {
+        "L0": {
+          "type": "number",
+          "minimum": 0
+        },
+        "L1": {
+          "type": "number",
+          "minimum": 0
+        },
+        "L2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "L3": {
+          "type": "number",
+          "minimum": 0
+        },
+        "L4": {
+          "type": "number",
+          "minimum": 0
+        },
+        "L5": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5"
+      ],
+      "additionalProperties": false
+    },
+    "retrievability": {
+      "type": "object",
+      "properties": {
+        "recognition_factor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "recognition_factor"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "grader_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "formats_weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "formats_target": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "grader_weight",
+        "formats_weight",
+        "formats_target"
+      ],
+      "additionalProperties": false
+    },
+    "validity": {
+      "type": "object",
+      "properties": {
+        "valid": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cl_x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "deprecated": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "valid",
+        "cl_x",
+        "deprecated"
+      ],
+      "additionalProperties": false
+    },
+    "provisional_factor": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "version",
+    "provisional",
+    "retention_weights",
+    "depth_by_level",
+    "retrievability",
+    "evidence",
+    "validity",
+    "provisional_factor"
+  ],
+  "additionalProperties": false
+}

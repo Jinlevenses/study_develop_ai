@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "declaration_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "time_capsule",
+        "season_goal",
+        "self_declaration"
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "unseal_at": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "declaration_id",
+    "kind",
+    "payload",
+    "unseal_at"
+  ],
+  "additionalProperties": false
+}

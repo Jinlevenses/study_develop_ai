@@ -1,0 +1,416 @@
+{
+  "$comment": "gateway.review.weekly",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "gateway.review.weekly"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/api/v1/review/weekly"
+    },
+    "allowedCallers": {
+      "enum": [
+        "browser"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-DSH-009",
+        "FR-DSH-011",
+        "FR-PRG-017"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "week": {
+              "type": "string",
+              "pattern": "^\\d{4}-W(0[1-9]|[1-4]\\d|5[0-3])$"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "week": {
+              "type": "string",
+              "pattern": "^\\d{4}-W(0[1-9]|[1-4]\\d|5[0-3])$"
+            },
+            "from": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+            },
+            "to": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
+            },
+            "ldi": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number"
+                },
+                "delta": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "params": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{2,40}@v\\d{1,4}$"
+                },
+                "params_provisional": {
+                  "type": "boolean"
+                },
+                "computed_at": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                }
+              },
+              "required": [
+                "value",
+                "delta",
+                "params",
+                "params_provisional",
+                "computed_at"
+              ],
+              "additionalProperties": false
+            },
+            "weak_top5": {
+              "maxItems": 5,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "concept_id": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+                  },
+                  "title_ko": {
+                    "type": "string"
+                  },
+                  "reason_code": {
+                    "type": "string",
+                    "enum": [
+                      "low_retention",
+                      "illusion",
+                      "misconception",
+                      "foundation_crack",
+                      "leech"
+                    ]
+                  },
+                  "nba": {
+                    "type": "object",
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "learn",
+                          "practice",
+                          "verify",
+                          "dig",
+                          "case",
+                          "review",
+                          "revalidate"
+                        ]
+                      },
+                      "label_ko": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "kind",
+                      "label_ko"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "concept_id",
+                  "title_ko",
+                  "reason_code",
+                  "nba"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "misconceptions": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "mc_id": {
+                    "type": "string",
+                    "maxLength": 80,
+                    "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.m\\d{2})$"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "meta_family": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 60
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "mc_id",
+                  "count",
+                  "meta_family"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "mode_mix": {
+              "maxItems": 21,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "mode_id": {
+                    "type": "string",
+                    "pattern": "^M-(0[1-9]|1\\d|2[01])$"
+                  },
+                  "blocks": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991
+                  },
+                  "share": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "mode_id",
+                  "blocks",
+                  "share"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "entropy": {
+              "type": "object",
+              "properties": {
+                "h": {
+                  "type": "number"
+                },
+                "h_min": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "h",
+                "h_min"
+              ],
+              "additionalProperties": false
+            },
+            "calibration": {
+              "type": "object",
+              "properties": {
+                "cbm_ratio": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "brier": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "cbm_ratio",
+                "brier"
+              ],
+              "additionalProperties": false
+            },
+            "forecast": {
+              "type": "object",
+              "properties": {
+                "window_days": {
+                  "type": "number",
+                  "const": 30
+                },
+                "total_range": {
+                  "type": "object",
+                  "properties": {
+                    "low": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "high": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "low",
+                    "high"
+                  ],
+                  "additionalProperties": false
+                },
+                "band_source": {
+                  "type": "string",
+                  "enum": [
+                    "user_history",
+                    "default_15pct"
+                  ]
+                },
+                "history_windows": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "method": {
+                  "type": "string",
+                  "enum": [
+                    "model",
+                    "observed"
+                  ]
+                },
+                "method_provisional": {
+                  "type": "boolean",
+                  "const": true
+                },
+                "governor": {
+                  "type": "object",
+                  "properties": {
+                    "daily_budget": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "lower_bound_exceeds_budget": {
+                      "type": "boolean"
+                    },
+                    "new_cards_throttled": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "daily_budget",
+                    "lower_bound_exceeds_budget",
+                    "new_cards_throttled"
+                  ],
+                  "additionalProperties": false
+                },
+                "computed_at": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                }
+              },
+              "required": [
+                "window_days",
+                "total_range",
+                "band_source",
+                "history_windows",
+                "method",
+                "method_provisional",
+                "governor",
+                "computed_at"
+              ],
+              "additionalProperties": false
+            },
+            "summary_ko": {
+              "type": "string",
+              "maxLength": 2000
+            },
+            "completed": {
+              "type": "boolean"
+            },
+            "completed_at": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 8640000000000000
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "reflection_md": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "week",
+            "from",
+            "to",
+            "ldi",
+            "weak_top5",
+            "misconceptions",
+            "mode_mix",
+            "entropy",
+            "calibration",
+            "forecast",
+            "summary_ko",
+            "completed",
+            "completed_at",
+            "reflection_md"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

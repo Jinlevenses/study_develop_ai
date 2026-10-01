@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "properties": {
+    "ready": {
+      "type": "boolean"
+    },
+    "svc": {
+      "type": "string",
+      "enum": [
+        "gateway",
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ]
+    },
+    "checks": {
+      "type": "object",
+      "properties": {
+        "db": {
+          "type": "boolean"
+        },
+        "schema": {
+          "type": "boolean"
+        },
+        "policy": {
+          "type": "boolean"
+        },
+        "peers": {
+          "type": "boolean"
+        },
+        "integrity": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "pending",
+            "failed"
+          ]
+        }
+      },
+      "required": [
+        "db",
+        "schema",
+        "policy",
+        "peers",
+        "integrity"
+      ],
+      "additionalProperties": false
+    },
+    "reasons": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 200
+      }
+    }
+  },
+  "required": [
+    "ready",
+    "svc",
+    "checks",
+    "reasons"
+  ],
+  "additionalProperties": false
+}

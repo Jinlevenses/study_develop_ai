@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "x-fathom-client 버전 ≠ 서버 app_version"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 400
+    },
+    "title": {
+      "const": "요청 스키마 위반"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

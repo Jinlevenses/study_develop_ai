@@ -1,0 +1,12 @@
+{
+  "anyOf": [
+    {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    {
+      "type": "string",
+      "pattern": "^gold\\.AI-J\\d{2}\\.\\d{3}$"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "blocks": {
+      "maxItems": 64,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 200000
+          },
+          "data_class": {
+            "type": "string",
+            "enum": [
+              "C0",
+              "C1",
+              "C2",
+              "C3"
+            ]
+          },
+          "untrusted": {
+            "type": "boolean"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "key",
+          "text",
+          "data_class",
+          "untrusted",
+          "source_ref"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "family_exclude": {
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "anthropic",
+          "openai",
+          "google",
+          "typesafe",
+          "local",
+          "other"
+        ]
+      }
+    },
+    "local_only": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "input",
+    "blocks",
+    "family_exclude",
+    "local_only"
+  ],
+  "additionalProperties": false
+}

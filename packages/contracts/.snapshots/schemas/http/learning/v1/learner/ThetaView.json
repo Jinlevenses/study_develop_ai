@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "display": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "n_graded": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "evidence_sufficient": {
+      "type": "boolean"
+    },
+    "display_min_events": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "display",
+    "n_graded",
+    "evidence_sufficient",
+    "display_min_events"
+  ],
+  "additionalProperties": false
+}

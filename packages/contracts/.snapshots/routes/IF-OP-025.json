@@ -1,0 +1,163 @@
+{
+  "$comment": "ops.doctor.last",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "ops.doctor.last"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/doctor"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "FR-SET-003",
+        "NFR-PORT-007"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "report_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "generated_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "live": {
+              "type": "boolean"
+            },
+            "fix": {
+              "type": "boolean"
+            },
+            "items": {
+              "maxItems": 40,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "enum": [
+                      "node_version",
+                      "node_eol",
+                      "sqlite_experimental",
+                      "data_path",
+                      "disk",
+                      "ports",
+                      "integrity_quick",
+                      "integrity_full",
+                      "ledger_chain",
+                      "ledger_anchor",
+                      "projection_hash",
+                      "policy_lock",
+                      "prompts_lock",
+                      "runner_platform",
+                      "prlimit",
+                      "docker",
+                      "graphify",
+                      "providers_live",
+                      "keychain",
+                      "backups",
+                      "secondary",
+                      "autostart",
+                      "session_key"
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "ok",
+                      "warn",
+                      "fail",
+                      "skip"
+                    ]
+                  },
+                  "summary_ko": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "detail_ko": {
+                    "anyOf": [
+                      {
+                        "type": "string",
+                        "maxLength": 2000
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "fixable": {
+                    "type": "boolean"
+                  },
+                  "fix_applied": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "id",
+                  "status",
+                  "summary_ko",
+                  "detail_ko",
+                  "fixable",
+                  "fix_applied"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "report_id",
+            "generated_at",
+            "live",
+            "fix",
+            "items"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

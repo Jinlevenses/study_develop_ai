@@ -1,0 +1,90 @@
+{
+  "type": "object",
+  "properties": {
+    "window_days": {
+      "type": "number",
+      "const": 30
+    },
+    "total_range": {
+      "type": "object",
+      "properties": {
+        "low": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "high": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "low",
+        "high"
+      ],
+      "additionalProperties": false
+    },
+    "band_source": {
+      "type": "string",
+      "enum": [
+        "user_history",
+        "default_15pct"
+      ]
+    },
+    "history_windows": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "model",
+        "observed"
+      ]
+    },
+    "method_provisional": {
+      "type": "boolean",
+      "const": true
+    },
+    "governor": {
+      "type": "object",
+      "properties": {
+        "daily_budget": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "lower_bound_exceeds_budget": {
+          "type": "boolean"
+        },
+        "new_cards_throttled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "daily_budget",
+        "lower_bound_exceeds_budget",
+        "new_cards_throttled"
+      ],
+      "additionalProperties": false
+    },
+    "computed_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "window_days",
+    "total_range",
+    "band_source",
+    "history_windows",
+    "method",
+    "method_provisional",
+    "governor",
+    "computed_at"
+  ],
+  "additionalProperties": false
+}

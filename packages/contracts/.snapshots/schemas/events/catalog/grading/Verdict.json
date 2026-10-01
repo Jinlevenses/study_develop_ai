@@ -1,0 +1,324 @@
+{
+  "type": "object",
+  "properties": {
+    "verdict_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "attempt_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "session_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "block_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "item_id": {
+      "type": "string",
+      "maxLength": 140,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
+    },
+    "item_content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "item_beta_snapshot": {
+      "type": "number"
+    },
+    "item_n_options": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "gate_result_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stakes": {
+      "type": "string",
+      "enum": [
+        "S0",
+        "S1",
+        "S2"
+      ]
+    },
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "ku_ids": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 96,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+      }
+    },
+    "mc_ids": {
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80,
+        "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.m\\d{2})$"
+      }
+    },
+    "facet": {
+      "type": "string",
+      "pattern": "^[a-z][a-z_]{0,31}$"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "embedded",
+        "ox",
+        "mcq",
+        "cloze",
+        "short",
+        "matching",
+        "code_task",
+        "blank_note",
+        "digging_d4_mcq",
+        "error_find",
+        "confusable",
+        "fermi",
+        "cond_reversal",
+        "infra_lite",
+        "kata",
+        "audit",
+        "case_decision",
+        "code_predict",
+        "sql_task",
+        "essay",
+        "digging",
+        "feynman",
+        "pr_review",
+        "reverse_item",
+        "artifact",
+        "case_postmortem",
+        "micro_judgment",
+        "ml_predict",
+        "mcq_multi",
+        "order",
+        "parsons",
+        "log_read",
+        "config_review"
+      ]
+    },
+    "response_mode": {
+      "type": "string",
+      "enum": [
+        "recognition",
+        "production"
+      ]
+    },
+    "tier": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    "result": {
+      "type": "string",
+      "enum": [
+        "correct",
+        "partial",
+        "incorrect",
+        "pending"
+      ]
+    },
+    "band": {
+      "type": "string",
+      "enum": [
+        "wrong",
+        "partial",
+        "right"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "latency_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "rapid": {
+      "type": "boolean"
+    },
+    "hints_used": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "grader_engine": {
+      "type": "string",
+      "enum": [
+        "D",
+        "J",
+        "LJ",
+        "H",
+        "S",
+        "PENDING"
+      ]
+    },
+    "calibrated": {
+      "type": "boolean"
+    },
+    "grader_confidence": {
+      "anyOf": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "pending": {
+      "type": "boolean"
+    },
+    "provisional": {
+      "type": "boolean"
+    },
+    "w_format": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "w_grader": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "gaming_factor": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "recommended_grade": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "ai_mode": {
+      "type": "string",
+      "enum": [
+        "FULL",
+        "JUDGE_ONLY",
+        "LLM_ONLY",
+        "OFFLINE"
+      ]
+    },
+    "content_policy_version": {
+      "type": "string",
+      "maxLength": 40
+    },
+    "judge_log_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "prompt_version": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "issued_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    }
+  },
+  "required": [
+    "verdict_id",
+    "attempt_id",
+    "session_id",
+    "block_id",
+    "item_id",
+    "item_content_hash",
+    "item_beta_snapshot",
+    "item_n_options",
+    "gate_result_id",
+    "stakes",
+    "concept_id",
+    "ku_ids",
+    "mc_ids",
+    "facet",
+    "format",
+    "response_mode",
+    "tier",
+    "result",
+    "band",
+    "score",
+    "confidence",
+    "latency_ms",
+    "rapid",
+    "hints_used",
+    "grader_engine",
+    "calibrated",
+    "grader_confidence",
+    "pending",
+    "provisional",
+    "w_format",
+    "w_grader",
+    "gaming_factor",
+    "recommended_grade",
+    "ai_mode",
+    "content_policy_version",
+    "judge_log_ref",
+    "prompt_version",
+    "issued_at"
+  ],
+  "additionalProperties": false
+}

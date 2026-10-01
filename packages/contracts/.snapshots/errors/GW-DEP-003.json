@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "quiesce로 interactive 쓰기 대기 > 3s"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

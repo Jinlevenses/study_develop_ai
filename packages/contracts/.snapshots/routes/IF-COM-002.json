@@ -1,0 +1,186 @@
+{
+  "$comment": "common.health.ready",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "common.health.ready"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/readyz"
+    },
+    "allowedCallers": {
+      "enum": []
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R0"
+    },
+    "fr": {
+      "enum": []
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {}
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "ready": {
+              "type": "boolean"
+            },
+            "svc": {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "checks": {
+              "type": "object",
+              "properties": {
+                "db": {
+                  "type": "boolean"
+                },
+                "schema": {
+                  "type": "boolean"
+                },
+                "policy": {
+                  "type": "boolean"
+                },
+                "peers": {
+                  "type": "boolean"
+                },
+                "integrity": {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "pending",
+                    "failed"
+                  ]
+                }
+              },
+              "required": [
+                "db",
+                "schema",
+                "policy",
+                "peers",
+                "integrity"
+              ],
+              "additionalProperties": false
+            },
+            "reasons": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 200
+              }
+            }
+          },
+          "required": [
+            "ready",
+            "svc",
+            "checks",
+            "reasons"
+          ],
+          "additionalProperties": false
+        },
+        "503": {
+          "type": "object",
+          "properties": {
+            "ready": {
+              "type": "boolean"
+            },
+            "svc": {
+              "type": "string",
+              "enum": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "checks": {
+              "type": "object",
+              "properties": {
+                "db": {
+                  "type": "boolean"
+                },
+                "schema": {
+                  "type": "boolean"
+                },
+                "policy": {
+                  "type": "boolean"
+                },
+                "peers": {
+                  "type": "boolean"
+                },
+                "integrity": {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "pending",
+                    "failed"
+                  ]
+                }
+              },
+              "required": [
+                "db",
+                "schema",
+                "policy",
+                "peers",
+                "integrity"
+              ],
+              "additionalProperties": false
+            },
+            "reasons": {
+              "maxItems": 20,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 200
+              }
+            }
+          },
+          "required": [
+            "ready",
+            "svc",
+            "checks",
+            "reasons"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

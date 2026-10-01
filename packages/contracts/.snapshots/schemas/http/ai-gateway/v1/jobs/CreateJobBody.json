@@ -1,0 +1,395 @@
+{
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "judge",
+        "generate"
+      ]
+    },
+    "task_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "AI-J01",
+            "AI-J02",
+            "AI-J03",
+            "AI-J04",
+            "AI-J05",
+            "AI-J06",
+            "AI-J07",
+            "AI-J08",
+            "AI-J09",
+            "AI-J10",
+            "AI-J11",
+            "AI-J12",
+            "AI-J13",
+            "AI-J14",
+            "AI-J15",
+            "AI-J16",
+            "AI-J17",
+            "AI-J18",
+            "AI-J19"
+          ]
+        },
+        {
+          "type": "string",
+          "enum": [
+            "AI-G01",
+            "AI-G02",
+            "AI-G03",
+            "AI-G04",
+            "AI-G05",
+            "AI-G06",
+            "AI-G07",
+            "AI-G08",
+            "AI-G09",
+            "AI-G10",
+            "AI-G11",
+            "AI-G12",
+            "AI-G13"
+          ]
+        }
+      ]
+    },
+    "work_order_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "normal",
+        "low"
+      ]
+    },
+    "not_before": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 8640000000000000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "dedupe_key": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "context_ref": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "attempt",
+            "dialog_turn",
+            "blank_note",
+            "item",
+            "import",
+            "pack",
+            "calibration",
+            "appeal",
+            "system"
+          ]
+        },
+        "phase": {
+          "type": "string",
+          "enum": [
+            "pre_submit",
+            "post_submit",
+            "n_a"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "maxLength": 160
+        }
+      },
+      "required": [
+        "kind",
+        "phase",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "items": {
+      "minItems": 1,
+      "maxItems": 500,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item_key": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_.:#!~-]{0,159}$"
+          },
+          "judge": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "state": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                    },
+                    "additionalProperties": {
+                      "$ref": "#/$defs/__schema0"
+                    }
+                  },
+                  "state_classes": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "enum": [
+                        "C0",
+                        "C1",
+                        "C2",
+                        "C3"
+                      ]
+                    }
+                  },
+                  "untrusted_keys": {
+                    "maxItems": 32,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                    }
+                  },
+                  "questions": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string",
+                      "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                    },
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "template": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                        },
+                        "vars": {
+                          "type": "object",
+                          "propertyNames": {
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]{0,31}$"
+                          },
+                          "additionalProperties": {
+                            "type": "string",
+                            "pattern": "^[a-z][a-z0-9_]{1,31}(\\.[a-z][a-z0-9_]{1,31}){0,3}$"
+                          }
+                        }
+                      },
+                      "required": [
+                        "template",
+                        "vars"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "calibrated_only": {
+                    "type": "boolean"
+                  },
+                  "family_exclude": {
+                    "maxItems": 4,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "anthropic",
+                        "openai",
+                        "google",
+                        "typesafe",
+                        "local",
+                        "other"
+                      ]
+                    }
+                  },
+                  "local_only": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "state",
+                  "state_classes",
+                  "untrusted_keys",
+                  "questions",
+                  "calibrated_only",
+                  "family_exclude",
+                  "local_only"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "generate": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "input": {
+                    "type": "object",
+                    "propertyNames": {
+                      "type": "string"
+                    },
+                    "additionalProperties": {}
+                  },
+                  "blocks": {
+                    "maxItems": 64,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string",
+                          "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                        },
+                        "text": {
+                          "type": "string",
+                          "maxLength": 200000
+                        },
+                        "data_class": {
+                          "type": "string",
+                          "enum": [
+                            "C0",
+                            "C1",
+                            "C2",
+                            "C3"
+                          ]
+                        },
+                        "untrusted": {
+                          "type": "boolean"
+                        },
+                        "source_ref": {
+                          "anyOf": [
+                            {
+                              "type": "string",
+                              "maxLength": 200
+                            },
+                            {
+                              "type": "null"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "key",
+                        "text",
+                        "data_class",
+                        "untrusted",
+                        "source_ref"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "family_exclude": {
+                    "maxItems": 4,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "anthropic",
+                        "openai",
+                        "google",
+                        "typesafe",
+                        "local",
+                        "other"
+                      ]
+                    }
+                  },
+                  "local_only": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "input",
+                  "blocks",
+                  "family_exclude",
+                  "local_only"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "item_key",
+          "judge",
+          "generate"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "job_id",
+    "kind",
+    "task_id",
+    "work_order_id",
+    "priority",
+    "not_before",
+    "dedupe_key",
+    "context_ref",
+    "items"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 20000
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{1,31}$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/__schema0"
+          }
+        }
+      ]
+    }
+  }
+}

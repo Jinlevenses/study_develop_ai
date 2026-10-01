@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "accepted_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "grace_ms": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    }
+  },
+  "required": [
+    "accepted_at",
+    "grace_ms"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "chosen_keys": {
+      "maxItems": 4,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      }
+    },
+    "answer_text": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 2000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "rationale_short": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    }
+  },
+  "required": [
+    "chosen_keys",
+    "answer_text",
+    "rationale_short",
+    "confidence"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,16 @@
+{
+  "type": "string",
+  "enum": [
+    "authored",
+    "seed_reviewed",
+    "draft",
+    "deferred",
+    "gated_pass",
+    "gated_fail",
+    "jev_verified",
+    "flagged",
+    "demoted",
+    "quarantined",
+    "retired"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "properties": {
+    "checkpoint_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "export",
+        "merge",
+        "manual"
+      ]
+    }
+  },
+  "required": [
+    "checkpoint_id",
+    "reason"
+  ],
+  "additionalProperties": false
+}

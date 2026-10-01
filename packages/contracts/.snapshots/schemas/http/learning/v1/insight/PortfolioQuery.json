@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "format": {
+      "default": "md",
+      "type": "string",
+      "enum": [
+        "md",
+        "json"
+      ]
+    }
+  },
+  "required": [
+    "format"
+  ],
+  "additionalProperties": false
+}

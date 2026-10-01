@@ -1,0 +1,499 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "composer_policy@v1"
+    },
+    "score_weights": {
+      "type": "object",
+      "properties": {
+        "utility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "urgency": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "goal": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "novelty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "preference": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "fatigue": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "switch_cost": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "mix_delta": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "softmax": {
+          "type": "object",
+          "properties": {
+            "top_k": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "tau": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "top_k",
+            "tau"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "utility",
+        "urgency",
+        "goal",
+        "novelty",
+        "preference",
+        "fatigue",
+        "switch_cost",
+        "mix_delta",
+        "softmax"
+      ],
+      "additionalProperties": false
+    },
+    "hard_constraints": {
+      "type": "object",
+      "properties": {
+        "HC-01": {
+          "type": "object",
+          "properties": {
+            "same_mode_consecutive_max": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            }
+          },
+          "required": [
+            "same_mode_consecutive_max"
+          ],
+          "additionalProperties": false
+        },
+        "HC-02": {
+          "type": "object",
+          "properties": {
+            "min_session_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "modes_min": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "short_template_slots": {
+              "minItems": 1,
+              "maxItems": 6,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "W",
+                  "R",
+                  "N",
+                  "D",
+                  "S",
+                  "C"
+                ]
+              }
+            }
+          },
+          "required": [
+            "min_session_minutes",
+            "modes_min",
+            "short_template_slots"
+          ],
+          "additionalProperties": false
+        },
+        "HC-03": {
+          "type": "object",
+          "properties": {
+            "min_session_minutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "constructive_interactive_share_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "min_session_minutes",
+            "constructive_interactive_share_min"
+          ],
+          "additionalProperties": false
+        },
+        "HC-04": {
+          "type": "object",
+          "properties": {
+            "requeue_within_h": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 72
+            }
+          },
+          "required": [
+            "requeue_within_h"
+          ],
+          "additionalProperties": false
+        },
+        "HC-05": {
+          "type": "object",
+          "properties": {
+            "new_blocked": {
+              "type": "boolean"
+            },
+            "review_interleaved": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "new_blocked",
+            "review_interleaved"
+          ],
+          "additionalProperties": false
+        },
+        "HC-06": {
+          "type": "object",
+          "properties": {
+            "boss_per_session_max": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "last_graded_p_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "boss_per_session_max",
+            "last_graded_p_min"
+          ],
+          "additionalProperties": false
+        },
+        "HC-07": {
+          "type": "object",
+          "properties": {
+            "first_item_ms_max": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "first_item_ms_max"
+          ],
+          "additionalProperties": false
+        },
+        "HC-08": {
+          "type": "object",
+          "properties": {
+            "practice_p_min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "practice_p_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "boss_p": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "practice_p_min",
+            "practice_p_max",
+            "boss_p"
+          ],
+          "additionalProperties": false
+        },
+        "HC-09": {
+          "type": "object",
+          "properties": {
+            "budget_overrun_max": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 2
+            }
+          },
+          "required": [
+            "budget_overrun_max"
+          ],
+          "additionalProperties": false
+        },
+        "HC-10": {
+          "type": "object",
+          "properties": {
+            "min_level": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            },
+            "worked_parsons_share_max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "required": [
+            "min_level",
+            "worked_parsons_share_max"
+          ],
+          "additionalProperties": false
+        },
+        "HC-11": {
+          "type": "object",
+          "properties": {
+            "variant_recent_exclude": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 50
+            }
+          },
+          "required": [
+            "variant_recent_exclude"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "HC-01",
+        "HC-02",
+        "HC-03",
+        "HC-04",
+        "HC-05",
+        "HC-06",
+        "HC-07",
+        "HC-08",
+        "HC-09",
+        "HC-10",
+        "HC-11"
+      ],
+      "additionalProperties": false
+    },
+    "entropy": {
+      "type": "object",
+      "properties": {
+        "h_min_formula": {
+          "type": "string",
+          "const": "min(h_cap, coef * log2(min(k, B)))"
+        },
+        "h_cap": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "coef": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "window_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 28
+        },
+        "single_mode_share_max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "freshness_boost": {
+          "type": "number",
+          "minimum": 1
+        },
+        "weekly_quota": {
+          "type": "object",
+          "properties": {
+            "digging": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "lab": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "blank_note": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "digging",
+            "lab",
+            "blank_note"
+          ],
+          "additionalProperties": false
+        },
+        "suggest_only_min_level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "h_min_formula",
+        "h_cap",
+        "coef",
+        "window_days",
+        "single_mode_share_max",
+        "freshness_boost",
+        "weekly_quota",
+        "suggest_only_min_level"
+      ],
+      "additionalProperties": false
+    },
+    "boss": {
+      "type": "object",
+      "properties": {
+        "min_session_minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "level_offset": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "target_p": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence_weight_factor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "min_session_minutes",
+        "level_offset",
+        "target_p",
+        "evidence_weight_factor"
+      ],
+      "additionalProperties": false
+    },
+    "peak_end": {
+      "type": "object",
+      "properties": {
+        "wave": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "W",
+              "R",
+              "N",
+              "D",
+              "S",
+              "C"
+            ]
+          },
+          "additionalProperties": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "required": [
+            "W",
+            "R",
+            "N",
+            "D",
+            "S",
+            "C"
+          ]
+        }
+      },
+      "required": [
+        "wave"
+      ],
+      "additionalProperties": false
+    },
+    "wildcard": {
+      "type": "object",
+      "properties": {
+        "per_week_min": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 7
+        },
+        "constraints": {
+          "minItems": 1,
+          "maxItems": 4,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "diagram_only",
+              "one_sentence",
+              "no_jargon",
+              "explain_to_pm"
+            ]
+          }
+        },
+        "suggest_only_min_level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "per_week_min",
+        "constraints",
+        "suggest_only_min_level"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "score_weights",
+    "hard_constraints",
+    "entropy",
+    "boss",
+    "peak_end",
+    "wildcard"
+  ],
+  "additionalProperties": false
+}

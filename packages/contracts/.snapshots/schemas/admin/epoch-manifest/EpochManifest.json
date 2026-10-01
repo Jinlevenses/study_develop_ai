@@ -1,0 +1,644 @@
+{
+  "type": "object",
+  "properties": {
+    "v": {
+      "type": "number",
+      "const": 1
+    },
+    "epoch_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "kind": {
+      "type": "string",
+      "const": "snapshot"
+    },
+    "created_at": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 8640000000000000
+    },
+    "app_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "contracts_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "device_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "policy_lock_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "prompts_lock_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "packs": {
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pack_id": {
+            "type": "string",
+            "maxLength": 48,
+            "pattern": "^(?:(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)|x\\.[a-z0-9]+(?:-[a-z0-9]+)*|u\\.[a-z0-9]+)$"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+          },
+          "manifest_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "pack_id",
+          "version",
+          "manifest_hash"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "services": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "enum": [
+                "content.db",
+                "learning.db",
+                "ai.db",
+                "ops.db"
+              ]
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "schema": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z_][a-z0-9_-]{1,40}$"
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "outbox_head_seq": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "delivery": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "inbox_watermark": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "projection_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "fsrs_impl": {
+              "type": "string",
+              "const": "ts-fsrs@5.4.2"
+            },
+            "ledger_head": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "seq": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "hash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "seq",
+                  "hash"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "file",
+            "sha256",
+            "bytes",
+            "schema",
+            "outbox_head_seq",
+            "delivery",
+            "inbox_watermark"
+          ],
+          "additionalProperties": false
+        },
+        "learning": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "enum": [
+                "content.db",
+                "learning.db",
+                "ai.db",
+                "ops.db"
+              ]
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "schema": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z_][a-z0-9_-]{1,40}$"
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "outbox_head_seq": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "delivery": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "inbox_watermark": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "projection_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "fsrs_impl": {
+              "type": "string",
+              "const": "ts-fsrs@5.4.2"
+            },
+            "ledger_head": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "seq": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "hash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "seq",
+                  "hash"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "file",
+            "sha256",
+            "bytes",
+            "schema",
+            "outbox_head_seq",
+            "delivery",
+            "inbox_watermark"
+          ],
+          "additionalProperties": false
+        },
+        "ai-gateway": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "enum": [
+                "content.db",
+                "learning.db",
+                "ai.db",
+                "ops.db"
+              ]
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "schema": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z_][a-z0-9_-]{1,40}$"
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "outbox_head_seq": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "delivery": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "inbox_watermark": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "projection_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "fsrs_impl": {
+              "type": "string",
+              "const": "ts-fsrs@5.4.2"
+            },
+            "ledger_head": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "seq": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "hash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "seq",
+                  "hash"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "file",
+            "sha256",
+            "bytes",
+            "schema",
+            "outbox_head_seq",
+            "delivery",
+            "inbox_watermark"
+          ],
+          "additionalProperties": false
+        },
+        "ops-api": {
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "enum": [
+                "content.db",
+                "learning.db",
+                "ai.db",
+                "ops.db"
+              ]
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "schema": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[a-z_][a-z0-9_-]{1,40}$"
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "outbox_head_seq": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "delivery": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "inbox_watermark": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "enum": [
+                  "gateway",
+                  "content",
+                  "learning",
+                  "ai-gateway",
+                  "ops-api"
+                ]
+              },
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "required": [
+                "gateway",
+                "content",
+                "learning",
+                "ai-gateway",
+                "ops-api"
+              ]
+            },
+            "projection_hash": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            "fsrs_impl": {
+              "type": "string",
+              "const": "ts-fsrs@5.4.2"
+            },
+            "ledger_head": {
+              "type": "object",
+              "propertyNames": {
+                "type": "string",
+                "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "seq": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "hash": {
+                    "type": "string",
+                    "pattern": "^[0-9a-f]{64}$"
+                  }
+                },
+                "required": [
+                  "seq",
+                  "hash"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "file",
+            "sha256",
+            "bytes",
+            "schema",
+            "outbox_head_seq",
+            "delivery",
+            "inbox_watermark"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "content",
+        "learning",
+        "ai-gateway",
+        "ops-api"
+      ],
+      "additionalProperties": false
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "insight.db",
+          "ai-cache.db",
+          "secrets/ai-keys.enc"
+        ]
+      }
+    }
+  },
+  "required": [
+    "v",
+    "epoch_id",
+    "kind",
+    "created_at",
+    "app_version",
+    "contracts_hash",
+    "device_id",
+    "policy_lock_sha256",
+    "prompts_lock_sha256",
+    "packs",
+    "services",
+    "excluded"
+  ],
+  "additionalProperties": false
+}

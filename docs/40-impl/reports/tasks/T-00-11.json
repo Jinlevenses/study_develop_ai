@@ -1,0 +1,442 @@
+{
+  "taskId": "T-00-11",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "apps/cli/bin/fathom.mjs",
+    "apps/cli/bin/warning-filter.d.mts",
+    "apps/cli/bin/warning-filter.mjs",
+    "apps/cli/src/commands/down.ts",
+    "apps/cli/src/commands/open.ts",
+    "apps/cli/src/commands/status.ts",
+    "apps/cli/src/commands/up.ts",
+    "apps/cli/src/lib/args.ts",
+    "apps/cli/src/lib/browser-open.ts",
+    "apps/cli/src/lib/cli-env.ts",
+    "apps/cli/src/lib/deps.ts",
+    "apps/cli/src/lib/ensure-running.ts",
+    "apps/cli/src/lib/exit-codes.ts",
+    "apps/cli/src/lib/gateway-client.ts",
+    "apps/cli/src/lib/home.ts",
+    "apps/cli/src/lib/inside.ts",
+    "apps/cli/src/lib/kill-pid.ts",
+    "apps/cli/src/lib/lockfile.ts",
+    "apps/cli/src/lib/output.ts",
+    "apps/cli/src/lib/preflight.ts",
+    "apps/cli/src/lib/real-deps.ts",
+    "apps/cli/src/lib/session.ts",
+    "apps/cli/src/lib/supervisor-launch.ts",
+    "apps/cli/src/main.ts",
+    "apps/cli/src/run.ts",
+    "apps/cli/test/integration/cli-process.spec.ts",
+    "apps/cli/test/integration/fixtures/fake-service.ts",
+    "apps/cli/test/integration/harness.ts",
+    "apps/cli/test/unit/args-output.spec.ts",
+    "apps/cli/test/unit/down-status.spec.ts",
+    "apps/cli/test/unit/fakes.ts",
+    "apps/cli/test/unit/gateway-browser.spec.ts",
+    "apps/cli/test/unit/home-lock.spec.ts",
+    "apps/cli/test/unit/up.spec.ts",
+    "services/ops/src/supervisor/args.ts",
+    "services/ops/src/supervisor/bootstrap.ts",
+    "services/ops/src/supervisor/bundle.ts",
+    "services/ops/src/supervisor/child-env.ts",
+    "services/ops/src/supervisor/child.ts",
+    "services/ops/src/supervisor/context.ts",
+    "services/ops/src/supervisor/control-ipc.ts",
+    "services/ops/src/supervisor/dev-watch.ts",
+    "services/ops/src/supervisor/handshake.ts",
+    "services/ops/src/supervisor/lifecycle.ts",
+    "services/ops/src/supervisor/log-sink.ts",
+    "services/ops/src/supervisor/main.ts",
+    "services/ops/src/supervisor/messages.ts",
+    "services/ops/src/supervisor/ports.ts",
+    "services/ops/src/supervisor/process-table.ts",
+    "services/ops/src/supervisor/restart-policy.ts",
+    "services/ops/src/supervisor/run-mode.ts",
+    "services/ops/src/supervisor/runtime-files.ts",
+    "services/ops/src/supervisor/supervisor.ts",
+    "services/ops/src/supervisor/tokens.ts",
+    "services/ops/src/supervisor/types.ts",
+    "services/ops/src/supervisor/vite.ts",
+    "services/ops/test/contract/ipc/supervisor-ipc.contract.spec.ts",
+    "services/ops/test/integration/supervisor/fixtures/fake-service.ts",
+    "services/ops/test/integration/supervisor/harness.ts",
+    "services/ops/test/integration/supervisor/lifecycle.spec.ts",
+    "services/ops/test/integration/supervisor/ops-ipc.spec.ts",
+    "services/ops/test/unit/supervisor/args-bundle.spec.ts",
+    "services/ops/test/unit/supervisor/control.spec.ts",
+    "services/ops/test/unit/supervisor/dev-watch.spec.ts",
+    "services/ops/test/unit/supervisor/fakes.ts",
+    "services/ops/test/unit/supervisor/log-sink.spec.ts",
+    "services/ops/test/unit/supervisor/restart.spec.ts",
+    "services/ops/test/unit/supervisor/runtime-files.spec.ts",
+    "services/ops/test/unit/supervisor/security-env.spec.ts",
+    "services/ops/test/unit/supervisor/shutdown.spec.ts",
+    "services/ops/test/unit/supervisor/start.spec.ts"
+  ],
+  "testsAdded": [
+    "UT-SUP-001",
+    "UT-SUP-002",
+    "UT-SUP-003",
+    "UT-SUP-004",
+    "UT-SUP-005",
+    "UT-SUP-006",
+    "UT-SUP-007",
+    "UT-SUP-010",
+    "UT-SUP-011",
+    "UT-SUP-012",
+    "UT-SUP-013",
+    "UT-SUP-014",
+    "UT-SUP-015",
+    "UT-SUP-016",
+    "UT-SUP-017",
+    "UT-SUP-018",
+    "UT-SUP-019",
+    "UT-SUP-020",
+    "UT-SUP-021",
+    "UT-SUP-022",
+    "UT-SUP-023",
+    "UT-SUP-024",
+    "UT-SUP-025",
+    "UT-SUP-026",
+    "UT-SUP-027",
+    "UT-SUP-028",
+    "UT-SUP-029",
+    "UT-SUP-030",
+    "UT-SUP-031",
+    "UT-SUP-032",
+    "UT-SUP-033",
+    "UT-SUP-034",
+    "UT-SUP-035",
+    "UT-SUP-036",
+    "UT-SUP-040",
+    "UT-SUP-041",
+    "UT-SUP-042",
+    "UT-SUP-043",
+    "UT-SUP-044",
+    "UT-SUP-045",
+    "UT-SUP-046",
+    "UT-SUP-047",
+    "UT-SUP-048",
+    "UT-SUP-049",
+    "UT-SUP-050",
+    "UT-SUP-051",
+    "UT-SUP-052",
+    "UT-SUP-053",
+    "UT-SUP-054",
+    "UT-SUP-055",
+    "UT-SUP-056",
+    "UT-SUP-060",
+    "UT-SUP-061",
+    "UT-SUP-062",
+    "UT-SUP-063",
+    "UT-SUP-064",
+    "UT-SUP-065",
+    "UT-SUP-066",
+    "CT-SUP-701",
+    "CT-SUP-702",
+    "CT-SUP-703",
+    "CT-SUP-704",
+    "CT-SUP-705",
+    "CT-SUP-706",
+    "CT-SUP-707",
+    "CT-SUP-708",
+    "CT-SUP-709",
+    "CT-SUP-710",
+    "CT-SUP-711",
+    "CT-SUP-712",
+    "CT-SUP-713",
+    "CT-SUP-714",
+    "CT-SUP-715",
+    "CT-SUP-716",
+    "CT-SUP-717",
+    "CT-SUP-718",
+    "CT-SUP-719",
+    "CT-SUP-720",
+    "CT-SUP-721",
+    "CT-SUP-722",
+    "IT-520",
+    "IT-521",
+    "IT-522",
+    "IT-523",
+    "IT-524",
+    "IT-525",
+    "IT-526",
+    "IT-527",
+    "IT-528",
+    "IT-529",
+    "IT-530",
+    "IT-531",
+    "IT-532",
+    "IT-533",
+    "IT-534",
+    "UT-CLI-001",
+    "UT-CLI-002",
+    "UT-CLI-010",
+    "UT-CLI-011",
+    "UT-CLI-012",
+    "UT-CLI-013",
+    "UT-CLI-014",
+    "UT-CLI-015",
+    "UT-CLI-016",
+    "UT-CLI-017",
+    "UT-CLI-018",
+    "UT-CLI-019",
+    "UT-CLI-020",
+    "UT-CLI-021",
+    "UT-CLI-022",
+    "UT-CLI-023",
+    "UT-CLI-024",
+    "UT-CLI-025",
+    "UT-CLI-026",
+    "UT-CLI-027",
+    "UT-CLI-028",
+    "UT-CLI-029",
+    "UT-CLI-030",
+    "UT-CLI-031",
+    "UT-CLI-032",
+    "UT-CLI-033",
+    "UT-CLI-034",
+    "UT-CLI-035",
+    "UT-CLI-036",
+    "UT-CLI-037",
+    "UT-CLI-038",
+    "UT-CLI-039",
+    "IT-610",
+    "IT-611",
+    "IT-612",
+    "IT-613",
+    "IT-614",
+    "IT-615",
+    "IT-616",
+    "IT-617",
+    "IT-618",
+    "IT-619",
+    "UT-SUP-037",
+    "UT-SUP-038",
+    "UT-SUP-039",
+    "UT-SUP-057",
+    "UT-SUP-058",
+    "UT-SUP-059",
+    "UT-SUP-067",
+    "UT-SUP-068",
+    "UT-SUP-069"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": null,
+      "note": "not run (shared node_modules used by parallel lanes)"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops test",
+      "exit": 0,
+      "note": "89 tests (unit+contract), supplement round 1"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops test:integration",
+      "exit": 0,
+      "note": "15 tests, stable over 3 runs"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-cli typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-cli test",
+      "exit": 0,
+      "note": "32 tests (UT-CLI-028/036 duplicate pairs merged), supplement round 1"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-cli test:integration",
+      "exit": 0,
+      "note": "10 tests, stable over 3 runs"
+    },
+    {
+      "cmd": "npx biome ci apps/cli services/ops",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "note": "only other lanes' files fail (packages/design-tokens/src/tokens.css, packages/shared-kernel/test/unit/service/*, idempotency/http.spec.ts); zero diagnostics in services/ops or apps/cli"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "check:boundaries PASS, check:tsconfig-paths PASS, gate-selftest PASS; check:deps (apps/web, root, packages/testkit, packages/ui, tools/packc package.json) and check:security (shared-kernel redact.spec.ts) fail in other lanes' files — not in T-00-11 paths"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-11",
+      "exit": 1,
+      "note": "161 errors, all for other lanes' concurrent changes (packages/contracts, docs reports); 0 entries for services/ops or apps/cli — every T-00-11 file is inside allowed_paths"
+    },
+    {
+      "cmd": "node --import tsx tools/si-docs/src/cli.ts ids --task T-00-11",
+      "exit": 1,
+      "note": "only si/title no-req for UT-SUP-060~066 ([AP-12][CR-07] are not requirement IDs; Brief-caused, T1 to fix in Brief); no duplicate ids and no UT-CLI no-req left in services/ops or apps/cli"
+    },
+    {
+      "cmd": "npx biome ci apps/cli services/ops",
+      "exit": 0,
+      "note": "re-run after supplement round 1"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "SupervisorOptions gains bootId (shared by lock, registry and logger); RuntimeFilesPort gains flush(); createRuntimeFiles accepts a writeFile test hook.",
+    "supervisor.ts split for STD-TS-25 into context.ts, lifecycle.ts, messages.ts, types.ts (extra files inside services/ops/src/supervisor/**); supervisor.ts re-exports nothing (Biome noBarrelFile) — public types live in types.ts, Timers in dev-watch.ts.",
+    "Log merge keys use child/child_pid instead of svc/pid because pino base bindings already carry svc and pid (duplicate JSON keys otherwise).",
+    "svc.start/svc.restart of ai-gateway in Safe Mode returns ack ok:false error:'safe_mode' (Brief silent).",
+    "CliDeps: stdout/stderr writers instead of out (Output is created in run() once --json is known); added mkdirp; openBrowser(url, home); killPid returns Promise<boolean>. Extra CLI lib files: deps, cli-env, kill-pid, preflight, session, real-deps; bin/warning-filter.d.mts typing file.",
+    "peerUrls returns {url} objects (BootstrapEnvelope.peers shape) rather than bare strings.",
+    "LoC over Brief target: core path 566 (target 400), whole src/supervisor 2164 (target 1000) — non-blank non-comment lines; recorded for T1.",
+    "Supplement round 1 (T1 review) — changes: (1) log-sink wrapRaw keeps every stored/returned line <= 8,000 chars after JSON wrapping/escaping (binary search on raw); handleOpsRequest now always replies (svc.ack{ok:false,error:'internal'}) when handling or building the reply throws; CT-SUP-717 puts oversized, quote/backslash-heavy, CJK and cut-JSON lines inside the returned window and covers the failure reply; UT-SUP-051 assertion updated.",
+    "Supplement round 1 — test IDs: duplicates renumbered into the free range (UT-SUP-001b->037, 029b->038, 045b->039, 046b->057, 066b->067); UT-CLI-028 and UT-CLI-036 pairs merged into one it each (UT-CLI range is full); [NFR-SEC-019] added to UT-CLI-015/016. New tests: UT-SUP-058 (run_mode_busy), 059 (sink line limit + onError), 068 (atomic stale-lock takeover), 069 (run_mode app_dir + child error report). UT-SUP-060~066 no-req titles remain (Brief tags [AP-12][CR-07], not requirement IDs) — T1 to fix in Brief.",
+    "Supplement round 1 — STD-TS-42: path building moved to resolveInsideLexical (supervisor bundle.joinInside; apps/cli/src/lib/inside.ts) in run-mode (app_dir must be absolute, else exit 64 and no fork), bundle snapshots, dev-watch, CLI home/browser-open/kill-pid/preflight/real-deps and /proc/<pid>/stat. Literal Windows paths prescribed by the Brief (<SYSTEMROOT>\\System32\\rundll32.exe|taskkill.exe) are still produced, now via inside(root,'System32/...','win32'). Remaining path.* uses are non-building (isAbsolute/relative/sep/URL helpers appPath/rootUrl).",
+    "Supplement round 1 — run_mode guard: supervisor tracks runModeActive per service from run_mode entry (before the stop); svc.start/svc.restart return ack{ok:false,error:'run_mode_busy'} and dev watcher restarts are skipped while active (UT-SUP-058).",
+    "Supplement round 1 — stale lock takeover is now rename-away + retry open('wx') (up to 3 attempts, restores a displaced fresh lock); in a race the winner may report previousCrashed:false because the other contender removed the stale file first. fathom down only signals lock.pid when registry boot_id and supervisor_pid match the lock (pid-reuse guard); otherwise exit 1 with a warning (UT-CLI-037 extended).",
+    "Supplement round 1 — errors no longer swallowed (STD-TS-34/SEC-32): log-sink takes onError (deduped per kind; stream error drops the writer so the next line reopens it; sync open failures no longer throw out of line()); ChildHandle gains onError (child 'error' events and pipe errors -> supervisor warn log 'supervisor.child.error'); run-mode runner gains onError; '// detached:' comments added in messages.ts and supervisor.ts onDevImpact.",
+    "Supplement round 1 — NOT changed (recorded for T1): (a) LoC/STD-TS-25 factory-closure size deviation stands (core 566 vs 400, whole src/supervisor ~2,2xx vs 1,000); verdict left to T1. (b) Known gap: in the dev profile Vite is spawned detached without an IPC channel, so a SIGKILLed supervisor orphans Vite on 5173 (ADR-012 §4 disconnect-exit cannot reach it); suggested remedy = stdin pipe + EOF watchdog or non-detached Vite, dev-profile orphan check in T-00-16 — needs CR/Brief note."
+  ],
+  "escalations": [],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-29",
+      "pgm": "PGM-SUP-001",
+      "req": [
+        "FR-SET-001",
+        "NFR-PERF-008",
+        "NFR-PORT-002"
+      ],
+      "tests": [
+        "UT-SUP-005",
+        "UT-SUP-010..027",
+        "UT-SUP-048..049",
+        "IT-520",
+        "IT-526..529",
+        "IT-532..533"
+      ]
+    },
+    {
+      "wp": "WP-00-29",
+      "pgm": "PGM-SUP-002",
+      "req": [
+        "FR-SET-002",
+        "NFR-AVL-003"
+      ],
+      "tests": [
+        "UT-SUP-001",
+        "UT-SUP-002",
+        "UT-SUP-030..036",
+        "IT-521..524"
+      ]
+    },
+    {
+      "wp": "WP-00-29",
+      "pgm": "PGM-SUP-003",
+      "req": [
+        "FR-SET-001",
+        "AQ-08",
+        "CR-07"
+      ],
+      "tests": [
+        "UT-SUP-006",
+        "UT-SUP-028..029"
+      ]
+    },
+    {
+      "wp": "WP-00-29",
+      "pgm": "PGM-SUP-004",
+      "req": [
+        "NFR-SEC-003"
+      ],
+      "tests": [
+        "UT-SUP-003",
+        "UT-SUP-015..019",
+        "CT-SUP-701"
+      ]
+    },
+    {
+      "wp": "WP-00-29",
+      "pgm": "PGM-SUP-005",
+      "req": [
+        "FR-SET-007",
+        "NFR-MAINT-006"
+      ],
+      "tests": [
+        "UT-SUP-004",
+        "UT-SUP-040..047",
+        "CT-SUP-702..722",
+        "IT-525",
+        "IT-530..531"
+      ]
+    },
+    {
+      "wp": "WP-00-29",
+      "pgm": "PGM-SUP-006",
+      "req": [
+        "NFR-AVL-007",
+        "CR-14",
+        "AP-12"
+      ],
+      "tests": [
+        "UT-SUP-007",
+        "UT-SUP-050..056",
+        "UT-SUP-060..066",
+        "IT-534"
+      ]
+    },
+    {
+      "wp": "WP-00-35",
+      "pgm": "PGM-CLI-001",
+      "req": [
+        "FR-SET-015",
+        "FR-SET-012"
+      ],
+      "tests": [
+        "UT-CLI-001",
+        "UT-CLI-010..017",
+        "UT-CLI-039",
+        "IT-619"
+      ]
+    },
+    {
+      "wp": "WP-00-35",
+      "pgm": "PGM-CLI-002",
+      "req": [
+        "FR-SET-001",
+        "FR-SET-015"
+      ],
+      "tests": [
+        "UT-CLI-025..028",
+        "UT-CLI-036..038",
+        "IT-610..612",
+        "IT-614..615",
+        "IT-617..618"
+      ]
+    },
+    {
+      "wp": "WP-00-35",
+      "pgm": "PGM-CLI-003",
+      "req": [
+        "FR-SET-023",
+        "IR-014"
+      ],
+      "tests": [
+        "UT-CLI-002",
+        "UT-CLI-018..024",
+        "UT-CLI-029..035",
+        "IT-613",
+        "IT-616"
+      ]
+    }
+  ],
+  "notes": "WP-00-29 checkpoint (svc-ops unit+integration green) passed before WP-00-35 work. Supervisor LoC core 566 / all 2164 (see deviations). Ported spike: spikes/sp4-node-sqlite/src/warnings.mjs -> supervisor child-env.ts, apps/cli/bin/warning-filter.mjs, apps/cli/src/lib/cli-env.ts. CR candidates hit: (1) lock/registry formats duplicated in supervisor and CLI, (2) xdg-open lacks DISPLAY env, (3) contracts_hash from .snapshots (dir absent today, fallback to app_version hash), (5) child env without API keys, (6) callers carries 5 tokens. Carry-over to IT-01: replace guard-based gateway body reads (open_url/status) with @fathom/contracts/http/gateway/v1/{session,cli} schemas; Windows icacls on cli.token not done (V-ci)."
+}

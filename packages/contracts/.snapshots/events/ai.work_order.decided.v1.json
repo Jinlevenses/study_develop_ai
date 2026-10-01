@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "work_order_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "rejected",
+        "exhausted",
+        "expired"
+      ]
+    },
+    "reservation": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "calls": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "krw": {
+              "type": "integer",
+              "minimum": -9007199254740991,
+              "maximum": 9007199254740991
+            },
+            "expires_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "calls",
+            "krw",
+            "expires_at"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "work_order_id",
+    "decision",
+    "reservation"
+  ],
+  "additionalProperties": false
+}

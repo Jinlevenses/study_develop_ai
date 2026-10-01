@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "start_session",
+        "resume_session",
+        "onboarding",
+        "return_mode",
+        "paused"
+      ]
+    },
+    "label_ko": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "suggested": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "minutes": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "const": 5
+                },
+                {
+                  "type": "number",
+                  "const": 15
+                },
+                {
+                  "type": "number",
+                  "const": 25
+                },
+                {
+                  "type": "number",
+                  "const": 45
+                },
+                {
+                  "type": "number",
+                  "const": 90
+                }
+              ]
+            },
+            "energy": {
+              "type": "string",
+              "enum": [
+                "light",
+                "normal",
+                "deep"
+              ]
+            }
+          },
+          "required": [
+            "minutes",
+            "energy"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "session_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "kind",
+    "label_ko",
+    "suggested",
+    "session_id"
+  ],
+  "additionalProperties": false
+}

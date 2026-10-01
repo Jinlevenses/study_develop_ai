@@ -1,0 +1,101 @@
+{
+  "consumer": "learning",
+  "subscriptions": [
+    {
+      "type": "catalog.pack.activated",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": [
+        "pack_id",
+        "track",
+        "version",
+        "manifest_hash",
+        "changed_concept_ids",
+        "offline_cap_level",
+        "catalog_version"
+      ]
+    },
+    {
+      "type": "catalog.concept.changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["change", "concept", "version"]
+    },
+    {
+      "type": "grading.verdict.issued",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "halt",
+      "reads": [
+        "verdict_id",
+        "attempt_id",
+        "session_id",
+        "block_id",
+        "item_id",
+        "item_content_hash",
+        "item_beta_snapshot",
+        "item_n_options",
+        "gate_result_id",
+        "stakes",
+        "concept_id",
+        "ku_ids",
+        "mc_ids",
+        "facet",
+        "format",
+        "response_mode",
+        "tier",
+        "result",
+        "band",
+        "score",
+        "confidence",
+        "latency_ms",
+        "rapid",
+        "hints_used",
+        "grader_engine",
+        "calibrated",
+        "grader_confidence",
+        "pending",
+        "provisional",
+        "w_format",
+        "w_grader",
+        "gaming_factor",
+        "recommended_grade",
+        "ai_mode",
+        "content_policy_version",
+        "judge_log_ref",
+        "prompt_version",
+        "issued_at"
+      ]
+    },
+    {
+      "type": "grading.verdict.revised",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "halt",
+      "reads": ["verdict", "supersedes_verdict_id", "reason", "band_changed"]
+    },
+    {
+      "type": "itembank.item.corrected",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "halt",
+      "reads": ["item_id", "correction", "evidence_policy", "basis", "gate_result_id", "effective_from"]
+    },
+    {
+      "type": "ai.mode.changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["mode", "providers", "changed_at"]
+    },
+    {
+      "type": "ops.host_state.changed",
+      "schema_versions": [1],
+      "mode": "durable",
+      "on_poison": "dead_letter",
+      "reads": ["idle_window_open", "power", "sampled_at"]
+    }
+  ]
+}

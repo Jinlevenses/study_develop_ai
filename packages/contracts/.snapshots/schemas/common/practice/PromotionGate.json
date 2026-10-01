@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "gate_id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]{1,40}$"
+    },
+    "label_ko": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "met": {
+      "type": "boolean"
+    },
+    "value": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "threshold": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "evidence_event_ids": {
+      "maxItems": 50,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+      }
+    },
+    "shortfall_ko": {
+      "anyOf": [
+        {
+          "type": "string",
+          "maxLength": 300
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "gate_id",
+    "label_ko",
+    "met",
+    "value",
+    "threshold",
+    "evidence_event_ids",
+    "shortfall_ko"
+  ],
+  "additionalProperties": false
+}

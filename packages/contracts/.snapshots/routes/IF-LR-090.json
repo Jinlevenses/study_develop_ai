@@ -1,0 +1,171 @@
+{
+  "$comment": "learning.telemetry.signals",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "learning.telemetry.signals"
+    },
+    "method": {
+      "const": "GET"
+    },
+    "path": {
+      "const": "/internal/v1/telemetry/learning-signals"
+    },
+    "allowedCallers": {
+      "enum": [
+        "ops-api"
+      ]
+    },
+    "idempotent": {
+      "const": false
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "D"
+    },
+    "slice": {
+      "const": "R1"
+    },
+    "fr": {
+      "enum": [
+        "NFR-AVL-008",
+        "FR-SET-021"
+      ]
+    },
+    "deadlineMs": {
+      "const": 5000
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "to": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "to": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            },
+            "tripwires": {
+              "maxItems": 40,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^(TW-(0[1-9]|1[0-3])|GR-\\d{2})$"
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "threshold": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "state": {
+                    "type": "string",
+                    "enum": [
+                      "ok",
+                      "warn",
+                      "trip",
+                      "insufficient_data"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "value",
+                  "threshold",
+                  "state"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "sessions": {
+              "type": "object",
+              "properties": {
+                "count": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "median_minutes": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "first_item_p95_ms": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "count",
+                "median_minutes",
+                "first_item_p95_ms"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "from",
+            "to",
+            "tripwires",
+            "sessions"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

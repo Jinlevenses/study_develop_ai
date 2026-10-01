@@ -1,0 +1,268 @@
+{
+  "$comment": "content.itembank.staging.approve",
+  "type": "object",
+  "properties": {
+    "id": {
+      "const": "content.itembank.staging.approve"
+    },
+    "method": {
+      "const": "POST"
+    },
+    "path": {
+      "const": "/internal/v1/itembank/staging/{staging_id}:approve"
+    },
+    "allowedCallers": {
+      "enum": [
+        "gateway"
+      ]
+    },
+    "idempotent": {
+      "const": true
+    },
+    "paginated": {
+      "const": false
+    },
+    "freeze": {
+      "const": "O"
+    },
+    "slice": {
+      "const": "R2"
+    },
+    "fr": {
+      "enum": [
+        "FR-QST-004"
+      ]
+    },
+    "deadlineMs": {
+      "const": null
+    },
+    "bodyLimitBytes": {
+      "const": null
+    },
+    "responseKind": {
+      "const": "json"
+    },
+    "bodyKind": {
+      "const": "json"
+    },
+    "request": {
+      "type": "object",
+      "properties": {
+        "params": {
+          "type": "object",
+          "properties": {
+            "staging_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          },
+          "required": [
+            "staging_id"
+          ],
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "decision": {
+              "type": "string",
+              "enum": [
+                "approve",
+                "reject"
+              ]
+            },
+            "reason_ko": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 500
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "decision",
+            "reason_ko"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "200": {
+          "type": "object",
+          "properties": {
+            "staging_id": {
+              "type": "string",
+              "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+            },
+            "origin": {
+              "type": "string",
+              "enum": [
+                "t1",
+                "t2",
+                "t3",
+                "t4",
+                "user_authored",
+                "model_sample",
+                "gap"
+              ]
+            },
+            "concept_id": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+            },
+            "format": {
+              "type": "string",
+              "enum": [
+                "embedded",
+                "ox",
+                "mcq",
+                "cloze",
+                "short",
+                "matching",
+                "code_task",
+                "blank_note",
+                "digging_d4_mcq",
+                "error_find",
+                "confusable",
+                "fermi",
+                "cond_reversal",
+                "infra_lite",
+                "kata",
+                "audit",
+                "case_decision",
+                "code_predict",
+                "sql_task",
+                "essay",
+                "digging",
+                "feynman",
+                "pr_review",
+                "reverse_item",
+                "artifact",
+                "case_postmortem",
+                "micro_judgment",
+                "ml_predict",
+                "mcq_multi",
+                "order",
+                "parsons",
+                "log_read",
+                "config_review"
+              ]
+            },
+            "stakes": {
+              "type": "string",
+              "enum": [
+                "S0",
+                "S1",
+                "S2"
+              ]
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "deferred",
+                "gated_pass",
+                "gated_fail",
+                "discarded",
+                "review"
+              ]
+            },
+            "preview_md": {
+              "type": "string",
+              "maxLength": 20000
+            },
+            "s2": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "cross_judge_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "span_check_id": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
+                    "curator_decision": {
+                      "type": "string",
+                      "enum": [
+                        "pending",
+                        "approved",
+                        "rejected"
+                      ]
+                    },
+                    "s2_mode": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "enum": [
+                            "cross_family",
+                            "same_family",
+                            "v7_review"
+                          ]
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "required": [
+                    "cross_judge_id",
+                    "span_check_id",
+                    "curator_decision",
+                    "s2_mode"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "updated_at": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8640000000000000
+            }
+          },
+          "required": [
+            "staging_id",
+            "origin",
+            "concept_id",
+            "format",
+            "stakes",
+            "status",
+            "preview_md",
+            "s2",
+            "updated_at"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}

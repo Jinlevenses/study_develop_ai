@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "bt": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    }
+  },
+  "required": [
+    "bt"
+  ],
+  "additionalProperties": false
+}

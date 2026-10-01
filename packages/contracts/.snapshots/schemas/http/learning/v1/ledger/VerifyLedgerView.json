@@ -1,0 +1,139 @@
+{
+  "type": "object",
+  "properties": {
+    "verify_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "running",
+        "done",
+        "failed"
+      ]
+    },
+    "chain_ok": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "anchors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "epoch",
+              "checkpoint",
+              "export_header"
+            ]
+          },
+          "ref": {
+            "type": "string"
+          },
+          "ok": {
+            "type": "boolean"
+          },
+          "mismatches": {
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "device_id": {
+                  "type": "string",
+                  "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+                },
+                "expected_seq": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                },
+                "actual_seq": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "device_id",
+                "expected_seq",
+                "actual_seq"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "source",
+          "ref",
+          "ok",
+          "mismatches"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "projection_hash_live": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "projection_hash_replay": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "match": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "duration_ms": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "verify_id",
+    "state",
+    "chain_ok",
+    "anchors",
+    "projection_hash_live",
+    "projection_hash_replay",
+    "match",
+    "duration_ms"
+  ],
+  "additionalProperties": false
+}

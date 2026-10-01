@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "Origin 불일치 또는 Sec-Fetch-Site ∉ {same-origin, none}"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

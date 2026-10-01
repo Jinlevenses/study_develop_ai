@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 409
+    },
+    "title": {
+      "const": "비밀 저장소 잠김"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

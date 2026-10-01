@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 503
+    },
+    "title": {
+      "const": "inbox 원장 경로 정지"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

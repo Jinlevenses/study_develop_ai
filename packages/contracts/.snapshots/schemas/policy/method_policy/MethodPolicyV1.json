@@ -1,0 +1,665 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "method_policy@v1"
+    },
+    "router_25": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "D",
+          "C",
+          "P",
+          "S",
+          "M"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": {
+          "type": "string",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "formats": {
+              "maxItems": 12,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "embedded",
+                  "ox",
+                  "mcq",
+                  "cloze",
+                  "short",
+                  "matching",
+                  "code_task",
+                  "blank_note",
+                  "digging_d4_mcq",
+                  "error_find",
+                  "confusable",
+                  "fermi",
+                  "cond_reversal",
+                  "infra_lite",
+                  "kata",
+                  "audit",
+                  "case_decision",
+                  "code_predict",
+                  "sql_task",
+                  "essay",
+                  "digging",
+                  "feynman",
+                  "pr_review",
+                  "reverse_item",
+                  "artifact",
+                  "case_postmortem",
+                  "micro_judgment",
+                  "ml_predict",
+                  "mcq_multi",
+                  "order",
+                  "parsons",
+                  "log_read",
+                  "config_review"
+                ]
+              }
+            },
+            "bloom": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "propertyNames": {
+                    "type": "string",
+                    "enum": [
+                      "remember",
+                      "understand",
+                      "apply",
+                      "analyze",
+                      "evaluate",
+                      "create"
+                    ]
+                  },
+                  "additionalProperties": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "required": [
+                    "remember",
+                    "understand",
+                    "apply",
+                    "analyze",
+                    "evaluate",
+                    "create"
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "scaffolding": {
+              "type": "string",
+              "enum": [
+                "full",
+                "faded",
+                "minimal",
+                "none"
+              ]
+            },
+            "digging_depth_max": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 7
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "formats",
+            "bloom",
+            "scaffolding",
+            "digging_depth_max"
+          ],
+          "additionalProperties": false
+        },
+        "required": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      "required": [
+        "D",
+        "C",
+        "P",
+        "S",
+        "M"
+      ]
+    },
+    "taboo": {
+      "maxItems": 40,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^TB-\\d{2}$"
+          },
+          "levels": {
+            "minItems": 1,
+            "maxItems": 5,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5
+            }
+          },
+          "knowledge_types": {
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "D",
+                "C",
+                "P",
+                "S"
+              ]
+            }
+          },
+          "effect": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "exclude_formats"
+                  },
+                  "formats": {
+                    "minItems": 1,
+                    "maxItems": 33,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "embedded",
+                        "ox",
+                        "mcq",
+                        "cloze",
+                        "short",
+                        "matching",
+                        "code_task",
+                        "blank_note",
+                        "digging_d4_mcq",
+                        "error_find",
+                        "confusable",
+                        "fermi",
+                        "cond_reversal",
+                        "infra_lite",
+                        "kata",
+                        "audit",
+                        "case_decision",
+                        "code_predict",
+                        "sql_task",
+                        "essay",
+                        "digging",
+                        "feynman",
+                        "pr_review",
+                        "reverse_item",
+                        "artifact",
+                        "case_postmortem",
+                        "micro_judgment",
+                        "ml_predict",
+                        "mcq_multi",
+                        "order",
+                        "parsons",
+                        "log_read",
+                        "config_review"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "kind",
+                  "formats"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "max_share"
+                  },
+                  "formats": {
+                    "minItems": 1,
+                    "maxItems": 33,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "embedded",
+                        "ox",
+                        "mcq",
+                        "cloze",
+                        "short",
+                        "matching",
+                        "code_task",
+                        "blank_note",
+                        "digging_d4_mcq",
+                        "error_find",
+                        "confusable",
+                        "fermi",
+                        "cond_reversal",
+                        "infra_lite",
+                        "kata",
+                        "audit",
+                        "case_decision",
+                        "code_predict",
+                        "sql_task",
+                        "essay",
+                        "digging",
+                        "feynman",
+                        "pr_review",
+                        "reverse_item",
+                        "artifact",
+                        "case_postmortem",
+                        "micro_judgment",
+                        "ml_predict",
+                        "mcq_multi",
+                        "order",
+                        "parsons",
+                        "log_read",
+                        "config_review"
+                      ]
+                    }
+                  },
+                  "share_max": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "formats",
+                  "share_max"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "digging_depth_max"
+                  },
+                  "depth": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 7
+                  }
+                },
+                "required": [
+                  "kind",
+                  "depth"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "evidence_weight"
+                  },
+                  "formats": {
+                    "minItems": 1,
+                    "maxItems": 33,
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "embedded",
+                        "ox",
+                        "mcq",
+                        "cloze",
+                        "short",
+                        "matching",
+                        "code_task",
+                        "blank_note",
+                        "digging_d4_mcq",
+                        "error_find",
+                        "confusable",
+                        "fermi",
+                        "cond_reversal",
+                        "infra_lite",
+                        "kata",
+                        "audit",
+                        "case_decision",
+                        "code_predict",
+                        "sql_task",
+                        "essay",
+                        "digging",
+                        "feynman",
+                        "pr_review",
+                        "reverse_item",
+                        "artifact",
+                        "case_postmortem",
+                        "micro_judgment",
+                        "ml_predict",
+                        "mcq_multi",
+                        "order",
+                        "parsons",
+                        "log_read",
+                        "config_review"
+                      ]
+                    }
+                  },
+                  "w": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                },
+                "required": [
+                  "kind",
+                  "formats",
+                  "w"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "reason_ko": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "id",
+          "levels",
+          "knowledge_types",
+          "effect",
+          "reason_ko"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "level_mix": {
+      "type": "object",
+      "properties": {
+        "groups": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "code",
+              "retrieval",
+              "implement",
+              "blank_note",
+              "digging",
+              "case"
+            ]
+          },
+          "additionalProperties": {
+            "minItems": 1,
+            "maxItems": 8,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^M-(0[1-9]|1\\d|2[01])$"
+            }
+          },
+          "required": [
+            "code",
+            "retrieval",
+            "implement",
+            "blank_note",
+            "digging",
+            "case"
+          ]
+        },
+        "shares": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          "additionalProperties": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "enum": [
+                "code",
+                "retrieval",
+                "implement",
+                "blank_note",
+                "digging",
+                "case"
+              ]
+            },
+            "additionalProperties": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "required": [
+              "code",
+              "retrieval",
+              "implement",
+              "blank_note",
+              "digging",
+              "case"
+            ]
+          },
+          "required": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "tolerance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "groups",
+        "shares",
+        "tolerance"
+      ],
+      "additionalProperties": false
+    },
+    "formats": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "embedded",
+          "ox",
+          "mcq",
+          "cloze",
+          "short",
+          "matching",
+          "code_task",
+          "blank_note",
+          "digging_d4_mcq",
+          "error_find",
+          "confusable",
+          "fermi",
+          "cond_reversal",
+          "infra_lite",
+          "kata",
+          "audit",
+          "case_decision",
+          "code_predict",
+          "sql_task",
+          "essay",
+          "digging",
+          "feynman",
+          "pr_review",
+          "reverse_item",
+          "artifact",
+          "case_postmortem",
+          "micro_judgment",
+          "ml_predict",
+          "mcq_multi",
+          "order",
+          "parsons",
+          "log_read",
+          "config_review"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "w_format": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "grade_class": {
+            "type": "string",
+            "enum": [
+              "D",
+              "J",
+              "S",
+              "H"
+            ]
+          },
+          "response_mode": {
+            "type": "string",
+            "enum": [
+              "recognition",
+              "production"
+            ]
+          },
+          "n_options": {
+            "type": "object",
+            "properties": {
+              "min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "max": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "min",
+              "max"
+            ],
+            "additionalProperties": false
+          },
+          "credit_eligible": {
+            "type": "boolean"
+          },
+          "runner": {
+            "type": "boolean"
+          },
+          "tiers": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "A",
+                "B",
+                "C"
+              ]
+            }
+          }
+        },
+        "required": [
+          "w_format",
+          "grade_class",
+          "response_mode",
+          "n_options",
+          "credit_eligible",
+          "runner",
+          "tiers"
+        ],
+        "additionalProperties": false
+      },
+      "required": [
+        "embedded",
+        "ox",
+        "mcq",
+        "cloze",
+        "short",
+        "matching",
+        "code_task",
+        "blank_note",
+        "digging_d4_mcq",
+        "error_find",
+        "confusable",
+        "fermi",
+        "cond_reversal",
+        "infra_lite",
+        "kata",
+        "audit",
+        "case_decision",
+        "code_predict",
+        "sql_task",
+        "essay",
+        "digging",
+        "feynman",
+        "pr_review",
+        "reverse_item",
+        "artifact",
+        "case_postmortem",
+        "micro_judgment",
+        "ml_predict",
+        "mcq_multi",
+        "order",
+        "parsons",
+        "log_read",
+        "config_review"
+      ]
+    }
+  },
+  "required": [
+    "version",
+    "router_25",
+    "taboo",
+    "level_mix",
+    "formats"
+  ],
+  "additionalProperties": false
+}

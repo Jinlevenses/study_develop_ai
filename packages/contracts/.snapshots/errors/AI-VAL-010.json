@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 422
+    },
+    "title": {
+      "const": "JudgeState에 배열·잘못된 키, 템플릿 변수가 없는 경로를 가리킴"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

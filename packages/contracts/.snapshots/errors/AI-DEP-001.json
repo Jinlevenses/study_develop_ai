@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 502
+    },
+    "title": {
+      "const": "제공자 오류"
+    },
+    "retryable": {
+      "const": true
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "url"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https:\\/\\/"
+        }
+      },
+      "required": [
+        "kind",
+        "url"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "paste"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2097152
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 200
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "text",
+        "title"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "file"
+        },
+        "filename": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "media_type": {
+          "type": "string",
+          "enum": [
+            "text/markdown",
+            "text/plain",
+            "text/html"
+          ]
+        },
+        "content_base64": {
+          "type": "string",
+          "maxLength": 2796204
+        }
+      },
+      "required": [
+        "kind",
+        "filename",
+        "media_type",
+        "content_base64"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "inbox"
+        },
+        "inbox_id": {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        }
+      },
+      "required": [
+        "kind",
+        "inbox_id"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

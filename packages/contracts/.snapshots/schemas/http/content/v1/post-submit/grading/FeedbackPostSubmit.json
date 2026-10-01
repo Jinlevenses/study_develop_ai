@@ -1,0 +1,115 @@
+{
+  "type": "object",
+  "properties": {
+    "summary_md": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "per_unit": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "partial",
+              "missing",
+              "error"
+            ]
+          },
+          "note_md": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "ku_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:k\\d{2}|uk[0-9a-z]{26}))$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "note_md",
+          "ku_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "misconception": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mc_id": {
+              "type": "string",
+              "maxLength": 80,
+              "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.m\\d{2})$"
+            },
+            "wrong_belief_ko": {
+              "type": "string"
+            },
+            "correction_ko": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "mc_id",
+            "wrong_belief_ko",
+            "correction_ko"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "template",
+        "ku_assembled",
+        "ai_generated"
+      ]
+    },
+    "stream_ref": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "summary_md",
+    "per_unit",
+    "misconception",
+    "source",
+    "stream_ref"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "type": "string",
+  "enum": [
+    "standard",
+    "placement",
+    "verify",
+    "promotion_exam",
+    "weak_drill",
+    "dday",
+    "return"
+  ]
+}

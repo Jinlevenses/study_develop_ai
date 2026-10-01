@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 404
+    },
+    "title": {
+      "const": "팩·설치 작업 없음"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

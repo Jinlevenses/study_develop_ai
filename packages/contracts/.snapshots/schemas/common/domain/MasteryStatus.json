@@ -1,0 +1,8 @@
+{
+  "type": "string",
+  "enum": [
+    "unseen",
+    "learning",
+    "mastered"
+  ]
+}

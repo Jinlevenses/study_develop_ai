@@ -1,0 +1,4 @@
+{
+  "type": "string",
+  "pattern": "^ps_[0-9a-f]{16}$"
+}

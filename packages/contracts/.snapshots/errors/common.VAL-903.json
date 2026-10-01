@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 400
+    },
+    "title": {
+      "const": "커서 무효 또는 만료"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}

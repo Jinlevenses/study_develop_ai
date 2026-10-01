@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "retro_md": {
+      "type": "string",
+      "maxLength": 8000
+    }
+  },
+  "required": [
+    "retro_md"
+  ],
+  "additionalProperties": false
+}

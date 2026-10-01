@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "declaration_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "ledger_event_id": {
+      "type": "string",
+      "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "declaration_id",
+    "ledger_event_id",
+    "content_hash"
+  ],
+  "additionalProperties": false
+}

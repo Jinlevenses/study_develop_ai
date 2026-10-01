@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "const": 403
+    },
+    "title": {
+      "const": "X-Fathom-CSRF 없음·불일치"
+    },
+    "retryable": {
+      "const": false
+    }
+  }
+}
