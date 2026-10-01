@@ -1,0 +1,477 @@
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { afterEach, describe, expect, it } from 'vitest';
+import { type CliEnv, run } from '../../src/cli.js';
+import type { CaseResult } from '../../src/results.js';
+import { buildRtm, judge, renderRtm } from '../../src/rtm.js';
+import {
+  applyIteration,
+  compareInt,
+  intUpper,
+  parseIteration,
+  parseRtmTables,
+  previousInt,
+  ShapeError,
+} from '../../src/rtm-source.js';
+import { scanSource } from '../../src/titles.js';
+
+/**
+ * 가짜 테스트 소스 안의 `IT(`·`TEST(` 를 `it(`·`test(` 로 되돌린다. 이 파일 안의 문자열을 정적 스캐너가
+ * 실제 테스트 제목으로 읽지 않도록(중복 ID·위치 오탐 방지) 소스 문자열에는 대문자로 적는다.
+ */
+const fake = (text: string): string => text.replace(/\bIT(?=[.(])/g, 'it').replace(/\bTEST(?=[.(])/g, 'test');
+
+import {
+  classLabel,
+  extractClassFromRtm,
+  parseVerificationClass,
+  summarizeClasses,
+  vMismatches,
+} from '../../src/verification-class.js';
+
+const fixture = (name: string): string => readFileSync(new URL(`../fixtures/${name}`, import.meta.url), 'utf8');
+
+const dirs: string[] = [];
+afterEach(() => {
+  for (const d of dirs.splice(0)) {
+    rmSync(d, { recursive: true, force: true });
+  }
+});
+
+function makeRepo(files: Record<string, string>): string {
+  const root = mkdtempSync(path.join(os.tmpdir(), 'fathom-sid-rtm-'));
+  dirs.push(root);
+  for (const [rel, text] of Object.entries(files)) {
+    const abs = path.join(root, rel);
+    mkdirSync(path.dirname(abs), { recursive: true });
+    writeFileSync(abs, text);
+  }
+  return root;
+}
+
+function env(): { env: CliEnv; out: string[]; err: string[] } {
+  const out: string[] = [];
+  const err: string[] = [];
+  return {
+    out,
+    err,
+    env: {
+      now: () => 1_790_000_000_000,
+      commit: () => 'abc1234',
+      nodeVersion: 'v22.22.2',
+      out: (l) => out.push(l),
+      err: (l) => err.push(l),
+    },
+  };
+}
+
+const rows = parseRtmTables(fixture('rtm-mini.md'));
+const manifest = extractClassFromRtm(fixture('rtm-mini.md'));
+
+const result = (id: string, status: CaseResult['status'], title = `${id} 동작`): CaseResult => ({
+  id,
+  title,
+  status,
+  durationMs: 1,
+  suite: 'ut',
+  file: 'x.spec.ts',
+});
+
+function titlesOf(src: string): ReturnType<typeof scanSource> {
+  return scanSource('services/learning/test/unit/x.spec.ts', fake(src));
+}
+
+describe('rtm', () => {
+  it('UT-SID-020 RTM 파서는 머리 셀로 열을 찾고 우선·슬을 분해하며 INT-2~3 은 INT-3, v1 이월·인식 불가는 deferred 다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const shuffled = [
+      '| 이름 | INT | V | ID | 우선·슬 |',
+      '|---|---|---|---|---|',
+      '| 셔플 \\| 파이프 | INT-2~3 | B+V-ci | FR-XYZ-001 | Should·R3 |',
+      '| 이월 | v1 이월 | V-build | NFR-ABC-002 | Must·R1 |',
+      '| 인식 불가 | TBD | V-build | FR-XYZ-002 | Must·R1 |',
+      '| 요구가 아님 | INT-1a | V-build | DR-001 | Must·R0 |',
+      '',
+      '| ID | 이름 | V | INT |',
+      '|---|---|---|---|',
+      '| FR-NOPE-001 | 우선·슬 열이 없는 표는 무시 | V-build | INT-1a |',
+    ].join('\n');
+    const parsed = parseRtmTables(shuffled);
+    expect(parsed.map((r) => r.id)).toEqual(['FR-XYZ-001', 'NFR-ABC-002', 'FR-XYZ-002']);
+    expect(parsed[0]).toMatchObject({
+      name: '셔플 | 파이프',
+      kind: 'FR',
+      priority: 'Should',
+      slice: 'R3',
+      v: 'B+V-ci',
+      first_int: 'INT-3',
+      deferred: false,
+    });
+    expect(parsed[1]).toMatchObject({ kind: 'NFR', first_int: null, deferred: true });
+    expect(parsed[2]?.deferred).toBe(true);
+    // 미니 RTM: 7행(FR 5 + NFR 2), 요약 표는 무시
+    expect(rows.map((r) => r.id)).toEqual([
+      'FR-PRG-001',
+      'FR-CUR-001',
+      'FR-AI-001',
+      'FR-AI-002',
+      'FR-SET-024',
+      'NFR-DATA-013',
+      'NFR-PORT-001',
+    ]);
+    expect(rows.find((r) => r.id === 'FR-AI-002')?.first_int).toBe('INT-3');
+    expect(rows.find((r) => r.id === 'FR-SET-024')?.deferred).toBe(true);
+    expect(rows.find((r) => r.id === 'FR-PRG-001')?.name).toBe('원장 멱등 | 재수신');
+  });
+
+  it('UT-SID-021 파싱된 요구 수가 --min-reqs 미만이거나 RTM 원천이 없으면 exit 2다(vacuous 방지) [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const repo = makeRepo({ 'docs/02-design/09-rtm.md': fixture('rtm-mini.md') });
+    const a = env();
+    expect(run(['rtm', '--int', 'INT-1b', '--root', repo, '--out', path.join(repo, 'out')], a.env)).toBe(2);
+    expect(a.err.join('\n')).toMatch(/7 requirements < --min-reqs 300/);
+    expect(run(['rtm', '--int', 'INT-1b', '--root', repo, '--min-reqs', '8'], env().env)).toBe(2);
+    const ok = env();
+    expect(
+      run(['rtm', '--int', 'INT-1b', '--root', repo, '--min-reqs', '7', '--out', path.join(repo, 'out')], ok.env),
+    ).toBe(0);
+    const json = JSON.parse(readFileSync(path.join(repo, '.reports', 'INT-1b', 'rtm.json'), 'utf8')) as {
+      summary: { requirements: number };
+    };
+    expect(json.summary.requirements).toBe(7);
+    expect(readFileSync(path.join(repo, 'out', 'RTM-INT-1b.md'), 'utf8').split('\n')[0]).toBe(
+      '<!-- generated by tools/si-docs — 수기 편집 금지 (STD-DOC-07) -->',
+    );
+    expect(run(['rtm', '--int', 'INT-1b', '--root', path.join(repo, 'absent'), '--min-reqs', '1'], env().env)).toBe(2);
+    expect(run(['rtm', '--int', 'INT-1b', '--root', repo, '--min-reqs', 'x'], env().env)).toBe(2);
+  });
+
+  it('UT-SID-022 fr-iteration.json 은 배열·{requirements}·{assignments} 세 모양을 받아 덮어쓰고 이상한 모양은 exit 2다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const first = (data: unknown): string | null => {
+      const out = applyIteration(rows, parseIteration(data)).find((r) => r.id === 'FR-PRG-001');
+      return out?.first_int ?? null;
+    };
+    expect(first([{ id: 'FR-PRG-001', first_int: 'INT-2' }])).toBe('INT-2');
+    expect(first({ requirements: [{ req: 'FR-PRG-001', int: 'INT-2~3' }] })).toBe('INT-3');
+    expect(first({ assignments: { 'FR-PRG-001': { first_int: 'INT-4', ints: ['INT-4'], notes: {} } } })).toBe('INT-4');
+    expect(first({ other: [] }.other)).toBe('INT-1a');
+    const deferred = applyIteration(rows, parseIteration([{ id: 'FR-PRG-001', deferred: true }])).find(
+      (r) => r.id === 'FR-PRG-001',
+    );
+    expect(deferred).toMatchObject({ first_int: 'INT-1a', deferred: true });
+    const revived = applyIteration(rows, parseIteration([{ id: 'FR-SET-024', first_int: 'INT-6' }])).find(
+      (r) => r.id === 'FR-SET-024',
+    );
+    expect(revived).toMatchObject({ first_int: 'INT-6', deferred: false });
+    for (const bad of [
+      { foo: 1 },
+      'text',
+      [{ id: 'not-an-id' }],
+      { requirements: [{ id: 'FR-AAA-001', first_int: 3 }] },
+      { assignments: { 'FR-AAA-001': 5 } },
+    ]) {
+      expect(() => parseIteration(bad), JSON.stringify(bad)).toThrow(ShapeError);
+    }
+    // cli: 이상한 모양 → exit 2 + ambiguity
+    const repo = makeRepo({
+      'docs/02-design/09-rtm.md': fixture('rtm-mini.md'),
+      'tools/si-docs/data/fr-iteration.json': '{"weird": true}',
+    });
+    const e = env();
+    expect(run(['rtm', '--int', 'INT-1b', '--root', repo, '--min-reqs', '1'], e.env)).toBe(2);
+    expect(e.err.join('\n')).toMatch(/ambiguity:/);
+    // cli: 시드 모양({assignments}) 은 덮어쓴다
+    const seeded = makeRepo({
+      'docs/02-design/09-rtm.md': fixture('rtm-mini.md'),
+      'tools/si-docs/data/fr-iteration.json': JSON.stringify({
+        assignments: { 'FR-PRG-001': { first_int: 'INT-5', ints: ['INT-5'], notes: {} } },
+      }),
+    });
+    expect(run(['rtm', '--int', 'INT-1b', '--root', seeded, '--min-reqs', '1'], env().env)).toBe(0);
+    const json = JSON.parse(readFileSync(path.join(seeded, '.reports', 'INT-1b', 'rtm.json'), 'utf8')) as {
+      requirements: { id: string; first_int: string; status: string }[];
+    };
+    expect(json.requirements.find((r) => r.id === 'FR-PRG-001')).toMatchObject({
+      first_int: 'INT-5',
+      status: 'future',
+    });
+  });
+
+  it('UT-SID-023 요구 상태 6종(met·unmet·orphan·untested·future·deferred)을 규칙 순서대로 판정한다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const scan = titlesOf(
+      [
+        "IT('UT-LR-012 원장 [FR-PRG-001]', () => {});",
+        "IT('UT-CT-001 팩 통과 [FR-CUR-001]', () => {});",
+        "IT('UT-CT-002 팩 실패 [FR-CUR-001]', () => {});",
+        "IT('UT-AI-001 probe [FR-AI-001]', () => {});",
+        "IT('UT-AI-002 모드 [FR-AI-002]', () => {});",
+      ].join('\n'),
+    );
+    const build = buildRtm({
+      int: 'INT-1b',
+      rows,
+      titles: scan.titles,
+      titleErrors: [],
+      results: [
+        result('UT-LR-012', 'pass'),
+        result('UT-CT-001', 'pass'),
+        result('UT-CT-002', 'fail'),
+        result('UT-AI-002', 'pass'),
+      ],
+      manifest,
+      generatedAt: 1,
+      commit: 'x',
+    });
+    const status = (id: string): string | undefined => build.json.requirements.find((r) => r.id === id)?.status;
+    expect(status('FR-PRG-001')).toBe('met');
+    expect(status('FR-CUR-001')).toBe('unmet');
+    expect(status('NFR-DATA-013')).toBe('orphan');
+    expect(status('FR-AI-001')).toBe('untested');
+    expect(status('FR-AI-002')).toBe('future');
+    expect(status('NFR-PORT-001')).toBe('future');
+    expect(status('FR-SET-024')).toBe('deferred');
+    expect(build.json.summary).toEqual({
+      requirements: 7,
+      met: 1,
+      unmet: 1,
+      orphan: 1,
+      untested: 1,
+      future: 2,
+      deferred: 1,
+    });
+    // judge 규칙 순서: deferred > future > orphan > unmet > untested > met
+    const t = (status: 'pass' | 'fail' | 'skip' | 'unknown') => ({ id: 'UT-SK-001', status, suite: 'ut', file: 'a' });
+    expect(judge({ first_int: 'INT-1a', deferred: true }, [t('pass')], 'INT-1b')).toBe('deferred');
+    expect(judge({ first_int: 'INT-3', deferred: false }, [t('fail')], 'INT-1b')).toBe('future');
+    expect(judge({ first_int: 'INT-1a', deferred: false }, [], 'INT-1b')).toBe('orphan');
+    expect(judge({ first_int: 'INT-1a', deferred: false }, [t('pass'), t('skip')], 'INT-1b')).toBe('unmet');
+    expect(judge({ first_int: 'INT-1a', deferred: false }, [t('unknown'), t('unknown')], 'INT-1b')).toBe('untested');
+    expect(judge({ first_int: 'INT-1a', deferred: false }, [t('pass'), t('unknown')], 'INT-1b')).toBe('met');
+    expect(judge({ first_int: 'INT-1b', deferred: false }, [t('pass')], 'INT-1b')).toBe('met');
+  });
+
+  it('UT-SID-024 rtm.json 은 키 순서가 고정이고 requirements·tests 는 ID 사전순이며 v_build 는 항상 true다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const scan = titlesOf(
+      ["IT('UT-LR-020 둘째 [FR-PRG-001]', () => {});", "IT('UT-LR-012 첫째 [FR-PRG-001][FR-CUR-001]', () => {});"].join(
+        '\n',
+      ),
+    );
+    const build = buildRtm({
+      int: 'INT-1a',
+      rows: [...rows].reverse(),
+      titles: scan.titles,
+      titleErrors: [],
+      results: [result('UT-LR-012', 'pass')],
+      manifest,
+      generatedAt: 1_790_000_000_000,
+      commit: 'abc1234',
+    });
+    const j = build.json;
+    expect(Object.keys(j)).toEqual([
+      'version',
+      'int',
+      'generated_at',
+      'commit',
+      'summary',
+      'requirements',
+      'unknown_refs',
+      'title_errors',
+      'v_mismatch',
+    ]);
+    expect(j.version).toBe(1);
+    expect(j.generated_at).toBe(1_790_000_000_000);
+    expect(Object.keys(j.summary)).toEqual([
+      'requirements',
+      'met',
+      'unmet',
+      'orphan',
+      'untested',
+      'future',
+      'deferred',
+    ]);
+    const ids = j.requirements.map((r) => r.id);
+    expect(ids).toEqual([...ids].sort());
+    const prg = j.requirements.find((r) => r.id === 'FR-PRG-001');
+    expect(prg?.tests.map((x) => x.id)).toEqual(['UT-LR-012', 'UT-LR-020']);
+    expect(prg?.tests.map((x) => x.status)).toEqual(['pass', 'unknown']);
+    expect(Object.keys(prg ?? {})).toEqual([
+      'id',
+      'kind',
+      'priority',
+      'slice',
+      'v',
+      'v_build',
+      'first_int',
+      'deferred',
+      'status',
+      'tests',
+    ]);
+    expect(Object.keys(prg?.tests[0] ?? {})).toEqual(['id', 'status', 'suite', 'file']);
+    expect(j.requirements.every((r) => r.v_build === true)).toBe(true);
+    expect(JSON.parse(JSON.stringify(j))).toEqual(j);
+  });
+
+  it('UT-SID-025 존재하지 않는 요구 참조는 unknown_refs, 제목 오류는 title_errors 로 담는다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const scan = titlesOf(
+      [
+        "IT('UT-LR-012 존재하지 않는 참조 [FR-PRG-001][FR-FOO-999][NFR-BAR-001~002]', () => {});",
+        "IT('UT-LR-013 요구 없음', () => {});",
+      ].join('\n'),
+    );
+    const build = buildRtm({
+      int: 'INT-1a',
+      rows,
+      titles: scan.titles,
+      titleErrors: scan.errors,
+      results: [],
+      manifest,
+      generatedAt: 1,
+      commit: 'x',
+    });
+    const file = 'services/learning/test/unit/x.spec.ts';
+    expect(build.json.unknown_refs).toEqual([
+      { test: 'UT-LR-012', ref: 'FR-FOO-999', file, line: 1 },
+      { test: 'UT-LR-012', ref: 'NFR-BAR-001', file, line: 1 },
+      { test: 'UT-LR-012', ref: 'NFR-BAR-002', file, line: 1 },
+    ]);
+    expect(build.json.title_errors).toEqual([
+      { file: 'services/learning/test/unit/x.spec.ts', line: 2, title: 'UT-LR-013 요구 없음', reason: 'no-req' },
+    ]);
+  });
+
+  it('UT-SID-026 검증 등급: 등급 파일 파싱·RTM §7 대체 추출·표기 변환·V 열 불일치·집계 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    expect(manifest).not.toBeNull();
+    if (manifest === null) {
+      return;
+    }
+    expect(classLabel(manifest, 'FR-PRG-001')).toBe('V-build');
+    expect(classLabel(manifest, 'FR-AI-001')).toBe('B+V-live');
+    expect(classLabel(manifest, 'FR-SET-024')).toBe('B+V-ci/V-live');
+    expect(vMismatches(rows, manifest)).toEqual([{ id: 'FR-CUR-001', rtm: 'V-build', manifest: 'B+V-field' }]);
+    const summary = summarizeClasses(rows, manifest);
+    expect(summary.byLabel).toEqual({ 'B+V-ci': 1, 'B+V-ci/V-live': 1, 'B+V-field': 1, 'B+V-live': 1, 'V-build': 3 });
+    expect(summary.exceptions).toBe(4);
+    expect(summary.beyond).toEqual({ 'V-ci': 2, 'V-live': 2, 'V-field': 1 });
+    expect(Object.keys(summary.byLabel)).toEqual([...Object.keys(summary.byLabel)].sort());
+    expect(parseVerificationClass({ default: 'V-build' })).toBeNull();
+    expect(parseVerificationClass({ default: 'V-build', exceptions: { 'FR-AAA-001': 5 } })).toBeNull();
+    expect(
+      parseVerificationClass({ default: 'V-build', exceptions: { 'FR-AAA-001': { build: true, beyond: ['V-ci'] } } })
+        ?.exceptions.size,
+    ).toBe(1);
+    expect(extractClassFromRtm('## 7. `verification-class.json` 초안\n```json\n{ nope }\n```')).toBeNull();
+    expect(extractClassFromRtm('내용 없음')).toBeNull();
+    // v_mismatch 가 rtm.json 에 실린다
+    const build = buildRtm({
+      int: 'INT-1a',
+      rows,
+      titles: [],
+      titleErrors: [],
+      results: [],
+      manifest,
+      generatedAt: 1,
+      commit: 'x',
+    });
+    expect(build.json.v_mismatch).toHaveLength(1);
+    expect(
+      buildRtm({
+        int: 'INT-1a',
+        rows,
+        titles: [],
+        titleErrors: [],
+        results: [],
+        manifest: null,
+        generatedAt: 1,
+        commit: 'x',
+      }).json.v_mismatch,
+    ).toEqual([]);
+  });
+
+  it('UT-SID-027 RTM 마크다운은 표 셀의 | 를 이스케이프하고 요약·본표·오류 절·등급 집계를 낸다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const scan = titlesOf(
+      "IT('UT-LR-012 원장 [FR-PRG-001][FR-FOO-999]', () => {});\nit('UT-LR-013 요구 없음', () => {});\n",
+    );
+    const build = buildRtm({
+      int: 'INT-1b',
+      rows,
+      titles: scan.titles,
+      titleErrors: scan.errors,
+      results: [result('UT-LR-012', 'pass')],
+      manifest,
+      generatedAt: 1,
+      commit: 'x',
+    });
+    const md = renderRtm(
+      build,
+      '실행: 2026-10-01T00:00:00.000Z · 커밋: abc · 명령: x · Node v22',
+      manifest === null ? null : summarizeClasses(rows, manifest),
+    );
+    const lines = md.split('\n');
+    expect(lines[0]).toBe('<!-- generated by tools/si-docs — 수기 편집 금지 (STD-DOC-07) -->');
+    expect(lines[1]).toBe('# RTM-INT-1b 요구사항추적 결과 (자동 생성)');
+    expect(md).toContain(
+      '| FR-PRG-001 | 원장 멱등 \\| 재수신 | Must·R0 | V-build | INT-1a | UT-LR-012 | pass 1 | 충족(met) |',
+    );
+    for (const section of [
+      '## 요약',
+      '## 요구 × 테스트',
+      '## 존재하지 않는 요구 참조 (unknown_refs)',
+      '## 제목 오류 (title_errors)',
+      '## 검증 등급 불일치 (v_mismatch)',
+      '## 검증 등급 집계',
+    ]) {
+      expect(md).toContain(section);
+    }
+    expect(md).toContain('| UT-LR-012 | FR-FOO-999 |');
+    expect(md).toContain('| FR-CUR-001 | V-build | B+V-field |');
+    expect(md).toContain('| 요구 수 | 충족 | 미충족 | 고아 | 미실행 | 이후 INT | 이월 |');
+    expect(md.endsWith('\n')).toBe(true);
+    expect(md.endsWith('\n\n')).toBe(false);
+    const nullClasses = renderRtm(build, 'h', null);
+    expect(nullClasses).toContain('n/a (verification-class 원천 없음)');
+  });
+
+  it('UT-SID-028 결과 제목의 참조도 요구에 매핑하고 소스에 없는 테스트는 결과 파일 경로를 쓴다 [PR-013][DR-028][NFR-MAINT-011]', () => {
+    const results: CaseResult[] = [
+      {
+        id: 'UT-LR-012',
+        title: 'UT-LR-012 결과 쪽 제목 [FR-PRG-001][FR-ZZZ-404]',
+        status: 'pass',
+        durationMs: 1,
+        suite: 'ut',
+        file: '/abs/from-results.spec.ts',
+      },
+      { id: null, title: 'describe 묶음', status: 'pass', durationMs: 0, suite: 'ut', file: 'x' },
+    ];
+    const build = buildRtm({
+      int: 'INT-1a',
+      rows,
+      titles: [],
+      titleErrors: [],
+      results,
+      manifest,
+      generatedAt: 1,
+      commit: 'x',
+    });
+    const prg = build.json.requirements.find((r) => r.id === 'FR-PRG-001');
+    expect(prg?.tests).toEqual([{ id: 'UT-LR-012', status: 'pass', suite: 'ut', file: '/abs/from-results.spec.ts' }]);
+    expect(prg?.status).toBe('met');
+    expect(build.json.unknown_refs).toEqual([
+      { test: 'UT-LR-012', ref: 'FR-ZZZ-404', file: '/abs/from-results.spec.ts', line: 0 },
+    ]);
+  });
+
+  it('UT-SID-029 INT 도우미: 순서 비교·상한 추출·직전 INT [PR-013][DR-028][NFR-MAINT-011]', () => {
+    expect(compareInt('INT-1a', 'INT-1b')).toBe(-1);
+    expect(compareInt('PG-3', 'INT-7')).toBe(1);
+    expect(compareInt('INT-4', 'INT-4')).toBe(0);
+    expect(() => compareInt('INT-9', 'INT-1a')).toThrow(RangeError);
+    expect(intUpper('INT-2~3')).toBe('INT-3');
+    expect(intUpper('INT-1b')).toBe('INT-1b');
+    expect(intUpper('INT-1a~INT-1b')).toBe('INT-1b');
+    expect(intUpper('v1 이월')).toBeNull();
+    expect(intUpper('—')).toBeNull();
+    expect(previousInt('INT-1a')).toBeNull();
+    expect(previousInt('INT-2')).toBe('INT-1b');
+    expect(previousInt('PG-3')).toBe('INT-7');
+  });
+});

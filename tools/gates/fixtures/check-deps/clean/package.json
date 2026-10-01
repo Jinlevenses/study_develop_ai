@@ -1,0 +1,10 @@
+{
+  "name": "fathom-workspace",
+  "private": true,
+  "devDependencies": {
+    "@fathom/testkit": "workspace:*",
+    "@biomejs/biome": "2.5.14",
+    "typescript": "7.0.2",
+    "vitest": "5.0.2"
+  }
+}

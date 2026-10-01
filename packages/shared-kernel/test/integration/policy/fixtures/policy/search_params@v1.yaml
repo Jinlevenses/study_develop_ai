@@ -1,0 +1,4 @@
+version: search_params@v1
+trigram_min_len: 3
+josa_strip: true
+top_k: 10

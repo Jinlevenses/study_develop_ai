@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "token_dirs": [
+    {
+      "source": "^packages/design-tokens/"
+    }
+  ],
+  "routing_path": {
+    "source": "(^|/)(routing|router|routes)/|\\.route\\.[a-z]+$"
+  },
+  "pre_submit_path": {
+    "source": "(^|/)(pre-submit|presubmit)/"
+  },
+  "blank_note_path": {
+    "source": "(^|/)blank-note/"
+  },
+  "post_submit_path": {
+    "source": "(^|/)post-submit/"
+  },
+  "contracts_path": {
+    "source": "^packages/contracts/"
+  },
+  "banned_pre_submit_keys": [
+    "answer_key",
+    "answerKey",
+    "explanation",
+    "correct_option",
+    "correct_options",
+    "correct_answer",
+    "correctAnswer",
+    "is_correct",
+    "isCorrect",
+    "model_answer",
+    "modelAnswer",
+    "exemplar_note",
+    "exemplarNote",
+    "rubric_answer",
+    "solution"
+  ],
+  "reveal_ident": {
+    "source": "(PostSubmit|Reveal(ed)?|AnswerKey)"
+  },
+  "reward_words": {
+    "source": "(^|_)(confetti|fireworks?|coins?|xp|sparkles?|loot)(_|$)"
+  },
+  "social_words": {
+    "source": "(^|_)(leaderboards?|scoreboard|friends?|followers?|other_users?|peer_rank\\w*|rank_among|social_share|global_rank)(_|$)"
+  },
+  "lock_words": {
+    "source": "(^|_)(locked|is_locked|lock|unlock|hard_gate|force_lock|blocked_until)(_|$)"
+  },
+  "ai_call_ident": {
+    "source": "^(auto_?write\\w*|autocomplete\\w*|ai_?assist\\w*|suggest_?(note|text)\\w*|generate_?(note|text|summary)\\w*|complete_?note\\w*|draft_?with_?ai\\w*)$",
+    "flags": "i"
+  },
+  "ai_import": {
+    "source": "(ai-gateway|anthropic|openai|typesafe-ai|llm-provider)",
+    "flags": "i"
+  },
+  "push_import": {
+    "source": "^(web-push|node-notifier|firebase/messaging|onesignal|@novu/)"
+  },
+  "push_allow_paths": [
+    "apps/web/src/features/settings/notify/**"
+  ],
+  "deps": {
+    "ng-g1/reward-vocab": [
+      "canvas-confetti",
+      "react-confetti",
+      "js-confetti",
+      "party-js",
+      "react-rewards"
+    ],
+    "ng-g5/push-api": [
+      "web-push",
+      "node-notifier",
+      "onesignal-node",
+      "react-onesignal"
+    ],
+    "ng-g6/video": [
+      "react-player",
+      "video.js",
+      "hls.js",
+      "plyr",
+      "video-react"
+    ],
+    "ng-g2/social-vocab": [
+      "react-share"
+    ]
+  },
+  "due_words": {
+    "source": "\\b(due|overdue|streak|backlog|missed)\\b",
+    "flags": "i"
+  },
+  "danger_words": {
+    "source": "(?:\\b(?:danger|destructive|red)\\b(?:-\\d+)?|var\\(--(?:color-)?(?:danger|destructive|error))",
+    "flags": "i"
+  },
+  "loss_copy": {
+    "source": "연체|게으름|밀린|놓쳤|스트릭이?\\s*(?:끊|손실)|스트릭을?\\s*잃|잃게\\s*됩니다|streak\\s*(?:lost|broken)|don'?t\\s+break\\s+your\\s+streak",
+    "flags": "i"
+  },
+  "reward_copy": {
+    "source": "코인|폭죽|경험치|보석|레벨업!|업적 달성|streak bonus",
+    "flags": "i"
+  },
+  "social_copy": {
+    "source": "리더보드|랭킹|친구와\\s*비교|상위\\s*\\d+\\s*%|친구"
+  },
+  "video_tag": {
+    "source": "<(video|iframe)\\b"
+  },
+  "video_text": {
+    "source": "youtube|vimeo",
+    "flags": "i"
+  },
+  "video_word": {
+    "source": "(^|_)video(s)?(_|$)"
+  },
+  "color_fn": {
+    "source": "\\b(?:rgba?|hsla?|hwb|oklch|oklab|lab|lch)\\(\\s*[-\\d.%]",
+    "flags": "i"
+  },
+  "hex_long": {
+    "source": "#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6})\\b"
+  },
+  "hex_short": {
+    "source": "#(?:[0-9a-fA-F]{3,4})\\b"
+  },
+  "hex_short_whole": {
+    "source": "^#(?:[0-9a-fA-F]{3,4})$"
+  },
+  "color_key": {
+    "source": "(color|background|bg|fill|stroke|border|shadow|outline)",
+    "flags": "i"
+  },
+  "class_fns": {
+    "source": "^(cn|clsx|classNames|twMerge|cva)$"
+  },
+  "network_share": {
+    "object": "navigator",
+    "member": "share"
+  },
+  "push_api": {
+    "object": "Notification",
+    "member": "requestPermission",
+    "identifiers": [
+      "pushManager",
+      "PushManager"
+    ],
+    "ctor": "Notification"
+  },
+  "policy": {
+    "file": "packages/contracts/src/ai/ai-gateway-policy.ts",
+    "deny_key": "deny_before_submit",
+    "required_prefix": {
+      "source": "^blank_note\\."
+    }
+  },
+  "g3_web": {
+    "scope": [
+      "apps/web/src/features/**/renderers/**"
+    ],
+    "exclude": [
+      "**/post-submit/**"
+    ],
+    "forbid_import": [
+      "@fathom/contracts/http/*/v1/post-submit/*"
+    ]
+  }
+}

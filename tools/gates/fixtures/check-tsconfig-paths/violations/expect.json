@@ -1,0 +1,42 @@
+[
+  {
+    "file": "tsconfig.json",
+    "line": 4,
+    "rule": "tsconfig/base-url"
+  },
+  {
+    "file": "tsconfig.json",
+    "line": 5,
+    "rule": "tsconfig/paths"
+  },
+  {
+    "file": "tsconfig.json",
+    "line": 1,
+    "rule": "tsconfig/root-include"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 2,
+    "rule": "tsconfig/package-name"
+  },
+  {
+    "file": "services/a/tsconfig.json",
+    "line": 3,
+    "rule": "tsconfig/paths"
+  },
+  {
+    "file": "apps/web/package.json",
+    "line": 2,
+    "rule": "tsconfig/package-name"
+  },
+  {
+    "file": "tools/x/package.json",
+    "line": 2,
+    "rule": "tsconfig/package-name"
+  },
+  {
+    "file": "tools/x/tsconfig.json",
+    "line": 1,
+    "rule": "tsconfig/base-url"
+  }
+]

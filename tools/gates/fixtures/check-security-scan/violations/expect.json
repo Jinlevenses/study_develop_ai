@@ -1,0 +1,7 @@
+[
+  {
+    "file": "evals/cases/leak.json",
+    "line": 2,
+    "rule": "security/secret-literal"
+  }
+]

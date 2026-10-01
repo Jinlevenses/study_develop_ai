@@ -79,6 +79,8 @@ describe('redact', () => {
     expect(out).toEqual({ list: ['a', R, { deep: R }], n: 1, ok: true, none: null, when });
     expect(redactValues('Bearer a.b')).toBe(R);
     expect(redactValues(7)).toBe(7);
-    expect(redactValues(JSON.parse('{"__proto__":{"x":"Bearer a.b"}}'))).toEqual(JSON.parse('{"__proto__":{"x":"[REDACTED]"}}'));
+    expect(redactValues(JSON.parse('{"__proto__":{"x":"Bearer a.b"}}'))).toEqual(
+      JSON.parse('{"__proto__":{"x":"[REDACTED]"}}'),
+    );
   });
 });

@@ -1,0 +1,7 @@
+{
+  "name": "@fathom/svc-learning",
+  "dependencies": {
+    "@fathom/contracts": "workspace:*",
+    "ts-fsrs": "5.4.2"
+  }
+}

@@ -1,0 +1,7 @@
+/* ported-from: spikes/sp7-static-gates/fixture/clean/apps/web/src/styles.css */
+@import "../../../packages/design-tokens/tokens.css";
+.due-count { color: var(--color-due); }
+.milestone-reveal { animation: milestone-reveal 600ms ease-out 1; }
+@keyframes milestone-reveal { from { opacity: 0; } to { opacity: 1; } }
+/* no leaderboard, no confetti (NG-G1/G2) */
+.error-banner { color: var(--color-danger); }

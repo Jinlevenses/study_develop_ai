@@ -7,7 +7,7 @@ import path from 'node:path';
 import { test } from 'node:test';
 import { hasEscape, readJsonc, snake } from '../lib/common.mjs';
 import { compare, loadEvasions, loadExpectations } from '../lib/expect.mjs';
-import { changedFiles, commitMessages } from '../lib/git.mjs';
+import { changedFiles, commitMessages, showAtBase } from '../lib/git.mjs';
 import { expandBraces, matchAny, matchGlob } from '../lib/glob.mjs';
 import { extractImports } from '../lib/imports.mjs';
 import { compareInt, INT_ORDER, intUpper, isIntId } from '../lib/int.mjs';
@@ -291,7 +291,7 @@ test('UT-GATE-015 git.changedFiles는 수정·추적 안 된 파일·rename 양�
   }
 });
 
-test('UT-GATE-016 git.commitMessages는 base..HEAD 로그와 messageFile을 합친다 [NFR-MAINT-001]', () => {
+test('UT-GATE-016 git.commitMessages는 base..HEAD 로그와 messageFile을 합치고 showAtBase는 없는 경로만 null, 잘못된 base는 engine/git이다 [NFR-MAINT-001]', () => {
   const root = tmpdir();
   try {
     const run = gitInit(root);
@@ -311,6 +311,21 @@ test('UT-GATE-016 git.commitMessages는 base..HEAD 로그와 messageFile을 합�
     assert.match(merged, /Task: T-00-05/);
     assert.match(merged, /CR: CR-57/);
     assert.equal(commitMessages(root, { messageFile: path.join(root, 'msg.txt') }), 'draft message\nCR: CR-57\n');
+    // showAtBase: 기준에 있는 파일 = 내용, 그 기준에 없는 경로 = null, 알 수 없는 base·git 실패 = engine/git
+    assert.equal(showAtBase(root, 'HEAD~1', 'a.txt'), 'a\n');
+    assert.equal(showAtBase(root, 'HEAD~1', 'b.txt'), null, 'HEAD~1 에는 b.txt 가 없다');
+    assert.equal(showAtBase(root, 'HEAD', 'no/such/file.txt'), null);
+    for (const bad of ['no-such-ref', 'HEAD~99']) {
+      assert.throws(
+        () => showAtBase(root, bad, 'a.txt'),
+        (e) => e.code === 'engine/git',
+        `invalid base ${bad}`,
+      );
+    }
+    assert.throws(
+      () => showAtBase(root, '--output=x', 'a.txt'),
+      (e) => e.code === 'engine/usage',
+    );
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

@@ -1,0 +1,17 @@
+[
+  {
+    "file": "apps/web/package.json",
+    "line": 7,
+    "rule": "ng-g1/reward-vocab"
+  },
+  {
+    "file": "apps/web/package.json",
+    "line": 8,
+    "rule": "ng-g5/push-api"
+  },
+  {
+    "file": "apps/web/package.json",
+    "line": 9,
+    "rule": "ng-g6/video"
+  }
+]

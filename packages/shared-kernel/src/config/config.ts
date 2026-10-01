@@ -1,9 +1,9 @@
 import { constants } from 'node:fs';
-import { open, realpath, rename, rm } from 'node:fs/promises';
+import { lstat, open, realpath, rename, rm } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import path from 'node:path';
-import { err, ok } from '../errors/errors.js';
 import type { Result } from '../errors/errors.js';
+import { err, ok } from '../errors/errors.js';
 import { ulid } from '../ids/ids.js';
 
 // STD-01 §8.3 허용 환경변수 표 — 이 표 밖은 읽기 금지(STD-CFG-20).
@@ -101,7 +101,8 @@ export type ResolveInsideError = {
     | 'device_name'
     | 'ads'
     | 'escape'
-    | 'symlink_escape';
+    | 'symlink_escape'
+    | 'unresolvable';
 };
 
 const DEVICE_NAME = /^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/i;
@@ -160,25 +161,59 @@ export function resolveInsideLexical(
   return ok(target);
 }
 
-async function realpathOfDeepestAncestor(p: path.PlatformPath, target: string): Promise<string> {
+function errnoCode(cause: unknown): string | undefined {
+  if (cause instanceof Error && 'code' in cause && typeof cause.code === 'string') {
+    return cause.code;
+  }
+  return undefined;
+}
+
+const MISSING_CODES: ReadonlySet<string> = new Set(['ENOENT', 'ENOTDIR']);
+
+/**
+ * `lstat`로 위로 올라가며 실제로 존재하는 가장 깊은 항목을 찾아 `realpath`하고, 존재하지 않는 꼬리를 그대로 붙인다.
+ * 심볼릭 링크는 `lstat`가 존재로 본다. 대상이 없는 링크(dangling)는 탈출 경로가 될 수 있어 거부한다(STD-SEC-03).
+ * ENOENT·ENOTDIR 밖의 오류(ELOOP·EACCES 등)는 던지지 않고 `unresolvable`로 돌려준다.
+ */
+async function realpathOfDeepestExisting(
+  p: path.PlatformPath,
+  target: string,
+): Promise<Result<string, ResolveInsideError>> {
+  const tail: string[] = [];
   let current = target;
   for (;;) {
+    let isLink = false;
+    let exists = true;
     try {
-      return await realpath(current);
+      isLink = (await lstat(current)).isSymbolicLink();
     } catch (cause) {
-      if (!(cause instanceof Error) || !('code' in cause) || (cause.code !== 'ENOENT' && cause.code !== 'ENOTDIR')) {
-        throw cause;
+      const code = errnoCode(cause);
+      if (code === undefined || !MISSING_CODES.has(code)) {
+        return err({ reason: 'unresolvable' });
       }
-      const parent = p.dirname(current);
-      if (parent === current) {
-        return current;
-      }
-      current = parent;
+      exists = false;
     }
+    if (exists) {
+      try {
+        return ok(p.join(await realpath(current), ...tail));
+      } catch (cause) {
+        const code = errnoCode(cause);
+        if (isLink && code !== undefined && MISSING_CODES.has(code)) {
+          return err({ reason: 'symlink_escape' }); // 대상 없는 링크
+        }
+        return err({ reason: 'unresolvable' });
+      }
+    }
+    const parent = p.dirname(current);
+    if (parent === current) {
+      return ok(p.join(current, ...tail));
+    }
+    tail.unshift(p.basename(current));
+    current = parent;
   }
 }
 
-/** lexical 통과 후, 존재하는 가장 깊은 조상을 `realpath`해 base 안인지 다시 확인한다(심볼릭 링크 탈출 거부). */
+/** lexical 통과 후, 존재하는 가장 깊은 항목을 `realpath`해 base 안인지 다시 확인한다(심볼릭 링크·dangling 링크 탈출 거부). */
 export async function resolveInside(
   base: string,
   untrusted: string,
@@ -189,9 +224,15 @@ export async function resolveInside(
     return lexical;
   }
   const p = platform === 'win32' ? path.win32 : path.posix;
-  const realBase = await realpathOfDeepestAncestor(p, p.resolve(base));
-  const realTarget = await realpathOfDeepestAncestor(p, lexical.value);
-  if (!isInside(p, realBase, realTarget)) {
+  const realBase = await realpathOfDeepestExisting(p, p.resolve(base));
+  if (!realBase.ok) {
+    return realBase;
+  }
+  const realTarget = await realpathOfDeepestExisting(p, lexical.value);
+  if (!realTarget.ok) {
+    return realTarget;
+  }
+  if (!isInside(p, realBase.value, realTarget.value)) {
     return err({ reason: 'symlink_escape' });
   }
   return lexical;
@@ -199,6 +240,13 @@ export async function resolveInside(
 
 /** STD-CFG-11: FATHOM_HOME 하위 경로는 이 함수로만 만든다. 세그먼트는 코드가 만든 값이므로 위반은 결함이다. */
 export function homePath(home: string, kind: HomeKind, ...segments: string[]): string {
+  for (const segment of segments) {
+    // 세그먼트 하나가 홈 밖·절대·장치 이름이면 합쳐지기 전에 결함으로 잡는다(`'/x'`가 `data//x`로 묻히지 않게).
+    const single = resolveInsideLexical(home, segment);
+    if (!single.ok) {
+      throw new Error(`invariant: homePath segment rejected (${single.error.reason})`);
+    }
+  }
   const result = resolveInsideLexical(home, [kind, ...segments].join('/'));
   if (!result.ok) {
     throw new Error(`invariant: homePath segment rejected (${result.error.reason})`);
@@ -217,7 +265,12 @@ async function fsyncDirectory(dir: string): Promise<void> {
       await handle.close();
     }
   } catch (cause) {
-    if (cause instanceof Error && 'code' in cause && typeof cause.code === 'string' && DIR_FSYNC_IGNORABLE.has(cause.code)) {
+    if (
+      cause instanceof Error &&
+      'code' in cause &&
+      typeof cause.code === 'string' &&
+      DIR_FSYNC_IGNORABLE.has(cause.code)
+    ) {
       return; // 디렉터리 fsync를 지원하지 않는 파일시스템
     }
     throw cause;

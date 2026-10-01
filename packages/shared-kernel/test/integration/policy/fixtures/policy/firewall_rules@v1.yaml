@@ -1,0 +1,6 @@
+version: firewall_rules@v1
+deny:
+  - pattern: "ignore previous"
+    action: block
+  - pattern: "system prompt"
+    action: redact

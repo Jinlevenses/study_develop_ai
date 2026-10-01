@@ -101,9 +101,13 @@ export function commitMessages(root, { base = 'HEAD', messageFile } = {}) {
   return text;
 }
 
-/** `git show <base>:<rel>`. 그 기준에 없는 경로 = null. */
+/**
+ * `git show <base>:<rel>`. 그 기준에 없는 경로 = null.
+ * base 참조 자체가 해석되지 않거나 그 밖의 git 실패는 GateEngineError('engine/git')(오타 --base가 "전부 부재"로 읽히면 안 된다).
+ */
 export function showAtBase(root, base, rel) {
   assertRef(base);
+  git(root, ['rev-parse', '--verify', '--quiet', `${base}^{commit}`]);
   try {
     return execFileSync('git', ['show', `${base}:${rel}`], {
       cwd: root,
@@ -115,6 +119,12 @@ export function showAtBase(root, base, rel) {
     if (e.code === 'ENOENT') {
       throw new GateEngineError('engine/git', 'git executable not found');
     }
-    return null;
+    const stderr = String(e.stderr ?? '');
+    if (/does not exist in|exists on disk, but not in/.test(stderr)) {
+      return null;
+    }
+    const err = new GateEngineError('engine/git', `git show ${base}:${rel} failed: ${stderr.trim().split('\n')[0]}`);
+    err.cause = e;
+    throw err;
   }
 }

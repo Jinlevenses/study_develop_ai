@@ -1,0 +1,4 @@
+{
+  // 서비스 안에서도 paths 금지
+  "compilerOptions": { "paths": { "@/*": ["./src/*"] } },
+}

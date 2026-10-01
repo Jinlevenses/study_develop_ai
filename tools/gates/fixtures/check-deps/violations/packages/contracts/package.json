@@ -1,0 +1,7 @@
+{
+  "name": "@fathom/contracts",
+  "dependencies": {
+    "@fathom/shared-kernel": "workspace:*",
+    "vite": "8.3.1"
+  }
+}

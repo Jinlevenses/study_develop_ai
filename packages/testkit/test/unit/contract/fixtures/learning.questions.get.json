@@ -1,0 +1,1 @@
+{ "request": { "params": { "item_id": "q1" } }, "caller": "gateway", "expect": { "status": 200 } }

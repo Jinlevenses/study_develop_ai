@@ -23,5 +23,5 @@
       "@legacy/b": ["./services/b/src/index.ts"]
     }
   },
-  "include": ["services", "packages", "apps", "tests"]
+  "include": ["services", "packages", "apps", "tests", "vitest.workspace.ts"]
 }

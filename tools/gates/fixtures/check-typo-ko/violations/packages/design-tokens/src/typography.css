@@ -1,0 +1,4 @@
+/* 전역 keep-all 이 없다 — EXPECT[typo-ko/keep-all] (이 파일 1줄) */
+@layer base {
+  body { font-size: var(--body-size); }
+}

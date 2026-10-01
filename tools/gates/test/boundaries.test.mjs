@@ -1,7 +1,7 @@
 // UT-GATE-004·020~032 — check:boundaries(config/boundaries.json, tokens·tsgo·both 엔진) 단위 테스트.
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { cpSync, mkdirSync, mkdtempSync, rmSync, unlinkSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -48,7 +48,7 @@ function rules(fromRel, spec, extra = {}) {
   return evaluateImport({ fromRel, spec, kind: 'static', typeOnly: false, line: 1, ...extra }, cfg).map((v) => v.rule);
 }
 
-test('UT-GATE-004 tsgo 초기화 실패·설정 부재·스키마 위반·빈 root·스캔 0개는 exit 2다(tokens는 tsconfig 없이도 위반 exit 1) [NFR-MAINT-001]', () => {
+test('UT-GATE-004 tsgo 초기화 실패·설정 부재·스키마 위반·빈 root·스캔 0개는 exit 2다(tokens는 tsconfig 없이도 위반 exit 1) 심볼릭 링크 경유 실행도 침묵 exit 0이 아니다 [NFR-MAINT-001]', () => {
   const copy = tmpdir();
   try {
     cpSync(VIOL, copy, { recursive: true });
@@ -101,6 +101,36 @@ test('UT-GATE-004 tsgo 초기화 실패·설정 부재·스키마 위반·빈 ro
     assert.equal(run(CLEAN, '--engine=tokens', '--config', path.join(dir, 'broken.json')).status, 2);
   } finally {
     rmSync(dir, { recursive: true, force: true });
+  }
+  // 심볼릭 링크 디렉터리 경유 실행: isMain realpath 비교 — 위반 root는 exit 1(JSON 출력), 없는 root는 exit 2, 침묵 exit 0 금지
+  const linkDir = tmpdir();
+  try {
+    const link = path.join(linkDir, 'gl');
+    symlinkSync(path.join(HERE, '..'), link, 'dir');
+    const viaLink = (root) =>
+      spawnSync(
+        process.execPath,
+        [path.join(link, 'check-boundaries.mjs'), '--root', root, '--engine=tokens', '--json'],
+        {
+          encoding: 'utf8',
+        },
+      );
+    const bad = viaLink(VIOL);
+    assert.equal(bad.status, 1, `symlinked gate on violations must exit 1 (stdout=${bad.stdout.slice(0, 80)})`);
+    assert.equal(JSON.parse(bad.stdout.trim().split('\n').pop()).exit, 1);
+    const none = viaLink(path.join(linkDir, 'absent'));
+    assert.equal(none.status, 2, 'symlinked gate on a missing root must exit 2');
+    assert.equal(viaLink(CLEAN).status, 0);
+    const runViaLink = spawnSync(
+      process.execPath,
+      [path.join(link, 'run-gates.mjs'), '--root', '/nonexistent-fathom-root'],
+      {
+        encoding: 'utf8',
+      },
+    );
+    assert.notEqual(runViaLink.status, 0, 'run-gates through a symlink must not exit 0 on a missing root');
+  } finally {
+    rmSync(linkDir, { recursive: true, force: true });
   }
   assert.equal(run(CLEAN, '--engine=lexer').status, 2, '제거된 엔진 이름');
   assert.equal(spawnSync(process.execPath, [GATE, '--root', CLEAN, '--bogus'], { encoding: 'utf8' }).status, 2);
@@ -361,7 +391,7 @@ test('UT-GATE-028 sk-pure·builtin-restricted·web-feature-cross는 위반과 �
   }
 });
 
-test('UT-GATE-029 intra 규칙은 <unit>/src/** 에만 적용되고 단위 간 규칙은 test·설정 파일에도 적용된다 [NFR-MAINT-001][NFR-MAINT-002]', () => {
+test('UT-GATE-029 intra 규칙은 <unit>/src/** 에만 적용되고 단위 간 규칙은 test·설정 파일·단위 밖 루트 파일에도 적용된다 [NFR-MAINT-001][NFR-MAINT-002]', () => {
   const intraSpecs = ['node:sqlite', 'node:child_process', 'node:worker_threads'];
   for (const from of [
     'services/content/test/unit/x.spec.ts',
@@ -376,6 +406,13 @@ test('UT-GATE-029 intra 규칙은 <unit>/src/** 에만 적용되고 단위 간 �
   // 단위 간 규칙은 test 에도
   assert.deepEqual(rules('services/a/test/x.spec.ts', '../../b/src/y.ts'), ['boundary/cross-service-import']);
   assert.deepEqual(rules('services/a/vitest.config.ts', '@fathom/svc-b'), ['boundary/cross-service-import']);
+  // 단위 밖 루트 파일: services/*·apps/* import 는 위반, packages/* 는 허용
+  assert.deepEqual(rules('vitest.workspace.ts', '@fathom/svc-b'), ['boundary/cross-service-import']);
+  assert.deepEqual(rules('playwright.config.ts', '@fathom/app-web'), ['boundary/cross-service-import']);
+  assert.deepEqual(rules('vitest.config.ts', './services/a/src/x.ts'), ['boundary/cross-service-import']);
+  assert.deepEqual(rules('vitest.workspace.ts', '@fathom/contracts/http/x'), []);
+  assert.deepEqual(rules('vitest.workspace.ts', 'node:fs'), []);
+  assert.deepEqual(rules('vitest.workspace.ts', 'vitest/config'), []);
   // 비리터럴·require 규칙도 전 파일
   assert.deepEqual(
     checkFile('services/a/test/x.spec.ts', 'const m = require(x);\n', cfg).map((v) => v.rule),

@@ -1,0 +1,8 @@
+version: cbm_params@v1
+levels:
+  - 1
+  - 2
+  - 3
+scores:
+  right: [1, 2, 3]
+  wrong: [0, -2, -6]

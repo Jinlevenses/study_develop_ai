@@ -1,0 +1,64 @@
+{
+  "config": {},
+  "suites": [
+    {
+      "title": "e2e/a.spec.ts",
+      "file": "e2e/a.spec.ts",
+      "specs": [],
+      "suites": [
+        {
+          "title": "시나리오",
+          "file": "e2e/a.spec.ts",
+          "specs": [
+            {
+              "title": "E2E-001 첫 세션 완주 [FR-STD-001]",
+              "file": "e2e/a.spec.ts",
+              "tests": [{ "status": "expected", "results": [{ "status": "passed", "duration": 1200 }] }]
+            },
+            {
+              "title": "E2E-002 재시도 후 통과 [FR-STD-002]",
+              "file": "e2e/a.spec.ts",
+              "tests": [
+                {
+                  "status": "flaky",
+                  "results": [
+                    { "status": "failed", "duration": 500, "error": { "message": "timeout" } },
+                    { "status": "passed", "duration": 700 }
+                  ]
+                }
+              ]
+            }
+          ],
+          "suites": [
+            {
+              "title": "깊은 단계",
+              "specs": [
+                {
+                  "title": "E2E-003 시간 초과 [FR-STD-003]",
+                  "file": "e2e/a.spec.ts",
+                  "tests": [
+                    {
+                      "status": "unexpected",
+                      "results": [
+                        {
+                          "status": "timedOut",
+                          "duration": 30000,
+                          "error": { "message": "Test timeout of 30000ms exceeded.\nstack" }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "E2E-004 건너뜀 [FR-STD-004]",
+                  "file": "e2e/a.spec.ts",
+                  "tests": [{ "status": "skipped", "results": [{ "status": "skipped", "duration": 0 }] }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,378 @@
+{
+  "taskId": "T-00-05",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    ".github/workflows/ci-build.yml",
+    ".github/workflows/ci-matrix.yml",
+    ".github/workflows/live-smoke.yml",
+    "docs/40-impl/reports/tasks/T-00-05.json",
+    "tools/gates/check-boundaries.mjs",
+    "tools/gates/check-gate-selftest.mjs",
+    "tools/gates/config/boundaries.json",
+    "tools/gates/fixtures/check-boundaries/clean/apps/web/src/features/a/x.ts",
+    "tools/gates/fixtures/check-boundaries/clean/apps/web/src/features/a/y.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/contracts/src/http/content.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/contracts/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/design-tokens/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/shared-kernel/src/errors/errors.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/shared-kernel/src/errors/kinds.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/shared-kernel/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/shared-kernel/src/proc/spawn.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/shared-kernel/src/sqlite/open.ts",
+    "tools/gates/fixtures/check-boundaries/clean/packages/ui/src/button.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/a/src/alias-ok.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/a/src/escape.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/a/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/a/src/local.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/a/test/db.spec.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/a/vitest.config.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/b/src/consumer.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/b/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/b/src/local.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/application/catalog/ports.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/application/catalog/service.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/application/itembank/uses-catalog.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/domain/catalog/shared/z.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/domain/catalog/x.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/domain/catalog/y.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/content/src/http/catalog/routes.ts",
+    "tools/gates/fixtures/check-boundaries/clean/services/learning/src/infra/workers/boot.ts",
+    "tools/gates/fixtures/check-boundaries/clean/tests/x.spec.ts",
+    "tools/gates/fixtures/check-boundaries/clean/tsconfig.json",
+    "tools/gates/fixtures/check-boundaries/clean/vitest.workspace.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/packages/contracts/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/packages/shared-kernel/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/services/a/src/evade.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/services/a/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/services/a/src/local.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/services/b/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/services/b/src/local.ts",
+    "tools/gates/fixtures/check-boundaries/evasions/tsconfig.json",
+    "tools/gates/fixtures/check-boundaries/violations/apps/web/src/features/a/x.ts",
+    "tools/gates/fixtures/check-boundaries/violations/apps/web/src/features/b/y.ts",
+    "tools/gates/fixtures/check-boundaries/violations/apps/web/src/leak.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/contracts/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/contracts/src/leak.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/contracts/src/uses-fs.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/shared-kernel/src/errors/leaky.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/shared-kernel/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/shared-kernel/src/sqlite/open.ts",
+    "tools/gates/fixtures/check-boundaries/violations/packages/ui/src/leak.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/alias-evasion.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/cross.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/dynamic.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/local.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/spawns.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/uses-spike.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/uses-sqlite.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/a/src/uses-testkit.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/b/src/consumer.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/b/src/db.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/b/src/index.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/b/src/local.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/content/src/application/catalog/ports.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/content/src/application/catalog/service.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/content/src/application/grading/judge.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/content/src/application/itembank/uses-catalog.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/content/src/domain/catalog/impure.ts",
+    "tools/gates/fixtures/check-boundaries/violations/services/content/src/domain/itembank/x.ts",
+    "tools/gates/fixtures/check-boundaries/violations/tests/x.spec.ts",
+    "tools/gates/fixtures/check-boundaries/violations/tsconfig.json",
+    "tools/gates/fixtures/check-boundaries/violations/vitest.workspace.ts",
+    "tools/gates/lib/common.mjs",
+    "tools/gates/lib/errors.mjs",
+    "tools/gates/lib/expect.mjs",
+    "tools/gates/lib/git.mjs",
+    "tools/gates/lib/glob.mjs",
+    "tools/gates/lib/imports.mjs",
+    "tools/gates/lib/int.mjs",
+    "tools/gates/lib/jsonc.mjs",
+    "tools/gates/lib/lex.mjs",
+    "tools/gates/lib/registry.mjs",
+    "tools/gates/lib/report.mjs",
+    "tools/gates/lib/tsgo.mjs",
+    "tools/gates/lib/units.mjs",
+    "tools/gates/lib/walk.mjs",
+    "tools/gates/run-gates.mjs",
+    "tools/gates/test/boundaries.test.mjs",
+    "tools/gates/test/lex.test.mjs",
+    "tools/gates/test/run-gates.test.mjs",
+    "tools/gates/test/selftest.test.mjs",
+    "tools/graph/src/cli.ts",
+    "tools/graph/src/god-nodes.ts",
+    "tools/graph/src/snapshot.ts",
+    "tools/graph/test/fixtures/graph-cross.json",
+    "tools/graph/test/fixtures/graph-gods.json",
+    "tools/graph/test/fixtures/graph-violations.json",
+    "tools/graph/test/unit/god-nodes.spec.ts",
+    "tools/graph/test/unit/snapshot.spec.ts",
+    "tools/si-docs/src/cli.ts",
+    "tools/si-docs/src/dod.ts",
+    "tools/si-docs/src/ids.ts",
+    "tools/si-docs/src/itr.ts",
+    "tools/si-docs/src/markdown.ts",
+    "tools/si-docs/src/pgm.ts",
+    "tools/si-docs/src/prf.ts",
+    "tools/si-docs/src/results.ts",
+    "tools/si-docs/src/rtm-source.ts",
+    "tools/si-docs/src/rtm.ts",
+    "tools/si-docs/src/sec.ts",
+    "tools/si-docs/src/titles.ts",
+    "tools/si-docs/src/utr.ts",
+    "tools/si-docs/src/verification-class.ts",
+    "tools/si-docs/test/fixtures/brief-prose.md",
+    "tools/si-docs/test/fixtures/brief-yaml.md",
+    "tools/si-docs/test/fixtures/playwright-results.json",
+    "tools/si-docs/test/fixtures/results.tap",
+    "tools/si-docs/test/fixtures/rtm-mini.md",
+    "tools/si-docs/test/fixtures/vitest-results.json",
+    "tools/si-docs/test/fixtures/wbs-mini.md",
+    "tools/si-docs/test/unit/reports.spec.ts",
+    "tools/si-docs/test/unit/rtm.spec.ts",
+    "tools/si-docs/test/unit/titles-ids.spec.ts"
+  ],
+  "testsAdded": [
+    "UT-GATE-001",
+    "UT-GATE-002",
+    "UT-GATE-003",
+    "UT-GATE-004",
+    "UT-GATE-005",
+    "UT-GATE-010..019",
+    "UT-GATE-020..032",
+    "UT-GATE-033..039",
+    "UT-GATE-040",
+    "UT-GATE-041",
+    "UT-GATE-042..049",
+    "UT-SID-001",
+    "UT-SID-002",
+    "UT-SID-010..019",
+    "UT-SID-020..029",
+    "UT-SID-030..039",
+    "UT-GRAPH-001..019"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-gates test",
+      "exit": 0,
+      "note": "supplement 1: 60 tests pass (symlink, showAtBase, root-file assertions added inside UT-GATE-004/016/029/040)"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-gates typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-si-docs typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-si-docs test",
+      "exit": 0,
+      "note": "32 tests"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-graph typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-graph test",
+      "exit": 0,
+      "note": "19 tests"
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "note": "supplement 1: still exit 1, 8 errors, all in packages/design-tokens/src/{tokens,typography}.css (Tailwind syntax parse/format) outside T-00-05 allowed_paths; T0 to hand to design-tokens owner. biome ci on tools/gates, tools/si-docs, tools/graph, .github = 0 errors"
+    },
+    {
+      "cmd": "npx biome ci tools/gates tools/si-docs tools/graph",
+      "exit": 0,
+      "note": "0 errors, 0 warnings on all T-00-05 paths"
+    },
+    {
+      "cmd": "node tools/gates/check-gate-selftest.mjs --allow-missing",
+      "exit": 0,
+      "note": "checked check:boundaries; 18 gates skipped(missing) until T-00-06"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1 --warn-only --allow-missing",
+      "exit": 0,
+      "note": "selftest PASS, check:boundaries PASS (223 files), check:deps/tsconfig-paths/security skipped(missing)"
+    },
+    {
+      "cmd": "node tools/gates/check-boundaries.mjs --engine=both --json",
+      "exit": 0,
+      "note": "real repo: 223 files, 0 errors, 0 warnings (tsgo module resolution works in the pnpm workspace)"
+    },
+    {
+      "cmd": "tsx tools/si-docs/src/cli.ts reports --int INT-1a --out <tmp> --in <tmp>/in",
+      "exit": 0,
+      "note": "RTM (329 requirements), UTR, ITR generated into tmp only; rtm.json in <tmp>/in"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-05",
+      "exit": null,
+      "skipped": "gate-not-yet-present"
+    },
+    {
+      "cmd": "supplement 1 re-run: typecheck gates/si-docs/graph; tool-si-docs test (32); tool-graph test (19); check-gate-selftest --allow-missing; run-gates --stage=g1 --warn-only --allow-missing; check-boundaries --engine=both",
+      "exit": 0
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "tools/gates/lib/jsonc.mjs added (readJsonc implementation) because biome noImportCycles rejects common.mjs <-> units.mjs; common.mjs still exports readJsonc as a const alias, so the Brief API is unchanged.",
+    "lib/walk.mjs additionally exports isExcludedPath() and SELFTEST_FILES (used by the tsgo engine and selftest); git.changedFiles() runs git diff --name-only --no-renames so both rename sides appear when base != HEAD.",
+    "fixtures/check-boundaries/*/tsconfig.json: besides \"types\": [] it adds \"tests\" to include (otherwise the tsgo engine cannot see tests/x.spec.ts and could not match the expected set exactly) and carries a leading // ported-from comment (JSONC).",
+    "fr-iteration.json: the T-00-01 seed shape is {assignments:{<id>:{first_int,ints,notes}}}, which is not one of the two Brief shapes (array | {requirements}). si-docs accepts it as a third shape instead of exiting 2; any other shape still exits 2 with ambiguity.",
+    "si/id-location: IT ids are also allowed in apps/cli|packages|tools test/integration and in tools/gates/test/*.test.mjs (T-00-01 IT-655~659 live in tools/gates/test/workspace.test.mjs, band 650~699).",
+    "titles.ts call regex adds a (?<![.\\w$]) lookbehind and skips comment-only lines so regex .test(...) calls and commented examples are not read as test titles; my own test sources therefore write embedded fake tests as IT( / TEST( and convert them at runtime.",
+    "pgm.ts evaluates each {a,b} brace alternative separately (partial when only some exist); dod.ts expands SEC-CT-001~299 into the real TST 11.2 bands and treats partially present ID sets as FAIL.",
+    "ci-build.yml writes PLAYWRIGHT_BROWSERS_PATH via $GITHUB_ENV in the pnpm step (the runner context is not available in workflow/job env); live-smoke.yml adds an optional string input task (default all) for ai:record and passes inputs through env vars.",
+    "run-gates forwards --allow-missing to the selftest only when given itself; the selftest script is resolved in --gates-dir like every other gate.",
+    "SUPPLEMENT 1 (major) isMain(): compares realpathSync(argv[1]) with realpathSync(fileURLToPath(import.meta.url)); false on resolution failure; comment corrected. Same realpath check (local isEntry()) added to tools/si-docs/src/cli.ts and tools/graph/src/cli.ts. Regression assertions (symlinked gate dir: violations exit 1, missing root exit 2, clean exit 0; run-gates via symlink != 0; si-docs/graph cli via symlink exit 2) added inside existing UT-GATE-004, UT-SID-036, UT-GRAPH-014 because the Brief test-ID band has no free UT-GATE-01x id.",
+    "SUPPLEMENT 1 finish(): no longer calls process.exit(); only sets process.exitCode so piped stdout drains (macOS). si-docs/graph cli entry likewise uses process.exitCode.",
+    "SUPPLEMENT 1 git.showAtBase(): verifies the ref first (git rev-parse --verify --quiet <base>^{commit}) -> engine/git on failure; returns null only when stderr says path does not exist in / exists on disk, but not in; any other git failure -> engine/git. Asserted in UT-GATE-016.",
+    "SUPPLEMENT 1 check-boundaries: files outside any unit (root vitest.config.ts, playwright.config.ts, vitest.workspace.ts) now get boundary/cross-service-import for services/* and apps/* targets (packages/*, builtins, externals allowed). Fixtures clean/ and violations/ gained vitest.workspace.ts (added to the fixture tsconfig include so the tsgo engine sees it); asserted in UT-GATE-029.",
+    "SUPPLEMENT 1 ci-build.yml unit step now does mkdir -p .reports/$FATHOM_INT and writes .reports/$FATHOM_INT/ut.json (Brief 4.2 row 7 text said .reports/ut.json; si-docs reads <in>/ut.json with in=.reports/<INT>). Asserted in UT-GATE-040. T1 should update Brief 4.2 row 7 wording to match."
+  ],
+  "escalations": [
+    {
+      "type": "ambiguity",
+      "detail": "fr-iteration.json seed shape {assignments:{...}} is outside the two shapes listed in Brief 4.3.6; handled leniently (see deviations). T1 should either bless the shape in the Brief or ask T-00-01 to reseed."
+    },
+    {
+      "type": "ambiguity",
+      "detail": "UNRESOLVED (T1/T0 decision, not changed): parseIteration still accepts the {assignments:{...}} shape (UT-SID-022). Either bless it in Brief 4.3.6/appendix, or re-seed fr-iteration.json in T-00-01 and remove the branch and its assertion."
+    },
+    {
+      "type": "scope",
+      "detail": "pnpm lint exit 1 only from packages/design-tokens/src/{tokens,typography}.css (8 errors, outside allowed_paths); hand to the design-tokens owner (enable tailwindDirectives in the CSS parser or reformat) before G1 re-run."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-10",
+      "pgm": "PGM-GATE-001",
+      "req": [
+        "NFR-MAINT-001"
+      ],
+      "tests": [
+        "UT-GATE-001",
+        "UT-GATE-005",
+        "UT-GATE-010..019"
+      ]
+    },
+    {
+      "wp": "WP-00-10",
+      "pgm": "PGM-GATE-002",
+      "req": [
+        "NFR-MAINT-001",
+        "NFR-MAINT-002",
+        "NFR-MAINT-003",
+        "QAS-20"
+      ],
+      "tests": [
+        "UT-GATE-004",
+        "UT-GATE-020..032"
+      ]
+    },
+    {
+      "wp": "WP-00-10",
+      "pgm": "PGM-GATE-003",
+      "req": [
+        "PR-005"
+      ],
+      "tests": [
+        "UT-GATE-003",
+        "UT-GATE-033..039"
+      ]
+    },
+    {
+      "wp": "WP-00-10",
+      "pgm": "PGM-GATE-004",
+      "req": [
+        "AP-15"
+      ],
+      "tests": [
+        "UT-GATE-002",
+        "UT-GATE-042..049"
+      ]
+    },
+    {
+      "wp": "WP-00-12",
+      "pgm": "PGM-SYS-102",
+      "req": [
+        "NFR-PORT-001",
+        "NFR-MAINT-009",
+        "AQ-15"
+      ],
+      "tests": [
+        "UT-GATE-040",
+        "UT-GATE-041"
+      ]
+    },
+    {
+      "wp": "WP-00-23",
+      "pgm": "PGM-SID-001",
+      "req": [
+        "UR-07",
+        "PR-018",
+        "NFR-MAINT-011"
+      ],
+      "tests": [
+        "UT-SID-001",
+        "UT-SID-010..029"
+      ]
+    },
+    {
+      "wp": "WP-00-23",
+      "pgm": "PGM-SID-002",
+      "req": [
+        "UR-07"
+      ],
+      "tests": [
+        "UT-SID-030..039"
+      ]
+    },
+    {
+      "wp": "WP-00-23",
+      "pgm": "PGM-SID-003",
+      "req": [
+        "UR-07"
+      ],
+      "tests": [
+        "UT-SID-002",
+        "UT-SID-030..039"
+      ]
+    },
+    {
+      "wp": "WP-00-23",
+      "pgm": "PGM-SID-004",
+      "req": [
+        "DR-028"
+      ],
+      "tests": [
+        "UT-SID-020..029"
+      ]
+    },
+    {
+      "wp": "WP-00-23",
+      "pgm": "PGM-GRAPH-001",
+      "req": [
+        "UR-09",
+        "PR-008"
+      ],
+      "tests": [
+        "UT-GRAPH-001..019"
+      ]
+    }
+  ],
+  "notes": "Real repo check:boundaries --engine=both = 223 files, 0 violations; run-gates g1 --warn-only --allow-missing exit 0 (only boundaries + selftest exist until T-00-06; plain run-gates without --allow-missing exits 2 by design). Workflows (ci-build/ci-matrix/live-smoke) are GitHub-only and were NOT executed here; their structure is asserted by UT-GATE-040/041 and was parsed once with a transient yaml parser. SP-7 -> gates changes: exit-2 contract for engine failure/0 files/missing units/tsconfig, no silent tokens downgrade, 16 rules driven by config/boundaries.json, lexer/regex engines removed, unit tests added. pnpm lint is red only because of other tasks files (see commands). si:ids on the real repo reports pre-existing duplicate/no-id titles in packages/testkit tests (T-00-02), none in this Task paths."
+}

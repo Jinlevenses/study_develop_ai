@@ -1,0 +1,5 @@
+version: ai_policy@v1
+default_mode: OFFLINE
+timeouts_ms:
+  judge: 20000
+  generate: 60000

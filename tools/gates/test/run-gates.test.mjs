@@ -175,7 +175,7 @@ test('UT-GATE-034 --warn-only는 위반 exit 1을 0으로 바꾸되 엔진 고�
   }
 });
 
-test('UT-GATE-035 단계는 누적이다(g1 ⊂ g2 ⊂ g3) 그리고 g1에서만 selftest를 가장 먼저 실행한다 [PR-005][NFR-MAINT-001]', () => {
+test('UT-GATE-035 단계는 누적이다(g1 ⊂ g2 ⊂ g3) 그리고 매 실행마다 selftest를 가장 먼저 실행한다 [PR-005][NFR-MAINT-001]', () => {
   const sb = sandbox([G1, G2, G3]);
   try {
     const names = (r) => r.calls.map((c) => c.script);
@@ -364,6 +364,9 @@ test('UT-GATE-040 ci-build.yml은 offline 래퍼·audit fail-closed·게이트 g
   assert.ok(y.indexOf('unshare --net') < y.indexOf('run-gates.mjs --stage=g3'), 'offline 래퍼 정의가 gates 앞');
   assert.match(y, /--warn-only/);
   assert.match(y, /FATHOM_INT/);
+  // si:reports 는 .reports/<INT>/{ut,ct,it,sec}.json 을 읽는다 — UT 결과도 같은 위치(아니면 UT 매핑 요구가 모두 untested)
+  assert.match(y, /--outputFile\.json="\.reports\/\$FATHOM_INT\/ut\.json"/);
+  assert.ok(!/outputFile\.json=\.reports\/ut\.json/.test(y), 'ut.json 은 .reports/ 직하가 아니라 .reports/<INT>/ 아래');
 });
 
 test('UT-GATE-041 ci-matrix.yml은 3 OS x 2 Node 매트릭스이고 live-smoke.yml은 workflow_dispatch만 쓴다 [NFR-PORT-001][NFR-MAINT-009]', () => {

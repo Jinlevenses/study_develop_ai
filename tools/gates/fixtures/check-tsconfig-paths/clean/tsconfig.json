@@ -1,0 +1,9 @@
+{
+  // 루트 tsconfig — JSONC: 주석과 끝 쉼표를 허용한다
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    /* paths 대신 패키지 exports를 쓴다 */
+    "noEmit": true,
+  },
+  "include": ["apps/*/src", "services/*/src", "packages/*/src",],
+}

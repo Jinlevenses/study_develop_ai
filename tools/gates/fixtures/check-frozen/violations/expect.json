@@ -1,0 +1,32 @@
+[
+  {
+    "file": "docs/a.md",
+    "line": 0,
+    "rule": "frozen/changed-without-trailer"
+  },
+  {
+    "file": "docs/gone.md",
+    "line": 0,
+    "rule": "frozen/missing"
+  },
+  {
+    "file": "frozen.lock",
+    "line": 0,
+    "rule": "frozen/lock-edit"
+  },
+  {
+    "file": "docs/pending/x.md",
+    "line": 0,
+    "rule": "frozen/pending-not-owner"
+  },
+  {
+    "file": "packages/contracts/.snapshots/events/destr.v1.json",
+    "line": 0,
+    "rule": "frozen/destructive-without-adr"
+  },
+  {
+    "file": "packages/contracts/.snapshots/events/add.v1.json",
+    "line": 0,
+    "rule": "frozen/additive-without-cr"
+  }
+]

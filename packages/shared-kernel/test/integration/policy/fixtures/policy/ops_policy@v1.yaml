@@ -1,0 +1,6 @@
+version: ops_policy@v1
+backup:
+  daily_keep: 7
+  epoch_keep: 4
+doctor:
+  warn_free_disk_mb: 2048

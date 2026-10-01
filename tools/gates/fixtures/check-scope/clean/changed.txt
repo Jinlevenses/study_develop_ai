@@ -1,0 +1,8 @@
+# 변경 파일 목록(줄당 1개)
+tools/gates/check-a.mjs
+tools/gates/check-b.mjs
+tools/gates/config/a.json
+packages/contracts/src/events/registry.gen.ts
+packages/contracts/src/events/routing.gen.ts
+packages/contracts/src/http/x.ts
+docs/40-impl/reports/tasks/T-00-06.json

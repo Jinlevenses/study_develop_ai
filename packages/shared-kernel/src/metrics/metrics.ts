@@ -22,8 +22,20 @@ const LABEL_NAME_PATTERN = /^[a-zA-Z_][a-zA-Z0-9_]*$/;
 
 type HistogramSeries = { readonly bucketCounts: number[]; sum: number; count: number };
 
-type CounterEntry = { kind: 'counter'; help: string; labelNames: readonly string[]; series: Map<string, number>; api: Counter };
-type GaugeEntry = { kind: 'gauge'; help: string; labelNames: readonly string[]; series: Map<string, number>; api: Gauge };
+type CounterEntry = {
+  kind: 'counter';
+  help: string;
+  labelNames: readonly string[];
+  series: Map<string, number>;
+  api: Counter;
+};
+type GaugeEntry = {
+  kind: 'gauge';
+  help: string;
+  labelNames: readonly string[];
+  series: Map<string, number>;
+  api: Gauge;
+};
 type HistogramEntry = {
   kind: 'histogram';
   help: string;
@@ -184,10 +196,7 @@ export function createMetrics(): MetricsRegistry {
       throw new Error(`invariant: histogram ${name} must not declare label le`);
     }
     const sorted = [...buckets].sort((a, b) => a - b);
-    if (
-      sorted.length === 0 ||
-      sorted.some((b, i) => !Number.isFinite(b) || (i > 0 && b === sorted[i - 1]))
-    ) {
+    if (sorted.length === 0 || sorted.some((b, i) => !Number.isFinite(b) || (i > 0 && b === sorted[i - 1]))) {
       throw new Error(`invariant: histogram ${name} buckets must be non-empty, finite and distinct`);
     }
     const existing = entries.get(name);

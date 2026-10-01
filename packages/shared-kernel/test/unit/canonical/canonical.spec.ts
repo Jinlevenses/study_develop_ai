@@ -16,9 +16,7 @@ describe('canonical', () => {
     expect(canonicalJson(-0)).toBe('0');
     expect(canonicalJson([-0, 1.5, 100])).toBe('[0,1.5,100]');
     // Assert: UTF-16 코드 단위 순서
-    expect(canonicalJson({ b: 1, a: 2, B: 3, '가': 4, '\u{1F600}': 5 })).toBe(
-      '{"B":3,"a":2,"b":1,"가":4,"\u{1F600}":5}',
-    );
+    expect(canonicalJson({ b: 1, a: 2, B: 3, 가: 4, '\u{1F600}': 5 })).toBe('{"B":3,"a":2,"b":1,"가":4,"\u{1F600}":5}');
     expect(canonicalJson('line\n"q"')).toBe('"line\\n\\"q\\""');
   });
 

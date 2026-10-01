@@ -1,0 +1,13 @@
+{
+  "name": "@fathom/svc-a",
+  "dependencies": {
+    "@fathom/contracts": "workspace:*",
+    "@fathom/shared-kernel": "workspace:*",
+    "fastify": "5.12.5"
+  },
+  "devDependencies": {
+    "@fathom/testkit": "workspace:*",
+    "vitest": "5.0.2",
+    "@types/node": "22.20.4"
+  }
+}

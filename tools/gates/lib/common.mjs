@@ -1,7 +1,7 @@
-// ported-from: spikes/sp7-static-gates/src/lib/common.mjs (audit-fixed: 엔진 예외 → exit 2, 스캔 0파일 → exit 2, isMain Windows 대응, process.exit 단일 지점, severity 필드)
-import { statSync } from 'node:fs';
+// ported-from: spikes/sp7-static-gates/src/lib/common.mjs (audit-fixed: 엔진 예외 → exit 2, 스캔 0파일 → exit 2, isMain realpath 비교, 종료 코드 단일 지점(process.exitCode), severity 필드)
+import { realpathSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { GateEngineError } from './errors.mjs';
 import { readJsonc as readJsoncImpl } from './jsonc.mjs';
 import { formatJson, formatText } from './report.mjs';
@@ -71,7 +71,11 @@ function normalize(violations) {
   return out;
 }
 
-/** (내부) 결과를 출력하고 종료 코드를 설정한다. process.exit 호출은 이 한 곳(STD-ERR-20). */
+/**
+ * (내부) 결과를 출력하고 종료 코드를 설정한다. 종료 코드 설정은 이 한 곳(STD-ERR-20).
+ * process.exit()를 부르지 않는다: 파이프 stdout 쓰기는 비동기일 수 있어(macOS) 즉시 종료하면 큰 --json 줄이 잘린다.
+ * 이벤트 루프가 비워질 때 Node가 process.exitCode로 종료한다.
+ */
 function finish(id, { json, quiet }, result) {
   if (json) {
     process.stdout.write(`${formatJson(id, result)}\n`);
@@ -81,7 +85,6 @@ function finish(id, { json, quiet }, result) {
     process.stdout.write(`${formatText(id, result, { quiet })}\n`);
   }
   process.exitCode = result.exit;
-  process.exit(result.exit);
 }
 
 function lenientOutput(argv) {
@@ -173,8 +176,19 @@ export function snake(id) {
     .toLowerCase();
 }
 
-/** 이 모듈이 진입점으로 실행됐는가(Windows 경로·심볼릭 링크 안전). */
+/**
+ * 이 모듈이 진입점으로 실행됐는가. import.meta.url은 realpath이고 process.argv[1]은 심볼릭 링크·8.3 단축 이름을
+ * 그대로 유지할 수 있으므로 양쪽을 realpath로 정규화해 비교한다(그렇지 않으면 링크 경유 실행이 침묵 exit 0이 된다).
+ * 경로 해석 실패 → false.
+ */
 export function isMain(importMetaUrl) {
   const entry = process.argv[1];
-  return typeof entry === 'string' && importMetaUrl === pathToFileURL(path.resolve(entry)).href;
+  if (typeof entry !== 'string') {
+    return false;
+  }
+  try {
+    return realpathSync(path.resolve(entry)) === realpathSync(fileURLToPath(importMetaUrl));
+  } catch {
+    return false;
+  }
 }

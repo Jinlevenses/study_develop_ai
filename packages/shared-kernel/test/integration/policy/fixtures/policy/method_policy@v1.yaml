@@ -1,0 +1,10 @@
+# 테스트용 fixture — 학습 방법 정책
+version: method_policy@v1
+tracks:
+  - concept
+  - practice
+  - drill
+weights:
+  concept: 0.4
+  practice: 0.35
+  drill: 0.25

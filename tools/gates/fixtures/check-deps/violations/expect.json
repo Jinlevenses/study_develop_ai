@@ -1,0 +1,107 @@
+[
+  {
+    "file": "package.json",
+    "line": 5,
+    "rule": "deps/version-mismatch"
+  },
+  {
+    "file": "package.json",
+    "line": 5,
+    "rule": "deps/range-spec"
+  },
+  {
+    "file": "package.json",
+    "line": 6,
+    "rule": "deps/forbidden"
+  },
+  {
+    "file": "package.json",
+    "line": 7,
+    "rule": "deps/not-allowed"
+  },
+  {
+    "file": "packages/contracts/package.json",
+    "line": 4,
+    "rule": "deps/workspace-unit"
+  },
+  {
+    "file": "packages/contracts/package.json",
+    "line": 5,
+    "rule": "deps/unit-not-allowed"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 4,
+    "rule": "deps/workspace-spec"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 5,
+    "rule": "deps/workspace-unit"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 6,
+    "rule": "deps/testkit-runtime"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 7,
+    "rule": "deps/dev-only-runtime"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 8,
+    "rule": "deps/unit-not-allowed"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 9,
+    "rule": "deps/typescript-local"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 10,
+    "rule": "deps/version-mismatch"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 11,
+    "rule": "deps/unit-not-allowed"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 11,
+    "rule": "deps/version-mismatch"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 11,
+    "rule": "deps/range-spec"
+  },
+  {
+    "file": "services/b/package.json",
+    "line": 4,
+    "rule": "deps/forbidden"
+  },
+  {
+    "file": "services/b/package.json",
+    "line": 5,
+    "rule": "deps/forbidden"
+  },
+  {
+    "file": "services/ai-gateway/src/other.ts",
+    "line": 1,
+    "rule": "deps/import-location"
+  },
+  {
+    "file": "services/ai-gateway/src/infra/providers/leak.ts",
+    "line": 1,
+    "rule": "deps/import-location"
+  },
+  {
+    "file": "services/a/package.json",
+    "line": 9,
+    "rule": "deps/dev-only-runtime"
+  }
+]

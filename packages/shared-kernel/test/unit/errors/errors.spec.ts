@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { AppError, assertDefined, assertNever, err, ok } from '../../../src/errors/errors.js';
 import type { ErrorCodeString } from '../../../src/errors/errors.js';
+import { AppError, assertDefined, assertNever, err, ok } from '../../../src/errors/errors.js';
 
 describe('errors', () => {
   it('UT-SK-020 ok·err가 판별 유니온을 만든다 [NFR-MAINT-002]', () => {

@@ -1,0 +1,3 @@
+version: ldi_params@v1
+alpha: 0.05
+window_days: 14

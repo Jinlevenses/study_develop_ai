@@ -107,6 +107,12 @@ export function evaluateImport(imp, cfg) {
       'boundary/spikes-import',
       `${fromRel} imports spikes/** via "${spec}" (${kind}); port by copy instead (STD-DIR-07)`,
     );
+  } else if (own === null && tgt && (tgt.startsWith('services/') || tgt.startsWith('apps/'))) {
+    // 단위 밖 파일(루트 vitest.config.ts·playwright.config.ts 등)은 packages/* 만 허용 — 서비스·앱 import 는 전 파일 규칙(Brief 4.1.3)
+    add(
+      'boundary/cross-service-import',
+      `${fromRel} (outside any unit) imports ${tgt} via "${spec}" (${kind}); only packages/* allowed`,
+    );
   } else if (own && tgt && tgt !== 'builtin' && tgt !== 'external' && tgt !== own) {
     if (tgt === cfg.test_only.unit) {
       if (!matchAny(fromRel, cfg.test_only.allowed_from)) {

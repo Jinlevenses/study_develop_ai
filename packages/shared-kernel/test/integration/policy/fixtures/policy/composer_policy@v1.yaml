@@ -1,0 +1,5 @@
+version: composer_policy@v1
+session:
+  max_items: 20
+  min_items: 5
+  interleave: true

@@ -1,0 +1,4 @@
+version: gaming_params@v1
+fast_answer_ms: 800
+streak_limit: 12
+penalty: -0.25

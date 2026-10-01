@@ -1,0 +1,14 @@
+/* typo-ko 위반 */
+body.x { word-break: break-all; } /* EXPECT[typo-ko/keep-all] */
+.a { word-break: normal; } /* EXPECT[typo-ko/keep-all] */
+.break-code, pre { word-break: normal; }
+.em { font-style: italic; } /* EXPECT[typo-ko/no-italic] */
+.u { text-transform: uppercase; } /* EXPECT[design/no-uppercase] */
+.px { margin: 12px; } /* EXPECT[typo-ko/px-literal] */
+.h { margin: 1px 0px; }
+.small { font-size: 10px; } /* EXPECT[typo-ko/body-min] EXPECT[typo-ko/px-literal] */
+@media (min-width: 640px) { .m { padding: 3.5px; } } /* EXPECT[typo-ko/px-literal] */
+/* biome-ignore lint/plugin: 사유 있는 예외 */
+.ok { font-style: italic; }
+/* biome-ignore lint/plugin: */
+.bad { font-style: italic; } /* EXPECT[typo-ko/no-italic] */

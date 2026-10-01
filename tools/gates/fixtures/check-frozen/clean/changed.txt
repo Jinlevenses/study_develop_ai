@@ -1,0 +1,3 @@
+# 변경 파일
+docs/pending/x.md
+docs/changing.md

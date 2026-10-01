@@ -104,7 +104,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          "$RUNNER_TEMP/offline.sh" pnpm test:coverage -- --reporter=default --reporter=json --outputFile.json=.reports/ut.json
+          mkdir -p ".reports/$FATHOM_INT"
+          "$RUNNER_TEMP/offline.sh" pnpm test:coverage -- --reporter=default --reporter=json --outputFile.json=".reports/$FATHOM_INT/ut.json"
           "$RUNNER_TEMP/offline.sh" pnpm test:determinism
 
       # 8. contract (offline)

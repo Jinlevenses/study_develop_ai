@@ -1,0 +1,143 @@
+{
+  "nodes": [
+    {
+      "id": "a",
+      "label": "Alpha",
+      "file_type": "code",
+      "source_file": "services/a/src/a.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "b",
+      "label": "Beta",
+      "file_type": "code",
+      "source_file": "services/a/src/b.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "c",
+      "label": "Gamma",
+      "file_type": "code",
+      "source_file": "services/a/src/c.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "d",
+      "label": "Delta",
+      "file_type": "code",
+      "source_file": "services/a/src/d.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_x",
+      "label": "external",
+      "file_type": "code",
+      "source_file": "services/a/src/ext.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "p",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "services/a/package.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "e",
+      "label": "Alpha",
+      "file_type": "code",
+      "source_file": "services/b/src/a2.ts",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "a",
+      "target": "b",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "a",
+      "target": "c",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "a",
+      "target": "d",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "a",
+      "target": "ref_x",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "a",
+      "target": "p",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "b",
+      "target": "c",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "b",
+      "target": "ref_x",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "e",
+      "target": "a",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "e",
+      "target": "b",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "d",
+      "target": "c",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "ref_x",
+      "target": "p",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    }
+  ]
+}

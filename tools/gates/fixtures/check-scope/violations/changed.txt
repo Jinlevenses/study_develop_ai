@@ -1,0 +1,8 @@
+tools/gates/check-a.mjs
+outside/file.txt
+graphify-out/graph.json
+spikes/sp1/x.ts
+packages/contracts/src/events/other.gen.ts
+packages/contracts/.snapshots/events/x.v1.json
+docs/40-impl/reports/tasks/T-00-06.json
+docs/40-impl/reports/tasks/T-00-07.json

@@ -1,0 +1,198 @@
+{
+  "nodes": [
+    {
+      "id": "svc_a_x",
+      "label": "x.ts",
+      "file_type": "code",
+      "source_file": "services/a/src/x.ts",
+      "source_location": "L1",
+      "community": 0
+    },
+    {
+      "id": "svc_a_y",
+      "label": "y.ts",
+      "file_type": "code",
+      "source_file": "services/a/src/y.ts",
+      "source_location": "L1",
+      "community": 0
+    },
+    {
+      "id": "svc_b_y",
+      "label": "y.ts",
+      "file_type": "code",
+      "source_file": "services/b/src/y.ts",
+      "source_location": "L1",
+      "community": 1
+    },
+    {
+      "id": "svc_b_z",
+      "label": "z.ts",
+      "file_type": "code",
+      "source_file": "services/b/src/z.ts",
+      "source_location": "L1",
+      "community": 1
+    },
+    {
+      "id": "web_app",
+      "label": "app.ts",
+      "file_type": "code",
+      "source_file": "apps/web/src/app.ts",
+      "source_location": "L1",
+      "community": 2
+    },
+    {
+      "id": "pkg_c",
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "packages/contracts/src/index.ts",
+      "source_location": "L1",
+      "community": 2
+    },
+    {
+      "id": "ref_zod",
+      "label": "zod",
+      "file_type": "code",
+      "source_file": "services/a/package.json",
+      "source_location": "L1",
+      "community": 2
+    },
+    {
+      "id": "pkg_json",
+      "label": "package.json",
+      "file_type": "code",
+      "source_file": "services/a/package.json",
+      "source_location": "L1",
+      "community": 0
+    },
+    {
+      "id": "tools_x",
+      "label": "x.mjs",
+      "file_type": "code",
+      "source_file": "tools/gates/x.mjs",
+      "source_location": "L1",
+      "community": 3
+    },
+    {
+      "id": "tests_t",
+      "label": "t.spec.ts",
+      "file_type": "code",
+      "source_file": "tests/x.spec.ts",
+      "source_location": "L1",
+      "community": 3
+    },
+    {
+      "id": "lonely",
+      "label": "lonely.ts",
+      "file_type": "code",
+      "source_file": "services/b/src/lonely.ts",
+      "source_location": "L1",
+      "community": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "svc_a_x",
+      "target": "svc_b_y",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "svc_b_y",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L9",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_y",
+      "target": "svc_b_z",
+      "relation": "dynamic_import",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "web_app",
+      "target": "svc_a_x",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_b_z",
+      "target": "web_app",
+      "relation": "re_exports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "pkg_c",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "ref_zod",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "pkg_json",
+      "target": "svc_b_y",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "svc_a_y",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "svc_b_y",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "tools_x",
+      "target": "svc_a_x",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "svc_b_y",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    },
+    {
+      "source": "svc_a_x",
+      "target": "svc_a_x",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_location": "L1",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+@ECHO off
+SETLOCAL
+SET dp0=%~dp0
+"%dp0%\node_modules\@anthropic-ai\claude-code\bin\claude.exe" %*

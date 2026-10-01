@@ -1,0 +1,37 @@
+[
+  {
+    "file": "outside/file.txt",
+    "line": 0,
+    "rule": "scope/outside-allowed"
+  },
+  {
+    "file": "graphify-out/graph.json",
+    "line": 0,
+    "rule": "scope/graphify-out"
+  },
+  {
+    "file": "spikes/sp1/x.ts",
+    "line": 0,
+    "rule": "scope/spikes"
+  },
+  {
+    "file": "packages/contracts/src/events/other.gen.ts",
+    "line": 0,
+    "rule": "scope/generated"
+  },
+  {
+    "file": "packages/contracts/.snapshots/events/x.v1.json",
+    "line": 0,
+    "rule": "scope/outside-allowed"
+  },
+  {
+    "file": "packages/contracts/.snapshots/events/x.v1.json",
+    "line": 0,
+    "rule": "scope/generated"
+  },
+  {
+    "file": "docs/40-impl/reports/tasks/T-00-07.json",
+    "line": 0,
+    "rule": "scope/outside-allowed"
+  }
+]

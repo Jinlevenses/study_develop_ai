@@ -1,0 +1,6 @@
+version: gate_thresholds@v1
+gates:
+  accuracy: 0.8
+  cbm: 0.6
+  days: 14
+label: "승급 문턱"

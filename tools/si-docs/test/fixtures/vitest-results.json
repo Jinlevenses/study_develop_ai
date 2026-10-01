@@ -1,0 +1,39 @@
+{
+  "numTotalTests": 4,
+  "testResults": [
+    {
+      "name": "/repo/services/learning/test/unit/ledger/x.spec.ts",
+      "status": "failed",
+      "assertionResults": [
+        {
+          "title": "UT-LR-012 같은 verdict 재수신은 원장 삽입 0건 [FR-PRG-001][NFR-DATA-013]",
+          "fullName": "ledger UT-LR-012 …",
+          "status": "passed",
+          "duration": 12.5,
+          "failureMessages": []
+        },
+        {
+          "title": "UT-LR-013 순서 뒤바뀜 [FR-PRG-001]",
+          "fullName": "ledger UT-LR-013 …",
+          "status": "failed",
+          "duration": 3,
+          "failureMessages": ["AssertionError: expected 1 to be 2\n    at x.spec.ts:10"]
+        },
+        {
+          "title": "UT-LR-014 건너뜀 [FR-PRG-001]",
+          "fullName": "ledger UT-LR-014 …",
+          "status": "skipped",
+          "duration": 0,
+          "failureMessages": []
+        },
+        {
+          "title": "제목에 ID 없음",
+          "fullName": "ledger 제목에 ID 없음",
+          "status": "pending",
+          "duration": 0,
+          "failureMessages": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "@fathom/svc-ai-gateway",
+  "dependencies": {
+    "@typesafe-ai/sdk": "0.6.0",
+    "@anthropic-ai/sdk": "0.129.0"
+  }
+}

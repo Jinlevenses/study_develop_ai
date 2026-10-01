@@ -1,0 +1,13 @@
+{
+  "name": "@fathom/svc-a",
+  "dependencies": {
+    "@fathom/contracts": "1.0.0",
+    "@fathom/svc-b": "workspace:*",
+    "@fathom/testkit": "workspace:*",
+    "vitest": "5.0.2",
+    "ts-fsrs": "5.4.2",
+    "typescript": "7.0.2",
+    "zod": "4.6.4",
+    "pino": "latest"
+  }
+}

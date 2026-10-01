@@ -1,0 +1,6 @@
+docs/a.md
+frozen.lock
+docs/pending/x.md
+packages/contracts/.snapshots/events/destr.v1.json
+packages/contracts/.snapshots/events/add.v1.json
+packages/contracts/.snapshots/events/new.v1.json

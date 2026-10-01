@@ -1,0 +1,6 @@
+{
+  "name": "@fathom/shared-kernel",
+  "dependencies": {
+    "@fathom/contracts": "workspace:*"
+  }
+}

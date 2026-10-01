@@ -1,0 +1,11 @@
+{
+  "name": "@fathom/web",
+  "private": true,
+  "dependencies": {
+    "react": "^19.3.0",
+    "zod": "^4.6.5",
+    "canvas-confetti": "^1.9.0", "//1": "EXPECT[ng-g1/reward-vocab]",
+    "web-push": "^3.6.0", "//2": "EXPECT[ng-g5/push-api]",
+    "react-player": "^2.16.0", "//3": "EXPECT[ng-g6/video]"
+  }
+}

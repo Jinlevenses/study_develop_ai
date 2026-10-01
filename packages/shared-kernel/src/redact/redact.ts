@@ -56,7 +56,10 @@ function walk(value: unknown, extra: readonly RegExp[] | undefined, depth: numbe
       return value.map((item: unknown): unknown => walk(item, extra, depth + 1, ancestors));
     }
     return Object.fromEntries(
-      Object.keys(value).map((key): [string, unknown] => [key, walk(Reflect.get(value, key), extra, depth + 1, ancestors)]),
+      Object.keys(value).map((key): [string, unknown] => [
+        key,
+        walk(Reflect.get(value, key), extra, depth + 1, ancestors),
+      ]),
     );
   } finally {
     ancestors.delete(value);

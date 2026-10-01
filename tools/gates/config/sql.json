@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "sanctioned_helpers": ["ident", "sqlIdent", "placeholders", "sqlInt"],
+  "receivers": { "types": ["DatabaseSync", "SqlitePort"], "methods": ["prepare", "exec"] },
+  "pragma_allow": ["packages/shared-kernel/src/sqlite/**"],
+  "begin_allow": ["packages/shared-kernel/src/sqlite/**"],
+  "like_scope": ["services/content/src/**"],
+  "outbox_allow": ["packages/shared-kernel/src/eventing/**"],
+  "db_files": {
+    "content.db": "services/content",
+    "learning.db": "services/learning",
+    "insight.db": "services/learning",
+    "ai.db": "services/ai-gateway",
+    "ai-cache.db": "services/ai-gateway",
+    "ops.db": "services/ops"
+  },
+  "db_paths_exempt": ["packages/testkit/**"],
+  "ledger": { "table": "lr_event", "writer": "services/learning/src/infra/ledger/ledger-writer.ts" },
+  "content_ingest": {
+    "serving_tables": [
+      "ct_artifact_task",
+      "ct_blueprint",
+      "ct_blueprint_item",
+      "ct_blueprint_map",
+      "ct_case",
+      "ct_concept",
+      "ct_concept_edge",
+      "ct_id_alias",
+      "ct_ku",
+      "ct_lab",
+      "ct_layout",
+      "ct_misconception",
+      "ct_overlay_head",
+      "ct_pack",
+      "ct_pack_active",
+      "ct_pack_delta",
+      "ct_path",
+      "ct_record_history",
+      "ct_rubric",
+      "ct_search_doc",
+      "ct_source",
+      "ct_track",
+      "ib_item",
+      "ib_item_model",
+      "ib_install_member",
+      "ib_active_install"
+    ],
+    "writers": [
+      "services/content/src/application/catalog/ingest/**",
+      "services/content/src/application/itembank/ingest/**",
+      "services/content/src/jobs/pack-load.ts",
+      "services/content/src/infra/db/catalog-ingest.sql.ts",
+      "services/content/src/infra/db/itembank-ingest.sql.ts"
+    ],
+    "overlay_tables": ["ct_overlay_head", "ct_search_doc", "ib_item"],
+    "overlay_writers": [
+      "services/content/src/application/catalog/overlay/**",
+      "services/content/src/infra/db/catalog-overlay.sql.ts"
+    ]
+  }
+}

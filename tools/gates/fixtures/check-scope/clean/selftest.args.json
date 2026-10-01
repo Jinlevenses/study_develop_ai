@@ -1,0 +1,6 @@
+[
+  "--task",
+  "T-00-06",
+  "--changed-from",
+  "${CASE}/changed.txt"
+]

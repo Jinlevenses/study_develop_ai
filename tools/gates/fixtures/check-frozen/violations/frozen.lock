@@ -1,0 +1,36 @@
+{
+  "format": "fathom-frozen-lock/1",
+  "baseline": "fixture",
+  "rules": {
+    "change_requires_trailer": [
+      "CR: CR-<nn>",
+      "ADR: ADR-<nnn>"
+    ],
+    "pending_semantics": "fixture"
+  },
+  "files": [
+    {
+      "path": "docs/a.md",
+      "sha256": "14ee0365b0dd4e94f218ca959cf23ba0e729f25cfaca9cb1682c710e63b70d4a",
+      "bytes": 20
+    },
+    {
+      "path": "docs/ok.md",
+      "sha256": "6940e790f91481d457746e4d9d0a122875eda5e4d40071d7b3adde19a0a45794",
+      "bytes": 5
+    },
+    {
+      "path": "docs/gone.md",
+      "sha256": "283bb9deef02e6843abfb538efa1eca70801bd8a701c3f98191e123496339247",
+      "bytes": 4
+    }
+  ],
+  "pending": [
+    {
+      "glob": "docs/pending/**",
+      "owner_task": "T-00-12, T-00-13",
+      "freeze_at": "INT-1a"
+    }
+  ],
+  "excluded": []
+}

@@ -1,0 +1,6 @@
+{
+  "name": "@fathom/contracts",
+  "dependencies": {
+    "zod": "4.6.5"
+  }
+}

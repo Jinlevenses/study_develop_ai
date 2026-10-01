@@ -1,0 +1,12 @@
+[
+  "--lock",
+  "${CASE}/frozen.lock",
+  "--task",
+  "T-00-12",
+  "--changed-from",
+  "${CASE}/changed.txt",
+  "--message-file",
+  "${CASE}/commit-msg.txt",
+  "--base-dir",
+  "${CASE}/base"
+]
