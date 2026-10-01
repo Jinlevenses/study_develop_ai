@@ -13,19 +13,10 @@
       },
       "owner": {
         "type": "string",
-        "enum": [
-          "gateway",
-          "content",
-          "learning",
-          "ai-gateway",
-          "ops-api"
-        ]
+        "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
       }
     },
-    "required": [
-      "sha256",
-      "owner"
-    ],
+    "required": ["sha256", "owner"],
     "additionalProperties": false
   }
 }

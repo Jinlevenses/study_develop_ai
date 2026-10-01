@@ -61,10 +61,7 @@
               "exclusiveMinimum": 0
             }
           },
-          "required": [
-            "top_k",
-            "tau"
-          ],
+          "required": ["top_k", "tau"],
           "additionalProperties": false
         }
       },
@@ -93,9 +90,7 @@
               "maximum": 5
             }
           },
-          "required": [
-            "same_mode_consecutive_max"
-          ],
+          "required": ["same_mode_consecutive_max"],
           "additionalProperties": false
         },
         "HC-02": {
@@ -117,22 +112,11 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "W",
-                  "R",
-                  "N",
-                  "D",
-                  "S",
-                  "C"
-                ]
+                "enum": ["W", "R", "N", "D", "S", "C"]
               }
             }
           },
-          "required": [
-            "min_session_minutes",
-            "modes_min",
-            "short_template_slots"
-          ],
+          "required": ["min_session_minutes", "modes_min", "short_template_slots"],
           "additionalProperties": false
         },
         "HC-03": {
@@ -149,10 +133,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "min_session_minutes",
-            "constructive_interactive_share_min"
-          ],
+          "required": ["min_session_minutes", "constructive_interactive_share_min"],
           "additionalProperties": false
         },
         "HC-04": {
@@ -164,9 +145,7 @@
               "maximum": 72
             }
           },
-          "required": [
-            "requeue_within_h"
-          ],
+          "required": ["requeue_within_h"],
           "additionalProperties": false
         },
         "HC-05": {
@@ -179,10 +158,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "new_blocked",
-            "review_interleaved"
-          ],
+          "required": ["new_blocked", "review_interleaved"],
           "additionalProperties": false
         },
         "HC-06": {
@@ -199,10 +175,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "boss_per_session_max",
-            "last_graded_p_min"
-          ],
+          "required": ["boss_per_session_max", "last_graded_p_min"],
           "additionalProperties": false
         },
         "HC-07": {
@@ -214,9 +187,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "first_item_ms_max"
-          ],
+          "required": ["first_item_ms_max"],
           "additionalProperties": false
         },
         "HC-08": {
@@ -238,11 +209,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "practice_p_min",
-            "practice_p_max",
-            "boss_p"
-          ],
+          "required": ["practice_p_min", "practice_p_max", "boss_p"],
           "additionalProperties": false
         },
         "HC-09": {
@@ -254,9 +221,7 @@
               "maximum": 2
             }
           },
-          "required": [
-            "budget_overrun_max"
-          ],
+          "required": ["budget_overrun_max"],
           "additionalProperties": false
         },
         "HC-10": {
@@ -273,10 +238,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "min_level",
-            "worked_parsons_share_max"
-          ],
+          "required": ["min_level", "worked_parsons_share_max"],
           "additionalProperties": false
         },
         "HC-11": {
@@ -288,25 +250,11 @@
               "maximum": 50
             }
           },
-          "required": [
-            "variant_recent_exclude"
-          ],
+          "required": ["variant_recent_exclude"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "HC-01",
-        "HC-02",
-        "HC-03",
-        "HC-04",
-        "HC-05",
-        "HC-06",
-        "HC-07",
-        "HC-08",
-        "HC-09",
-        "HC-10",
-        "HC-11"
-      ],
+      "required": ["HC-01", "HC-02", "HC-03", "HC-04", "HC-05", "HC-06", "HC-07", "HC-08", "HC-09", "HC-10", "HC-11"],
       "additionalProperties": false
     },
     "entropy": {
@@ -357,11 +305,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "digging",
-            "lab",
-            "blank_note"
-          ],
+          "required": ["digging", "lab", "blank_note"],
           "additionalProperties": false
         },
         "suggest_only_min_level": {
@@ -406,12 +350,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "min_session_minutes",
-        "level_offset",
-        "target_p",
-        "evidence_weight_factor"
-      ],
+      "required": ["min_session_minutes", "level_offset", "target_p", "evidence_weight_factor"],
       "additionalProperties": false
     },
     "peak_end": {
@@ -421,33 +360,17 @@
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "W",
-              "R",
-              "N",
-              "D",
-              "S",
-              "C"
-            ]
+            "enum": ["W", "R", "N", "D", "S", "C"]
           },
           "additionalProperties": {
             "type": "number",
             "minimum": 0,
             "maximum": 1
           },
-          "required": [
-            "W",
-            "R",
-            "N",
-            "D",
-            "S",
-            "C"
-          ]
+          "required": ["W", "R", "N", "D", "S", "C"]
         }
       },
-      "required": [
-        "wave"
-      ],
+      "required": ["wave"],
       "additionalProperties": false
     },
     "wildcard": {
@@ -464,12 +387,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "diagram_only",
-              "one_sentence",
-              "no_jargon",
-              "explain_to_pm"
-            ]
+            "enum": ["diagram_only", "one_sentence", "no_jargon", "explain_to_pm"]
           }
         },
         "suggest_only_min_level": {
@@ -478,22 +396,10 @@
           "maximum": 5
         }
       },
-      "required": [
-        "per_week_min",
-        "constraints",
-        "suggest_only_min_level"
-      ],
+      "required": ["per_week_min", "constraints", "suggest_only_min_level"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "version",
-    "score_weights",
-    "hard_constraints",
-    "entropy",
-    "boss",
-    "peak_end",
-    "wildcard"
-  ],
+  "required": ["version", "score_weights", "hard_constraints", "entropy", "boss", "peak_end", "wildcard"],
   "additionalProperties": false
 }

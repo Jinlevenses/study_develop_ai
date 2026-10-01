@@ -52,10 +52,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "seq",
-          "head_hash"
-        ],
+        "required": ["seq", "head_hash"],
         "additionalProperties": false
       }
     },

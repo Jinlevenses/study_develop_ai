@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/curriculum/export"
     },
     "allowedCallers": {
-      "enum": [
-        "learning"
-      ]
+      "enum": ["learning"]
     },
     "idempotent": {
       "const": false
@@ -29,12 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-025",
-        "FR-PRG-013",
-        "D-4",
-        "D-9"
-      ]
+      "enum": ["FR-CUR-025", "FR-PRG-013", "D-4", "D-9"]
     },
     "deadlineMs": {
       "const": null
@@ -136,12 +129,7 @@
                         "pattern": "^[0-9a-f]{64}$"
                       }
                     },
-                    "required": [
-                      "pack_id",
-                      "track",
-                      "version",
-                      "manifest_hash"
-                    ],
+                    "required": ["pack_id", "track", "version", "manifest_hash"],
                     "additionalProperties": false
                   }
                 },
@@ -151,15 +139,7 @@
                   "maximum": 8640000000000000
                 }
               },
-              "required": [
-                "kind",
-                "v",
-                "version",
-                "full",
-                "pack_set_hash",
-                "packs",
-                "generated_at"
-              ],
+              "required": ["kind", "v", "version", "full", "pack_set_hash", "packs", "generated_at"],
               "additionalProperties": false
             },
             {
@@ -209,20 +189,11 @@
                     },
                     "tier": {
                       "type": "string",
-                      "enum": [
-                        "A",
-                        "B",
-                        "C"
-                      ]
+                      "enum": ["A", "B", "C"]
                     },
                     "knowledge_type": {
                       "type": "string",
-                      "enum": [
-                        "D",
-                        "C",
-                        "P",
-                        "S"
-                      ]
+                      "enum": ["D", "C", "P", "S"]
                     },
                     "title_ko": {
                       "type": "string",
@@ -279,11 +250,7 @@
                     },
                     "volatility": {
                       "type": "string",
-                      "enum": [
-                        "stable",
-                        "evolving",
-                        "volatile"
-                      ]
+                      "enum": ["stable", "evolving", "volatile"]
                     },
                     "tags": {
                       "maxItems": 20,
@@ -324,10 +291,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "concept"
-              ],
+              "required": ["kind", "concept"],
               "additionalProperties": false
             },
             {
@@ -383,19 +347,11 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "case_id",
-                    "tracks",
-                    "level",
-                    "floor"
-                  ],
+                  "required": ["case_id", "tracks", "level", "floor"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "case"
-              ],
+              "required": ["kind", "case"],
               "additionalProperties": false
             },
             {
@@ -476,11 +432,7 @@
                           },
                           "tier": {
                             "type": "string",
-                            "enum": [
-                              "A",
-                              "B",
-                              "C"
-                            ]
+                            "enum": ["A", "B", "C"]
                           },
                           "required_for_level": {
                             "anyOf": [
@@ -501,12 +453,7 @@
                             "type": "object",
                             "propertyNames": {
                               "type": "string",
-                              "enum": [
-                                "FULL",
-                                "JUDGE_ONLY",
-                                "LLM_ONLY",
-                                "OFFLINE"
-                              ]
+                              "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                             },
                             "additionalProperties": {
                               "type": "array",
@@ -549,12 +496,7 @@
                                 ]
                               }
                             },
-                            "required": [
-                              "FULL",
-                              "JUDGE_ONLY",
-                              "LLM_ONLY",
-                              "OFFLINE"
-                            ]
+                            "required": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                           }
                         },
                         "required": [
@@ -572,24 +514,13 @@
                       "type": "object",
                       "propertyNames": {
                         "type": "string",
-                        "enum": [
-                          "1",
-                          "2",
-                          "3",
-                          "4",
-                          "5"
-                        ]
+                        "enum": ["1", "2", "3", "4", "5"]
                       },
                       "additionalProperties": {
                         "type": "object",
                         "propertyNames": {
                           "type": "string",
-                          "enum": [
-                            "FULL",
-                            "JUDGE_ONLY",
-                            "LLM_ONLY",
-                            "OFFLINE"
-                          ]
+                          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                         },
                         "additionalProperties": {
                           "type": "object",
@@ -641,26 +572,12 @@
                               }
                             }
                           },
-                          "required": [
-                            "items",
-                            "formats"
-                          ],
+                          "required": ["items", "formats"],
                           "additionalProperties": false
                         },
-                        "required": [
-                          "FULL",
-                          "JUDGE_ONLY",
-                          "LLM_ONLY",
-                          "OFFLINE"
-                        ]
+                        "required": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                       },
-                      "required": [
-                        "1",
-                        "2",
-                        "3",
-                        "4",
-                        "5"
-                      ]
+                      "required": ["1", "2", "3", "4", "5"]
                     },
                     "cases": {
                       "maxItems": 60,
@@ -707,29 +624,16 @@
                             }
                           }
                         },
-                        "required": [
-                          "case_id",
-                          "level",
-                          "tracks"
-                        ],
+                        "required": ["case_id", "level", "tracks"],
                         "additionalProperties": false
                       }
                     }
                   },
-                  "required": [
-                    "track",
-                    "concepts",
-                    "assessment_pool",
-                    "cases"
-                  ],
+                  "required": ["track", "concepts", "assessment_pool", "cases"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "track",
-                "inventory"
-              ],
+              "required": ["kind", "track", "inventory"],
               "additionalProperties": false
             },
             {
@@ -790,19 +694,11 @@
                       }
                     }
                   },
-                  "required": [
-                    "path_id",
-                    "title_ko",
-                    "tracks",
-                    "concept_ids"
-                  ],
+                  "required": ["path_id", "title_ko", "tracks", "concept_ids"],
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "path"
-              ],
+              "required": ["kind", "path"],
               "additionalProperties": false
             },
             {
@@ -822,11 +718,7 @@
                   "pattern": "^[0-9a-f]{64}$"
                 }
               },
-              "required": [
-                "kind",
-                "count",
-                "sha256"
-              ],
+              "required": ["kind", "count", "sha256"],
               "additionalProperties": false
             }
           ]

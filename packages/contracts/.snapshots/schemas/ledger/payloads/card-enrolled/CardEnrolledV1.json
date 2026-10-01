@@ -17,18 +17,11 @@
     },
     "response_mode": {
       "type": "string",
-      "enum": [
-        "recognition",
-        "production"
-      ]
+      "enum": ["recognition", "production"]
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C"
-      ]
+      "enum": ["A", "B", "C"]
     },
     "study_day": {
       "type": "string",
@@ -39,14 +32,6 @@
       "pattern": "^ps_[0-9a-f]{16}$"
     }
   },
-  "required": [
-    "card_id",
-    "concept_id",
-    "facet",
-    "response_mode",
-    "tier",
-    "study_day",
-    "policy_version"
-  ],
+  "required": ["card_id", "concept_id", "facet", "response_mode", "tier", "study_day", "policy_version"],
   "additionalProperties": false
 }

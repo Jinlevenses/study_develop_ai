@@ -12,26 +12,14 @@
     },
     "reason": {
       "type": "string",
-      "enum": [
-        "key_wrong",
-        "ambiguous",
-        "outdated",
-        "other"
-      ]
+      "enum": ["key_wrong", "ambiguous", "outdated", "other"]
     },
     "text": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "state": {
       "type": "string",
-      "enum": [
-        "received",
-        "classified",
-        "resolved"
-      ]
+      "enum": ["received", "classified", "resolved"]
     },
     "classification": {
       "anyOf": [
@@ -40,36 +28,17 @@
           "properties": {
             "label": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "learner_wrong"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
             },
             "engine": {
               "type": "string",
-              "enum": [
-                "D",
-                "J",
-                "LJ",
-                "H",
-                "S",
-                "PENDING"
-              ]
+              "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
             },
             "confidence": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             }
           },
-          "required": [
-            "label",
-            "engine",
-            "confidence"
-          ],
+          "required": ["label", "engine", "confidence"],
           "additionalProperties": false
         },
         {
@@ -84,11 +53,7 @@
           "properties": {
             "kind": {
               "type": "string",
-              "enum": [
-                "fixed_overlay",
-                "retired",
-                "kept"
-              ]
+              "enum": ["fixed_overlay", "retired", "kept"]
             },
             "reason_ko": {
               "type": "string"
@@ -105,11 +70,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "reason_ko",
-            "patch_id"
-          ],
+          "required": ["kind", "reason_ko", "patch_id"],
           "additionalProperties": false
         },
         {

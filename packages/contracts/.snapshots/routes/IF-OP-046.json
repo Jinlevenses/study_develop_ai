@@ -12,9 +12,7 @@
       "const": "/internal/v1/telemetry/slo"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "NFR-PERF-*",
-        "TW-12"
-      ]
+      "enum": ["NFR-PERF-*", "TW-12"]
     },
     "deadlineMs": {
       "const": null
@@ -73,45 +68,24 @@
                 "properties": {
                   "id": {
                     "type": "string",
-                    "enum": [
-                      "first_item_p95",
-                      "grading_p95",
-                      "outbox_oldest_age",
-                      "restart_time",
-                      "eventloop_p99"
-                    ]
+                    "enum": ["first_item_p95", "grading_p95", "outbox_oldest_age", "restart_time", "eventloop_p99"]
                   },
                   "target_ms": {
                     "type": "number"
                   },
                   "value_ms": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "ok": {
-                    "type": [
-                      "boolean",
-                      "null"
-                    ]
+                    "type": ["boolean", "null"]
                   }
                 },
-                "required": [
-                  "id",
-                  "target_ms",
-                  "value_ms",
-                  "ok"
-                ],
+                "required": ["id", "target_ms", "value_ms", "ok"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "computed_at",
-            "window",
-            "slos"
-          ],
+          "required": ["computed_at", "window", "slos"],
           "additionalProperties": false
         }
       }

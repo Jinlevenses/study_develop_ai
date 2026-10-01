@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "A",
-    "B",
-    "C"
-  ]
+  "enum": ["A", "B", "C"]
 }

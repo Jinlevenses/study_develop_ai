@@ -18,10 +18,7 @@
           }
         }
       },
-      "required": [
-        "kind",
-        "concept_ids"
-      ],
+      "required": ["kind", "concept_ids"],
       "additionalProperties": false
     },
     {
@@ -36,10 +33,7 @@
           "pattern": "^cert:[a-z0-9-]{2,40}$"
         }
       },
-      "required": [
-        "kind",
-        "tag"
-      ],
+      "required": ["kind", "tag"],
       "additionalProperties": false
     },
     {
@@ -55,10 +49,7 @@
           "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
         }
       },
-      "required": [
-        "kind",
-        "blueprint_id"
-      ],
+      "required": ["kind", "blueprint_id"],
       "additionalProperties": false
     }
   ]

@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/concepts/{concept_id}/outdated-reports"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-013",
-        "FR-CUR-014"
-      ]
+      "enum": ["FR-CUR-013", "FR-CUR-014"]
     },
     "deadlineMs": {
       "const": null
@@ -58,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
             }
           },
-          "required": [
-            "concept_id"
-          ],
+          "required": ["concept_id"],
           "additionalProperties": false
         },
         "body": {
@@ -84,11 +77,7 @@
               "maxLength": 1000
             }
           },
-          "required": [
-            "report_id",
-            "ku_ids",
-            "note_ko"
-          ],
+          "required": ["report_id", "ku_ids", "note_ko"],
           "additionalProperties": false
         }
       }
@@ -110,11 +99,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "received",
-                "revalidating",
-                "resolved"
-              ]
+              "enum": ["received", "revalidating", "resolved"]
             },
             "cl_x": {
               "type": "boolean"
@@ -125,13 +110,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "report_id",
-            "concept_id",
-            "state",
-            "cl_x",
-            "created_at"
-          ],
+          "required": ["report_id", "concept_id", "state", "cl_x", "created_at"],
           "additionalProperties": false
         }
       }

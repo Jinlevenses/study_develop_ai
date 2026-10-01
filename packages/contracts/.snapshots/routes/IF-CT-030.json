@@ -12,9 +12,7 @@
       "const": "/internal/v1/acquisition/imports"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-IMP-001~010"
-      ]
+      "enum": ["FR-IMP-001~010"]
     },
     "deadlineMs": {
       "const": null
@@ -69,10 +65,7 @@
                       "pattern": "^https:\\/\\/"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "url"
-                  ],
+                  "required": ["kind", "url"],
                   "additionalProperties": false
                 },
                 {
@@ -99,11 +92,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "text",
-                    "title"
-                  ],
+                  "required": ["kind", "text", "title"],
                   "additionalProperties": false
                 },
                 {
@@ -119,23 +108,14 @@
                     },
                     "media_type": {
                       "type": "string",
-                      "enum": [
-                        "text/markdown",
-                        "text/plain",
-                        "text/html"
-                      ]
+                      "enum": ["text/markdown", "text/plain", "text/html"]
                     },
                     "content_base64": {
                       "type": "string",
                       "maxLength": 2796204
                     }
                   },
-                  "required": [
-                    "kind",
-                    "filename",
-                    "media_type",
-                    "content_base64"
-                  ],
+                  "required": ["kind", "filename", "media_type", "content_base64"],
                   "additionalProperties": false
                 },
                 {
@@ -150,10 +130,7 @@
                       "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "inbox_id"
-                  ],
+                  "required": ["kind", "inbox_id"],
                   "additionalProperties": false
                 }
               ]
@@ -194,12 +171,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "job_id",
-            "source",
-            "target_track",
-            "local_only"
-          ],
+          "required": ["job_id", "source", "target_track", "local_only"],
           "additionalProperties": false
         }
       }
@@ -216,16 +188,7 @@
             },
             "source_kind": {
               "type": "string",
-              "enum": [
-                "url",
-                "paste",
-                "file",
-                "inbox",
-                "folder",
-                "blueprint",
-                "pack_refresh",
-                "case_foundry"
-              ]
+              "enum": ["url", "paste", "file", "inbox", "folder", "blueprint", "pack_refresh", "case_foundry"]
             },
             "title": {
               "anyOf": [
@@ -253,19 +216,7 @@
             },
             "stage": {
               "type": "string",
-              "enum": [
-                "I1",
-                "I1.5",
-                "I2",
-                "I3",
-                "I4",
-                "I5",
-                "I6",
-                "I7",
-                "COPY_GUARD",
-                "I8",
-                "I9"
-              ]
+              "enum": ["I1", "I1.5", "I2", "I3", "I4", "I5", "I6", "I7", "COPY_GUARD", "I8", "I9"]
             },
             "stages": {
               "maxItems": 11,
@@ -275,41 +226,17 @@
                 "properties": {
                   "stage": {
                     "type": "string",
-                    "enum": [
-                      "I1",
-                      "I1.5",
-                      "I2",
-                      "I3",
-                      "I4",
-                      "I5",
-                      "I6",
-                      "I7",
-                      "COPY_GUARD",
-                      "I8",
-                      "I9"
-                    ]
+                    "enum": ["I1", "I1.5", "I2", "I3", "I4", "I5", "I6", "I7", "COPY_GUARD", "I8", "I9"]
                   },
                   "state": {
                     "type": "string",
-                    "enum": [
-                      "pending",
-                      "running",
-                      "done",
-                      "failed",
-                      "skipped"
-                    ]
+                    "enum": ["pending", "running", "done", "failed", "skipped"]
                   },
                   "engine": {
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "D",
-                          "H",
-                          "J",
-                          "L",
-                          "LJ"
-                        ]
+                        "enum": ["D", "H", "J", "L", "LJ"]
                       },
                       {
                         "type": "null"
@@ -352,40 +279,21 @@
                     ]
                   }
                 },
-                "required": [
-                  "stage",
-                  "state",
-                  "engine",
-                  "started_at",
-                  "finished_at",
-                  "error_code"
-                ],
+                "required": ["stage", "state", "engine", "started_at", "finished_at", "error_code"],
                 "additionalProperties": false
               }
             },
             "trust": {
               "type": "string",
-              "enum": [
-                "user",
-                "llm_unverified",
-                "verified"
-              ]
+              "enum": ["user", "llm_unverified", "verified"]
             },
             "masking": {
               "type": "string",
-              "enum": [
-                "full",
-                "partial"
-              ]
+              "enum": ["full", "partial"]
             },
             "data_class": {
               "type": "string",
-              "enum": [
-                "C0",
-                "C1",
-                "C2",
-                "C3"
-              ]
+              "enum": ["C0", "C1", "C2", "C3"]
             },
             "work_order_id": {
               "anyOf": [
@@ -429,12 +337,7 @@
                       "maximum": 9007199254740991
                     }
                   },
-                  "required": [
-                    "concepts",
-                    "kus",
-                    "items",
-                    "conflicts"
-                  ],
+                  "required": ["concepts", "kus", "items", "conflicts"],
                   "additionalProperties": false
                 },
                 {

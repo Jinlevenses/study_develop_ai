@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "dig",
-    "feynman",
-    "artifact_rebuttal"
-  ]
+  "enum": ["dig", "feynman", "artifact_rebuttal"]
 }

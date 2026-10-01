@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/overlays/export"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": false
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-004",
-        "FR-SET-006",
-        "FR-SET-022"
-      ]
+      "enum": ["FR-SET-004", "FR-SET-006", "FR-SET-022"]
     },
     "deadlineMs": {
       "const": null
@@ -101,13 +95,7 @@
                   ]
                 }
               },
-              "required": [
-                "kind",
-                "v",
-                "device_id",
-                "generated_at",
-                "since"
-              ],
+              "required": ["kind", "v", "device_id", "generated_at", "since"],
               "additionalProperties": false
             },
             {
@@ -126,14 +114,7 @@
                     },
                     "target_kind": {
                       "type": "string",
-                      "enum": [
-                        "concept",
-                        "ku",
-                        "misconception",
-                        "item",
-                        "case",
-                        "source"
-                      ]
+                      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
                     },
                     "target_id": {
                       "type": "string"
@@ -187,10 +168,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "event"
-              ],
+              "required": ["kind", "event"],
               "additionalProperties": false
             },
             {
@@ -210,11 +188,7 @@
                   "pattern": "^[0-9a-f]{64}$"
                 }
               },
-              "required": [
-                "kind",
-                "count",
-                "sha256"
-              ],
+              "required": ["kind", "count", "sha256"],
               "additionalProperties": false
             }
           ],

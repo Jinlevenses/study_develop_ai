@@ -38,20 +38,11 @@
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C"
-      ]
+      "enum": ["A", "B", "C"]
     },
     "knowledge_type": {
       "type": "string",
-      "enum": [
-        "D",
-        "C",
-        "P",
-        "S"
-      ]
+      "enum": ["D", "C", "P", "S"]
     },
     "title_ko": {
       "type": "string",
@@ -108,11 +99,7 @@
     },
     "volatility": {
       "type": "string",
-      "enum": [
-        "stable",
-        "evolving",
-        "volatile"
-      ]
+      "enum": ["stable", "evolving", "volatile"]
     },
     "tags": {
       "maxItems": 20,

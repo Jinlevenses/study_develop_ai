@@ -7,23 +7,13 @@
     },
     "dependency": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "code": {
       "type": "string",
       "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
     }
   },
-  "required": [
-    "part",
-    "dependency",
-    "code"
-  ],
+  "required": ["part", "dependency", "code"],
   "additionalProperties": false
 }

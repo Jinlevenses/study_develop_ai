@@ -13,12 +13,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "direction",
-        "concept_link",
-        "partial_code",
-        "walkthrough"
-      ]
+      "enum": ["direction", "concept_link", "partial_code", "walkthrough"]
     },
     "body_md": {
       "type": "string",
@@ -46,14 +41,6 @@
       "maximum": 4
     }
   },
-  "required": [
-    "item_id",
-    "step",
-    "kind",
-    "body_md",
-    "concept_link",
-    "penalty_note_ko",
-    "steps_available"
-  ],
+  "required": ["item_id", "step", "kind", "body_md", "concept_link", "penalty_note_ko", "steps_available"],
   "additionalProperties": false
 }

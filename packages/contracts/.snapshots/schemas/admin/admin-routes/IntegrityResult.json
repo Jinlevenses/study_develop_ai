@@ -3,20 +3,11 @@
   "properties": {
     "svc": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "level": {
       "type": "string",
-      "enum": [
-        "quick",
-        "full"
-      ]
+      "enum": ["quick", "full"]
     },
     "ok": {
       "type": "boolean"
@@ -51,11 +42,7 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "file",
-          "check",
-          "foreign_key_violations"
-        ],
+        "required": ["file", "check", "foreign_key_violations"],
         "additionalProperties": false
       }
     },
@@ -70,13 +57,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "svc",
-    "level",
-    "ok",
-    "files",
-    "checked_at",
-    "duration_ms"
-  ],
+  "required": ["svc", "level", "ok", "files", "checked_at", "duration_ms"],
   "additionalProperties": false
 }

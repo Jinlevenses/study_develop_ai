@@ -16,16 +16,10 @@
       ]
     },
     "logged_in": {
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "type": ["boolean", "null"]
     },
     "flags_ok": {
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "type": ["boolean", "null"]
     },
     "missing_flags": {
       "maxItems": 20,
@@ -36,10 +30,7 @@
       }
     },
     "key_present": {
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "type": ["boolean", "null"]
     },
     "models": {
       "maxItems": 50,

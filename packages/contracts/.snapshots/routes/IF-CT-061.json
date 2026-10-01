@@ -12,9 +12,7 @@
       "const": "/internal/v1/itembank/items/{item_id}:quarantine"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-QST-011",
-        "FR-QST-015"
-      ]
+      "enum": ["FR-QST-011", "FR-QST-015"]
     },
     "deadlineMs": {
       "const": null
@@ -58,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
             }
           },
-          "required": [
-            "item_id"
-          ],
+          "required": ["item_id"],
           "additionalProperties": false
         },
         "body": {
@@ -73,25 +66,14 @@
             },
             "scope": {
               "type": "string",
-              "enum": [
-                "item",
-                "family"
-              ]
+              "enum": ["item", "family"]
             },
             "evidence_policy": {
               "type": "string",
-              "enum": [
-                "void",
-                "halve",
-                "keep"
-              ]
+              "enum": ["void", "halve", "keep"]
             }
           },
-          "required": [
-            "reason_ko",
-            "scope",
-            "evidence_policy"
-          ],
+          "required": ["reason_ko", "scope", "evidence_policy"],
           "additionalProperties": false
         }
       }
@@ -145,13 +127,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "item_id",
-            "gate_status",
-            "stem_family",
-            "changed_at",
-            "affected_items"
-          ],
+          "required": ["item_id", "gate_status", "stem_family", "changed_at", "affected_items"],
           "additionalProperties": false
         }
       }

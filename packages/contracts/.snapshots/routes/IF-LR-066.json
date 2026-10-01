@@ -12,9 +12,7 @@
       "const": "/internal/v1/settings/policies:switch"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-018"
-      ]
+      "enum": ["FR-SET-018"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "preview_id"
-          ],
+          "required": ["preview_id"],
           "additionalProperties": false
         }
       }
@@ -83,11 +77,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "policy_version",
-            "ledger_event_id",
-            "switched_at"
-          ],
+          "required": ["policy_version", "ledger_event_id", "switched_at"],
           "additionalProperties": false
         }
       }

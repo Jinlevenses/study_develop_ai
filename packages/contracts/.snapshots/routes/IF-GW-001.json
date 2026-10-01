@@ -12,9 +12,7 @@
       "const": "/api/v1/cli/bootstrap-token"
     },
     "allowedCallers": {
-      "enum": [
-        "cli"
-      ]
+      "enum": ["cli"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "NFR-SEC-019",
-        "FR-SET-023"
-      ]
+      "enum": ["NFR-SEC-019", "FR-SET-023"]
     },
     "deadlineMs": {
       "const": null
@@ -54,15 +49,10 @@
           "properties": {
             "purpose": {
               "type": "string",
-              "enum": [
-                "up",
-                "open"
-              ]
+              "enum": ["up", "open"]
             }
           },
-          "required": [
-            "purpose"
-          ],
+          "required": ["purpose"],
           "additionalProperties": false
         }
       }
@@ -87,11 +77,7 @@
               "format": "uri"
             }
           },
-          "required": [
-            "bootstrap_token",
-            "expires_at",
-            "open_url"
-          ],
+          "required": ["bootstrap_token", "expires_at", "open_url"],
           "additionalProperties": false
         }
       }

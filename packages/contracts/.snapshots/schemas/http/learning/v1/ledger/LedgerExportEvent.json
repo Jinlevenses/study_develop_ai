@@ -107,9 +107,6 @@
       "additionalProperties": false
     }
   },
-  "required": [
-    "kind",
-    "event"
-  ],
+  "required": ["kind", "event"],
   "additionalProperties": false
 }

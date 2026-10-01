@@ -7,12 +7,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "time_capsule",
-        "anchor_0",
-        "season_goal",
-        "self_declaration"
-      ]
+      "enum": ["time_capsule", "anchor_0", "season_goal", "self_declaration"]
     },
     "content_hash": {
       "type": "string",
@@ -42,13 +37,6 @@
       "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
     }
   },
-  "required": [
-    "declaration_id",
-    "kind",
-    "content_hash",
-    "sealed_payload",
-    "unseal_at",
-    "study_day"
-  ],
+  "required": ["declaration_id", "kind", "content_hash", "sealed_payload", "unseal_at", "study_day"],
   "additionalProperties": false
 }

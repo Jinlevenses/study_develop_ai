@@ -3,13 +3,7 @@
   "properties": {
     "label": {
       "type": "string",
-      "enum": [
-        "complete",
-        "partial",
-        "misconception",
-        "off_topic",
-        "dont_know"
-      ]
+      "enum": ["complete", "partial", "misconception", "off_topic", "dont_know"]
     },
     "mc_id": {
       "anyOf": [
@@ -28,39 +22,16 @@
     },
     "engine": {
       "type": "string",
-      "enum": [
-        "D",
-        "J",
-        "LJ",
-        "H",
-        "S",
-        "PENDING"
-      ]
+      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
     },
     "calibrated": {
       "type": "boolean"
     },
     "badge": {
       "type": "string",
-      "enum": [
-        "none",
-        "ai",
-        "ai_uncalibrated",
-        "ai_confirm",
-        "ai_estimate_confirm",
-        "heuristic",
-        "self",
-        "pending"
-      ]
+      "enum": ["none", "ai", "ai_uncalibrated", "ai_confirm", "ai_estimate_confirm", "heuristic", "self", "pending"]
     }
   },
-  "required": [
-    "label",
-    "mc_id",
-    "asks_for_answer",
-    "engine",
-    "calibrated",
-    "badge"
-  ],
+  "required": ["label", "mc_id", "asks_for_answer", "engine", "calibrated", "badge"],
   "additionalProperties": false
 }

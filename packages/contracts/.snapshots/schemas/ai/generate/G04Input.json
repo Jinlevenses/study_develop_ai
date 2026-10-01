@@ -11,16 +11,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "explanation",
-          "per_option"
-        ]
+        "enum": ["explanation", "per_option"]
       }
     }
   },
-  "required": [
-    "item_id",
-    "missing"
-  ],
+  "required": ["item_id", "missing"],
   "additionalProperties": false
 }

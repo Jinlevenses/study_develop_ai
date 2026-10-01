@@ -17,11 +17,7 @@
           "maxLength": 1024
         }
       },
-      "required": [
-        "action",
-        "op_id",
-        "bundle_path"
-      ],
+      "required": ["action", "op_id", "bundle_path"],
       "additionalProperties": false
     },
     {
@@ -36,10 +32,7 @@
           "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
         }
       },
-      "required": [
-        "action",
-        "op_id"
-      ],
+      "required": ["action", "op_id"],
       "additionalProperties": false
     }
   ]

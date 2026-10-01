@@ -10,9 +10,6 @@
       "pattern": "^[a-z][a-z0-9_]{1,31}$"
     }
   },
-  "required": [
-    "request_id",
-    "evidence_key"
-  ],
+  "required": ["request_id", "evidence_key"],
   "additionalProperties": false
 }

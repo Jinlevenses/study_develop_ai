@@ -12,9 +12,7 @@
       "const": "/internal/v1/learner/tracks"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-PRG-013",
-        "FR-CUR-025"
-      ]
+      "enum": ["FR-PRG-013", "FR-CUR-025"]
     },
     "deadlineMs": {
       "const": null
@@ -111,20 +106,12 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "track",
-                  "level",
-                  "provisional",
-                  "needs_reconfirmation",
-                  "mastered"
-                ],
+                "required": ["track", "level", "provisional", "needs_reconfirmation", "mastered"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "tracks"
-          ],
+          "required": ["tracks"],
           "additionalProperties": false
         }
       }

@@ -12,9 +12,7 @@
       "const": "/internal/v1/work-orders"
     },
     "allowedCallers": {
-      "enum": [
-        "content"
-      ]
+      "enum": ["content"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-007",
-        "FR-AI-025",
-        "FR-AI-026"
-      ]
+      "enum": ["FR-AI-007", "FR-AI-025", "FR-AI-026"]
     },
     "deadlineMs": {
       "const": null
@@ -74,11 +68,7 @@
             },
             "requested_by": {
               "type": "string",
-              "enum": [
-                "content",
-                "user",
-                "system"
-              ]
+              "enum": ["content", "user", "system"]
             },
             "context_ref": {
               "type": "object",
@@ -99,22 +89,14 @@
                 },
                 "phase": {
                   "type": "string",
-                  "enum": [
-                    "pre_submit",
-                    "post_submit",
-                    "n_a"
-                  ]
+                  "enum": ["pre_submit", "post_submit", "n_a"]
                 },
                 "id": {
                   "type": "string",
                   "maxLength": 160
                 }
               },
-              "required": [
-                "kind",
-                "phase",
-                "id"
-              ],
+              "required": ["kind", "phase", "id"],
               "additionalProperties": false
             },
             "tasks": {
@@ -200,23 +182,12 @@
                     ]
                   }
                 },
-                "required": [
-                  "task_id",
-                  "calls",
-                  "est_input_tokens",
-                  "est_output_tokens"
-                ],
+                "required": ["task_id", "calls", "est_input_tokens", "est_output_tokens"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "work_order_id",
-            "purpose",
-            "requested_by",
-            "context_ref",
-            "tasks"
-          ],
+          "required": ["work_order_id", "purpose", "requested_by", "context_ref", "tasks"],
           "additionalProperties": false
         }
       }
@@ -248,22 +219,11 @@
             },
             "requested_by": {
               "type": "string",
-              "enum": [
-                "content",
-                "user",
-                "system"
-              ]
+              "enum": ["content", "user", "system"]
             },
             "state": {
               "type": "string",
-              "enum": [
-                "approval_required",
-                "approved",
-                "rejected",
-                "exhausted",
-                "expired",
-                "completed"
-              ]
+              "enum": ["approval_required", "approved", "rejected", "exhausted", "expired", "completed"]
             },
             "tasks": {
               "maxItems": 20,
@@ -323,10 +283,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "task_id",
-                  "calls"
-                ],
+                "required": ["task_id", "calls"],
                 "additionalProperties": false
               }
             },
@@ -354,12 +311,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "calls",
-                "krw",
-                "quota_pct",
-                "duration_s"
-              ],
+              "required": ["calls", "krw", "quota_pct", "duration_s"],
               "additionalProperties": false
             },
             "threshold_exceeded": {
@@ -375,11 +327,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "calls",
-                "krw",
-                "quota"
-              ],
+              "required": ["calls", "krw", "quota"],
               "additionalProperties": false
             },
             "reservation": {
@@ -403,11 +351,7 @@
                       "maximum": 8640000000000000
                     }
                   },
-                  "required": [
-                    "calls",
-                    "krw",
-                    "expires_at"
-                  ],
+                  "required": ["calls", "krw", "expires_at"],
                   "additionalProperties": false
                 },
                 {
@@ -429,10 +373,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "calls",
-                "krw"
-              ],
+              "required": ["calls", "krw"],
               "additionalProperties": false
             },
             "created_at": {
@@ -456,10 +397,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "auto",
-                    "user"
-                  ]
+                  "enum": ["auto", "user"]
                 },
                 {
                   "type": "null"

@@ -12,9 +12,7 @@
       "const": "/internal/v1/generate/{task_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "content"
-      ]
+      "enum": ["content"]
     },
     "idempotent": {
       "const": true
@@ -29,15 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-004",
-        "FR-AI-006",
-        "FR-AI-020",
-        "FR-AI-023",
-        "FR-STD-020",
-        "IR-001~007",
-        "IR-018"
-      ]
+      "enum": ["FR-AI-004", "FR-AI-006", "FR-AI-020", "FR-AI-023", "FR-STD-020", "IR-001~007", "IR-018"]
     },
     "deadlineMs": {
       "const": 120000
@@ -62,9 +52,7 @@
               "pattern": "^[A-Za-z0-9-]{1,20}$"
             }
           },
-          "required": [
-            "task_id"
-          ],
+          "required": ["task_id"],
           "additionalProperties": false
         },
         "body": {
@@ -72,10 +60,7 @@
           "properties": {
             "lane": {
               "type": "string",
-              "enum": [
-                "interactive",
-                "conversational"
-              ]
+              "enum": ["interactive", "conversational"]
             },
             "input": {
               "type": "object",
@@ -100,12 +85,7 @@
                   },
                   "data_class": {
                     "type": "string",
-                    "enum": [
-                      "C0",
-                      "C1",
-                      "C2",
-                      "C3"
-                    ]
+                    "enum": ["C0", "C1", "C2", "C3"]
                   },
                   "untrusted": {
                     "type": "boolean"
@@ -122,13 +102,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "key",
-                  "text",
-                  "data_class",
-                  "untrusted",
-                  "source_ref"
-                ],
+                "required": ["key", "text", "data_class", "untrusted", "source_ref"],
                 "additionalProperties": false
               }
             },
@@ -151,22 +125,14 @@
                 },
                 "phase": {
                   "type": "string",
-                  "enum": [
-                    "pre_submit",
-                    "post_submit",
-                    "n_a"
-                  ]
+                  "enum": ["pre_submit", "post_submit", "n_a"]
                 },
                 "id": {
                   "type": "string",
                   "maxLength": 160
                 }
               },
-              "required": [
-                "kind",
-                "phase",
-                "id"
-              ],
+              "required": ["kind", "phase", "id"],
               "additionalProperties": false
             },
             "stream": {
@@ -182,14 +148,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "anthropic",
-                  "openai",
-                  "google",
-                  "typesafe",
-                  "local",
-                  "other"
-                ]
+                "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
               }
             },
             "local_only": {
@@ -264,12 +223,7 @@
                   "properties": {
                     "basis": {
                       "type": "string",
-                      "enum": [
-                        "reported",
-                        "computed",
-                        "subscription",
-                        "free"
-                      ]
+                      "enum": ["reported", "computed", "subscription", "free"]
                     },
                     "krw": {
                       "type": "number",
@@ -287,11 +241,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "basis",
-                    "krw",
-                    "usd"
-                  ],
+                  "required": ["basis", "krw", "usd"],
                   "additionalProperties": false
                 },
                 "latency_ms": {
@@ -345,14 +295,7 @@
                   "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
                 }
               },
-              "required": [
-                "status",
-                "stream_ref",
-                "expires_at",
-                "provider_id",
-                "prompt_version",
-                "call_id"
-              ],
+              "required": ["status", "stream_ref", "expires_at", "provider_id", "prompt_version", "call_id"],
               "additionalProperties": false
             },
             {
@@ -393,11 +336,7 @@
                   ]
                 }
               },
-              "required": [
-                "status",
-                "reason",
-                "retry_after_ms"
-              ],
+              "required": ["status", "reason", "retry_after_ms"],
               "additionalProperties": false
             }
           ]

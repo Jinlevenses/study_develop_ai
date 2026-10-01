@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/jobs"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-010"
-      ]
+      "enum": ["FR-AI-010"]
     },
     "deadlineMs": {
       "const": null
@@ -53,15 +49,7 @@
           "properties": {
             "state": {
               "type": "string",
-              "enum": [
-                "queued",
-                "waiting_window",
-                "running",
-                "done",
-                "failed",
-                "cancelled",
-                "deferred"
-              ]
+              "enum": ["queued", "waiting_window", "running", "done", "failed", "cancelled", "deferred"]
             },
             "task_id": {
               "anyOf": [
@@ -120,9 +108,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -144,10 +130,7 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "judge",
-                      "generate"
-                    ]
+                    "enum": ["judge", "generate"]
                   },
                   "task_id": {
                     "anyOf": [
@@ -201,15 +184,7 @@
                   },
                   "state": {
                     "type": "string",
-                    "enum": [
-                      "queued",
-                      "waiting_window",
-                      "running",
-                      "done",
-                      "failed",
-                      "cancelled",
-                      "deferred"
-                    ]
+                    "enum": ["queued", "waiting_window", "running", "done", "failed", "cancelled", "deferred"]
                   },
                   "items_total": {
                     "type": "integer",
@@ -276,12 +251,7 @@
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "ok",
-                          "failed",
-                          "cancelled",
-                          "deferred"
-                        ]
+                        "enum": ["ok", "failed", "cancelled", "deferred"]
                       },
                       {
                         "type": "null"
@@ -373,10 +343,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

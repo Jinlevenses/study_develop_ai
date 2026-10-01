@@ -5,13 +5,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "too_hard",
-            "too_easy",
-            "not_now",
-            "irrelevant",
-            "other"
-          ]
+          "enum": ["too_hard", "too_easy", "not_now", "irrelevant", "other"]
         },
         {
           "type": "null"
@@ -19,8 +13,6 @@
       ]
     }
   },
-  "required": [
-    "reason"
-  ],
+  "required": ["reason"],
   "additionalProperties": false
 }

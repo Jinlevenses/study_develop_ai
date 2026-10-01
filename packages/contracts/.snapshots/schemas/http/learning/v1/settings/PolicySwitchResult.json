@@ -15,10 +15,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "policy_version",
-    "ledger_event_id",
-    "switched_at"
-  ],
+  "required": ["policy_version", "ledger_event_id", "switched_at"],
   "additionalProperties": false
 }

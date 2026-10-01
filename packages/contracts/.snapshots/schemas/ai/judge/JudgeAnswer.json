@@ -13,10 +13,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "type",
-        "p_yes"
-      ],
+      "required": ["type", "p_yes"],
       "additionalProperties": false
     },
     {
@@ -48,12 +45,7 @@
           }
         }
       },
-      "required": [
-        "type",
-        "choice",
-        "confidence",
-        "probabilities"
-      ],
+      "required": ["type", "choice", "confidence", "probabilities"],
       "additionalProperties": false
     },
     {
@@ -90,13 +82,7 @@
           "maximum": 10
         }
       },
-      "required": [
-        "type",
-        "score",
-        "confidence",
-        "probabilities",
-        "levels"
-      ],
+      "required": ["type", "score", "confidence", "probabilities", "levels"],
       "additionalProperties": false
     }
   ]

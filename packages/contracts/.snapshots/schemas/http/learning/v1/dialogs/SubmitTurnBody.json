@@ -39,11 +39,7 @@
               }
             }
           },
-          "required": [
-            "item_id",
-            "item_content_hash",
-            "option_keys"
-          ],
+          "required": ["item_id", "item_content_hash", "option_keys"],
           "additionalProperties": false
         },
         {
@@ -52,11 +48,6 @@
       ]
     }
   },
-  "required": [
-    "turn_id",
-    "text",
-    "answered_at",
-    "d4_choice"
-  ],
+  "required": ["turn_id", "text", "answered_at", "d4_choice"],
   "additionalProperties": false
 }

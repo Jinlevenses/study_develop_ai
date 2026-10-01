@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/tracks/{track}/concepts"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-001"
-      ]
+      "enum": ["FR-CUR-001"]
     },
     "deadlineMs": {
       "const": null
@@ -77,9 +73,7 @@
               ]
             }
           },
-          "required": [
-            "track"
-          ],
+          "required": ["track"],
           "additionalProperties": false
         },
         "query": {
@@ -101,9 +95,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -156,20 +148,11 @@
                   },
                   "tier": {
                     "type": "string",
-                    "enum": [
-                      "A",
-                      "B",
-                      "C"
-                    ]
+                    "enum": ["A", "B", "C"]
                   },
                   "knowledge_type": {
                     "type": "string",
-                    "enum": [
-                      "D",
-                      "C",
-                      "P",
-                      "S"
-                    ]
+                    "enum": ["D", "C", "P", "S"]
                   },
                   "title_ko": {
                     "type": "string",
@@ -217,11 +200,7 @@
                   },
                   "volatility": {
                     "type": "string",
-                    "enum": [
-                      "stable",
-                      "evolving",
-                      "volatile"
-                    ]
+                    "enum": ["stable", "evolving", "volatile"]
                   },
                   "tags": {
                     "maxItems": 20,
@@ -262,10 +241,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

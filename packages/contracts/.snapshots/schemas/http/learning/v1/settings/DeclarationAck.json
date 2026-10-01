@@ -14,10 +14,6 @@
       "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "required": [
-    "declaration_id",
-    "ledger_event_id",
-    "content_hash"
-  ],
+  "required": ["declaration_id", "ledger_event_id", "content_hash"],
   "additionalProperties": false
 }

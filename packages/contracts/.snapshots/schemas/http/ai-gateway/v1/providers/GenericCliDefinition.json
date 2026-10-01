@@ -40,10 +40,7 @@
               "pattern": "^(\\/[^/]*)*$"
             }
           },
-          "required": [
-            "kind",
-            "pointer"
-          ],
+          "required": ["kind", "pointer"],
           "additionalProperties": false
         },
         {
@@ -54,9 +51,7 @@
               "const": "text"
             }
           },
-          "required": [
-            "kind"
-          ],
+          "required": ["kind"],
           "additionalProperties": false
         }
       ]
@@ -84,10 +79,7 @@
           ]
         }
       },
-      "required": [
-        "args",
-        "expect_regex"
-      ],
+      "required": ["args", "expect_regex"],
       "additionalProperties": false
     },
     "isolation": {
@@ -103,16 +95,10 @@
         },
         "home": {
           "type": "string",
-          "enum": [
-            "empty_tmp",
-            "fathom_cli_home"
-          ]
+          "enum": ["empty_tmp", "fathom_cli_home"]
         }
       },
-      "required": [
-        "flags",
-        "home"
-      ],
+      "required": ["flags", "home"],
       "additionalProperties": false
     },
     "models": {
@@ -152,11 +138,7 @@
           ]
         }
       },
-      "required": [
-        "low",
-        "mid",
-        "high"
-      ],
+      "required": ["low", "mid", "high"],
       "additionalProperties": false
     },
     "timeout_ms": {
@@ -166,23 +148,11 @@
     },
     "family": {
       "type": "string",
-      "enum": [
-        "anthropic",
-        "openai",
-        "google",
-        "typesafe",
-        "local",
-        "other"
-      ]
+      "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
     },
     "billing_mode": {
       "type": "string",
-      "enum": [
-        "subscription",
-        "metered",
-        "free",
-        "local"
-      ]
+      "enum": ["subscription", "metered", "free", "local"]
     }
   },
   "required": [

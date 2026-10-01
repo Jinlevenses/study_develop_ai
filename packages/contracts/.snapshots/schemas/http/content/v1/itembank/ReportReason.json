@@ -1,9 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "key_wrong",
-    "ambiguous",
-    "outdated",
-    "other"
-  ]
+  "enum": ["key_wrong", "ambiguous", "outdated", "other"]
 }

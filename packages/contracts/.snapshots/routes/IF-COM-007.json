@@ -12,9 +12,7 @@
       "const": "/internal/v1/admin/resume"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": true
@@ -55,16 +53,10 @@
             },
             "outcome": {
               "type": "string",
-              "enum": [
-                "completed",
-                "aborted"
-              ]
+              "enum": ["completed", "aborted"]
             }
           },
-          "required": [
-            "epoch_id",
-            "outcome"
-          ],
+          "required": ["epoch_id", "outcome"],
           "additionalProperties": false
         }
       }
@@ -85,10 +77,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "epoch_id",
-            "resumed_at"
-          ],
+          "required": ["epoch_id", "resumed_at"],
           "additionalProperties": false
         }
       }

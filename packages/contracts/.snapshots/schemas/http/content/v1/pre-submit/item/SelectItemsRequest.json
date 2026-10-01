@@ -7,12 +7,7 @@
     },
     "ai_mode_observed": {
       "type": "string",
-      "enum": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     },
     "slots": {
       "minItems": 1,
@@ -27,16 +22,7 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "items",
-              "blank_note",
-              "lab",
-              "case",
-              "artifact",
-              "d4_mcq",
-              "embedded",
-              "pretest"
-            ]
+            "enum": ["items", "blank_note", "lab", "case", "artifact", "d4_mcq", "embedded", "pretest"]
           },
           "concept_id": {
             "anyOf": [
@@ -108,19 +94,13 @@
             "maximum": 20
           },
           "target_beta": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "response_mode": {
             "anyOf": [
               {
                 "type": "string",
-                "enum": [
-                  "recognition",
-                  "production"
-                ]
+                "enum": ["recognition", "production"]
               },
               {
                 "type": "null"
@@ -184,10 +164,7 @@
                 "type": "boolean"
               }
             },
-            "required": [
-              "calibrated_only",
-              "deterministic_only"
-            ],
+            "required": ["calibrated_only", "deterministic_only"],
             "additionalProperties": false
           }
         },
@@ -228,12 +205,6 @@
       }
     }
   },
-  "required": [
-    "session_id",
-    "ai_mode_observed",
-    "slots",
-    "exclude_item_ids",
-    "exclude_stem_families"
-  ],
+  "required": ["session_id", "ai_mode_observed", "slots", "exclude_item_ids", "exclude_stem_families"],
   "additionalProperties": false
 }

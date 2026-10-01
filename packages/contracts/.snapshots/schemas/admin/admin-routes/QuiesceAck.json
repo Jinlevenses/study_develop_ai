@@ -15,10 +15,6 @@
       "const": true
     }
   },
-  "required": [
-    "epoch_id",
-    "quiesced_at",
-    "in_flight_drained"
-  ],
+  "required": ["epoch_id", "quiesced_at", "in_flight_drained"],
   "additionalProperties": false
 }

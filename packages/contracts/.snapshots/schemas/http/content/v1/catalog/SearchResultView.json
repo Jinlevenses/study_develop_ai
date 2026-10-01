@@ -9,13 +9,7 @@
         "properties": {
           "kind": {
             "type": "string",
-            "enum": [
-              "concept",
-              "ku",
-              "misconception",
-              "case",
-              "path"
-            ]
+            "enum": ["concept", "ku", "misconception", "case", "path"]
           },
           "id": {
             "type": "string",
@@ -88,25 +82,13 @@
             "type": "number"
           }
         },
-        "required": [
-          "kind",
-          "id",
-          "concept_id",
-          "title_ko",
-          "snippet_ko",
-          "track",
-          "level",
-          "score"
-        ],
+        "required": ["kind", "id", "concept_id", "title_ko", "snippet_ko", "track", "level", "score"],
         "additionalProperties": false
       }
     },
     "engine": {
       "type": "string",
-      "enum": [
-        "v2",
-        "v3"
-      ]
+      "enum": ["v2", "v3"]
     },
     "took_ms": {
       "type": "integer",
@@ -114,10 +96,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "items",
-    "engine",
-    "took_ms"
-  ],
+  "required": ["items", "engine", "took_ms"],
   "additionalProperties": false
 }

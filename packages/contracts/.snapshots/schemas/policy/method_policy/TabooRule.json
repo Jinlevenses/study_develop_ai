@@ -20,12 +20,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "D",
-          "C",
-          "P",
-          "S"
-        ]
+        "enum": ["D", "C", "P", "S"]
       }
     },
     "effect": {
@@ -81,10 +76,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "formats"
-          ],
+          "required": ["kind", "formats"],
           "additionalProperties": false
         },
         {
@@ -143,11 +135,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "kind",
-            "formats",
-            "share_max"
-          ],
+          "required": ["kind", "formats", "share_max"],
           "additionalProperties": false
         },
         {
@@ -163,10 +151,7 @@
               "maximum": 7
             }
           },
-          "required": [
-            "kind",
-            "depth"
-          ],
+          "required": ["kind", "depth"],
           "additionalProperties": false
         },
         {
@@ -225,11 +210,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "kind",
-            "formats",
-            "w"
-          ],
+          "required": ["kind", "formats", "w"],
           "additionalProperties": false
         }
       ]
@@ -240,12 +221,6 @@
       "maxLength": 200
     }
   },
-  "required": [
-    "id",
-    "levels",
-    "knowledge_types",
-    "effect",
-    "reason_ko"
-  ],
+  "required": ["id", "levels", "knowledge_types", "effect", "reason_ko"],
   "additionalProperties": false
 }

@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/preferences"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-023"
-      ]
+      "enum": ["FR-AI-023"]
     },
     "deadlineMs": {
       "const": null
@@ -60,13 +56,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "generation",
-                  "explanation",
-                  "dialog",
-                  "import",
-                  "judge"
-                ]
+                "enum": ["generation", "explanation", "dialog", "import", "judge"]
               }
             },
             "pinned": {
@@ -117,12 +107,7 @@
                   ]
                 }
               },
-              "required": [
-                "generation",
-                "explanation",
-                "dialog",
-                "import"
-              ],
+              "required": ["generation", "explanation", "dialog", "import"],
               "additionalProperties": false
             },
             "batch_enabled": {
@@ -132,12 +117,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "local_only_families",
-            "pinned",
-            "batch_enabled",
-            "yield_to_interactive_cli"
-          ],
+          "required": ["local_only_families", "pinned", "batch_enabled", "yield_to_interactive_cli"],
           "additionalProperties": false
         }
       }

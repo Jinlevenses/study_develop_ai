@@ -42,13 +42,7 @@
     },
     "case_kind": {
       "type": "string",
-      "enum": [
-        "incident",
-        "design",
-        "review",
-        "migration",
-        "tradeoff"
-      ]
+      "enum": ["incident", "design", "review", "migration", "tradeoff"]
     },
     "title_ko": {
       "type": "string",
@@ -107,10 +101,7 @@
             "pattern": "^[a-z][a-z0-9_]{1,31}$"
           }
         },
-        "required": [
-          "rules",
-          "default_best"
-        ],
+        "required": ["rules", "default_best"],
         "additionalProperties": false
       }
     },
@@ -160,12 +151,7 @@
           },
           "usage": {
             "type": "string",
-            "enum": [
-              "link_only",
-              "paraphrase",
-              "short_quote",
-              "code_adapted"
-            ]
+            "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
           },
           "retrieved_at": {
             "type": "string",
@@ -194,15 +180,7 @@
             ]
           }
         },
-        "required": [
-          "source_id",
-          "locator",
-          "section",
-          "usage",
-          "retrieved_at",
-          "product_version",
-          "quote"
-        ],
+        "required": ["source_id", "locator", "section", "usage", "retrieved_at", "product_version", "quote"],
         "additionalProperties": false
       }
     },

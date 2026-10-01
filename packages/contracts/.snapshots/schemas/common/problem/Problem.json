@@ -61,23 +61,13 @@
             "maxLength": 60
           }
         },
-        "required": [
-          "path",
-          "message",
-          "rule"
-        ],
+        "required": ["path", "message", "rule"],
         "additionalProperties": false
       }
     },
     "dependency": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "acked_through_seq": {
       "type": "integer",
@@ -100,14 +90,6 @@
       }
     }
   },
-  "required": [
-    "type",
-    "title",
-    "status",
-    "code",
-    "error_id",
-    "request_id",
-    "retryable"
-  ],
+  "required": ["type", "title", "status", "code", "error_id", "request_id", "retryable"],
   "additionalProperties": false
 }

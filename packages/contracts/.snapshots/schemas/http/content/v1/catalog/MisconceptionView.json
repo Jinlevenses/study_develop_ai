@@ -29,19 +29,9 @@
     },
     "status": {
       "type": "string",
-      "enum": [
-        "active",
-        "retired"
-      ]
+      "enum": ["active", "retired"]
     }
   },
-  "required": [
-    "mc_id",
-    "wrong_belief_ko",
-    "correction_ko",
-    "meta_family",
-    "refutes",
-    "status"
-  ],
+  "required": ["mc_id", "wrong_belief_ko", "correction_ko", "meta_family", "refutes", "status"],
   "additionalProperties": false
 }

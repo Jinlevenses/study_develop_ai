@@ -22,25 +22,15 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": [
-                "V-ci",
-                "V-live",
-                "V-field"
-              ]
+              "enum": ["V-ci", "V-live", "V-field"]
             }
           }
         },
-        "required": [
-          "build",
-          "beyond"
-        ],
+        "required": ["build", "beyond"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "default",
-    "exceptions"
-  ],
+  "required": ["default", "exceptions"],
   "additionalProperties": false
 }

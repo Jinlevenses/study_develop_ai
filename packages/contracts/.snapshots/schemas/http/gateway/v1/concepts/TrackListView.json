@@ -95,12 +95,7 @@
                 "maximum": 5
               }
             },
-            "required": [
-              "declared",
-              "offline",
-              "oracle",
-              "display"
-            ],
+            "required": ["declared", "offline", "oracle", "display"],
             "additionalProperties": false
           },
           "learner": {
@@ -132,12 +127,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "level",
-                  "provisional",
-                  "needs_reconfirmation",
-                  "mastered"
-                ],
+                "required": ["level", "provisional", "needs_reconfirmation", "mastered"],
                 "additionalProperties": false
               },
               {
@@ -146,14 +136,7 @@
             ]
           }
         },
-        "required": [
-          "track",
-          "title_ko",
-          "title_en",
-          "concept_counts",
-          "cap",
-          "learner"
-        ],
+        "required": ["track", "title_ko", "title_en", "concept_counts", "cap", "learner"],
         "additionalProperties": false
       }
     },
@@ -168,31 +151,18 @@
           },
           "dependency": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "code": {
             "type": "string",
             "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
           }
         },
-        "required": [
-          "part",
-          "dependency",
-          "code"
-        ],
+        "required": ["part", "dependency", "code"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "tracks",
-    "degraded"
-  ],
+  "required": ["tracks", "degraded"],
   "additionalProperties": false
 }

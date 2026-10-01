@@ -5,14 +5,7 @@
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "enum": [
-          "code",
-          "retrieval",
-          "implement",
-          "blank_note",
-          "digging",
-          "case"
-        ]
+        "enum": ["code", "retrieval", "implement", "blank_note", "digging", "case"]
       },
       "additionalProperties": {
         "minItems": 1,
@@ -23,61 +16,28 @@
           "pattern": "^M-(0[1-9]|1\\d|2[01])$"
         }
       },
-      "required": [
-        "code",
-        "retrieval",
-        "implement",
-        "blank_note",
-        "digging",
-        "case"
-      ]
+      "required": ["code", "retrieval", "implement", "blank_note", "digging", "case"]
     },
     "shares": {
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "enum": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
+        "enum": ["1", "2", "3", "4", "5"]
       },
       "additionalProperties": {
         "type": "object",
         "propertyNames": {
           "type": "string",
-          "enum": [
-            "code",
-            "retrieval",
-            "implement",
-            "blank_note",
-            "digging",
-            "case"
-          ]
+          "enum": ["code", "retrieval", "implement", "blank_note", "digging", "case"]
         },
         "additionalProperties": {
           "type": "number",
           "minimum": 0,
           "maximum": 1
         },
-        "required": [
-          "code",
-          "retrieval",
-          "implement",
-          "blank_note",
-          "digging",
-          "case"
-        ]
+        "required": ["code", "retrieval", "implement", "blank_note", "digging", "case"]
       },
-      "required": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ]
+      "required": ["1", "2", "3", "4", "5"]
     },
     "tolerance": {
       "type": "number",
@@ -85,10 +45,6 @@
       "maximum": 1
     }
   },
-  "required": [
-    "groups",
-    "shares",
-    "tolerance"
-  ],
+  "required": ["groups", "shares", "tolerance"],
   "additionalProperties": false
 }

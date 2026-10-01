@@ -4,14 +4,9 @@
     "format": {
       "default": "md",
       "type": "string",
-      "enum": [
-        "md",
-        "json"
-      ]
+      "enum": ["md", "json"]
     }
   },
-  "required": [
-    "format"
-  ],
+  "required": ["format"],
   "additionalProperties": false
 }

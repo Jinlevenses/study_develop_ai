@@ -12,9 +12,7 @@
       "const": "/api/v1/settings"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,12 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-009",
-        "FR-SET-010",
-        "FR-PRG-022",
-        "FR-PRG-027"
-      ]
+      "enum": ["FR-SET-009", "FR-SET-010", "FR-PRG-022", "FR-PRG-027"]
     },
     "deadlineMs": {
       "const": null
@@ -104,11 +97,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "light",
-                    "normal",
-                    "deep"
-                  ]
+                  "enum": ["light", "normal", "deep"]
                 },
                 {
                   "type": "null"
@@ -117,36 +106,22 @@
             },
             "wildcard_mode": {
               "type": "string",
-              "enum": [
-                "enforce",
-                "suggest"
-              ]
+              "enum": ["enforce", "suggest"]
             },
             "quota_mode": {
               "type": "string",
-              "enum": [
-                "enforce",
-                "suggest"
-              ]
+              "enum": ["enforce", "suggest"]
             },
             "log_content": {
               "type": "boolean"
             },
             "reduced_motion": {
               "type": "string",
-              "enum": [
-                "system",
-                "on",
-                "off"
-              ]
+              "enum": ["system", "on", "off"]
             },
             "ui_density": {
               "type": "string",
-              "enum": [
-                "auto",
-                "compact",
-                "comfortable"
-              ]
+              "enum": ["auto", "compact", "comfortable"]
             },
             "notifications": {
               "type": "object",
@@ -158,10 +133,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "weekly_review",
-                "return_nudge"
-              ],
+              "required": ["weekly_review", "return_nudge"],
               "additionalProperties": false
             },
             "career_years": {
@@ -289,11 +261,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "light",
-                    "normal",
-                    "deep"
-                  ]
+                  "enum": ["light", "normal", "deep"]
                 },
                 {
                   "type": "null"
@@ -302,36 +270,22 @@
             },
             "wildcard_mode": {
               "type": "string",
-              "enum": [
-                "enforce",
-                "suggest"
-              ]
+              "enum": ["enforce", "suggest"]
             },
             "quota_mode": {
               "type": "string",
-              "enum": [
-                "enforce",
-                "suggest"
-              ]
+              "enum": ["enforce", "suggest"]
             },
             "log_content": {
               "type": "boolean"
             },
             "reduced_motion": {
               "type": "string",
-              "enum": [
-                "system",
-                "on",
-                "off"
-              ]
+              "enum": ["system", "on", "off"]
             },
             "ui_density": {
               "type": "string",
-              "enum": [
-                "auto",
-                "compact",
-                "comfortable"
-              ]
+              "enum": ["auto", "compact", "comfortable"]
             },
             "notifications": {
               "type": "object",
@@ -343,10 +297,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "weekly_review",
-                "return_nudge"
-              ],
+              "required": ["weekly_review", "return_nudge"],
               "additionalProperties": false
             },
             "career_years": {

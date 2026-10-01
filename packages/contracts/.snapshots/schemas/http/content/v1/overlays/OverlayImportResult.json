@@ -21,11 +21,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "import_id",
-    "inserted",
-    "skipped",
-    "conflicts"
-  ],
+  "required": ["import_id", "inserted", "skipped", "conflicts"],
   "additionalProperties": false
 }

@@ -12,10 +12,7 @@
       "const": "/internal/v1/jobs/{job_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway",
-        "content"
-      ]
+      "enum": ["gateway", "content"]
     },
     "idempotent": {
       "const": false
@@ -30,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-010"
-      ]
+      "enum": ["FR-AI-010"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "job_id"
-          ],
+          "required": ["job_id"],
           "additionalProperties": false
         }
       }
@@ -76,10 +69,7 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "judge",
-                "generate"
-              ]
+              "enum": ["judge", "generate"]
             },
             "task_id": {
               "anyOf": [
@@ -133,15 +123,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "queued",
-                "waiting_window",
-                "running",
-                "done",
-                "failed",
-                "cancelled",
-                "deferred"
-              ]
+              "enum": ["queued", "waiting_window", "running", "done", "failed", "cancelled", "deferred"]
             },
             "items_total": {
               "type": "integer",
@@ -208,12 +190,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "failed",
-                    "cancelled",
-                    "deferred"
-                  ]
+                  "enum": ["ok", "failed", "cancelled", "deferred"]
                 },
                 {
                   "type": "null"

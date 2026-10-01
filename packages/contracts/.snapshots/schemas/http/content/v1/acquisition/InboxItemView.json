@@ -11,10 +11,7 @@
     },
     "masking": {
       "type": "string",
-      "enum": [
-        "full",
-        "partial"
-      ]
+      "enum": ["full", "partial"]
     },
     "source_url": {
       "anyOf": [
@@ -29,13 +26,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "new",
-        "triaged",
-        "linked",
-        "imported",
-        "discarded"
-      ]
+      "enum": ["new", "triaged", "linked", "imported", "discarded"]
     },
     "matches": {
       "maxItems": 10,
@@ -52,10 +43,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "concept_id",
-          "score"
-        ],
+        "required": ["concept_id", "score"],
         "additionalProperties": false
       }
     },

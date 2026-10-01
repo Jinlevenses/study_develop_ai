@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/budget"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-007",
-        "FR-AI-025"
-      ]
+      "enum": ["FR-AI-007", "FR-AI-025"]
     },
     "deadlineMs": {
       "const": null
@@ -87,11 +82,7 @@
                   "maximum": 100
                 }
               },
-              "required": [
-                "calls",
-                "krw",
-                "quota_pct"
-              ],
+              "required": ["calls", "krw", "quota_pct"],
               "additionalProperties": false
             },
             "subscription_windows": {
@@ -122,17 +113,11 @@
                   ]
                 }
               },
-              "required": [
-                "five_hour_calls",
-                "weekly_calls"
-              ],
+              "required": ["five_hour_calls", "weekly_calls"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "monthly_krw",
-            "per_call_usd_cap"
-          ],
+          "required": ["monthly_krw", "per_call_usd_cap"],
           "additionalProperties": false
         }
       }
@@ -187,11 +172,7 @@
                   "type": "number"
                 }
               },
-              "required": [
-                "calls",
-                "krw",
-                "quota_pct"
-              ],
+              "required": ["calls", "krw", "quota_pct"],
               "additionalProperties": false
             },
             "subscription_windows": {
@@ -222,10 +203,7 @@
                   ]
                 }
               },
-              "required": [
-                "five_hour_calls",
-                "weekly_calls"
-              ],
+              "required": ["five_hour_calls", "weekly_calls"],
               "additionalProperties": false
             },
             "batch_window": {
@@ -240,10 +218,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "idle_min",
-                "require_ac"
-              ],
+              "required": ["idle_min", "require_ac"],
               "additionalProperties": false
             }
           },

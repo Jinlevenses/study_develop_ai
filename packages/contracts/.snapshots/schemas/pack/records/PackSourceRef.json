@@ -18,12 +18,7 @@
     },
     "usage": {
       "type": "string",
-      "enum": [
-        "link_only",
-        "paraphrase",
-        "short_quote",
-        "code_adapted"
-      ]
+      "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
     },
     "retrieved_at": {
       "type": "string",
@@ -52,14 +47,6 @@
       ]
     }
   },
-  "required": [
-    "source_id",
-    "locator",
-    "section",
-    "usage",
-    "retrieved_at",
-    "product_version",
-    "quote"
-  ],
+  "required": ["source_id", "locator", "section", "usage", "retrieved_at", "product_version", "quote"],
   "additionalProperties": false
 }

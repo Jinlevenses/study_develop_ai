@@ -6,8 +6,6 @@
       "maxLength": 8000
     }
   },
-  "required": [
-    "retro_md"
-  ],
+  "required": ["retro_md"],
   "additionalProperties": false
 }

@@ -11,13 +11,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "enum": [
-                  "gateway",
-                  "content",
-                  "learning",
-                  "ai-gateway",
-                  "ops-api"
-                ]
+                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
               },
               {
                 "type": "string",
@@ -27,13 +21,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "starting",
-              "ready",
-              "restarting",
-              "degraded",
-              "stopped"
-            ]
+            "enum": ["starting", "ready", "restarting", "degraded", "stopped"]
           },
           "restarts_60s": {
             "type": "integer",
@@ -41,11 +29,7 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "svc",
-          "state",
-          "restarts_60s"
-        ],
+        "required": ["svc", "state", "restarts_60s"],
         "additionalProperties": false
       }
     },
@@ -65,23 +49,11 @@
         "properties": {
           "svc": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "dest": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "oldest_age_ms": {
             "type": "integer",
@@ -89,11 +61,7 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "svc",
-          "dest",
-          "oldest_age_ms"
-        ],
+        "required": ["svc", "dest", "oldest_age_ms"],
         "additionalProperties": false
       }
     },
@@ -142,11 +110,7 @@
           },
           "severity": {
             "type": "string",
-            "enum": [
-              "info",
-              "warn",
-              "critical"
-            ]
+            "enum": ["info", "warn", "critical"]
           },
           "message_ko": {
             "type": "string",
@@ -192,11 +156,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "href",
-                  "cli"
-                ],
+                "required": ["label_ko", "href", "cli"],
                 "additionalProperties": false
               },
               {
@@ -205,24 +165,11 @@
             ]
           }
         },
-        "required": [
-          "banner_id",
-          "code",
-          "severity",
-          "message_ko",
-          "since",
-          "dismissible",
-          "action"
-        ],
+        "required": ["banner_id", "code", "severity", "message_ko", "since", "dismissible", "action"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "services",
-    "degraded",
-    "outbox_lag",
-    "banners"
-  ],
+  "required": ["services", "degraded", "outbox_lag", "banners"],
   "additionalProperties": false
 }

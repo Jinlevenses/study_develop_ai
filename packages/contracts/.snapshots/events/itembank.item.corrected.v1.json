@@ -8,31 +8,15 @@
     },
     "correction": {
       "type": "string",
-      "enum": [
-        "quarantined",
-        "demoted",
-        "key_fixed",
-        "retired"
-      ]
+      "enum": ["quarantined", "demoted", "key_fixed", "retired"]
     },
     "evidence_policy": {
       "type": "string",
-      "enum": [
-        "void",
-        "halve",
-        "keep"
-      ]
+      "enum": ["void", "halve", "keep"]
     },
     "basis": {
       "type": "string",
-      "enum": [
-        "regate_g3",
-        "regate_g5",
-        "report",
-        "health",
-        "overlay",
-        "pack_upgrade"
-      ]
+      "enum": ["regate_g3", "regate_g5", "report", "health", "overlay", "pack_upgrade"]
     },
     "gate_result_id": {
       "type": "string",
@@ -44,13 +28,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "item_id",
-    "correction",
-    "evidence_policy",
-    "basis",
-    "gate_result_id",
-    "effective_from"
-  ],
+  "required": ["item_id", "correction", "evidence_policy", "basis", "gate_result_id", "effective_from"],
   "additionalProperties": false
 }

@@ -12,9 +12,7 @@
       "const": "/internal/v1/ledger/verify"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": true
@@ -29,12 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "NFR-DATA-002",
-        "NFR-DATA-013",
-        "FR-SET-003",
-        "CR-27"
-      ]
+      "enum": ["NFR-DATA-002", "NFR-DATA-013", "FR-SET-003", "CR-27"]
     },
     "deadlineMs": {
       "const": null
@@ -69,11 +62,7 @@
                 "properties": {
                   "source": {
                     "type": "string",
-                    "enum": [
-                      "epoch",
-                      "checkpoint",
-                      "export_header"
-                    ]
+                    "enum": ["epoch", "checkpoint", "export_header"]
                   },
                   "ref": {
                     "type": "string",
@@ -98,28 +87,17 @@
                           "pattern": "^[0-9a-f]{64}$"
                         }
                       },
-                      "required": [
-                        "seq",
-                        "hash"
-                      ],
+                      "required": ["seq", "hash"],
                       "additionalProperties": false
                     }
                   }
                 },
-                "required": [
-                  "source",
-                  "ref",
-                  "heads"
-                ],
+                "required": ["source", "ref", "heads"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "verify_id",
-            "replay",
-            "anchors"
-          ],
+          "required": ["verify_id", "replay", "anchors"],
           "additionalProperties": false
         }
       }
@@ -136,17 +114,10 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "running",
-                "done",
-                "failed"
-              ]
+              "enum": ["running", "done", "failed"]
             },
             "chain_ok": {
-              "type": [
-                "boolean",
-                "null"
-              ]
+              "type": ["boolean", "null"]
             },
             "anchors": {
               "type": "array",
@@ -155,11 +126,7 @@
                 "properties": {
                   "source": {
                     "type": "string",
-                    "enum": [
-                      "epoch",
-                      "checkpoint",
-                      "export_header"
-                    ]
+                    "enum": ["epoch", "checkpoint", "export_header"]
                   },
                   "ref": {
                     "type": "string"
@@ -195,21 +162,12 @@
                           ]
                         }
                       },
-                      "required": [
-                        "device_id",
-                        "expected_seq",
-                        "actual_seq"
-                      ],
+                      "required": ["device_id", "expected_seq", "actual_seq"],
                       "additionalProperties": false
                     }
                   }
                 },
-                "required": [
-                  "source",
-                  "ref",
-                  "ok",
-                  "mismatches"
-                ],
+                "required": ["source", "ref", "ok", "mismatches"],
                 "additionalProperties": false
               }
             },
@@ -236,10 +194,7 @@
               ]
             },
             "match": {
-              "type": [
-                "boolean",
-                "null"
-              ]
+              "type": ["boolean", "null"]
             },
             "duration_ms": {
               "anyOf": [

@@ -8,8 +8,6 @@
       "maximum": 365
     }
   },
-  "required": [
-    "window_days"
-  ],
+  "required": ["window_days"],
   "additionalProperties": false
 }

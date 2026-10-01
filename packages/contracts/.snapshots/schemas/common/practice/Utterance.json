@@ -13,18 +13,10 @@
         },
         "source": {
           "type": "string",
-          "enum": [
-            "question_bank",
-            "template",
-            "rebuttal_bank"
-          ]
+          "enum": ["question_bank", "template", "rebuttal_bank"]
         }
       },
-      "required": [
-        "kind",
-        "text_md",
-        "source"
-      ],
+      "required": ["kind", "text_md", "source"],
       "additionalProperties": false
     },
     {
@@ -48,12 +40,7 @@
           "maxLength": 4000
         }
       },
-      "required": [
-        "kind",
-        "stream_ref",
-        "expires_at",
-        "fallback_text_md"
-      ],
+      "required": ["kind", "stream_ref", "expires_at", "fallback_text_md"],
       "additionalProperties": false
     }
   ]

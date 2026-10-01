@@ -12,13 +12,7 @@
       "const": "/internal/v1/inbox"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "idempotent": {
       "const": false
@@ -55,13 +49,7 @@
           "properties": {
             "producer": {
               "type": "string",
-              "enum": [
-                "gateway",
-                "content",
-                "learning",
-                "ai-gateway",
-                "ops-api"
-              ]
+              "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
             },
             "events": {
               "minItems": 1,
@@ -85,13 +73,7 @@
                   },
                   "producer": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "producer_seq": {
                     "type": "integer",
@@ -153,10 +135,7 @@
               }
             }
           },
-          "required": [
-            "producer",
-            "events"
-          ],
+          "required": ["producer", "events"],
           "additionalProperties": false
         }
       }
@@ -173,9 +152,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "acked_through_seq"
-          ],
+          "required": ["acked_through_seq"],
           "additionalProperties": false
         }
       }

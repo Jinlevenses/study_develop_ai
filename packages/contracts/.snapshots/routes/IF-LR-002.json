@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/sessions/active"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-STD-031"
-      ]
+      "enum": ["FR-STD-031"]
     },
     "deadlineMs": {
       "const": null
@@ -66,24 +62,11 @@
                     },
                     "template": {
                       "type": "string",
-                      "enum": [
-                        "standard",
-                        "placement",
-                        "verify",
-                        "promotion_exam",
-                        "weak_drill",
-                        "dday",
-                        "return"
-                      ]
+                      "enum": ["standard", "placement", "verify", "promotion_exam", "weak_drill", "dday", "return"]
                     },
                     "state": {
                       "type": "string",
-                      "enum": [
-                        "active",
-                        "paused",
-                        "completed",
-                        "abandoned"
-                      ]
+                      "enum": ["active", "paused", "completed", "abandoned"]
                     },
                     "scope": {
                       "anyOf": [
@@ -97,9 +80,7 @@
                                   "const": "all"
                                 }
                               },
-                              "required": [
-                                "kind"
-                              ],
+                              "required": ["kind"],
                               "additionalProperties": false
                             },
                             {
@@ -115,10 +96,7 @@
                                   "pattern": "^(?:path\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "path_id"
-                              ],
+                              "required": ["kind", "path_id"],
                               "additionalProperties": false
                             },
                             {
@@ -159,10 +137,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "tracks"
-                              ],
+                              "required": ["kind", "tracks"],
                               "additionalProperties": false
                             },
                             {
@@ -183,10 +158,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "concept_ids"
-                              ],
+                              "required": ["kind", "concept_ids"],
                               "additionalProperties": false
                             }
                           ]
@@ -231,11 +203,7 @@
                       "anyOf": [
                         {
                           "type": "string",
-                          "enum": [
-                            "light",
-                            "normal",
-                            "deep"
-                          ]
+                          "enum": ["light", "normal", "deep"]
                         },
                         {
                           "type": "null"
@@ -265,12 +233,7 @@
                     },
                     "ai_mode_at_start": {
                       "type": "string",
-                      "enum": [
-                        "FULL",
-                        "JUDGE_ONLY",
-                        "LLM_ONLY",
-                        "OFFLINE"
-                      ]
+                      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                     },
                     "relaxations": {
                       "maxItems": 10,
@@ -287,10 +250,7 @@
                             "maxLength": 200
                           }
                         },
-                        "required": [
-                          "rule",
-                          "message_ko"
-                        ],
+                        "required": ["rule", "message_ko"],
                         "additionalProperties": false
                       }
                     },
@@ -311,14 +271,7 @@
                           },
                           "slot": {
                             "type": "string",
-                            "enum": [
-                              "W",
-                              "R",
-                              "N",
-                              "D",
-                              "S",
-                              "C"
-                            ]
+                            "enum": ["W", "R", "N", "D", "S", "C"]
                           },
                           "mode_id": {
                             "type": "string",
@@ -395,11 +348,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "code",
-                                "label_ko",
-                                "value"
-                              ],
+                              "required": ["code", "label_ko", "value"],
                               "additionalProperties": false
                             }
                           },
@@ -408,14 +357,7 @@
                           },
                           "state": {
                             "type": "string",
-                            "enum": [
-                              "pending",
-                              "active",
-                              "awaiting_grade",
-                              "done",
-                              "skipped",
-                              "swapped"
-                            ]
+                            "enum": ["pending", "active", "awaiting_grade", "done", "skipped", "swapped"]
                           },
                           "est_minutes": {
                             "type": "number",
@@ -495,11 +437,7 @@
                           "maximum": 9007199254740991
                         }
                       },
-                      "required": [
-                        "blocks_total",
-                        "blocks_done",
-                        "elapsed_ms"
-                      ],
+                      "required": ["blocks_total", "blocks_done", "elapsed_ms"],
                       "additionalProperties": false
                     },
                     "pending_grades": {
@@ -533,9 +471,7 @@
               ]
             }
           },
-          "required": [
-            "session"
-          ],
+          "required": ["session"],
           "additionalProperties": false
         }
       }

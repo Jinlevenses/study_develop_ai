@@ -29,10 +29,6 @@
       ]
     }
   },
-  "required": [
-    "path",
-    "encrypt",
-    "passphrase"
-  ],
+  "required": ["path", "encrypt", "passphrase"],
   "additionalProperties": false
 }

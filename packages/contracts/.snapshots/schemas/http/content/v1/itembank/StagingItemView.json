@@ -7,15 +7,7 @@
     },
     "origin": {
       "type": "string",
-      "enum": [
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "user_authored",
-        "model_sample",
-        "gap"
-      ]
+      "enum": ["t1", "t2", "t3", "t4", "user_authored", "model_sample", "gap"]
     },
     "concept_id": {
       "type": "string",
@@ -62,22 +54,11 @@
     },
     "stakes": {
       "type": "string",
-      "enum": [
-        "S0",
-        "S1",
-        "S2"
-      ]
+      "enum": ["S0", "S1", "S2"]
     },
     "status": {
       "type": "string",
-      "enum": [
-        "draft",
-        "deferred",
-        "gated_pass",
-        "gated_fail",
-        "discarded",
-        "review"
-      ]
+      "enum": ["draft", "deferred", "gated_pass", "gated_fail", "discarded", "review"]
     },
     "preview_md": {
       "type": "string",
@@ -112,21 +93,13 @@
             },
             "curator_decision": {
               "type": "string",
-              "enum": [
-                "pending",
-                "approved",
-                "rejected"
-              ]
+              "enum": ["pending", "approved", "rejected"]
             },
             "s2_mode": {
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "cross_family",
-                    "same_family",
-                    "v7_review"
-                  ]
+                  "enum": ["cross_family", "same_family", "v7_review"]
                 },
                 {
                   "type": "null"
@@ -134,12 +107,7 @@
               ]
             }
           },
-          "required": [
-            "cross_judge_id",
-            "span_check_id",
-            "curator_decision",
-            "s2_mode"
-          ],
+          "required": ["cross_judge_id", "span_check_id", "curator_decision", "s2_mode"],
           "additionalProperties": false
         },
         {
@@ -153,16 +121,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "staging_id",
-    "origin",
-    "concept_id",
-    "format",
-    "stakes",
-    "status",
-    "preview_md",
-    "s2",
-    "updated_at"
-  ],
+  "required": ["staging_id", "origin", "concept_id", "format", "stakes", "status", "preview_md", "s2", "updated_at"],
   "additionalProperties": false
 }

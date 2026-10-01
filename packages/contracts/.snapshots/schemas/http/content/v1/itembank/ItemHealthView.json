@@ -69,14 +69,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "too_easy",
-          "too_hard",
-          "distractor_dead",
-          "discrimination_low",
-          "key_suspect",
-          "latency_outlier"
-        ]
+        "enum": ["too_easy", "too_hard", "distractor_dead", "discrimination_low", "key_suspect", "latency_outlier"]
       }
     },
     "stats": {
@@ -88,16 +81,10 @@
           "maximum": 9007199254740991
         },
         "p_correct": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "mean_latency_ms": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "option_freq": {
           "type": "object",
@@ -110,12 +97,7 @@
           }
         }
       },
-      "required": [
-        "n",
-        "p_correct",
-        "mean_latency_ms",
-        "option_freq"
-      ],
+      "required": ["n", "p_correct", "mean_latency_ms", "option_freq"],
       "additionalProperties": false
     },
     "updated_at": {
@@ -124,14 +106,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "item_id",
-    "concept_id",
-    "format",
-    "gate_status",
-    "flags",
-    "stats",
-    "updated_at"
-  ],
+  "required": ["item_id", "concept_id", "format", "gate_status", "flags", "stats", "updated_at"],
   "additionalProperties": false
 }

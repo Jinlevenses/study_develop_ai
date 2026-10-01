@@ -12,9 +12,7 @@
       "const": "/api/v1/review/radar"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-DSH-013"
-      ]
+      "enum": ["FR-DSH-013"]
     },
     "deadlineMs": {
       "const": null
@@ -81,12 +77,7 @@
                     "maxLength": 100
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "retention",
-                  "due_at",
-                  "reason_ko"
-                ],
+                "required": ["concept_id", "retention", "due_at", "reason_ko"],
                 "additionalProperties": false
               }
             },
@@ -96,10 +87,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "at_risk",
-            "computed_at"
-          ],
+          "required": ["at_risk", "computed_at"],
           "additionalProperties": false
         }
       }

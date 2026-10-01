@@ -27,11 +27,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "inbox_id",
-    "text",
-    "source_url",
-    "captured_at"
-  ],
+  "required": ["inbox_id", "text", "source_url", "captured_at"],
   "additionalProperties": false
 }

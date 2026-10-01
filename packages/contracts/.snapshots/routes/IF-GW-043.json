@@ -12,9 +12,7 @@
       "const": "/api/v1/concepts/{concept_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,14 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-005~008",
-        "FR-CUR-012",
-        "FR-CUR-018",
-        "FR-PRG-010",
-        "FR-PRG-011",
-        "FR-DSH-006"
-      ]
+      "enum": ["FR-CUR-005~008", "FR-CUR-012", "FR-CUR-018", "FR-PRG-010", "FR-PRG-011", "FR-DSH-006"]
     },
     "deadlineMs": {
       "const": null
@@ -62,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
             }
           },
-          "required": [
-            "concept_id"
-          ],
+          "required": ["concept_id"],
           "additionalProperties": false
         }
       }
@@ -118,20 +107,11 @@
                     },
                     "tier": {
                       "type": "string",
-                      "enum": [
-                        "A",
-                        "B",
-                        "C"
-                      ]
+                      "enum": ["A", "B", "C"]
                     },
                     "knowledge_type": {
                       "type": "string",
-                      "enum": [
-                        "D",
-                        "C",
-                        "P",
-                        "S"
-                      ]
+                      "enum": ["D", "C", "P", "S"]
                     },
                     "title_ko": {
                       "type": "string",
@@ -179,11 +159,7 @@
                     },
                     "volatility": {
                       "type": "string",
-                      "enum": [
-                        "stable",
-                        "evolving",
-                        "volatile"
-                      ]
+                      "enum": ["stable", "evolving", "volatile"]
                     },
                     "tags": {
                       "maxItems": 20,
@@ -233,11 +209,7 @@
                       "maximum": 9007199254740991
                     }
                   },
-                  "required": [
-                    "pack_id",
-                    "pack_version",
-                    "overlay_rev"
-                  ],
+                  "required": ["pack_id", "pack_version", "overlay_rev"],
                   "additionalProperties": false
                 },
                 "stages": {
@@ -261,10 +233,7 @@
                             "properties": {
                               "kind": {
                                 "type": "string",
-                                "enum": [
-                                  "mermaid",
-                                  "svg"
-                                ]
+                                "enum": ["mermaid", "svg"]
                               },
                               "src": {
                                 "type": "string",
@@ -275,20 +244,12 @@
                                 "maxLength": 300
                               }
                             },
-                            "required": [
-                              "kind",
-                              "src",
-                              "alt_ko"
-                            ],
+                            "required": ["kind", "src", "alt_ko"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "body_md",
-                        "placeholder",
-                        "diagrams"
-                      ],
+                      "required": ["body_md", "placeholder", "diagrams"],
                       "additionalProperties": false
                     },
                     "code": {
@@ -309,12 +270,7 @@
                             "properties": {
                               "kind": {
                                 "type": "string",
-                                "enum": [
-                                  "worked",
-                                  "faded",
-                                  "task",
-                                  "case"
-                                ]
+                                "enum": ["worked", "faded", "task", "case"]
                               },
                               "lang": {
                                 "anyOf": [
@@ -343,21 +299,12 @@
                                 "maxLength": 8000
                               }
                             },
-                            "required": [
-                              "kind",
-                              "lang",
-                              "code",
-                              "body_md"
-                            ],
+                            "required": ["kind", "lang", "code", "body_md"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "body_md",
-                        "placeholder",
-                        "examples"
-                      ],
+                      "required": ["body_md", "placeholder", "examples"],
                       "additionalProperties": false
                     },
                     "core": {
@@ -382,19 +329,11 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "body_md",
-                        "when_not_to_use_md",
-                        "placeholder"
-                      ],
+                      "required": ["body_md", "when_not_to_use_md", "placeholder"],
                       "additionalProperties": false
                     }
                   },
-                  "required": [
-                    "theory",
-                    "code",
-                    "core"
-                  ],
+                  "required": ["theory", "code", "core"],
                   "additionalProperties": false
                 },
                 "kus": {
@@ -429,11 +368,7 @@
                       },
                       "volatility": {
                         "type": "string",
-                        "enum": [
-                          "stable",
-                          "evolving",
-                          "volatile"
-                        ]
+                        "enum": ["stable", "evolving", "volatile"]
                       },
                       "valid_as_of": {
                         "anyOf": [
@@ -496,10 +431,7 @@
                                       "maximum": 9007199254740991
                                     }
                                   },
-                                  "required": [
-                                    "start",
-                                    "end"
-                                  ],
+                                  "required": ["start", "end"],
                                   "additionalProperties": false
                                 },
                                 {
@@ -508,11 +440,7 @@
                               ]
                             }
                           },
-                          "required": [
-                            "source_id",
-                            "locator",
-                            "span"
-                          ],
+                          "required": ["source_id", "locator", "span"],
                           "additionalProperties": false
                         }
                       }
@@ -564,20 +492,10 @@
                       },
                       "status": {
                         "type": "string",
-                        "enum": [
-                          "active",
-                          "retired"
-                        ]
+                        "enum": ["active", "retired"]
                       }
                     },
-                    "required": [
-                      "mc_id",
-                      "wrong_belief_ko",
-                      "correction_ko",
-                      "meta_family",
-                      "refutes",
-                      "status"
-                    ],
+                    "required": ["mc_id", "wrong_belief_ko", "correction_ko", "meta_family", "refutes", "status"],
                     "additionalProperties": false
                   }
                 },
@@ -625,13 +543,7 @@
                       },
                       "grade": {
                         "type": "string",
-                        "enum": [
-                          "A",
-                          "B",
-                          "C",
-                          "D",
-                          "P"
-                        ]
+                        "enum": ["A", "B", "C", "D", "P"]
                       },
                       "url": {
                         "anyOf": [
@@ -671,15 +583,7 @@
                         ]
                       }
                     },
-                    "required": [
-                      "source_id",
-                      "title",
-                      "grade",
-                      "url",
-                      "edition",
-                      "license",
-                      "retrieved_at"
-                    ],
+                    "required": ["source_id", "title", "grade", "url", "edition", "license", "retrieved_at"],
                     "additionalProperties": false
                   }
                 },
@@ -687,13 +591,7 @@
                   "type": "object",
                   "propertyNames": {
                     "type": "string",
-                    "enum": [
-                      "1",
-                      "2",
-                      "3",
-                      "4",
-                      "5"
-                    ]
+                    "enum": ["1", "2", "3", "4", "5"]
                   },
                   "additionalProperties": {
                     "type": "object",
@@ -707,18 +605,10 @@
                         }
                       }
                     },
-                    "required": [
-                      "questions_md"
-                    ],
+                    "required": ["questions_md"],
                     "additionalProperties": false
                   },
-                  "required": [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5"
-                  ]
+                  "required": ["1", "2", "3", "4", "5"]
                 },
                 "embedded_items": {
                   "maxItems": 5,
@@ -797,18 +687,11 @@
                       },
                       "response_mode": {
                         "type": "string",
-                        "enum": [
-                          "recognition",
-                          "production"
-                        ]
+                        "enum": ["recognition", "production"]
                       },
                       "tier": {
                         "type": "string",
-                        "enum": [
-                          "A",
-                          "B",
-                          "C"
-                        ]
+                        "enum": ["A", "B", "C"]
                       },
                       "level": {
                         "type": "integer",
@@ -817,11 +700,7 @@
                       },
                       "stakes": {
                         "type": "string",
-                        "enum": [
-                          "S0",
-                          "S1",
-                          "S2"
-                        ]
+                        "enum": ["S0", "S1", "S2"]
                       },
                       "n_options": {
                         "type": "integer",
@@ -842,9 +721,7 @@
                                 "const": "ox"
                               }
                             },
-                            "required": [
-                              "kind"
-                            ],
+                            "required": ["kind"],
                             "additionalProperties": false
                           },
                           {
@@ -868,9 +745,7 @@
                                       "maxLength": 2000
                                     }
                                   },
-                                  "required": [
-                                    "text_md"
-                                  ],
+                                  "required": ["text_md"],
                                   "additionalProperties": false
                                 }
                               },
@@ -887,12 +762,7 @@
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "kind",
-                              "options",
-                              "order",
-                              "multi"
-                            ],
+                            "required": ["kind", "options", "order", "multi"],
                             "additionalProperties": false
                           },
                           {
@@ -919,11 +789,7 @@
                                 ]
                               }
                             },
-                            "required": [
-                              "kind",
-                              "max_chars",
-                              "placeholder_ko"
-                            ],
+                            "required": ["kind", "max_chars", "placeholder_ko"],
                             "additionalProperties": false
                           },
                           {
@@ -952,18 +818,12 @@
                                       "maximum": 500
                                     }
                                   },
-                                  "required": [
-                                    "max_chars"
-                                  ],
+                                  "required": ["max_chars"],
                                   "additionalProperties": false
                                 }
                               }
                             },
-                            "required": [
-                              "kind",
-                              "template_md",
-                              "blanks"
-                            ],
+                            "required": ["kind", "template_md", "blanks"],
                             "additionalProperties": false
                           },
                           {
@@ -996,11 +856,7 @@
                                 }
                               }
                             },
-                            "required": [
-                              "kind",
-                              "left",
-                              "right"
-                            ],
+                            "required": ["kind", "left", "right"],
                             "additionalProperties": false
                           },
                           {
@@ -1012,18 +868,11 @@
                               },
                               "lang": {
                                 "type": "string",
-                                "enum": [
-                                  "js",
-                                  "ts"
-                                ]
+                                "enum": ["js", "ts"]
                               },
                               "mode": {
                                 "type": "string",
-                                "enum": [
-                                  "write",
-                                  "predict_output",
-                                  "fix"
-                                ]
+                                "enum": ["write", "predict_output", "fix"]
                               },
                               "starter": {
                                 "type": "string",
@@ -1044,14 +893,7 @@
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "kind",
-                              "lang",
-                              "mode",
-                              "starter",
-                              "public_tests_md",
-                              "runnable"
-                            ],
+                            "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
                             "additionalProperties": false
                           },
                           {
@@ -1073,12 +915,7 @@
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "kind",
-                              "schema_md",
-                              "starter",
-                              "runnable"
-                            ],
+                            "required": ["kind", "schema_md", "starter", "runnable"],
                             "additionalProperties": false
                           },
                           {
@@ -1113,12 +950,7 @@
                                 "maximum": 20
                               }
                             },
-                            "required": [
-                              "kind",
-                              "lines",
-                              "order",
-                              "max_select"
-                            ],
+                            "required": ["kind", "lines", "order", "max_select"],
                             "additionalProperties": false
                           },
                           {
@@ -1140,10 +972,7 @@
                                 ]
                               }
                             },
-                            "required": [
-                              "kind",
-                              "unit_hint"
-                            ],
+                            "required": ["kind", "unit_hint"],
                             "additionalProperties": false
                           },
                           {
@@ -1190,21 +1019,12 @@
                                       "maxLength": 60
                                     }
                                   },
-                                  "required": [
-                                    "key",
-                                    "label_ko"
-                                  ],
+                                  "required": ["key", "label_ko"],
                                   "additionalProperties": false
                                 }
                               }
                             },
-                            "required": [
-                              "kind",
-                              "min_chars",
-                              "max_chars",
-                              "kp_count",
-                              "rubric_dims"
-                            ],
+                            "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
                             "additionalProperties": false
                           },
                           {
@@ -1238,17 +1058,12 @@
                                               "maxLength": 1000
                                             }
                                           },
-                                          "required": [
-                                            "text_md"
-                                          ],
+                                          "required": ["text_md"],
                                           "additionalProperties": false
                                         }
                                       }
                                     },
-                                    "required": [
-                                      "stem_md",
-                                      "options"
-                                    ],
+                                    "required": ["stem_md", "options"],
                                     "additionalProperties": false
                                   },
                                   "b": {
@@ -1272,35 +1087,23 @@
                                               "maxLength": 1000
                                             }
                                           },
-                                          "required": [
-                                            "text_md"
-                                          ],
+                                          "required": ["text_md"],
                                           "additionalProperties": false
                                         }
                                       }
                                     },
-                                    "required": [
-                                      "stem_md",
-                                      "options"
-                                    ],
+                                    "required": ["stem_md", "options"],
                                     "additionalProperties": false
                                   }
                                 },
-                                "required": [
-                                  "a",
-                                  "b"
-                                ],
+                                "required": ["a", "b"],
                                 "additionalProperties": false
                               },
                               "pivot_required": {
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "kind",
-                              "parts",
-                              "pivot_required"
-                            ],
+                            "required": ["kind", "parts", "pivot_required"],
                             "additionalProperties": false
                           },
                           {
@@ -1334,12 +1137,7 @@
                                 }
                               }
                             },
-                            "required": [
-                              "kind",
-                              "diff_md",
-                              "lines",
-                              "order"
-                            ],
+                            "required": ["kind", "diff_md", "lines", "order"],
                             "additionalProperties": false
                           },
                           {
@@ -1361,18 +1159,10 @@
                               },
                               "item_format": {
                                 "type": "string",
-                                "enum": [
-                                  "mcq",
-                                  "ox",
-                                  "short"
-                                ]
+                                "enum": ["mcq", "ox", "short"]
                               }
                             },
-                            "required": [
-                              "kind",
-                              "target_ku_ids",
-                              "item_format"
-                            ],
+                            "required": ["kind", "target_ku_ids", "item_format"],
                             "additionalProperties": false
                           },
                           {
@@ -1400,9 +1190,7 @@
                                       "maxLength": 2000
                                     }
                                   },
-                                  "required": [
-                                    "text_md"
-                                  ],
+                                  "required": ["text_md"],
                                   "additionalProperties": false
                                 }
                               },
@@ -1416,20 +1204,10 @@
                               },
                               "rationale": {
                                 "type": "string",
-                                "enum": [
-                                  "none",
-                                  "optional",
-                                  "required"
-                                ]
+                                "enum": ["none", "optional", "required"]
                               }
                             },
-                            "required": [
-                              "kind",
-                              "node_key",
-                              "options",
-                              "order",
-                              "rationale"
-                            ],
+                            "required": ["kind", "node_key", "options", "order", "rationale"],
                             "additionalProperties": false
                           }
                         ]
@@ -1459,30 +1237,14 @@
                         "properties": {
                           "source_kind": {
                             "type": "string",
-                            "enum": [
-                              "seed",
-                              "t1",
-                              "t2",
-                              "t3",
-                              "t4",
-                              "imported",
-                              "user"
-                            ]
+                            "enum": ["seed", "t1", "t2", "t3", "t4", "imported", "user"]
                           },
                           "trust": {
                             "type": "string",
-                            "enum": [
-                              "seed",
-                              "verified",
-                              "user",
-                              "llm_unverified"
-                            ]
+                            "enum": ["seed", "verified", "user", "llm_unverified"]
                           }
                         },
-                        "required": [
-                          "source_kind",
-                          "trust"
-                        ],
+                        "required": ["source_kind", "trust"],
                         "additionalProperties": false
                       }
                     },
@@ -1532,11 +1294,7 @@
                       "maximum": 9007199254740991
                     }
                   },
-                  "required": [
-                    "valid_as_of_min",
-                    "cl_x",
-                    "volatile_ku_count"
-                  ],
+                  "required": ["valid_as_of_min", "cl_x", "volatile_ku_count"],
                   "additionalProperties": false
                 }
               },
@@ -1569,29 +1327,14 @@
                     },
                     "lifecycle": {
                       "type": "string",
-                      "enum": [
-                        "CL-0",
-                        "CL-1",
-                        "CL-2",
-                        "CL-3",
-                        "CL-4",
-                        "CL-5",
-                        "CL-6",
-                        "CL-7",
-                        "CL-8",
-                        "CL-X"
-                      ]
+                      "enum": ["CL-0", "CL-1", "CL-2", "CL-3", "CL-4", "CL-5", "CL-6", "CL-7", "CL-8", "CL-X"]
                     },
                     "mastery": {
                       "type": "object",
                       "properties": {
                         "status": {
                           "type": "string",
-                          "enum": [
-                            "unseen",
-                            "learning",
-                            "mastered"
-                          ]
+                          "enum": ["unseen", "learning", "mastered"]
                         },
                         "provisional": {
                           "type": "boolean"
@@ -1672,10 +1415,7 @@
                       "type": "object",
                       "properties": {
                         "display": {
-                          "type": [
-                            "number",
-                            "null"
-                          ]
+                          "type": ["number", "null"]
                         },
                         "n_graded": {
                           "type": "integer",
@@ -1691,12 +1431,7 @@
                           "maximum": 9007199254740991
                         }
                       },
-                      "required": [
-                        "display",
-                        "n_graded",
-                        "evidence_sufficient",
-                        "display_min_events"
-                      ],
+                      "required": ["display", "n_graded", "evidence_sufficient", "display_min_events"],
                       "additionalProperties": false
                     },
                     "competence": {
@@ -1718,13 +1453,7 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "mastered",
-                        "retained",
-                        "deepened",
-                        "transferred",
-                        "taught"
-                      ],
+                      "required": ["mastered", "retained", "deepened", "transferred", "taught"],
                       "additionalProperties": false
                     },
                     "cards": {
@@ -1749,26 +1478,15 @@
                           },
                           "response_mode": {
                             "type": "string",
-                            "enum": [
-                              "recognition",
-                              "production"
-                            ]
+                            "enum": ["recognition", "production"]
                           },
                           "tier": {
                             "type": "string",
-                            "enum": [
-                              "A",
-                              "B",
-                              "C"
-                            ]
+                            "enum": ["A", "B", "C"]
                           },
                           "status": {
                             "type": "string",
-                            "enum": [
-                              "active",
-                              "suspended",
-                              "retired"
-                            ]
+                            "enum": ["active", "suspended", "retired"]
                           },
                           "due_at": {
                             "anyOf": [
@@ -1853,12 +1571,7 @@
                     },
                     "entry_stage": {
                       "type": "string",
-                      "enum": [
-                        "theory",
-                        "pretest",
-                        "problem",
-                        "problem_definition"
-                      ]
+                      "enum": ["theory", "pretest", "problem", "problem_definition"]
                     },
                     "nba": {
                       "anyOf": [
@@ -1867,25 +1580,14 @@
                           "properties": {
                             "kind": {
                               "type": "string",
-                              "enum": [
-                                "learn",
-                                "practice",
-                                "verify",
-                                "dig",
-                                "case",
-                                "review",
-                                "revalidate"
-                              ]
+                              "enum": ["learn", "practice", "verify", "dig", "case", "review", "revalidate"]
                             },
                             "label_ko": {
                               "type": "string",
                               "maxLength": 60
                             }
                           },
-                          "required": [
-                            "kind",
-                            "label_ko"
-                          ],
+                          "required": ["kind", "label_ko"],
                           "additionalProperties": false
                         },
                         {
@@ -1928,12 +1630,7 @@
             },
             "entry_stage": {
               "type": "string",
-              "enum": [
-                "theory",
-                "pretest",
-                "problem",
-                "problem_definition"
-              ]
+              "enum": ["theory", "pretest", "problem", "problem_definition"]
             },
             "degraded": {
               "type": "array",
@@ -1946,34 +1643,19 @@
                   },
                   "dependency": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "code": {
                     "type": "string",
                     "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
                   }
                 },
-                "required": [
-                  "part",
-                  "dependency",
-                  "code"
-                ],
+                "required": ["part", "dependency", "code"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "content",
-            "learner",
-            "entry_stage",
-            "degraded"
-          ],
+          "required": ["content", "learner", "entry_stage", "degraded"],
           "additionalProperties": false
         }
       }

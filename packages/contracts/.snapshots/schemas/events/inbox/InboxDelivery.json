@@ -3,13 +3,7 @@
   "properties": {
     "producer": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "events": {
       "minItems": 1,
@@ -33,13 +27,7 @@
           },
           "producer": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "producer_seq": {
             "type": "integer",
@@ -101,9 +89,6 @@
       }
     }
   },
-  "required": [
-    "producer",
-    "events"
-  ],
+  "required": ["producer", "events"],
   "additionalProperties": false
 }

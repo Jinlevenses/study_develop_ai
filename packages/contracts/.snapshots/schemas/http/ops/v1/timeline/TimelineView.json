@@ -18,22 +18,11 @@
           },
           "svc": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "outbox",
-              "inbox",
-              "inbox_dead",
-              "log"
-            ]
+            "enum": ["outbox", "inbox", "inbox_dead", "log"]
           },
           "type": {
             "anyOf": [
@@ -76,13 +65,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "enum": [
-                  "debug",
-                  "info",
-                  "warn",
-                  "error",
-                  "fatal"
-                ]
+                "enum": ["debug", "info", "warn", "error", "fatal"]
               },
               {
                 "type": "null"
@@ -90,23 +73,11 @@
             ]
           }
         },
-        "required": [
-          "ts",
-          "svc",
-          "kind",
-          "type",
-          "event_id",
-          "causation_id",
-          "summary",
-          "level"
-        ],
+        "required": ["ts", "svc", "kind", "type", "event_id", "causation_id", "summary", "level"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "correlation_id",
-    "entries"
-  ],
+  "required": ["correlation_id", "entries"],
   "additionalProperties": false
 }

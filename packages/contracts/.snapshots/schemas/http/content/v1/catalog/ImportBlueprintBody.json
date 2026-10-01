@@ -16,10 +16,6 @@
       "maxLength": 40
     }
   },
-  "required": [
-    "blueprint_id",
-    "file_path",
-    "edition"
-  ],
+  "required": ["blueprint_id", "file_path", "edition"],
   "additionalProperties": false
 }

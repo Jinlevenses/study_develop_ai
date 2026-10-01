@@ -12,9 +12,7 @@
       "const": "/api/v1/evidence/{concept_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-DSH-007",
-        "FR-PRG-009",
-        "FR-PRG-010"
-      ]
+      "enum": ["FR-DSH-007", "FR-PRG-009", "FR-PRG-010"]
     },
     "deadlineMs": {
       "const": null
@@ -59,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
             }
           },
-          "required": [
-            "concept_id"
-          ],
+          "required": ["concept_id"],
           "additionalProperties": false
         }
       }
@@ -82,11 +74,7 @@
               "properties": {
                 "status": {
                   "type": "string",
-                  "enum": [
-                    "unseen",
-                    "learning",
-                    "mastered"
-                  ]
+                  "enum": ["unseen", "learning", "mastered"]
                 },
                 "provisional": {
                   "type": "boolean"
@@ -167,10 +155,7 @@
               "type": "object",
               "properties": {
                 "display": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": ["number", "null"]
                 },
                 "n_graded": {
                   "type": "integer",
@@ -186,12 +171,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "display",
-                "n_graded",
-                "evidence_sufficient",
-                "display_min_events"
-              ],
+              "required": ["display", "n_graded", "evidence_sufficient", "display_min_events"],
               "additionalProperties": false
             },
             "gates": {
@@ -212,16 +192,10 @@
                     "type": "boolean"
                   },
                   "value": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "threshold": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "evidence_event_ids": {
                     "maxItems": 50,
@@ -243,15 +217,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "gate_id",
-                  "label_ko",
-                  "met",
-                  "value",
-                  "threshold",
-                  "evidence_event_ids",
-                  "shortfall_ko"
-                ],
+                "required": ["gate_id", "label_ko", "met", "value", "threshold", "evidence_event_ids", "shortfall_ko"],
                 "additionalProperties": false
               }
             },
@@ -317,13 +283,7 @@
                     }
                   }
                 },
-                "required": [
-                  "format",
-                  "counted",
-                  "best_w_format",
-                  "best_w_grader",
-                  "event_ids"
-                ],
+                "required": ["format", "counted", "best_w_format", "best_w_grader", "event_ids"],
                 "additionalProperties": false
               }
             },
@@ -448,12 +408,7 @@
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "correct",
-                          "partial",
-                          "incorrect",
-                          "pending"
-                        ]
+                        "enum": ["correct", "partial", "incorrect", "pending"]
                       },
                       {
                         "type": "null"
@@ -476,14 +431,7 @@
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "D",
-                          "J",
-                          "LJ",
-                          "H",
-                          "S",
-                          "PENDING"
-                        ]
+                        "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                       },
                       {
                         "type": "null"

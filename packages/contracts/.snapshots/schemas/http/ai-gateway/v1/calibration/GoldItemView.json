@@ -39,12 +39,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "model_labeled_draft",
-        "user_confirmed",
-        "user_corrected",
-        "skipped"
-      ]
+      "enum": ["model_labeled_draft", "user_confirmed", "user_corrected", "skipped"]
     },
     "updated_at": {
       "type": "integer",
@@ -52,11 +47,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "gold_id",
-    "task_id",
-    "state",
-    "updated_at"
-  ],
+  "required": ["gold_id", "task_id", "state", "updated_at"],
   "additionalProperties": false
 }

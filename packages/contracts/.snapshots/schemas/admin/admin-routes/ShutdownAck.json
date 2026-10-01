@@ -12,9 +12,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "accepted_at",
-    "grace_ms"
-  ],
+  "required": ["accepted_at", "grace_ms"],
   "additionalProperties": false
 }

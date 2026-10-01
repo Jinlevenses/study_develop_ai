@@ -3,11 +3,7 @@
   "properties": {
     "action_strength": {
       "type": "string",
-      "enum": [
-        "observe",
-        "suggest",
-        "auto_adjust"
-      ]
+      "enum": ["observe", "suggest", "auto_adjust"]
     },
     "muted": {
       "maxItems": 20,
@@ -18,9 +14,6 @@
       }
     }
   },
-  "required": [
-    "action_strength",
-    "muted"
-  ],
+  "required": ["action_strength", "muted"],
   "additionalProperties": false
 }

@@ -48,10 +48,7 @@
     },
     "basis": {
       "type": "string",
-      "enum": [
-        "promotion_exam",
-        "placement"
-      ]
+      "enum": ["promotion_exam", "placement"]
     },
     "gates": {
       "maxItems": 20,
@@ -71,16 +68,10 @@
             "type": "boolean"
           },
           "value": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "threshold": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "evidence_event_ids": {
             "maxItems": 50,
@@ -102,15 +93,7 @@
             ]
           }
         },
-        "required": [
-          "gate_id",
-          "label_ko",
-          "met",
-          "value",
-          "threshold",
-          "evidence_event_ids",
-          "shortfall_ko"
-        ],
+        "required": ["gate_id", "label_ko", "met", "value", "threshold", "evidence_event_ids", "shortfall_ko"],
         "additionalProperties": false
       }
     },
@@ -123,27 +106,14 @@
         },
         "ai_mode": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         },
         "sp1_state": {
           "type": "string",
-          "enum": [
-            "pass",
-            "fail",
-            "unknown"
-          ]
+          "enum": ["pass", "fail", "unknown"]
         }
       },
-      "required": [
-        "policy_version",
-        "ai_mode",
-        "sp1_state"
-      ],
+      "required": ["policy_version", "ai_mode", "sp1_state"],
       "additionalProperties": false
     },
     "study_day": {
@@ -151,15 +121,6 @@
       "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
     }
   },
-  "required": [
-    "track",
-    "from",
-    "to",
-    "provisional",
-    "basis",
-    "gates",
-    "profile",
-    "study_day"
-  ],
+  "required": ["track", "from", "to", "provisional", "basis", "gates", "profile", "study_day"],
   "additionalProperties": false
 }

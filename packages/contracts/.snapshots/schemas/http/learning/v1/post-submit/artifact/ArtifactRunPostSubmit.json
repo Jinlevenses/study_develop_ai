@@ -16,21 +16,11 @@
     },
     "template_kind": {
       "type": "string",
-      "enum": [
-        "adr",
-        "runbook",
-        "postmortem",
-        "design_review",
-        "standard_clause"
-      ]
+      "enum": ["adr", "runbook", "postmortem", "design_review", "standard_clause"]
     },
     "state": {
       "type": "string",
-      "enum": [
-        "graded",
-        "awaiting_self_grade",
-        "rebuttal"
-      ]
+      "enum": ["graded", "awaiting_self_grade", "rebuttal"]
     },
     "submitted_text": {
       "type": "string",
@@ -73,11 +63,7 @@
             "minimum": 1
           }
         },
-        "required": [
-          "label_ko",
-          "score",
-          "max"
-        ],
+        "required": ["label_ko", "score", "max"],
         "additionalProperties": false
       }
     },

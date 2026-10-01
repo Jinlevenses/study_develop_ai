@@ -6,8 +6,6 @@
       "pattern": "^[A-Za-z0-9_-]{43}$"
     }
   },
-  "required": [
-    "bt"
-  ],
+  "required": ["bt"],
   "additionalProperties": false
 }

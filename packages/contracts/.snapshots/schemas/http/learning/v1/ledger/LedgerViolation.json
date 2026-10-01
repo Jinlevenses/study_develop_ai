@@ -42,11 +42,6 @@
       "maxLength": 300
     }
   },
-  "required": [
-    "device_id",
-    "device_seq",
-    "kind",
-    "detail"
-  ],
+  "required": ["device_id", "device_seq", "kind", "detail"],
   "additionalProperties": false
 }

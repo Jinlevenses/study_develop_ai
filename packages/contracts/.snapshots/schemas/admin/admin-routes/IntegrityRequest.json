@@ -3,14 +3,9 @@
   "properties": {
     "level": {
       "type": "string",
-      "enum": [
-        "quick",
-        "full"
-      ]
+      "enum": ["quick", "full"]
     }
   },
-  "required": [
-    "level"
-  ],
+  "required": ["level"],
   "additionalProperties": false
 }

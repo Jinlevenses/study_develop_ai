@@ -3,35 +3,17 @@
   "properties": {
     "kind": {
       "type": "string",
-      "enum": [
-        "attempt",
-        "dialog_turn",
-        "blank_note",
-        "item",
-        "import",
-        "pack",
-        "calibration",
-        "appeal",
-        "system"
-      ]
+      "enum": ["attempt", "dialog_turn", "blank_note", "item", "import", "pack", "calibration", "appeal", "system"]
     },
     "phase": {
       "type": "string",
-      "enum": [
-        "pre_submit",
-        "post_submit",
-        "n_a"
-      ]
+      "enum": ["pre_submit", "post_submit", "n_a"]
     },
     "id": {
       "type": "string",
       "maxLength": 160
     }
   },
-  "required": [
-    "kind",
-    "phase",
-    "id"
-  ],
+  "required": ["kind", "phase", "id"],
   "additionalProperties": false
 }

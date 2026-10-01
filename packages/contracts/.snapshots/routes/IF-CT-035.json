@@ -12,9 +12,7 @@
       "const": "/internal/v1/acquisition/inbox"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-IMP-013"
-      ]
+      "enum": ["FR-IMP-013"]
     },
     "deadlineMs": {
       "const": 500
@@ -77,12 +73,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "inbox_id",
-            "text",
-            "source_url",
-            "captured_at"
-          ],
+          "required": ["inbox_id", "text", "source_url", "captured_at"],
           "additionalProperties": false
         }
       }
@@ -103,10 +94,7 @@
             },
             "masking": {
               "type": "string",
-              "enum": [
-                "full",
-                "partial"
-              ]
+              "enum": ["full", "partial"]
             },
             "source_url": {
               "anyOf": [
@@ -121,13 +109,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "new",
-                "triaged",
-                "linked",
-                "imported",
-                "discarded"
-              ]
+              "enum": ["new", "triaged", "linked", "imported", "discarded"]
             },
             "matches": {
               "maxItems": 10,
@@ -144,10 +126,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "score"
-                ],
+                "required": ["concept_id", "score"],
                 "additionalProperties": false
               }
             },

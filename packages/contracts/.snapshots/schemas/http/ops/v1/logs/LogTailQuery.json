@@ -5,13 +5,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "gateway",
-            "content",
-            "learning",
-            "ai-gateway",
-            "ops-api"
-          ]
+          "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
         },
         {
           "type": "string",
@@ -26,9 +20,6 @@
       "maximum": 5000
     }
   },
-  "required": [
-    "svc",
-    "n"
-  ],
+  "required": ["svc", "n"],
   "additionalProperties": false
 }

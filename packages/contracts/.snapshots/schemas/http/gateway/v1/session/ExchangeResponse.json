@@ -16,18 +16,9 @@
     },
     "profile": {
       "type": "string",
-      "enum": [
-        "prod",
-        "dev",
-        "test"
-      ]
+      "enum": ["prod", "dev", "test"]
     }
   },
-  "required": [
-    "session_established",
-    "port",
-    "app_version",
-    "profile"
-  ],
+  "required": ["session_established", "port", "app_version", "profile"],
   "additionalProperties": false
 }

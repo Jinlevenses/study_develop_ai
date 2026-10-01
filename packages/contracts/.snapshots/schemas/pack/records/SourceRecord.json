@@ -12,15 +12,7 @@
     },
     "source_type": {
       "type": "string",
-      "enum": [
-        "web",
-        "doc",
-        "book",
-        "rfc",
-        "paper",
-        "repo",
-        "user"
-      ]
+      "enum": ["web", "doc", "book", "rfc", "paper", "repo", "user"]
     },
     "title": {
       "type": "string",
@@ -50,13 +42,7 @@
     },
     "license_grade": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C",
-        "D",
-        "P"
-      ]
+      "enum": ["A", "B", "C", "D", "P"]
     },
     "fetched_at": {
       "anyOf": [

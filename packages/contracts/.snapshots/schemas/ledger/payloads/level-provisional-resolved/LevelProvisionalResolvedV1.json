@@ -33,10 +33,7 @@
     },
     "outcome": {
       "type": "string",
-      "enum": [
-        "confirmed",
-        "provisional_revoked"
-      ]
+      "enum": ["confirmed", "provisional_revoked"]
     },
     "needs_reconfirmation": {
       "type": "boolean"
@@ -54,13 +51,6 @@
       "pattern": "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$"
     }
   },
-  "required": [
-    "track",
-    "level",
-    "outcome",
-    "needs_reconfirmation",
-    "regrade_verdict_ids",
-    "study_day"
-  ],
+  "required": ["track", "level", "outcome", "needs_reconfirmation", "regrade_verdict_ids", "study_day"],
   "additionalProperties": false
 }

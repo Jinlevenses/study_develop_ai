@@ -44,28 +44,14 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "calls",
-        "krw",
-        "quota_pct",
-        "duration_s"
-      ],
+      "required": ["calls", "krw", "quota_pct", "duration_s"],
       "additionalProperties": false
     },
     "requested_by": {
       "type": "string",
-      "enum": [
-        "content",
-        "user",
-        "system"
-      ]
+      "enum": ["content", "user", "system"]
     }
   },
-  "required": [
-    "work_order_id",
-    "purpose",
-    "estimate",
-    "requested_by"
-  ],
+  "required": ["work_order_id", "purpose", "estimate", "requested_by"],
   "additionalProperties": false
 }

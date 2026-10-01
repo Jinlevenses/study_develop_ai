@@ -12,14 +12,7 @@
     },
     "ur14_family": {
       "type": "string",
-      "enum": [
-        "개념이해",
-        "실습",
-        "문제",
-        "개념 디깅",
-        "OX",
-        "백지노트"
-      ]
+      "enum": ["개념이해", "실습", "문제", "개념 디깅", "OX", "백지노트"]
     },
     "offline_path": {
       "type": "string",
@@ -37,19 +30,9 @@
     },
     "status": {
       "type": "string",
-      "enum": [
-        "included",
-        "deferred"
-      ]
+      "enum": ["included", "deferred"]
     }
   },
-  "required": [
-    "mode_id",
-    "name_ko",
-    "ur14_family",
-    "offline_path",
-    "e2e_ids",
-    "status"
-  ],
+  "required": ["mode_id", "name_ko", "ur14_family", "offline_path", "e2e_ids", "status"],
   "additionalProperties": false
 }

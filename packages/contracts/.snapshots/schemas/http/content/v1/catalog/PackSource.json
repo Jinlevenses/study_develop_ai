@@ -40,10 +40,7 @@
           ]
         }
       },
-      "required": [
-        "kind",
-        "track"
-      ],
+      "required": ["kind", "track"],
       "additionalProperties": false
     },
     {
@@ -59,10 +56,7 @@
           "maxLength": 1024
         }
       },
-      "required": [
-        "kind",
-        "path"
-      ],
+      "required": ["kind", "path"],
       "additionalProperties": false
     },
     {
@@ -78,10 +72,7 @@
           "maxLength": 1024
         }
       },
-      "required": [
-        "kind",
-        "dir"
-      ],
+      "required": ["kind", "dir"],
       "additionalProperties": false
     }
   ]

@@ -9,17 +9,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "judge",
-          "generate",
-          "batch"
-        ]
+        "enum": ["judge", "generate", "batch"]
       }
     }
   },
-  "required": [
-    "granted",
-    "scopes"
-  ],
+  "required": ["granted", "scopes"],
   "additionalProperties": false
 }

@@ -12,9 +12,7 @@
       "const": "/internal/v1/providers/generic-cli"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-024",
-        "IR-018"
-      ]
+      "enum": ["FR-AI-024", "IR-018"]
     },
     "deadlineMs": {
       "const": null
@@ -91,10 +86,7 @@
                       "pattern": "^(\\/[^/]*)*$"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "pointer"
-                  ],
+                  "required": ["kind", "pointer"],
                   "additionalProperties": false
                 },
                 {
@@ -105,9 +97,7 @@
                       "const": "text"
                     }
                   },
-                  "required": [
-                    "kind"
-                  ],
+                  "required": ["kind"],
                   "additionalProperties": false
                 }
               ]
@@ -135,10 +125,7 @@
                   ]
                 }
               },
-              "required": [
-                "args",
-                "expect_regex"
-              ],
+              "required": ["args", "expect_regex"],
               "additionalProperties": false
             },
             "isolation": {
@@ -154,16 +141,10 @@
                 },
                 "home": {
                   "type": "string",
-                  "enum": [
-                    "empty_tmp",
-                    "fathom_cli_home"
-                  ]
+                  "enum": ["empty_tmp", "fathom_cli_home"]
                 }
               },
-              "required": [
-                "flags",
-                "home"
-              ],
+              "required": ["flags", "home"],
               "additionalProperties": false
             },
             "models": {
@@ -203,11 +184,7 @@
                   ]
                 }
               },
-              "required": [
-                "low",
-                "mid",
-                "high"
-              ],
+              "required": ["low", "mid", "high"],
               "additionalProperties": false
             },
             "timeout_ms": {
@@ -217,23 +194,11 @@
             },
             "family": {
               "type": "string",
-              "enum": [
-                "anthropic",
-                "openai",
-                "google",
-                "typesafe",
-                "local",
-                "other"
-              ]
+              "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
             },
             "billing_mode": {
               "type": "string",
-              "enum": [
-                "subscription",
-                "metered",
-                "free",
-                "local"
-              ]
+              "enum": ["subscription", "metered", "free", "local"]
             }
           },
           "required": [
@@ -266,24 +231,11 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "jev",
-                "llm_api",
-                "llm_cli",
-                "generic_cli",
-                "local_llm"
-              ]
+              "enum": ["jev", "llm_api", "llm_cli", "generic_cli", "local_llm"]
             },
             "family": {
               "type": "string",
-              "enum": [
-                "anthropic",
-                "openai",
-                "google",
-                "typesafe",
-                "local",
-                "other"
-              ]
+              "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
             },
             "display_name": {
               "type": "string",
@@ -291,13 +243,7 @@
             },
             "status": {
               "type": "string",
-              "enum": [
-                "ok",
-                "degraded",
-                "down",
-                "unconsented",
-                "disabled"
-              ]
+              "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
             },
             "consent": {
               "type": "object",
@@ -321,19 +267,11 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "enum": [
-                      "judge",
-                      "generate",
-                      "batch"
-                    ]
+                    "enum": ["judge", "generate", "batch"]
                   }
                 }
               },
-              "required": [
-                "granted",
-                "granted_at",
-                "scopes"
-              ],
+              "required": ["granted", "granted_at", "scopes"],
               "additionalProperties": false
             },
             "probe": {
@@ -356,16 +294,10 @@
                       ]
                     },
                     "logged_in": {
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
+                      "type": ["boolean", "null"]
                     },
                     "flags_ok": {
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
+                      "type": ["boolean", "null"]
                     },
                     "missing_flags": {
                       "maxItems": 20,
@@ -376,10 +308,7 @@
                       }
                     },
                     "key_present": {
-                      "type": [
-                        "boolean",
-                        "null"
-                      ]
+                      "type": ["boolean", "null"]
                     },
                     "models": {
                       "maxItems": 50,
@@ -439,27 +368,15 @@
             },
             "breaker": {
               "type": "string",
-              "enum": [
-                "closed",
-                "open",
-                "half_open"
-              ]
+              "enum": ["closed", "open", "half_open"]
             },
             "billing_mode": {
               "type": "string",
-              "enum": [
-                "metered",
-                "subscription",
-                "free",
-                "local"
-              ]
+              "enum": ["metered", "subscription", "free", "local"]
             },
             "trust": {
               "type": "string",
-              "enum": [
-                "verified",
-                "unverified"
-              ]
+              "enum": ["verified", "unverified"]
             },
             "models_by_tier": {
               "type": "object",
@@ -498,11 +415,7 @@
                   ]
                 }
               },
-              "required": [
-                "low",
-                "mid",
-                "high"
-              ],
+              "required": ["low", "mid", "high"],
               "additionalProperties": false
             },
             "capabilities": {
@@ -521,12 +434,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "structured_output",
-                "json_schema_flag",
-                "streaming",
-                "multi_turn"
-              ],
+              "required": ["structured_output", "json_schema_flag", "streaming", "multi_turn"],
               "additionalProperties": false
             },
             "external_processor": {

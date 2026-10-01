@@ -12,9 +12,7 @@
       "const": "/api/v1/tracks/{track}"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-001",
-        "FR-CUR-025",
-        "FR-STD-032"
-      ]
+      "enum": ["FR-CUR-001", "FR-CUR-025", "FR-STD-032"]
     },
     "deadlineMs": {
       "const": null
@@ -79,9 +73,7 @@
               ]
             }
           },
-          "required": [
-            "track"
-          ],
+          "required": ["track"],
           "additionalProperties": false
         },
         "query": {
@@ -155,12 +147,7 @@
                   "maximum": 5
                 }
               },
-              "required": [
-                "declared",
-                "offline",
-                "oracle",
-                "display"
-              ],
+              "required": ["declared", "offline", "oracle", "display"],
               "additionalProperties": false
             },
             "levels": {
@@ -220,20 +207,11 @@
                             },
                             "tier": {
                               "type": "string",
-                              "enum": [
-                                "A",
-                                "B",
-                                "C"
-                              ]
+                              "enum": ["A", "B", "C"]
                             },
                             "knowledge_type": {
                               "type": "string",
-                              "enum": [
-                                "D",
-                                "C",
-                                "P",
-                                "S"
-                              ]
+                              "enum": ["D", "C", "P", "S"]
                             },
                             "title_ko": {
                               "type": "string",
@@ -281,11 +259,7 @@
                             },
                             "volatility": {
                               "type": "string",
-                              "enum": [
-                                "stable",
-                                "evolving",
-                                "volatile"
-                              ]
+                              "enum": ["stable", "evolving", "volatile"]
                             },
                             "tags": {
                               "maxItems": 20,
@@ -340,11 +314,7 @@
                                 },
                                 "mastery": {
                                   "type": "string",
-                                  "enum": [
-                                    "unseen",
-                                    "learning",
-                                    "mastered"
-                                  ]
+                                  "enum": ["unseen", "learning", "mastered"]
                                 },
                                 "provisional": {
                                   "type": "boolean"
@@ -353,13 +323,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "concept_id",
-                                "lifecycle",
-                                "mastery",
-                                "provisional",
-                                "rusty"
-                              ],
+                              "required": ["concept_id", "lifecycle", "mastery", "provisional", "rusty"],
                               "additionalProperties": false
                             },
                             {
@@ -368,18 +332,12 @@
                           ]
                         }
                       },
-                      "required": [
-                        "concept",
-                        "learner"
-                      ],
+                      "required": ["concept", "learner"],
                       "additionalProperties": false
                     }
                   }
                 },
-                "required": [
-                  "level",
-                  "concepts"
-                ],
+                "required": ["level", "concepts"],
                 "additionalProperties": false
               }
             },
@@ -522,26 +480,11 @@
                           },
                           "lifecycle": {
                             "type": "string",
-                            "enum": [
-                              "CL-0",
-                              "CL-1",
-                              "CL-2",
-                              "CL-3",
-                              "CL-4",
-                              "CL-5",
-                              "CL-6",
-                              "CL-7",
-                              "CL-8",
-                              "CL-X"
-                            ]
+                            "enum": ["CL-0", "CL-1", "CL-2", "CL-3", "CL-4", "CL-5", "CL-6", "CL-7", "CL-8", "CL-X"]
                           },
                           "mastery": {
                             "type": "string",
-                            "enum": [
-                              "unseen",
-                              "learning",
-                              "mastered"
-                            ]
+                            "enum": ["unseen", "learning", "mastered"]
                           },
                           "provisional": {
                             "type": "boolean"
@@ -550,13 +493,7 @@
                             "type": "boolean"
                           }
                         },
-                        "required": [
-                          "concept_id",
-                          "lifecycle",
-                          "mastery",
-                          "provisional",
-                          "rusty"
-                        ],
+                        "required": ["concept_id", "lifecycle", "mastery", "provisional", "rusty"],
                         "additionalProperties": false
                       }
                     },
@@ -602,12 +539,7 @@
                             },
                             "decision": {
                               "type": "string",
-                              "enum": [
-                                "promote",
-                                "promote_provisional",
-                                "not_ready",
-                                "cap_reached"
-                              ]
+                              "enum": ["promote", "promote_provisional", "not_ready", "cap_reached"]
                             },
                             "gates": {
                               "maxItems": 20,
@@ -627,16 +559,10 @@
                                     "type": "boolean"
                                   },
                                   "value": {
-                                    "type": [
-                                      "number",
-                                      "null"
-                                    ]
+                                    "type": ["number", "null"]
                                   },
                                   "threshold": {
-                                    "type": [
-                                      "number",
-                                      "null"
-                                    ]
+                                    "type": ["number", "null"]
                                   },
                                   "evidence_event_ids": {
                                     "maxItems": 50,
@@ -685,10 +611,7 @@
                                     "maxLength": 300
                                   }
                                 },
-                                "required": [
-                                  "code",
-                                  "detail_ko"
-                                ],
+                                "required": ["code", "detail_ko"],
                                 "additionalProperties": false
                               }
                             },
@@ -736,13 +659,7 @@
                                           "maximum": 8640000000000000
                                         }
                                       },
-                                      "required": [
-                                        "exam_id",
-                                        "passed",
-                                        "correct_count",
-                                        "cbm_ratio",
-                                        "at"
-                                      ],
+                                      "required": ["exam_id", "passed", "correct_count", "cbm_ratio", "at"],
                                       "additionalProperties": false
                                     },
                                     {
@@ -751,11 +668,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "eligible",
-                                "retry_after",
-                                "last"
-                              ],
+                              "required": ["eligible", "retry_after", "last"],
                               "additionalProperties": false
                             },
                             "profile": {
@@ -767,27 +680,14 @@
                                 },
                                 "ai_mode": {
                                   "type": "string",
-                                  "enum": [
-                                    "FULL",
-                                    "JUDGE_ONLY",
-                                    "LLM_ONLY",
-                                    "OFFLINE"
-                                  ]
+                                  "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                                 },
                                 "sp1_state": {
                                   "type": "string",
-                                  "enum": [
-                                    "pass",
-                                    "fail",
-                                    "unknown"
-                                  ]
+                                  "enum": ["pass", "fail", "unknown"]
                                 }
                               },
-                              "required": [
-                                "policy_version",
-                                "ai_mode",
-                                "sp1_state"
-                              ],
+                              "required": ["policy_version", "ai_mode", "sp1_state"],
                               "additionalProperties": false
                             },
                             "cap": {
@@ -814,12 +714,7 @@
                                   "maximum": 5
                                 }
                               },
-                              "required": [
-                                "declared",
-                                "offline",
-                                "oracle",
-                                "display"
-                              ],
+                              "required": ["declared", "offline", "oracle", "display"],
                               "additionalProperties": false
                             }
                           },
@@ -871,36 +766,19 @@
                   },
                   "dependency": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "code": {
                     "type": "string",
                     "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
                   }
                 },
-                "required": [
-                  "part",
-                  "dependency",
-                  "code"
-                ],
+                "required": ["part", "dependency", "code"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "track",
-            "title_ko",
-            "cap",
-            "levels",
-            "learner",
-            "degraded"
-          ],
+          "required": ["track", "title_ko", "cap", "levels", "learner", "degraded"],
           "additionalProperties": false
         }
       }

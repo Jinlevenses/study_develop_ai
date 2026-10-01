@@ -18,11 +18,7 @@
     },
     "power": {
       "type": "string",
-      "enum": [
-        "ac",
-        "battery",
-        "unknown"
-      ]
+      "enum": ["ac", "battery", "unknown"]
     },
     "interactive_cli": {
       "maxItems": 8,
@@ -38,12 +34,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "idle_window_open",
-    "idle_since",
-    "power",
-    "interactive_cli",
-    "sampled_at"
-  ],
+  "required": ["idle_window_open", "idle_since", "power", "interactive_cli", "sampled_at"],
   "additionalProperties": false
 }

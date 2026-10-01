@@ -135,26 +135,11 @@
           },
           "lifecycle": {
             "type": "string",
-            "enum": [
-              "CL-0",
-              "CL-1",
-              "CL-2",
-              "CL-3",
-              "CL-4",
-              "CL-5",
-              "CL-6",
-              "CL-7",
-              "CL-8",
-              "CL-X"
-            ]
+            "enum": ["CL-0", "CL-1", "CL-2", "CL-3", "CL-4", "CL-5", "CL-6", "CL-7", "CL-8", "CL-X"]
           },
           "mastery": {
             "type": "string",
-            "enum": [
-              "unseen",
-              "learning",
-              "mastered"
-            ]
+            "enum": ["unseen", "learning", "mastered"]
           },
           "provisional": {
             "type": "boolean"
@@ -163,13 +148,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "concept_id",
-          "lifecycle",
-          "mastery",
-          "provisional",
-          "rusty"
-        ],
+        "required": ["concept_id", "lifecycle", "mastery", "provisional", "rusty"],
         "additionalProperties": false
       }
     },
@@ -215,12 +194,7 @@
             },
             "decision": {
               "type": "string",
-              "enum": [
-                "promote",
-                "promote_provisional",
-                "not_ready",
-                "cap_reached"
-              ]
+              "enum": ["promote", "promote_provisional", "not_ready", "cap_reached"]
             },
             "gates": {
               "maxItems": 20,
@@ -240,16 +214,10 @@
                     "type": "boolean"
                   },
                   "value": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "threshold": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "evidence_event_ids": {
                     "maxItems": 50,
@@ -271,15 +239,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "gate_id",
-                  "label_ko",
-                  "met",
-                  "value",
-                  "threshold",
-                  "evidence_event_ids",
-                  "shortfall_ko"
-                ],
+                "required": ["gate_id", "label_ko", "met", "value", "threshold", "evidence_event_ids", "shortfall_ko"],
                 "additionalProperties": false
               }
             },
@@ -298,10 +258,7 @@
                     "maxLength": 300
                   }
                 },
-                "required": [
-                  "code",
-                  "detail_ko"
-                ],
+                "required": ["code", "detail_ko"],
                 "additionalProperties": false
               }
             },
@@ -349,13 +306,7 @@
                           "maximum": 8640000000000000
                         }
                       },
-                      "required": [
-                        "exam_id",
-                        "passed",
-                        "correct_count",
-                        "cbm_ratio",
-                        "at"
-                      ],
+                      "required": ["exam_id", "passed", "correct_count", "cbm_ratio", "at"],
                       "additionalProperties": false
                     },
                     {
@@ -364,11 +315,7 @@
                   ]
                 }
               },
-              "required": [
-                "eligible",
-                "retry_after",
-                "last"
-              ],
+              "required": ["eligible", "retry_after", "last"],
               "additionalProperties": false
             },
             "profile": {
@@ -380,27 +327,14 @@
                 },
                 "ai_mode": {
                   "type": "string",
-                  "enum": [
-                    "FULL",
-                    "JUDGE_ONLY",
-                    "LLM_ONLY",
-                    "OFFLINE"
-                  ]
+                  "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                 },
                 "sp1_state": {
                   "type": "string",
-                  "enum": [
-                    "pass",
-                    "fail",
-                    "unknown"
-                  ]
+                  "enum": ["pass", "fail", "unknown"]
                 }
               },
-              "required": [
-                "policy_version",
-                "ai_mode",
-                "sp1_state"
-              ],
+              "required": ["policy_version", "ai_mode", "sp1_state"],
               "additionalProperties": false
             },
             "cap": {
@@ -427,26 +361,11 @@
                   "maximum": 5
                 }
               },
-              "required": [
-                "declared",
-                "offline",
-                "oracle",
-                "display"
-              ],
+              "required": ["declared", "offline", "oracle", "display"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "track",
-            "from_level",
-            "to_level",
-            "decision",
-            "gates",
-            "blockers",
-            "exam",
-            "profile",
-            "cap"
-          ],
+          "required": ["track", "from_level", "to_level", "decision", "gates", "blockers", "exam", "profile", "cap"],
           "additionalProperties": false
         },
         {

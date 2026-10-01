@@ -25,10 +25,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "active",
-                "closed"
-              ]
+              "enum": ["active", "closed"]
             },
             "goals": {
               "type": "array",
@@ -90,12 +87,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "track",
-                  "target_level",
-                  "probability",
-                  "required_minutes_per_week"
-                ],
+                "required": ["track", "target_level", "probability", "required_minutes_per_week"],
                 "additionalProperties": false
               }
             },
@@ -106,22 +98,10 @@
               }
             },
             "retro_md": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             }
           },
-          "required": [
-            "season_id",
-            "starts_on",
-            "ends_on",
-            "weeks",
-            "state",
-            "goals",
-            "premortem_ko",
-            "retro_md"
-          ],
+          "required": ["season_id", "starts_on", "ends_on", "weeks", "state", "goals", "premortem_ko", "retro_md"],
           "additionalProperties": false
         },
         {
@@ -153,12 +133,7 @@
             "maximum": 1
           }
         },
-        "required": [
-          "season_id",
-          "starts_on",
-          "ends_on",
-          "achieved_ratio"
-        ],
+        "required": ["season_id", "starts_on", "ends_on", "achieved_ratio"],
         "additionalProperties": false
       }
     },
@@ -171,10 +146,7 @@
               "type": "number"
             },
             "delta": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             },
             "params": {
               "type": "string",
@@ -189,13 +161,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "value",
-            "delta",
-            "params",
-            "params_provisional",
-            "computed_at"
-          ],
+          "required": ["value", "delta", "params", "params_provisional", "computed_at"],
           "additionalProperties": false
         },
         {
@@ -204,10 +170,6 @@
       ]
     }
   },
-  "required": [
-    "season",
-    "history",
-    "ldi"
-  ],
+  "required": ["season", "history", "ldi"],
   "additionalProperties": false
 }

@@ -9,15 +9,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "ok",
-            "error",
-            "timeout",
-            "memory_limit",
-            "output_limit",
-            "rejected",
-            "platform_disabled"
-          ]
+          "enum": ["ok", "error", "timeout", "memory_limit", "output_limit", "rejected", "platform_disabled"]
         },
         {
           "type": "string",
@@ -108,20 +100,12 @@
                     ]
                   }
                 },
-                "required": [
-                  "case_key",
-                  "ok",
-                  "message_ko"
-                ],
+                "required": ["case_key", "ok", "message_ko"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "passed",
-            "failed",
-            "cases"
-          ],
+          "required": ["passed", "failed", "cases"],
           "additionalProperties": false
         },
         {
@@ -167,11 +151,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "columns",
-            "rows",
-            "truncated"
-          ],
+          "required": ["columns", "rows", "truncated"],
           "additionalProperties": false
         },
         {

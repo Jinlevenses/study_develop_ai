@@ -22,10 +22,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "version",
-          "sha256"
-        ],
+        "required": ["version", "sha256"],
         "additionalProperties": false
       }
     },
@@ -46,11 +43,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "policy_version",
-    "members",
-    "overrides_sha256",
-    "created_at"
-  ],
+  "required": ["policy_version", "members", "overrides_sha256", "created_at"],
   "additionalProperties": false
 }

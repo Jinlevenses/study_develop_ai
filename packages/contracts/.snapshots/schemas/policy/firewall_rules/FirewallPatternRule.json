@@ -16,11 +16,7 @@
     },
     "action": {
       "type": "string",
-      "enum": [
-        "mask",
-        "block",
-        "force_local"
-      ]
+      "enum": ["mask", "block", "force_local"]
     },
     "group": {
       "type": "integer",
@@ -45,19 +41,9 @@
     },
     "class": {
       "type": "string",
-      "enum": [
-        "C0",
-        "C1",
-        "C2",
-        "C3"
-      ]
+      "enum": ["C0", "C1", "C2", "C3"]
     }
   },
-  "required": [
-    "id",
-    "name",
-    "pattern",
-    "action"
-  ],
+  "required": ["id", "name", "pattern", "action"],
   "additionalProperties": false
 }

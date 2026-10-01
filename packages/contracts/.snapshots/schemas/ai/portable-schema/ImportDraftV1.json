@@ -85,23 +85,11 @@
                 "maximum": 9007199254740991
               }
             },
-            "required": [
-              "chunk_key",
-              "start",
-              "end"
-            ],
+            "required": ["chunk_key", "start", "end"],
             "additionalProperties": false
           }
         },
-        "required": [
-          "temp_key",
-          "title_ko",
-          "title_en",
-          "track_hint",
-          "level_hint",
-          "summary_ko",
-          "span"
-        ],
+        "required": ["temp_key", "title_ko", "title_en", "track_hint", "level_hint", "summary_ko", "span"],
         "additionalProperties": false
       }
     },
@@ -145,21 +133,11 @@
                 "maximum": 9007199254740991
               }
             },
-            "required": [
-              "chunk_key",
-              "start",
-              "end"
-            ],
+            "required": ["chunk_key", "start", "end"],
             "additionalProperties": false
           }
         },
-        "required": [
-          "temp_key",
-          "concept_temp_key",
-          "statement_ko",
-          "facet",
-          "span"
-        ],
+        "required": ["temp_key", "concept_temp_key", "statement_ko", "facet", "span"],
         "additionalProperties": false
       }
     },
@@ -203,21 +181,11 @@
                 "maximum": 9007199254740991
               }
             },
-            "required": [
-              "chunk_key",
-              "start",
-              "end"
-            ],
+            "required": ["chunk_key", "start", "end"],
             "additionalProperties": false
           }
         },
-        "required": [
-          "temp_key",
-          "concept_temp_key",
-          "wrong_belief_ko",
-          "correction_ko",
-          "span"
-        ],
+        "required": ["temp_key", "concept_temp_key", "wrong_belief_ko", "correction_ko", "span"],
         "additionalProperties": false
       }
     },
@@ -237,28 +205,14 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "prereq",
-              "related",
-              "contrast",
-              "part_of"
-            ]
+            "enum": ["prereq", "related", "contrast", "part_of"]
           }
         },
-        "required": [
-          "from",
-          "to",
-          "kind"
-        ],
+        "required": ["from", "to", "kind"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "concepts",
-    "kus",
-    "misconceptions",
-    "relations"
-  ],
+  "required": ["concepts", "kus", "misconceptions", "relations"],
   "additionalProperties": false
 }

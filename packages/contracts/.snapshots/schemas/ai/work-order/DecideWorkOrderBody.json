@@ -3,10 +3,7 @@
   "properties": {
     "decision": {
       "type": "string",
-      "enum": [
-        "approve",
-        "reject"
-      ]
+      "enum": ["approve", "reject"]
     },
     "cap": {
       "anyOf": [
@@ -38,10 +35,7 @@
               ]
             }
           },
-          "required": [
-            "calls",
-            "krw"
-          ],
+          "required": ["calls", "krw"],
           "additionalProperties": false
         },
         {
@@ -50,9 +44,6 @@
       ]
     }
   },
-  "required": [
-    "decision",
-    "cap"
-  ],
+  "required": ["decision", "cap"],
   "additionalProperties": false
 }

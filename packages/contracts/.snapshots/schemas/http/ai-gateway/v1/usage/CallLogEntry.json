@@ -60,11 +60,7 @@
         },
         {
           "type": "string",
-          "enum": [
-            "SYS-CANARY",
-            "SYS-SMOKE",
-            "SYS-FWCLS"
-          ]
+          "enum": ["SYS-CANARY", "SYS-SMOKE", "SYS-FWCLS"]
         }
       ]
     },
@@ -78,23 +74,11 @@
     },
     "family": {
       "type": "string",
-      "enum": [
-        "anthropic",
-        "openai",
-        "google",
-        "typesafe",
-        "local",
-        "other"
-      ]
+      "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
     },
     "transport": {
       "type": "string",
-      "enum": [
-        "api",
-        "cli",
-        "jev",
-        "local"
-      ]
+      "enum": ["api", "cli", "jev", "local"]
     },
     "input_tokens": {
       "anyOf": [
@@ -125,12 +109,7 @@
       "properties": {
         "basis": {
           "type": "string",
-          "enum": [
-            "reported",
-            "computed",
-            "subscription",
-            "free"
-          ]
+          "enum": ["reported", "computed", "subscription", "free"]
         },
         "krw": {
           "type": "number",
@@ -148,11 +127,7 @@
           ]
         }
       },
-      "required": [
-        "basis",
-        "krw",
-        "usd"
-      ],
+      "required": ["basis", "krw", "usd"],
       "additionalProperties": false
     },
     "latency_ms": {
@@ -162,13 +137,7 @@
     },
     "outcome": {
       "type": "string",
-      "enum": [
-        "ok",
-        "error",
-        "timeout",
-        "fallback",
-        "cache_hit"
-      ]
+      "enum": ["ok", "error", "timeout", "fallback", "cache_hit"]
     },
     "error_class": {
       "anyOf": [
@@ -214,12 +183,7 @@
     },
     "firewall_action": {
       "type": "string",
-      "enum": [
-        "pass",
-        "masked",
-        "force_local",
-        "block"
-      ]
+      "enum": ["pass", "masked", "force_local", "block"]
     },
     "firewall_decision_id": {
       "type": "string",
@@ -227,12 +191,7 @@
     },
     "data_class": {
       "type": "string",
-      "enum": [
-        "C0",
-        "C1",
-        "C2",
-        "C3"
-      ]
+      "enum": ["C0", "C1", "C2", "C3"]
     },
     "external_processor": {
       "type": "boolean"
@@ -249,21 +208,14 @@
           },
           "decision": {
             "type": "string",
-            "enum": [
-              "selected",
-              "skipped"
-            ]
+            "enum": ["selected", "skipped"]
           },
           "reason": {
             "type": "string",
             "maxLength": 60
           }
         },
-        "required": [
-          "provider_id",
-          "decision",
-          "reason"
-        ],
+        "required": ["provider_id", "decision", "reason"],
         "additionalProperties": false
       }
     }

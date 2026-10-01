@@ -19,10 +19,7 @@
               "pattern": "^https:\\/\\/"
             }
           },
-          "required": [
-            "kind",
-            "url"
-          ],
+          "required": ["kind", "url"],
           "additionalProperties": false
         },
         {
@@ -49,11 +46,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "text",
-            "title"
-          ],
+          "required": ["kind", "text", "title"],
           "additionalProperties": false
         },
         {
@@ -69,23 +62,14 @@
             },
             "media_type": {
               "type": "string",
-              "enum": [
-                "text/markdown",
-                "text/plain",
-                "text/html"
-              ]
+              "enum": ["text/markdown", "text/plain", "text/html"]
             },
             "content_base64": {
               "type": "string",
               "maxLength": 2796204
             }
           },
-          "required": [
-            "kind",
-            "filename",
-            "media_type",
-            "content_base64"
-          ],
+          "required": ["kind", "filename", "media_type", "content_base64"],
           "additionalProperties": false
         },
         {
@@ -100,10 +84,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "kind",
-            "inbox_id"
-          ],
+          "required": ["kind", "inbox_id"],
           "additionalProperties": false
         }
       ]
@@ -144,11 +125,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "job_id",
-    "source",
-    "target_track",
-    "local_only"
-  ],
+  "required": ["job_id", "source", "target_track", "local_only"],
   "additionalProperties": false
 }

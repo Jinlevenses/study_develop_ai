@@ -33,12 +33,7 @@
     },
     "result": {
       "type": "string",
-      "enum": [
-        "correct",
-        "partial",
-        "incorrect",
-        "pending"
-      ]
+      "enum": ["correct", "partial", "incorrect", "pending"]
     },
     "latency_ms": {
       "type": "integer",

@@ -12,9 +12,7 @@
       "const": "/api/v1/ops/backups/secondary:unlock"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "NFR-SEC-018"
-      ]
+      "enum": ["NFR-SEC-018"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +53,7 @@
               "maxLength": 1024
             }
           },
-          "required": [
-            "passphrase"
-          ],
+          "required": ["passphrase"],
           "additionalProperties": false
         }
       }
@@ -116,24 +110,11 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "inside_fathom_home",
-                  "sync_folder",
-                  "network_path",
-                  "not_writable",
-                  "missing"
-                ]
+                "enum": ["inside_fathom_home", "sync_folder", "network_path", "not_writable", "missing"]
               }
             }
           },
-          "required": [
-            "path",
-            "encrypt",
-            "locked",
-            "last_copied_at",
-            "lag_s",
-            "warnings"
-          ],
+          "required": ["path", "encrypt", "locked", "last_copied_at", "lag_s", "warnings"],
           "additionalProperties": false
         }
       }

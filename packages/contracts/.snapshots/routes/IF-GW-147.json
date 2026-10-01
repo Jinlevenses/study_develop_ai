@@ -12,9 +12,7 @@
       "const": "/api/v1/ops/doctor"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-003"
-      ]
+      "enum": ["FR-SET-003"]
     },
     "deadlineMs": {
       "const": null
@@ -106,12 +102,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "ok",
-                      "warn",
-                      "fail",
-                      "skip"
-                    ]
+                    "enum": ["ok", "warn", "fail", "skip"]
                   },
                   "summary_ko": {
                     "type": "string",
@@ -135,25 +126,12 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "id",
-                  "status",
-                  "summary_ko",
-                  "detail_ko",
-                  "fixable",
-                  "fix_applied"
-                ],
+                "required": ["id", "status", "summary_ko", "detail_ko", "fixable", "fix_applied"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "report_id",
-            "generated_at",
-            "live",
-            "fix",
-            "items"
-          ],
+          "required": ["report_id", "generated_at", "live", "fix", "items"],
           "additionalProperties": false
         }
       }

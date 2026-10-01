@@ -37,10 +37,7 @@
           "maximum": 9007199254740991
         },
         "ldi_delta": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "changed_concepts": {
           "maxItems": 200,
@@ -68,12 +65,6 @@
       "additionalProperties": false
     }
   },
-  "required": [
-    "preview_id",
-    "current_policy_version",
-    "target_policy_version",
-    "expires_at",
-    "report"
-  ],
+  "required": ["preview_id", "current_policy_version", "target_policy_version", "expires_at", "report"],
   "additionalProperties": false
 }

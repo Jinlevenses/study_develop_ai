@@ -3,10 +3,7 @@
   "properties": {
     "lang": {
       "type": "string",
-      "enum": [
-        "js",
-        "ts"
-      ]
+      "enum": ["js", "ts"]
     },
     "title_ko": {
       "type": "string",
@@ -43,12 +40,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "key",
-          "input_json",
-          "expected_json",
-          "hidden"
-        ],
+        "required": ["key", "input_json", "expected_json", "hidden"],
         "additionalProperties": false
       }
     },
@@ -68,14 +60,6 @@
       ]
     }
   },
-  "required": [
-    "lang",
-    "title_ko",
-    "task_md",
-    "starter",
-    "tests",
-    "reference_code",
-    "complexity_target"
-  ],
+  "required": ["lang", "title_ko", "task_md", "starter", "tests", "reference_code", "complexity_target"],
   "additionalProperties": false
 }

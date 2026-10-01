@@ -12,9 +12,7 @@
       "const": "/api/v1/imports/{job_id}/diff"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-IMP-009"
-      ]
+      "enum": ["FR-IMP-009"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "job_id"
-          ],
+          "required": ["job_id"],
           "additionalProperties": false
         },
         "query": {
@@ -75,9 +69,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -103,23 +95,11 @@
                   },
                   "op": {
                     "type": "string",
-                    "enum": [
-                      "add",
-                      "modify",
-                      "merge",
-                      "conflict"
-                    ]
+                    "enum": ["add", "modify", "merge", "conflict"]
                   },
                   "target_kind": {
                     "type": "string",
-                    "enum": [
-                      "concept",
-                      "ku",
-                      "misconception",
-                      "item",
-                      "case",
-                      "relation"
-                    ]
+                    "enum": ["concept", "ku", "misconception", "item", "case", "relation"]
                   },
                   "target_id": {
                     "type": "string",
@@ -163,34 +143,20 @@
                           "maxLength": 500
                         }
                       },
-                      "required": [
-                        "chunk_id",
-                        "start",
-                        "end",
-                        "quote_ko"
-                      ],
+                      "required": ["chunk_id", "start", "end", "quote_ko"],
                       "additionalProperties": false
                     }
                   },
                   "trust": {
                     "type": "string",
-                    "enum": [
-                      "user",
-                      "llm_unverified",
-                      "verified"
-                    ]
+                    "enum": ["user", "llm_unverified", "verified"]
                   },
                   "quarantined": {
                     "type": "boolean"
                   },
                   "decision": {
                     "type": "string",
-                    "enum": [
-                      "pending",
-                      "approved",
-                      "rejected",
-                      "edited"
-                    ]
+                    "enum": ["pending", "approved", "rejected", "edited"]
                   }
                 },
                 "required": [
@@ -220,11 +186,7 @@
               ]
             }
           },
-          "required": [
-            "job_id",
-            "items",
-            "next_cursor"
-          ],
+          "required": ["job_id", "items", "next_cursor"],
           "additionalProperties": false,
           "$defs": {
             "__schema0": {

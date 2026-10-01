@@ -20,10 +20,7 @@
             "maxLength": 1000
           }
         },
-        "required": [
-          "key",
-          "note_md"
-        ],
+        "required": ["key", "note_md"],
         "additionalProperties": false
       }
     },
@@ -37,10 +34,6 @@
       }
     }
   },
-  "required": [
-    "summary_md",
-    "per_point",
-    "cited_ku_ids"
-  ],
+  "required": ["summary_md", "per_point", "cited_ku_ids"],
   "additionalProperties": false
 }

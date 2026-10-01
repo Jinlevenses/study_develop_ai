@@ -12,9 +12,7 @@
       "const": "/internal/v1/admin/quiesce"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": true
@@ -60,10 +58,7 @@
               "maximum": 10000
             }
           },
-          "required": [
-            "epoch_id",
-            "ack_deadline_ms"
-          ],
+          "required": ["epoch_id", "ack_deadline_ms"],
           "additionalProperties": false
         }
       }
@@ -88,11 +83,7 @@
               "const": true
             }
           },
-          "required": [
-            "epoch_id",
-            "quiesced_at",
-            "in_flight_drained"
-          ],
+          "required": ["epoch_id", "quiesced_at", "in_flight_drained"],
           "additionalProperties": false
         }
       }

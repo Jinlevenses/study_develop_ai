@@ -11,11 +11,7 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": [
-            "unseen",
-            "learning",
-            "mastered"
-          ]
+          "enum": ["unseen", "learning", "mastered"]
         },
         "provisional": {
           "type": "boolean"
@@ -82,24 +78,14 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "status",
-        "provisional",
-        "needs_reconfirmation",
-        "p",
-        "formats_counted",
-        "distinct_study_days"
-      ],
+      "required": ["status", "provisional", "needs_reconfirmation", "p", "formats_counted", "distinct_study_days"],
       "additionalProperties": false
     },
     "theta": {
       "type": "object",
       "properties": {
         "display": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "n_graded": {
           "type": "integer",
@@ -115,12 +101,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "display",
-        "n_graded",
-        "evidence_sufficient",
-        "display_min_events"
-      ],
+      "required": ["display", "n_graded", "evidence_sufficient", "display_min_events"],
       "additionalProperties": false
     },
     "gates": {
@@ -141,16 +122,10 @@
             "type": "boolean"
           },
           "value": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "threshold": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "evidence_event_ids": {
             "maxItems": 50,
@@ -172,15 +147,7 @@
             ]
           }
         },
-        "required": [
-          "gate_id",
-          "label_ko",
-          "met",
-          "value",
-          "threshold",
-          "evidence_event_ids",
-          "shortfall_ko"
-        ],
+        "required": ["gate_id", "label_ko", "met", "value", "threshold", "evidence_event_ids", "shortfall_ko"],
         "additionalProperties": false
       }
     },
@@ -246,13 +213,7 @@
             }
           }
         },
-        "required": [
-          "format",
-          "counted",
-          "best_w_format",
-          "best_w_grader",
-          "event_ids"
-        ],
+        "required": ["format", "counted", "best_w_format", "best_w_grader", "event_ids"],
         "additionalProperties": false
       }
     },
@@ -377,12 +338,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "enum": [
-                  "correct",
-                  "partial",
-                  "incorrect",
-                  "pending"
-                ]
+                "enum": ["correct", "partial", "incorrect", "pending"]
               },
               {
                 "type": "null"
@@ -405,14 +361,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "enum": [
-                  "D",
-                  "J",
-                  "LJ",
-                  "H",
-                  "S",
-                  "PENDING"
-                ]
+                "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
               },
               {
                 "type": "null"
@@ -493,15 +442,6 @@
       }
     }
   },
-  "required": [
-    "concept_id",
-    "mastery",
-    "theta",
-    "gates",
-    "formats",
-    "study_days",
-    "recent",
-    "provisional_reasons_ko"
-  ],
+  "required": ["concept_id", "mastery", "theta", "gates", "formats", "study_days", "recent", "provisional_reasons_ko"],
   "additionalProperties": false
 }

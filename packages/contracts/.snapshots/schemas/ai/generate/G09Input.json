@@ -12,9 +12,6 @@
       "maximum": 5
     }
   },
-  "required": [
-    "item_id",
-    "count"
-  ],
+  "required": ["item_id", "count"],
   "additionalProperties": false
 }

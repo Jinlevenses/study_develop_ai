@@ -61,19 +61,10 @@
           "const": true
         }
       },
-      "required": [
-        "max_sentences",
-        "single_question",
-        "no_answer"
-      ],
+      "required": ["max_sentences", "single_question", "no_answer"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "move",
-    "target_ku_id",
-    "target_mc_id",
-    "constraints"
-  ],
+  "required": ["move", "target_ku_id", "target_mc_id", "constraints"],
   "additionalProperties": false
 }

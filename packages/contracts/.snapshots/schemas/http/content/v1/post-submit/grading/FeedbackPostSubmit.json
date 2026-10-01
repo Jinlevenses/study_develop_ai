@@ -16,12 +16,7 @@
         "properties": {
           "status": {
             "type": "string",
-            "enum": [
-              "correct",
-              "partial",
-              "missing",
-              "error"
-            ]
+            "enum": ["correct", "partial", "missing", "error"]
           },
           "note_md": {
             "anyOf": [
@@ -47,11 +42,7 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "note_md",
-          "ku_id"
-        ],
+        "required": ["status", "note_md", "ku_id"],
         "additionalProperties": false
       }
     },
@@ -72,11 +63,7 @@
               "type": "string"
             }
           },
-          "required": [
-            "mc_id",
-            "wrong_belief_ko",
-            "correction_ko"
-          ],
+          "required": ["mc_id", "wrong_belief_ko", "correction_ko"],
           "additionalProperties": false
         },
         {
@@ -86,11 +73,7 @@
     },
     "source": {
       "type": "string",
-      "enum": [
-        "template",
-        "ku_assembled",
-        "ai_generated"
-      ]
+      "enum": ["template", "ku_assembled", "ai_generated"]
     },
     "stream_ref": {
       "anyOf": [
@@ -104,12 +87,6 @@
       ]
     }
   },
-  "required": [
-    "summary_md",
-    "per_unit",
-    "misconception",
-    "source",
-    "stream_ref"
-  ],
+  "required": ["summary_md", "per_unit", "misconception", "source", "stream_ref"],
   "additionalProperties": false
 }

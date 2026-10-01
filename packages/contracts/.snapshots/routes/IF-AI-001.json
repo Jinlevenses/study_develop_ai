@@ -12,9 +12,7 @@
       "const": "/internal/v1/judge/{task_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "content"
-      ]
+      "enum": ["content"]
     },
     "idempotent": {
       "const": true
@@ -64,9 +62,7 @@
               "pattern": "^[A-Za-z0-9-]{1,20}$"
             }
           },
-          "required": [
-            "task_id"
-          ],
+          "required": ["task_id"],
           "additionalProperties": false
         },
         "body": {
@@ -102,12 +98,7 @@
               },
               "additionalProperties": {
                 "type": "string",
-                "enum": [
-                  "C0",
-                  "C1",
-                  "C2",
-                  "C3"
-                ]
+                "enum": ["C0", "C1", "C2", "C3"]
               }
             },
             "untrusted_keys": {
@@ -143,19 +134,13 @@
                     }
                   }
                 },
-                "required": [
-                  "template",
-                  "vars"
-                ],
+                "required": ["template", "vars"],
                 "additionalProperties": false
               }
             },
             "lane": {
               "type": "string",
-              "enum": [
-                "interactive",
-                "background"
-              ]
+              "enum": ["interactive", "background"]
             },
             "deadline_ms": {
               "type": "integer",
@@ -181,22 +166,14 @@
                 },
                 "phase": {
                   "type": "string",
-                  "enum": [
-                    "pre_submit",
-                    "post_submit",
-                    "n_a"
-                  ]
+                  "enum": ["pre_submit", "post_submit", "n_a"]
                 },
                 "id": {
                   "type": "string",
                   "maxLength": 160
                 }
               },
-              "required": [
-                "kind",
-                "phase",
-                "id"
-              ],
+              "required": ["kind", "phase", "id"],
               "additionalProperties": false
             },
             "calibrated_only": {
@@ -207,14 +184,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "anthropic",
-                  "openai",
-                  "google",
-                  "typesafe",
-                  "local",
-                  "other"
-                ]
+                "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
               }
             },
             "local_only": {
@@ -293,10 +263,7 @@
                 },
                 "engine": {
                   "type": "string",
-                  "enum": [
-                    "J",
-                    "LJ"
-                  ]
+                  "enum": ["J", "LJ"]
                 },
                 "calibrated": {
                   "type": "boolean"
@@ -327,10 +294,7 @@
                             "maximum": 1
                           }
                         },
-                        "required": [
-                          "type",
-                          "p_yes"
-                        ],
+                        "required": ["type", "p_yes"],
                         "additionalProperties": false
                       },
                       {
@@ -362,12 +326,7 @@
                             }
                           }
                         },
-                        "required": [
-                          "type",
-                          "choice",
-                          "confidence",
-                          "probabilities"
-                        ],
+                        "required": ["type", "choice", "confidence", "probabilities"],
                         "additionalProperties": false
                       },
                       {
@@ -404,13 +363,7 @@
                             "maximum": 10
                           }
                         },
-                        "required": [
-                          "type",
-                          "score",
-                          "confidence",
-                          "probabilities",
-                          "levels"
-                        ],
+                        "required": ["type", "score", "confidence", "probabilities", "levels"],
                         "additionalProperties": false
                       }
                     ]
@@ -499,11 +452,7 @@
                   ]
                 }
               },
-              "required": [
-                "status",
-                "reason",
-                "retry_after_ms"
-              ],
+              "required": ["status", "reason", "retry_after_ms"],
               "additionalProperties": false
             },
             {
@@ -515,11 +464,7 @@
                 },
                 "reason": {
                   "type": "string",
-                  "enum": [
-                    "background_queued",
-                    "batch_window_closed",
-                    "work_order_pending"
-                  ]
+                  "enum": ["background_queued", "batch_window_closed", "work_order_pending"]
                 },
                 "job_id": {
                   "anyOf": [
@@ -533,11 +478,7 @@
                   ]
                 }
               },
-              "required": [
-                "status",
-                "reason",
-                "job_id"
-              ],
+              "required": ["status", "reason", "job_id"],
               "additionalProperties": false
             }
           ]

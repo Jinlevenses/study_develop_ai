@@ -22,11 +22,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "calls",
-    "krw",
-    "quota_pct",
-    "duration_s"
-  ],
+  "required": ["calls", "krw", "quota_pct", "duration_s"],
   "additionalProperties": false
 }

@@ -33,20 +33,11 @@
               "type": "number"
             }
           },
-          "required": [
-            "w_format_min",
-            "w_grader_min"
-          ],
+          "required": ["w_format_min", "w_grader_min"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "alpha",
-        "b",
-        "guess_correction",
-        "unqualified_ceiling",
-        "theta_q"
-      ],
+      "required": ["alpha", "b", "guess_correction", "unqualified_ceiling", "theta_q"],
       "additionalProperties": false
     },
     "theta_shrink": {
@@ -64,11 +55,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "theta_prior",
-        "theta_shrink_n0",
-        "theta_display_min_events"
-      ],
+      "required": ["theta_prior", "theta_shrink_n0", "theta_display_min_events"],
       "additionalProperties": false
     },
     "mastery": {
@@ -97,19 +84,11 @@
               "type": "number"
             }
           },
-          "required": [
-            "w_format_min",
-            "w_grader_min"
-          ],
+          "required": ["w_format_min", "w_grader_min"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "p_min",
-        "formats_min",
-        "distinct_days_min",
-        "format_counts"
-      ],
+      "required": ["p_min", "formats_min", "distinct_days_min", "format_counts"],
       "additionalProperties": false
     },
     "w_grader": {
@@ -155,16 +134,7 @@
           "const": 0
         }
       },
-      "required": [
-        "D",
-        "J_calibrated",
-        "J_uncalibrated",
-        "J_low_confidence",
-        "LJ",
-        "H",
-        "S",
-        "PENDING"
-      ],
+      "required": ["D", "J_calibrated", "J_uncalibrated", "J_low_confidence", "LJ", "H", "S", "PENDING"],
       "additionalProperties": false
     },
     "promotion": {
@@ -172,10 +142,7 @@
       "properties": {
         "empty_level": {
           "type": "string",
-          "enum": [
-            "skip",
-            "block"
-          ]
+          "enum": ["skip", "block"]
         },
         "required_mastered": {
           "type": "object",
@@ -194,18 +161,11 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "all_if_n_le",
-            "ratio",
-            "allow_misses"
-          ],
+          "required": ["all_if_n_le", "ratio", "allow_misses"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "empty_level",
-        "required_mastered"
-      ],
+      "required": ["empty_level", "required_mastered"],
       "additionalProperties": false
     },
     "sparse": {
@@ -213,15 +173,10 @@
       "properties": {
         "depth_scope": {
           "type": "string",
-          "enum": [
-            "track",
-            "level"
-          ]
+          "enum": ["track", "level"]
         }
       },
-      "required": [
-        "depth_scope"
-      ],
+      "required": ["depth_scope"],
       "additionalProperties": false
     },
     "d4": {
@@ -229,23 +184,14 @@
       "properties": {
         "floor_mode": {
           "type": "string",
-          "enum": [
-            "min_with_possible",
-            "fixed"
-          ]
+          "enum": ["min_with_possible", "fixed"]
         },
         "possible_scope": {
           "type": "string",
-          "enum": [
-            "level_le_k",
-            "all"
-          ]
+          "enum": ["level_le_k", "all"]
         }
       },
-      "required": [
-        "floor_mode",
-        "possible_scope"
-      ],
+      "required": ["floor_mode", "possible_scope"],
       "additionalProperties": false
     },
     "assessment": {
@@ -269,34 +215,21 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "deterministic",
-              "calibrated_jev_if_sp1_pass"
-            ]
+            "enum": ["deterministic", "calibrated_jev_if_sp1_pass"]
           }
         },
         "accuracy_min_correct": {
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
+            "enum": ["1", "2", "3", "4"]
           },
           "additionalProperties": {
             "type": "integer",
             "minimum": -9007199254740991,
             "maximum": 9007199254740991
           },
-          "required": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ]
+          "required": ["1", "2", "3", "4"]
         },
         "cbm_denominator": {
           "type": "string",
@@ -306,22 +239,12 @@
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4"
-            ]
+            "enum": ["1", "2", "3", "4"]
           },
           "additionalProperties": {
             "type": "number"
           },
-          "required": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ]
+          "required": ["1", "2", "3", "4"]
         },
         "retry_days": {
           "type": "integer",
@@ -345,12 +268,7 @@
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "enum": [
-          "FULL",
-          "JUDGE_ONLY",
-          "LLM_ONLY",
-          "OFFLINE"
-        ]
+        "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
       },
       "additionalProperties": {
         "type": "object",
@@ -360,43 +278,24 @@
             "properties": {
               "sp1_pass": {
                 "type": "string",
-                "enum": [
-                  "J",
-                  "LJ",
-                  "S_provisional"
-                ]
+                "enum": ["J", "LJ", "S_provisional"]
               },
               "sp1_fail": {
                 "type": "string",
-                "enum": [
-                  "J",
-                  "LJ",
-                  "S_provisional"
-                ]
+                "enum": ["J", "LJ", "S_provisional"]
               }
             },
-            "required": [
-              "sp1_pass",
-              "sp1_fail"
-            ],
+            "required": ["sp1_pass", "sp1_fail"],
             "additionalProperties": false
           },
           "provisional_if_self_only": {
             "type": "boolean"
           }
         },
-        "required": [
-          "rubric_engine",
-          "provisional_if_self_only"
-        ],
+        "required": ["rubric_engine", "provisional_if_self_only"],
         "additionalProperties": false
       },
-      "required": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "required": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     }
   },
   "required": [

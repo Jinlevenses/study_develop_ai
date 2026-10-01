@@ -7,16 +7,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "receiving",
-        "verifying",
-        "inserting",
-        "replaying",
-        "swapping",
-        "done",
-        "rejected",
-        "failed"
-      ]
+      "enum": ["receiving", "verifying", "inserting", "replaying", "swapping", "done", "rejected", "failed"]
     },
     "received_lines": {
       "type": "integer",
@@ -52,10 +43,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "seq",
-          "head_hash"
-        ],
+        "required": ["seq", "head_hash"],
         "additionalProperties": false
       }
     },
@@ -128,12 +116,7 @@
             "maxLength": 300
           }
         },
-        "required": [
-          "device_id",
-          "device_seq",
-          "kind",
-          "detail"
-        ],
+        "required": ["device_id", "device_seq", "kind", "detail"],
         "additionalProperties": false
       }
     },

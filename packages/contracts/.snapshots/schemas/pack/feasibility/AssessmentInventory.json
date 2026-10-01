@@ -44,11 +44,7 @@
           },
           "tier": {
             "type": "string",
-            "enum": [
-              "A",
-              "B",
-              "C"
-            ]
+            "enum": ["A", "B", "C"]
           },
           "required_for_level": {
             "anyOf": [
@@ -69,12 +65,7 @@
             "type": "object",
             "propertyNames": {
               "type": "string",
-              "enum": [
-                "FULL",
-                "JUDGE_ONLY",
-                "LLM_ONLY",
-                "OFFLINE"
-              ]
+              "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
             },
             "additionalProperties": {
               "type": "array",
@@ -117,22 +108,10 @@
                 ]
               }
             },
-            "required": [
-              "FULL",
-              "JUDGE_ONLY",
-              "LLM_ONLY",
-              "OFFLINE"
-            ]
+            "required": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
           }
         },
-        "required": [
-          "concept_id",
-          "level",
-          "tier",
-          "required_for_level",
-          "d4_possible",
-          "formats_by_mode"
-        ],
+        "required": ["concept_id", "level", "tier", "required_for_level", "d4_possible", "formats_by_mode"],
         "additionalProperties": false
       }
     },
@@ -140,24 +119,13 @@
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "enum": [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ]
+        "enum": ["1", "2", "3", "4", "5"]
       },
       "additionalProperties": {
         "type": "object",
         "propertyNames": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         },
         "additionalProperties": {
           "type": "object",
@@ -209,26 +177,12 @@
               }
             }
           },
-          "required": [
-            "items",
-            "formats"
-          ],
+          "required": ["items", "formats"],
           "additionalProperties": false
         },
-        "required": [
-          "FULL",
-          "JUDGE_ONLY",
-          "LLM_ONLY",
-          "OFFLINE"
-        ]
+        "required": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
       },
-      "required": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ]
+      "required": ["1", "2", "3", "4", "5"]
     },
     "cases": {
       "maxItems": 60,
@@ -275,20 +229,11 @@
             }
           }
         },
-        "required": [
-          "case_id",
-          "level",
-          "tracks"
-        ],
+        "required": ["case_id", "level", "tracks"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "track",
-    "concepts",
-    "assessment_pool",
-    "cases"
-  ],
+  "required": ["track", "concepts", "assessment_pool", "cases"],
   "additionalProperties": false
 }

@@ -12,11 +12,7 @@
       "const": "/internal/v1/mode"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway",
-        "content",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "ops-api"]
     },
     "idempotent": {
       "const": false
@@ -31,11 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-AI-002",
-        "FR-AI-003",
-        "FR-AI-017"
-      ]
+      "enum": ["FR-AI-002", "FR-AI-003", "FR-AI-017"]
     },
     "deadlineMs": {
       "const": null
@@ -61,23 +53,13 @@
           "properties": {
             "mode": {
               "type": "string",
-              "enum": [
-                "FULL",
-                "JUDGE_ONLY",
-                "LLM_ONLY",
-                "OFFLINE"
-              ]
+              "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
             },
             "previous_mode": {
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "FULL",
-                    "JUDGE_ONLY",
-                    "LLM_ONLY",
-                    "OFFLINE"
-                  ]
+                  "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
                 },
                 {
                   "type": "null"
@@ -119,30 +101,14 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "jev",
-                      "llm_api",
-                      "llm_cli",
-                      "generic_cli",
-                      "local_llm"
-                    ]
+                    "enum": ["jev", "llm_api", "llm_cli", "generic_cli", "local_llm"]
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "ok",
-                      "degraded",
-                      "down",
-                      "unconsented",
-                      "disabled"
-                    ]
+                    "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
                   }
                 },
-                "required": [
-                  "id",
-                  "kind",
-                  "status"
-                ],
+                "required": ["id", "kind", "status"],
                 "additionalProperties": false
               }
             },
@@ -155,14 +121,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "mode",
-            "previous_mode",
-            "reasons",
-            "providers",
-            "changed_at",
-            "safe_mode"
-          ],
+          "required": ["mode", "previous_mode", "reasons", "providers", "changed_at", "safe_mode"],
           "additionalProperties": false
         }
       }

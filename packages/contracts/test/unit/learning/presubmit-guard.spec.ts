@@ -5,7 +5,7 @@ import * as blockMod from '../../../src/http/learning/v1/pre-submit/block.js';
 import * as caseMod from '../../../src/http/learning/v1/pre-submit/case.js';
 import * as noteMod from '../../../src/http/learning/v1/pre-submit/note.js';
 
-// UT-CON-189 — 제출 전 스키마(NG-G3, STD 15)에는 정답·해설·모범답안 필드가 0이어야 한다(T-00-09 UT-CON-111과 같은 금지 목록).
+// 제출 전 스키마(NG-G3, STD 15)에는 정답·해설·모범답안 필드가 0이어야 한다(content pre-submit 가드와 같은 금지 목록).
 const FORBIDDEN = [
   /^answer_key$/,
   /^explanation$/,

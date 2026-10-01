@@ -50,15 +50,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "mastery",
-          "retention",
-          "illusion",
-          "foundation_crack",
-          "revalidation",
-          "rusty",
-          "blueprint"
-        ]
+        "enum": ["mastery", "retention", "illusion", "foundation_crack", "revalidation", "rusty", "blueprint"]
       }
     },
     "cells": {
@@ -104,26 +96,11 @@
           },
           "lifecycle": {
             "type": "string",
-            "enum": [
-              "CL-0",
-              "CL-1",
-              "CL-2",
-              "CL-3",
-              "CL-4",
-              "CL-5",
-              "CL-6",
-              "CL-7",
-              "CL-8",
-              "CL-X"
-            ]
+            "enum": ["CL-0", "CL-1", "CL-2", "CL-3", "CL-4", "CL-5", "CL-6", "CL-7", "CL-8", "CL-X"]
           },
           "mastery": {
             "type": "string",
-            "enum": [
-              "unseen",
-              "learning",
-              "mastered"
-            ]
+            "enum": ["unseen", "learning", "mastered"]
           },
           "provisional": {
             "type": "boolean"
@@ -208,20 +185,11 @@
             "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
           }
         },
-        "required": [
-          "from",
-          "to"
-        ],
+        "required": ["from", "to"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "track",
-    "as_of",
-    "layers",
-    "cells",
-    "edges"
-  ],
+  "required": ["track", "as_of", "layers", "cells", "edges"],
   "additionalProperties": false
 }

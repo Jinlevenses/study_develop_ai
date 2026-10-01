@@ -24,10 +24,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "probe_id",
-    "providers",
-    "live"
-  ],
+  "required": ["probe_id", "providers", "live"],
   "additionalProperties": false
 }

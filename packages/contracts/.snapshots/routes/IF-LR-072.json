@@ -12,9 +12,7 @@
       "const": "/internal/v1/settings/declarations"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-STD-027",
-        "FR-PRG-025",
-        "FR-DSH-012"
-      ]
+      "enum": ["FR-STD-027", "FR-PRG-025", "FR-DSH-012"]
     },
     "deadlineMs": {
       "const": null
@@ -59,11 +53,7 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "time_capsule",
-                "season_goal",
-                "self_declaration"
-              ]
+              "enum": ["time_capsule", "season_goal", "self_declaration"]
             },
             "payload": {
               "type": "object",
@@ -85,12 +75,7 @@
               ]
             }
           },
-          "required": [
-            "declaration_id",
-            "kind",
-            "payload",
-            "unseal_at"
-          ],
+          "required": ["declaration_id", "kind", "payload", "unseal_at"],
           "additionalProperties": false
         }
       }
@@ -114,11 +99,7 @@
               "pattern": "^[0-9a-f]{64}$"
             }
           },
-          "required": [
-            "declaration_id",
-            "ledger_event_id",
-            "content_hash"
-          ],
+          "required": ["declaration_id", "ledger_event_id", "content_hash"],
           "additionalProperties": false
         }
       }

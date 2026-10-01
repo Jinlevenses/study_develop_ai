@@ -16,13 +16,7 @@
     },
     "producer": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "producer_seq": {
       "type": "integer",

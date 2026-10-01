@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/packs/installs/{install_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-SET-014"
-      ]
+      "enum": ["FR-SET-014"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "install_id"
-          ],
+          "required": ["install_id"],
           "additionalProperties": false
         }
       }
@@ -143,13 +137,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "pack_id",
-                  "track",
-                  "version",
-                  "previous_version",
-                  "conflicts"
-                ],
+                "required": ["pack_id", "track", "version", "previous_version", "conflicts"],
                 "additionalProperties": false
               }
             },
@@ -218,23 +206,13 @@
                             "maxLength": 60
                           }
                         },
-                        "required": [
-                          "path",
-                          "message",
-                          "rule"
-                        ],
+                        "required": ["path", "message", "rule"],
                         "additionalProperties": false
                       }
                     },
                     "dependency": {
                       "type": "string",
-                      "enum": [
-                        "gateway",
-                        "content",
-                        "learning",
-                        "ai-gateway",
-                        "ops-api"
-                      ]
+                      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                     },
                     "acked_through_seq": {
                       "type": "integer",
@@ -257,15 +235,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "type",
-                    "title",
-                    "status",
-                    "code",
-                    "error_id",
-                    "request_id",
-                    "retryable"
-                  ],
+                  "required": ["type", "title", "status", "code", "error_id", "request_id", "retryable"],
                   "additionalProperties": false
                 },
                 {
@@ -291,14 +261,7 @@
               ]
             }
           },
-          "required": [
-            "install_id",
-            "state",
-            "packs",
-            "problem",
-            "started_at",
-            "finished_at"
-          ],
+          "required": ["install_id", "state", "packs", "problem", "started_at", "finished_at"],
           "additionalProperties": false
         }
       }

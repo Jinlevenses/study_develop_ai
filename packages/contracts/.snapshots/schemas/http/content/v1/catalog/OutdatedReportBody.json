@@ -19,10 +19,6 @@
       "maxLength": 1000
     }
   },
-  "required": [
-    "report_id",
-    "ku_ids",
-    "note_ko"
-  ],
+  "required": ["report_id", "ku_ids", "note_ko"],
   "additionalProperties": false
 }

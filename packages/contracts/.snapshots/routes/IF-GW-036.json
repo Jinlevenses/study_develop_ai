@@ -12,9 +12,7 @@
       "const": "/api/v1/verdicts/{verdict_id}/appeals"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-012"
-      ]
+      "enum": ["FR-AI-012"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "verdict_id"
-          ],
+          "required": ["verdict_id"],
           "additionalProperties": false
         },
         "body": {
@@ -70,13 +64,7 @@
             },
             "reason": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "learner_right",
-                "other"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
             },
             "text": {
               "anyOf": [
@@ -90,11 +78,7 @@
               ]
             }
           },
-          "required": [
-            "appeal_id",
-            "reason",
-            "text"
-          ],
+          "required": ["appeal_id", "reason", "text"],
           "additionalProperties": false
         }
       }
@@ -115,24 +99,11 @@
             },
             "reason": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "learner_right",
-                "other"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
             },
             "state": {
               "type": "string",
-              "enum": [
-                "received",
-                "classifying",
-                "regrading",
-                "upheld",
-                "rejected",
-                "user_decision_required"
-              ]
+              "enum": ["received", "classifying", "regrading", "upheld", "rejected", "user_decision_required"]
             },
             "classification": {
               "anyOf": [
@@ -141,23 +112,11 @@
                   "properties": {
                     "label": {
                       "type": "string",
-                      "enum": [
-                        "key_wrong",
-                        "ambiguous",
-                        "outdated",
-                        "learner_wrong"
-                      ]
+                      "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                     },
                     "engine": {
                       "type": "string",
-                      "enum": [
-                        "D",
-                        "J",
-                        "LJ",
-                        "H",
-                        "S",
-                        "PENDING"
-                      ]
+                      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                     },
                     "confidence": {
                       "anyOf": [
@@ -172,11 +131,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "label",
-                    "engine",
-                    "confidence"
-                  ],
+                  "required": ["label", "engine", "confidence"],
                   "additionalProperties": false
                 },
                 {

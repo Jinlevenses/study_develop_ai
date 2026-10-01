@@ -11,9 +11,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "block_id",
-    "saved_at"
-  ],
+  "required": ["block_id", "saved_at"],
   "additionalProperties": false
 }

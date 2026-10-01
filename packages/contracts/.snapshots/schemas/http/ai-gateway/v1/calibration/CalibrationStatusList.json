@@ -33,21 +33,14 @@
           },
           "engine": {
             "type": "string",
-            "enum": [
-              "J",
-              "LJ"
-            ]
+            "enum": ["J", "LJ"]
           },
           "calibrated": {
             "type": "boolean"
           },
           "sp1_state": {
             "type": "string",
-            "enum": [
-              "pass",
-              "fail",
-              "unknown"
-            ]
+            "enum": ["pass", "fail", "unknown"]
           },
           "gold": {
             "type": "object",
@@ -68,11 +61,7 @@
                 "maximum": 9007199254740991
               }
             },
-            "required": [
-              "draft",
-              "confirmed",
-              "required"
-            ],
+            "required": ["draft", "confirmed", "required"],
             "additionalProperties": false
           },
           "metrics": {
@@ -81,34 +70,19 @@
                 "type": "object",
                 "properties": {
                   "idea_unit_accuracy": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "precision_at_conf06": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "rubric_kappa": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "paraphrase": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "verbosity_bias": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   }
                 },
                 "required": [
@@ -167,8 +141,6 @@
       }
     }
   },
-  "required": [
-    "tasks"
-  ],
+  "required": ["tasks"],
   "additionalProperties": false
 }

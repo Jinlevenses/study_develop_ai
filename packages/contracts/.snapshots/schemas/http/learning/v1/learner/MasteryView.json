@@ -3,11 +3,7 @@
   "properties": {
     "status": {
       "type": "string",
-      "enum": [
-        "unseen",
-        "learning",
-        "mastered"
-      ]
+      "enum": ["unseen", "learning", "mastered"]
     },
     "provisional": {
       "type": "boolean"
@@ -74,13 +70,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "status",
-    "provisional",
-    "needs_reconfirmation",
-    "p",
-    "formats_counted",
-    "distinct_study_days"
-  ],
+  "required": ["status", "provisional", "needs_reconfirmation", "p", "formats_counted", "distinct_study_days"],
   "additionalProperties": false
 }

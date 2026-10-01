@@ -12,9 +12,7 @@
       "const": "/internal/v1/settings/onboarding"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-019",
-        "FR-PRG-014",
-        "FR-PRG-025"
-      ]
+      "enum": ["FR-SET-019", "FR-PRG-014", "FR-PRG-025"]
     },
     "deadlineMs": {
       "const": null
@@ -112,20 +106,12 @@
                     "maximum": 5
                   }
                 },
-                "required": [
-                  "track",
-                  "declared_level"
-                ],
+                "required": ["track", "declared_level"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "career_years",
-            "weekly_minutes",
-            "path_id",
-            "declarations"
-          ],
+          "required": ["career_years", "weekly_minutes", "path_id", "declarations"],
           "additionalProperties": false
         }
       }
@@ -173,11 +159,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "placement_tracks",
-            "next",
-            "declaration_event_id"
-          ],
+          "required": ["placement_tracks", "next", "declaration_event_id"],
           "additionalProperties": false
         }
       }

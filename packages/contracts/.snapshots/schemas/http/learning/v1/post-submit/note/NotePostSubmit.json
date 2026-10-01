@@ -20,13 +20,7 @@
     },
     "ladder_step": {
       "type": "string",
-      "enum": [
-        "BN-1",
-        "BN-2",
-        "BN-3",
-        "BN-4",
-        "BN-5"
-      ]
+      "enum": ["BN-1", "BN-2", "BN-3", "BN-4", "BN-5"]
     },
     "submitted_text": {
       "type": "string",
@@ -54,11 +48,7 @@
     },
     "status": {
       "type": "string",
-      "enum": [
-        "graded",
-        "awaiting_self_grade",
-        "pending"
-      ]
+      "enum": ["graded", "awaiting_self_grade", "pending"]
     },
     "diff": {
       "anyOf": [
@@ -76,11 +66,7 @@
                 "properties": {
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "recalled",
-                      "missing",
-                      "error"
-                    ]
+                    "enum": ["recalled", "missing", "error"]
                   },
                   "ku_id": {
                     "anyOf": [
@@ -110,19 +96,12 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "status",
-                  "ku_id",
-                  "p",
-                  "uncertain_marked"
-                ],
+                "required": ["status", "ku_id", "p", "uncertain_marked"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "units"
-          ],
+          "required": ["units"],
           "additionalProperties": false
         },
         {
@@ -179,12 +158,7 @@
           }
         }
       },
-      "required": [
-        "cards",
-        "ox_item_ids",
-        "import_candidates_ko",
-        "recall_scheduled"
-      ],
+      "required": ["cards", "ox_item_ids", "import_candidates_ko", "recall_scheduled"],
       "additionalProperties": false
     },
     "judge_card": {
@@ -245,14 +219,7 @@
             },
             "engine": {
               "type": "string",
-              "enum": [
-                "D",
-                "J",
-                "LJ",
-                "H",
-                "S",
-                "PENDING"
-              ]
+              "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
             },
             "badge": {
               "type": "string",
@@ -330,25 +297,11 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "kp",
-                      "misconception",
-                      "dimension",
-                      "solo",
-                      "injection",
-                      "rationale"
-                    ]
+                    "enum": ["kp", "misconception", "dimension", "solo", "injection", "rationale"]
                   },
                   "outcome": {
                     "type": "string",
-                    "enum": [
-                      "covered",
-                      "partial",
-                      "missing",
-                      "present",
-                      "absent",
-                      "scored"
-                    ]
+                    "enum": ["covered", "partial", "missing", "present", "absent", "scored"]
                   },
                   "p": {
                     "anyOf": [
@@ -363,10 +316,7 @@
                     ]
                   },
                   "score": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "ku_id": {
                     "anyOf": [
@@ -393,15 +343,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "kind",
-                  "outcome",
-                  "p",
-                  "score",
-                  "ku_id",
-                  "mc_id"
-                ],
+                "required": ["label_ko", "kind", "outcome", "p", "score", "ku_id", "mc_id"],
                 "additionalProperties": false
               }
             },
@@ -451,24 +393,11 @@
                     },
                     "reason": {
                       "type": "string",
-                      "enum": [
-                        "key_wrong",
-                        "ambiguous",
-                        "outdated",
-                        "learner_right",
-                        "other"
-                      ]
+                      "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
                     },
                     "state": {
                       "type": "string",
-                      "enum": [
-                        "received",
-                        "classifying",
-                        "regrading",
-                        "upheld",
-                        "rejected",
-                        "user_decision_required"
-                      ]
+                      "enum": ["received", "classifying", "regrading", "upheld", "rejected", "user_decision_required"]
                     },
                     "classification": {
                       "anyOf": [
@@ -477,23 +406,11 @@
                           "properties": {
                             "label": {
                               "type": "string",
-                              "enum": [
-                                "key_wrong",
-                                "ambiguous",
-                                "outdated",
-                                "learner_wrong"
-                              ]
+                              "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                             },
                             "engine": {
                               "type": "string",
-                              "enum": [
-                                "D",
-                                "J",
-                                "LJ",
-                                "H",
-                                "S",
-                                "PENDING"
-                              ]
+                              "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                             },
                             "confidence": {
                               "anyOf": [
@@ -508,11 +425,7 @@
                               ]
                             }
                           },
-                          "required": [
-                            "label",
-                            "engine",
-                            "confidence"
-                          ],
+                          "required": ["label", "engine", "confidence"],
                           "additionalProperties": false
                         },
                         {

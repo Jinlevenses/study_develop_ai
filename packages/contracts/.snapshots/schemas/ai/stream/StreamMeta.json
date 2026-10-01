@@ -29,11 +29,7 @@
     },
     "provider_kind": {
       "type": "string",
-      "enum": [
-        "llm_api",
-        "llm_cli",
-        "local_llm"
-      ]
+      "enum": ["llm_api", "llm_cli", "local_llm"]
     },
     "started_at": {
       "type": "integer",
@@ -41,12 +37,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "ref",
-    "task_id",
-    "prompt_version",
-    "provider_kind",
-    "started_at"
-  ],
+  "required": ["ref", "task_id", "prompt_version", "provider_kind", "started_at"],
   "additionalProperties": false
 }

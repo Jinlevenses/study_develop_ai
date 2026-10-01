@@ -3,14 +3,9 @@
   "properties": {
     "reason": {
       "type": "string",
-      "enum": [
-        "learner",
-        "completed"
-      ]
+      "enum": ["learner", "completed"]
     }
   },
-  "required": [
-    "reason"
-  ],
+  "required": ["reason"],
   "additionalProperties": false
 }

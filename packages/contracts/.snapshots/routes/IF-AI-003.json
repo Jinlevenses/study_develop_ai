@@ -12,9 +12,7 @@
       "const": "/internal/v1/streams/{ref}"
     },
     "allowedCallers": {
-      "enum": [
-        "content"
-      ]
+      "enum": ["content"]
     },
     "idempotent": {
       "const": false
@@ -29,11 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-STD-020",
-        "FR-QST-023",
-        "IR-016"
-      ]
+      "enum": ["FR-STD-020", "FR-QST-023", "IR-016"]
     },
     "deadlineMs": {
       "const": 120000
@@ -58,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "ref"
-          ],
+          "required": ["ref"],
           "additionalProperties": false
         }
       }

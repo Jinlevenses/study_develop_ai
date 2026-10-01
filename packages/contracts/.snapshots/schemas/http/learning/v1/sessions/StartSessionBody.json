@@ -37,11 +37,7 @@
         },
         "energy": {
           "type": "string",
-          "enum": [
-            "light",
-            "normal",
-            "deep"
-          ]
+          "enum": ["light", "normal", "deep"]
         },
         "scope": {
           "oneOf": [
@@ -53,9 +49,7 @@
                   "const": "all"
                 }
               },
-              "required": [
-                "kind"
-              ],
+              "required": ["kind"],
               "additionalProperties": false
             },
             {
@@ -71,10 +65,7 @@
                   "pattern": "^(?:path\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
                 }
               },
-              "required": [
-                "kind",
-                "path_id"
-              ],
+              "required": ["kind", "path_id"],
               "additionalProperties": false
             },
             {
@@ -115,10 +106,7 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "tracks"
-              ],
+              "required": ["kind", "tracks"],
               "additionalProperties": false
             },
             {
@@ -139,22 +127,13 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "concept_ids"
-              ],
+              "required": ["kind", "concept_ids"],
               "additionalProperties": false
             }
           ]
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "minutes",
-        "energy",
-        "scope"
-      ],
+      "required": ["template", "session_id", "minutes", "energy", "scope"],
       "additionalProperties": false
     },
     {
@@ -199,11 +178,7 @@
           }
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "tracks"
-      ],
+      "required": ["template", "session_id", "tracks"],
       "additionalProperties": false
     },
     {
@@ -223,11 +198,7 @@
           "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "concept_id"
-      ],
+      "required": ["template", "session_id", "concept_id"],
       "additionalProperties": false
     },
     {
@@ -272,12 +243,7 @@
           "maximum": 4
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "track",
-        "from_level"
-      ],
+      "required": ["template", "session_id", "track", "from_level"],
       "additionalProperties": false
     },
     {
@@ -325,9 +291,7 @@
                   "const": "all"
                 }
               },
-              "required": [
-                "kind"
-              ],
+              "required": ["kind"],
               "additionalProperties": false
             },
             {
@@ -343,10 +307,7 @@
                   "pattern": "^(?:path\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
                 }
               },
-              "required": [
-                "kind",
-                "path_id"
-              ],
+              "required": ["kind", "path_id"],
               "additionalProperties": false
             },
             {
@@ -387,10 +348,7 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "tracks"
-              ],
+              "required": ["kind", "tracks"],
               "additionalProperties": false
             },
             {
@@ -411,21 +369,13 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "concept_ids"
-              ],
+              "required": ["kind", "concept_ids"],
               "additionalProperties": false
             }
           ]
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "minutes",
-        "scope"
-      ],
+      "required": ["template", "session_id", "minutes", "scope"],
       "additionalProperties": false
     },
     {
@@ -465,19 +415,10 @@
         },
         "energy": {
           "type": "string",
-          "enum": [
-            "light",
-            "normal",
-            "deep"
-          ]
+          "enum": ["light", "normal", "deep"]
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "minutes",
-        "energy"
-      ],
+      "required": ["template", "session_id", "minutes", "energy"],
       "additionalProperties": false
     },
     {
@@ -516,11 +457,7 @@
           ]
         }
       },
-      "required": [
-        "template",
-        "session_id",
-        "minutes"
-      ],
+      "required": ["template", "session_id", "minutes"],
       "additionalProperties": false
     }
   ]

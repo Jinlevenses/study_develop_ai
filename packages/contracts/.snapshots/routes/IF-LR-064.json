@@ -12,9 +12,7 @@
       "const": "/internal/v1/settings/policies"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-017",
-        "FR-SET-018"
-      ]
+      "enum": ["FR-CUR-017", "FR-SET-018"]
     },
     "deadlineMs": {
       "const": null
@@ -78,20 +73,10 @@
                   },
                   "owner": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   }
                 },
-                "required": [
-                  "version",
-                  "sha256",
-                  "owner"
-                ],
+                "required": ["version", "sha256", "owner"],
                 "additionalProperties": false
               }
             },
@@ -111,10 +96,7 @@
                     }
                   }
                 },
-                "required": [
-                  "name",
-                  "versions"
-                ],
+                "required": ["name", "versions"],
                 "additionalProperties": false
               }
             },
@@ -170,13 +152,7 @@
               }
             }
           },
-          "required": [
-            "active_policy_version",
-            "members",
-            "available",
-            "overrides",
-            "provisional"
-          ],
+          "required": ["active_policy_version", "members", "available", "overrides", "provisional"],
           "additionalProperties": false
         }
       }

@@ -11,11 +11,7 @@
     },
     "dialog_kind": {
       "type": "string",
-      "enum": [
-        "dig",
-        "feynman",
-        "artifact_rebuttal"
-      ]
+      "enum": ["dig", "feynman", "artifact_rebuttal"]
     },
     "concept_id": {
       "type": "string",
@@ -109,14 +105,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "moves",
-        "covered_ku_ids",
-        "flagged_mc_ids",
-        "fail_streak",
-        "asks_for_answer_count",
-        "turn_count"
-      ],
+      "required": ["moves", "covered_ku_ids", "flagged_mc_ids", "fail_streak", "asks_for_answer_count", "turn_count"],
       "additionalProperties": false
     },
     "turn_text": {
@@ -148,11 +137,7 @@
               }
             }
           },
-          "required": [
-            "item_id",
-            "item_content_hash",
-            "option_keys"
-          ],
+          "required": ["item_id", "item_content_hash", "option_keys"],
           "additionalProperties": false
         },
         {
@@ -185,11 +170,7 @@
               ]
             }
           },
-          "required": [
-            "run_id",
-            "attempt_id",
-            "verdict_id"
-          ],
+          "required": ["run_id", "attempt_id", "verdict_id"],
           "additionalProperties": false
         },
         {
@@ -252,16 +233,7 @@
               "const": 0
             }
           },
-          "required": [
-            "D",
-            "J_calibrated",
-            "J_uncalibrated",
-            "J_low_confidence",
-            "LJ",
-            "H",
-            "S",
-            "PENDING"
-          ],
+          "required": ["D", "J_calibrated", "J_uncalibrated", "J_low_confidence", "LJ", "H", "S", "PENDING"],
           "additionalProperties": false
         },
         "rapid": {
@@ -273,23 +245,12 @@
           "maximum": 1
         }
       },
-      "required": [
-        "policy_version",
-        "w_format",
-        "w_grader_table",
-        "rapid",
-        "gaming_factor"
-      ],
+      "required": ["policy_version", "w_format", "w_grader_table", "rapid", "gaming_factor"],
       "additionalProperties": false
     },
     "ai_mode_observed": {
       "type": "string",
-      "enum": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     }
   },
   "required": [

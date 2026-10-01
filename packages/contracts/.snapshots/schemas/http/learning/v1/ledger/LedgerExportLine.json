@@ -54,10 +54,7 @@
                 "pattern": "^[0-9a-f]{64}$"
               }
             },
-            "required": [
-              "seq",
-              "head_hash"
-            ],
+            "required": ["seq", "head_hash"],
             "additionalProperties": false
           }
         },
@@ -151,10 +148,7 @@
                 "pattern": "^[0-9a-f]{64}$"
               }
             },
-            "required": [
-              "version",
-              "sha256"
-            ],
+            "required": ["version", "sha256"],
             "additionalProperties": false
           }
         },
@@ -176,20 +170,12 @@
                 "maxLength": 1000000
               }
             },
-            "required": [
-              "sha256",
-              "yaml"
-            ],
+            "required": ["sha256", "yaml"],
             "additionalProperties": false
           }
         }
       },
-      "required": [
-        "kind",
-        "policy_version",
-        "members",
-        "documents"
-      ],
+      "required": ["kind", "policy_version", "members", "documents"],
       "additionalProperties": false
     },
     {
@@ -301,10 +287,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "kind",
-        "event"
-      ],
+      "required": ["kind", "event"],
       "additionalProperties": false
     },
     {
@@ -324,11 +307,7 @@
           "pattern": "^[0-9a-f]{64}$"
         }
       },
-      "required": [
-        "kind",
-        "count",
-        "sha256"
-      ],
+      "required": ["kind", "count", "sha256"],
       "additionalProperties": false
     }
   ]

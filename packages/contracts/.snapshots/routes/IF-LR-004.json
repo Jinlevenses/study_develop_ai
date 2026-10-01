@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/sessions/{session_id}/blocks/{block_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-STD-010~018",
-        "FR-UX-016"
-      ]
+      "enum": ["FR-STD-010~018", "FR-UX-016"]
     },
     "deadlineMs": {
       "const": null
@@ -61,10 +56,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "session_id",
-            "block_id"
-          ],
+          "required": ["session_id", "block_id"],
           "additionalProperties": false
         }
       }
@@ -93,14 +85,7 @@
                 },
                 "slot": {
                   "type": "string",
-                  "enum": [
-                    "W",
-                    "R",
-                    "N",
-                    "D",
-                    "S",
-                    "C"
-                  ]
+                  "enum": ["W", "R", "N", "D", "S", "C"]
                 },
                 "mode_id": {
                   "type": "string",
@@ -177,11 +162,7 @@
                         ]
                       }
                     },
-                    "required": [
-                      "code",
-                      "label_ko",
-                      "value"
-                    ],
+                    "required": ["code", "label_ko", "value"],
                     "additionalProperties": false
                   }
                 },
@@ -190,14 +171,7 @@
                 },
                 "state": {
                   "type": "string",
-                  "enum": [
-                    "pending",
-                    "active",
-                    "awaiting_grade",
-                    "done",
-                    "skipped",
-                    "swapped"
-                  ]
+                  "enum": ["pending", "active", "awaiting_grade", "done", "skipped", "swapped"]
                 },
                 "est_minutes": {
                   "type": "number",
@@ -262,26 +236,14 @@
                     },
                     "entry_stage": {
                       "type": "string",
-                      "enum": [
-                        "theory",
-                        "code",
-                        "core",
-                        "pretest",
-                        "problem",
-                        "problem_definition"
-                      ]
+                      "enum": ["theory", "code", "core", "pretest", "problem", "problem_definition"]
                     },
                     "page_content_hash": {
                       "type": "string",
                       "pattern": "^[0-9a-f]{64}$"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "concept_id",
-                    "entry_stage",
-                    "page_content_hash"
-                  ],
+                  "required": ["kind", "concept_id", "entry_stage", "page_content_hash"],
                   "additionalProperties": false
                 },
                 {
@@ -293,15 +255,7 @@
                     },
                     "phase": {
                       "type": "string",
-                      "enum": [
-                        "practice",
-                        "pretest",
-                        "embedded",
-                        "verify",
-                        "promotion_exam",
-                        "placement",
-                        "boss"
-                      ]
+                      "enum": ["practice", "pretest", "embedded", "verify", "promotion_exam", "placement", "boss"]
                     },
                     "items": {
                       "minItems": 1,
@@ -381,18 +335,11 @@
                           },
                           "response_mode": {
                             "type": "string",
-                            "enum": [
-                              "recognition",
-                              "production"
-                            ]
+                            "enum": ["recognition", "production"]
                           },
                           "tier": {
                             "type": "string",
-                            "enum": [
-                              "A",
-                              "B",
-                              "C"
-                            ]
+                            "enum": ["A", "B", "C"]
                           },
                           "level": {
                             "type": "integer",
@@ -401,11 +348,7 @@
                           },
                           "stakes": {
                             "type": "string",
-                            "enum": [
-                              "S0",
-                              "S1",
-                              "S2"
-                            ]
+                            "enum": ["S0", "S1", "S2"]
                           },
                           "n_options": {
                             "type": "integer",
@@ -426,9 +369,7 @@
                                     "const": "ox"
                                   }
                                 },
-                                "required": [
-                                  "kind"
-                                ],
+                                "required": ["kind"],
                                 "additionalProperties": false
                               },
                               {
@@ -452,9 +393,7 @@
                                           "maxLength": 2000
                                         }
                                       },
-                                      "required": [
-                                        "text_md"
-                                      ],
+                                      "required": ["text_md"],
                                       "additionalProperties": false
                                     }
                                   },
@@ -471,12 +410,7 @@
                                     "type": "boolean"
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "options",
-                                  "order",
-                                  "multi"
-                                ],
+                                "required": ["kind", "options", "order", "multi"],
                                 "additionalProperties": false
                               },
                               {
@@ -503,11 +437,7 @@
                                     ]
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "max_chars",
-                                  "placeholder_ko"
-                                ],
+                                "required": ["kind", "max_chars", "placeholder_ko"],
                                 "additionalProperties": false
                               },
                               {
@@ -536,18 +466,12 @@
                                           "maximum": 500
                                         }
                                       },
-                                      "required": [
-                                        "max_chars"
-                                      ],
+                                      "required": ["max_chars"],
                                       "additionalProperties": false
                                     }
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "template_md",
-                                  "blanks"
-                                ],
+                                "required": ["kind", "template_md", "blanks"],
                                 "additionalProperties": false
                               },
                               {
@@ -580,11 +504,7 @@
                                     }
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "left",
-                                  "right"
-                                ],
+                                "required": ["kind", "left", "right"],
                                 "additionalProperties": false
                               },
                               {
@@ -596,18 +516,11 @@
                                   },
                                   "lang": {
                                     "type": "string",
-                                    "enum": [
-                                      "js",
-                                      "ts"
-                                    ]
+                                    "enum": ["js", "ts"]
                                   },
                                   "mode": {
                                     "type": "string",
-                                    "enum": [
-                                      "write",
-                                      "predict_output",
-                                      "fix"
-                                    ]
+                                    "enum": ["write", "predict_output", "fix"]
                                   },
                                   "starter": {
                                     "type": "string",
@@ -628,14 +541,7 @@
                                     "type": "boolean"
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "lang",
-                                  "mode",
-                                  "starter",
-                                  "public_tests_md",
-                                  "runnable"
-                                ],
+                                "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
                                 "additionalProperties": false
                               },
                               {
@@ -657,12 +563,7 @@
                                     "type": "boolean"
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "schema_md",
-                                  "starter",
-                                  "runnable"
-                                ],
+                                "required": ["kind", "schema_md", "starter", "runnable"],
                                 "additionalProperties": false
                               },
                               {
@@ -697,12 +598,7 @@
                                     "maximum": 20
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "lines",
-                                  "order",
-                                  "max_select"
-                                ],
+                                "required": ["kind", "lines", "order", "max_select"],
                                 "additionalProperties": false
                               },
                               {
@@ -724,10 +620,7 @@
                                     ]
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "unit_hint"
-                                ],
+                                "required": ["kind", "unit_hint"],
                                 "additionalProperties": false
                               },
                               {
@@ -774,21 +667,12 @@
                                           "maxLength": 60
                                         }
                                       },
-                                      "required": [
-                                        "key",
-                                        "label_ko"
-                                      ],
+                                      "required": ["key", "label_ko"],
                                       "additionalProperties": false
                                     }
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "min_chars",
-                                  "max_chars",
-                                  "kp_count",
-                                  "rubric_dims"
-                                ],
+                                "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
                                 "additionalProperties": false
                               },
                               {
@@ -822,17 +706,12 @@
                                                   "maxLength": 1000
                                                 }
                                               },
-                                              "required": [
-                                                "text_md"
-                                              ],
+                                              "required": ["text_md"],
                                               "additionalProperties": false
                                             }
                                           }
                                         },
-                                        "required": [
-                                          "stem_md",
-                                          "options"
-                                        ],
+                                        "required": ["stem_md", "options"],
                                         "additionalProperties": false
                                       },
                                       "b": {
@@ -856,35 +735,23 @@
                                                   "maxLength": 1000
                                                 }
                                               },
-                                              "required": [
-                                                "text_md"
-                                              ],
+                                              "required": ["text_md"],
                                               "additionalProperties": false
                                             }
                                           }
                                         },
-                                        "required": [
-                                          "stem_md",
-                                          "options"
-                                        ],
+                                        "required": ["stem_md", "options"],
                                         "additionalProperties": false
                                       }
                                     },
-                                    "required": [
-                                      "a",
-                                      "b"
-                                    ],
+                                    "required": ["a", "b"],
                                     "additionalProperties": false
                                   },
                                   "pivot_required": {
                                     "type": "boolean"
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "parts",
-                                  "pivot_required"
-                                ],
+                                "required": ["kind", "parts", "pivot_required"],
                                 "additionalProperties": false
                               },
                               {
@@ -918,12 +785,7 @@
                                     }
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "diff_md",
-                                  "lines",
-                                  "order"
-                                ],
+                                "required": ["kind", "diff_md", "lines", "order"],
                                 "additionalProperties": false
                               },
                               {
@@ -945,18 +807,10 @@
                                   },
                                   "item_format": {
                                     "type": "string",
-                                    "enum": [
-                                      "mcq",
-                                      "ox",
-                                      "short"
-                                    ]
+                                    "enum": ["mcq", "ox", "short"]
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "target_ku_ids",
-                                  "item_format"
-                                ],
+                                "required": ["kind", "target_ku_ids", "item_format"],
                                 "additionalProperties": false
                               },
                               {
@@ -984,9 +838,7 @@
                                           "maxLength": 2000
                                         }
                                       },
-                                      "required": [
-                                        "text_md"
-                                      ],
+                                      "required": ["text_md"],
                                       "additionalProperties": false
                                     }
                                   },
@@ -1000,20 +852,10 @@
                                   },
                                   "rationale": {
                                     "type": "string",
-                                    "enum": [
-                                      "none",
-                                      "optional",
-                                      "required"
-                                    ]
+                                    "enum": ["none", "optional", "required"]
                                   }
                                 },
-                                "required": [
-                                  "kind",
-                                  "node_key",
-                                  "options",
-                                  "order",
-                                  "rationale"
-                                ],
+                                "required": ["kind", "node_key", "options", "order", "rationale"],
                                 "additionalProperties": false
                               }
                             ]
@@ -1043,30 +885,14 @@
                             "properties": {
                               "source_kind": {
                                 "type": "string",
-                                "enum": [
-                                  "seed",
-                                  "t1",
-                                  "t2",
-                                  "t3",
-                                  "t4",
-                                  "imported",
-                                  "user"
-                                ]
+                                "enum": ["seed", "t1", "t2", "t3", "t4", "imported", "user"]
                               },
                               "trust": {
                                 "type": "string",
-                                "enum": [
-                                  "seed",
-                                  "verified",
-                                  "user",
-                                  "llm_unverified"
-                                ]
+                                "enum": ["seed", "verified", "user", "llm_unverified"]
                               }
                             },
-                            "required": [
-                              "source_kind",
-                              "trust"
-                            ],
+                            "required": ["source_kind", "trust"],
                             "additionalProperties": false
                           }
                         },
@@ -1103,12 +929,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "phase",
-                    "items",
-                    "attempted_item_ids"
-                  ],
+                  "required": ["kind", "phase", "items", "attempted_item_ids"],
                   "additionalProperties": false
                 },
                 {
@@ -1125,13 +946,7 @@
                     },
                     "ladder_step": {
                       "type": "string",
-                      "enum": [
-                        "BN-1",
-                        "BN-2",
-                        "BN-3",
-                        "BN-4",
-                        "BN-5"
-                      ]
+                      "enum": ["BN-1", "BN-2", "BN-3", "BN-4", "BN-5"]
                     },
                     "item": {
                       "type": "object",
@@ -1207,18 +1022,11 @@
                         },
                         "response_mode": {
                           "type": "string",
-                          "enum": [
-                            "recognition",
-                            "production"
-                          ]
+                          "enum": ["recognition", "production"]
                         },
                         "tier": {
                           "type": "string",
-                          "enum": [
-                            "A",
-                            "B",
-                            "C"
-                          ]
+                          "enum": ["A", "B", "C"]
                         },
                         "level": {
                           "type": "integer",
@@ -1227,11 +1035,7 @@
                         },
                         "stakes": {
                           "type": "string",
-                          "enum": [
-                            "S0",
-                            "S1",
-                            "S2"
-                          ]
+                          "enum": ["S0", "S1", "S2"]
                         },
                         "n_options": {
                           "type": "integer",
@@ -1252,9 +1056,7 @@
                                   "const": "ox"
                                 }
                               },
-                              "required": [
-                                "kind"
-                              ],
+                              "required": ["kind"],
                               "additionalProperties": false
                             },
                             {
@@ -1278,9 +1080,7 @@
                                         "maxLength": 2000
                                       }
                                     },
-                                    "required": [
-                                      "text_md"
-                                    ],
+                                    "required": ["text_md"],
                                     "additionalProperties": false
                                   }
                                 },
@@ -1297,12 +1097,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "options",
-                                "order",
-                                "multi"
-                              ],
+                              "required": ["kind", "options", "order", "multi"],
                               "additionalProperties": false
                             },
                             {
@@ -1329,11 +1124,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "max_chars",
-                                "placeholder_ko"
-                              ],
+                              "required": ["kind", "max_chars", "placeholder_ko"],
                               "additionalProperties": false
                             },
                             {
@@ -1362,18 +1153,12 @@
                                         "maximum": 500
                                       }
                                     },
-                                    "required": [
-                                      "max_chars"
-                                    ],
+                                    "required": ["max_chars"],
                                     "additionalProperties": false
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "template_md",
-                                "blanks"
-                              ],
+                              "required": ["kind", "template_md", "blanks"],
                               "additionalProperties": false
                             },
                             {
@@ -1406,11 +1191,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "left",
-                                "right"
-                              ],
+                              "required": ["kind", "left", "right"],
                               "additionalProperties": false
                             },
                             {
@@ -1422,18 +1203,11 @@
                                 },
                                 "lang": {
                                   "type": "string",
-                                  "enum": [
-                                    "js",
-                                    "ts"
-                                  ]
+                                  "enum": ["js", "ts"]
                                 },
                                 "mode": {
                                   "type": "string",
-                                  "enum": [
-                                    "write",
-                                    "predict_output",
-                                    "fix"
-                                  ]
+                                  "enum": ["write", "predict_output", "fix"]
                                 },
                                 "starter": {
                                   "type": "string",
@@ -1454,14 +1228,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "lang",
-                                "mode",
-                                "starter",
-                                "public_tests_md",
-                                "runnable"
-                              ],
+                              "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
                               "additionalProperties": false
                             },
                             {
@@ -1483,12 +1250,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "schema_md",
-                                "starter",
-                                "runnable"
-                              ],
+                              "required": ["kind", "schema_md", "starter", "runnable"],
                               "additionalProperties": false
                             },
                             {
@@ -1523,12 +1285,7 @@
                                   "maximum": 20
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "lines",
-                                "order",
-                                "max_select"
-                              ],
+                              "required": ["kind", "lines", "order", "max_select"],
                               "additionalProperties": false
                             },
                             {
@@ -1550,10 +1307,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "unit_hint"
-                              ],
+                              "required": ["kind", "unit_hint"],
                               "additionalProperties": false
                             },
                             {
@@ -1600,21 +1354,12 @@
                                         "maxLength": 60
                                       }
                                     },
-                                    "required": [
-                                      "key",
-                                      "label_ko"
-                                    ],
+                                    "required": ["key", "label_ko"],
                                     "additionalProperties": false
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "min_chars",
-                                "max_chars",
-                                "kp_count",
-                                "rubric_dims"
-                              ],
+                              "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
                               "additionalProperties": false
                             },
                             {
@@ -1648,17 +1393,12 @@
                                                 "maxLength": 1000
                                               }
                                             },
-                                            "required": [
-                                              "text_md"
-                                            ],
+                                            "required": ["text_md"],
                                             "additionalProperties": false
                                           }
                                         }
                                       },
-                                      "required": [
-                                        "stem_md",
-                                        "options"
-                                      ],
+                                      "required": ["stem_md", "options"],
                                       "additionalProperties": false
                                     },
                                     "b": {
@@ -1682,35 +1422,23 @@
                                                 "maxLength": 1000
                                               }
                                             },
-                                            "required": [
-                                              "text_md"
-                                            ],
+                                            "required": ["text_md"],
                                             "additionalProperties": false
                                           }
                                         }
                                       },
-                                      "required": [
-                                        "stem_md",
-                                        "options"
-                                      ],
+                                      "required": ["stem_md", "options"],
                                       "additionalProperties": false
                                     }
                                   },
-                                  "required": [
-                                    "a",
-                                    "b"
-                                  ],
+                                  "required": ["a", "b"],
                                   "additionalProperties": false
                                 },
                                 "pivot_required": {
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "parts",
-                                "pivot_required"
-                              ],
+                              "required": ["kind", "parts", "pivot_required"],
                               "additionalProperties": false
                             },
                             {
@@ -1744,12 +1472,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "diff_md",
-                                "lines",
-                                "order"
-                              ],
+                              "required": ["kind", "diff_md", "lines", "order"],
                               "additionalProperties": false
                             },
                             {
@@ -1771,18 +1494,10 @@
                                 },
                                 "item_format": {
                                   "type": "string",
-                                  "enum": [
-                                    "mcq",
-                                    "ox",
-                                    "short"
-                                  ]
+                                  "enum": ["mcq", "ox", "short"]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "target_ku_ids",
-                                "item_format"
-                              ],
+                              "required": ["kind", "target_ku_ids", "item_format"],
                               "additionalProperties": false
                             },
                             {
@@ -1810,9 +1525,7 @@
                                         "maxLength": 2000
                                       }
                                     },
-                                    "required": [
-                                      "text_md"
-                                    ],
+                                    "required": ["text_md"],
                                     "additionalProperties": false
                                   }
                                 },
@@ -1826,20 +1539,10 @@
                                 },
                                 "rationale": {
                                   "type": "string",
-                                  "enum": [
-                                    "none",
-                                    "optional",
-                                    "required"
-                                  ]
+                                  "enum": ["none", "optional", "required"]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "node_key",
-                                "options",
-                                "order",
-                                "rationale"
-                              ],
+                              "required": ["kind", "node_key", "options", "order", "rationale"],
                               "additionalProperties": false
                             }
                           ]
@@ -1869,30 +1572,14 @@
                           "properties": {
                             "source_kind": {
                               "type": "string",
-                              "enum": [
-                                "seed",
-                                "t1",
-                                "t2",
-                                "t3",
-                                "t4",
-                                "imported",
-                                "user"
-                              ]
+                              "enum": ["seed", "t1", "t2", "t3", "t4", "imported", "user"]
                             },
                             "trust": {
                               "type": "string",
-                              "enum": [
-                                "seed",
-                                "verified",
-                                "user",
-                                "llm_unverified"
-                              ]
+                              "enum": ["seed", "verified", "user", "llm_unverified"]
                             }
                           },
-                          "required": [
-                            "source_kind",
-                            "trust"
-                          ],
+                          "required": ["source_kind", "trust"],
                           "additionalProperties": false
                         }
                       },
@@ -1919,12 +1606,7 @@
                       "additionalProperties": false
                     }
                   },
-                  "required": [
-                    "kind",
-                    "concept_id",
-                    "ladder_step",
-                    "item"
-                  ],
+                  "required": ["kind", "concept_id", "ladder_step", "item"],
                   "additionalProperties": false
                 },
                 {
@@ -1936,11 +1618,7 @@
                     },
                     "dialog_kind": {
                       "type": "string",
-                      "enum": [
-                        "dig",
-                        "feynman",
-                        "artifact_rebuttal"
-                      ]
+                      "enum": ["dig", "feynman", "artifact_rebuttal"]
                     },
                     "concept_id": {
                       "type": "string",
@@ -1959,12 +1637,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "dialog_kind",
-                    "concept_id",
-                    "dialog_id"
-                  ],
+                  "required": ["kind", "dialog_kind", "concept_id", "dialog_id"],
                   "additionalProperties": false
                 },
                 {
@@ -2048,18 +1721,11 @@
                         },
                         "response_mode": {
                           "type": "string",
-                          "enum": [
-                            "recognition",
-                            "production"
-                          ]
+                          "enum": ["recognition", "production"]
                         },
                         "tier": {
                           "type": "string",
-                          "enum": [
-                            "A",
-                            "B",
-                            "C"
-                          ]
+                          "enum": ["A", "B", "C"]
                         },
                         "level": {
                           "type": "integer",
@@ -2068,11 +1734,7 @@
                         },
                         "stakes": {
                           "type": "string",
-                          "enum": [
-                            "S0",
-                            "S1",
-                            "S2"
-                          ]
+                          "enum": ["S0", "S1", "S2"]
                         },
                         "n_options": {
                           "type": "integer",
@@ -2093,9 +1755,7 @@
                                   "const": "ox"
                                 }
                               },
-                              "required": [
-                                "kind"
-                              ],
+                              "required": ["kind"],
                               "additionalProperties": false
                             },
                             {
@@ -2119,9 +1779,7 @@
                                         "maxLength": 2000
                                       }
                                     },
-                                    "required": [
-                                      "text_md"
-                                    ],
+                                    "required": ["text_md"],
                                     "additionalProperties": false
                                   }
                                 },
@@ -2138,12 +1796,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "options",
-                                "order",
-                                "multi"
-                              ],
+                              "required": ["kind", "options", "order", "multi"],
                               "additionalProperties": false
                             },
                             {
@@ -2170,11 +1823,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "max_chars",
-                                "placeholder_ko"
-                              ],
+                              "required": ["kind", "max_chars", "placeholder_ko"],
                               "additionalProperties": false
                             },
                             {
@@ -2203,18 +1852,12 @@
                                         "maximum": 500
                                       }
                                     },
-                                    "required": [
-                                      "max_chars"
-                                    ],
+                                    "required": ["max_chars"],
                                     "additionalProperties": false
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "template_md",
-                                "blanks"
-                              ],
+                              "required": ["kind", "template_md", "blanks"],
                               "additionalProperties": false
                             },
                             {
@@ -2247,11 +1890,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "left",
-                                "right"
-                              ],
+                              "required": ["kind", "left", "right"],
                               "additionalProperties": false
                             },
                             {
@@ -2263,18 +1902,11 @@
                                 },
                                 "lang": {
                                   "type": "string",
-                                  "enum": [
-                                    "js",
-                                    "ts"
-                                  ]
+                                  "enum": ["js", "ts"]
                                 },
                                 "mode": {
                                   "type": "string",
-                                  "enum": [
-                                    "write",
-                                    "predict_output",
-                                    "fix"
-                                  ]
+                                  "enum": ["write", "predict_output", "fix"]
                                 },
                                 "starter": {
                                   "type": "string",
@@ -2295,14 +1927,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "lang",
-                                "mode",
-                                "starter",
-                                "public_tests_md",
-                                "runnable"
-                              ],
+                              "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
                               "additionalProperties": false
                             },
                             {
@@ -2324,12 +1949,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "schema_md",
-                                "starter",
-                                "runnable"
-                              ],
+                              "required": ["kind", "schema_md", "starter", "runnable"],
                               "additionalProperties": false
                             },
                             {
@@ -2364,12 +1984,7 @@
                                   "maximum": 20
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "lines",
-                                "order",
-                                "max_select"
-                              ],
+                              "required": ["kind", "lines", "order", "max_select"],
                               "additionalProperties": false
                             },
                             {
@@ -2391,10 +2006,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "unit_hint"
-                              ],
+                              "required": ["kind", "unit_hint"],
                               "additionalProperties": false
                             },
                             {
@@ -2441,21 +2053,12 @@
                                         "maxLength": 60
                                       }
                                     },
-                                    "required": [
-                                      "key",
-                                      "label_ko"
-                                    ],
+                                    "required": ["key", "label_ko"],
                                     "additionalProperties": false
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "min_chars",
-                                "max_chars",
-                                "kp_count",
-                                "rubric_dims"
-                              ],
+                              "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
                               "additionalProperties": false
                             },
                             {
@@ -2489,17 +2092,12 @@
                                                 "maxLength": 1000
                                               }
                                             },
-                                            "required": [
-                                              "text_md"
-                                            ],
+                                            "required": ["text_md"],
                                             "additionalProperties": false
                                           }
                                         }
                                       },
-                                      "required": [
-                                        "stem_md",
-                                        "options"
-                                      ],
+                                      "required": ["stem_md", "options"],
                                       "additionalProperties": false
                                     },
                                     "b": {
@@ -2523,35 +2121,23 @@
                                                 "maxLength": 1000
                                               }
                                             },
-                                            "required": [
-                                              "text_md"
-                                            ],
+                                            "required": ["text_md"],
                                             "additionalProperties": false
                                           }
                                         }
                                       },
-                                      "required": [
-                                        "stem_md",
-                                        "options"
-                                      ],
+                                      "required": ["stem_md", "options"],
                                       "additionalProperties": false
                                     }
                                   },
-                                  "required": [
-                                    "a",
-                                    "b"
-                                  ],
+                                  "required": ["a", "b"],
                                   "additionalProperties": false
                                 },
                                 "pivot_required": {
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "parts",
-                                "pivot_required"
-                              ],
+                              "required": ["kind", "parts", "pivot_required"],
                               "additionalProperties": false
                             },
                             {
@@ -2585,12 +2171,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "diff_md",
-                                "lines",
-                                "order"
-                              ],
+                              "required": ["kind", "diff_md", "lines", "order"],
                               "additionalProperties": false
                             },
                             {
@@ -2612,18 +2193,10 @@
                                 },
                                 "item_format": {
                                   "type": "string",
-                                  "enum": [
-                                    "mcq",
-                                    "ox",
-                                    "short"
-                                  ]
+                                  "enum": ["mcq", "ox", "short"]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "target_ku_ids",
-                                "item_format"
-                              ],
+                              "required": ["kind", "target_ku_ids", "item_format"],
                               "additionalProperties": false
                             },
                             {
@@ -2651,9 +2224,7 @@
                                         "maxLength": 2000
                                       }
                                     },
-                                    "required": [
-                                      "text_md"
-                                    ],
+                                    "required": ["text_md"],
                                     "additionalProperties": false
                                   }
                                 },
@@ -2667,20 +2238,10 @@
                                 },
                                 "rationale": {
                                   "type": "string",
-                                  "enum": [
-                                    "none",
-                                    "optional",
-                                    "required"
-                                  ]
+                                  "enum": ["none", "optional", "required"]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "node_key",
-                                "options",
-                                "order",
-                                "rationale"
-                              ],
+                              "required": ["kind", "node_key", "options", "order", "rationale"],
                               "additionalProperties": false
                             }
                           ]
@@ -2710,30 +2271,14 @@
                           "properties": {
                             "source_kind": {
                               "type": "string",
-                              "enum": [
-                                "seed",
-                                "t1",
-                                "t2",
-                                "t3",
-                                "t4",
-                                "imported",
-                                "user"
-                              ]
+                              "enum": ["seed", "t1", "t2", "t3", "t4", "imported", "user"]
                             },
                             "trust": {
                               "type": "string",
-                              "enum": [
-                                "seed",
-                                "verified",
-                                "user",
-                                "llm_unverified"
-                              ]
+                              "enum": ["seed", "verified", "user", "llm_unverified"]
                             }
                           },
-                          "required": [
-                            "source_kind",
-                            "trust"
-                          ],
+                          "required": ["source_kind", "trust"],
                           "additionalProperties": false
                         }
                       },
@@ -2763,11 +2308,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "item",
-                    "runner_enabled"
-                  ],
+                  "required": ["kind", "item", "runner_enabled"],
                   "additionalProperties": false
                 },
                 {
@@ -2794,11 +2335,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "case_id",
-                    "run_id"
-                  ],
+                  "required": ["kind", "case_id", "run_id"],
                   "additionalProperties": false
                 },
                 {
@@ -2825,11 +2362,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "artifact_id",
-                    "run_id"
-                  ],
+                  "required": ["kind", "artifact_id", "run_id"],
                   "additionalProperties": false
                 },
                 {
@@ -2850,10 +2383,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "concept_ids"
-                  ],
+                  "required": ["kind", "concept_ids"],
                   "additionalProperties": false
                 },
                 {
@@ -2873,10 +2403,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "prompts_ko"
-                  ],
+                  "required": ["kind", "prompts_ko"],
                   "additionalProperties": false
                 },
                 {
@@ -2896,20 +2423,13 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "inbox_ids"
-                  ],
+                  "required": ["kind", "inbox_ids"],
                   "additionalProperties": false
                 }
               ]
             }
           },
-          "required": [
-            "session_id",
-            "block",
-            "payload"
-          ],
+          "required": ["session_id", "block", "payload"],
           "additionalProperties": false
         }
       }

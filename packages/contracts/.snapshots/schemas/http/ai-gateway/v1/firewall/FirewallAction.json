@@ -1,9 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "pass",
-    "masked",
-    "force_local",
-    "block"
-  ]
+  "enum": ["pass", "masked", "force_local", "block"]
 }

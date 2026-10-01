@@ -30,11 +30,6 @@
       "maximum": 1
     }
   },
-  "required": [
-    "chosen_keys",
-    "answer_text",
-    "rationale_short",
-    "confidence"
-  ],
+  "required": ["chosen_keys", "answer_text", "rationale_short", "confidence"],
   "additionalProperties": false
 }

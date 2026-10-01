@@ -42,20 +42,11 @@
     },
     "knowledge_type": {
       "type": "string",
-      "enum": [
-        "D",
-        "C",
-        "P",
-        "S"
-      ]
+      "enum": ["D", "C", "P", "S"]
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C"
-      ]
+      "enum": ["A", "B", "C"]
     },
     "title_ko": {
       "type": "string",
@@ -87,11 +78,7 @@
     },
     "volatility": {
       "type": "string",
-      "enum": [
-        "stable",
-        "evolving",
-        "volatile"
-      ]
+      "enum": ["stable", "evolving", "volatile"]
     },
     "required_for_level": {
       "anyOf": [
@@ -153,11 +140,7 @@
             "maxLength": 400
           }
         },
-        "required": [
-          "mermaid",
-          "alt",
-          "summary"
-        ],
+        "required": ["mermaid", "alt", "summary"],
         "additionalProperties": false
       }
     },
@@ -184,12 +167,7 @@
           },
           "usage": {
             "type": "string",
-            "enum": [
-              "link_only",
-              "paraphrase",
-              "short_quote",
-              "code_adapted"
-            ]
+            "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
           },
           "retrieved_at": {
             "type": "string",
@@ -218,15 +196,7 @@
             ]
           }
         },
-        "required": [
-          "source_id",
-          "locator",
-          "section",
-          "usage",
-          "retrieved_at",
-          "product_version",
-          "quote"
-        ],
+        "required": ["source_id", "locator", "section", "usage", "retrieved_at", "product_version", "quote"],
         "additionalProperties": false
       }
     },

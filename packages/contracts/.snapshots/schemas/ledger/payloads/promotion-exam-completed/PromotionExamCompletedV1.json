@@ -108,27 +108,14 @@
         },
         "ai_mode": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         },
         "sp1_state": {
           "type": "string",
-          "enum": [
-            "pass",
-            "fail",
-            "unknown"
-          ]
+          "enum": ["pass", "fail", "unknown"]
         }
       },
-      "required": [
-        "policy_version",
-        "ai_mode",
-        "sp1_state"
-      ],
+      "required": ["policy_version", "ai_mode", "sp1_state"],
       "additionalProperties": false
     },
     "study_day": {

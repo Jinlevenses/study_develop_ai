@@ -11,9 +11,6 @@
       "maxLength": 1024
     }
   },
-  "required": [
-    "op_id",
-    "bundle_path"
-  ],
+  "required": ["op_id", "bundle_path"],
   "additionalProperties": false
 }

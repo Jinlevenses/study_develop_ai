@@ -3,13 +3,7 @@
   "properties": {
     "kind": {
       "type": "string",
-      "enum": [
-        "start_session",
-        "resume_session",
-        "onboarding",
-        "return_mode",
-        "paused"
-      ]
+      "enum": ["start_session", "resume_session", "onboarding", "return_mode", "paused"]
     },
     "label_ko": {
       "type": "string",
@@ -46,17 +40,10 @@
             },
             "energy": {
               "type": "string",
-              "enum": [
-                "light",
-                "normal",
-                "deep"
-              ]
+              "enum": ["light", "normal", "deep"]
             }
           },
-          "required": [
-            "minutes",
-            "energy"
-          ],
+          "required": ["minutes", "energy"],
           "additionalProperties": false
         },
         {
@@ -76,11 +63,6 @@
       ]
     }
   },
-  "required": [
-    "kind",
-    "label_ko",
-    "suggested",
-    "session_id"
-  ],
+  "required": ["kind", "label_ko", "suggested", "session_id"],
   "additionalProperties": false
 }

@@ -12,9 +12,6 @@
       "maximum": 10000
     }
   },
-  "required": [
-    "epoch_id",
-    "ack_deadline_ms"
-  ],
+  "required": ["epoch_id", "ack_deadline_ms"],
   "additionalProperties": false
 }

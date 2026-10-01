@@ -13,13 +13,7 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "domain",
-              "employee_id",
-              "project_code",
-              "regex",
-              "literal"
-            ]
+            "enum": ["domain", "employee_id", "project_code", "regex", "literal"]
           },
           "value": {
             "type": "string",
@@ -27,11 +21,7 @@
             "maxLength": 500
           }
         },
-        "required": [
-          "pattern_id",
-          "kind",
-          "value"
-        ],
+        "required": ["pattern_id", "kind", "value"],
         "additionalProperties": false
       }
     },
@@ -39,9 +29,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "user_patterns",
-    "local_classifier_enabled"
-  ],
+  "required": ["user_patterns", "local_classifier_enabled"],
   "additionalProperties": false
 }

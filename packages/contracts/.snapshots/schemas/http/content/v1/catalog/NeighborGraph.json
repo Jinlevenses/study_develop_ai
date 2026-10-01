@@ -51,12 +51,7 @@
             "maximum": 5
           }
         },
-        "required": [
-          "concept_id",
-          "title_ko",
-          "track",
-          "level"
-        ],
+        "required": ["concept_id", "title_ko", "track", "level"],
         "additionalProperties": false
       }
     },
@@ -78,27 +73,14 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "prereq",
-              "related",
-              "contrast",
-              "part_of"
-            ]
+            "enum": ["prereq", "related", "contrast", "part_of"]
           }
         },
-        "required": [
-          "from",
-          "to",
-          "kind"
-        ],
+        "required": ["from", "to", "kind"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "center",
-    "nodes",
-    "edges"
-  ],
+  "required": ["center", "nodes", "edges"],
   "additionalProperties": false
 }

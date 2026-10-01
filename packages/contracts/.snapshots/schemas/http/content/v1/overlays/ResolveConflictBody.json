@@ -3,11 +3,7 @@
   "properties": {
     "resolution": {
       "type": "string",
-      "enum": [
-        "keep_overlay",
-        "take_pack",
-        "edit"
-      ]
+      "enum": ["keep_overlay", "take_pack", "edit"]
     },
     "value": {
       "anyOf": [
@@ -20,10 +16,7 @@
       ]
     }
   },
-  "required": [
-    "resolution",
-    "value"
-  ],
+  "required": ["resolution", "value"],
   "additionalProperties": false,
   "$defs": {
     "__schema0": {

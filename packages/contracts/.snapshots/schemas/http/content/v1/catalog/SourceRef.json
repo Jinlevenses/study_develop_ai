@@ -12,13 +12,7 @@
     },
     "grade": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C",
-        "D",
-        "P"
-      ]
+      "enum": ["A", "B", "C", "D", "P"]
     },
     "url": {
       "anyOf": [
@@ -58,14 +52,6 @@
       ]
     }
   },
-  "required": [
-    "source_id",
-    "title",
-    "grade",
-    "url",
-    "edition",
-    "license",
-    "retrieved_at"
-  ],
+  "required": ["source_id", "title", "grade", "url", "edition", "license", "retrieved_at"],
   "additionalProperties": false
 }

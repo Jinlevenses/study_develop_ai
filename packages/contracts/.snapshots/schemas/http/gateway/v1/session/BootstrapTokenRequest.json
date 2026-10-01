@@ -3,14 +3,9 @@
   "properties": {
     "purpose": {
       "type": "string",
-      "enum": [
-        "up",
-        "open"
-      ]
+      "enum": ["up", "open"]
     }
   },
-  "required": [
-    "purpose"
-  ],
+  "required": ["purpose"],
   "additionalProperties": false
 }

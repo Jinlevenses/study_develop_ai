@@ -12,10 +12,7 @@
       "const": "/internal/v1/itembank/warming"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "ops-api"]
     },
     "idempotent": {
       "const": false
@@ -30,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-QST-013"
-      ]
+      "enum": ["FR-QST-013"]
     },
     "deadlineMs": {
       "const": null
@@ -121,13 +116,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "format",
-                  "level",
-                  "have",
-                  "need"
-                ],
+                "required": ["concept_id", "format", "level", "have", "need"],
                 "additionalProperties": false
               }
             },
@@ -149,11 +138,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "pools",
-            "last_forecast_at",
-            "last_computed_at"
-          ],
+          "required": ["pools", "last_forecast_at", "last_computed_at"],
           "additionalProperties": false
         }
       }

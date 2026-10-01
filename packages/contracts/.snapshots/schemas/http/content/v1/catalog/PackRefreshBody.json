@@ -42,10 +42,6 @@
       ]
     }
   },
-  "required": [
-    "install_id",
-    "track",
-    "work_order_id"
-  ],
+  "required": ["install_id", "track", "work_order_id"],
   "additionalProperties": false
 }

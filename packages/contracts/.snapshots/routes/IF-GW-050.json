@@ -12,9 +12,7 @@
       "const": "/api/v1/search"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-011",
-        "FR-UX-005"
-      ]
+      "enum": ["FR-CUR-011", "FR-UX-005"]
     },
     "deadlineMs": {
       "const": 1000
@@ -93,10 +88,7 @@
               "maximum": 50
             }
           },
-          "required": [
-            "q",
-            "limit"
-          ],
+          "required": ["q", "limit"],
           "additionalProperties": false
         }
       }
@@ -115,13 +107,7 @@
                 "properties": {
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "concept",
-                      "ku",
-                      "misconception",
-                      "case",
-                      "path"
-                    ]
+                    "enum": ["concept", "ku", "misconception", "case", "path"]
                   },
                   "id": {
                     "type": "string",
@@ -194,25 +180,13 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "kind",
-                  "id",
-                  "concept_id",
-                  "title_ko",
-                  "snippet_ko",
-                  "track",
-                  "level",
-                  "score"
-                ],
+                "required": ["kind", "id", "concept_id", "title_ko", "snippet_ko", "track", "level", "score"],
                 "additionalProperties": false
               }
             },
             "engine": {
               "type": "string",
-              "enum": [
-                "v2",
-                "v3"
-              ]
+              "enum": ["v2", "v3"]
             },
             "took_ms": {
               "type": "integer",
@@ -220,11 +194,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "items",
-            "engine",
-            "took_ms"
-          ],
+          "required": ["items", "engine", "took_ms"],
           "additionalProperties": false
         }
       }

@@ -11,14 +11,7 @@
     },
     "target_kind": {
       "type": "string",
-      "enum": [
-        "concept",
-        "ku",
-        "misconception",
-        "item",
-        "case",
-        "source"
-      ]
+      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
     },
     "target_id": {
       "type": "string"
@@ -42,20 +35,13 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "open",
-        "resolved"
-      ]
+      "enum": ["open", "resolved"]
     },
     "resolution": {
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "keep_overlay",
-            "take_pack",
-            "edit"
-          ]
+          "enum": ["keep_overlay", "take_pack", "edit"]
         },
         {
           "type": "null"

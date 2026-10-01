@@ -20,10 +20,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "graded",
-        "awaiting_self_grade"
-      ]
+      "enum": ["graded", "awaiting_self_grade"]
     },
     "started_at": {
       "type": "integer",
@@ -63,13 +60,7 @@
             "pattern": "^[a-z][a-z0-9_]{1,31}$"
           }
         },
-        "required": [
-          "node_key",
-          "option_key",
-          "verdict_id",
-          "score",
-          "best_option_key"
-        ],
+        "required": ["node_key", "option_key", "verdict_id", "score", "best_option_key"],
         "additionalProperties": false
       }
     },

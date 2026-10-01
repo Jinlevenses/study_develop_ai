@@ -29,12 +29,7 @@
           ]
         }
       },
-      "required": [
-        "kind",
-        "v",
-        "generated_at",
-        "since"
-      ],
+      "required": ["kind", "v", "generated_at", "since"],
       "additionalProperties": false
     },
     {
@@ -116,10 +111,7 @@
                       "maximum": 1
                     }
                   },
-                  "required": [
-                    "type",
-                    "p_yes"
-                  ],
+                  "required": ["type", "p_yes"],
                   "additionalProperties": false
                 },
                 {
@@ -151,12 +143,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "type",
-                    "choice",
-                    "confidence",
-                    "probabilities"
-                  ],
+                  "required": ["type", "choice", "confidence", "probabilities"],
                   "additionalProperties": false
                 },
                 {
@@ -193,23 +180,14 @@
                       "maximum": 10
                     }
                   },
-                  "required": [
-                    "type",
-                    "score",
-                    "confidence",
-                    "probabilities",
-                    "levels"
-                  ],
+                  "required": ["type", "score", "confidence", "probabilities", "levels"],
                   "additionalProperties": false
                 }
               ]
             },
             "label_state": {
               "type": "string",
-              "enum": [
-                "user_confirmed",
-                "user_corrected"
-              ]
+              "enum": ["user_confirmed", "user_corrected"]
             },
             "confirmed_at": {
               "type": "integer",
@@ -230,10 +208,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "kind",
-        "item"
-      ],
+      "required": ["kind", "item"],
       "additionalProperties": false
     },
     {
@@ -253,11 +228,7 @@
           "pattern": "^[0-9a-f]{64}$"
         }
       },
-      "required": [
-        "kind",
-        "count",
-        "sha256"
-      ],
+      "required": ["kind", "count", "sha256"],
       "additionalProperties": false
     }
   ],

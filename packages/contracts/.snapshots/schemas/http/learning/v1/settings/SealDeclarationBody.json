@@ -7,11 +7,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "time_capsule",
-        "season_goal",
-        "self_declaration"
-      ]
+      "enum": ["time_capsule", "season_goal", "self_declaration"]
     },
     "payload": {
       "type": "object",
@@ -33,11 +29,6 @@
       ]
     }
   },
-  "required": [
-    "declaration_id",
-    "kind",
-    "payload",
-    "unseal_at"
-  ],
+  "required": ["declaration_id", "kind", "payload", "unseal_at"],
   "additionalProperties": false
 }

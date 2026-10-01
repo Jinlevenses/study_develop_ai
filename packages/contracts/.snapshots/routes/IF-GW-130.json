@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/firewall/patterns"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-019"
-      ]
+      "enum": ["FR-AI-019"]
     },
     "deadlineMs": {
       "const": null
@@ -63,13 +59,7 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "domain",
-                      "employee_id",
-                      "project_code",
-                      "regex",
-                      "literal"
-                    ]
+                    "enum": ["domain", "employee_id", "project_code", "regex", "literal"]
                   },
                   "value": {
                     "type": "string",
@@ -77,11 +67,7 @@
                     "maxLength": 500
                   }
                 },
-                "required": [
-                  "pattern_id",
-                  "kind",
-                  "value"
-                ],
+                "required": ["pattern_id", "kind", "value"],
                 "additionalProperties": false
               }
             },
@@ -89,10 +75,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "user_patterns",
-            "local_classifier_enabled"
-          ],
+          "required": ["user_patterns", "local_classifier_enabled"],
           "additionalProperties": false
         }
       }
@@ -127,13 +110,7 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "domain",
-                      "employee_id",
-                      "project_code",
-                      "regex",
-                      "literal"
-                    ]
+                    "enum": ["domain", "employee_id", "project_code", "regex", "literal"]
                   },
                   "value": {
                     "type": "string",
@@ -146,12 +123,7 @@
                     "maximum": 8640000000000000
                   }
                 },
-                "required": [
-                  "pattern_id",
-                  "kind",
-                  "value",
-                  "created_at"
-                ],
+                "required": ["pattern_id", "kind", "value", "created_at"],
                 "additionalProperties": false
               }
             },
@@ -173,19 +145,11 @@
                   ]
                 }
               },
-              "required": [
-                "enabled",
-                "provider_id"
-              ],
+              "required": ["enabled", "provider_id"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "builtin_policy",
-            "builtin_rule_ids",
-            "user_patterns",
-            "local_classifier"
-          ],
+          "required": ["builtin_policy", "builtin_rule_ids", "user_patterns", "local_classifier"],
           "additionalProperties": false
         }
       }

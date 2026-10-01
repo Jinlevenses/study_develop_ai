@@ -3,11 +3,7 @@
   "properties": {
     "state": {
       "type": "string",
-      "enum": [
-        "received",
-        "classified",
-        "resolved"
-      ]
+      "enum": ["received", "classified", "resolved"]
     },
     "cursor": {
       "type": "string",
@@ -20,8 +16,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

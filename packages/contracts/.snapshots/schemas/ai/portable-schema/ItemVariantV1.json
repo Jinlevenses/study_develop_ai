@@ -27,10 +27,7 @@
                   "maxLength": 2000
                 }
               },
-              "required": [
-                "key",
-                "text_md"
-              ],
+              "required": ["key", "text_md"],
               "additionalProperties": false
             }
           },
@@ -43,17 +40,11 @@
             }
           }
         },
-        "required": [
-          "stem_md",
-          "options",
-          "answer_keys"
-        ],
+        "required": ["stem_md", "options", "answer_keys"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "variants"
-  ],
+  "required": ["variants"],
   "additionalProperties": false
 }

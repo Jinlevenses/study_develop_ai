@@ -12,9 +12,7 @@
       "const": "/internal/v1/ledger/heads"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-PRG-003",
-        "CR-27"
-      ]
+      "enum": ["FR-PRG-003", "CR-27"]
     },
     "deadlineMs": {
       "const": null
@@ -89,20 +84,12 @@
                     "maximum": 8640000000000000
                   }
                 },
-                "required": [
-                  "seq",
-                  "head_hash",
-                  "last_client_ts"
-                ],
+                "required": ["seq", "head_hash", "last_client_ts"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "local_device_id",
-            "event_count",
-            "devices"
-          ],
+          "required": ["local_device_id", "event_count", "devices"],
           "additionalProperties": false
         }
       }

@@ -3,10 +3,7 @@
   "properties": {
     "decision": {
       "type": "string",
-      "enum": [
-        "approve",
-        "reject"
-      ]
+      "enum": ["approve", "reject"]
     },
     "reason_ko": {
       "anyOf": [
@@ -20,9 +17,6 @@
       ]
     }
   },
-  "required": [
-    "decision",
-    "reason_ko"
-  ],
+  "required": ["decision", "reason_ko"],
   "additionalProperties": false
 }

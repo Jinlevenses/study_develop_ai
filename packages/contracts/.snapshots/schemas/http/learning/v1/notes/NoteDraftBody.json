@@ -27,18 +27,11 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "start",
-          "end"
-        ],
+        "required": ["start", "end"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "text",
-    "updated_at",
-    "uncertain_spans"
-  ],
+  "required": ["text", "updated_at", "uncertain_spans"],
   "additionalProperties": false
 }

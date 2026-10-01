@@ -8,29 +8,14 @@
     },
     "lifecycle": {
       "type": "string",
-      "enum": [
-        "CL-0",
-        "CL-1",
-        "CL-2",
-        "CL-3",
-        "CL-4",
-        "CL-5",
-        "CL-6",
-        "CL-7",
-        "CL-8",
-        "CL-X"
-      ]
+      "enum": ["CL-0", "CL-1", "CL-2", "CL-3", "CL-4", "CL-5", "CL-6", "CL-7", "CL-8", "CL-X"]
     },
     "mastery": {
       "type": "object",
       "properties": {
         "status": {
           "type": "string",
-          "enum": [
-            "unseen",
-            "learning",
-            "mastered"
-          ]
+          "enum": ["unseen", "learning", "mastered"]
         },
         "provisional": {
           "type": "boolean"
@@ -97,24 +82,14 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "status",
-        "provisional",
-        "needs_reconfirmation",
-        "p",
-        "formats_counted",
-        "distinct_study_days"
-      ],
+      "required": ["status", "provisional", "needs_reconfirmation", "p", "formats_counted", "distinct_study_days"],
       "additionalProperties": false
     },
     "theta": {
       "type": "object",
       "properties": {
         "display": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "n_graded": {
           "type": "integer",
@@ -130,12 +105,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "display",
-        "n_graded",
-        "evidence_sufficient",
-        "display_min_events"
-      ],
+      "required": ["display", "n_graded", "evidence_sufficient", "display_min_events"],
       "additionalProperties": false
     },
     "competence": {
@@ -157,13 +127,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "mastered",
-        "retained",
-        "deepened",
-        "transferred",
-        "taught"
-      ],
+      "required": ["mastered", "retained", "deepened", "transferred", "taught"],
       "additionalProperties": false
     },
     "cards": {
@@ -188,26 +152,15 @@
           },
           "response_mode": {
             "type": "string",
-            "enum": [
-              "recognition",
-              "production"
-            ]
+            "enum": ["recognition", "production"]
           },
           "tier": {
             "type": "string",
-            "enum": [
-              "A",
-              "B",
-              "C"
-            ]
+            "enum": ["A", "B", "C"]
           },
           "status": {
             "type": "string",
-            "enum": [
-              "active",
-              "suspended",
-              "retired"
-            ]
+            "enum": ["active", "suspended", "retired"]
           },
           "due_at": {
             "anyOf": [
@@ -292,12 +245,7 @@
     },
     "entry_stage": {
       "type": "string",
-      "enum": [
-        "theory",
-        "pretest",
-        "problem",
-        "problem_definition"
-      ]
+      "enum": ["theory", "pretest", "problem", "problem_definition"]
     },
     "nba": {
       "anyOf": [
@@ -306,25 +254,14 @@
           "properties": {
             "kind": {
               "type": "string",
-              "enum": [
-                "learn",
-                "practice",
-                "verify",
-                "dig",
-                "case",
-                "review",
-                "revalidate"
-              ]
+              "enum": ["learn", "practice", "verify", "dig", "case", "review", "revalidate"]
             },
             "label_ko": {
               "type": "string",
               "maxLength": 60
             }
           },
-          "required": [
-            "kind",
-            "label_ko"
-          ],
+          "required": ["kind", "label_ko"],
           "additionalProperties": false
         },
         {

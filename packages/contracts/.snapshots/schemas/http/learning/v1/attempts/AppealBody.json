@@ -7,13 +7,7 @@
     },
     "reason": {
       "type": "string",
-      "enum": [
-        "key_wrong",
-        "ambiguous",
-        "outdated",
-        "learner_right",
-        "other"
-      ]
+      "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
     },
     "text": {
       "anyOf": [
@@ -27,10 +21,6 @@
       ]
     }
   },
-  "required": [
-    "appeal_id",
-    "reason",
-    "text"
-  ],
+  "required": ["appeal_id", "reason", "text"],
   "additionalProperties": false
 }

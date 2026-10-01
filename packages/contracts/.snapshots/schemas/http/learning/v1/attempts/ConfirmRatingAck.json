@@ -26,9 +26,6 @@
       ]
     }
   },
-  "required": [
-    "ledger_event_id",
-    "applied_rating"
-  ],
+  "required": ["ledger_event_id", "applied_rating"],
   "additionalProperties": false
 }

@@ -1,11 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "concept",
-    "ku",
-    "misconception",
-    "item",
-    "case",
-    "source"
-  ]
+  "enum": ["concept", "ku", "misconception", "item", "case", "source"]
 }

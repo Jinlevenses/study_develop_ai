@@ -14,11 +14,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "noul",
-              "choice",
-              "score"
-            ]
+            "enum": ["noul", "choice", "score"]
           },
           "p_yes": {
             "anyOf": [
@@ -60,20 +56,11 @@
             "maximum": 1
           }
         },
-        "required": [
-          "question_key",
-          "type",
-          "p_yes",
-          "choice",
-          "score",
-          "confidence"
-        ],
+        "required": ["question_key", "type", "p_yes", "choice", "score", "confidence"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "answers"
-  ],
+  "required": ["answers"],
   "additionalProperties": false
 }

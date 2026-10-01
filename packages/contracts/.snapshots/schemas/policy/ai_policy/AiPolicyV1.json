@@ -36,13 +36,7 @@
           ]
         }
       },
-      "required": [
-        "monthly_krw",
-        "degrade_day",
-        "warn",
-        "stop",
-        "per_call_usd_cap"
-      ],
+      "required": ["monthly_krw", "degrade_day", "warn", "stop", "per_call_usd_cap"],
       "additionalProperties": false
     },
     "jev": {
@@ -82,20 +76,11 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "interactive",
-            "background"
-          ],
+          "required": ["interactive", "background"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "rps",
-        "burst",
-        "concurrency",
-        "monthly_krw_cap",
-        "timeout_ms"
-      ],
+      "required": ["rps", "burst", "concurrency", "monthly_krw_cap", "timeout_ms"],
       "additionalProperties": false
     },
     "bulk": {
@@ -115,11 +100,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "calls",
-        "krw",
-        "quota_pct"
-      ],
+      "required": ["calls", "krw", "quota_pct"],
       "additionalProperties": false
     },
     "quota_windows": {
@@ -168,11 +149,7 @@
             ]
           }
         },
-        "required": [
-          "five_hour_calls",
-          "five_hour_tokens",
-          "weekly_calls"
-        ],
+        "required": ["five_hour_calls", "five_hour_tokens", "weekly_calls"],
         "additionalProperties": false
       }
     },
@@ -188,10 +165,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "idle_min",
-        "require_ac"
-      ],
+      "required": ["idle_min", "require_ac"],
       "additionalProperties": false
     },
     "yield_interactive_cli": {
@@ -206,10 +180,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "enabled",
-        "resume_after_min"
-      ],
+      "required": ["enabled", "resume_after_min"],
       "additionalProperties": false
     },
     "cli_concurrency": {
@@ -242,10 +213,7 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "rpm",
-          "concurrency"
-        ],
+        "required": ["rpm", "concurrency"],
         "additionalProperties": false
       }
     },
@@ -259,10 +227,7 @@
           "type": "number"
         }
       },
-      "required": [
-        "decrease",
-        "recover_per_min"
-      ],
+      "required": ["decrease", "recover_per_min"],
       "additionalProperties": false
     },
     "breaker": {
@@ -297,14 +262,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "window_s",
-        "failures",
-        "error_rate",
-        "min_calls",
-        "open_s",
-        "open_max_s"
-      ],
+      "required": ["window_s", "failures", "error_rate", "min_calls", "open_s", "open_max_s"],
       "additionalProperties": false
     },
     "mode": {
@@ -316,9 +274,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "upgrade_hold_s"
-      ],
+      "required": ["upgrade_hold_s"],
       "additionalProperties": false
     },
     "cache_ttl_days": {
@@ -391,11 +347,7 @@
               },
               {
                 "type": "string",
-                "enum": [
-                  "SYS-CANARY",
-                  "SYS-SMOKE",
-                  "SYS-FWCLS"
-                ]
+                "enum": ["SYS-CANARY", "SYS-SMOKE", "SYS-FWCLS"]
               }
             ]
           },
@@ -443,12 +395,7 @@
           ]
         }
       },
-      "required": [
-        "judge",
-        "generate",
-        "max",
-        "per_task"
-      ],
+      "required": ["judge", "generate", "max", "per_task"],
       "additionalProperties": false
     },
     "fx_krw_per_usd": {
@@ -492,13 +439,7 @@
                 "type": "number"
               }
             },
-            "required": [
-              "provider",
-              "match",
-              "in",
-              "out",
-              "cache_read"
-            ],
+            "required": ["provider", "match", "in", "out", "cache_read"],
             "additionalProperties": false
           }
         },
@@ -515,19 +456,11 @@
               "type": "number"
             }
           },
-          "required": [
-            "in",
-            "out",
-            "cache_read"
-          ],
+          "required": ["in", "out", "cache_read"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "as_of",
-        "models",
-        "unknown_model"
-      ],
+      "required": ["as_of", "models", "unknown_model"],
       "additionalProperties": false
     },
     "cli_env": {
@@ -537,9 +470,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "pass_proxy"
-      ],
+      "required": ["pass_proxy"],
       "additionalProperties": false
     },
     "deadlines_ms": {
@@ -561,11 +492,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "interactive_max",
-        "conversational_max",
-        "background_max"
-      ],
+      "required": ["interactive_max", "conversational_max", "background_max"],
       "additionalProperties": false
     },
     "work_order": {
@@ -582,10 +509,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "approval_ttl_days",
-        "approved_ttl_days"
-      ],
+      "required": ["approval_ttl_days", "approved_ttl_days"],
       "additionalProperties": false
     },
     "confirm_cards": {
@@ -597,9 +521,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "per_day_max"
-      ],
+      "required": ["per_day_max"],
       "additionalProperties": false
     },
     "calibration": {
@@ -621,11 +543,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "gold_confirmed_min",
-        "gold_confirmed_min_with_cross_review",
-        "recalibrate_suggest_at"
-      ],
+      "required": ["gold_confirmed_min", "gold_confirmed_min_with_cross_review", "recalibrate_suggest_at"],
       "additionalProperties": false
     }
   },

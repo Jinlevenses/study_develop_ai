@@ -17,13 +17,7 @@
           },
           "level": {
             "type": "string",
-            "enum": [
-              "debug",
-              "info",
-              "warn",
-              "error",
-              "fatal"
-            ]
+            "enum": ["debug", "info", "warn", "error", "fatal"]
           },
           "svc": {
             "type": "string",
@@ -120,9 +114,6 @@
       }
     }
   },
-  "required": [
-    "svc",
-    "lines"
-  ],
+  "required": ["svc", "lines"],
   "additionalProperties": false
 }

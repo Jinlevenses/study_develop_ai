@@ -8,11 +8,7 @@
     },
     "finish": {
       "type": "string",
-      "enum": [
-        "stop",
-        "length",
-        "filtered"
-      ]
+      "enum": ["stop", "length", "filtered"]
     },
     "text_sha256": {
       "type": "string",
@@ -38,12 +34,6 @@
       ]
     }
   },
-  "required": [
-    "seq",
-    "finish",
-    "text_sha256",
-    "chars",
-    "output"
-  ],
+  "required": ["seq", "finish", "text_sha256", "chars", "output"],
   "additionalProperties": false
 }

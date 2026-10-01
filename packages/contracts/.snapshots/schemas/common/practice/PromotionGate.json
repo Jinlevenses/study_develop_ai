@@ -13,16 +13,10 @@
       "type": "boolean"
     },
     "value": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "threshold": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "evidence_event_ids": {
       "maxItems": 50,
@@ -44,14 +38,6 @@
       ]
     }
   },
-  "required": [
-    "gate_id",
-    "label_ko",
-    "met",
-    "value",
-    "threshold",
-    "evidence_event_ids",
-    "shortfall_ko"
-  ],
+  "required": ["gate_id", "label_ko", "met", "value", "threshold", "evidence_event_ids", "shortfall_ko"],
   "additionalProperties": false
 }

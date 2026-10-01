@@ -7,19 +7,11 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "snapshot",
-        "incremental",
-        "rehearsal"
-      ]
+      "enum": ["snapshot", "incremental", "rehearsal"]
     },
     "outcome": {
       "type": "string",
-      "enum": [
-        "ok",
-        "aborted",
-        "failed"
-      ]
+      "enum": ["ok", "aborted", "failed"]
     },
     "reason": {
       "anyOf": [
@@ -44,12 +36,6 @@
       ]
     }
   },
-  "required": [
-    "epoch_id",
-    "kind",
-    "outcome",
-    "reason",
-    "rpo_hours"
-  ],
+  "required": ["epoch_id", "kind", "outcome", "reason", "rpo_hours"],
   "additionalProperties": false
 }

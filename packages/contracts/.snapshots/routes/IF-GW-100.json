@@ -12,9 +12,7 @@
       "const": "/api/v1/curation/conflicts/{conflict_id}:resolve"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-020"
-      ]
+      "enum": ["FR-CUR-020"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "conflict_id"
-          ],
+          "required": ["conflict_id"],
           "additionalProperties": false
         },
         "body": {
@@ -66,11 +60,7 @@
           "properties": {
             "resolution": {
               "type": "string",
-              "enum": [
-                "keep_overlay",
-                "take_pack",
-                "edit"
-              ]
+              "enum": ["keep_overlay", "take_pack", "edit"]
             },
             "value": {
               "anyOf": [
@@ -83,10 +73,7 @@
               ]
             }
           },
-          "required": [
-            "resolution",
-            "value"
-          ],
+          "required": ["resolution", "value"],
           "additionalProperties": false,
           "$defs": {
             "__schema0": {
@@ -140,14 +127,7 @@
             },
             "target_kind": {
               "type": "string",
-              "enum": [
-                "concept",
-                "ku",
-                "misconception",
-                "item",
-                "case",
-                "source"
-              ]
+              "enum": ["concept", "ku", "misconception", "item", "case", "source"]
             },
             "target_id": {
               "type": "string"
@@ -171,20 +151,13 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "open",
-                "resolved"
-              ]
+              "enum": ["open", "resolved"]
             },
             "resolution": {
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "keep_overlay",
-                    "take_pack",
-                    "edit"
-                  ]
+                  "enum": ["keep_overlay", "take_pack", "edit"]
                 },
                 {
                   "type": "null"

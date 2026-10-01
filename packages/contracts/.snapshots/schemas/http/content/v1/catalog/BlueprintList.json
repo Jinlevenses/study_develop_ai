@@ -24,11 +24,7 @@
             "properties": {
               "kind": {
                 "type": "string",
-                "enum": [
-                  "git",
-                  "user_file",
-                  "manual"
-                ]
+                "enum": ["git", "user_file", "manual"]
               },
               "commit_sha": {
                 "anyOf": [
@@ -46,11 +42,7 @@
                 "pattern": "^[0-9a-f]{64}$"
               }
             },
-            "required": [
-              "kind",
-              "commit_sha",
-              "sha256"
-            ],
+            "required": ["kind", "commit_sha", "sha256"],
             "additionalProperties": false
           },
           "domains": {
@@ -81,29 +73,16 @@
                   }
                 }
               },
-              "required": [
-                "key",
-                "title_ko",
-                "weight",
-                "concept_ids"
-              ],
+              "required": ["key", "title_ko", "weight", "concept_ids"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "blueprint_id",
-          "title_ko",
-          "edition",
-          "source_edition",
-          "domains"
-        ],
+        "required": ["blueprint_id", "title_ko", "edition", "source_edition", "domains"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "blueprints"
-  ],
+  "required": ["blueprints"],
   "additionalProperties": false
 }

@@ -42,26 +42,11 @@
     },
     "lab_kind": {
       "type": "string",
-      "enum": [
-        "code",
-        "kata",
-        "algorithm",
-        "security_patch",
-        "infra",
-        "sql",
-        "predict"
-      ]
+      "enum": ["code", "kata", "algorithm", "security_patch", "infra", "sql", "predict"]
     },
     "language": {
       "type": "string",
-      "enum": [
-        "js",
-        "ts",
-        "sql",
-        "yaml",
-        "dockerfile",
-        "python_view"
-      ]
+      "enum": ["js", "ts", "sql", "yaml", "dockerfile", "python_view"]
     },
     "task_md": {
       "type": "string",

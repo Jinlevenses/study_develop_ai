@@ -3,35 +3,21 @@
   "properties": {
     "kind": {
       "type": "string",
-      "enum": [
-        "self_grade",
-        "jol",
-        "regrade_rating_confirm",
-        "bias_probe"
-      ]
+      "enum": ["self_grade", "jol", "regrade_rating_confirm", "bias_probe"]
     },
     "target": {
       "type": "object",
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "concept",
-            "item",
-            "attempt",
-            "ledger_event",
-            "session"
-          ]
+          "enum": ["concept", "item", "attempt", "ledger_event", "session"]
         },
         "id": {
           "type": "string",
           "maxLength": 160
         }
       },
-      "required": [
-        "kind",
-        "id"
-      ],
+      "required": ["kind", "id"],
       "additionalProperties": false
     },
     "value": {
@@ -49,10 +35,7 @@
               "maximum": 4
             }
           },
-          "required": [
-            "kind",
-            "grade"
-          ],
+          "required": ["kind", "grade"],
           "additionalProperties": false
         },
         {
@@ -68,10 +51,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "kind",
-            "p"
-          ],
+          "required": ["kind", "p"],
           "additionalProperties": false
         },
         {
@@ -105,11 +85,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "accepted",
-            "rating"
-          ],
+          "required": ["kind", "accepted", "rating"],
           "additionalProperties": false
         }
       ]
@@ -134,13 +110,6 @@
       "pattern": "^ps_[0-9a-f]{16}$"
     }
   },
-  "required": [
-    "kind",
-    "target",
-    "value",
-    "session_id",
-    "study_day",
-    "policy_version"
-  ],
+  "required": ["kind", "target", "value", "session_id", "study_day", "policy_version"],
   "additionalProperties": false
 }

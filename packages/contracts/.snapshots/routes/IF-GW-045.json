@@ -12,9 +12,7 @@
       "const": "/api/v1/concepts/{concept_id}/sources"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-012",
-        "FR-CUR-021"
-      ]
+      "enum": ["FR-CUR-012", "FR-CUR-021"]
     },
     "deadlineMs": {
       "const": null
@@ -58,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
             }
           },
-          "required": [
-            "concept_id"
-          ],
+          "required": ["concept_id"],
           "additionalProperties": false
         }
       }
@@ -93,13 +86,7 @@
                   },
                   "grade": {
                     "type": "string",
-                    "enum": [
-                      "A",
-                      "B",
-                      "C",
-                      "D",
-                      "P"
-                    ]
+                    "enum": ["A", "B", "C", "D", "P"]
                   },
                   "url": {
                     "anyOf": [
@@ -139,15 +126,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "source_id",
-                  "title",
-                  "grade",
-                  "url",
-                  "edition",
-                  "license",
-                  "retrieved_at"
-                ],
+                "required": ["source_id", "title", "grade", "url", "edition", "license", "retrieved_at"],
                 "additionalProperties": false
               }
             },
@@ -190,12 +169,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "ku_id",
-                  "source_id",
-                  "locator",
-                  "quote_ko"
-                ],
+                "required": ["ku_id", "source_id", "locator", "quote_ko"],
                 "additionalProperties": false
               }
             },
@@ -215,20 +189,12 @@
                     "maxLength": 2000
                   }
                 },
-                "required": [
-                  "ku_id",
-                  "note_md"
-                ],
+                "required": ["ku_id", "note_md"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "concept_id",
-            "sources",
-            "ku_spans",
-            "disagreements"
-          ],
+          "required": ["concept_id", "sources", "ku_spans", "disagreements"],
           "additionalProperties": false
         }
       }

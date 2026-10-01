@@ -12,9 +12,7 @@
       "const": "/api/v1/curation/conflicts"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-020"
-      ]
+      "enum": ["FR-CUR-020"]
     },
     "deadlineMs": {
       "const": null
@@ -53,10 +49,7 @@
           "properties": {
             "state": {
               "type": "string",
-              "enum": [
-                "open",
-                "resolved"
-              ]
+              "enum": ["open", "resolved"]
             },
             "cursor": {
               "type": "string",
@@ -69,9 +62,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -97,14 +88,7 @@
                   },
                   "target_kind": {
                     "type": "string",
-                    "enum": [
-                      "concept",
-                      "ku",
-                      "misconception",
-                      "item",
-                      "case",
-                      "source"
-                    ]
+                    "enum": ["concept", "ku", "misconception", "item", "case", "source"]
                   },
                   "target_id": {
                     "type": "string"
@@ -128,20 +112,13 @@
                   },
                   "state": {
                     "type": "string",
-                    "enum": [
-                      "open",
-                      "resolved"
-                    ]
+                    "enum": ["open", "resolved"]
                   },
                   "resolution": {
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "keep_overlay",
-                          "take_pack",
-                          "edit"
-                        ]
+                        "enum": ["keep_overlay", "take_pack", "edit"]
                       },
                       {
                         "type": "null"
@@ -183,10 +160,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false,
           "$defs": {
             "__schema0": {

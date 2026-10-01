@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/firewall:preview"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-019",
-        "FR-IMP-010"
-      ]
+      "enum": ["FR-AI-019", "FR-IMP-010"]
     },
     "deadlineMs": {
       "const": null
@@ -69,12 +64,7 @@
                   },
                   "data_class": {
                     "type": "string",
-                    "enum": [
-                      "C0",
-                      "C1",
-                      "C2",
-                      "C3"
-                    ]
+                    "enum": ["C0", "C1", "C2", "C3"]
                   },
                   "untrusted": {
                     "type": "boolean"
@@ -91,28 +81,16 @@
                     ]
                   }
                 },
-                "required": [
-                  "key",
-                  "text",
-                  "data_class",
-                  "untrusted",
-                  "source_ref"
-                ],
+                "required": ["key", "text", "data_class", "untrusted", "source_ref"],
                 "additionalProperties": false
               }
             },
             "route": {
               "type": "string",
-              "enum": [
-                "external",
-                "local_only"
-              ]
+              "enum": ["external", "local_only"]
             }
           },
-          "required": [
-            "blocks",
-            "route"
-          ],
+          "required": ["blocks", "route"],
           "additionalProperties": false
         }
       }
@@ -125,21 +103,11 @@
           "properties": {
             "action": {
               "type": "string",
-              "enum": [
-                "pass",
-                "masked",
-                "force_local",
-                "block"
-              ]
+              "enum": ["pass", "masked", "force_local", "block"]
             },
             "data_class": {
               "type": "string",
-              "enum": [
-                "C0",
-                "C1",
-                "C2",
-                "C3"
-              ]
+              "enum": ["C0", "C1", "C2", "C3"]
             },
             "masks": {
               "maxItems": 500,
@@ -170,13 +138,7 @@
                     "maxLength": 60
                   }
                 },
-                "required": [
-                  "block_key",
-                  "start",
-                  "end",
-                  "token",
-                  "rule_id"
-                ],
+                "required": ["block_key", "start", "end", "token", "rule_id"],
                 "additionalProperties": false
               }
             },
@@ -194,20 +156,12 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "key",
-                  "text"
-                ],
+                "required": ["key", "text"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "action",
-            "data_class",
-            "masks",
-            "masked_blocks"
-          ],
+          "required": ["action", "data_class", "masks", "masked_blocks"],
           "additionalProperties": false
         }
       }

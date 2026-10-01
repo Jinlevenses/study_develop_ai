@@ -12,9 +12,7 @@
       "const": "/internal/v1/providers/generic-cli/{provider_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-024"
-      ]
+      "enum": ["FR-AI-024"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^(jev|anthropic-api|openai-api|gemini-api|ollama|claude-cli|codex-cli|gemini-cli|gcli-[a-z0-9-]{2,24})$"
             }
           },
-          "required": [
-            "provider_id"
-          ],
+          "required": ["provider_id"],
           "additionalProperties": false
         }
       }

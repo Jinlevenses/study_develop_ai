@@ -34,19 +34,11 @@
             "maximum": 8640000000000000
           }
         },
-        "required": [
-          "seq",
-          "head_hash",
-          "last_client_ts"
-        ],
+        "required": ["seq", "head_hash", "last_client_ts"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "local_device_id",
-    "event_count",
-    "devices"
-  ],
+  "required": ["local_device_id", "event_count", "devices"],
   "additionalProperties": false
 }

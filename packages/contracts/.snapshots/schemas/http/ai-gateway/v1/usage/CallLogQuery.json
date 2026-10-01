@@ -53,13 +53,7 @@
     },
     "outcome": {
       "type": "string",
-      "enum": [
-        "ok",
-        "error",
-        "timeout",
-        "fallback",
-        "cache_hit"
-      ]
+      "enum": ["ok", "error", "timeout", "fallback", "cache_hit"]
     },
     "cursor": {
       "type": "string",
@@ -72,8 +66,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

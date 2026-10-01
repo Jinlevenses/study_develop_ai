@@ -12,9 +12,7 @@
       "const": "/internal/v1/calibration/gold/{gold_id}:confirm"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-027"
-      ]
+      "enum": ["FR-AI-027"]
     },
     "deadlineMs": {
       "const": null
@@ -64,9 +60,7 @@
               ]
             }
           },
-          "required": [
-            "gold_id"
-          ],
+          "required": ["gold_id"],
           "additionalProperties": false
         },
         "body": {
@@ -74,11 +68,7 @@
           "properties": {
             "decision": {
               "type": "string",
-              "enum": [
-                "confirm",
-                "correct",
-                "skip"
-              ]
+              "enum": ["confirm", "correct", "skip"]
             },
             "corrected_label": {
               "anyOf": [
@@ -97,10 +87,7 @@
                           "maximum": 1
                         }
                       },
-                      "required": [
-                        "type",
-                        "p_yes"
-                      ],
+                      "required": ["type", "p_yes"],
                       "additionalProperties": false
                     },
                     {
@@ -132,12 +119,7 @@
                           }
                         }
                       },
-                      "required": [
-                        "type",
-                        "choice",
-                        "confidence",
-                        "probabilities"
-                      ],
+                      "required": ["type", "choice", "confidence", "probabilities"],
                       "additionalProperties": false
                     },
                     {
@@ -174,13 +156,7 @@
                           "maximum": 10
                         }
                       },
-                      "required": [
-                        "type",
-                        "score",
-                        "confidence",
-                        "probabilities",
-                        "levels"
-                      ],
+                      "required": ["type", "score", "confidence", "probabilities", "levels"],
                       "additionalProperties": false
                     }
                   ]
@@ -191,10 +167,7 @@
               ]
             }
           },
-          "required": [
-            "decision",
-            "corrected_label"
-          ],
+          "required": ["decision", "corrected_label"],
           "additionalProperties": false
         }
       }
@@ -243,12 +216,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "model_labeled_draft",
-                "user_confirmed",
-                "user_corrected",
-                "skipped"
-              ]
+              "enum": ["model_labeled_draft", "user_confirmed", "user_corrected", "skipped"]
             },
             "updated_at": {
               "type": "integer",
@@ -256,12 +224,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "gold_id",
-            "task_id",
-            "state",
-            "updated_at"
-          ],
+          "required": ["gold_id", "task_id", "state", "updated_at"],
           "additionalProperties": false
         }
       }

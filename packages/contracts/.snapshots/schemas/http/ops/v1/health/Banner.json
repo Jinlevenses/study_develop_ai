@@ -40,11 +40,7 @@
     },
     "severity": {
       "type": "string",
-      "enum": [
-        "info",
-        "warn",
-        "critical"
-      ]
+      "enum": ["info", "warn", "critical"]
     },
     "message_ko": {
       "type": "string",
@@ -90,11 +86,7 @@
               ]
             }
           },
-          "required": [
-            "label_ko",
-            "href",
-            "cli"
-          ],
+          "required": ["label_ko", "href", "cli"],
           "additionalProperties": false
         },
         {
@@ -103,14 +95,6 @@
       ]
     }
   },
-  "required": [
-    "banner_id",
-    "code",
-    "severity",
-    "message_ko",
-    "since",
-    "dismissible",
-    "action"
-  ],
+  "required": ["banner_id", "code", "severity", "message_ko", "since", "dismissible", "action"],
   "additionalProperties": false
 }

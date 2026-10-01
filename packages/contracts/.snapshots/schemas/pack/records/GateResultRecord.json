@@ -11,10 +11,7 @@
     },
     "subject_kind": {
       "type": "string",
-      "enum": [
-        "item",
-        "item_model"
-      ]
+      "enum": ["item", "item_model"]
     },
     "subject_id": {
       "type": "string",
@@ -30,15 +27,7 @@
     },
     "engine": {
       "type": "string",
-      "enum": [
-        "D",
-        "J",
-        "LJ",
-        "H",
-        "S",
-        "USER",
-        "ORACLE"
-      ]
+      "enum": ["D", "J", "LJ", "H", "S", "USER", "ORACLE"]
     },
     "provider_id": {
       "anyOf": [
@@ -59,10 +48,7 @@
       "type": "boolean"
     },
     "score": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "probabilities": {
       "anyOf": [

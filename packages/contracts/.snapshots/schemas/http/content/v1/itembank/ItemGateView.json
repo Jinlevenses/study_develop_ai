@@ -44,12 +44,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "item_id",
-    "gate_status",
-    "stem_family",
-    "changed_at",
-    "affected_items"
-  ],
+  "required": ["item_id", "gate_status", "stem_family", "changed_at", "affected_items"],
   "additionalProperties": false
 }

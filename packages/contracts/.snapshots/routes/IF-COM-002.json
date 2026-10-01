@@ -56,13 +56,7 @@
             },
             "svc": {
               "type": "string",
-              "enum": [
-                "gateway",
-                "content",
-                "learning",
-                "ai-gateway",
-                "ops-api"
-              ]
+              "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
             },
             "checks": {
               "type": "object",
@@ -81,20 +75,10 @@
                 },
                 "integrity": {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "pending",
-                    "failed"
-                  ]
+                  "enum": ["ok", "pending", "failed"]
                 }
               },
-              "required": [
-                "db",
-                "schema",
-                "policy",
-                "peers",
-                "integrity"
-              ],
+              "required": ["db", "schema", "policy", "peers", "integrity"],
               "additionalProperties": false
             },
             "reasons": {
@@ -106,12 +90,7 @@
               }
             }
           },
-          "required": [
-            "ready",
-            "svc",
-            "checks",
-            "reasons"
-          ],
+          "required": ["ready", "svc", "checks", "reasons"],
           "additionalProperties": false
         },
         "503": {
@@ -122,13 +101,7 @@
             },
             "svc": {
               "type": "string",
-              "enum": [
-                "gateway",
-                "content",
-                "learning",
-                "ai-gateway",
-                "ops-api"
-              ]
+              "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
             },
             "checks": {
               "type": "object",
@@ -147,20 +120,10 @@
                 },
                 "integrity": {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "pending",
-                    "failed"
-                  ]
+                  "enum": ["ok", "pending", "failed"]
                 }
               },
-              "required": [
-                "db",
-                "schema",
-                "policy",
-                "peers",
-                "integrity"
-              ],
+              "required": ["db", "schema", "policy", "peers", "integrity"],
               "additionalProperties": false
             },
             "reasons": {
@@ -172,12 +135,7 @@
               }
             }
           },
-          "required": [
-            "ready",
-            "svc",
-            "checks",
-            "reasons"
-          ],
+          "required": ["ready", "svc", "checks", "reasons"],
           "additionalProperties": false
         }
       }

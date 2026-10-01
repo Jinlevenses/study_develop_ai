@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/overlays/import"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-006",
-        "FR-SET-022"
-      ]
+      "enum": ["FR-SET-006", "FR-SET-022"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "import_id"
-          ],
+          "required": ["import_id"],
           "additionalProperties": false
         },
         "body": {
@@ -97,13 +90,7 @@
                   ]
                 }
               },
-              "required": [
-                "kind",
-                "v",
-                "device_id",
-                "generated_at",
-                "since"
-              ],
+              "required": ["kind", "v", "device_id", "generated_at", "since"],
               "additionalProperties": false
             },
             {
@@ -122,14 +109,7 @@
                     },
                     "target_kind": {
                       "type": "string",
-                      "enum": [
-                        "concept",
-                        "ku",
-                        "misconception",
-                        "item",
-                        "case",
-                        "source"
-                      ]
+                      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
                     },
                     "target_id": {
                       "type": "string"
@@ -183,10 +163,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "event"
-              ],
+              "required": ["kind", "event"],
               "additionalProperties": false
             },
             {
@@ -206,11 +183,7 @@
                   "pattern": "^[0-9a-f]{64}$"
                 }
               },
-              "required": [
-                "kind",
-                "count",
-                "sha256"
-              ],
+              "required": ["kind", "count", "sha256"],
               "additionalProperties": false
             }
           ],
@@ -276,12 +249,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "import_id",
-            "inserted",
-            "skipped",
-            "conflicts"
-          ],
+          "required": ["import_id", "inserted", "skipped", "conflicts"],
           "additionalProperties": false
         }
       }

@@ -12,9 +12,7 @@
       "const": "/api/v1/settings/pause"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-PRG-021"
-      ]
+      "enum": ["FR-PRG-021"]
     },
     "deadlineMs": {
       "const": null
@@ -53,10 +49,7 @@
           "properties": {
             "mode": {
               "type": "string",
-              "enum": [
-                "pause",
-                "crunch"
-              ]
+              "enum": ["pause", "crunch"]
             },
             "from": {
               "type": "string",
@@ -70,10 +63,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "mvd",
-                    "core"
-                  ]
+                  "enum": ["mvd", "core"]
                 },
                 {
                   "type": "null"
@@ -81,12 +71,7 @@
               ]
             }
           },
-          "required": [
-            "mode",
-            "from",
-            "to",
-            "crunch_scope"
-          ],
+          "required": ["mode", "from", "to", "crunch_scope"],
           "additionalProperties": false
         }
       }
@@ -104,10 +89,7 @@
                   "properties": {
                     "mode": {
                       "type": "string",
-                      "enum": [
-                        "pause",
-                        "crunch"
-                      ]
+                      "enum": ["pause", "crunch"]
                     },
                     "from": {
                       "type": "string",
@@ -121,10 +103,7 @@
                       "anyOf": [
                         {
                           "type": "string",
-                          "enum": [
-                            "mvd",
-                            "core"
-                          ]
+                          "enum": ["mvd", "core"]
                         },
                         {
                           "type": "null"
@@ -132,12 +111,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "mode",
-                    "from",
-                    "to",
-                    "crunch_scope"
-                  ],
+                  "required": ["mode", "from", "to", "crunch_scope"],
                   "additionalProperties": false
                 },
                 {
@@ -174,10 +148,7 @@
                               }
                             }
                           },
-                          "required": [
-                            "kind",
-                            "concept_ids"
-                          ],
+                          "required": ["kind", "concept_ids"],
                           "additionalProperties": false
                         },
                         {
@@ -192,10 +163,7 @@
                               "pattern": "^cert:[a-z0-9-]{2,40}$"
                             }
                           },
-                          "required": [
-                            "kind",
-                            "tag"
-                          ],
+                          "required": ["kind", "tag"],
                           "additionalProperties": false
                         },
                         {
@@ -211,19 +179,13 @@
                               "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
                             }
                           },
-                          "required": [
-                            "kind",
-                            "blueprint_id"
-                          ],
+                          "required": ["kind", "blueprint_id"],
                           "additionalProperties": false
                         }
                       ]
                     }
                   },
-                  "required": [
-                    "target_date",
-                    "scope"
-                  ],
+                  "required": ["target_date", "scope"],
                   "additionalProperties": false
                 },
                 {
@@ -254,19 +216,11 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "active",
-                "since",
-                "gap_days"
-              ],
+              "required": ["active", "since", "gap_days"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "pause",
-            "dday",
-            "return_mode"
-          ],
+          "required": ["pause", "dday", "return_mode"],
           "additionalProperties": false
         }
       }

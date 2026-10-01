@@ -7,23 +7,11 @@
     },
     "op": {
       "type": "string",
-      "enum": [
-        "add",
-        "modify",
-        "merge",
-        "conflict"
-      ]
+      "enum": ["add", "modify", "merge", "conflict"]
     },
     "target_kind": {
       "type": "string",
-      "enum": [
-        "concept",
-        "ku",
-        "misconception",
-        "item",
-        "case",
-        "relation"
-      ]
+      "enum": ["concept", "ku", "misconception", "item", "case", "relation"]
     },
     "target_id": {
       "type": "string",
@@ -67,34 +55,20 @@
             "maxLength": 500
           }
         },
-        "required": [
-          "chunk_id",
-          "start",
-          "end",
-          "quote_ko"
-        ],
+        "required": ["chunk_id", "start", "end", "quote_ko"],
         "additionalProperties": false
       }
     },
     "trust": {
       "type": "string",
-      "enum": [
-        "user",
-        "llm_unverified",
-        "verified"
-      ]
+      "enum": ["user", "llm_unverified", "verified"]
     },
     "quarantined": {
       "type": "boolean"
     },
     "decision": {
       "type": "string",
-      "enum": [
-        "pending",
-        "approved",
-        "rejected",
-        "edited"
-      ]
+      "enum": ["pending", "approved", "rejected", "edited"]
     }
   },
   "required": [

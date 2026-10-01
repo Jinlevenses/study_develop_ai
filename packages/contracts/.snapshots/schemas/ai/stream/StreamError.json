@@ -8,11 +8,7 @@
     },
     "code": {
       "type": "string",
-      "enum": [
-        "AI-DEP-001",
-        "AI-DEP-002",
-        "AI-DEP-003"
-      ]
+      "enum": ["AI-DEP-001", "AI-DEP-002", "AI-DEP-003"]
     },
     "fallback_text_md": {
       "anyOf": [
@@ -26,10 +22,6 @@
       ]
     }
   },
-  "required": [
-    "seq",
-    "code",
-    "fallback_text_md"
-  ],
+  "required": ["seq", "code", "fallback_text_md"],
   "additionalProperties": false
 }

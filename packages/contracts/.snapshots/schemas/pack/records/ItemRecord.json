@@ -12,10 +12,7 @@
     },
     "origin": {
       "type": "string",
-      "enum": [
-        "pack",
-        "runtime"
-      ]
+      "enum": ["pack", "runtime"]
     },
     "model_id": {
       "anyOf": [
@@ -108,10 +105,7 @@
     },
     "response_mode": {
       "type": "string",
-      "enum": [
-        "recognition",
-        "production"
-      ]
+      "enum": ["recognition", "production"]
     },
     "level": {
       "type": "integer",
@@ -120,30 +114,15 @@
     },
     "bloom": {
       "type": "string",
-      "enum": [
-        "remember",
-        "understand",
-        "apply",
-        "analyze",
-        "evaluate",
-        "create"
-      ]
+      "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
     },
     "stakes": {
       "type": "string",
-      "enum": [
-        "S0",
-        "S1",
-        "S2"
-      ]
+      "enum": ["S0", "S1", "S2"]
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C"
-      ]
+      "enum": ["A", "B", "C"]
     },
     "n_options": {
       "type": "integer",
@@ -199,19 +178,7 @@
     },
     "source_kind": {
       "type": "string",
-      "enum": [
-        "seed",
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "gap",
-        "user_error",
-        "past_self",
-        "user_authored",
-        "repo",
-        "imported"
-      ]
+      "enum": ["seed", "t1", "t2", "t3", "t4", "gap", "user_error", "past_self", "user_authored", "repo", "imported"]
     },
     "stem_family": {
       "type": "string",
@@ -247,11 +214,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "cross_family",
-            "same_family",
-            "v7_review"
-          ]
+          "enum": ["cross_family", "same_family", "v7_review"]
         },
         {
           "type": "null"

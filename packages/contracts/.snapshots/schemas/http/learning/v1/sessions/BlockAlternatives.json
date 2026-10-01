@@ -90,11 +90,7 @@
                   ]
                 }
               },
-              "required": [
-                "code",
-                "label_ko",
-                "value"
-              ],
+              "required": ["code", "label_ko", "value"],
               "additionalProperties": false
             }
           },
@@ -103,21 +99,11 @@
             "minimum": 0
           }
         },
-        "required": [
-          "candidate_id",
-          "mode_id",
-          "kind",
-          "concept_id",
-          "reason_chips",
-          "est_minutes"
-        ],
+        "required": ["candidate_id", "mode_id", "kind", "concept_id", "reason_chips", "est_minutes"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "block_id",
-    "candidates"
-  ],
+  "required": ["block_id", "candidates"],
   "additionalProperties": false
 }

@@ -76,12 +76,7 @@
     },
     "data_class": {
       "type": "string",
-      "enum": [
-        "C0",
-        "C1",
-        "C2",
-        "C3"
-      ]
+      "enum": ["C0", "C1", "C2", "C3"]
     },
     "rule_hits": {
       "maxItems": 50,
@@ -93,22 +88,9 @@
     },
     "action": {
       "type": "string",
-      "enum": [
-        "pass",
-        "masked",
-        "force_local",
-        "block"
-      ]
+      "enum": ["pass", "masked", "force_local", "block"]
     }
   },
-  "required": [
-    "decision_id",
-    "ts",
-    "task_id",
-    "provider_id",
-    "data_class",
-    "rule_hits",
-    "action"
-  ],
+  "required": ["decision_id", "ts", "task_id", "provider_id", "data_class", "rule_hits", "action"],
   "additionalProperties": false
 }

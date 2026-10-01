@@ -6,12 +6,7 @@
     },
     "method": {
       "type": "string",
-      "enum": [
-        "launchd",
-        "schtasks",
-        "systemd_user",
-        "unsupported"
-      ]
+      "enum": ["launchd", "schtasks", "systemd_user", "unsupported"]
     },
     "path": {
       "anyOf": [
@@ -25,10 +20,6 @@
       ]
     }
   },
-  "required": [
-    "enabled",
-    "method",
-    "path"
-  ],
+  "required": ["enabled", "method", "path"],
   "additionalProperties": false
 }

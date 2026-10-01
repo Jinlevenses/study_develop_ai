@@ -19,18 +19,12 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "low",
-        "high"
-      ],
+      "required": ["low", "high"],
       "additionalProperties": false
     },
     "band_source": {
       "type": "string",
-      "enum": [
-        "user_history",
-        "default_15pct"
-      ]
+      "enum": ["user_history", "default_15pct"]
     },
     "history_windows": {
       "type": "integer",
@@ -39,10 +33,7 @@
     },
     "method": {
       "type": "string",
-      "enum": [
-        "model",
-        "observed"
-      ]
+      "enum": ["model", "observed"]
     },
     "method_provisional": {
       "type": "boolean",
@@ -63,11 +54,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "daily_budget",
-        "lower_bound_exceeds_budget",
-        "new_cards_throttled"
-      ],
+      "required": ["daily_budget", "lower_bound_exceeds_budget", "new_cards_throttled"],
       "additionalProperties": false
     },
     "computed_at": {

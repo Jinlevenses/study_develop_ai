@@ -8,19 +8,11 @@
     },
     "grade_class": {
       "type": "string",
-      "enum": [
-        "D",
-        "J",
-        "S",
-        "H"
-      ]
+      "enum": ["D", "J", "S", "H"]
     },
     "response_mode": {
       "type": "string",
-      "enum": [
-        "recognition",
-        "production"
-      ]
+      "enum": ["recognition", "production"]
     },
     "n_options": {
       "type": "object",
@@ -36,10 +28,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "min",
-        "max"
-      ],
+      "required": ["min", "max"],
       "additionalProperties": false
     },
     "credit_eligible": {
@@ -53,22 +42,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "A",
-          "B",
-          "C"
-        ]
+        "enum": ["A", "B", "C"]
       }
     }
   },
-  "required": [
-    "w_format",
-    "grade_class",
-    "response_mode",
-    "n_options",
-    "credit_eligible",
-    "runner",
-    "tiers"
-  ],
+  "required": ["w_format", "grade_class", "response_mode", "n_options", "credit_eligible", "runner", "tiers"],
   "additionalProperties": false
 }

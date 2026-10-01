@@ -80,4 +80,4 @@ export const EVENT_META = {
 
 export type IntegrationEventType = keyof typeof EVENT_PAYLOADS;
 
-export const CONTRACTS_HASH = 'a60a68185f091857bcf15667ec9f29dd13b2bde39e85a919355a3ffd2bf21335';
+export const CONTRACTS_HASH = '6cbc7cc3a6510ab0bcad22f66f669d1f83ab4a023f7e43c6b08a4d797617a356';

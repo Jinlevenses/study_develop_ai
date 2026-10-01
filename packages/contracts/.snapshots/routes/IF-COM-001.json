@@ -57,13 +57,7 @@
             },
             "svc": {
               "type": "string",
-              "enum": [
-                "gateway",
-                "content",
-                "learning",
-                "ai-gateway",
-                "ops-api"
-              ]
+              "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
             },
             "version": {
               "type": "string",
@@ -79,13 +73,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "ok",
-            "svc",
-            "version",
-            "boot_id",
-            "uptime_ms"
-          ],
+          "required": ["ok", "svc", "version", "boot_id", "uptime_ms"],
           "additionalProperties": false
         }
       }

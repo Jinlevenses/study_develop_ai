@@ -53,10 +53,7 @@
                   ]
                 }
               },
-              "required": [
-                "kind",
-                "track"
-              ],
+              "required": ["kind", "track"],
               "additionalProperties": false
             },
             {
@@ -72,10 +69,7 @@
                   "maxLength": 1024
                 }
               },
-              "required": [
-                "kind",
-                "path"
-              ],
+              "required": ["kind", "path"],
               "additionalProperties": false
             },
             {
@@ -91,20 +85,13 @@
                   "maxLength": 1024
                 }
               },
-              "required": [
-                "kind",
-                "dir"
-              ],
+              "required": ["kind", "dir"],
               "additionalProperties": false
             }
           ]
         }
       },
-      "required": [
-        "action",
-        "install_id",
-        "source"
-      ],
+      "required": ["action", "install_id", "source"],
       "additionalProperties": false
     },
     {
@@ -160,10 +147,7 @@
                   ]
                 }
               },
-              "required": [
-                "kind",
-                "track"
-              ],
+              "required": ["kind", "track"],
               "additionalProperties": false
             },
             {
@@ -179,10 +163,7 @@
                   "maxLength": 1024
                 }
               },
-              "required": [
-                "kind",
-                "path"
-              ],
+              "required": ["kind", "path"],
               "additionalProperties": false
             },
             {
@@ -198,20 +179,13 @@
                   "maxLength": 1024
                 }
               },
-              "required": [
-                "kind",
-                "dir"
-              ],
+              "required": ["kind", "dir"],
               "additionalProperties": false
             }
           ]
         }
       },
-      "required": [
-        "action",
-        "install_id",
-        "source"
-      ],
+      "required": ["action", "install_id", "source"],
       "additionalProperties": false
     },
     {
@@ -231,11 +205,7 @@
           "maxLength": 1024
         }
       },
-      "required": [
-        "action",
-        "install_id",
-        "dir"
-      ],
+      "required": ["action", "install_id", "dir"],
       "additionalProperties": false
     },
     {
@@ -286,12 +256,7 @@
           ]
         }
       },
-      "required": [
-        "action",
-        "install_id",
-        "track",
-        "work_order_id"
-      ],
+      "required": ["action", "install_id", "track", "work_order_id"],
       "additionalProperties": false
     }
   ]

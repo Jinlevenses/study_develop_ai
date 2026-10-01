@@ -10,13 +10,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "adr",
-            "runbook",
-            "postmortem",
-            "design_review",
-            "standard_clause"
-          ]
+          "enum": ["adr", "runbook", "postmortem", "design_review", "standard_clause"]
         },
         {
           "type": "null"
@@ -24,9 +18,6 @@
       ]
     }
   },
-  "required": [
-    "concept_id",
-    "artifact_kind"
-  ],
+  "required": ["concept_id", "artifact_kind"],
   "additionalProperties": false
 }

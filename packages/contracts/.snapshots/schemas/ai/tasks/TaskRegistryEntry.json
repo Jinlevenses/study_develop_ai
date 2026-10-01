@@ -3,18 +3,11 @@
   "properties": {
     "kind": {
       "type": "string",
-      "enum": [
-        "judge",
-        "generate"
-      ]
+      "enum": ["judge", "generate"]
     },
     "lane": {
       "type": "string",
-      "enum": [
-        "interactive",
-        "conversational",
-        "background"
-      ]
+      "enum": ["interactive", "conversational", "background"]
     },
     "chain": {
       "minItems": 1,
@@ -22,11 +15,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "jev",
-          "llm-judge",
-          "llm"
-        ]
+        "enum": ["jev", "llm-judge", "llm"]
       }
     },
     "question_types": {
@@ -34,11 +23,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "noul",
-          "choice",
-          "score"
-        ]
+        "enum": ["noul", "choice", "score"]
       }
     },
     "max_questions_per_request": {
@@ -52,11 +37,7 @@
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "low",
-        "mid",
-        "high"
-      ]
+      "enum": ["low", "mid", "high"]
     },
     "prompt": {
       "type": "object",
@@ -109,16 +90,10 @@
         },
         "channel": {
           "type": "string",
-          "enum": [
-            "active",
-            "candidate"
-          ]
+          "enum": ["active", "candidate"]
         }
       },
-      "required": [
-        "id",
-        "channel"
-      ],
+      "required": ["id", "channel"],
       "additionalProperties": false
     },
     "prefer": {
@@ -145,19 +120,11 @@
     },
     "data_class_max": {
       "type": "string",
-      "enum": [
-        "C0",
-        "C1",
-        "C2",
-        "C3"
-      ]
+      "enum": ["C0", "C1", "C2", "C3"]
     },
     "family_constraint": {
       "type": "string",
-      "enum": [
-        "none",
-        "different_from_generator"
-      ]
+      "enum": ["none", "different_from_generator"]
     },
     "deadline_ms": {
       "type": "integer",
@@ -168,14 +135,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "kind",
-    "lane",
-    "chain",
-    "data_class_max",
-    "family_constraint",
-    "deadline_ms",
-    "requires_work_order"
-  ],
+  "required": ["kind", "lane", "chain", "data_class_max", "family_constraint", "deadline_ms", "requires_work_order"],
   "additionalProperties": false
 }

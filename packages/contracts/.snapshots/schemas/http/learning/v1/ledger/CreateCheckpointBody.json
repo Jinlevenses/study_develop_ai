@@ -7,16 +7,9 @@
     },
     "reason": {
       "type": "string",
-      "enum": [
-        "export",
-        "merge",
-        "manual"
-      ]
+      "enum": ["export", "merge", "manual"]
     }
   },
-  "required": [
-    "checkpoint_id",
-    "reason"
-  ],
+  "required": ["checkpoint_id", "reason"],
   "additionalProperties": false
 }

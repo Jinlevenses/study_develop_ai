@@ -7,11 +7,7 @@
     },
     "profile": {
       "type": "string",
-      "enum": [
-        "prod",
-        "dev",
-        "test"
-      ]
+      "enum": ["prod", "dev", "test"]
     },
     "url": {
       "type": "string",
@@ -27,11 +23,7 @@
         },
         "overall": {
           "type": "string",
-          "enum": [
-            "ok",
-            "degraded",
-            "down"
-          ]
+          "enum": ["ok", "degraded", "down"]
         },
         "app_version": {
           "type": "string",
@@ -47,13 +39,7 @@
                 "anyOf": [
                   {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   {
                     "type": "string",
@@ -63,13 +49,7 @@
               },
               "state": {
                 "type": "string",
-                "enum": [
-                  "starting",
-                  "ready",
-                  "restarting",
-                  "degraded",
-                  "stopped"
-                ]
+                "enum": ["starting", "ready", "restarting", "degraded", "stopped"]
               },
               "pid": {
                 "anyOf": [
@@ -124,15 +104,7 @@
                 ]
               }
             },
-            "required": [
-              "svc",
-              "state",
-              "pid",
-              "port",
-              "restarts_60s",
-              "started_at",
-              "degraded_reason"
-            ],
+            "required": ["svc", "state", "pid", "port", "restarts_60s", "started_at", "degraded_reason"],
             "additionalProperties": false
           }
         },
@@ -141,12 +113,7 @@
           "properties": {
             "mode": {
               "type": "string",
-              "enum": [
-                "FULL",
-                "JUDGE_ONLY",
-                "LLM_ONLY",
-                "OFFLINE"
-              ]
+              "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
             },
             "providers": {
               "maxItems": 32,
@@ -160,27 +127,15 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "ok",
-                      "degraded",
-                      "down",
-                      "unconsented",
-                      "disabled"
-                    ]
+                    "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
                   }
                 },
-                "required": [
-                  "id",
-                  "status"
-                ],
+                "required": ["id", "status"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "mode",
-            "providers"
-          ],
+          "required": ["mode", "providers"],
           "additionalProperties": false
         },
         "backup": {
@@ -199,10 +154,7 @@
               ]
             },
             "rpo_hours": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             },
             "secondary_configured": {
               "type": "boolean"
@@ -211,11 +163,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "aborted",
-                    "failed"
-                  ]
+                  "enum": ["ok", "aborted", "failed"]
                 },
                 {
                   "type": "null"
@@ -223,12 +171,7 @@
               ]
             }
           },
-          "required": [
-            "last_ok_at",
-            "rpo_hours",
-            "secondary_configured",
-            "last_outcome"
-          ],
+          "required": ["last_ok_at", "rpo_hours", "secondary_configured", "last_outcome"],
           "additionalProperties": false
         },
         "outbox": {
@@ -239,23 +182,11 @@
             "properties": {
               "svc": {
                 "type": "string",
-                "enum": [
-                  "gateway",
-                  "content",
-                  "learning",
-                  "ai-gateway",
-                  "ops-api"
-                ]
+                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
               },
               "dest": {
                 "type": "string",
-                "enum": [
-                  "gateway",
-                  "content",
-                  "learning",
-                  "ai-gateway",
-                  "ops-api"
-                ]
+                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
               },
               "pending": {
                 "type": "integer",
@@ -268,12 +199,7 @@
                 "maximum": 9007199254740991
               }
             },
-            "required": [
-              "svc",
-              "dest",
-              "pending",
-              "oldest_age_ms"
-            ],
+            "required": ["svc", "dest", "pending", "oldest_age_ms"],
             "additionalProperties": false
           }
         },
@@ -293,23 +219,11 @@
                 "properties": {
                   "svc": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "producer": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "since": {
                     "type": "integer",
@@ -317,19 +231,12 @@
                     "maximum": 8640000000000000
                   }
                 },
-                "required": [
-                  "svc",
-                  "producer",
-                  "since"
-                ],
+                "required": ["svc", "producer", "since"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "dead_total",
-            "halted"
-          ],
+          "required": ["dead_total", "halted"],
           "additionalProperties": false
         },
         "runner": {
@@ -355,35 +262,19 @@
               ]
             }
           },
-          "required": [
-            "enabled",
-            "queue_length",
-            "platform_reason"
-          ],
+          "required": ["enabled", "queue_length", "platform_reason"],
           "additionalProperties": false
         },
         "eventloop_p99_ms": {
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "additionalProperties": {
             "type": "number"
           },
-          "required": [
-            "gateway",
-            "content",
-            "learning",
-            "ai-gateway",
-            "ops-api"
-          ]
+          "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
         },
         "rss_mb": {
           "type": "object",
@@ -404,10 +295,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "free_mb",
-            "warn"
-          ],
+          "required": ["free_mb", "warn"],
           "additionalProperties": false
         },
         "integrity": {
@@ -417,10 +305,7 @@
               "type": "boolean"
             },
             "projection_match": {
-              "type": [
-                "boolean",
-                "null"
-              ]
+              "type": ["boolean", "null"]
             },
             "last_full_check_at": {
               "anyOf": [
@@ -435,11 +320,7 @@
               ]
             }
           },
-          "required": [
-            "ledger_alarm",
-            "projection_match",
-            "last_full_check_at"
-          ],
+          "required": ["ledger_alarm", "projection_match", "last_full_check_at"],
           "additionalProperties": false
         },
         "banners": {
@@ -487,11 +368,7 @@
               },
               "severity": {
                 "type": "string",
-                "enum": [
-                  "info",
-                  "warn",
-                  "critical"
-                ]
+                "enum": ["info", "warn", "critical"]
               },
               "message_ko": {
                 "type": "string",
@@ -537,11 +414,7 @@
                         ]
                       }
                     },
-                    "required": [
-                      "label_ko",
-                      "href",
-                      "cli"
-                    ],
+                    "required": ["label_ko", "href", "cli"],
                     "additionalProperties": false
                   },
                   {
@@ -550,15 +423,7 @@
                 ]
               }
             },
-            "required": [
-              "banner_id",
-              "code",
-              "severity",
-              "message_ko",
-              "since",
-              "dismissible",
-              "action"
-            ],
+            "required": ["banner_id", "code", "severity", "message_ko", "since", "dismissible", "action"],
             "additionalProperties": false
           }
         }
@@ -582,11 +447,6 @@
       "additionalProperties": false
     }
   },
-  "required": [
-    "app_version",
-    "profile",
-    "url",
-    "health"
-  ],
+  "required": ["app_version", "profile", "url", "health"],
   "additionalProperties": false
 }

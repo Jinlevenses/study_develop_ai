@@ -12,10 +12,7 @@
       "const": "/internal/v1/firewall/patterns"
     },
     "allowedCallers": {
-      "enum": [
-        "content",
-        "gateway"
-      ]
+      "enum": ["content", "gateway"]
     },
     "idempotent": {
       "const": false
@@ -30,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-AI-019",
-        "NFR-DATA-010"
-      ]
+      "enum": ["FR-AI-019", "NFR-DATA-010"]
     },
     "deadlineMs": {
       "const": null
@@ -81,13 +75,7 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "domain",
-                      "employee_id",
-                      "project_code",
-                      "regex",
-                      "literal"
-                    ]
+                    "enum": ["domain", "employee_id", "project_code", "regex", "literal"]
                   },
                   "value": {
                     "type": "string",
@@ -100,12 +88,7 @@
                     "maximum": 8640000000000000
                   }
                 },
-                "required": [
-                  "pattern_id",
-                  "kind",
-                  "value",
-                  "created_at"
-                ],
+                "required": ["pattern_id", "kind", "value", "created_at"],
                 "additionalProperties": false
               }
             },
@@ -127,19 +110,11 @@
                   ]
                 }
               },
-              "required": [
-                "enabled",
-                "provider_id"
-              ],
+              "required": ["enabled", "provider_id"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "builtin_policy",
-            "builtin_rule_ids",
-            "user_patterns",
-            "local_classifier"
-          ],
+          "required": ["builtin_policy", "builtin_rule_ids", "user_patterns", "local_classifier"],
           "additionalProperties": false
         }
       }

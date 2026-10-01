@@ -22,9 +22,6 @@
       }
     }
   },
-  "required": [
-    "reflection_md",
-    "next_week_focus"
-  ],
+  "required": ["reflection_md", "next_week_focus"],
   "additionalProperties": false
 }

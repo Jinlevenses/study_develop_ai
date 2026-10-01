@@ -7,10 +7,7 @@
     },
     "lang": {
       "type": "string",
-      "enum": [
-        "js",
-        "ts"
-      ]
+      "enum": ["js", "ts"]
     },
     "complexity_target": {
       "anyOf": [
@@ -24,10 +21,6 @@
       ]
     }
   },
-  "required": [
-    "lab_spec_md",
-    "lang",
-    "complexity_target"
-  ],
+  "required": ["lab_spec_md", "lang", "complexity_target"],
   "additionalProperties": false
 }

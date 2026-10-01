@@ -12,9 +12,7 @@
       "const": "/api/v1/dialogs/{dialog_id}/turns/{turn_id}/utterance"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-STD-020",
-        "IR-016"
-      ]
+      "enum": ["FR-STD-020", "IR-016"]
     },
     "deadlineMs": {
       "const": 60000
@@ -61,10 +56,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "dialog_id",
-            "turn_id"
-          ],
+          "required": ["dialog_id", "turn_id"],
           "additionalProperties": false
         }
       }

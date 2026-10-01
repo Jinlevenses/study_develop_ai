@@ -12,9 +12,7 @@
       "const": "/internal/v1/backups/secondary"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-004",
-        "FR-SET-025",
-        "NFR-SEC-018"
-      ]
+      "enum": ["FR-SET-004", "FR-SET-025", "NFR-SEC-018"]
     },
     "deadlineMs": {
       "const": null
@@ -81,11 +75,7 @@
               ]
             }
           },
-          "required": [
-            "path",
-            "encrypt",
-            "passphrase"
-          ],
+          "required": ["path", "encrypt", "passphrase"],
           "additionalProperties": false
         }
       }
@@ -142,24 +132,11 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "inside_fathom_home",
-                  "sync_folder",
-                  "network_path",
-                  "not_writable",
-                  "missing"
-                ]
+                "enum": ["inside_fathom_home", "sync_folder", "network_path", "not_writable", "missing"]
               }
             }
           },
-          "required": [
-            "path",
-            "encrypt",
-            "locked",
-            "last_copied_at",
-            "lag_s",
-            "warnings"
-          ],
+          "required": ["path", "encrypt", "locked", "last_copied_at", "lag_s", "warnings"],
           "additionalProperties": false
         }
       }

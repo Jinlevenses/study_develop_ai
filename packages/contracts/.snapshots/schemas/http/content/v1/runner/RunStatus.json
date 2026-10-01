@@ -2,15 +2,7 @@
   "anyOf": [
     {
       "type": "string",
-      "enum": [
-        "ok",
-        "error",
-        "timeout",
-        "memory_limit",
-        "output_limit",
-        "rejected",
-        "platform_disabled"
-      ]
+      "enum": ["ok", "error", "timeout", "memory_limit", "output_limit", "rejected", "platform_disabled"]
     },
     {
       "type": "string",

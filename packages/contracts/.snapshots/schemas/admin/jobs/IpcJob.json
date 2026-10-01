@@ -40,12 +40,7 @@
           "additionalProperties": {}
         }
       },
-      "required": [
-        "type",
-        "v",
-        "job",
-        "args"
-      ],
+      "required": ["type", "v", "job", "args"],
       "additionalProperties": false
     },
     {
@@ -84,12 +79,7 @@
           "maxLength": 60
         }
       },
-      "required": [
-        "type",
-        "v",
-        "pct",
-        "step"
-      ],
+      "required": ["type", "v", "pct", "step"],
       "additionalProperties": false
     },
     {
@@ -119,11 +109,7 @@
           "additionalProperties": {}
         }
       },
-      "required": [
-        "type",
-        "v",
-        "result"
-      ],
+      "required": ["type", "v", "result"],
       "additionalProperties": false
     },
     {
@@ -154,12 +140,7 @@
           "maxLength": 500
         }
       },
-      "required": [
-        "type",
-        "v",
-        "code",
-        "message"
-      ],
+      "required": ["type", "v", "code", "message"],
       "additionalProperties": false
     },
     {
@@ -182,10 +163,7 @@
           "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
         }
       },
-      "required": [
-        "type",
-        "v"
-      ],
+      "required": ["type", "v"],
       "additionalProperties": false
     }
   ]

@@ -24,12 +24,6 @@
       "minimum": 0
     }
   },
-  "required": [
-    "kind",
-    "blueprint_id",
-    "section_key",
-    "concept_id",
-    "weight"
-  ],
+  "required": ["kind", "blueprint_id", "section_key", "concept_id", "weight"],
   "additionalProperties": false
 }

@@ -69,13 +69,7 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "concept_id",
-          "facet",
-          "format",
-          "level",
-          "n"
-        ],
+        "required": ["concept_id", "facet", "format", "level", "n"],
         "additionalProperties": false
       }
     },
@@ -85,10 +79,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "window_days",
-    "demand",
-    "computed_at"
-  ],
+  "required": ["window_days", "demand", "computed_at"],
   "additionalProperties": false
 }

@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "light",
-    "normal",
-    "deep"
-  ]
+  "enum": ["light", "normal", "deep"]
 }

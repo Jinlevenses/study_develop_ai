@@ -3,11 +3,7 @@
   "properties": {
     "resolution": {
       "type": "string",
-      "enum": [
-        "fixed_overlay",
-        "retired",
-        "kept"
-      ]
+      "enum": ["fixed_overlay", "retired", "kept"]
     },
     "reason_ko": {
       "type": "string",
@@ -25,14 +21,7 @@
             },
             "target_kind": {
               "type": "string",
-              "enum": [
-                "concept",
-                "ku",
-                "misconception",
-                "item",
-                "case",
-                "source"
-              ]
+              "enum": ["concept", "ku", "misconception", "item", "case", "source"]
             },
             "target_id": {
               "type": "string",
@@ -55,15 +44,7 @@
               "maxLength": 500
             }
           },
-          "required": [
-            "patch_id",
-            "target_kind",
-            "target_id",
-            "field",
-            "base_version",
-            "new_value",
-            "reason_ko"
-          ],
+          "required": ["patch_id", "target_kind", "target_id", "field", "base_version", "new_value", "reason_ko"],
           "additionalProperties": false
         },
         {
@@ -72,11 +53,7 @@
       ]
     }
   },
-  "required": [
-    "resolution",
-    "reason_ko",
-    "patch"
-  ],
+  "required": ["resolution", "reason_ko", "patch"],
   "additionalProperties": false,
   "$defs": {
     "__schema0": {

@@ -3,14 +3,7 @@
   "properties": {
     "state": {
       "type": "string",
-      "enum": [
-        "approval_required",
-        "approved",
-        "rejected",
-        "exhausted",
-        "expired",
-        "completed"
-      ]
+      "enum": ["approval_required", "approved", "rejected", "exhausted", "expired", "completed"]
     },
     "cursor": {
       "type": "string",
@@ -23,8 +16,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

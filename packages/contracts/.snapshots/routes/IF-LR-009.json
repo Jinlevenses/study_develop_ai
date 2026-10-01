@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/sessions/{session_id}/blocks/{block_id}:complete"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-STD-010",
-        "FR-CUR-005~008",
-        "FR-PRG-026"
-      ]
+      "enum": ["FR-STD-010", "FR-CUR-005~008", "FR-PRG-026"]
     },
     "deadlineMs": {
       "const": null
@@ -62,10 +56,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "session_id",
-            "block_id"
-          ],
+          "required": ["session_id", "block_id"],
           "additionalProperties": false
         },
         "body": {
@@ -83,11 +74,7 @@
                   "type": "array",
                   "items": {
                     "type": "string",
-                    "enum": [
-                      "theory",
-                      "code",
-                      "core"
-                    ]
+                    "enum": ["theory", "code", "core"]
                   }
                 },
                 "duration_ms": {
@@ -96,11 +83,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "kind",
-                "stages_done",
-                "duration_ms"
-              ],
+              "required": ["kind", "stages_done", "duration_ms"],
               "additionalProperties": false
             },
             {
@@ -124,10 +107,7 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "predictions"
-              ],
+              "required": ["kind", "predictions"],
               "additionalProperties": false
             },
             {
@@ -146,10 +126,7 @@
                   }
                 }
               },
-              "required": [
-                "kind",
-                "answers_ko"
-              ],
+              "required": ["kind", "answers_ko"],
               "additionalProperties": false
             },
             {
@@ -167,20 +144,11 @@
                   },
                   "additionalProperties": {
                     "type": "string",
-                    "enum": [
-                      "link",
-                      "probe",
-                      "import",
-                      "discard",
-                      "later"
-                    ]
+                    "enum": ["link", "probe", "import", "discard", "later"]
                   }
                 }
               },
-              "required": [
-                "kind",
-                "decisions"
-              ],
+              "required": ["kind", "decisions"],
               "additionalProperties": false
             },
             {
@@ -191,9 +159,7 @@
                   "const": "generic"
                 }
               },
-              "required": [
-                "kind"
-              ],
+              "required": ["kind"],
               "additionalProperties": false
             }
           ]
@@ -217,14 +183,7 @@
             },
             "slot": {
               "type": "string",
-              "enum": [
-                "W",
-                "R",
-                "N",
-                "D",
-                "S",
-                "C"
-              ]
+              "enum": ["W", "R", "N", "D", "S", "C"]
             },
             "mode_id": {
               "type": "string",
@@ -301,11 +260,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "code",
-                  "label_ko",
-                  "value"
-                ],
+                "required": ["code", "label_ko", "value"],
                 "additionalProperties": false
               }
             },
@@ -314,14 +269,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "pending",
-                "active",
-                "awaiting_grade",
-                "done",
-                "skipped",
-                "swapped"
-              ]
+              "enum": ["pending", "active", "awaiting_grade", "done", "skipped", "swapped"]
             },
             "est_minutes": {
               "type": "number",

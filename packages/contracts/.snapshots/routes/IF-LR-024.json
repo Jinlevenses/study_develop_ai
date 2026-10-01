@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/notes/{block_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,11 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-STD-018",
-        "FR-STD-019",
-        "FR-QST-026"
-      ]
+      "enum": ["FR-STD-018", "FR-STD-019", "FR-QST-026"]
     },
     "deadlineMs": {
       "const": null
@@ -58,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "block_id"
-          ],
+          "required": ["block_id"],
           "additionalProperties": false
         }
       }
@@ -92,13 +84,7 @@
                 },
                 "ladder_step": {
                   "type": "string",
-                  "enum": [
-                    "BN-1",
-                    "BN-2",
-                    "BN-3",
-                    "BN-4",
-                    "BN-5"
-                  ]
+                  "enum": ["BN-1", "BN-2", "BN-3", "BN-4", "BN-5"]
                 },
                 "prompt_md": {
                   "type": "string",
@@ -178,18 +164,11 @@
                     },
                     "response_mode": {
                       "type": "string",
-                      "enum": [
-                        "recognition",
-                        "production"
-                      ]
+                      "enum": ["recognition", "production"]
                     },
                     "tier": {
                       "type": "string",
-                      "enum": [
-                        "A",
-                        "B",
-                        "C"
-                      ]
+                      "enum": ["A", "B", "C"]
                     },
                     "level": {
                       "type": "integer",
@@ -198,11 +177,7 @@
                     },
                     "stakes": {
                       "type": "string",
-                      "enum": [
-                        "S0",
-                        "S1",
-                        "S2"
-                      ]
+                      "enum": ["S0", "S1", "S2"]
                     },
                     "n_options": {
                       "type": "integer",
@@ -223,9 +198,7 @@
                               "const": "ox"
                             }
                           },
-                          "required": [
-                            "kind"
-                          ],
+                          "required": ["kind"],
                           "additionalProperties": false
                         },
                         {
@@ -249,9 +222,7 @@
                                     "maxLength": 2000
                                   }
                                 },
-                                "required": [
-                                  "text_md"
-                                ],
+                                "required": ["text_md"],
                                 "additionalProperties": false
                               }
                             },
@@ -268,12 +239,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "kind",
-                            "options",
-                            "order",
-                            "multi"
-                          ],
+                          "required": ["kind", "options", "order", "multi"],
                           "additionalProperties": false
                         },
                         {
@@ -300,11 +266,7 @@
                               ]
                             }
                           },
-                          "required": [
-                            "kind",
-                            "max_chars",
-                            "placeholder_ko"
-                          ],
+                          "required": ["kind", "max_chars", "placeholder_ko"],
                           "additionalProperties": false
                         },
                         {
@@ -333,18 +295,12 @@
                                     "maximum": 500
                                   }
                                 },
-                                "required": [
-                                  "max_chars"
-                                ],
+                                "required": ["max_chars"],
                                 "additionalProperties": false
                               }
                             }
                           },
-                          "required": [
-                            "kind",
-                            "template_md",
-                            "blanks"
-                          ],
+                          "required": ["kind", "template_md", "blanks"],
                           "additionalProperties": false
                         },
                         {
@@ -377,11 +333,7 @@
                               }
                             }
                           },
-                          "required": [
-                            "kind",
-                            "left",
-                            "right"
-                          ],
+                          "required": ["kind", "left", "right"],
                           "additionalProperties": false
                         },
                         {
@@ -393,18 +345,11 @@
                             },
                             "lang": {
                               "type": "string",
-                              "enum": [
-                                "js",
-                                "ts"
-                              ]
+                              "enum": ["js", "ts"]
                             },
                             "mode": {
                               "type": "string",
-                              "enum": [
-                                "write",
-                                "predict_output",
-                                "fix"
-                              ]
+                              "enum": ["write", "predict_output", "fix"]
                             },
                             "starter": {
                               "type": "string",
@@ -425,14 +370,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "kind",
-                            "lang",
-                            "mode",
-                            "starter",
-                            "public_tests_md",
-                            "runnable"
-                          ],
+                          "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
                           "additionalProperties": false
                         },
                         {
@@ -454,12 +392,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "kind",
-                            "schema_md",
-                            "starter",
-                            "runnable"
-                          ],
+                          "required": ["kind", "schema_md", "starter", "runnable"],
                           "additionalProperties": false
                         },
                         {
@@ -494,12 +427,7 @@
                               "maximum": 20
                             }
                           },
-                          "required": [
-                            "kind",
-                            "lines",
-                            "order",
-                            "max_select"
-                          ],
+                          "required": ["kind", "lines", "order", "max_select"],
                           "additionalProperties": false
                         },
                         {
@@ -521,10 +449,7 @@
                               ]
                             }
                           },
-                          "required": [
-                            "kind",
-                            "unit_hint"
-                          ],
+                          "required": ["kind", "unit_hint"],
                           "additionalProperties": false
                         },
                         {
@@ -571,21 +496,12 @@
                                     "maxLength": 60
                                   }
                                 },
-                                "required": [
-                                  "key",
-                                  "label_ko"
-                                ],
+                                "required": ["key", "label_ko"],
                                 "additionalProperties": false
                               }
                             }
                           },
-                          "required": [
-                            "kind",
-                            "min_chars",
-                            "max_chars",
-                            "kp_count",
-                            "rubric_dims"
-                          ],
+                          "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
                           "additionalProperties": false
                         },
                         {
@@ -619,17 +535,12 @@
                                             "maxLength": 1000
                                           }
                                         },
-                                        "required": [
-                                          "text_md"
-                                        ],
+                                        "required": ["text_md"],
                                         "additionalProperties": false
                                       }
                                     }
                                   },
-                                  "required": [
-                                    "stem_md",
-                                    "options"
-                                  ],
+                                  "required": ["stem_md", "options"],
                                   "additionalProperties": false
                                 },
                                 "b": {
@@ -653,35 +564,23 @@
                                             "maxLength": 1000
                                           }
                                         },
-                                        "required": [
-                                          "text_md"
-                                        ],
+                                        "required": ["text_md"],
                                         "additionalProperties": false
                                       }
                                     }
                                   },
-                                  "required": [
-                                    "stem_md",
-                                    "options"
-                                  ],
+                                  "required": ["stem_md", "options"],
                                   "additionalProperties": false
                                 }
                               },
-                              "required": [
-                                "a",
-                                "b"
-                              ],
+                              "required": ["a", "b"],
                               "additionalProperties": false
                             },
                             "pivot_required": {
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "kind",
-                            "parts",
-                            "pivot_required"
-                          ],
+                          "required": ["kind", "parts", "pivot_required"],
                           "additionalProperties": false
                         },
                         {
@@ -715,12 +614,7 @@
                               }
                             }
                           },
-                          "required": [
-                            "kind",
-                            "diff_md",
-                            "lines",
-                            "order"
-                          ],
+                          "required": ["kind", "diff_md", "lines", "order"],
                           "additionalProperties": false
                         },
                         {
@@ -742,18 +636,10 @@
                             },
                             "item_format": {
                               "type": "string",
-                              "enum": [
-                                "mcq",
-                                "ox",
-                                "short"
-                              ]
+                              "enum": ["mcq", "ox", "short"]
                             }
                           },
-                          "required": [
-                            "kind",
-                            "target_ku_ids",
-                            "item_format"
-                          ],
+                          "required": ["kind", "target_ku_ids", "item_format"],
                           "additionalProperties": false
                         },
                         {
@@ -781,9 +667,7 @@
                                     "maxLength": 2000
                                   }
                                 },
-                                "required": [
-                                  "text_md"
-                                ],
+                                "required": ["text_md"],
                                 "additionalProperties": false
                               }
                             },
@@ -797,20 +681,10 @@
                             },
                             "rationale": {
                               "type": "string",
-                              "enum": [
-                                "none",
-                                "optional",
-                                "required"
-                              ]
+                              "enum": ["none", "optional", "required"]
                             }
                           },
-                          "required": [
-                            "kind",
-                            "node_key",
-                            "options",
-                            "order",
-                            "rationale"
-                          ],
+                          "required": ["kind", "node_key", "options", "order", "rationale"],
                           "additionalProperties": false
                         }
                       ]
@@ -840,30 +714,14 @@
                       "properties": {
                         "source_kind": {
                           "type": "string",
-                          "enum": [
-                            "seed",
-                            "t1",
-                            "t2",
-                            "t3",
-                            "t4",
-                            "imported",
-                            "user"
-                          ]
+                          "enum": ["seed", "t1", "t2", "t3", "t4", "imported", "user"]
                         },
                         "trust": {
                           "type": "string",
-                          "enum": [
-                            "seed",
-                            "verified",
-                            "user",
-                            "llm_unverified"
-                          ]
+                          "enum": ["seed", "verified", "user", "llm_unverified"]
                         }
                       },
-                      "required": [
-                        "source_kind",
-                        "trust"
-                      ],
+                      "required": ["source_kind", "trust"],
                       "additionalProperties": false
                     }
                   },
@@ -920,19 +778,12 @@
                                 "maximum": 9007199254740991
                               }
                             },
-                            "required": [
-                              "start",
-                              "end"
-                            ],
+                            "required": ["start", "end"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "text",
-                        "updated_at",
-                        "uncertain_spans"
-                      ],
+                      "required": ["text", "updated_at", "uncertain_spans"],
                       "additionalProperties": false
                     },
                     {
@@ -971,10 +822,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "limit_ms",
-                    "extensions"
-                  ],
+                  "required": ["limit_ms", "extensions"],
                   "additionalProperties": false
                 }
               },
@@ -1013,13 +861,7 @@
                 },
                 "ladder_step": {
                   "type": "string",
-                  "enum": [
-                    "BN-1",
-                    "BN-2",
-                    "BN-3",
-                    "BN-4",
-                    "BN-5"
-                  ]
+                  "enum": ["BN-1", "BN-2", "BN-3", "BN-4", "BN-5"]
                 },
                 "submitted_text": {
                   "type": "string",
@@ -1047,11 +889,7 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": [
-                    "graded",
-                    "awaiting_self_grade",
-                    "pending"
-                  ]
+                  "enum": ["graded", "awaiting_self_grade", "pending"]
                 },
                 "diff": {
                   "anyOf": [
@@ -1069,11 +907,7 @@
                             "properties": {
                               "status": {
                                 "type": "string",
-                                "enum": [
-                                  "recalled",
-                                  "missing",
-                                  "error"
-                                ]
+                                "enum": ["recalled", "missing", "error"]
                               },
                               "ku_id": {
                                 "anyOf": [
@@ -1103,19 +937,12 @@
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "status",
-                              "ku_id",
-                              "p",
-                              "uncertain_marked"
-                            ],
+                            "required": ["status", "ku_id", "p", "uncertain_marked"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "units"
-                      ],
+                      "required": ["units"],
                       "additionalProperties": false
                     },
                     {
@@ -1172,12 +999,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "cards",
-                    "ox_item_ids",
-                    "import_candidates_ko",
-                    "recall_scheduled"
-                  ],
+                  "required": ["cards", "ox_item_ids", "import_candidates_ko", "recall_scheduled"],
                   "additionalProperties": false
                 },
                 "judge_card": {
@@ -1238,14 +1060,7 @@
                         },
                         "engine": {
                           "type": "string",
-                          "enum": [
-                            "D",
-                            "J",
-                            "LJ",
-                            "H",
-                            "S",
-                            "PENDING"
-                          ]
+                          "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                         },
                         "badge": {
                           "type": "string",
@@ -1323,25 +1138,11 @@
                               },
                               "kind": {
                                 "type": "string",
-                                "enum": [
-                                  "kp",
-                                  "misconception",
-                                  "dimension",
-                                  "solo",
-                                  "injection",
-                                  "rationale"
-                                ]
+                                "enum": ["kp", "misconception", "dimension", "solo", "injection", "rationale"]
                               },
                               "outcome": {
                                 "type": "string",
-                                "enum": [
-                                  "covered",
-                                  "partial",
-                                  "missing",
-                                  "present",
-                                  "absent",
-                                  "scored"
-                                ]
+                                "enum": ["covered", "partial", "missing", "present", "absent", "scored"]
                               },
                               "p": {
                                 "anyOf": [
@@ -1356,10 +1157,7 @@
                                 ]
                               },
                               "score": {
-                                "type": [
-                                  "number",
-                                  "null"
-                                ]
+                                "type": ["number", "null"]
                               },
                               "ku_id": {
                                 "anyOf": [
@@ -1386,15 +1184,7 @@
                                 ]
                               }
                             },
-                            "required": [
-                              "label_ko",
-                              "kind",
-                              "outcome",
-                              "p",
-                              "score",
-                              "ku_id",
-                              "mc_id"
-                            ],
+                            "required": ["label_ko", "kind", "outcome", "p", "score", "ku_id", "mc_id"],
                             "additionalProperties": false
                           }
                         },
@@ -1444,13 +1234,7 @@
                                 },
                                 "reason": {
                                   "type": "string",
-                                  "enum": [
-                                    "key_wrong",
-                                    "ambiguous",
-                                    "outdated",
-                                    "learner_right",
-                                    "other"
-                                  ]
+                                  "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
                                 },
                                 "state": {
                                   "type": "string",
@@ -1470,23 +1254,11 @@
                                       "properties": {
                                         "label": {
                                           "type": "string",
-                                          "enum": [
-                                            "key_wrong",
-                                            "ambiguous",
-                                            "outdated",
-                                            "learner_wrong"
-                                          ]
+                                          "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                                         },
                                         "engine": {
                                           "type": "string",
-                                          "enum": [
-                                            "D",
-                                            "J",
-                                            "LJ",
-                                            "H",
-                                            "S",
-                                            "PENDING"
-                                          ]
+                                          "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                                         },
                                         "confidence": {
                                           "anyOf": [
@@ -1501,11 +1273,7 @@
                                           ]
                                         }
                                       },
-                                      "required": [
-                                        "label",
-                                        "engine",
-                                        "confidence"
-                                      ],
+                                      "required": ["label", "engine", "confidence"],
                                       "additionalProperties": false
                                     },
                                     {

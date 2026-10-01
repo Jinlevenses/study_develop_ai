@@ -10,9 +10,6 @@
       "maxLength": 300
     }
   },
-  "required": [
-    "code",
-    "detail_ko"
-  ],
+  "required": ["code", "detail_ko"],
   "additionalProperties": false
 }

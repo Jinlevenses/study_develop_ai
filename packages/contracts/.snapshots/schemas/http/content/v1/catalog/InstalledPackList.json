@@ -43,11 +43,7 @@
           },
           "channel": {
             "type": "string",
-            "enum": [
-              "seed",
-              "local",
-              "user"
-            ]
+            "enum": ["seed", "local", "user"]
           },
           "manifest_hash": {
             "type": "string",
@@ -91,13 +87,7 @@
                 "maximum": 9007199254740991
               }
             },
-            "required": [
-              "concepts",
-              "kus",
-              "misconceptions",
-              "items",
-              "cases"
-            ],
+            "required": ["concepts", "kus", "misconceptions", "items", "cases"],
             "additionalProperties": false
           },
           "report": {
@@ -125,11 +115,7 @@
                         "maximum": 1
                       }
                     },
-                    "required": [
-                      "full",
-                      "lite",
-                      "skeleton"
-                    ],
+                    "required": ["full", "lite", "skeleton"],
                     "additionalProperties": false
                   },
                   "offline_learnable": {
@@ -138,10 +124,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "three_stage",
-                  "offline_learnable"
-                ],
+                "required": ["three_stage", "offline_learnable"],
                 "additionalProperties": false
               },
               "tier_counts": {
@@ -163,11 +146,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "A",
-                  "B",
-                  "C"
-                ],
+                "required": ["A", "B", "C"],
                 "additionalProperties": false
               },
               "cap_blockers": {
@@ -185,19 +164,12 @@
                       "maxLength": 300
                     }
                   },
-                  "required": [
-                    "code",
-                    "detail_ko"
-                  ],
+                  "required": ["code", "detail_ko"],
                   "additionalProperties": false
                 }
               }
             },
-            "required": [
-              "kpi",
-              "tier_counts",
-              "cap_blockers"
-            ],
+            "required": ["kpi", "tier_counts", "cap_blockers"],
             "additionalProperties": false
           }
         },
@@ -216,8 +188,6 @@
       }
     }
   },
-  "required": [
-    "packs"
-  ],
+  "required": ["packs"],
   "additionalProperties": false
 }

@@ -6,8 +6,6 @@
       "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
     }
   },
-  "required": [
-    "preview_id"
-  ],
+  "required": ["preview_id"],
   "additionalProperties": false
 }

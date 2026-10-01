@@ -12,10 +12,7 @@
       "const": "/internal/v1/providers:probe"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "ops-api"]
     },
     "idempotent": {
       "const": true
@@ -30,10 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-AI-001",
-        "FR-AI-015"
-      ]
+      "enum": ["FR-AI-001", "FR-AI-015"]
     },
     "deadlineMs": {
       "const": null
@@ -76,11 +70,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "probe_id",
-            "providers",
-            "live"
-          ],
+          "required": ["probe_id", "providers", "live"],
           "additionalProperties": false
         }
       }
@@ -97,10 +87,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "running",
-                "done"
-              ]
+              "enum": ["running", "done"]
             },
             "results": {
               "maxItems": 32,
@@ -114,13 +101,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "ok",
-                      "degraded",
-                      "down",
-                      "unconsented",
-                      "disabled"
-                    ]
+                    "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
                   },
                   "probe": {
                     "type": "object",
@@ -140,16 +121,10 @@
                         ]
                       },
                       "logged_in": {
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
+                        "type": ["boolean", "null"]
                       },
                       "flags_ok": {
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
+                        "type": ["boolean", "null"]
                       },
                       "missing_flags": {
                         "maxItems": 20,
@@ -160,10 +135,7 @@
                         }
                       },
                       "key_present": {
-                        "type": [
-                          "boolean",
-                          "null"
-                        ]
+                        "type": ["boolean", "null"]
                       },
                       "models": {
                         "maxItems": 50,
@@ -217,20 +189,12 @@
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "provider_id",
-                  "status",
-                  "probe"
-                ],
+                "required": ["provider_id", "status", "probe"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "probe_id",
-            "state",
-            "results"
-          ],
+          "required": ["probe_id", "state", "results"],
           "additionalProperties": false
         }
       }

@@ -33,11 +33,7 @@
     },
     "scenario_kind": {
       "type": "string",
-      "enum": [
-        "incident",
-        "tradeoff",
-        "design"
-      ]
+      "enum": ["incident", "tradeoff", "design"]
     },
     "target_ku_ids": {
       "maxItems": 20,
@@ -49,11 +45,6 @@
       }
     }
   },
-  "required": [
-    "track",
-    "level",
-    "scenario_kind",
-    "target_ku_ids"
-  ],
+  "required": ["track", "level", "scenario_kind", "target_ku_ids"],
   "additionalProperties": false
 }

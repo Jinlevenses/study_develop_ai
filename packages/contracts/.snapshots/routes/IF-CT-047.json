@@ -12,9 +12,7 @@
       "const": "/internal/v1/grading/verdicts/{verdict_id}/feedback"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-STD-019",
-        "FR-QST-023"
-      ]
+      "enum": ["FR-STD-019", "FR-QST-023"]
     },
     "deadlineMs": {
       "const": 60000
@@ -57,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "verdict_id"
-          ],
+          "required": ["verdict_id"],
           "additionalProperties": false
         }
       }

@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/packs:refresh"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-023",
-        "FR-AI-026"
-      ]
+      "enum": ["FR-CUR-023", "FR-AI-026"]
     },
     "deadlineMs": {
       "const": null
@@ -93,11 +88,7 @@
               ]
             }
           },
-          "required": [
-            "install_id",
-            "track",
-            "work_order_id"
-          ],
+          "required": ["install_id", "track", "work_order_id"],
           "additionalProperties": false
         }
       }
@@ -182,13 +173,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "pack_id",
-                  "track",
-                  "version",
-                  "previous_version",
-                  "conflicts"
-                ],
+                "required": ["pack_id", "track", "version", "previous_version", "conflicts"],
                 "additionalProperties": false
               }
             },
@@ -257,23 +242,13 @@
                             "maxLength": 60
                           }
                         },
-                        "required": [
-                          "path",
-                          "message",
-                          "rule"
-                        ],
+                        "required": ["path", "message", "rule"],
                         "additionalProperties": false
                       }
                     },
                     "dependency": {
                       "type": "string",
-                      "enum": [
-                        "gateway",
-                        "content",
-                        "learning",
-                        "ai-gateway",
-                        "ops-api"
-                      ]
+                      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                     },
                     "acked_through_seq": {
                       "type": "integer",
@@ -296,15 +271,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "type",
-                    "title",
-                    "status",
-                    "code",
-                    "error_id",
-                    "request_id",
-                    "retryable"
-                  ],
+                  "required": ["type", "title", "status", "code", "error_id", "request_id", "retryable"],
                   "additionalProperties": false
                 },
                 {
@@ -330,14 +297,7 @@
               ]
             }
           },
-          "required": [
-            "install_id",
-            "state",
-            "packs",
-            "problem",
-            "started_at",
-            "finished_at"
-          ],
+          "required": ["install_id", "state", "packs", "problem", "started_at", "finished_at"],
           "additionalProperties": false
         }
       }

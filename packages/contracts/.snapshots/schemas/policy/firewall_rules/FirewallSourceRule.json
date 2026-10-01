@@ -11,11 +11,7 @@
     },
     "source": {
       "type": "string",
-      "enum": [
-        "ai_firewall_pattern",
-        "SYS-FWCLS",
-        "request.local_only"
-      ]
+      "enum": ["ai_firewall_pattern", "SYS-FWCLS", "request.local_only"]
     },
     "action": {
       "type": "string",
@@ -27,19 +23,9 @@
     },
     "class": {
       "type": "string",
-      "enum": [
-        "C0",
-        "C1",
-        "C2",
-        "C3"
-      ]
+      "enum": ["C0", "C1", "C2", "C3"]
     }
   },
-  "required": [
-    "id",
-    "name",
-    "source",
-    "action"
-  ],
+  "required": ["id", "name", "source", "action"],
   "additionalProperties": false
 }

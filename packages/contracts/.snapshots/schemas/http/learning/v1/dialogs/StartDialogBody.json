@@ -7,10 +7,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "dig",
-        "feynman"
-      ]
+      "enum": ["dig", "feynman"]
     },
     "concept_id": {
       "type": "string",
@@ -40,12 +37,6 @@
       ]
     }
   },
-  "required": [
-    "dialog_id",
-    "kind",
-    "concept_id",
-    "session_id",
-    "block_id"
-  ],
+  "required": ["dialog_id", "kind", "concept_id", "session_id", "block_id"],
   "additionalProperties": false
 }

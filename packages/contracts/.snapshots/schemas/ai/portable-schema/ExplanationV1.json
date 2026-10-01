@@ -43,10 +43,7 @@
             "maxLength": 2000
           }
         },
-        "required": [
-          "key",
-          "text_md"
-        ],
+        "required": ["key", "text_md"],
         "additionalProperties": false
       }
     },
@@ -60,12 +57,6 @@
       }
     }
   },
-  "required": [
-    "level",
-    "body_md",
-    "why_md",
-    "per_option",
-    "cited_ku_ids"
-  ],
+  "required": ["level", "body_md", "why_md", "per_option", "cited_ku_ids"],
   "additionalProperties": false
 }

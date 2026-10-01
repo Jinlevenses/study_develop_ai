@@ -12,9 +12,7 @@
       "const": "/internal/v1/acquisition/imports"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-IMP-003",
-        "FR-IMP-012"
-      ]
+      "enum": ["FR-IMP-003", "FR-IMP-012"]
     },
     "deadlineMs": {
       "const": null
@@ -76,9 +71,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -100,16 +93,7 @@
                   },
                   "source_kind": {
                     "type": "string",
-                    "enum": [
-                      "url",
-                      "paste",
-                      "file",
-                      "inbox",
-                      "folder",
-                      "blueprint",
-                      "pack_refresh",
-                      "case_foundry"
-                    ]
+                    "enum": ["url", "paste", "file", "inbox", "folder", "blueprint", "pack_refresh", "case_foundry"]
                   },
                   "title": {
                     "anyOf": [
@@ -137,19 +121,7 @@
                   },
                   "stage": {
                     "type": "string",
-                    "enum": [
-                      "I1",
-                      "I1.5",
-                      "I2",
-                      "I3",
-                      "I4",
-                      "I5",
-                      "I6",
-                      "I7",
-                      "COPY_GUARD",
-                      "I8",
-                      "I9"
-                    ]
+                    "enum": ["I1", "I1.5", "I2", "I3", "I4", "I5", "I6", "I7", "COPY_GUARD", "I8", "I9"]
                   },
                   "stages": {
                     "maxItems": 11,
@@ -159,41 +131,17 @@
                       "properties": {
                         "stage": {
                           "type": "string",
-                          "enum": [
-                            "I1",
-                            "I1.5",
-                            "I2",
-                            "I3",
-                            "I4",
-                            "I5",
-                            "I6",
-                            "I7",
-                            "COPY_GUARD",
-                            "I8",
-                            "I9"
-                          ]
+                          "enum": ["I1", "I1.5", "I2", "I3", "I4", "I5", "I6", "I7", "COPY_GUARD", "I8", "I9"]
                         },
                         "state": {
                           "type": "string",
-                          "enum": [
-                            "pending",
-                            "running",
-                            "done",
-                            "failed",
-                            "skipped"
-                          ]
+                          "enum": ["pending", "running", "done", "failed", "skipped"]
                         },
                         "engine": {
                           "anyOf": [
                             {
                               "type": "string",
-                              "enum": [
-                                "D",
-                                "H",
-                                "J",
-                                "L",
-                                "LJ"
-                              ]
+                              "enum": ["D", "H", "J", "L", "LJ"]
                             },
                             {
                               "type": "null"
@@ -236,40 +184,21 @@
                           ]
                         }
                       },
-                      "required": [
-                        "stage",
-                        "state",
-                        "engine",
-                        "started_at",
-                        "finished_at",
-                        "error_code"
-                      ],
+                      "required": ["stage", "state", "engine", "started_at", "finished_at", "error_code"],
                       "additionalProperties": false
                     }
                   },
                   "trust": {
                     "type": "string",
-                    "enum": [
-                      "user",
-                      "llm_unverified",
-                      "verified"
-                    ]
+                    "enum": ["user", "llm_unverified", "verified"]
                   },
                   "masking": {
                     "type": "string",
-                    "enum": [
-                      "full",
-                      "partial"
-                    ]
+                    "enum": ["full", "partial"]
                   },
                   "data_class": {
                     "type": "string",
-                    "enum": [
-                      "C0",
-                      "C1",
-                      "C2",
-                      "C3"
-                    ]
+                    "enum": ["C0", "C1", "C2", "C3"]
                   },
                   "work_order_id": {
                     "anyOf": [
@@ -313,12 +242,7 @@
                             "maximum": 9007199254740991
                           }
                         },
-                        "required": [
-                          "concepts",
-                          "kus",
-                          "items",
-                          "conflicts"
-                        ],
+                        "required": ["concepts", "kus", "items", "conflicts"],
                         "additionalProperties": false
                       },
                       {
@@ -368,10 +292,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

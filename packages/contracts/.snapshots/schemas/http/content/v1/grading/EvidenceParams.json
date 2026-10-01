@@ -53,16 +53,7 @@
           "const": 0
         }
       },
-      "required": [
-        "D",
-        "J_calibrated",
-        "J_uncalibrated",
-        "J_low_confidence",
-        "LJ",
-        "H",
-        "S",
-        "PENDING"
-      ],
+      "required": ["D", "J_calibrated", "J_uncalibrated", "J_low_confidence", "LJ", "H", "S", "PENDING"],
       "additionalProperties": false
     },
     "rapid": {
@@ -74,12 +65,6 @@
       "maximum": 1
     }
   },
-  "required": [
-    "policy_version",
-    "w_format",
-    "w_grader_table",
-    "rapid",
-    "gaming_factor"
-  ],
+  "required": ["policy_version", "w_format", "w_grader_table", "rapid", "gaming_factor"],
   "additionalProperties": false
 }

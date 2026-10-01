@@ -47,10 +47,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "track"
-          ],
+          "required": ["kind", "track"],
           "additionalProperties": false
         },
         {
@@ -66,10 +63,7 @@
               "maxLength": 1024
             }
           },
-          "required": [
-            "kind",
-            "path"
-          ],
+          "required": ["kind", "path"],
           "additionalProperties": false
         },
         {
@@ -85,31 +79,19 @@
               "maxLength": 1024
             }
           },
-          "required": [
-            "kind",
-            "dir"
-          ],
+          "required": ["kind", "dir"],
           "additionalProperties": false
         }
       ]
     },
     "channel": {
       "type": "string",
-      "enum": [
-        "seed",
-        "local",
-        "user"
-      ]
+      "enum": ["seed", "local", "user"]
     },
     "allow_downgrade": {
       "type": "boolean"
     }
   },
-  "required": [
-    "install_id",
-    "source",
-    "channel",
-    "allow_downgrade"
-  ],
+  "required": ["install_id", "source", "channel", "allow_downgrade"],
   "additionalProperties": false
 }

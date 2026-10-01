@@ -42,9 +42,6 @@
       "maximum": 50
     }
   },
-  "required": [
-    "q",
-    "limit"
-  ],
+  "required": ["q", "limit"],
   "additionalProperties": false
 }

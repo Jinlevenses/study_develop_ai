@@ -26,10 +26,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "version",
-          "sha256"
-        ],
+        "required": ["version", "sha256"],
         "additionalProperties": false
       }
     },
@@ -51,19 +48,11 @@
             "maxLength": 1000000
           }
         },
-        "required": [
-          "sha256",
-          "yaml"
-        ],
+        "required": ["sha256", "yaml"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "kind",
-    "policy_version",
-    "members",
-    "documents"
-  ],
+  "required": ["kind", "policy_version", "members", "documents"],
   "additionalProperties": false
 }

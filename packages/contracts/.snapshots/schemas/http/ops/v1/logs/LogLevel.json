@@ -1,10 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "debug",
-    "info",
-    "warn",
-    "error",
-    "fatal"
-  ]
+  "enum": ["debug", "info", "warn", "error", "fatal"]
 }

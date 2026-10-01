@@ -57,19 +57,11 @@
             }
           }
         },
-        "required": [
-          "path_id",
-          "title_ko",
-          "description_ko",
-          "tracks",
-          "concept_ids"
-        ],
+        "required": ["path_id", "title_ko", "description_ko", "tracks", "concept_ids"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "paths"
-  ],
+  "required": ["paths"],
   "additionalProperties": false
 }

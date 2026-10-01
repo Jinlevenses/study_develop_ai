@@ -1,0 +1,292 @@
+{
+  "taskId": "T-00-10",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "packages/contracts/.snapshots/** (1099 generated JSON files: schemas/ events/ routes/ errors/)",
+    "packages/contracts/scripts/gen.ts",
+    "packages/contracts/src/events/__consumers__/gateway.json",
+    "packages/contracts/src/events/__consumers__/learning.json",
+    "packages/contracts/src/events/catalog/learning.ts",
+    "packages/contracts/src/events/registry.gen.ts",
+    "packages/contracts/src/events/routing.gen.ts",
+    "packages/contracts/src/http/gateway/v1/ai.ts",
+    "packages/contracts/src/http/gateway/v1/cli.ts",
+    "packages/contracts/src/http/gateway/v1/concepts.ts",
+    "packages/contracts/src/http/gateway/v1/curation.ts",
+    "packages/contracts/src/http/gateway/v1/dialogs.ts",
+    "packages/contracts/src/http/gateway/v1/errors.ts",
+    "packages/contracts/src/http/gateway/v1/evidence.ts",
+    "packages/contracts/src/http/gateway/v1/home.ts",
+    "packages/contracts/src/http/gateway/v1/imports.ts",
+    "packages/contracts/src/http/gateway/v1/inbox.ts",
+    "packages/contracts/src/http/gateway/v1/internal.ts",
+    "packages/contracts/src/http/gateway/v1/longtasks.ts",
+    "packages/contracts/src/http/gateway/v1/map.ts",
+    "packages/contracts/src/http/gateway/v1/ops.ts",
+    "packages/contracts/src/http/gateway/v1/practice-items.ts",
+    "packages/contracts/src/http/gateway/v1/review.ts",
+    "packages/contracts/src/http/gateway/v1/session.ts",
+    "packages/contracts/src/http/gateway/v1/sessions.ts",
+    "packages/contracts/src/http/gateway/v1/settings.ts",
+    "packages/contracts/src/http/gateway/v1/stream.ts",
+    "packages/contracts/src/http/learning/v1/dialogs.ts",
+    "packages/contracts/src/http/learning/v1/errors.ts",
+    "packages/contracts/src/http/learning/v1/insight.ts",
+    "packages/contracts/src/http/learning/v1/learner.ts",
+    "packages/contracts/src/http/learning/v1/ledger.ts",
+    "packages/contracts/src/http/learning/v1/longtasks.ts",
+    "packages/contracts/src/http/learning/v1/notes.ts",
+    "packages/contracts/src/http/learning/v1/post-submit/artifact.ts",
+    "packages/contracts/src/http/learning/v1/post-submit/attempt.ts",
+    "packages/contracts/src/http/learning/v1/post-submit/case.ts",
+    "packages/contracts/src/http/learning/v1/post-submit/note.ts",
+    "packages/contracts/src/http/learning/v1/pre-submit/artifact.ts",
+    "packages/contracts/src/http/learning/v1/pre-submit/block.ts",
+    "packages/contracts/src/http/learning/v1/pre-submit/case.ts",
+    "packages/contracts/src/http/learning/v1/pre-submit/note.ts",
+    "packages/contracts/src/http/learning/v1/seasons.ts",
+    "packages/contracts/src/http/learning/v1/sessions.ts",
+    "packages/contracts/src/http/learning/v1/settings.ts",
+    "packages/contracts/src/http/learning/v1/telemetry.ts",
+    "packages/contracts/src/policy/cbm_params.ts",
+    "packages/contracts/src/policy/composer_policy.ts",
+    "packages/contracts/src/policy/fsrs_params.ts",
+    "packages/contracts/src/policy/gaming_params.ts",
+    "packages/contracts/src/policy/ldi_params.ts",
+    "packages/contracts/src/policy/method_policy.ts",
+    "packages/contracts/test/unit/gateway/all-routes.ts",
+    "packages/contracts/test/unit/gateway/errors-routes-all.spec.ts",
+    "packages/contracts/test/unit/gateway/expected-errors.ts",
+    "packages/contracts/test/unit/gateway/expected-passthrough.ts",
+    "packages/contracts/test/unit/gateway/expected-routes.ts",
+    "packages/contracts/test/unit/gateway/routes.spec.ts",
+    "packages/contracts/test/unit/gateway/samples.ts",
+    "packages/contracts/test/unit/gateway/schemas.spec.ts",
+    "packages/contracts/test/unit/gen/gen.spec.ts",
+    "packages/contracts/test/unit/learning/dialogs-notes-longtasks.spec.ts",
+    "packages/contracts/test/unit/learning/events.spec.ts",
+    "packages/contracts/test/unit/learning/expected-routes.ts",
+    "packages/contracts/test/unit/learning/policies.spec.ts",
+    "packages/contracts/test/unit/learning/presubmit-guard.spec.ts",
+    "packages/contracts/test/unit/learning/routes.spec.ts",
+    "packages/contracts/test/unit/learning/samples.ts",
+    "packages/contracts/test/unit/learning/seasons-learner-insight.spec.ts",
+    "packages/contracts/test/unit/learning/sessions-block.spec.ts",
+    "packages/contracts/test/unit/learning/settings-ledger.spec.ts"
+  ],
+  "testsAdded": [
+    "UT-CON-180",
+    "UT-CON-181",
+    "UT-CON-182",
+    "UT-CON-183",
+    "UT-CON-184",
+    "UT-CON-185",
+    "UT-CON-186",
+    "UT-CON-187",
+    "UT-CON-188",
+    "UT-CON-189",
+    "UT-CON-190",
+    "UT-CON-191",
+    "UT-CON-192",
+    "UT-CON-193",
+    "UT-CON-194",
+    "UT-CON-195",
+    "UT-CON-196",
+    "UT-CON-197",
+    "UT-CON-198",
+    "UT-CON-199",
+    "UT-CON-200",
+    "UT-CON-201",
+    "UT-CON-205",
+    "UT-CON-206",
+    "UT-CON-207",
+    "UT-CON-208",
+    "UT-CON-209",
+    "UT-CON-210",
+    "UT-CON-211",
+    "UT-CON-212",
+    "UT-CON-213",
+    "UT-CON-220",
+    "UT-CON-221",
+    "UT-CON-222",
+    "UT-CON-223",
+    "UT-CON-224",
+    "UT-CON-225",
+    "UT-CON-226",
+    "UT-CON-227",
+    "UT-CON-228",
+    "UT-CON-229",
+    "UT-CON-230",
+    "UT-CON-231",
+    "UT-CON-232",
+    "UT-CON-233",
+    "UT-CON-234"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm contracts:gen",
+      "exit": 0,
+      "notes": "files=1101 hash=6cbc7cc3a651 (2 consecutive runs identical)"
+    },
+    {
+      "cmd": "pnpm contracts:gen --check",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/contracts typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/contracts test",
+      "exit": 0,
+      "notes": "46 files / 198 tests pass (new: 12 files / 46 tests)"
+    },
+    {
+      "cmd": "npx biome ci packages/contracts",
+      "exit": 0,
+      "notes": "0 diagnostics incl. .snapshots/** JSON format"
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "notes": "workspace-wide biome ci fails only in packages/design-tokens/src/{tokens,typography}.css (other lane); 0 diagnostics under packages/contracts"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "notes": "check:deps (apps/web, packages/ui, tools/packc, root/testkit vite) and check:security (shared-kernel redact.spec) fail outside this task's paths; gate-selftest/boundaries/tsconfig-paths PASS"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-10",
+      "exit": 0,
+      "notes": "0 errors, 923 files"
+    },
+    {
+      "cmd": "node tools/gates/check-frozen.mjs --task T-00-10",
+      "exit": 0,
+      "notes": "0 errors (method_policy.ts formats block: 0 differences vs IF-01)"
+    },
+    {
+      "cmd": "node tools/gates/check-consumers.mjs",
+      "exit": 0,
+      "notes": "0 errors, 5 manifests vs 23 event snapshots"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "scripts/gen.ts writes .snapshots/**/*.json with a 2-space JSON writer that puts scalar-only arrays on one line when they fit in 120 columns (fmtJson), not plain JSON.stringify(x, null, 2) as Brief 4.7-4 says. Reason: root `pnpm lint` (biome ci) also checks .snapshots/** and root biome.json is frozen (T-00-01); plain stringify gave 918 format errors. Output is now stable under `biome format`. Suggest T1 add `!**/.snapshots` to biome.json (then plain stringify could return).",
+    "buildRouting(events, manifests) accepts ManifestInput = ConsumerManifest & { file?: string } (superset of the Brief signature) so the 'consumer != file name' negative (UT-CON-225) goes through buildRouting; loadManifests() attaches the file name.",
+    "Extra test IDs UT-CON-233 (main write mode/exit codes) and UT-CON-234 (loadManifests) inside the allotted 220~239 range; spare IDs 202~204, 214~219, 235~239 left unused.",
+    "Passthrough identity (UT-CON-208) = Object.is for named schemas; Page(X) / z.string() (SSE) / z.null() (204) responses are compared by kind / JSON Schema equivalence because those helpers create a new object per call. Public-body exceptions (table names, not downstream names): IF-GW-033 CreateReportBody, 036 AppealBody, 038 CreateRunBody, 181 CliShutdownBody.",
+    "Expected route tables in tests (test/unit/{learning,gateway}/expected-*.ts) were extracted from the IF-01 tables by the same table parser used for generation (not hand-typed twice); schema blocks were verified separately by a token-normalised comparison against IF-01 (128 statements, only diff = the E1 getter).",
+    "IF-COM-004 route lives in events/inbox.ts (T-00-02), so the 386-route count in tests adds InboxDeliverRoute to COMMON_ADMIN_ROUTES (9)."
+  ],
+  "escalations": [
+    {
+      "type": "contract_change",
+      "detail": "IF-01 insight.ts HomeAlert.action.href regex /^\\/[A-Za-z0-9/_$.?=&-]*$/ (transcribed verbatim) also accepts protocol-relative '//evil.example' because '/' is in the character class. Not changed (frozen block); tell T1 whether to tighten (e.g. /^\\/(?!\\/)…/) via CR."
+    },
+    {
+      "type": "repeated_failure",
+      "detail": "biome suspicious/noImportCycles flags the E1 pair sessions.ts <-> pre-submit/block.ts that Brief E1 mandates; rule NOT disabled, both import lines carry `// biome-ignore lint/suspicious/noImportCycles: [Brief 결정 E1] ...` (same as T-00-09 D1). T1 to confirm."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-05",
+      "pgm": "PGM-CON-011",
+      "req": [
+        "FR-STD-001",
+        "FR-STD-010",
+        "FR-QST-022",
+        "FR-PRG-013",
+        "FR-DSH-001",
+        "FR-SET-022"
+      ],
+      "tests": [
+        "UT-CON-180..192"
+      ]
+    },
+    {
+      "wp": "WP-00-05",
+      "pgm": "PGM-CON-005",
+      "req": [
+        "FR-QST-013",
+        "FR-QST-014",
+        "FR-PRG-013"
+      ],
+      "tests": [
+        "UT-CON-193",
+        "UT-CON-194"
+      ]
+    },
+    {
+      "wp": "WP-00-05",
+      "pgm": "PGM-CON-017",
+      "req": [
+        "FR-CUR-017",
+        "FR-STD-007",
+        "FR-STD-009",
+        "FR-QST-025",
+        "NFR-MAINT-007"
+      ],
+      "tests": [
+        "UT-CON-195..201"
+      ]
+    },
+    {
+      "wp": "WP-00-04",
+      "pgm": "PGM-CON-010",
+      "req": [
+        "IR-015",
+        "FR-SET-015",
+        "NFR-SEC-019",
+        "IR-016"
+      ],
+      "tests": [
+        "UT-CON-205..213"
+      ]
+    },
+    {
+      "wp": "WP-00-04·05",
+      "pgm": "PGM-CON-019",
+      "req": [
+        "NFR-MAINT-003",
+        "AQ-02"
+      ],
+      "tests": [
+        "UT-CON-194",
+        "UT-CON-211"
+      ]
+    },
+    {
+      "wp": "WP-00-09",
+      "pgm": "PGM-CON-007",
+      "req": [
+        "NFR-MAINT-003"
+      ],
+      "tests": [
+        "UT-CON-222..226"
+      ]
+    },
+    {
+      "wp": "WP-00-09",
+      "pgm": "PGM-CON-008",
+      "req": [
+        "NFR-MAINT-006"
+      ],
+      "tests": [
+        "UT-CON-220",
+        "UT-CON-221",
+        "UT-CON-227..234"
+      ]
+    }
+  ],
+  "notes": "1) 1101 generated files (1099 .snapshots JSON: 23 events, 386 routes, 109 errors = 92 service + 17 common, rest schemas; + registry.gen.ts + routing.gen.ts), CONTRACTS_HASH prefix 6cbc7cc3a651. 2) frozen pending method_policy.ts: FormatPolicy/MethodFormats 0 differences vs IF-01 §13.4 (token-normalised); router_25/taboo/level_mix/composer/ldi/gaming/cbm/fsrs = Brief-authored zod (CR-43). 3) Routes learning 75 / gateway 179 (total 386 = COM 10 + GW 179 + LR 75 + CT 55 + AI 39 + OP 28); errors LR 24 / GW 14. 4) E6: CONTRACTS_HASH lives in src/events/registry.gen.ts (T-00-16 imports it as such); BUT T-00-11 Brief 4.1.9 computes its own bundle contractsHash from <appRoot>/packages/contracts/.snapshots/*.json (flat, non-recursive -> empty here) so handshake value will differ from CONTRACTS_HASH - T1 should reconcile (T-00-13 leaves contractsHash null). 5) Observation for T-00-15: policy values must satisfy the new zod (33-key formats/t_min_ms_by_format, 5x5 router_25, 6 SlotId peak_end.wave, w length 21); graphify unavailable."
+}

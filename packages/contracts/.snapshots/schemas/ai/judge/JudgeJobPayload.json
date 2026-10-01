@@ -19,12 +19,7 @@
       },
       "additionalProperties": {
         "type": "string",
-        "enum": [
-          "C0",
-          "C1",
-          "C2",
-          "C3"
-        ]
+        "enum": ["C0", "C1", "C2", "C3"]
       }
     },
     "untrusted_keys": {
@@ -60,10 +55,7 @@
             }
           }
         },
-        "required": [
-          "template",
-          "vars"
-        ],
+        "required": ["template", "vars"],
         "additionalProperties": false
       }
     },
@@ -75,14 +67,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "anthropic",
-          "openai",
-          "google",
-          "typesafe",
-          "local",
-          "other"
-        ]
+        "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
       }
     },
     "local_only": {

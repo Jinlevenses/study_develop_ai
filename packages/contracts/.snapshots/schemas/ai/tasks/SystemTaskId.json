@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "SYS-CANARY",
-    "SYS-SMOKE",
-    "SYS-FWCLS"
-  ]
+  "enum": ["SYS-CANARY", "SYS-SMOKE", "SYS-FWCLS"]
 }

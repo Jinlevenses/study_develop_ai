@@ -57,11 +57,7 @@
         },
         "stakes": {
           "type": "string",
-          "enum": [
-            "S0",
-            "S1",
-            "S2"
-          ]
+          "enum": ["S0", "S1", "S2"]
         },
         "concept_id": {
           "type": "string",
@@ -130,35 +126,19 @@
         },
         "response_mode": {
           "type": "string",
-          "enum": [
-            "recognition",
-            "production"
-          ]
+          "enum": ["recognition", "production"]
         },
         "tier": {
           "type": "string",
-          "enum": [
-            "A",
-            "B",
-            "C"
-          ]
+          "enum": ["A", "B", "C"]
         },
         "result": {
           "type": "string",
-          "enum": [
-            "correct",
-            "partial",
-            "incorrect",
-            "pending"
-          ]
+          "enum": ["correct", "partial", "incorrect", "pending"]
         },
         "band": {
           "type": "string",
-          "enum": [
-            "wrong",
-            "partial",
-            "right"
-          ]
+          "enum": ["wrong", "partial", "right"]
         },
         "score": {
           "type": "number",
@@ -192,14 +172,7 @@
         },
         "grader_engine": {
           "type": "string",
-          "enum": [
-            "D",
-            "J",
-            "LJ",
-            "H",
-            "S",
-            "PENDING"
-          ]
+          "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
         },
         "calibrated": {
           "type": "boolean"
@@ -244,12 +217,7 @@
         },
         "ai_mode": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         },
         "content_policy_version": {
           "type": "string",
@@ -331,21 +299,12 @@
     },
     "reason": {
       "type": "string",
-      "enum": [
-        "deadline_upgrade",
-        "pending_regrade",
-        "appeal"
-      ]
+      "enum": ["deadline_upgrade", "pending_regrade", "appeal"]
     },
     "band_changed": {
       "type": "boolean"
     }
   },
-  "required": [
-    "verdict",
-    "supersedes_verdict_id",
-    "reason",
-    "band_changed"
-  ],
+  "required": ["verdict", "supersedes_verdict_id", "reason", "band_changed"],
   "additionalProperties": false
 }

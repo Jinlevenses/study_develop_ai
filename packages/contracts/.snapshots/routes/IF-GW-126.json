@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/calibration/confirm-cards"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-013",
-        "FR-AI-027"
-      ]
+      "enum": ["FR-AI-013", "FR-AI-027"]
     },
     "deadlineMs": {
       "const": null
@@ -59,9 +54,7 @@
               "maximum": 3
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -141,10 +134,7 @@
                             "maximum": 1
                           }
                         },
-                        "required": [
-                          "type",
-                          "p_yes"
-                        ],
+                        "required": ["type", "p_yes"],
                         "additionalProperties": false
                       },
                       {
@@ -176,12 +166,7 @@
                             }
                           }
                         },
-                        "required": [
-                          "type",
-                          "choice",
-                          "confidence",
-                          "probabilities"
-                        ],
+                        "required": ["type", "choice", "confidence", "probabilities"],
                         "additionalProperties": false
                       },
                       {
@@ -218,26 +203,13 @@
                             "maximum": 10
                           }
                         },
-                        "required": [
-                          "type",
-                          "score",
-                          "confidence",
-                          "probabilities",
-                          "levels"
-                        ],
+                        "required": ["type", "score", "confidence", "probabilities", "levels"],
                         "additionalProperties": false
                       }
                     ]
                   }
                 },
-                "required": [
-                  "gold_id",
-                  "task_id",
-                  "question_key",
-                  "prompt_ko",
-                  "state_preview_md",
-                  "model_label"
-                ],
+                "required": ["gold_id", "task_id", "question_key", "prompt_ko", "state_preview_md", "model_label"],
                 "additionalProperties": false
               }
             },
@@ -247,10 +219,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "cards",
-            "remaining_today"
-          ],
+          "required": ["cards", "remaining_today"],
           "additionalProperties": false
         }
       }

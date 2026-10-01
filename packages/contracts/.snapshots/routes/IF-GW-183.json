@@ -12,9 +12,7 @@
       "const": "/api/v1/cli/session-key:rotate"
     },
     "allowedCallers": {
-      "enum": [
-        "cli"
-      ]
+      "enum": ["cli"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "NFR-SEC-019"
-      ]
+      "enum": ["NFR-SEC-019"]
     },
     "deadlineMs": {
       "const": null
@@ -65,10 +61,7 @@
               "const": true
             }
           },
-          "required": [
-            "rotated_at",
-            "sessions_invalidated"
-          ],
+          "required": ["rotated_at", "sessions_invalidated"],
           "additionalProperties": false
         }
       }

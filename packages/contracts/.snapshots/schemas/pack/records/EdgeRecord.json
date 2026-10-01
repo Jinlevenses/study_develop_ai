@@ -17,22 +17,12 @@
     },
     "edge_kind": {
       "type": "string",
-      "enum": [
-        "prereq",
-        "sibling",
-        "extends"
-      ]
+      "enum": ["prereq", "sibling", "extends"]
     },
     "weight": {
       "type": "number"
     }
   },
-  "required": [
-    "kind",
-    "from_concept_id",
-    "to_concept_id",
-    "edge_kind",
-    "weight"
-  ],
+  "required": ["kind", "from_concept_id", "to_concept_id", "edge_kind", "weight"],
   "additionalProperties": false
 }

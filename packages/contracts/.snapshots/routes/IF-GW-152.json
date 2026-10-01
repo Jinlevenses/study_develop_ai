@@ -12,9 +12,7 @@
       "const": "/api/v1/ops/tripwires"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "NFR-AVL-008",
-        "FR-SET-021"
-      ]
+      "enum": ["NFR-AVL-008", "FR-SET-021"]
     },
     "deadlineMs": {
       "const": null
@@ -72,33 +67,17 @@
                     "pattern": "^(TW-(0[1-9]|1[0-3])|GR-\\d{2})$"
                   },
                   "value": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "threshold": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "state": {
                     "type": "string",
-                    "enum": [
-                      "ok",
-                      "warn",
-                      "trip",
-                      "insufficient_data"
-                    ]
+                    "enum": ["ok", "warn", "trip", "insufficient_data"]
                   }
                 },
-                "required": [
-                  "id",
-                  "value",
-                  "threshold",
-                  "state"
-                ],
+                "required": ["id", "value", "threshold", "state"],
                 "additionalProperties": false
               }
             },
@@ -106,28 +85,19 @@
               "type": "object",
               "properties": {
                 "idle_rss_total_mb": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": ["number", "null"]
                 },
                 "idle_rss_limit_mb": {
                   "type": "number"
                 },
                 "cold_start_ms": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": ["number", "null"]
                 },
                 "cold_start_limit_ms": {
                   "type": "number"
                 },
                 "disk_projection_15y_mb": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": ["number", "null"]
                 }
               },
               "required": [
@@ -140,11 +110,7 @@
               "additionalProperties": false
             }
           },
-          "required": [
-            "computed_at",
-            "learning",
-            "resource"
-          ],
+          "required": ["computed_at", "learning", "resource"],
           "additionalProperties": false
         }
       }

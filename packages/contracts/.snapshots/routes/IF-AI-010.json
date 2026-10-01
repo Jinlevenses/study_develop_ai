@@ -12,9 +12,7 @@
       "const": "/internal/v1/jobs"
     },
     "allowedCallers": {
-      "enum": [
-        "content"
-      ]
+      "enum": ["content"]
     },
     "idempotent": {
       "const": true
@@ -29,15 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-010",
-        "FR-AI-026",
-        "FR-QST-003",
-        "FR-QST-004",
-        "FR-QST-008",
-        "FR-QST-011",
-        "FR-IMP-005"
-      ]
+      "enum": ["FR-AI-010", "FR-AI-026", "FR-QST-003", "FR-QST-004", "FR-QST-008", "FR-QST-011", "FR-IMP-005"]
     },
     "deadlineMs": {
       "const": null
@@ -63,10 +53,7 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "judge",
-                "generate"
-              ]
+              "enum": ["judge", "generate"]
             },
             "task_id": {
               "anyOf": [
@@ -120,10 +107,7 @@
             },
             "priority": {
               "type": "string",
-              "enum": [
-                "normal",
-                "low"
-              ]
+              "enum": ["normal", "low"]
             },
             "not_before": {
               "anyOf": [
@@ -167,22 +151,14 @@
                 },
                 "phase": {
                   "type": "string",
-                  "enum": [
-                    "pre_submit",
-                    "post_submit",
-                    "n_a"
-                  ]
+                  "enum": ["pre_submit", "post_submit", "n_a"]
                 },
                 "id": {
                   "type": "string",
                   "maxLength": 160
                 }
               },
-              "required": [
-                "kind",
-                "phase",
-                "id"
-              ],
+              "required": ["kind", "phase", "id"],
               "additionalProperties": false
             },
             "items": {
@@ -219,12 +195,7 @@
                             },
                             "additionalProperties": {
                               "type": "string",
-                              "enum": [
-                                "C0",
-                                "C1",
-                                "C2",
-                                "C3"
-                              ]
+                              "enum": ["C0", "C1", "C2", "C3"]
                             }
                           },
                           "untrusted_keys": {
@@ -260,10 +231,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "template",
-                                "vars"
-                              ],
+                              "required": ["template", "vars"],
                               "additionalProperties": false
                             }
                           },
@@ -275,14 +243,7 @@
                             "type": "array",
                             "items": {
                               "type": "string",
-                              "enum": [
-                                "anthropic",
-                                "openai",
-                                "google",
-                                "typesafe",
-                                "local",
-                                "other"
-                              ]
+                              "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
                             }
                           },
                           "local_only": {
@@ -333,12 +294,7 @@
                                 },
                                 "data_class": {
                                   "type": "string",
-                                  "enum": [
-                                    "C0",
-                                    "C1",
-                                    "C2",
-                                    "C3"
-                                  ]
+                                  "enum": ["C0", "C1", "C2", "C3"]
                                 },
                                 "untrusted": {
                                   "type": "boolean"
@@ -355,13 +311,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "key",
-                                "text",
-                                "data_class",
-                                "untrusted",
-                                "source_ref"
-                              ],
+                              "required": ["key", "text", "data_class", "untrusted", "source_ref"],
                               "additionalProperties": false
                             }
                           },
@@ -370,26 +320,14 @@
                             "type": "array",
                             "items": {
                               "type": "string",
-                              "enum": [
-                                "anthropic",
-                                "openai",
-                                "google",
-                                "typesafe",
-                                "local",
-                                "other"
-                              ]
+                              "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
                             }
                           },
                           "local_only": {
                             "type": "boolean"
                           }
                         },
-                        "required": [
-                          "input",
-                          "blocks",
-                          "family_exclude",
-                          "local_only"
-                        ],
+                        "required": ["input", "blocks", "family_exclude", "local_only"],
                         "additionalProperties": false
                       },
                       {
@@ -398,11 +336,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "item_key",
-                  "judge",
-                  "generate"
-                ],
+                "required": ["item_key", "judge", "generate"],
                 "additionalProperties": false
               }
             }
@@ -463,10 +397,7 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "judge",
-                "generate"
-              ]
+              "enum": ["judge", "generate"]
             },
             "task_id": {
               "anyOf": [
@@ -520,15 +451,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "queued",
-                "waiting_window",
-                "running",
-                "done",
-                "failed",
-                "cancelled",
-                "deferred"
-              ]
+              "enum": ["queued", "waiting_window", "running", "done", "failed", "cancelled", "deferred"]
             },
             "items_total": {
               "type": "integer",
@@ -595,12 +518,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "failed",
-                    "cancelled",
-                    "deferred"
-                  ]
+                  "enum": ["ok", "failed", "cancelled", "deferred"]
                 },
                 {
                   "type": "null"

@@ -14,10 +14,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "kind",
-            "value"
-          ],
+          "required": ["kind", "value"],
           "additionalProperties": false
         },
         {
@@ -37,10 +34,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "option_keys"
-          ],
+          "required": ["kind", "option_keys"],
           "additionalProperties": false
         },
         {
@@ -60,10 +54,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "accepted"
-          ],
+          "required": ["kind", "accepted"],
           "additionalProperties": false
         },
         {
@@ -90,10 +81,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "blanks"
-          ],
+          "required": ["kind", "blanks"],
           "additionalProperties": false
         },
         {
@@ -115,10 +103,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "pairs"
-          ],
+          "required": ["kind", "pairs"],
           "additionalProperties": false
         },
         {
@@ -136,11 +121,7 @@
               "minimum": 0
             }
           },
-          "required": [
-            "kind",
-            "value",
-            "tolerance_log10"
-          ],
+          "required": ["kind", "value", "tolerance_log10"],
           "additionalProperties": false
         },
         {
@@ -159,10 +140,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "keys"
-          ],
+          "required": ["kind", "keys"],
           "additionalProperties": false
         },
         {
@@ -210,19 +188,12 @@
                         "type": "boolean"
                       }
                     },
-                    "required": [
-                      "case_key",
-                      "ok"
-                    ],
+                    "required": ["case_key", "ok"],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": [
-                "passed",
-                "failed",
-                "cases"
-              ],
+              "required": ["passed", "failed", "cases"],
               "additionalProperties": false
             },
             "complexity": {
@@ -235,10 +206,7 @@
                     },
                     "method": {
                       "type": "string",
-                      "enum": [
-                        "ops",
-                        "cpu"
-                      ]
+                      "enum": ["ops", "cpu"]
                     },
                     "target_order": {
                       "type": "number"
@@ -247,12 +215,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "slope",
-                    "method",
-                    "target_order",
-                    "passed"
-                  ],
+                  "required": ["slope", "method", "target_order", "passed"],
                   "additionalProperties": false
                 },
                 {
@@ -261,12 +224,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "reference_md",
-            "hidden_tests",
-            "complexity"
-          ],
+          "required": ["kind", "reference_md", "hidden_tests", "complexity"],
           "additionalProperties": false
         },
         {
@@ -291,11 +249,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "kind",
-            "reference_sql",
-            "result_match"
-          ],
+          "required": ["kind", "reference_sql", "result_match"],
           "additionalProperties": false
         },
         {
@@ -323,10 +277,7 @@
                   }
                 }
               },
-              "required": [
-                "a",
-                "b"
-              ],
+              "required": ["a", "b"],
               "additionalProperties": false
             },
             "pivot_ko": {
@@ -334,11 +285,7 @@
               "maxLength": 500
             }
           },
-          "required": [
-            "kind",
-            "answers",
-            "pivot_ko"
-          ],
+          "required": ["kind", "answers", "pivot_ko"],
           "additionalProperties": false
         },
         {
@@ -374,18 +321,12 @@
                     ]
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "ku_id"
-                ],
+                "required": ["label_ko", "ku_id"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "kind",
-            "units"
-          ],
+          "required": ["kind", "units"],
           "additionalProperties": false
         },
         {
@@ -412,11 +353,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "best_option_key",
-            "scores"
-          ],
+          "required": ["kind", "best_option_key", "scores"],
           "additionalProperties": false
         },
         {
@@ -427,9 +364,7 @@
               "const": "none"
             }
           },
-          "required": [
-            "kind"
-          ],
+          "required": ["kind"],
           "additionalProperties": false
         }
       ]
@@ -478,15 +413,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "error",
-                    "timeout",
-                    "memory_limit",
-                    "output_limit",
-                    "rejected",
-                    "platform_disabled"
-                  ]
+                  "enum": ["ok", "error", "timeout", "memory_limit", "output_limit", "rejected", "platform_disabled"]
                 },
                 {
                   "type": "string",
@@ -577,20 +504,12 @@
                             ]
                           }
                         },
-                        "required": [
-                          "case_key",
-                          "ok",
-                          "message_ko"
-                        ],
+                        "required": ["case_key", "ok", "message_ko"],
                         "additionalProperties": false
                       }
                     }
                   },
-                  "required": [
-                    "passed",
-                    "failed",
-                    "cases"
-                  ],
+                  "required": ["passed", "failed", "cases"],
                   "additionalProperties": false
                 },
                 {
@@ -636,11 +555,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "columns",
-                    "rows",
-                    "truncated"
-                  ],
+                  "required": ["columns", "rows", "truncated"],
                   "additionalProperties": false
                 },
                 {
@@ -670,12 +585,6 @@
       ]
     }
   },
-  "required": [
-    "answer",
-    "explanation_md",
-    "model_answer_md",
-    "cited_ku_ids",
-    "runner"
-  ],
+  "required": ["answer", "explanation_md", "model_answer_md", "cited_ku_ids", "runner"],
   "additionalProperties": false
 }

@@ -14,10 +14,6 @@
       "maxLength": 60
     }
   },
-  "required": [
-    "path",
-    "message",
-    "rule"
-  ],
+  "required": ["path", "message", "rule"],
   "additionalProperties": false
 }

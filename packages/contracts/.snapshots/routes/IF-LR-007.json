@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/sessions/{session_id}/blocks/{block_id}:skip"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-STD-006"
-      ]
+      "enum": ["FR-STD-006"]
     },
     "deadlineMs": {
       "const": null
@@ -60,10 +56,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "session_id",
-            "block_id"
-          ],
+          "required": ["session_id", "block_id"],
           "additionalProperties": false
         },
         "body": {
@@ -73,13 +66,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "too_hard",
-                    "too_easy",
-                    "not_now",
-                    "irrelevant",
-                    "other"
-                  ]
+                  "enum": ["too_hard", "too_easy", "not_now", "irrelevant", "other"]
                 },
                 {
                   "type": "null"
@@ -87,9 +74,7 @@
               ]
             }
           },
-          "required": [
-            "reason"
-          ],
+          "required": ["reason"],
           "additionalProperties": false
         }
       }
@@ -111,14 +96,7 @@
             },
             "slot": {
               "type": "string",
-              "enum": [
-                "W",
-                "R",
-                "N",
-                "D",
-                "S",
-                "C"
-              ]
+              "enum": ["W", "R", "N", "D", "S", "C"]
             },
             "mode_id": {
               "type": "string",
@@ -195,11 +173,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "code",
-                  "label_ko",
-                  "value"
-                ],
+                "required": ["code", "label_ko", "value"],
                 "additionalProperties": false
               }
             },
@@ -208,14 +182,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "pending",
-                "active",
-                "awaiting_grade",
-                "done",
-                "skipped",
-                "swapped"
-              ]
+              "enum": ["pending", "active", "awaiting_grade", "done", "skipped", "swapped"]
             },
             "est_minutes": {
               "type": "number",

@@ -12,9 +12,7 @@
       "const": "/internal/v1/insight/portfolio"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-DSH-014"
-      ]
+      "enum": ["FR-DSH-014"]
     },
     "deadlineMs": {
       "const": 10000
@@ -54,15 +50,10 @@
             "format": {
               "default": "md",
               "type": "string",
-              "enum": [
-                "md",
-                "json"
-              ]
+              "enum": ["md", "json"]
             }
           },
-          "required": [
-            "format"
-          ],
+          "required": ["format"],
           "additionalProperties": false
         }
       }
@@ -75,10 +66,7 @@
           "properties": {
             "format": {
               "type": "string",
-              "enum": [
-                "md",
-                "json"
-              ]
+              "enum": ["md", "json"]
             },
             "content": {
               "type": "string",
@@ -94,12 +82,7 @@
               "pattern": "^[0-9a-f]{64}$"
             }
           },
-          "required": [
-            "format",
-            "content",
-            "generated_at",
-            "sha256"
-          ],
+          "required": ["format", "content", "generated_at", "sha256"],
           "additionalProperties": false
         }
       }

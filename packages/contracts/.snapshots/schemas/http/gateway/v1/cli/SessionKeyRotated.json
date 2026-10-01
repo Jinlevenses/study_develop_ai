@@ -11,9 +11,6 @@
       "const": true
     }
   },
-  "required": [
-    "rotated_at",
-    "sessions_invalidated"
-  ],
+  "required": ["rotated_at", "sessions_invalidated"],
   "additionalProperties": false
 }

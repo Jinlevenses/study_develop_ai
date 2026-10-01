@@ -11,9 +11,6 @@
       "maximum": 10000
     }
   },
-  "required": [
-    "op_id",
-    "grace_ms"
-  ],
+  "required": ["op_id", "grace_ms"],
   "additionalProperties": false
 }

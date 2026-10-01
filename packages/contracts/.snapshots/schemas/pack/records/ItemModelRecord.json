@@ -20,10 +20,7 @@
     },
     "origin": {
       "type": "string",
-      "enum": [
-        "pack",
-        "runtime"
-      ]
+      "enum": ["pack", "runtime"]
     },
     "concept_id": {
       "type": "string",
@@ -99,19 +96,11 @@
     },
     "status": {
       "type": "string",
-      "enum": [
-        "draft",
-        "active",
-        "retired"
-      ]
+      "enum": ["draft", "active", "retired"]
     },
     "author": {
       "type": "string",
-      "enum": [
-        "seed",
-        "llm",
-        "user"
-      ]
+      "enum": ["seed", "llm", "user"]
     },
     "prompt_version": {
       "anyOf": [

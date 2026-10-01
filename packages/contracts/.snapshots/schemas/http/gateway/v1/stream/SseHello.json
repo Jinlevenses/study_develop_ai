@@ -21,20 +21,9 @@
     },
     "ai_mode": {
       "type": "string",
-      "enum": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     }
   },
-  "required": [
-    "boot_id",
-    "hub_seq",
-    "server_time",
-    "app_version",
-    "ai_mode"
-  ],
+  "required": ["boot_id", "hub_seq", "server_time", "app_version", "ai_mode"],
   "additionalProperties": false
 }

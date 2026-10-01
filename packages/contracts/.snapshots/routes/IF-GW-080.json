@@ -12,9 +12,7 @@
       "const": "/api/v1/season/{season_id}:close"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-DSH-012"
-      ]
+      "enum": ["FR-DSH-012"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "season_id"
-          ],
+          "required": ["season_id"],
           "additionalProperties": false
         },
         "body": {
@@ -69,9 +63,7 @@
               "maxLength": 8000
             }
           },
-          "required": [
-            "retro_md"
-          ],
+          "required": ["retro_md"],
           "additionalProperties": false
         }
       }
@@ -106,10 +98,7 @@
                     },
                     "state": {
                       "type": "string",
-                      "enum": [
-                        "active",
-                        "closed"
-                      ]
+                      "enum": ["active", "closed"]
                     },
                     "goals": {
                       "type": "array",
@@ -171,12 +160,7 @@
                             ]
                           }
                         },
-                        "required": [
-                          "track",
-                          "target_level",
-                          "probability",
-                          "required_minutes_per_week"
-                        ],
+                        "required": ["track", "target_level", "probability", "required_minutes_per_week"],
                         "additionalProperties": false
                       }
                     },
@@ -187,10 +171,7 @@
                       }
                     },
                     "retro_md": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
+                      "type": ["string", "null"]
                     }
                   },
                   "required": [
@@ -234,12 +215,7 @@
                     "maximum": 1
                   }
                 },
-                "required": [
-                  "season_id",
-                  "starts_on",
-                  "ends_on",
-                  "achieved_ratio"
-                ],
+                "required": ["season_id", "starts_on", "ends_on", "achieved_ratio"],
                 "additionalProperties": false
               }
             },
@@ -252,10 +228,7 @@
                       "type": "number"
                     },
                     "delta": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
+                      "type": ["number", "null"]
                     },
                     "params": {
                       "type": "string",
@@ -270,13 +243,7 @@
                       "maximum": 8640000000000000
                     }
                   },
-                  "required": [
-                    "value",
-                    "delta",
-                    "params",
-                    "params_provisional",
-                    "computed_at"
-                  ],
+                  "required": ["value", "delta", "params", "params_provisional", "computed_at"],
                   "additionalProperties": false
                 },
                 {
@@ -285,11 +252,7 @@
               ]
             }
           },
-          "required": [
-            "season",
-            "history",
-            "ldi"
-          ],
+          "required": ["season", "history", "ldi"],
           "additionalProperties": false
         }
       }

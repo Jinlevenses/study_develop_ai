@@ -3,12 +3,7 @@
   "properties": {
     "change": {
       "type": "string",
-      "enum": [
-        "published",
-        "revised",
-        "deprecated",
-        "tier_promoted"
-      ]
+      "enum": ["published", "revised", "deprecated", "tier_promoted"]
     },
     "concept": {
       "type": "object",
@@ -50,20 +45,11 @@
         },
         "tier": {
           "type": "string",
-          "enum": [
-            "A",
-            "B",
-            "C"
-          ]
+          "enum": ["A", "B", "C"]
         },
         "knowledge_type": {
           "type": "string",
-          "enum": [
-            "D",
-            "C",
-            "P",
-            "S"
-          ]
+          "enum": ["D", "C", "P", "S"]
         },
         "title_ko": {
           "type": "string",
@@ -120,11 +106,7 @@
         },
         "volatility": {
           "type": "string",
-          "enum": [
-            "stable",
-            "evolving",
-            "volatile"
-          ]
+          "enum": ["stable", "evolving", "volatile"]
         },
         "tags": {
           "maxItems": 20,
@@ -174,11 +156,6 @@
       "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
     }
   },
-  "required": [
-    "change",
-    "concept",
-    "pack_id",
-    "version"
-  ],
+  "required": ["change", "concept", "pack_id", "version"],
   "additionalProperties": false
 }

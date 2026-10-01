@@ -12,9 +12,7 @@
       "const": "/api/v1/overlays"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-020"
-      ]
+      "enum": ["FR-CUR-020"]
     },
     "deadlineMs": {
       "const": null
@@ -53,14 +49,7 @@
           "properties": {
             "target_kind": {
               "type": "string",
-              "enum": [
-                "concept",
-                "ku",
-                "misconception",
-                "item",
-                "case",
-                "source"
-              ]
+              "enum": ["concept", "ku", "misconception", "item", "case", "source"]
             },
             "target_id": {
               "type": "string",
@@ -77,9 +66,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -101,14 +88,7 @@
                   },
                   "target_kind": {
                     "type": "string",
-                    "enum": [
-                      "concept",
-                      "ku",
-                      "misconception",
-                      "item",
-                      "case",
-                      "source"
-                    ]
+                    "enum": ["concept", "ku", "misconception", "item", "case", "source"]
                   },
                   "target_id": {
                     "type": "string"
@@ -148,11 +128,7 @@
                   },
                   "state": {
                     "type": "string",
-                    "enum": [
-                      "applied",
-                      "conflicted",
-                      "reverted"
-                    ]
+                    "enum": ["applied", "conflicted", "reverted"]
                   },
                   "conflict_id": {
                     "anyOf": [
@@ -195,10 +171,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false,
           "$defs": {
             "__schema0": {

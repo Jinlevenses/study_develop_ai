@@ -12,9 +12,7 @@
       "const": "/internal/v1/grading/pending"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-QST-020"
-      ]
+      "enum": ["FR-QST-020"]
     },
     "deadlineMs": {
       "const": null
@@ -62,9 +58,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -138,14 +132,7 @@
                   },
                   "reason": {
                     "type": "string",
-                    "enum": [
-                      "offline",
-                      "deadline",
-                      "provider_down",
-                      "self_grade_skipped",
-                      "low_confidence",
-                      "appeal"
-                    ]
+                    "enum": ["offline", "deadline", "provider_down", "self_grade_skipped", "low_confidence", "appeal"]
                   },
                   "attempts": {
                     "type": "integer",
@@ -190,10 +177,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

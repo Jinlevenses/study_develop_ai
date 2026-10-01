@@ -6,13 +6,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "start_session",
-            "resume_session",
-            "onboarding",
-            "return_mode",
-            "paused"
-          ]
+          "enum": ["start_session", "resume_session", "onboarding", "return_mode", "paused"]
         },
         "label_ko": {
           "type": "string",
@@ -49,17 +43,10 @@
                 },
                 "energy": {
                   "type": "string",
-                  "enum": [
-                    "light",
-                    "normal",
-                    "deep"
-                  ]
+                  "enum": ["light", "normal", "deep"]
                 }
               },
-              "required": [
-                "minutes",
-                "energy"
-              ],
+              "required": ["minutes", "energy"],
               "additionalProperties": false
             },
             {
@@ -79,12 +66,7 @@
           ]
         }
       },
-      "required": [
-        "kind",
-        "label_ko",
-        "suggested",
-        "session_id"
-      ],
+      "required": ["kind", "label_ko", "suggested", "session_id"],
       "additionalProperties": false
     },
     "alerts": {
@@ -110,11 +92,7 @@
           },
           "severity": {
             "type": "string",
-            "enum": [
-              "info",
-              "warn",
-              "critical"
-            ]
+            "enum": ["info", "warn", "critical"]
           },
           "message_ko": {
             "type": "string",
@@ -134,10 +112,7 @@
                     "pattern": "^\\/[A-Za-z0-9/_$.?=&-]*$"
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "href"
-                ],
+                "required": ["label_ko", "href"],
                 "additionalProperties": false
               },
               {
@@ -146,22 +121,13 @@
             ]
           }
         },
-        "required": [
-          "code",
-          "severity",
-          "message_ko",
-          "action"
-        ],
+        "required": ["code", "severity", "message_ko", "action"],
         "additionalProperties": false
       }
     },
     "energy_default": {
       "type": "string",
-      "enum": [
-        "light",
-        "normal",
-        "deep"
-      ]
+      "enum": ["light", "normal", "deep"]
     },
     "minutes_default": {
       "anyOf": [
@@ -206,11 +172,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "due_cards",
-        "new_budget",
-        "est_minutes"
-      ],
+      "required": ["due_cards", "new_budget", "est_minutes"],
       "additionalProperties": false
     },
     "weekly_goal": {
@@ -237,12 +199,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "target_sessions",
-        "done_sessions",
-        "streak_weeks",
-        "rest_tokens"
-      ],
+      "required": ["target_sessions", "done_sessions", "streak_weeks", "rest_tokens"],
       "additionalProperties": false
     },
     "ai_chip": {
@@ -250,31 +207,17 @@
       "properties": {
         "mode": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         },
         "label_ko": {
           "type": "string",
-          "enum": [
-            "AI: 전체",
-            "AI: 판단만",
-            "AI: 생성만",
-            "AI: 오프라인"
-          ]
+          "enum": ["AI: 전체", "AI: 판단만", "AI: 생성만", "AI: 오프라인"]
         },
         "degraded_badge": {
           "type": "boolean"
         }
       },
-      "required": [
-        "mode",
-        "label_ko",
-        "degraded_badge"
-      ],
+      "required": ["mode", "label_ko", "degraded_badge"],
       "additionalProperties": false
     },
     "banners": {
@@ -322,11 +265,7 @@
           },
           "severity": {
             "type": "string",
-            "enum": [
-              "info",
-              "warn",
-              "critical"
-            ]
+            "enum": ["info", "warn", "critical"]
           },
           "message_ko": {
             "type": "string",
@@ -372,11 +311,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "href",
-                  "cli"
-                ],
+                "required": ["label_ko", "href", "cli"],
                 "additionalProperties": false
               },
               {
@@ -385,15 +320,7 @@
             ]
           }
         },
-        "required": [
-          "banner_id",
-          "code",
-          "severity",
-          "message_ko",
-          "since",
-          "dismissible",
-          "action"
-        ],
+        "required": ["banner_id", "code", "severity", "message_ko", "since", "dismissible", "action"],
         "additionalProperties": false
       }
     },
@@ -408,24 +335,14 @@
           },
           "dependency": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "code": {
             "type": "string",
             "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
           }
         },
-        "required": [
-          "part",
-          "dependency",
-          "code"
-        ],
+        "required": ["part", "dependency", "code"],
         "additionalProperties": false
       }
     }

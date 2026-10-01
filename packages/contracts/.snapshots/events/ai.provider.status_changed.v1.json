@@ -7,21 +7,11 @@
     },
     "status": {
       "type": "string",
-      "enum": [
-        "ok",
-        "degraded",
-        "down",
-        "unconsented",
-        "disabled"
-      ]
+      "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
     },
     "breaker": {
       "type": "string",
-      "enum": [
-        "closed",
-        "open",
-        "half_open"
-      ]
+      "enum": ["closed", "open", "half_open"]
     },
     "reason_code": {
       "anyOf": [
@@ -35,11 +25,6 @@
       ]
     }
   },
-  "required": [
-    "provider_id",
-    "status",
-    "breaker",
-    "reason_code"
-  ],
+  "required": ["provider_id", "status", "breaker", "reason_code"],
   "additionalProperties": false
 }

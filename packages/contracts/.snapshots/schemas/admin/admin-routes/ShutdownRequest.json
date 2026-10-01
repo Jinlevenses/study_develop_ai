@@ -8,8 +8,6 @@
       "maximum": 10000
     }
   },
-  "required": [
-    "grace_ms"
-  ],
+  "required": ["grace_ms"],
   "additionalProperties": false
 }

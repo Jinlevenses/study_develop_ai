@@ -7,30 +7,21 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "self_grade",
-        "bias_probe"
-      ]
+      "enum": ["self_grade", "bias_probe"]
     },
     "target": {
       "type": "object",
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "item",
-            "attempt"
-          ]
+          "enum": ["item", "attempt"]
         },
         "id": {
           "type": "string",
           "maxLength": 160
         }
       },
-      "required": [
-        "kind",
-        "id"
-      ],
+      "required": ["kind", "id"],
       "additionalProperties": false
     },
     "value": {
@@ -39,11 +30,6 @@
       "maximum": 4
     }
   },
-  "required": [
-    "assessment_id",
-    "kind",
-    "target",
-    "value"
-  ],
+  "required": ["assessment_id", "kind", "target", "value"],
   "additionalProperties": false
 }

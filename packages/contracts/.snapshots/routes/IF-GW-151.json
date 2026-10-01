@@ -12,9 +12,7 @@
       "const": "/api/v1/ops/logs/tail"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-016"
-      ]
+      "enum": ["FR-SET-016"]
     },
     "deadlineMs": {
       "const": null
@@ -55,13 +51,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "gateway",
-                    "content",
-                    "learning",
-                    "ai-gateway",
-                    "ops-api"
-                  ]
+                  "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                 },
                 {
                   "type": "string",
@@ -76,10 +66,7 @@
               "maximum": 5000
             }
           },
-          "required": [
-            "svc",
-            "n"
-          ],
+          "required": ["svc", "n"],
           "additionalProperties": false
         }
       }
@@ -106,13 +93,7 @@
                   },
                   "level": {
                     "type": "string",
-                    "enum": [
-                      "debug",
-                      "info",
-                      "warn",
-                      "error",
-                      "fatal"
-                    ]
+                    "enum": ["debug", "info", "warn", "error", "fatal"]
                   },
                   "svc": {
                     "type": "string",
@@ -209,10 +190,7 @@
               }
             }
           },
-          "required": [
-            "svc",
-            "lines"
-          ],
+          "required": ["svc", "lines"],
           "additionalProperties": false
         }
       }

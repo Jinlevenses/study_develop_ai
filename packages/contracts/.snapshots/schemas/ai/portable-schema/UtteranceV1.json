@@ -30,10 +30,6 @@
       "const": false
     }
   },
-  "required": [
-    "utterance_ko",
-    "move",
-    "reveals_answer"
-  ],
+  "required": ["utterance_ko", "move", "reveals_answer"],
   "additionalProperties": false
 }

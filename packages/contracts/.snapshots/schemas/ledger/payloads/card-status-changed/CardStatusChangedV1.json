@@ -8,20 +8,11 @@
     },
     "status": {
       "type": "string",
-      "enum": [
-        "active",
-        "suspended",
-        "retired"
-      ]
+      "enum": ["active", "suspended", "retired"]
     },
     "reason": {
       "type": "string",
-      "enum": [
-        "user",
-        "leech",
-        "irrelevant",
-        "pack_deprecated"
-      ]
+      "enum": ["user", "leech", "irrelevant", "pack_deprecated"]
     },
     "study_day": {
       "type": "string",
@@ -32,12 +23,6 @@
       "pattern": "^ps_[0-9a-f]{16}$"
     }
   },
-  "required": [
-    "card_id",
-    "status",
-    "reason",
-    "study_day",
-    "policy_version"
-  ],
+  "required": ["card_id", "status", "reason", "study_day", "policy_version"],
   "additionalProperties": false
 }

@@ -40,14 +40,7 @@
     },
     "track_group": {
       "type": "string",
-      "enum": [
-        "foundation",
-        "app",
-        "infra",
-        "security",
-        "ai",
-        "design_lead"
-      ]
+      "enum": ["foundation", "app", "infra", "security", "ai", "design_lead"]
     },
     "sort_order": {
       "type": "integer",

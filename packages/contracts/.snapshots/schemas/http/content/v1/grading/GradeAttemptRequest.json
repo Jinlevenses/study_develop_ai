@@ -42,15 +42,7 @@
     },
     "phase": {
       "type": "string",
-      "enum": [
-        "practice",
-        "pretest",
-        "embedded",
-        "verify",
-        "promotion_exam",
-        "placement",
-        "boss"
-      ]
+      "enum": ["practice", "pretest", "embedded", "verify", "promotion_exam", "placement", "boss"]
     },
     "response": {
       "oneOf": [
@@ -65,10 +57,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "kind",
-            "value"
-          ],
+          "required": ["kind", "value"],
           "additionalProperties": false
         },
         {
@@ -88,10 +77,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "option_keys"
-          ],
+          "required": ["kind", "option_keys"],
           "additionalProperties": false
         },
         {
@@ -106,10 +92,7 @@
               "maxLength": 2000
             }
           },
-          "required": [
-            "kind",
-            "text"
-          ],
+          "required": ["kind", "text"],
           "additionalProperties": false
         },
         {
@@ -131,10 +114,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "blanks"
-          ],
+          "required": ["kind", "blanks"],
           "additionalProperties": false
         },
         {
@@ -156,10 +136,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "pairs"
-          ],
+          "required": ["kind", "pairs"],
           "additionalProperties": false
         },
         {
@@ -171,21 +148,14 @@
             },
             "lang": {
               "type": "string",
-              "enum": [
-                "js",
-                "ts"
-              ]
+              "enum": ["js", "ts"]
             },
             "code": {
               "type": "string",
               "maxLength": 65536
             }
           },
-          "required": [
-            "kind",
-            "lang",
-            "code"
-          ],
+          "required": ["kind", "lang", "code"],
           "additionalProperties": false
         },
         {
@@ -200,10 +170,7 @@
               "maxLength": 65536
             }
           },
-          "required": [
-            "kind",
-            "sql"
-          ],
+          "required": ["kind", "sql"],
           "additionalProperties": false
         },
         {
@@ -233,11 +200,7 @@
               }
             }
           },
-          "required": [
-            "kind",
-            "keys",
-            "notes"
-          ],
+          "required": ["kind", "keys", "notes"],
           "additionalProperties": false
         },
         {
@@ -262,11 +225,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "value",
-            "unit"
-          ],
+          "required": ["kind", "value", "unit"],
           "additionalProperties": false
         },
         {
@@ -297,19 +256,12 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "start",
-                  "end"
-                ],
+                "required": ["start", "end"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "kind",
-            "text",
-            "uncertain_spans"
-          ],
+          "required": ["kind", "text", "uncertain_spans"],
           "additionalProperties": false
         },
         {
@@ -341,10 +293,7 @@
                   }
                 }
               },
-              "required": [
-                "a",
-                "b"
-              ],
+              "required": ["a", "b"],
               "additionalProperties": false
             },
             "pivot_text": {
@@ -352,11 +301,7 @@
               "maxLength": 1000
             }
           },
-          "required": [
-            "kind",
-            "answers",
-            "pivot_text"
-          ],
+          "required": ["kind", "answers", "pivot_text"],
           "additionalProperties": false
         },
         {
@@ -378,31 +323,19 @@
                   },
                   "severity": {
                     "type": "string",
-                    "enum": [
-                      "blocker",
-                      "major",
-                      "minor",
-                      "nit"
-                    ]
+                    "enum": ["blocker", "major", "minor", "nit"]
                   },
                   "text": {
                     "type": "string",
                     "maxLength": 2000
                   }
                 },
-                "required": [
-                  "line_key",
-                  "severity",
-                  "text"
-                ],
+                "required": ["line_key", "severity", "text"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "kind",
-            "comments"
-          ],
+          "required": ["kind", "comments"],
           "additionalProperties": false
         },
         {
@@ -445,10 +378,7 @@
                         ]
                       }
                     },
-                    "required": [
-                      "text_md",
-                      "mc_id"
-                    ],
+                    "required": ["text_md", "mc_id"],
                     "additionalProperties": false
                   }
                 },
@@ -466,19 +396,11 @@
                   "maxLength": 4000
                 }
               },
-              "required": [
-                "stem_md",
-                "options",
-                "chosen_keys",
-                "rationale_md"
-              ],
+              "required": ["stem_md", "options", "chosen_keys", "rationale_md"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "kind",
-            "item"
-          ],
+          "required": ["kind", "item"],
           "additionalProperties": false
         },
         {
@@ -504,11 +426,7 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "option_key",
-            "rationale"
-          ],
+          "required": ["kind", "option_key", "rationale"],
           "additionalProperties": false
         }
       ]
@@ -606,16 +524,7 @@
               "const": 0
             }
           },
-          "required": [
-            "D",
-            "J_calibrated",
-            "J_uncalibrated",
-            "J_low_confidence",
-            "LJ",
-            "H",
-            "S",
-            "PENDING"
-          ],
+          "required": ["D", "J_calibrated", "J_uncalibrated", "J_low_confidence", "LJ", "H", "S", "PENDING"],
           "additionalProperties": false
         },
         "rapid": {
@@ -627,13 +536,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "policy_version",
-        "w_format",
-        "w_grader_table",
-        "rapid",
-        "gaming_factor"
-      ],
+      "required": ["policy_version", "w_format", "w_grader_table", "rapid", "gaming_factor"],
       "additionalProperties": false
     },
     "engine_constraints": {
@@ -643,19 +546,12 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "calibrated_only"
-      ],
+      "required": ["calibrated_only"],
       "additionalProperties": false
     },
     "ai_mode_observed": {
       "type": "string",
-      "enum": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     }
   },
   "required": [

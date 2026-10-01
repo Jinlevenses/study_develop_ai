@@ -1,9 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "reported",
-    "computed",
-    "subscription",
-    "free"
-  ]
+  "enum": ["reported", "computed", "subscription", "free"]
 }

@@ -12,9 +12,7 @@
       "const": "/internal/v1/admin/events"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": false
@@ -54,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "correlation_id"
-          ],
+          "required": ["correlation_id"],
           "additionalProperties": false
         }
       }
@@ -69,13 +65,7 @@
           "properties": {
             "svc": {
               "type": "string",
-              "enum": [
-                "gateway",
-                "content",
-                "learning",
-                "ai-gateway",
-                "ops-api"
-              ]
+              "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
             },
             "outbox": {
               "maxItems": 500,
@@ -116,34 +106,15 @@
                     "type": "object",
                     "propertyNames": {
                       "type": "string",
-                      "enum": [
-                        "gateway",
-                        "content",
-                        "learning",
-                        "ai-gateway",
-                        "ops-api"
-                      ]
+                      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                     },
                     "additionalProperties": {
                       "type": "boolean"
                     },
-                    "required": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   }
                 },
-                "required": [
-                  "seq",
-                  "event_id",
-                  "type",
-                  "occurred_at",
-                  "causation_id",
-                  "delivered"
-                ],
+                "required": ["seq", "event_id", "type", "occurred_at", "causation_id", "delivered"],
                 "additionalProperties": false
               }
             },
@@ -159,13 +130,7 @@
                   },
                   "producer": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "producer_seq": {
                     "type": "integer",
@@ -182,13 +147,7 @@
                     "maximum": 8640000000000000
                   }
                 },
-                "required": [
-                  "event_id",
-                  "producer",
-                  "producer_seq",
-                  "type",
-                  "received_at"
-                ],
+                "required": ["event_id", "producer", "producer_seq", "type", "received_at"],
                 "additionalProperties": false
               }
             },
@@ -204,13 +163,7 @@
                   },
                   "producer": {
                     "type": "string",
-                    "enum": [
-                      "gateway",
-                      "content",
-                      "learning",
-                      "ai-gateway",
-                      "ops-api"
-                    ]
+                    "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                   },
                   "type": {
                     "type": "string",
@@ -228,10 +181,7 @@
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "replayed",
-                          "discarded"
-                        ]
+                        "enum": ["replayed", "discarded"]
                       },
                       {
                         "type": "null"
@@ -239,24 +189,12 @@
                     ]
                   }
                 },
-                "required": [
-                  "event_id",
-                  "producer",
-                  "type",
-                  "error_code",
-                  "failed_at",
-                  "resolution"
-                ],
+                "required": ["event_id", "producer", "type", "error_code", "failed_at", "resolution"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "svc",
-            "outbox",
-            "inbox",
-            "dead"
-          ],
+          "required": ["svc", "outbox", "inbox", "dead"],
           "additionalProperties": false
         }
       }

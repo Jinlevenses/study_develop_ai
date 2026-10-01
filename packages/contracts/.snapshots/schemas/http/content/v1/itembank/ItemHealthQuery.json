@@ -3,14 +3,7 @@
   "properties": {
     "flag": {
       "type": "string",
-      "enum": [
-        "too_easy",
-        "too_hard",
-        "distractor_dead",
-        "discrimination_low",
-        "key_suspect",
-        "latency_outlier"
-      ]
+      "enum": ["too_easy", "too_hard", "distractor_dead", "discrimination_low", "key_suspect", "latency_outlier"]
     },
     "cursor": {
       "type": "string",
@@ -23,8 +16,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

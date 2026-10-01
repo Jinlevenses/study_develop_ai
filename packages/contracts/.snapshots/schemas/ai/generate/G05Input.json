@@ -43,9 +43,6 @@
       ]
     }
   },
-  "required": [
-    "chunk_keys",
-    "target_track"
-  ],
+  "required": ["chunk_keys", "target_track"],
   "additionalProperties": false
 }

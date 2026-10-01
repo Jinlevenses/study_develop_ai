@@ -70,13 +70,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "total",
-        "correct",
-        "partial",
-        "incorrect",
-        "pending"
-      ],
+      "required": ["total", "correct", "partial", "incorrect", "pending"],
       "additionalProperties": false
     },
     "mastery_changes": {
@@ -92,30 +86,17 @@
           },
           "from": {
             "type": "string",
-            "enum": [
-              "unseen",
-              "learning",
-              "mastered"
-            ]
+            "enum": ["unseen", "learning", "mastered"]
           },
           "to": {
             "type": "string",
-            "enum": [
-              "unseen",
-              "learning",
-              "mastered"
-            ]
+            "enum": ["unseen", "learning", "mastered"]
           },
           "provisional": {
             "type": "boolean"
           }
         },
-        "required": [
-          "concept_id",
-          "from",
-          "to",
-          "provisional"
-        ],
+        "required": ["concept_id", "from", "to", "provisional"],
         "additionalProperties": false
       }
     },
@@ -148,11 +129,7 @@
             ]
           }
         },
-        "required": [
-          "concept_id",
-          "predicted",
-          "actual"
-        ],
+        "required": ["concept_id", "predicted", "actual"],
         "additionalProperties": false
       }
     },
@@ -177,10 +154,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "tomorrow",
-        "week"
-      ],
+      "required": ["tomorrow", "week"],
       "additionalProperties": false
     }
   },

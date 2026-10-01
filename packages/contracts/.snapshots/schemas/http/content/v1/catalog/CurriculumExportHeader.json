@@ -65,12 +65,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "pack_id",
-          "track",
-          "version",
-          "manifest_hash"
-        ],
+        "required": ["pack_id", "track", "version", "manifest_hash"],
         "additionalProperties": false
       }
     },
@@ -80,14 +75,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "kind",
-    "v",
-    "version",
-    "full",
-    "pack_set_hash",
-    "packs",
-    "generated_at"
-  ],
+  "required": ["kind", "v", "version", "full", "pack_set_hash", "packs", "generated_at"],
   "additionalProperties": false
 }

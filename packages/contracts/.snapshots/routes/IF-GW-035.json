@@ -12,9 +12,7 @@
       "const": "/api/v1/verdicts/{verdict_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-011",
-        "FR-UX-007"
-      ]
+      "enum": ["FR-AI-011", "FR-UX-007"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "verdict_id"
-          ],
+          "required": ["verdict_id"],
           "additionalProperties": false
         }
       }
@@ -123,14 +116,7 @@
             },
             "engine": {
               "type": "string",
-              "enum": [
-                "D",
-                "J",
-                "LJ",
-                "H",
-                "S",
-                "PENDING"
-              ]
+              "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
             },
             "badge": {
               "type": "string",
@@ -208,25 +194,11 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "kp",
-                      "misconception",
-                      "dimension",
-                      "solo",
-                      "injection",
-                      "rationale"
-                    ]
+                    "enum": ["kp", "misconception", "dimension", "solo", "injection", "rationale"]
                   },
                   "outcome": {
                     "type": "string",
-                    "enum": [
-                      "covered",
-                      "partial",
-                      "missing",
-                      "present",
-                      "absent",
-                      "scored"
-                    ]
+                    "enum": ["covered", "partial", "missing", "present", "absent", "scored"]
                   },
                   "p": {
                     "anyOf": [
@@ -241,10 +213,7 @@
                     ]
                   },
                   "score": {
-                    "type": [
-                      "number",
-                      "null"
-                    ]
+                    "type": ["number", "null"]
                   },
                   "ku_id": {
                     "anyOf": [
@@ -271,15 +240,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "kind",
-                  "outcome",
-                  "p",
-                  "score",
-                  "ku_id",
-                  "mc_id"
-                ],
+                "required": ["label_ko", "kind", "outcome", "p", "score", "ku_id", "mc_id"],
                 "additionalProperties": false
               }
             },
@@ -329,24 +290,11 @@
                     },
                     "reason": {
                       "type": "string",
-                      "enum": [
-                        "key_wrong",
-                        "ambiguous",
-                        "outdated",
-                        "learner_right",
-                        "other"
-                      ]
+                      "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
                     },
                     "state": {
                       "type": "string",
-                      "enum": [
-                        "received",
-                        "classifying",
-                        "regrading",
-                        "upheld",
-                        "rejected",
-                        "user_decision_required"
-                      ]
+                      "enum": ["received", "classifying", "regrading", "upheld", "rejected", "user_decision_required"]
                     },
                     "classification": {
                       "anyOf": [
@@ -355,23 +303,11 @@
                           "properties": {
                             "label": {
                               "type": "string",
-                              "enum": [
-                                "key_wrong",
-                                "ambiguous",
-                                "outdated",
-                                "learner_wrong"
-                              ]
+                              "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                             },
                             "engine": {
                               "type": "string",
-                              "enum": [
-                                "D",
-                                "J",
-                                "LJ",
-                                "H",
-                                "S",
-                                "PENDING"
-                              ]
+                              "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                             },
                             "confidence": {
                               "anyOf": [
@@ -386,11 +322,7 @@
                               ]
                             }
                           },
-                          "required": [
-                            "label",
-                            "engine",
-                            "confidence"
-                          ],
+                          "required": ["label", "engine", "confidence"],
                           "additionalProperties": false
                         },
                         {

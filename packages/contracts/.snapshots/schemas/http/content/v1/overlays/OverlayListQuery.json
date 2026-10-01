@@ -3,14 +3,7 @@
   "properties": {
     "target_kind": {
       "type": "string",
-      "enum": [
-        "concept",
-        "ku",
-        "misconception",
-        "item",
-        "case",
-        "source"
-      ]
+      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
     },
     "target_id": {
       "type": "string",
@@ -27,8 +20,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

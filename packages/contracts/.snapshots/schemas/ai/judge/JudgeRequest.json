@@ -31,12 +31,7 @@
       },
       "additionalProperties": {
         "type": "string",
-        "enum": [
-          "C0",
-          "C1",
-          "C2",
-          "C3"
-        ]
+        "enum": ["C0", "C1", "C2", "C3"]
       }
     },
     "untrusted_keys": {
@@ -72,19 +67,13 @@
             }
           }
         },
-        "required": [
-          "template",
-          "vars"
-        ],
+        "required": ["template", "vars"],
         "additionalProperties": false
       }
     },
     "lane": {
       "type": "string",
-      "enum": [
-        "interactive",
-        "background"
-      ]
+      "enum": ["interactive", "background"]
     },
     "deadline_ms": {
       "type": "integer",
@@ -96,36 +85,18 @@
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "attempt",
-            "dialog_turn",
-            "blank_note",
-            "item",
-            "import",
-            "pack",
-            "calibration",
-            "appeal",
-            "system"
-          ]
+          "enum": ["attempt", "dialog_turn", "blank_note", "item", "import", "pack", "calibration", "appeal", "system"]
         },
         "phase": {
           "type": "string",
-          "enum": [
-            "pre_submit",
-            "post_submit",
-            "n_a"
-          ]
+          "enum": ["pre_submit", "post_submit", "n_a"]
         },
         "id": {
           "type": "string",
           "maxLength": 160
         }
       },
-      "required": [
-        "kind",
-        "phase",
-        "id"
-      ],
+      "required": ["kind", "phase", "id"],
       "additionalProperties": false
     },
     "calibrated_only": {
@@ -136,14 +107,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "anthropic",
-          "openai",
-          "google",
-          "typesafe",
-          "local",
-          "other"
-        ]
+        "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
       }
     },
     "local_only": {

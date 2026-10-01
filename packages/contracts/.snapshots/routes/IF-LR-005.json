@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/sessions/{session_id}/blocks/{block_id}/alternatives"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-STD-006"
-      ]
+      "enum": ["FR-STD-006"]
     },
     "deadlineMs": {
       "const": null
@@ -60,10 +56,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "session_id",
-            "block_id"
-          ],
+          "required": ["session_id", "block_id"],
           "additionalProperties": false
         }
       }
@@ -163,11 +156,7 @@
                           ]
                         }
                       },
-                      "required": [
-                        "code",
-                        "label_ko",
-                        "value"
-                      ],
+                      "required": ["code", "label_ko", "value"],
                       "additionalProperties": false
                     }
                   },
@@ -176,22 +165,12 @@
                     "minimum": 0
                   }
                 },
-                "required": [
-                  "candidate_id",
-                  "mode_id",
-                  "kind",
-                  "concept_id",
-                  "reason_chips",
-                  "est_minutes"
-                ],
+                "required": ["candidate_id", "mode_id", "kind", "concept_id", "reason_chips", "est_minutes"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "block_id",
-            "candidates"
-          ],
+          "required": ["block_id", "candidates"],
           "additionalProperties": false
         }
       }

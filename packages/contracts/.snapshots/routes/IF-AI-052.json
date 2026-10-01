@@ -12,9 +12,7 @@
       "const": "/internal/v1/firewall/log"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-019",
-        "FR-AI-021"
-      ]
+      "enum": ["FR-AI-019", "FR-AI-021"]
     },
     "deadlineMs": {
       "const": null
@@ -63,9 +58,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -156,12 +149,7 @@
                   },
                   "data_class": {
                     "type": "string",
-                    "enum": [
-                      "C0",
-                      "C1",
-                      "C2",
-                      "C3"
-                    ]
+                    "enum": ["C0", "C1", "C2", "C3"]
                   },
                   "rule_hits": {
                     "maxItems": 50,
@@ -173,23 +161,10 @@
                   },
                   "action": {
                     "type": "string",
-                    "enum": [
-                      "pass",
-                      "masked",
-                      "force_local",
-                      "block"
-                    ]
+                    "enum": ["pass", "masked", "force_local", "block"]
                   }
                 },
-                "required": [
-                  "decision_id",
-                  "ts",
-                  "task_id",
-                  "provider_id",
-                  "data_class",
-                  "rule_hits",
-                  "action"
-                ],
+                "required": ["decision_id", "ts", "task_id", "provider_id", "data_class", "rule_hits", "action"],
                 "additionalProperties": false
               }
             },
@@ -205,10 +180,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

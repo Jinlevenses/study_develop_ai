@@ -50,8 +50,6 @@
       "pattern": "^(?:cert-[a-z0-9]+(?:-[a-z0-9]+)*@\\d{4})$"
     }
   },
-  "required": [
-    "track"
-  ],
+  "required": ["track"],
   "additionalProperties": false
 }

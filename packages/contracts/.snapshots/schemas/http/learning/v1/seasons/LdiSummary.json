@@ -5,10 +5,7 @@
       "type": "number"
     },
     "delta": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "params": {
       "type": "string",
@@ -23,12 +20,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "value",
-    "delta",
-    "params",
-    "params_provisional",
-    "computed_at"
-  ],
+  "required": ["value", "delta", "params", "params_provisional", "computed_at"],
   "additionalProperties": false
 }

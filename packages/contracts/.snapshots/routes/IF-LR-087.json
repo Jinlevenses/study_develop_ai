@@ -12,9 +12,7 @@
       "const": "/internal/v1/ledger/verify/{verify_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-003"
-      ]
+      "enum": ["FR-SET-003"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "verify_id"
-          ],
+          "required": ["verify_id"],
           "additionalProperties": false
         }
       }
@@ -75,17 +69,10 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "running",
-                "done",
-                "failed"
-              ]
+              "enum": ["running", "done", "failed"]
             },
             "chain_ok": {
-              "type": [
-                "boolean",
-                "null"
-              ]
+              "type": ["boolean", "null"]
             },
             "anchors": {
               "type": "array",
@@ -94,11 +81,7 @@
                 "properties": {
                   "source": {
                     "type": "string",
-                    "enum": [
-                      "epoch",
-                      "checkpoint",
-                      "export_header"
-                    ]
+                    "enum": ["epoch", "checkpoint", "export_header"]
                   },
                   "ref": {
                     "type": "string"
@@ -134,21 +117,12 @@
                           ]
                         }
                       },
-                      "required": [
-                        "device_id",
-                        "expected_seq",
-                        "actual_seq"
-                      ],
+                      "required": ["device_id", "expected_seq", "actual_seq"],
                       "additionalProperties": false
                     }
                   }
                 },
-                "required": [
-                  "source",
-                  "ref",
-                  "ok",
-                  "mismatches"
-                ],
+                "required": ["source", "ref", "ok", "mismatches"],
                 "additionalProperties": false
               }
             },
@@ -175,10 +149,7 @@
               ]
             },
             "match": {
-              "type": [
-                "boolean",
-                "null"
-              ]
+              "type": ["boolean", "null"]
             },
             "duration_ms": {
               "anyOf": [

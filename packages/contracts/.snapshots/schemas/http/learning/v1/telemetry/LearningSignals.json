@@ -22,33 +22,17 @@
             "pattern": "^(TW-(0[1-9]|1[0-3])|GR-\\d{2})$"
           },
           "value": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "threshold": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "state": {
             "type": "string",
-            "enum": [
-              "ok",
-              "warn",
-              "trip",
-              "insufficient_data"
-            ]
+            "enum": ["ok", "warn", "trip", "insufficient_data"]
           }
         },
-        "required": [
-          "id",
-          "value",
-          "threshold",
-          "state"
-        ],
+        "required": ["id", "value", "threshold", "state"],
         "additionalProperties": false
       }
     },
@@ -61,31 +45,16 @@
           "maximum": 9007199254740991
         },
         "median_minutes": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "first_item_p95_ms": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         }
       },
-      "required": [
-        "count",
-        "median_minutes",
-        "first_item_p95_ms"
-      ],
+      "required": ["count", "median_minutes", "first_item_p95_ms"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "from",
-    "to",
-    "tripwires",
-    "sessions"
-  ],
+  "required": ["from", "to", "tripwires", "sessions"],
   "additionalProperties": false
 }

@@ -18,13 +18,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "queued",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled"
-      ]
+      "enum": ["queued", "running", "succeeded", "failed", "cancelled"]
     },
     "cursor": {
       "type": "string",
@@ -37,8 +31,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

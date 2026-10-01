@@ -43,18 +43,12 @@
                 }
               }
             },
-            "required": [
-              "name",
-              "weight",
-              "levels"
-            ],
+            "required": ["name", "weight", "levels"],
             "additionalProperties": false
           }
         }
       },
-      "required": [
-        "dims"
-      ],
+      "required": ["dims"],
       "additionalProperties": false
     },
     "ext": {
@@ -72,13 +66,7 @@
       "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "required": [
-    "kind",
-    "rubric_id",
-    "dims",
-    "ext",
-    "content_hash"
-  ],
+  "required": ["kind", "rubric_id", "dims", "ext", "content_hash"],
   "additionalProperties": false,
   "$defs": {
     "__schema0": {

@@ -16,12 +16,7 @@
         "properties": {
           "status": {
             "type": "string",
-            "enum": [
-              "correct",
-              "partial",
-              "missing",
-              "error"
-            ]
+            "enum": ["correct", "partial", "missing", "error"]
           },
           "ku_id": {
             "anyOf": [
@@ -36,17 +31,11 @@
             ]
           }
         },
-        "required": [
-          "status",
-          "ku_id"
-        ],
+        "required": ["status", "ku_id"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "verdict_id",
-    "units"
-  ],
+  "required": ["verdict_id", "units"],
   "additionalProperties": false
 }

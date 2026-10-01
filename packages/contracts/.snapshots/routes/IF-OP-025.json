@@ -12,9 +12,7 @@
       "const": "/internal/v1/doctor"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-003",
-        "NFR-PORT-007"
-      ]
+      "enum": ["FR-SET-003", "NFR-PORT-007"]
     },
     "deadlineMs": {
       "const": null
@@ -107,12 +102,7 @@
                   },
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "ok",
-                      "warn",
-                      "fail",
-                      "skip"
-                    ]
+                    "enum": ["ok", "warn", "fail", "skip"]
                   },
                   "summary_ko": {
                     "type": "string",
@@ -136,25 +126,12 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "id",
-                  "status",
-                  "summary_ko",
-                  "detail_ko",
-                  "fixable",
-                  "fix_applied"
-                ],
+                "required": ["id", "status", "summary_ko", "detail_ko", "fixable", "fix_applied"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "report_id",
-            "generated_at",
-            "live",
-            "fix",
-            "items"
-          ],
+          "required": ["report_id", "generated_at", "live", "fix", "items"],
           "additionalProperties": false
         }
       }

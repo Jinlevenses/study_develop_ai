@@ -7,16 +7,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "items",
-        "blank_note",
-        "lab",
-        "case",
-        "artifact",
-        "d4_mcq",
-        "embedded",
-        "pretest"
-      ]
+      "enum": ["items", "blank_note", "lab", "case", "artifact", "d4_mcq", "embedded", "pretest"]
     },
     "concept_id": {
       "anyOf": [
@@ -88,19 +79,13 @@
       "maximum": 20
     },
     "target_beta": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "response_mode": {
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "recognition",
-            "production"
-          ]
+          "enum": ["recognition", "production"]
         },
         {
           "type": "null"
@@ -164,10 +149,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "calibrated_only",
-        "deterministic_only"
-      ],
+      "required": ["calibrated_only", "deterministic_only"],
       "additionalProperties": false
     }
   },

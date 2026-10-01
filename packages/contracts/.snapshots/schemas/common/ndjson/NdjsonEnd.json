@@ -15,10 +15,6 @@
       "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "required": [
-    "kind",
-    "count",
-    "sha256"
-  ],
+  "required": ["kind", "count", "sha256"],
   "additionalProperties": false
 }

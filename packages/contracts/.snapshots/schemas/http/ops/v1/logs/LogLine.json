@@ -8,13 +8,7 @@
     },
     "level": {
       "type": "string",
-      "enum": [
-        "debug",
-        "info",
-        "warn",
-        "error",
-        "fatal"
-      ]
+      "enum": ["debug", "info", "warn", "error", "fatal"]
     },
     "svc": {
       "type": "string",
@@ -94,18 +88,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "ts",
-    "level",
-    "svc",
-    "msg",
-    "req_id",
-    "event",
-    "err_code",
-    "correlation_id",
-    "trace_id",
-    "job",
-    "raw"
-  ],
+  "required": ["ts", "level", "svc", "msg", "req_id", "event", "err_code", "correlation_id", "trace_id", "job", "raw"],
   "additionalProperties": false
 }

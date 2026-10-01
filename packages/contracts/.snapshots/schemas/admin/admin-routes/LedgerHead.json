@@ -17,10 +17,7 @@
         "pattern": "^[0-9a-f]{64}$"
       }
     },
-    "required": [
-      "seq",
-      "hash"
-    ],
+    "required": ["seq", "hash"],
     "additionalProperties": false
   }
 }

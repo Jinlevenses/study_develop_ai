@@ -7,12 +7,7 @@
     },
     "decision": {
       "type": "string",
-      "enum": [
-        "approved",
-        "rejected",
-        "exhausted",
-        "expired"
-      ]
+      "enum": ["approved", "rejected", "exhausted", "expired"]
     },
     "reservation": {
       "anyOf": [
@@ -35,11 +30,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "calls",
-            "krw",
-            "expires_at"
-          ],
+          "required": ["calls", "krw", "expires_at"],
           "additionalProperties": false
         },
         {
@@ -48,10 +39,6 @@
       ]
     }
   },
-  "required": [
-    "work_order_id",
-    "decision",
-    "reservation"
-  ],
+  "required": ["work_order_id", "decision", "reservation"],
   "additionalProperties": false
 }

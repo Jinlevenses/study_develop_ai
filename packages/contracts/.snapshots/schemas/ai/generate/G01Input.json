@@ -6,12 +6,7 @@
       "properties": {
         "format": {
           "type": "string",
-          "enum": [
-            "mcq",
-            "ox",
-            "cloze",
-            "short"
-          ]
+          "enum": ["mcq", "ox", "cloze", "short"]
         },
         "level": {
           "type": "integer",
@@ -20,14 +15,7 @@
         },
         "bloom": {
           "type": "string",
-          "enum": [
-            "remember",
-            "understand",
-            "apply",
-            "analyze",
-            "evaluate",
-            "create"
-          ]
+          "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
         },
         "count": {
           "type": "integer",
@@ -53,14 +41,7 @@
           }
         }
       },
-      "required": [
-        "format",
-        "level",
-        "bloom",
-        "count",
-        "target_ku_ids",
-        "forbidden"
-      ],
+      "required": ["format", "level", "bloom", "count", "target_ku_ids", "forbidden"],
       "additionalProperties": false
     },
     "recent_items_digest": {
@@ -72,9 +53,6 @@
       }
     }
   },
-  "required": [
-    "blueprint",
-    "recent_items_digest"
-  ],
+  "required": ["blueprint", "recent_items_digest"],
   "additionalProperties": false
 }

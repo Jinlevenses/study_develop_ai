@@ -1,10 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "starting",
-    "ready",
-    "restarting",
-    "degraded",
-    "stopped"
-  ]
+  "enum": ["starting", "ready", "restarting", "degraded", "stopped"]
 }

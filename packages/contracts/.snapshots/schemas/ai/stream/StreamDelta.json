@@ -11,9 +11,6 @@
       "maxLength": 4000
     }
   },
-  "required": [
-    "seq",
-    "text"
-  ],
+  "required": ["seq", "text"],
   "additionalProperties": false
 }

@@ -11,9 +11,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "text",
-    "updated_at"
-  ],
+  "required": ["text", "updated_at"],
   "additionalProperties": false
 }

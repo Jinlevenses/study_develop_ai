@@ -13,11 +13,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [
-              "theory",
-              "code",
-              "core"
-            ]
+            "enum": ["theory", "code", "core"]
           }
         },
         "duration_ms": {
@@ -26,11 +22,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "kind",
-        "stages_done",
-        "duration_ms"
-      ],
+      "required": ["kind", "stages_done", "duration_ms"],
       "additionalProperties": false
     },
     {
@@ -54,10 +46,7 @@
           }
         }
       },
-      "required": [
-        "kind",
-        "predictions"
-      ],
+      "required": ["kind", "predictions"],
       "additionalProperties": false
     },
     {
@@ -76,10 +65,7 @@
           }
         }
       },
-      "required": [
-        "kind",
-        "answers_ko"
-      ],
+      "required": ["kind", "answers_ko"],
       "additionalProperties": false
     },
     {
@@ -97,20 +83,11 @@
           },
           "additionalProperties": {
             "type": "string",
-            "enum": [
-              "link",
-              "probe",
-              "import",
-              "discard",
-              "later"
-            ]
+            "enum": ["link", "probe", "import", "discard", "later"]
           }
         }
       },
-      "required": [
-        "kind",
-        "decisions"
-      ],
+      "required": ["kind", "decisions"],
       "additionalProperties": false
     },
     {
@@ -121,9 +98,7 @@
           "const": "generic"
         }
       },
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "additionalProperties": false
     }
   ]

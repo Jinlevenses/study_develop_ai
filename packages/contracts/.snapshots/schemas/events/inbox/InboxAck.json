@@ -7,8 +7,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "acked_through_seq"
-  ],
+  "required": ["acked_through_seq"],
   "additionalProperties": false
 }

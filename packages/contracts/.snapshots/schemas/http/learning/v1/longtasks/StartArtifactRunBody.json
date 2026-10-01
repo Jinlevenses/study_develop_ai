@@ -33,11 +33,6 @@
       ]
     }
   },
-  "required": [
-    "run_id",
-    "artifact_id",
-    "session_id",
-    "block_id"
-  ],
+  "required": ["run_id", "artifact_id", "session_id", "block_id"],
   "additionalProperties": false
 }

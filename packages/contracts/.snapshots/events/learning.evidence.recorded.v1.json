@@ -59,12 +59,7 @@
     },
     "result": {
       "type": "string",
-      "enum": [
-        "correct",
-        "partial",
-        "incorrect",
-        "pending"
-      ]
+      "enum": ["correct", "partial", "incorrect", "pending"]
     },
     "latency_ms": {
       "type": "integer",
@@ -99,12 +94,7 @@
     },
     "ai_mode": {
       "type": "string",
-      "enum": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     },
     "recorded_at": {
       "type": "integer",
@@ -113,21 +103,10 @@
     },
     "phase": {
       "type": "string",
-      "enum": [
-        "practice",
-        "pretest",
-        "embedded",
-        "verify",
-        "promotion_exam",
-        "placement",
-        "boss"
-      ]
+      "enum": ["practice", "pretest", "embedded", "verify", "promotion_exam", "placement", "boss"]
     },
     "item_beta_after": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     }
   },
   "required": [

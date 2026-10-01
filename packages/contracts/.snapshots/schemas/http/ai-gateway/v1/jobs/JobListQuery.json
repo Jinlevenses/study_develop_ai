@@ -3,15 +3,7 @@
   "properties": {
     "state": {
       "type": "string",
-      "enum": [
-        "queued",
-        "waiting_window",
-        "running",
-        "done",
-        "failed",
-        "cancelled",
-        "deferred"
-      ]
+      "enum": ["queued", "waiting_window", "running", "done", "failed", "cancelled", "deferred"]
     },
     "task_id": {
       "anyOf": [
@@ -70,8 +62,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

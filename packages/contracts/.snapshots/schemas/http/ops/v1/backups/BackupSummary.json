@@ -7,10 +7,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "snapshot",
-        "incremental"
-      ]
+      "enum": ["snapshot", "incremental"]
     },
     "created_at": {
       "type": "integer",
@@ -19,11 +16,7 @@
     },
     "outcome": {
       "type": "string",
-      "enum": [
-        "ok",
-        "aborted",
-        "failed"
-      ]
+      "enum": ["ok", "aborted", "failed"]
     },
     "size_bytes": {
       "type": "integer",
@@ -59,10 +52,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "at",
-            "ok"
-          ],
+          "required": ["at", "ok"],
           "additionalProperties": false
         },
         {
@@ -89,10 +79,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "copied_at",
-        "encrypted"
-      ],
+      "required": ["copied_at", "encrypted"],
       "additionalProperties": false
     }
   },

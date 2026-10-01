@@ -1,9 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "FULL",
-    "JUDGE_ONLY",
-    "LLM_ONLY",
-    "OFFLINE"
-  ]
+  "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
 }

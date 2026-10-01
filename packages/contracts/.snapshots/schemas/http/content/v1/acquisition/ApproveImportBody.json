@@ -14,11 +14,7 @@
           },
           "decision": {
             "type": "string",
-            "enum": [
-              "approve",
-              "reject",
-              "edit"
-            ]
+            "enum": ["approve", "reject", "edit"]
           },
           "edited_value": {
             "anyOf": [
@@ -31,11 +27,7 @@
             ]
           }
         },
-        "required": [
-          "entry_id",
-          "decision",
-          "edited_value"
-        ],
+        "required": ["entry_id", "decision", "edited_value"],
         "additionalProperties": false
       }
     },
@@ -43,10 +35,7 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "decisions",
-    "publish"
-  ],
+  "required": ["decisions", "publish"],
   "additionalProperties": false,
   "$defs": {
     "__schema0": {

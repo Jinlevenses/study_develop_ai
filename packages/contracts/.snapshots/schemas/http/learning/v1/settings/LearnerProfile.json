@@ -59,11 +59,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "light",
-            "normal",
-            "deep"
-          ]
+          "enum": ["light", "normal", "deep"]
         },
         {
           "type": "null"
@@ -72,36 +68,22 @@
     },
     "wildcard_mode": {
       "type": "string",
-      "enum": [
-        "enforce",
-        "suggest"
-      ]
+      "enum": ["enforce", "suggest"]
     },
     "quota_mode": {
       "type": "string",
-      "enum": [
-        "enforce",
-        "suggest"
-      ]
+      "enum": ["enforce", "suggest"]
     },
     "log_content": {
       "type": "boolean"
     },
     "reduced_motion": {
       "type": "string",
-      "enum": [
-        "system",
-        "on",
-        "off"
-      ]
+      "enum": ["system", "on", "off"]
     },
     "ui_density": {
       "type": "string",
-      "enum": [
-        "auto",
-        "compact",
-        "comfortable"
-      ]
+      "enum": ["auto", "compact", "comfortable"]
     },
     "notifications": {
       "type": "object",
@@ -113,10 +95,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "weekly_review",
-        "return_nudge"
-      ],
+      "required": ["weekly_review", "return_nudge"],
       "additionalProperties": false
     },
     "career_years": {

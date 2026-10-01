@@ -11,14 +11,7 @@
     },
     "target_kind": {
       "type": "string",
-      "enum": [
-        "concept",
-        "ku",
-        "misconception",
-        "item",
-        "case",
-        "source"
-      ]
+      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
     },
     "target_id": {
       "type": "string",
@@ -37,14 +30,6 @@
       "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "required": [
-    "conflict_id",
-    "patch_id",
-    "target_kind",
-    "target_id",
-    "field",
-    "base_version",
-    "new_base_version"
-  ],
+  "required": ["conflict_id", "patch_id", "target_kind", "target_id", "field", "base_version", "new_base_version"],
   "additionalProperties": false
 }

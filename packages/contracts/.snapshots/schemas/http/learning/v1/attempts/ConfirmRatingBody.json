@@ -25,9 +25,6 @@
       ]
     }
   },
-  "required": [
-    "accept",
-    "rating"
-  ],
+  "required": ["accept", "rating"],
   "additionalProperties": false
 }

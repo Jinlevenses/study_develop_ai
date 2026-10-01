@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/tracks"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-001",
-        "FR-CUR-025"
-      ]
+      "enum": ["FR-CUR-001", "FR-CUR-025"]
     },
     "deadlineMs": {
       "const": null
@@ -152,12 +147,7 @@
                         "maximum": 5
                       }
                     },
-                    "required": [
-                      "declared",
-                      "offline",
-                      "oracle",
-                      "display"
-                    ],
+                    "required": ["declared", "offline", "oracle", "display"],
                     "additionalProperties": false
                   },
                   "kpi": {
@@ -182,11 +172,7 @@
                             "maximum": 1
                           }
                         },
-                        "required": [
-                          "full",
-                          "lite",
-                          "skeleton"
-                        ],
+                        "required": ["full", "lite", "skeleton"],
                         "additionalProperties": false
                       },
                       "offline_learnable": {
@@ -195,10 +181,7 @@
                         "maximum": 9007199254740991
                       }
                     },
-                    "required": [
-                      "three_stage",
-                      "offline_learnable"
-                    ],
+                    "required": ["three_stage", "offline_learnable"],
                     "additionalProperties": false
                   },
                   "pack": {
@@ -215,37 +198,19 @@
                       },
                       "channel": {
                         "type": "string",
-                        "enum": [
-                          "seed",
-                          "local",
-                          "user"
-                        ]
+                        "enum": ["seed", "local", "user"]
                       }
                     },
-                    "required": [
-                      "pack_id",
-                      "version",
-                      "channel"
-                    ],
+                    "required": ["pack_id", "version", "channel"],
                     "additionalProperties": false
                   }
                 },
-                "required": [
-                  "track",
-                  "title_ko",
-                  "title_en",
-                  "concept_counts",
-                  "cap",
-                  "kpi",
-                  "pack"
-                ],
+                "required": ["track", "title_ko", "title_en", "concept_counts", "cap", "kpi", "pack"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "tracks"
-          ],
+          "required": ["tracks"],
           "additionalProperties": false
         }
       }

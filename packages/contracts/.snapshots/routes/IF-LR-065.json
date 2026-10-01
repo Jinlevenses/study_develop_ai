@@ -12,9 +12,7 @@
       "const": "/internal/v1/settings/policies:preview"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-018",
-        "FR-PRG-028",
-        "FR-PRG-029"
-      ]
+      "enum": ["FR-SET-018", "FR-PRG-028", "FR-PRG-029"]
     },
     "deadlineMs": {
       "const": 60000
@@ -111,10 +105,7 @@
               "additionalProperties": false
             }
           },
-          "required": [
-            "preview_id",
-            "target"
-          ],
+          "required": ["preview_id", "target"],
           "additionalProperties": false
         }
       }
@@ -161,10 +152,7 @@
                   "maximum": 9007199254740991
                 },
                 "ldi_delta": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": ["number", "null"]
                 },
                 "changed_concepts": {
                   "maxItems": 200,
@@ -192,13 +180,7 @@
               "additionalProperties": false
             }
           },
-          "required": [
-            "preview_id",
-            "current_policy_version",
-            "target_policy_version",
-            "expires_at",
-            "report"
-          ],
+          "required": ["preview_id", "current_policy_version", "target_policy_version", "expires_at", "report"],
           "additionalProperties": false
         }
       }

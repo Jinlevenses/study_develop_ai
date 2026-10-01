@@ -12,9 +12,7 @@
       "const": "/internal/v1/acquisition/inbox"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-IMP-013",
-        "FR-IMP-014"
-      ]
+      "enum": ["FR-IMP-013", "FR-IMP-014"]
     },
     "deadlineMs": {
       "const": null
@@ -54,13 +49,7 @@
           "properties": {
             "state": {
               "type": "string",
-              "enum": [
-                "new",
-                "triaged",
-                "linked",
-                "imported",
-                "discarded"
-              ]
+              "enum": ["new", "triaged", "linked", "imported", "discarded"]
             },
             "cursor": {
               "type": "string",
@@ -73,9 +62,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -101,10 +88,7 @@
                   },
                   "masking": {
                     "type": "string",
-                    "enum": [
-                      "full",
-                      "partial"
-                    ]
+                    "enum": ["full", "partial"]
                   },
                   "source_url": {
                     "anyOf": [
@@ -119,13 +103,7 @@
                   },
                   "state": {
                     "type": "string",
-                    "enum": [
-                      "new",
-                      "triaged",
-                      "linked",
-                      "imported",
-                      "discarded"
-                    ]
+                    "enum": ["new", "triaged", "linked", "imported", "discarded"]
                   },
                   "matches": {
                     "maxItems": 10,
@@ -142,10 +120,7 @@
                           "type": "number"
                         }
                       },
-                      "required": [
-                        "concept_id",
-                        "score"
-                      ],
+                      "required": ["concept_id", "score"],
                       "additionalProperties": false
                     }
                   },
@@ -205,10 +180,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

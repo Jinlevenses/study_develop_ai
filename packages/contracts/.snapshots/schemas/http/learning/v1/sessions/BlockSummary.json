@@ -12,14 +12,7 @@
     },
     "slot": {
       "type": "string",
-      "enum": [
-        "W",
-        "R",
-        "N",
-        "D",
-        "S",
-        "C"
-      ]
+      "enum": ["W", "R", "N", "D", "S", "C"]
     },
     "mode_id": {
       "type": "string",
@@ -27,18 +20,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "lesson",
-        "items",
-        "blank_note",
-        "dialog",
-        "lab",
-        "case",
-        "artifact",
-        "jol",
-        "reflection",
-        "triage"
-      ]
+      "enum": ["lesson", "items", "blank_note", "dialog", "lab", "case", "artifact", "jol", "reflection", "triage"]
     },
     "concept_id": {
       "anyOf": [
@@ -96,11 +78,7 @@
             ]
           }
         },
-        "required": [
-          "code",
-          "label_ko",
-          "value"
-        ],
+        "required": ["code", "label_ko", "value"],
         "additionalProperties": false
       }
     },
@@ -109,14 +87,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "pending",
-        "active",
-        "awaiting_grade",
-        "done",
-        "skipped",
-        "swapped"
-      ]
+      "enum": ["pending", "active", "awaiting_grade", "done", "skipped", "swapped"]
     },
     "est_minutes": {
       "type": "number",

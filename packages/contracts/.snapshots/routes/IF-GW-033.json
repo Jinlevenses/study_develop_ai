@@ -12,9 +12,7 @@
       "const": "/api/v1/items/{item_id}/reports"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-QST-016"
-      ]
+      "enum": ["FR-QST-016"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.i\\d{2,3}|(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*)\\.(?:im\\d{2}|imx-[a-z0-9]+(?:-[a-z0-9]+)*)\\.x[0-9a-f]{12}|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.lab\\.[a-z0-9]+(?:-[a-z0-9]+)*|[0-9A-HJKMNP-TV-Z]{26})$"
             }
           },
-          "required": [
-            "item_id"
-          ],
+          "required": ["item_id"],
           "additionalProperties": false
         },
         "body": {
@@ -71,12 +65,7 @@
             },
             "reason": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "other"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "other"]
             },
             "text": {
               "anyOf": [
@@ -112,13 +101,7 @@
               ]
             }
           },
-          "required": [
-            "report_id",
-            "reason",
-            "text",
-            "attempt_id",
-            "session_id"
-          ],
+          "required": ["report_id", "reason", "text", "attempt_id", "session_id"],
           "additionalProperties": false
         }
       }
@@ -140,26 +123,14 @@
             },
             "reason": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "other"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "other"]
             },
             "text": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "state": {
               "type": "string",
-              "enum": [
-                "received",
-                "classified",
-                "resolved"
-              ]
+              "enum": ["received", "classified", "resolved"]
             },
             "classification": {
               "anyOf": [
@@ -168,36 +139,17 @@
                   "properties": {
                     "label": {
                       "type": "string",
-                      "enum": [
-                        "key_wrong",
-                        "ambiguous",
-                        "outdated",
-                        "learner_wrong"
-                      ]
+                      "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                     },
                     "engine": {
                       "type": "string",
-                      "enum": [
-                        "D",
-                        "J",
-                        "LJ",
-                        "H",
-                        "S",
-                        "PENDING"
-                      ]
+                      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                     },
                     "confidence": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
+                      "type": ["number", "null"]
                     }
                   },
-                  "required": [
-                    "label",
-                    "engine",
-                    "confidence"
-                  ],
+                  "required": ["label", "engine", "confidence"],
                   "additionalProperties": false
                 },
                 {
@@ -212,11 +164,7 @@
                   "properties": {
                     "kind": {
                       "type": "string",
-                      "enum": [
-                        "fixed_overlay",
-                        "retired",
-                        "kept"
-                      ]
+                      "enum": ["fixed_overlay", "retired", "kept"]
                     },
                     "reason_ko": {
                       "type": "string"
@@ -233,11 +181,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "reason_ko",
-                    "patch_id"
-                  ],
+                  "required": ["kind", "reason_ko", "patch_id"],
                   "additionalProperties": false
                 },
                 {

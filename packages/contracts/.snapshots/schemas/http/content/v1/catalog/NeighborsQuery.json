@@ -8,8 +8,6 @@
       "maximum": 2
     }
   },
-  "required": [
-    "depth"
-  ],
+  "required": ["depth"],
   "additionalProperties": false
 }

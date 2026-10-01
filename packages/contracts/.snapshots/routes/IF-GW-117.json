@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/budget"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-AI-007"
-      ]
+      "enum": ["FR-AI-007"]
     },
     "deadlineMs": {
       "const": null
@@ -99,11 +95,7 @@
                   "type": "number"
                 }
               },
-              "required": [
-                "calls",
-                "krw",
-                "quota_pct"
-              ],
+              "required": ["calls", "krw", "quota_pct"],
               "additionalProperties": false
             },
             "subscription_windows": {
@@ -134,10 +126,7 @@
                   ]
                 }
               },
-              "required": [
-                "five_hour_calls",
-                "weekly_calls"
-              ],
+              "required": ["five_hour_calls", "weekly_calls"],
               "additionalProperties": false
             },
             "batch_window": {
@@ -152,10 +141,7 @@
                   "type": "boolean"
                 }
               },
-              "required": [
-                "idle_min",
-                "require_ac"
-              ],
+              "required": ["idle_min", "require_ac"],
               "additionalProperties": false
             }
           },

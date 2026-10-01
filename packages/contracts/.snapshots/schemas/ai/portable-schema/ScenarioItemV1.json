@@ -28,10 +28,7 @@
             "maxLength": 2000
           }
         },
-        "required": [
-          "key",
-          "text_md"
-        ],
+        "required": ["key", "text_md"],
         "additionalProperties": false
       }
     },
@@ -68,12 +65,7 @@
                 "maximum": 1
               }
             },
-            "required": [
-              "key",
-              "label_ko",
-              "levels",
-              "weight"
-            ],
+            "required": ["key", "label_ko", "levels", "weight"],
             "additionalProperties": false
           }
         },
@@ -104,19 +96,12 @@
                 ]
               }
             },
-            "required": [
-              "key",
-              "statement_ko",
-              "ku_id"
-            ],
+            "required": ["key", "statement_ko", "ku_id"],
             "additionalProperties": false
           }
         }
       },
-      "required": [
-        "dimensions",
-        "key_points"
-      ],
+      "required": ["dimensions", "key_points"],
       "additionalProperties": false
     },
     "cited_ku_ids": {
@@ -137,14 +122,6 @@
       }
     }
   },
-  "required": [
-    "title_ko",
-    "scenario_md",
-    "question_md",
-    "options",
-    "rubric",
-    "cited_ku_ids",
-    "assumptions"
-  ],
+  "required": ["title_ko", "scenario_md", "question_md", "options", "rubric", "cited_ku_ids", "assumptions"],
   "additionalProperties": false
 }

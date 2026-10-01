@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/paths"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-CUR-019"
-      ]
+      "enum": ["FR-CUR-019"]
     },
     "deadlineMs": {
       "const": null
@@ -111,20 +107,12 @@
                     }
                   }
                 },
-                "required": [
-                  "path_id",
-                  "title_ko",
-                  "description_ko",
-                  "tracks",
-                  "concept_ids"
-                ],
+                "required": ["path_id", "title_ko", "description_ko", "tracks", "concept_ids"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "paths"
-          ],
+          "required": ["paths"],
           "additionalProperties": false
         }
       }

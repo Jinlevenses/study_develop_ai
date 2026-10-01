@@ -12,10 +12,7 @@
       "const": "/internal/v1/runner/platform"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "ops-api"]
     },
     "idempotent": {
       "const": false
@@ -30,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-LAB-012",
-        "NFR-PORT-001",
-        "CR-02"
-      ]
+      "enum": ["FR-LAB-012", "NFR-PORT-001", "CR-02"]
     },
     "deadlineMs": {
       "const": null
@@ -66,11 +59,7 @@
               "properties": {
                 "os": {
                   "type": "string",
-                  "enum": [
-                    "linux",
-                    "darwin",
-                    "win32"
-                  ]
+                  "enum": ["linux", "darwin", "win32"]
                 },
                 "arch": {
                   "type": "string",
@@ -81,11 +70,7 @@
                   "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
                 }
               },
-              "required": [
-                "os",
-                "arch",
-                "node"
-              ],
+              "required": ["os", "arch", "node"],
               "additionalProperties": false
             },
             "verified_platforms": {
@@ -96,11 +81,7 @@
                 "properties": {
                   "os": {
                     "type": "string",
-                    "enum": [
-                      "linux",
-                      "darwin",
-                      "win32"
-                    ]
+                    "enum": ["linux", "darwin", "win32"]
                   },
                   "arch": {
                     "type": "string",
@@ -111,11 +92,7 @@
                     "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
                   }
                 },
-                "required": [
-                  "os",
-                  "arch",
-                  "node"
-                ],
+                "required": ["os", "arch", "node"],
                 "additionalProperties": false
               }
             },
@@ -135,11 +112,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "not_verified",
-                    "watchdog_period_exceeded",
-                    "helper_unavailable"
-                  ]
+                  "enum": ["not_verified", "watchdog_period_exceeded", "helper_unavailable"]
                 },
                 {
                   "type": "null"
@@ -168,11 +141,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "running",
-                "queued",
-                "max_concurrency"
-              ],
+              "required": ["running", "queued", "max_concurrency"],
               "additionalProperties": false
             }
           },

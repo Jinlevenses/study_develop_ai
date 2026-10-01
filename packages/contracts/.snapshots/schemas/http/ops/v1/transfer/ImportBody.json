@@ -15,10 +15,6 @@
       "const": "merge"
     }
   },
-  "required": [
-    "op_id",
-    "path",
-    "mode"
-  ],
+  "required": ["op_id", "path", "mode"],
   "additionalProperties": false
 }

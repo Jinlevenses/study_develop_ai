@@ -20,11 +20,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "full",
-        "lite",
-        "skeleton"
-      ],
+      "required": ["full", "lite", "skeleton"],
       "additionalProperties": false
     },
     "offline_learnable": {
@@ -33,9 +29,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "three_stage",
-    "offline_learnable"
-  ],
+  "required": ["three_stage", "offline_learnable"],
   "additionalProperties": false
 }

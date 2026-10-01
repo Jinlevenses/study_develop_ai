@@ -23,10 +23,7 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "kp",
-              "dimension"
-            ]
+            "enum": ["kp", "dimension"]
           },
           "ku_id": {
             "anyOf": [
@@ -50,20 +47,11 @@
             }
           }
         },
-        "required": [
-          "label_ko",
-          "kind",
-          "ku_id",
-          "levels"
-        ],
+        "required": ["label_ko", "kind", "ku_id", "levels"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "attempt_id",
-    "overall_required",
-    "rubric"
-  ],
+  "required": ["attempt_id", "overall_required", "rubric"],
   "additionalProperties": false
 }

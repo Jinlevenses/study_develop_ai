@@ -55,27 +55,13 @@
         },
         "ai_mode": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         }
       },
-      "required": [
-        "policy_version",
-        "ai_mode"
-      ],
+      "required": ["policy_version", "ai_mode"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "track",
-    "from_level",
-    "to_level",
-    "provisional",
-    "profile"
-  ],
+  "required": ["track", "from_level", "to_level", "provisional", "profile"],
   "additionalProperties": false
 }

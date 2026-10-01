@@ -6,12 +6,7 @@
     },
     "billing_mode": {
       "type": "string",
-      "enum": [
-        "metered",
-        "subscription",
-        "free",
-        "local"
-      ]
+      "enum": ["metered", "subscription", "free", "local"]
     },
     "models_by_tier": {
       "type": "object",
@@ -50,11 +45,7 @@
           ]
         }
       },
-      "required": [
-        "low",
-        "mid",
-        "high"
-      ],
+      "required": ["low", "mid", "high"],
       "additionalProperties": false
     },
     "base_url": {
@@ -92,13 +83,6 @@
       ]
     }
   },
-  "required": [
-    "enabled",
-    "billing_mode",
-    "models_by_tier",
-    "base_url",
-    "max_concurrency",
-    "pinned_model"
-  ],
+  "required": ["enabled", "billing_mode", "models_by_tier", "base_url", "max_concurrency", "pinned_model"],
   "additionalProperties": false
 }

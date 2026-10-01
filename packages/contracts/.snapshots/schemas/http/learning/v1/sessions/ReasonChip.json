@@ -39,10 +39,6 @@
       ]
     }
   },
-  "required": [
-    "code",
-    "label_ko",
-    "value"
-  ],
+  "required": ["code", "label_ko", "value"],
   "additionalProperties": false
 }

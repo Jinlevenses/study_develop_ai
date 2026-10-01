@@ -25,10 +25,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "kind",
-            "factor"
-          ],
+          "required": ["kind", "factor"],
           "additionalProperties": false
         },
         {
@@ -75,22 +72,14 @@
               ]
             }
           },
-          "required": [
-            "kind",
-            "w_format",
-            "w_grader",
-            "gaming_factor"
-          ],
+          "required": ["kind", "w_format", "w_grader", "gaming_factor"],
           "additionalProperties": false
         }
       ]
     },
     "cause": {
       "type": "string",
-      "enum": [
-        "correction_halve",
-        "policy_recalc"
-      ]
+      "enum": ["correction_halve", "policy_recalc"]
     },
     "item_id": {
       "anyOf": [
@@ -124,14 +113,6 @@
       "pattern": "^ps_[0-9a-f]{16}$"
     }
   },
-  "required": [
-    "target_event_ids",
-    "adjustment",
-    "cause",
-    "item_id",
-    "gate_result_id",
-    "study_day",
-    "policy_version"
-  ],
+  "required": ["target_event_ids", "adjustment", "cause", "item_id", "gate_result_id", "study_day", "policy_version"],
   "additionalProperties": false
 }

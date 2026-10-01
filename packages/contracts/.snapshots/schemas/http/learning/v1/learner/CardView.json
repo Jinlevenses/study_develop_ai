@@ -17,26 +17,15 @@
     },
     "response_mode": {
       "type": "string",
-      "enum": [
-        "recognition",
-        "production"
-      ]
+      "enum": ["recognition", "production"]
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C"
-      ]
+      "enum": ["A", "B", "C"]
     },
     "status": {
       "type": "string",
-      "enum": [
-        "active",
-        "suspended",
-        "retired"
-      ]
+      "enum": ["active", "suspended", "retired"]
     },
     "due_at": {
       "anyOf": [

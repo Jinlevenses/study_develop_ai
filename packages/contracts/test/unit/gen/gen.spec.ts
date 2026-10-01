@@ -55,6 +55,13 @@ async function listFiles(dir: string): Promise<string[]> {
   return out;
 }
 const byCode = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
+// 2칸 들여쓰기 JSON·끝 줄바꿈 1개·탭 0·CR 0 (스칼라 배열은 biome 포맷처럼 한 줄에 들어가면 한 줄 — gen.ts fmtJson)
+const isTwoSpaceJson = (text: string): boolean =>
+  text.endsWith('}\n') &&
+  !text.endsWith('\n\n') &&
+  !text.includes('\t') &&
+  !text.includes('\r') &&
+  text.split('\n').every((l) => (l.length - l.trimStart().length) % 2 === 0);
 
 // IF-01 §9.3 카탈로그 표 23행(type → IF-EV · 생산 · 동결 · 슬라이스) — 문서에서 뽑은 기대 목록.
 const EVENTS: readonly (readonly [string, string, string, 'D' | 'O', string])[] = [
@@ -417,7 +424,7 @@ describe('contracts:gen — 생성 결정성·스냅샷·레지스트리·라우
         EVENT_PAYLOADS[type as keyof typeof EVENT_PAYLOADS][1],
       ) as Record<string, unknown>;
       expect(json, type).toEqual(expected);
-      expect(text, type).toBe(`${JSON.stringify(expected, null, 2)}\n`);
+      expect(isTwoSpaceJson(text), type).toBe(true);
       expect(json.type, type).toBe('object');
     }
     // check:consumers가 읽는 모양 — Verdict 스냅샷에 reads 필드가 전부 있다
@@ -457,7 +464,7 @@ describe('contracts:gen — 생성 결정성·스냅샷·레지스트리·라우
     for (const p of paths) {
       const text = files.get(p) ?? '';
       const json: unknown = JSON.parse(text);
-      expect(text, p).toBe(`${JSON.stringify(json, null, 2)}\n`);
+      expect(isTwoSpaceJson(text), p).toBe(true);
       expect((json as Record<string, unknown>).$schema, p).toBeUndefined();
     }
     // 대표 파일(Brief 예시)

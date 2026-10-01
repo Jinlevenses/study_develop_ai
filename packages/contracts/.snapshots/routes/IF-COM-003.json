@@ -12,9 +12,7 @@
       "const": "/internal/v1/metrics"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": false

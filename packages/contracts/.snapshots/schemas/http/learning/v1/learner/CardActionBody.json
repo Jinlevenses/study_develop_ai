@@ -3,15 +3,9 @@
   "properties": {
     "reason": {
       "type": "string",
-      "enum": [
-        "user",
-        "leech",
-        "irrelevant"
-      ]
+      "enum": ["user", "leech", "irrelevant"]
     }
   },
-  "required": [
-    "reason"
-  ],
+  "required": ["reason"],
   "additionalProperties": false
 }

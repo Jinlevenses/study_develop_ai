@@ -10,10 +10,7 @@
       "type": "object",
       "properties": {
         "ratio": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "n": {
           "type": "integer",
@@ -21,29 +18,17 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "ratio",
-        "n"
-      ],
+      "required": ["ratio", "n"],
       "additionalProperties": false
     },
     "brier": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "ece": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "overconfidence": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     },
     "bins": {
       "minItems": 3,
@@ -86,11 +71,7 @@
             ]
           }
         },
-        "required": [
-          "confidence",
-          "n",
-          "accuracy"
-        ],
+        "required": ["confidence", "n", "accuracy"],
         "additionalProperties": false
       }
     },
@@ -109,10 +90,7 @@
             "type": "number"
           }
         },
-        "required": [
-          "concept_id",
-          "gap"
-        ],
+        "required": ["concept_id", "gap"],
         "additionalProperties": false
       }
     },
@@ -172,11 +150,7 @@
             ]
           }
         },
-        "required": [
-          "track",
-          "declared_level",
-          "proved_level"
-        ],
+        "required": ["track", "declared_level", "proved_level"],
         "additionalProperties": false
       }
     },
@@ -186,10 +160,7 @@
           "type": "object",
           "properties": {
             "coefficient": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             },
             "n": {
               "type": "integer",
@@ -197,10 +168,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "coefficient",
-            "n"
-          ],
+          "required": ["coefficient", "n"],
           "additionalProperties": false
         },
         {

@@ -1,4 +1,4 @@
-// IF-01 §2.6.3 서비스 고유 코드 표의 비-CLI 행(문서 순서) — 문서에서 뽑은 기대 목록(UT-CON-210). CLI-* 3개는 apps/cli 소유라 제외.
+// IF-01 §2.6.3 서비스 고유 코드 표의 비-CLI 행(문서 순서) — 문서에서 뽑은 기대 목록(전 레지스트리 교차 점검용). CLI-* 3개는 apps/cli 소유라 제외.
 export const EXPECTED_GW_CODES: readonly string[] = [
   'GW-AUTH-001',
   'GW-AUTH-002',

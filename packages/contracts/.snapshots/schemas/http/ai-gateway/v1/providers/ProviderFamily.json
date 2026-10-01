@@ -1,11 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "anthropic",
-    "openai",
-    "google",
-    "typesafe",
-    "local",
-    "other"
-  ]
+  "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
 }

@@ -12,9 +12,7 @@
       "const": "/api/v1/cli/upgrade"
     },
     "allowedCallers": {
-      "enum": [
-        "cli"
-      ]
+      "enum": ["cli"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-SET-007",
-        "CR-17"
-      ]
+      "enum": ["FR-SET-007", "CR-17"]
     },
     "deadlineMs": {
       "const": null
@@ -68,11 +63,7 @@
                   "maxLength": 1024
                 }
               },
-              "required": [
-                "action",
-                "op_id",
-                "bundle_path"
-              ],
+              "required": ["action", "op_id", "bundle_path"],
               "additionalProperties": false
             },
             {
@@ -87,10 +78,7 @@
                   "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
                 }
               },
-              "required": [
-                "action",
-                "op_id"
-              ],
+              "required": ["action", "op_id"],
               "additionalProperties": false
             }
           ]
@@ -124,13 +112,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "queued",
-                "running",
-                "succeeded",
-                "failed",
-                "cancelled"
-              ]
+              "enum": ["queued", "running", "succeeded", "failed", "cancelled"]
             },
             "progress": {
               "type": "object",
@@ -152,10 +134,7 @@
                   ]
                 }
               },
-              "required": [
-                "step",
-                "pct"
-              ],
+              "required": ["step", "pct"],
               "additionalProperties": false
             },
             "correlation_id": {
@@ -196,18 +175,11 @@
                         },
                         "backup_kind": {
                           "type": "string",
-                          "enum": [
-                            "snapshot",
-                            "incremental"
-                          ]
+                          "enum": ["snapshot", "incremental"]
                         },
                         "outcome": {
                           "type": "string",
-                          "enum": [
-                            "ok",
-                            "aborted",
-                            "failed"
-                          ]
+                          "enum": ["ok", "aborted", "failed"]
                         },
                         "reason": {
                           "anyOf": [
@@ -237,15 +209,7 @@
                           ]
                         }
                       },
-                      "required": [
-                        "kind",
-                        "epoch_id",
-                        "backup_kind",
-                        "outcome",
-                        "reason",
-                        "bytes",
-                        "manifest_sha256"
-                      ],
+                      "required": ["kind", "epoch_id", "backup_kind", "outcome", "reason", "bytes", "manifest_sha256"],
                       "additionalProperties": false
                     },
                     {
@@ -260,10 +224,7 @@
                           "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
                         },
                         "projection_match": {
-                          "type": [
-                            "boolean",
-                            "null"
-                          ]
+                          "type": ["boolean", "null"]
                         },
                         "incrementals_applied": {
                           "type": "integer",
@@ -276,13 +237,7 @@
                           "maximum": 9007199254740991
                         }
                       },
-                      "required": [
-                        "kind",
-                        "epoch_id",
-                        "projection_match",
-                        "incrementals_applied",
-                        "rto_ms"
-                      ],
+                      "required": ["kind", "epoch_id", "projection_match", "incrementals_applied", "rto_ms"],
                       "additionalProperties": false
                     },
                     {
@@ -303,19 +258,10 @@
                           "type": "boolean"
                         },
                         "projection_match": {
-                          "type": [
-                            "boolean",
-                            "null"
-                          ]
+                          "type": ["boolean", "null"]
                         }
                       },
-                      "required": [
-                        "kind",
-                        "epoch_id",
-                        "checksums_ok",
-                        "row_counts_ok",
-                        "projection_match"
-                      ],
+                      "required": ["kind", "epoch_id", "checksums_ok", "row_counts_ok", "projection_match"],
                       "additionalProperties": false
                     },
                     {
@@ -349,20 +295,12 @@
                                 "maximum": 9007199254740991
                               }
                             },
-                            "required": [
-                              "path",
-                              "sha256",
-                              "bytes"
-                            ],
+                            "required": ["path", "sha256", "bytes"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "kind",
-                        "checkpoint_id",
-                        "files"
-                      ],
+                      "required": ["kind", "checkpoint_id", "files"],
                       "additionalProperties": false
                     },
                     {
@@ -395,12 +333,7 @@
                               "maximum": 9007199254740991
                             }
                           },
-                          "required": [
-                            "import_id",
-                            "inserted",
-                            "skipped_duplicates",
-                            "violations"
-                          ],
+                          "required": ["import_id", "inserted", "skipped_duplicates", "violations"],
                           "additionalProperties": false
                         },
                         "overlays": {
@@ -428,12 +361,7 @@
                                   "maximum": 9007199254740991
                                 }
                               },
-                              "required": [
-                                "import_id",
-                                "inserted",
-                                "skipped",
-                                "conflicts"
-                              ],
+                              "required": ["import_id", "inserted", "skipped", "conflicts"],
                               "additionalProperties": false
                             },
                             {
@@ -461,11 +389,7 @@
                                   "maximum": 9007199254740991
                                 }
                               },
-                              "required": [
-                                "import_id",
-                                "inserted",
-                                "skipped"
-                              ],
+                              "required": ["import_id", "inserted", "skipped"],
                               "additionalProperties": false
                             },
                             {
@@ -485,13 +409,7 @@
                           ]
                         }
                       },
-                      "required": [
-                        "kind",
-                        "ledger",
-                        "overlays",
-                        "gold",
-                        "held_file"
-                      ],
+                      "required": ["kind", "ledger", "overlays", "gold", "held_file"],
                       "additionalProperties": false
                     },
                     {
@@ -521,13 +439,7 @@
                           "maximum": 9007199254740991
                         }
                       },
-                      "required": [
-                        "kind",
-                        "report_id",
-                        "fail",
-                        "warn",
-                        "fixed"
-                      ],
+                      "required": ["kind", "report_id", "fail", "warn", "fixed"],
                       "additionalProperties": false
                     },
                     {
@@ -553,13 +465,7 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "kind",
-                        "from_version",
-                        "to_version",
-                        "pre_epoch_id",
-                        "rolled_back"
-                      ],
+                      "required": ["kind", "from_version", "to_version", "pre_epoch_id", "rolled_back"],
                       "additionalProperties": false
                     },
                     {
@@ -583,12 +489,7 @@
                           "maximum": 9007199254740991
                         }
                       },
-                      "required": [
-                        "kind",
-                        "to_version",
-                        "restored_epoch_id",
-                        "held_events"
-                      ],
+                      "required": ["kind", "to_version", "restored_epoch_id", "held_events"],
                       "additionalProperties": false
                     },
                     {
@@ -599,9 +500,7 @@
                           "const": "shutdown"
                         }
                       },
-                      "required": [
-                        "kind"
-                      ],
+                      "required": ["kind"],
                       "additionalProperties": false
                     },
                     {
@@ -613,13 +512,7 @@
                         },
                         "svc": {
                           "type": "string",
-                          "enum": [
-                            "gateway",
-                            "content",
-                            "learning",
-                            "ai-gateway",
-                            "ops-api"
-                          ]
+                          "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                         },
                         "pid": {
                           "anyOf": [
@@ -634,11 +527,7 @@
                           ]
                         }
                       },
-                      "required": [
-                        "kind",
-                        "svc",
-                        "pid"
-                      ],
+                      "required": ["kind", "svc", "pid"],
                       "additionalProperties": false
                     }
                   ]
@@ -713,23 +602,13 @@
                             "maxLength": 60
                           }
                         },
-                        "required": [
-                          "path",
-                          "message",
-                          "rule"
-                        ],
+                        "required": ["path", "message", "rule"],
                         "additionalProperties": false
                       }
                     },
                     "dependency": {
                       "type": "string",
-                      "enum": [
-                        "gateway",
-                        "content",
-                        "learning",
-                        "ai-gateway",
-                        "ops-api"
-                      ]
+                      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                     },
                     "acked_through_seq": {
                       "type": "integer",
@@ -752,15 +631,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "type",
-                    "title",
-                    "status",
-                    "code",
-                    "error_id",
-                    "request_id",
-                    "retryable"
-                  ],
+                  "required": ["type", "title", "status", "code", "error_id", "request_id", "retryable"],
                   "additionalProperties": false
                 },
                 {

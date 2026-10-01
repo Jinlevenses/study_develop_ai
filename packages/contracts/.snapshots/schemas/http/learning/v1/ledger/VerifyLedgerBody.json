@@ -16,11 +16,7 @@
         "properties": {
           "source": {
             "type": "string",
-            "enum": [
-              "epoch",
-              "checkpoint",
-              "export_header"
-            ]
+            "enum": ["epoch", "checkpoint", "export_header"]
           },
           "ref": {
             "type": "string",
@@ -45,27 +41,16 @@
                   "pattern": "^[0-9a-f]{64}$"
                 }
               },
-              "required": [
-                "seq",
-                "hash"
-              ],
+              "required": ["seq", "hash"],
               "additionalProperties": false
             }
           }
         },
-        "required": [
-          "source",
-          "ref",
-          "heads"
-        ],
+        "required": ["source", "ref", "heads"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "verify_id",
-    "replay",
-    "anchors"
-  ],
+  "required": ["verify_id", "replay", "anchors"],
   "additionalProperties": false
 }

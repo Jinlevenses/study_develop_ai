@@ -12,9 +12,7 @@
       "const": "/api/v1/evidence/events/{ledger_event_id}:confirm-rating"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-QST-020"
-      ]
+      "enum": ["FR-QST-020"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "ledger_event_id"
-          ],
+          "required": ["ledger_event_id"],
           "additionalProperties": false
         },
         "body": {
@@ -88,10 +82,7 @@
               ]
             }
           },
-          "required": [
-            "accept",
-            "rating"
-          ],
+          "required": ["accept", "rating"],
           "additionalProperties": false
         }
       }
@@ -127,10 +118,7 @@
               ]
             }
           },
-          "required": [
-            "ledger_event_id",
-            "applied_rating"
-          ],
+          "required": ["ledger_event_id", "applied_rating"],
           "additionalProperties": false
         }
       }

@@ -5,8 +5,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "locked"
-  ],
+  "required": ["locked"],
   "additionalProperties": false
 }

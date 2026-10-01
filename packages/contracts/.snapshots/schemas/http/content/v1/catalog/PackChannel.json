@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "seed",
-    "local",
-    "user"
-  ]
+  "enum": ["seed", "local", "user"]
 }

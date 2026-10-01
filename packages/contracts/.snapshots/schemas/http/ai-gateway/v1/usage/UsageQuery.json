@@ -4,14 +4,9 @@
     "period": {
       "default": "month",
       "type": "string",
-      "enum": [
-        "day",
-        "month"
-      ]
+      "enum": ["day", "month"]
     }
   },
-  "required": [
-    "period"
-  ],
+  "required": ["period"],
   "additionalProperties": false
 }

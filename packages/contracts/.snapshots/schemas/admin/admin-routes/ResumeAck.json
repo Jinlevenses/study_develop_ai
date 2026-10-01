@@ -11,9 +11,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "epoch_id",
-    "resumed_at"
-  ],
+  "required": ["epoch_id", "resumed_at"],
   "additionalProperties": false
 }

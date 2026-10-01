@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "pass",
-    "fail",
-    "unknown"
-  ]
+  "enum": ["pass", "fail", "unknown"]
 }

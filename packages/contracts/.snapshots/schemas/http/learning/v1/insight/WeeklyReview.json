@@ -20,10 +20,7 @@
           "type": "number"
         },
         "delta": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "params": {
           "type": "string",
@@ -38,13 +35,7 @@
           "maximum": 8640000000000000
         }
       },
-      "required": [
-        "value",
-        "delta",
-        "params",
-        "params_provisional",
-        "computed_at"
-      ],
+      "required": ["value", "delta", "params", "params_provisional", "computed_at"],
       "additionalProperties": false
     },
     "weak_top5": {
@@ -63,46 +54,24 @@
           },
           "reason_code": {
             "type": "string",
-            "enum": [
-              "low_retention",
-              "illusion",
-              "misconception",
-              "foundation_crack",
-              "leech"
-            ]
+            "enum": ["low_retention", "illusion", "misconception", "foundation_crack", "leech"]
           },
           "nba": {
             "type": "object",
             "properties": {
               "kind": {
                 "type": "string",
-                "enum": [
-                  "learn",
-                  "practice",
-                  "verify",
-                  "dig",
-                  "case",
-                  "review",
-                  "revalidate"
-                ]
+                "enum": ["learn", "practice", "verify", "dig", "case", "review", "revalidate"]
               },
               "label_ko": {
                 "type": "string"
               }
             },
-            "required": [
-              "kind",
-              "label_ko"
-            ],
+            "required": ["kind", "label_ko"],
             "additionalProperties": false
           }
         },
-        "required": [
-          "concept_id",
-          "title_ko",
-          "reason_code",
-          "nba"
-        ],
+        "required": ["concept_id", "title_ko", "reason_code", "nba"],
         "additionalProperties": false
       }
     },
@@ -134,11 +103,7 @@
             ]
           }
         },
-        "required": [
-          "mc_id",
-          "count",
-          "meta_family"
-        ],
+        "required": ["mc_id", "count", "meta_family"],
         "additionalProperties": false
       }
     },
@@ -163,11 +128,7 @@
             "maximum": 1
           }
         },
-        "required": [
-          "mode_id",
-          "blocks",
-          "share"
-        ],
+        "required": ["mode_id", "blocks", "share"],
         "additionalProperties": false
       }
     },
@@ -181,32 +142,20 @@
           "type": "number"
         }
       },
-      "required": [
-        "h",
-        "h_min"
-      ],
+      "required": ["h", "h_min"],
       "additionalProperties": false
     },
     "calibration": {
       "type": "object",
       "properties": {
         "cbm_ratio": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         },
         "brier": {
-          "type": [
-            "number",
-            "null"
-          ]
+          "type": ["number", "null"]
         }
       },
-      "required": [
-        "cbm_ratio",
-        "brier"
-      ],
+      "required": ["cbm_ratio", "brier"],
       "additionalProperties": false
     },
     "forecast": {
@@ -230,18 +179,12 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "low",
-            "high"
-          ],
+          "required": ["low", "high"],
           "additionalProperties": false
         },
         "band_source": {
           "type": "string",
-          "enum": [
-            "user_history",
-            "default_15pct"
-          ]
+          "enum": ["user_history", "default_15pct"]
         },
         "history_windows": {
           "type": "integer",
@@ -250,10 +193,7 @@
         },
         "method": {
           "type": "string",
-          "enum": [
-            "model",
-            "observed"
-          ]
+          "enum": ["model", "observed"]
         },
         "method_provisional": {
           "type": "boolean",
@@ -274,11 +214,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "daily_budget",
-            "lower_bound_exceeds_budget",
-            "new_cards_throttled"
-          ],
+          "required": ["daily_budget", "lower_bound_exceeds_budget", "new_cards_throttled"],
           "additionalProperties": false
         },
         "computed_at": {
@@ -319,10 +255,7 @@
       ]
     },
     "reflection_md": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     }
   },
   "required": [

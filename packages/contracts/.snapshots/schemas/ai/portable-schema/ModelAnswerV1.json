@@ -19,17 +19,11 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "key",
-          "covered"
-        ],
+        "required": ["key", "covered"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "body_md",
-    "kp_coverage"
-  ],
+  "required": ["body_md", "kp_coverage"],
   "additionalProperties": false
 }

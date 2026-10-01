@@ -12,9 +12,7 @@
       "const": "/internal/v1/banners/{banner_id}:dismiss"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-017"
-      ]
+      "enum": ["FR-SET-017"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "banner_id"
-          ],
+          "required": ["banner_id"],
           "additionalProperties": false
         }
       }

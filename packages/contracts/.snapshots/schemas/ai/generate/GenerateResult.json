@@ -49,12 +49,7 @@
           "properties": {
             "basis": {
               "type": "string",
-              "enum": [
-                "reported",
-                "computed",
-                "subscription",
-                "free"
-              ]
+              "enum": ["reported", "computed", "subscription", "free"]
             },
             "krw": {
               "type": "number",
@@ -72,11 +67,7 @@
               ]
             }
           },
-          "required": [
-            "basis",
-            "krw",
-            "usd"
-          ],
+          "required": ["basis", "krw", "usd"],
           "additionalProperties": false
         },
         "latency_ms": {
@@ -130,14 +121,7 @@
           "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
         }
       },
-      "required": [
-        "status",
-        "stream_ref",
-        "expires_at",
-        "provider_id",
-        "prompt_version",
-        "call_id"
-      ],
+      "required": ["status", "stream_ref", "expires_at", "provider_id", "prompt_version", "call_id"],
       "additionalProperties": false
     },
     {
@@ -178,11 +162,7 @@
           ]
         }
       },
-      "required": [
-        "status",
-        "reason",
-        "retry_after_ms"
-      ],
+      "required": ["status", "reason", "retry_after_ms"],
       "additionalProperties": false
     }
   ]

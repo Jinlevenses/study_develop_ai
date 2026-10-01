@@ -43,16 +43,10 @@
           "maxItems": 3
         }
       },
-      "required": [
-        "correct",
-        "wrong"
-      ],
+      "required": ["correct", "wrong"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "version",
-    "score"
-  ],
+  "required": ["version", "score"],
   "additionalProperties": false
 }

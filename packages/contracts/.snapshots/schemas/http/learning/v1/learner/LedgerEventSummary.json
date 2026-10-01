@@ -108,12 +108,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "correct",
-            "partial",
-            "incorrect",
-            "pending"
-          ]
+          "enum": ["correct", "partial", "incorrect", "pending"]
         },
         {
           "type": "null"
@@ -136,14 +131,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "D",
-            "J",
-            "LJ",
-            "H",
-            "S",
-            "PENDING"
-          ]
+          "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
         },
         {
           "type": "null"
@@ -154,16 +142,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "none",
-            "ai",
-            "ai_uncalibrated",
-            "ai_confirm",
-            "ai_estimate_confirm",
-            "heuristic",
-            "self",
-            "pending"
-          ]
+          "enum": ["none", "ai", "ai_uncalibrated", "ai_confirm", "ai_estimate_confirm", "heuristic", "self", "pending"]
         },
         {
           "type": "null"

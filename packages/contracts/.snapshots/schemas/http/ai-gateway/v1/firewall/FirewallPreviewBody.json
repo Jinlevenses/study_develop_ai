@@ -18,12 +18,7 @@
           },
           "data_class": {
             "type": "string",
-            "enum": [
-              "C0",
-              "C1",
-              "C2",
-              "C3"
-            ]
+            "enum": ["C0", "C1", "C2", "C3"]
           },
           "untrusted": {
             "type": "boolean"
@@ -40,27 +35,15 @@
             ]
           }
         },
-        "required": [
-          "key",
-          "text",
-          "data_class",
-          "untrusted",
-          "source_ref"
-        ],
+        "required": ["key", "text", "data_class", "untrusted", "source_ref"],
         "additionalProperties": false
       }
     },
     "route": {
       "type": "string",
-      "enum": [
-        "external",
-        "local_only"
-      ]
+      "enum": ["external", "local_only"]
     }
   },
-  "required": [
-    "blocks",
-    "route"
-  ],
+  "required": ["blocks", "route"],
   "additionalProperties": false
 }

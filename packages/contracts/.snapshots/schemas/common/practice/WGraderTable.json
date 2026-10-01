@@ -41,15 +41,6 @@
       "const": 0
     }
   },
-  "required": [
-    "D",
-    "J_calibrated",
-    "J_uncalibrated",
-    "J_low_confidence",
-    "LJ",
-    "H",
-    "S",
-    "PENDING"
-  ],
+  "required": ["D", "J_calibrated", "J_uncalibrated", "J_low_confidence", "LJ", "H", "S", "PENDING"],
   "additionalProperties": false
 }

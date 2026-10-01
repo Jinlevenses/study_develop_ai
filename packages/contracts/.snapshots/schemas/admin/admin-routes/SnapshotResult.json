@@ -7,13 +7,7 @@
     },
     "svc": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "files": {
       "minItems": 1,
@@ -23,12 +17,7 @@
         "properties": {
           "file": {
             "type": "string",
-            "enum": [
-              "content.db",
-              "learning.db",
-              "ai.db",
-              "ops.db"
-            ]
+            "enum": ["content.db", "learning.db", "ai.db", "ops.db"]
           },
           "sha256": {
             "type": "string",
@@ -40,11 +29,7 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "file",
-          "sha256",
-          "bytes"
-        ],
+        "required": ["file", "sha256", "bytes"],
         "additionalProperties": false
       }
     },
@@ -69,51 +54,27 @@
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "enum": [
-          "gateway",
-          "content",
-          "learning",
-          "ai-gateway",
-          "ops-api"
-        ]
+        "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
       },
       "additionalProperties": {
         "type": "integer",
         "minimum": 0,
         "maximum": 9007199254740991
       },
-      "required": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "inbox_watermark": {
       "type": "object",
       "propertyNames": {
         "type": "string",
-        "enum": [
-          "gateway",
-          "content",
-          "learning",
-          "ai-gateway",
-          "ops-api"
-        ]
+        "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
       },
       "additionalProperties": {
         "type": "integer",
         "minimum": 0,
         "maximum": 9007199254740991
       },
-      "required": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "projection_hash": {
       "type": "string",
@@ -142,10 +103,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "seq",
-          "hash"
-        ],
+        "required": ["seq", "hash"],
         "additionalProperties": false
       }
     },
@@ -155,15 +113,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "epoch_id",
-    "svc",
-    "files",
-    "schema",
-    "outbox_head_seq",
-    "delivery",
-    "inbox_watermark",
-    "duration_ms"
-  ],
+  "required": ["epoch_id", "svc", "files", "schema", "outbox_head_seq", "delivery", "inbox_watermark", "duration_ms"],
   "additionalProperties": false
 }

@@ -15,9 +15,7 @@
               "const": "all"
             }
           },
-          "required": [
-            "kind"
-          ],
+          "required": ["kind"],
           "additionalProperties": false
         },
         {
@@ -32,10 +30,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "kind",
-            "checkpoint_id"
-          ],
+          "required": ["kind", "checkpoint_id"],
           "additionalProperties": false
         }
       ]
@@ -58,21 +53,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "ledger",
-          "overlays",
-          "settings",
-          "gold",
-          "markdown_notes"
-        ]
+        "enum": ["ledger", "overlays", "settings", "gold", "markdown_notes"]
       }
     }
   },
-  "required": [
-    "op_id",
-    "since",
-    "out_dir",
-    "include"
-  ],
+  "required": ["op_id", "since", "out_dir", "include"],
   "additionalProperties": false
 }

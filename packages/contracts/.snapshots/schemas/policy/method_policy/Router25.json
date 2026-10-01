@@ -2,25 +2,13 @@
   "type": "object",
   "propertyNames": {
     "type": "string",
-    "enum": [
-      "D",
-      "C",
-      "P",
-      "S",
-      "M"
-    ]
+    "enum": ["D", "C", "P", "S", "M"]
   },
   "additionalProperties": {
     "type": "object",
     "propertyNames": {
       "type": "string",
-      "enum": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5"
-      ]
+      "enum": ["1", "2", "3", "4", "5"]
     },
     "additionalProperties": {
       "type": "object",
@@ -73,28 +61,14 @@
               "type": "object",
               "propertyNames": {
                 "type": "string",
-                "enum": [
-                  "remember",
-                  "understand",
-                  "apply",
-                  "analyze",
-                  "evaluate",
-                  "create"
-                ]
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
               },
               "additionalProperties": {
                 "type": "number",
                 "minimum": 0,
                 "maximum": 1
               },
-              "required": [
-                "remember",
-                "understand",
-                "apply",
-                "analyze",
-                "evaluate",
-                "create"
-              ]
+              "required": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
             },
             {
               "type": "null"
@@ -103,12 +77,7 @@
         },
         "scaffolding": {
           "type": "string",
-          "enum": [
-            "full",
-            "faded",
-            "minimal",
-            "none"
-          ]
+          "enum": ["full", "faded", "minimal", "none"]
         },
         "digging_depth_max": {
           "anyOf": [
@@ -123,27 +92,10 @@
           ]
         }
       },
-      "required": [
-        "formats",
-        "bloom",
-        "scaffolding",
-        "digging_depth_max"
-      ],
+      "required": ["formats", "bloom", "scaffolding", "digging_depth_max"],
       "additionalProperties": false
     },
-    "required": [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5"
-    ]
+    "required": ["1", "2", "3", "4", "5"]
   },
-  "required": [
-    "D",
-    "C",
-    "P",
-    "S",
-    "M"
-  ]
+  "required": ["D", "C", "P", "S", "M"]
 }

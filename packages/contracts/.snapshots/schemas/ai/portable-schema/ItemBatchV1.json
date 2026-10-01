@@ -10,12 +10,7 @@
         "properties": {
           "format": {
             "type": "string",
-            "enum": [
-              "mcq",
-              "ox",
-              "cloze",
-              "short"
-            ]
+            "enum": ["mcq", "ox", "cloze", "short"]
           },
           "stem_md": {
             "type": "string",
@@ -48,11 +43,7 @@
                   ]
                 }
               },
-              "required": [
-                "key",
-                "text_md",
-                "mc_id"
-              ],
+              "required": ["key", "text_md", "mc_id"],
               "additionalProperties": false
             }
           },
@@ -88,14 +79,7 @@
           },
           "bloom": {
             "type": "string",
-            "enum": [
-              "remember",
-              "understand",
-              "apply",
-              "analyze",
-              "evaluate",
-              "create"
-            ]
+            "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
           },
           "difficulty": {
             "type": "integer",
@@ -127,8 +111,6 @@
       }
     }
   },
-  "required": [
-    "items"
-  ],
+  "required": ["items"],
   "additionalProperties": false
 }

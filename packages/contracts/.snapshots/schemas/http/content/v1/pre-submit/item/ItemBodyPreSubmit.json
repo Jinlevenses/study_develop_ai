@@ -8,9 +8,7 @@
           "const": "ox"
         }
       },
-      "required": [
-        "kind"
-      ],
+      "required": ["kind"],
       "additionalProperties": false
     },
     {
@@ -34,9 +32,7 @@
                 "maxLength": 2000
               }
             },
-            "required": [
-              "text_md"
-            ],
+            "required": ["text_md"],
             "additionalProperties": false
           }
         },
@@ -53,12 +49,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "kind",
-        "options",
-        "order",
-        "multi"
-      ],
+      "required": ["kind", "options", "order", "multi"],
       "additionalProperties": false
     },
     {
@@ -85,11 +76,7 @@
           ]
         }
       },
-      "required": [
-        "kind",
-        "max_chars",
-        "placeholder_ko"
-      ],
+      "required": ["kind", "max_chars", "placeholder_ko"],
       "additionalProperties": false
     },
     {
@@ -118,18 +105,12 @@
                 "maximum": 500
               }
             },
-            "required": [
-              "max_chars"
-            ],
+            "required": ["max_chars"],
             "additionalProperties": false
           }
         }
       },
-      "required": [
-        "kind",
-        "template_md",
-        "blanks"
-      ],
+      "required": ["kind", "template_md", "blanks"],
       "additionalProperties": false
     },
     {
@@ -162,11 +143,7 @@
           }
         }
       },
-      "required": [
-        "kind",
-        "left",
-        "right"
-      ],
+      "required": ["kind", "left", "right"],
       "additionalProperties": false
     },
     {
@@ -178,18 +155,11 @@
         },
         "lang": {
           "type": "string",
-          "enum": [
-            "js",
-            "ts"
-          ]
+          "enum": ["js", "ts"]
         },
         "mode": {
           "type": "string",
-          "enum": [
-            "write",
-            "predict_output",
-            "fix"
-          ]
+          "enum": ["write", "predict_output", "fix"]
         },
         "starter": {
           "type": "string",
@@ -210,14 +180,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "kind",
-        "lang",
-        "mode",
-        "starter",
-        "public_tests_md",
-        "runnable"
-      ],
+      "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
       "additionalProperties": false
     },
     {
@@ -239,12 +202,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "kind",
-        "schema_md",
-        "starter",
-        "runnable"
-      ],
+      "required": ["kind", "schema_md", "starter", "runnable"],
       "additionalProperties": false
     },
     {
@@ -279,12 +237,7 @@
           "maximum": 20
         }
       },
-      "required": [
-        "kind",
-        "lines",
-        "order",
-        "max_select"
-      ],
+      "required": ["kind", "lines", "order", "max_select"],
       "additionalProperties": false
     },
     {
@@ -306,10 +259,7 @@
           ]
         }
       },
-      "required": [
-        "kind",
-        "unit_hint"
-      ],
+      "required": ["kind", "unit_hint"],
       "additionalProperties": false
     },
     {
@@ -356,21 +306,12 @@
                 "maxLength": 60
               }
             },
-            "required": [
-              "key",
-              "label_ko"
-            ],
+            "required": ["key", "label_ko"],
             "additionalProperties": false
           }
         }
       },
-      "required": [
-        "kind",
-        "min_chars",
-        "max_chars",
-        "kp_count",
-        "rubric_dims"
-      ],
+      "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
       "additionalProperties": false
     },
     {
@@ -404,17 +345,12 @@
                         "maxLength": 1000
                       }
                     },
-                    "required": [
-                      "text_md"
-                    ],
+                    "required": ["text_md"],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": [
-                "stem_md",
-                "options"
-              ],
+              "required": ["stem_md", "options"],
               "additionalProperties": false
             },
             "b": {
@@ -438,35 +374,23 @@
                         "maxLength": 1000
                       }
                     },
-                    "required": [
-                      "text_md"
-                    ],
+                    "required": ["text_md"],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": [
-                "stem_md",
-                "options"
-              ],
+              "required": ["stem_md", "options"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "a",
-            "b"
-          ],
+          "required": ["a", "b"],
           "additionalProperties": false
         },
         "pivot_required": {
           "type": "boolean"
         }
       },
-      "required": [
-        "kind",
-        "parts",
-        "pivot_required"
-      ],
+      "required": ["kind", "parts", "pivot_required"],
       "additionalProperties": false
     },
     {
@@ -500,12 +424,7 @@
           }
         }
       },
-      "required": [
-        "kind",
-        "diff_md",
-        "lines",
-        "order"
-      ],
+      "required": ["kind", "diff_md", "lines", "order"],
       "additionalProperties": false
     },
     {
@@ -527,18 +446,10 @@
         },
         "item_format": {
           "type": "string",
-          "enum": [
-            "mcq",
-            "ox",
-            "short"
-          ]
+          "enum": ["mcq", "ox", "short"]
         }
       },
-      "required": [
-        "kind",
-        "target_ku_ids",
-        "item_format"
-      ],
+      "required": ["kind", "target_ku_ids", "item_format"],
       "additionalProperties": false
     },
     {
@@ -566,9 +477,7 @@
                 "maxLength": 2000
               }
             },
-            "required": [
-              "text_md"
-            ],
+            "required": ["text_md"],
             "additionalProperties": false
           }
         },
@@ -582,20 +491,10 @@
         },
         "rationale": {
           "type": "string",
-          "enum": [
-            "none",
-            "optional",
-            "required"
-          ]
+          "enum": ["none", "optional", "required"]
         }
       },
-      "required": [
-        "kind",
-        "node_key",
-        "options",
-        "order",
-        "rationale"
-      ],
+      "required": ["kind", "node_key", "options", "order", "rationale"],
       "additionalProperties": false
     }
   ]

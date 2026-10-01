@@ -12,9 +12,7 @@
       "const": "/internal/v1/activity"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": false
@@ -76,11 +74,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "last_user_activity_at",
-            "idle_ms",
-            "active_streams"
-          ],
+          "required": ["last_user_activity_at", "idle_ms", "active_streams"],
           "additionalProperties": false
         }
       }

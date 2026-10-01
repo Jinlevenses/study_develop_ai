@@ -23,13 +23,7 @@
           },
           "grade": {
             "type": "string",
-            "enum": [
-              "A",
-              "B",
-              "C",
-              "D",
-              "P"
-            ]
+            "enum": ["A", "B", "C", "D", "P"]
           },
           "url": {
             "anyOf": [
@@ -69,15 +63,7 @@
             ]
           }
         },
-        "required": [
-          "source_id",
-          "title",
-          "grade",
-          "url",
-          "edition",
-          "license",
-          "retrieved_at"
-        ],
+        "required": ["source_id", "title", "grade", "url", "edition", "license", "retrieved_at"],
         "additionalProperties": false
       }
     },
@@ -120,12 +106,7 @@
             ]
           }
         },
-        "required": [
-          "ku_id",
-          "source_id",
-          "locator",
-          "quote_ko"
-        ],
+        "required": ["ku_id", "source_id", "locator", "quote_ko"],
         "additionalProperties": false
       }
     },
@@ -145,19 +126,11 @@
             "maxLength": 2000
           }
         },
-        "required": [
-          "ku_id",
-          "note_md"
-        ],
+        "required": ["ku_id", "note_md"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "concept_id",
-    "sources",
-    "ku_spans",
-    "disagreements"
-  ],
+  "required": ["concept_id", "sources", "ku_spans", "disagreements"],
   "additionalProperties": false
 }

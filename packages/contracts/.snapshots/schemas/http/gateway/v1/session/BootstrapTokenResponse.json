@@ -15,10 +15,6 @@
       "format": "uri"
     }
   },
-  "required": [
-    "bootstrap_token",
-    "expires_at",
-    "open_url"
-  ],
+  "required": ["bootstrap_token", "expires_at", "open_url"],
   "additionalProperties": false
 }

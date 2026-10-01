@@ -10,9 +10,6 @@
       "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
     }
   },
-  "required": [
-    "session_id",
-    "block_id"
-  ],
+  "required": ["session_id", "block_id"],
   "additionalProperties": false
 }

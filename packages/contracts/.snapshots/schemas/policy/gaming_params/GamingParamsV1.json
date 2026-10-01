@@ -63,11 +63,7 @@
             "exclusiveMinimum": 0
           }
         },
-        "required": [
-          "floor_ms",
-          "base_ms",
-          "chars_per_s"
-        ],
+        "required": ["floor_ms", "base_ms", "chars_per_s"],
         "additionalProperties": false
       },
       "required": [
@@ -120,10 +116,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "responses",
-        "quantile"
-      ],
+      "required": ["responses", "quantile"],
       "additionalProperties": false
     },
     "rapid": {
@@ -155,10 +148,7 @@
           ]
         }
       },
-      "required": [
-        "w",
-        "grade_cap"
-      ],
+      "required": ["w", "grade_cap"],
       "additionalProperties": false
     },
     "hint_penalty": {
@@ -170,18 +160,10 @@
           "maximum": 1
         }
       },
-      "required": [
-        "factor_per_step"
-      ],
+      "required": ["factor_per_step"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "version",
-    "t_min_ms_by_format",
-    "personalize_after",
-    "rapid",
-    "hint_penalty"
-  ],
+  "required": ["version", "t_min_ms_by_format", "personalize_after", "rapid", "hint_penalty"],
   "additionalProperties": false
 }

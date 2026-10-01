@@ -34,12 +34,7 @@
           ]
         }
       },
-      "required": [
-        "type",
-        "v",
-        "ok",
-        "error"
-      ],
+      "required": ["type", "v", "ok", "error"],
       "additionalProperties": false
     },
     {
@@ -75,12 +70,7 @@
           }
         }
       },
-      "required": [
-        "type",
-        "v",
-        "exit_code",
-        "tail"
-      ],
+      "required": ["type", "v", "exit_code", "tail"],
       "additionalProperties": false
     },
     {
@@ -113,13 +103,7 @@
                     "anyOf": [
                       {
                         "type": "string",
-                        "enum": [
-                          "gateway",
-                          "content",
-                          "learning",
-                          "ai-gateway",
-                          "ops-api"
-                        ]
+                        "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                       },
                       {
                         "type": "string",
@@ -135,13 +119,7 @@
               },
               "state": {
                 "type": "string",
-                "enum": [
-                  "starting",
-                  "ready",
-                  "restarting",
-                  "degraded",
-                  "stopped"
-                ]
+                "enum": ["starting", "ready", "restarting", "degraded", "stopped"]
               },
               "pid": {
                 "anyOf": [
@@ -197,24 +175,12 @@
                 ]
               }
             },
-            "required": [
-              "svc",
-              "state",
-              "pid",
-              "port",
-              "restarts_60s",
-              "started_at",
-              "last_exit_code"
-            ],
+            "required": ["svc", "state", "pid", "port", "restarts_60s", "started_at", "last_exit_code"],
             "additionalProperties": false
           }
         }
       },
-      "required": [
-        "type",
-        "v",
-        "services"
-      ],
+      "required": ["type", "v", "services"],
       "additionalProperties": false
     },
     {
@@ -248,12 +214,7 @@
           }
         }
       },
-      "required": [
-        "type",
-        "v",
-        "svc",
-        "lines"
-      ],
+      "required": ["type", "v", "svc", "lines"],
       "additionalProperties": false
     }
   ]

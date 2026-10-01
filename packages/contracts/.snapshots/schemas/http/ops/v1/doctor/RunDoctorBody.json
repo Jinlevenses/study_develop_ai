@@ -12,10 +12,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "op_id",
-    "fix",
-    "live"
-  ],
+  "required": ["op_id", "fix", "live"],
   "additionalProperties": false
 }

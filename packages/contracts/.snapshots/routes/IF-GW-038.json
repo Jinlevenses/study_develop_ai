@@ -12,9 +12,7 @@
       "const": "/api/v1/labs/runs"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,13 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-LAB-001~003",
-        "FR-LAB-006",
-        "FR-LAB-007",
-        "FR-LAB-013",
-        "FR-LAB-016"
-      ]
+      "enum": ["FR-LAB-001~003", "FR-LAB-006", "FR-LAB-007", "FR-LAB-013", "FR-LAB-016"]
     },
     "deadlineMs": {
       "const": 6000
@@ -73,19 +65,13 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "code",
-                "sql"
-              ]
+              "enum": ["code", "sql"]
             },
             "lang": {
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "js",
-                    "ts"
-                  ]
+                  "enum": ["js", "ts"]
                 },
                 {
                   "type": "null"
@@ -99,20 +85,10 @@
             },
             "mode": {
               "type": "string",
-              "enum": [
-                "stdout",
-                "public_tests"
-              ]
+              "enum": ["stdout", "public_tests"]
             }
           },
-          "required": [
-            "run_id",
-            "item_id",
-            "kind",
-            "lang",
-            "code",
-            "mode"
-          ],
+          "required": ["run_id", "item_id", "kind", "lang", "code", "mode"],
           "additionalProperties": false
         }
       }
@@ -131,15 +107,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "error",
-                    "timeout",
-                    "memory_limit",
-                    "output_limit",
-                    "rejected",
-                    "platform_disabled"
-                  ]
+                  "enum": ["ok", "error", "timeout", "memory_limit", "output_limit", "rejected", "platform_disabled"]
                 },
                 {
                   "type": "string",
@@ -230,20 +198,12 @@
                             ]
                           }
                         },
-                        "required": [
-                          "case_key",
-                          "ok",
-                          "message_ko"
-                        ],
+                        "required": ["case_key", "ok", "message_ko"],
                         "additionalProperties": false
                       }
                     }
                   },
-                  "required": [
-                    "passed",
-                    "failed",
-                    "cases"
-                  ],
+                  "required": ["passed", "failed", "cases"],
                   "additionalProperties": false
                 },
                 {
@@ -289,11 +249,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "columns",
-                    "rows",
-                    "truncated"
-                  ],
+                  "required": ["columns", "rows", "truncated"],
                   "additionalProperties": false
                 },
                 {

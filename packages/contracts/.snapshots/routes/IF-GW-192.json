@@ -12,9 +12,7 @@
       "const": "/api/v1/cli/autostart"
     },
     "allowedCallers": {
-      "enum": [
-        "cli"
-      ]
+      "enum": ["cli"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-SET-024"
-      ]
+      "enum": ["FR-SET-024"]
     },
     "deadlineMs": {
       "const": null
@@ -53,16 +49,10 @@
           "properties": {
             "action": {
               "type": "string",
-              "enum": [
-                "on",
-                "off",
-                "status"
-              ]
+              "enum": ["on", "off", "status"]
             }
           },
-          "required": [
-            "action"
-          ],
+          "required": ["action"],
           "additionalProperties": false
         }
       }
@@ -78,12 +68,7 @@
             },
             "method": {
               "type": "string",
-              "enum": [
-                "launchd",
-                "schtasks",
-                "systemd_user",
-                "unsupported"
-              ]
+              "enum": ["launchd", "schtasks", "systemd_user", "unsupported"]
             },
             "path": {
               "anyOf": [
@@ -97,11 +82,7 @@
               ]
             }
           },
-          "required": [
-            "enabled",
-            "method",
-            "path"
-          ],
+          "required": ["enabled", "method", "path"],
           "additionalProperties": false
         }
       }

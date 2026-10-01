@@ -12,9 +12,7 @@
       "const": "/internal/v1/admin/shutdown"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": true
@@ -56,9 +54,7 @@
               "maximum": 10000
             }
           },
-          "required": [
-            "grace_ms"
-          ],
+          "required": ["grace_ms"],
           "additionalProperties": false
         }
       }
@@ -80,10 +76,7 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "accepted_at",
-            "grace_ms"
-          ],
+          "required": ["accepted_at", "grace_ms"],
           "additionalProperties": false
         }
       }

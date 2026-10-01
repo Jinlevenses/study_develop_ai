@@ -59,9 +59,6 @@
       "additionalProperties": false
     }
   },
-  "required": [
-    "preview_id",
-    "target"
-  ],
+  "required": ["preview_id", "target"],
   "additionalProperties": false
 }

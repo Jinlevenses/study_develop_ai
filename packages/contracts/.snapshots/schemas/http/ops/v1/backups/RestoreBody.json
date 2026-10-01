@@ -19,10 +19,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "kind",
-            "epoch_id"
-          ],
+          "required": ["kind", "epoch_id"],
           "additionalProperties": false
         },
         {
@@ -33,9 +30,7 @@
               "const": "latest"
             }
           },
-          "required": [
-            "kind"
-          ],
+          "required": ["kind"],
           "additionalProperties": false
         }
       ]
@@ -47,11 +42,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "op_id",
-    "epoch",
-    "rehearse",
-    "apply_incrementals"
-  ],
+  "required": ["op_id", "epoch", "rehearse", "apply_incrementals"],
   "additionalProperties": false
 }

@@ -16,11 +16,7 @@
     },
     "stage": {
       "type": "string",
-      "enum": [
-        "theory",
-        "code",
-        "core"
-      ]
+      "enum": ["theory", "code", "core"]
     },
     "duration_ms": {
       "type": "integer",
@@ -36,14 +32,6 @@
       "pattern": "^ps_[0-9a-f]{16}$"
     }
   },
-  "required": [
-    "concept_id",
-    "session_id",
-    "block_id",
-    "stage",
-    "duration_ms",
-    "study_day",
-    "policy_version"
-  ],
+  "required": ["concept_id", "session_id", "block_id", "stage", "duration_ms", "study_day", "policy_version"],
   "additionalProperties": false
 }

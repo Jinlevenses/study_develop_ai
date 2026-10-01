@@ -12,9 +12,7 @@
       "const": "/api/v1/curation/staging/{staging_id}:approve"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-QST-004"
-      ]
+      "enum": ["FR-QST-004"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "staging_id"
-          ],
+          "required": ["staging_id"],
           "additionalProperties": false
         },
         "body": {
@@ -66,10 +60,7 @@
           "properties": {
             "decision": {
               "type": "string",
-              "enum": [
-                "approve",
-                "reject"
-              ]
+              "enum": ["approve", "reject"]
             },
             "reason_ko": {
               "anyOf": [
@@ -83,10 +74,7 @@
               ]
             }
           },
-          "required": [
-            "decision",
-            "reason_ko"
-          ],
+          "required": ["decision", "reason_ko"],
           "additionalProperties": false
         }
       }
@@ -103,15 +91,7 @@
             },
             "origin": {
               "type": "string",
-              "enum": [
-                "t1",
-                "t2",
-                "t3",
-                "t4",
-                "user_authored",
-                "model_sample",
-                "gap"
-              ]
+              "enum": ["t1", "t2", "t3", "t4", "user_authored", "model_sample", "gap"]
             },
             "concept_id": {
               "type": "string",
@@ -158,22 +138,11 @@
             },
             "stakes": {
               "type": "string",
-              "enum": [
-                "S0",
-                "S1",
-                "S2"
-              ]
+              "enum": ["S0", "S1", "S2"]
             },
             "status": {
               "type": "string",
-              "enum": [
-                "draft",
-                "deferred",
-                "gated_pass",
-                "gated_fail",
-                "discarded",
-                "review"
-              ]
+              "enum": ["draft", "deferred", "gated_pass", "gated_fail", "discarded", "review"]
             },
             "preview_md": {
               "type": "string",
@@ -208,21 +177,13 @@
                     },
                     "curator_decision": {
                       "type": "string",
-                      "enum": [
-                        "pending",
-                        "approved",
-                        "rejected"
-                      ]
+                      "enum": ["pending", "approved", "rejected"]
                     },
                     "s2_mode": {
                       "anyOf": [
                         {
                           "type": "string",
-                          "enum": [
-                            "cross_family",
-                            "same_family",
-                            "v7_review"
-                          ]
+                          "enum": ["cross_family", "same_family", "v7_review"]
                         },
                         {
                           "type": "null"
@@ -230,12 +191,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "cross_judge_id",
-                    "span_check_id",
-                    "curator_decision",
-                    "s2_mode"
-                  ],
+                  "required": ["cross_judge_id", "span_check_id", "curator_decision", "s2_mode"],
                   "additionalProperties": false
                 },
                 {

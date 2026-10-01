@@ -12,9 +12,7 @@
       "const": "/internal/v1/ledger/imports"
     },
     "allowedCallers": {
-      "enum": [
-        "ops-api"
-      ]
+      "enum": ["ops-api"]
     },
     "idempotent": {
       "const": true
@@ -29,11 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-022",
-        "FR-PRG-003",
-        "NFR-DATA-011"
-      ]
+      "enum": ["FR-SET-022", "FR-PRG-003", "NFR-DATA-011"]
     },
     "deadlineMs": {
       "const": null
@@ -62,10 +56,7 @@
               "const": "merge"
             }
           },
-          "required": [
-            "import_id",
-            "mode"
-          ],
+          "required": ["import_id", "mode"],
           "additionalProperties": false
         },
         "body": {
@@ -124,10 +115,7 @@
                         "pattern": "^[0-9a-f]{64}$"
                       }
                     },
-                    "required": [
-                      "seq",
-                      "head_hash"
-                    ],
+                    "required": ["seq", "head_hash"],
                     "additionalProperties": false
                   }
                 },
@@ -221,10 +209,7 @@
                         "pattern": "^[0-9a-f]{64}$"
                       }
                     },
-                    "required": [
-                      "version",
-                      "sha256"
-                    ],
+                    "required": ["version", "sha256"],
                     "additionalProperties": false
                   }
                 },
@@ -246,20 +231,12 @@
                         "maxLength": 1000000
                       }
                     },
-                    "required": [
-                      "sha256",
-                      "yaml"
-                    ],
+                    "required": ["sha256", "yaml"],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": [
-                "kind",
-                "policy_version",
-                "members",
-                "documents"
-              ],
+              "required": ["kind", "policy_version", "members", "documents"],
               "additionalProperties": false
             },
             {
@@ -371,10 +348,7 @@
                   "additionalProperties": false
                 }
               },
-              "required": [
-                "kind",
-                "event"
-              ],
+              "required": ["kind", "event"],
               "additionalProperties": false
             },
             {
@@ -394,11 +368,7 @@
                   "pattern": "^[0-9a-f]{64}$"
                 }
               },
-              "required": [
-                "kind",
-                "count",
-                "sha256"
-              ],
+              "required": ["kind", "count", "sha256"],
               "additionalProperties": false
             }
           ]
@@ -417,16 +387,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "receiving",
-                "verifying",
-                "inserting",
-                "replaying",
-                "swapping",
-                "done",
-                "rejected",
-                "failed"
-              ]
+              "enum": ["receiving", "verifying", "inserting", "replaying", "swapping", "done", "rejected", "failed"]
             },
             "received_lines": {
               "type": "integer",
@@ -462,10 +423,7 @@
                     "pattern": "^[0-9a-f]{64}$"
                   }
                 },
-                "required": [
-                  "seq",
-                  "head_hash"
-                ],
+                "required": ["seq", "head_hash"],
                 "additionalProperties": false
               }
             },
@@ -538,12 +496,7 @@
                     "maxLength": 300
                   }
                 },
-                "required": [
-                  "device_id",
-                  "device_seq",
-                  "kind",
-                  "detail"
-                ],
+                "required": ["device_id", "device_seq", "kind", "detail"],
                 "additionalProperties": false
               }
             },

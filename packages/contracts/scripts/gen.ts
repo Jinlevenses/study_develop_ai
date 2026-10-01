@@ -382,7 +382,42 @@ const isRec = (v: unknown): v is Rec => typeof v === 'object' && v !== null && !
 const isSchema = (v: unknown): v is z.ZodType => v instanceof z.ZodType;
 const byCode = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0); // JS 문자열 사전순(로캘 무관)
 const sortedKeys = (o: Rec): string[] => Object.keys(o).sort(byCode);
-const asJson = (x: unknown): string => `${JSON.stringify(x, null, 2)}\n`;
+const JSON_WIDTH = 120; // biome.json formatter.lineWidth — `pnpm lint`(biome ci)가 .snapshots/**도 검사하므로 같은 모양으로 쓴다.
+
+/**
+ * `JSON.stringify(x, null, 2)`와 같은 2칸 들여쓰기 JSON. 단 스칼라만 든 배열은 한 줄에 들어가면 한 줄로 쓴다(biome 포맷 결과와 동일 —
+ * 루트 `pnpm lint`가 .snapshots/**를 검사하고 biome.json은 T-00-01 동결이라 생성물이 포맷 안정이어야 한다).
+ */
+function fmtJson(v: unknown, level: number, col: number, tail: number): string {
+  if (v === null || typeof v !== 'object') {
+    return JSON.stringify(v);
+  }
+  const pad = '  '.repeat(level);
+  const pad1 = '  '.repeat(level + 1);
+  if (Array.isArray(v)) {
+    if (v.length === 0) {
+      return '[]';
+    }
+    if (v.every((x) => x === null || typeof x !== 'object')) {
+      const inline = `[${v.map((x) => JSON.stringify(x)).join(', ')}]`;
+      if (col + inline.length + tail <= JSON_WIDTH) {
+        return inline;
+      }
+    }
+    const items = v.map((x, i) => `${pad1}${fmtJson(x, level + 1, pad1.length, i < v.length - 1 ? 1 : 0)}`);
+    return `[\n${items.join(',\n')}\n${pad}]`;
+  }
+  const entries = Object.entries(v);
+  if (entries.length === 0) {
+    return '{}';
+  }
+  const lines = entries.map(([k, val], i) => {
+    const key = `${JSON.stringify(k)}: `;
+    return `${pad1}${key}${fmtJson(val, level + 1, pad1.length + key.length, i < entries.length - 1 ? 1 : 0)}`;
+  });
+  return `{\n${lines.join(',\n')}\n${pad}}`;
+}
+const asJson = (x: unknown): string => `${fmtJson(x, 0, 0, 0)}\n`;
 
 function jsonSchemaOf(schema: z.ZodType, label: string): Record<string, unknown> {
   let out: unknown;

@@ -12,9 +12,7 @@
       "const": "/api/v1/review/calibration"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-DSH-010",
-        "FR-PRG-023~025"
-      ]
+      "enum": ["FR-DSH-010", "FR-PRG-023~025"]
     },
     "deadlineMs": {
       "const": null
@@ -59,9 +54,7 @@
               "maximum": 365
             }
           },
-          "required": [
-            "window_days"
-          ],
+          "required": ["window_days"],
           "additionalProperties": false
         }
       }
@@ -81,10 +74,7 @@
               "type": "object",
               "properties": {
                 "ratio": {
-                  "type": [
-                    "number",
-                    "null"
-                  ]
+                  "type": ["number", "null"]
                 },
                 "n": {
                   "type": "integer",
@@ -92,29 +82,17 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "ratio",
-                "n"
-              ],
+              "required": ["ratio", "n"],
               "additionalProperties": false
             },
             "brier": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             },
             "ece": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             },
             "overconfidence": {
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": ["number", "null"]
             },
             "bins": {
               "minItems": 3,
@@ -157,11 +135,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "confidence",
-                  "n",
-                  "accuracy"
-                ],
+                "required": ["confidence", "n", "accuracy"],
                 "additionalProperties": false
               }
             },
@@ -180,10 +154,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "gap"
-                ],
+                "required": ["concept_id", "gap"],
                 "additionalProperties": false
               }
             },
@@ -243,11 +214,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "track",
-                  "declared_level",
-                  "proved_level"
-                ],
+                "required": ["track", "declared_level", "proved_level"],
                 "additionalProperties": false
               }
             },
@@ -257,10 +224,7 @@
                   "type": "object",
                   "properties": {
                     "coefficient": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
+                      "type": ["number", "null"]
                     },
                     "n": {
                       "type": "integer",
@@ -268,10 +232,7 @@
                       "maximum": 9007199254740991
                     }
                   },
-                  "required": [
-                    "coefficient",
-                    "n"
-                  ],
+                  "required": ["coefficient", "n"],
                   "additionalProperties": false
                 },
                 {

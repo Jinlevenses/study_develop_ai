@@ -12,9 +12,7 @@
       "const": "/api/v1/session/logout"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "NFR-SEC-019"
-      ]
+      "enum": ["NFR-SEC-019"]
     },
     "deadlineMs": {
       "const": null

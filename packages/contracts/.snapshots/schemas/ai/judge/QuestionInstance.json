@@ -17,9 +17,6 @@
       }
     }
   },
-  "required": [
-    "template",
-    "vars"
-  ],
+  "required": ["template", "vars"],
   "additionalProperties": false
 }

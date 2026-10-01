@@ -63,11 +63,7 @@
             },
             "stakes": {
               "type": "string",
-              "enum": [
-                "S0",
-                "S1",
-                "S2"
-              ]
+              "enum": ["S0", "S1", "S2"]
             },
             "concept_id": {
               "type": "string",
@@ -136,35 +132,19 @@
             },
             "response_mode": {
               "type": "string",
-              "enum": [
-                "recognition",
-                "production"
-              ]
+              "enum": ["recognition", "production"]
             },
             "tier": {
               "type": "string",
-              "enum": [
-                "A",
-                "B",
-                "C"
-              ]
+              "enum": ["A", "B", "C"]
             },
             "result": {
               "type": "string",
-              "enum": [
-                "correct",
-                "partial",
-                "incorrect",
-                "pending"
-              ]
+              "enum": ["correct", "partial", "incorrect", "pending"]
             },
             "band": {
               "type": "string",
-              "enum": [
-                "wrong",
-                "partial",
-                "right"
-              ]
+              "enum": ["wrong", "partial", "right"]
             },
             "score": {
               "type": "number",
@@ -198,14 +178,7 @@
             },
             "grader_engine": {
               "type": "string",
-              "enum": [
-                "D",
-                "J",
-                "LJ",
-                "H",
-                "S",
-                "PENDING"
-              ]
+              "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
             },
             "calibrated": {
               "type": "boolean"
@@ -250,12 +223,7 @@
             },
             "ai_mode": {
               "type": "string",
-              "enum": [
-                "FULL",
-                "JUDGE_ONLY",
-                "LLM_ONLY",
-                "OFFLINE"
-              ]
+              "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
             },
             "content_policy_version": {
               "type": "string",
@@ -333,16 +301,7 @@
         },
         "badge": {
           "type": "string",
-          "enum": [
-            "none",
-            "ai",
-            "ai_uncalibrated",
-            "ai_confirm",
-            "ai_estimate_confirm",
-            "heuristic",
-            "self",
-            "pending"
-          ]
+          "enum": ["none", "ai", "ai_uncalibrated", "ai_confirm", "ai_estimate_confirm", "heuristic", "self", "pending"]
         },
         "feedback": {
           "type": "object",
@@ -362,12 +321,7 @@
                 "properties": {
                   "status": {
                     "type": "string",
-                    "enum": [
-                      "correct",
-                      "partial",
-                      "missing",
-                      "error"
-                    ]
+                    "enum": ["correct", "partial", "missing", "error"]
                   },
                   "note_md": {
                     "anyOf": [
@@ -393,11 +347,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "status",
-                  "note_md",
-                  "ku_id"
-                ],
+                "required": ["status", "note_md", "ku_id"],
                 "additionalProperties": false
               }
             },
@@ -418,11 +368,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "mc_id",
-                    "wrong_belief_ko",
-                    "correction_ko"
-                  ],
+                  "required": ["mc_id", "wrong_belief_ko", "correction_ko"],
                   "additionalProperties": false
                 },
                 {
@@ -432,11 +378,7 @@
             },
             "source": {
               "type": "string",
-              "enum": [
-                "template",
-                "ku_assembled",
-                "ai_generated"
-              ]
+              "enum": ["template", "ku_assembled", "ai_generated"]
             },
             "stream_ref": {
               "anyOf": [
@@ -450,13 +392,7 @@
               ]
             }
           },
-          "required": [
-            "summary_md",
-            "per_unit",
-            "misconception",
-            "source",
-            "stream_ref"
-          ],
+          "required": ["summary_md", "per_unit", "misconception", "source", "stream_ref"],
           "additionalProperties": false
         },
         "reveal": {
@@ -475,10 +411,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "value"
-                  ],
+                  "required": ["kind", "value"],
                   "additionalProperties": false
                 },
                 {
@@ -498,10 +431,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "option_keys"
-                  ],
+                  "required": ["kind", "option_keys"],
                   "additionalProperties": false
                 },
                 {
@@ -521,10 +451,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "accepted"
-                  ],
+                  "required": ["kind", "accepted"],
                   "additionalProperties": false
                 },
                 {
@@ -551,10 +478,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "blanks"
-                  ],
+                  "required": ["kind", "blanks"],
                   "additionalProperties": false
                 },
                 {
@@ -576,10 +500,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "pairs"
-                  ],
+                  "required": ["kind", "pairs"],
                   "additionalProperties": false
                 },
                 {
@@ -597,11 +518,7 @@
                       "minimum": 0
                     }
                   },
-                  "required": [
-                    "kind",
-                    "value",
-                    "tolerance_log10"
-                  ],
+                  "required": ["kind", "value", "tolerance_log10"],
                   "additionalProperties": false
                 },
                 {
@@ -620,10 +537,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "keys"
-                  ],
+                  "required": ["kind", "keys"],
                   "additionalProperties": false
                 },
                 {
@@ -671,19 +585,12 @@
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "case_key",
-                              "ok"
-                            ],
+                            "required": ["case_key", "ok"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "passed",
-                        "failed",
-                        "cases"
-                      ],
+                      "required": ["passed", "failed", "cases"],
                       "additionalProperties": false
                     },
                     "complexity": {
@@ -696,10 +603,7 @@
                             },
                             "method": {
                               "type": "string",
-                              "enum": [
-                                "ops",
-                                "cpu"
-                              ]
+                              "enum": ["ops", "cpu"]
                             },
                             "target_order": {
                               "type": "number"
@@ -708,12 +612,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "slope",
-                            "method",
-                            "target_order",
-                            "passed"
-                          ],
+                          "required": ["slope", "method", "target_order", "passed"],
                           "additionalProperties": false
                         },
                         {
@@ -722,12 +621,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "reference_md",
-                    "hidden_tests",
-                    "complexity"
-                  ],
+                  "required": ["kind", "reference_md", "hidden_tests", "complexity"],
                   "additionalProperties": false
                 },
                 {
@@ -752,11 +646,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "reference_sql",
-                    "result_match"
-                  ],
+                  "required": ["kind", "reference_sql", "result_match"],
                   "additionalProperties": false
                 },
                 {
@@ -784,10 +674,7 @@
                           }
                         }
                       },
-                      "required": [
-                        "a",
-                        "b"
-                      ],
+                      "required": ["a", "b"],
                       "additionalProperties": false
                     },
                     "pivot_ko": {
@@ -795,11 +682,7 @@
                       "maxLength": 500
                     }
                   },
-                  "required": [
-                    "kind",
-                    "answers",
-                    "pivot_ko"
-                  ],
+                  "required": ["kind", "answers", "pivot_ko"],
                   "additionalProperties": false
                 },
                 {
@@ -835,18 +718,12 @@
                             ]
                           }
                         },
-                        "required": [
-                          "label_ko",
-                          "ku_id"
-                        ],
+                        "required": ["label_ko", "ku_id"],
                         "additionalProperties": false
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "units"
-                  ],
+                  "required": ["kind", "units"],
                   "additionalProperties": false
                 },
                 {
@@ -873,11 +750,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "best_option_key",
-                    "scores"
-                  ],
+                  "required": ["kind", "best_option_key", "scores"],
                   "additionalProperties": false
                 },
                 {
@@ -888,9 +761,7 @@
                       "const": "none"
                     }
                   },
-                  "required": [
-                    "kind"
-                  ],
+                  "required": ["kind"],
                   "additionalProperties": false
                 }
               ]
@@ -1038,20 +909,12 @@
                                     ]
                                   }
                                 },
-                                "required": [
-                                  "case_key",
-                                  "ok",
-                                  "message_ko"
-                                ],
+                                "required": ["case_key", "ok", "message_ko"],
                                 "additionalProperties": false
                               }
                             }
                           },
-                          "required": [
-                            "passed",
-                            "failed",
-                            "cases"
-                          ],
+                          "required": ["passed", "failed", "cases"],
                           "additionalProperties": false
                         },
                         {
@@ -1097,11 +960,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "columns",
-                            "rows",
-                            "truncated"
-                          ],
+                          "required": ["columns", "rows", "truncated"],
                           "additionalProperties": false
                         },
                         {
@@ -1131,13 +990,7 @@
               ]
             }
           },
-          "required": [
-            "answer",
-            "explanation_md",
-            "model_answer_md",
-            "cited_ku_ids",
-            "runner"
-          ],
+          "required": ["answer", "explanation_md", "model_answer_md", "cited_ku_ids", "runner"],
           "additionalProperties": false
         },
         "upgrade_pending": {
@@ -1224,18 +1077,11 @@
                         },
                         "response_mode": {
                           "type": "string",
-                          "enum": [
-                            "recognition",
-                            "production"
-                          ]
+                          "enum": ["recognition", "production"]
                         },
                         "tier": {
                           "type": "string",
-                          "enum": [
-                            "A",
-                            "B",
-                            "C"
-                          ]
+                          "enum": ["A", "B", "C"]
                         },
                         "level": {
                           "type": "integer",
@@ -1244,11 +1090,7 @@
                         },
                         "stakes": {
                           "type": "string",
-                          "enum": [
-                            "S0",
-                            "S1",
-                            "S2"
-                          ]
+                          "enum": ["S0", "S1", "S2"]
                         },
                         "n_options": {
                           "type": "integer",
@@ -1269,9 +1111,7 @@
                                   "const": "ox"
                                 }
                               },
-                              "required": [
-                                "kind"
-                              ],
+                              "required": ["kind"],
                               "additionalProperties": false
                             },
                             {
@@ -1295,9 +1135,7 @@
                                         "maxLength": 2000
                                       }
                                     },
-                                    "required": [
-                                      "text_md"
-                                    ],
+                                    "required": ["text_md"],
                                     "additionalProperties": false
                                   }
                                 },
@@ -1314,12 +1152,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "options",
-                                "order",
-                                "multi"
-                              ],
+                              "required": ["kind", "options", "order", "multi"],
                               "additionalProperties": false
                             },
                             {
@@ -1346,11 +1179,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "max_chars",
-                                "placeholder_ko"
-                              ],
+                              "required": ["kind", "max_chars", "placeholder_ko"],
                               "additionalProperties": false
                             },
                             {
@@ -1379,18 +1208,12 @@
                                         "maximum": 500
                                       }
                                     },
-                                    "required": [
-                                      "max_chars"
-                                    ],
+                                    "required": ["max_chars"],
                                     "additionalProperties": false
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "template_md",
-                                "blanks"
-                              ],
+                              "required": ["kind", "template_md", "blanks"],
                               "additionalProperties": false
                             },
                             {
@@ -1423,11 +1246,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "left",
-                                "right"
-                              ],
+                              "required": ["kind", "left", "right"],
                               "additionalProperties": false
                             },
                             {
@@ -1439,18 +1258,11 @@
                                 },
                                 "lang": {
                                   "type": "string",
-                                  "enum": [
-                                    "js",
-                                    "ts"
-                                  ]
+                                  "enum": ["js", "ts"]
                                 },
                                 "mode": {
                                   "type": "string",
-                                  "enum": [
-                                    "write",
-                                    "predict_output",
-                                    "fix"
-                                  ]
+                                  "enum": ["write", "predict_output", "fix"]
                                 },
                                 "starter": {
                                   "type": "string",
@@ -1471,14 +1283,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "lang",
-                                "mode",
-                                "starter",
-                                "public_tests_md",
-                                "runnable"
-                              ],
+                              "required": ["kind", "lang", "mode", "starter", "public_tests_md", "runnable"],
                               "additionalProperties": false
                             },
                             {
@@ -1500,12 +1305,7 @@
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "schema_md",
-                                "starter",
-                                "runnable"
-                              ],
+                              "required": ["kind", "schema_md", "starter", "runnable"],
                               "additionalProperties": false
                             },
                             {
@@ -1540,12 +1340,7 @@
                                   "maximum": 20
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "lines",
-                                "order",
-                                "max_select"
-                              ],
+                              "required": ["kind", "lines", "order", "max_select"],
                               "additionalProperties": false
                             },
                             {
@@ -1567,10 +1362,7 @@
                                   ]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "unit_hint"
-                              ],
+                              "required": ["kind", "unit_hint"],
                               "additionalProperties": false
                             },
                             {
@@ -1617,21 +1409,12 @@
                                         "maxLength": 60
                                       }
                                     },
-                                    "required": [
-                                      "key",
-                                      "label_ko"
-                                    ],
+                                    "required": ["key", "label_ko"],
                                     "additionalProperties": false
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "min_chars",
-                                "max_chars",
-                                "kp_count",
-                                "rubric_dims"
-                              ],
+                              "required": ["kind", "min_chars", "max_chars", "kp_count", "rubric_dims"],
                               "additionalProperties": false
                             },
                             {
@@ -1665,17 +1448,12 @@
                                                 "maxLength": 1000
                                               }
                                             },
-                                            "required": [
-                                              "text_md"
-                                            ],
+                                            "required": ["text_md"],
                                             "additionalProperties": false
                                           }
                                         }
                                       },
-                                      "required": [
-                                        "stem_md",
-                                        "options"
-                                      ],
+                                      "required": ["stem_md", "options"],
                                       "additionalProperties": false
                                     },
                                     "b": {
@@ -1699,35 +1477,23 @@
                                                 "maxLength": 1000
                                               }
                                             },
-                                            "required": [
-                                              "text_md"
-                                            ],
+                                            "required": ["text_md"],
                                             "additionalProperties": false
                                           }
                                         }
                                       },
-                                      "required": [
-                                        "stem_md",
-                                        "options"
-                                      ],
+                                      "required": ["stem_md", "options"],
                                       "additionalProperties": false
                                     }
                                   },
-                                  "required": [
-                                    "a",
-                                    "b"
-                                  ],
+                                  "required": ["a", "b"],
                                   "additionalProperties": false
                                 },
                                 "pivot_required": {
                                   "type": "boolean"
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "parts",
-                                "pivot_required"
-                              ],
+                              "required": ["kind", "parts", "pivot_required"],
                               "additionalProperties": false
                             },
                             {
@@ -1761,12 +1527,7 @@
                                   }
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "diff_md",
-                                "lines",
-                                "order"
-                              ],
+                              "required": ["kind", "diff_md", "lines", "order"],
                               "additionalProperties": false
                             },
                             {
@@ -1788,18 +1549,10 @@
                                 },
                                 "item_format": {
                                   "type": "string",
-                                  "enum": [
-                                    "mcq",
-                                    "ox",
-                                    "short"
-                                  ]
+                                  "enum": ["mcq", "ox", "short"]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "target_ku_ids",
-                                "item_format"
-                              ],
+                              "required": ["kind", "target_ku_ids", "item_format"],
                               "additionalProperties": false
                             },
                             {
@@ -1827,9 +1580,7 @@
                                         "maxLength": 2000
                                       }
                                     },
-                                    "required": [
-                                      "text_md"
-                                    ],
+                                    "required": ["text_md"],
                                     "additionalProperties": false
                                   }
                                 },
@@ -1843,20 +1594,10 @@
                                 },
                                 "rationale": {
                                   "type": "string",
-                                  "enum": [
-                                    "none",
-                                    "optional",
-                                    "required"
-                                  ]
+                                  "enum": ["none", "optional", "required"]
                                 }
                               },
-                              "required": [
-                                "kind",
-                                "node_key",
-                                "options",
-                                "order",
-                                "rationale"
-                              ],
+                              "required": ["kind", "node_key", "options", "order", "rationale"],
                               "additionalProperties": false
                             }
                           ]
@@ -1886,30 +1627,14 @@
                           "properties": {
                             "source_kind": {
                               "type": "string",
-                              "enum": [
-                                "seed",
-                                "t1",
-                                "t2",
-                                "t3",
-                                "t4",
-                                "imported",
-                                "user"
-                              ]
+                              "enum": ["seed", "t1", "t2", "t3", "t4", "imported", "user"]
                             },
                             "trust": {
                               "type": "string",
-                              "enum": [
-                                "seed",
-                                "verified",
-                                "user",
-                                "llm_unverified"
-                              ]
+                              "enum": ["seed", "verified", "user", "llm_unverified"]
                             }
                           },
-                          "required": [
-                            "source_kind",
-                            "trust"
-                          ],
+                          "required": ["source_kind", "trust"],
                           "additionalProperties": false
                         }
                       },
@@ -1952,11 +1677,7 @@
                   }
                 }
               },
-              "required": [
-                "next_node",
-                "finished",
-                "revealed_evidence_keys"
-              ],
+              "required": ["next_node", "finished", "revealed_evidence_keys"],
               "additionalProperties": false
             },
             {
@@ -1965,15 +1686,7 @@
           ]
         }
       },
-      "required": [
-        "status",
-        "verdict",
-        "badge",
-        "feedback",
-        "reveal",
-        "upgrade_pending",
-        "continuation"
-      ],
+      "required": ["status", "verdict", "badge", "feedback", "reveal", "upgrade_pending", "continuation"],
       "additionalProperties": false
     },
     {
@@ -2012,10 +1725,7 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "kp",
-                      "dimension"
-                    ]
+                    "enum": ["kp", "dimension"]
                   },
                   "ku_id": {
                     "anyOf": [
@@ -2039,21 +1749,12 @@
                     }
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "kind",
-                  "ku_id",
-                  "levels"
-                ],
+                "required": ["label_ko", "kind", "ku_id", "levels"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "attempt_id",
-            "overall_required",
-            "rubric"
-          ],
+          "required": ["attempt_id", "overall_required", "rubric"],
           "additionalProperties": false
         },
         "reveal": {
@@ -2072,10 +1773,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "value"
-                  ],
+                  "required": ["kind", "value"],
                   "additionalProperties": false
                 },
                 {
@@ -2095,10 +1793,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "option_keys"
-                  ],
+                  "required": ["kind", "option_keys"],
                   "additionalProperties": false
                 },
                 {
@@ -2118,10 +1813,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "accepted"
-                  ],
+                  "required": ["kind", "accepted"],
                   "additionalProperties": false
                 },
                 {
@@ -2148,10 +1840,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "blanks"
-                  ],
+                  "required": ["kind", "blanks"],
                   "additionalProperties": false
                 },
                 {
@@ -2173,10 +1862,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "pairs"
-                  ],
+                  "required": ["kind", "pairs"],
                   "additionalProperties": false
                 },
                 {
@@ -2194,11 +1880,7 @@
                       "minimum": 0
                     }
                   },
-                  "required": [
-                    "kind",
-                    "value",
-                    "tolerance_log10"
-                  ],
+                  "required": ["kind", "value", "tolerance_log10"],
                   "additionalProperties": false
                 },
                 {
@@ -2217,10 +1899,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "keys"
-                  ],
+                  "required": ["kind", "keys"],
                   "additionalProperties": false
                 },
                 {
@@ -2268,19 +1947,12 @@
                                 "type": "boolean"
                               }
                             },
-                            "required": [
-                              "case_key",
-                              "ok"
-                            ],
+                            "required": ["case_key", "ok"],
                             "additionalProperties": false
                           }
                         }
                       },
-                      "required": [
-                        "passed",
-                        "failed",
-                        "cases"
-                      ],
+                      "required": ["passed", "failed", "cases"],
                       "additionalProperties": false
                     },
                     "complexity": {
@@ -2293,10 +1965,7 @@
                             },
                             "method": {
                               "type": "string",
-                              "enum": [
-                                "ops",
-                                "cpu"
-                              ]
+                              "enum": ["ops", "cpu"]
                             },
                             "target_order": {
                               "type": "number"
@@ -2305,12 +1974,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "slope",
-                            "method",
-                            "target_order",
-                            "passed"
-                          ],
+                          "required": ["slope", "method", "target_order", "passed"],
                           "additionalProperties": false
                         },
                         {
@@ -2319,12 +1983,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "reference_md",
-                    "hidden_tests",
-                    "complexity"
-                  ],
+                  "required": ["kind", "reference_md", "hidden_tests", "complexity"],
                   "additionalProperties": false
                 },
                 {
@@ -2349,11 +2008,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "kind",
-                    "reference_sql",
-                    "result_match"
-                  ],
+                  "required": ["kind", "reference_sql", "result_match"],
                   "additionalProperties": false
                 },
                 {
@@ -2381,10 +2036,7 @@
                           }
                         }
                       },
-                      "required": [
-                        "a",
-                        "b"
-                      ],
+                      "required": ["a", "b"],
                       "additionalProperties": false
                     },
                     "pivot_ko": {
@@ -2392,11 +2044,7 @@
                       "maxLength": 500
                     }
                   },
-                  "required": [
-                    "kind",
-                    "answers",
-                    "pivot_ko"
-                  ],
+                  "required": ["kind", "answers", "pivot_ko"],
                   "additionalProperties": false
                 },
                 {
@@ -2432,18 +2080,12 @@
                             ]
                           }
                         },
-                        "required": [
-                          "label_ko",
-                          "ku_id"
-                        ],
+                        "required": ["label_ko", "ku_id"],
                         "additionalProperties": false
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "units"
-                  ],
+                  "required": ["kind", "units"],
                   "additionalProperties": false
                 },
                 {
@@ -2470,11 +2112,7 @@
                       }
                     }
                   },
-                  "required": [
-                    "kind",
-                    "best_option_key",
-                    "scores"
-                  ],
+                  "required": ["kind", "best_option_key", "scores"],
                   "additionalProperties": false
                 },
                 {
@@ -2485,9 +2123,7 @@
                       "const": "none"
                     }
                   },
-                  "required": [
-                    "kind"
-                  ],
+                  "required": ["kind"],
                   "additionalProperties": false
                 }
               ]
@@ -2635,20 +2271,12 @@
                                     ]
                                   }
                                 },
-                                "required": [
-                                  "case_key",
-                                  "ok",
-                                  "message_ko"
-                                ],
+                                "required": ["case_key", "ok", "message_ko"],
                                 "additionalProperties": false
                               }
                             }
                           },
-                          "required": [
-                            "passed",
-                            "failed",
-                            "cases"
-                          ],
+                          "required": ["passed", "failed", "cases"],
                           "additionalProperties": false
                         },
                         {
@@ -2694,11 +2322,7 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "columns",
-                            "rows",
-                            "truncated"
-                          ],
+                          "required": ["columns", "rows", "truncated"],
                           "additionalProperties": false
                         },
                         {
@@ -2728,13 +2352,7 @@
               ]
             }
           },
-          "required": [
-            "answer",
-            "explanation_md",
-            "model_answer_md",
-            "cited_ku_ids",
-            "runner"
-          ],
+          "required": ["answer", "explanation_md", "model_answer_md", "cited_ku_ids", "runner"],
           "additionalProperties": false
         },
         "heuristic_preview": {
@@ -2767,17 +2385,12 @@
                         ]
                       }
                     },
-                    "required": [
-                      "covered",
-                      "p"
-                    ],
+                    "required": ["covered", "p"],
                     "additionalProperties": false
                   }
                 }
               },
-              "required": [
-                "units"
-              ],
+              "required": ["units"],
               "additionalProperties": false
             },
             {
@@ -2786,13 +2399,7 @@
           ]
         }
       },
-      "required": [
-        "status",
-        "attempt_id",
-        "self_grade_form",
-        "reveal",
-        "heuristic_preview"
-      ],
+      "required": ["status", "attempt_id", "self_grade_form", "reveal", "heuristic_preview"],
       "additionalProperties": false
     }
   ]

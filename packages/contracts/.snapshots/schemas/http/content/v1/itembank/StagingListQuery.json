@@ -3,11 +3,7 @@
   "properties": {
     "status": {
       "type": "string",
-      "enum": [
-        "review",
-        "deferred",
-        "gated_fail"
-      ]
+      "enum": ["review", "deferred", "gated_fail"]
     },
     "cursor": {
       "type": "string",
@@ -20,8 +16,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

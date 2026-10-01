@@ -7,10 +7,7 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "judge",
-        "generate"
-      ]
+      "enum": ["judge", "generate"]
     },
     "task_id": {
       "anyOf": [
@@ -64,15 +61,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "queued",
-        "waiting_window",
-        "running",
-        "done",
-        "failed",
-        "cancelled",
-        "deferred"
-      ]
+      "enum": ["queued", "waiting_window", "running", "done", "failed", "cancelled", "deferred"]
     },
     "items_total": {
       "type": "integer",
@@ -139,12 +128,7 @@
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "ok",
-            "failed",
-            "cancelled",
-            "deferred"
-          ]
+          "enum": ["ok", "failed", "cancelled", "deferred"]
         },
         {
           "type": "null"

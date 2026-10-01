@@ -8,26 +8,11 @@
     },
     "lifecycle": {
       "type": "string",
-      "enum": [
-        "CL-0",
-        "CL-1",
-        "CL-2",
-        "CL-3",
-        "CL-4",
-        "CL-5",
-        "CL-6",
-        "CL-7",
-        "CL-8",
-        "CL-X"
-      ]
+      "enum": ["CL-0", "CL-1", "CL-2", "CL-3", "CL-4", "CL-5", "CL-6", "CL-7", "CL-8", "CL-X"]
     },
     "mastery": {
       "type": "string",
-      "enum": [
-        "unseen",
-        "learning",
-        "mastered"
-      ]
+      "enum": ["unseen", "learning", "mastered"]
     },
     "provisional": {
       "type": "boolean"
@@ -36,12 +21,6 @@
       "type": "boolean"
     }
   },
-  "required": [
-    "concept_id",
-    "lifecycle",
-    "mastery",
-    "provisional",
-    "rusty"
-  ],
+  "required": ["concept_id", "lifecycle", "mastery", "provisional", "rusty"],
   "additionalProperties": false
 }

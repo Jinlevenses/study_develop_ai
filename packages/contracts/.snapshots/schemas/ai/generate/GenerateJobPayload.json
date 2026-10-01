@@ -24,12 +24,7 @@
           },
           "data_class": {
             "type": "string",
-            "enum": [
-              "C0",
-              "C1",
-              "C2",
-              "C3"
-            ]
+            "enum": ["C0", "C1", "C2", "C3"]
           },
           "untrusted": {
             "type": "boolean"
@@ -46,13 +41,7 @@
             ]
           }
         },
-        "required": [
-          "key",
-          "text",
-          "data_class",
-          "untrusted",
-          "source_ref"
-        ],
+        "required": ["key", "text", "data_class", "untrusted", "source_ref"],
         "additionalProperties": false
       }
     },
@@ -61,25 +50,13 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "anthropic",
-          "openai",
-          "google",
-          "typesafe",
-          "local",
-          "other"
-        ]
+        "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
       }
     },
     "local_only": {
       "type": "boolean"
     }
   },
-  "required": [
-    "input",
-    "blocks",
-    "family_exclude",
-    "local_only"
-  ],
+  "required": ["input", "blocks", "family_exclude", "local_only"],
   "additionalProperties": false
 }

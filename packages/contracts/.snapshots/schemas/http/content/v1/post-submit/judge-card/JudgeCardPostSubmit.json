@@ -54,27 +54,11 @@
     },
     "engine": {
       "type": "string",
-      "enum": [
-        "D",
-        "J",
-        "LJ",
-        "H",
-        "S",
-        "PENDING"
-      ]
+      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
     },
     "badge": {
       "type": "string",
-      "enum": [
-        "none",
-        "ai",
-        "ai_uncalibrated",
-        "ai_confirm",
-        "ai_estimate_confirm",
-        "heuristic",
-        "self",
-        "pending"
-      ]
+      "enum": ["none", "ai", "ai_uncalibrated", "ai_confirm", "ai_estimate_confirm", "heuristic", "self", "pending"]
     },
     "calibrated": {
       "type": "boolean"
@@ -139,25 +123,11 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "kp",
-              "misconception",
-              "dimension",
-              "solo",
-              "injection",
-              "rationale"
-            ]
+            "enum": ["kp", "misconception", "dimension", "solo", "injection", "rationale"]
           },
           "outcome": {
             "type": "string",
-            "enum": [
-              "covered",
-              "partial",
-              "missing",
-              "present",
-              "absent",
-              "scored"
-            ]
+            "enum": ["covered", "partial", "missing", "present", "absent", "scored"]
           },
           "p": {
             "anyOf": [
@@ -172,10 +142,7 @@
             ]
           },
           "score": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "ku_id": {
             "anyOf": [
@@ -202,15 +169,7 @@
             ]
           }
         },
-        "required": [
-          "label_ko",
-          "kind",
-          "outcome",
-          "p",
-          "score",
-          "ku_id",
-          "mc_id"
-        ],
+        "required": ["label_ko", "kind", "outcome", "p", "score", "ku_id", "mc_id"],
         "additionalProperties": false
       }
     },
@@ -260,24 +219,11 @@
             },
             "reason": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "learner_right",
-                "other"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "learner_right", "other"]
             },
             "state": {
               "type": "string",
-              "enum": [
-                "received",
-                "classifying",
-                "regrading",
-                "upheld",
-                "rejected",
-                "user_decision_required"
-              ]
+              "enum": ["received", "classifying", "regrading", "upheld", "rejected", "user_decision_required"]
             },
             "classification": {
               "anyOf": [
@@ -286,23 +232,11 @@
                   "properties": {
                     "label": {
                       "type": "string",
-                      "enum": [
-                        "key_wrong",
-                        "ambiguous",
-                        "outdated",
-                        "learner_wrong"
-                      ]
+                      "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                     },
                     "engine": {
                       "type": "string",
-                      "enum": [
-                        "D",
-                        "J",
-                        "LJ",
-                        "H",
-                        "S",
-                        "PENDING"
-                      ]
+                      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                     },
                     "confidence": {
                       "anyOf": [
@@ -317,11 +251,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "label",
-                    "engine",
-                    "confidence"
-                  ],
+                  "required": ["label", "engine", "confidence"],
                   "additionalProperties": false
                 },
                 {

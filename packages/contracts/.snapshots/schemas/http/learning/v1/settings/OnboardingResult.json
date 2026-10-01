@@ -38,10 +38,6 @@
       "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
     }
   },
-  "required": [
-    "placement_tracks",
-    "next",
-    "declaration_event_id"
-  ],
+  "required": ["placement_tracks", "next", "declaration_event_id"],
   "additionalProperties": false
 }

@@ -36,11 +36,7 @@
           "maximum": 100
         }
       },
-      "required": [
-        "calls",
-        "krw",
-        "quota_pct"
-      ],
+      "required": ["calls", "krw", "quota_pct"],
       "additionalProperties": false
     },
     "subscription_windows": {
@@ -71,16 +67,10 @@
           ]
         }
       },
-      "required": [
-        "five_hour_calls",
-        "weekly_calls"
-      ],
+      "required": ["five_hour_calls", "weekly_calls"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "monthly_krw",
-    "per_call_usd_cap"
-  ],
+  "required": ["monthly_krw", "per_call_usd_cap"],
   "additionalProperties": false
 }

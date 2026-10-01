@@ -18,11 +18,7 @@
     },
     "severity": {
       "type": "string",
-      "enum": [
-        "info",
-        "warn",
-        "critical"
-      ]
+      "enum": ["info", "warn", "critical"]
     },
     "message_ko": {
       "type": "string",
@@ -42,10 +38,7 @@
               "pattern": "^\\/[A-Za-z0-9/_$.?=&-]*$"
             }
           },
-          "required": [
-            "label_ko",
-            "href"
-          ],
+          "required": ["label_ko", "href"],
           "additionalProperties": false
         },
         {
@@ -54,11 +47,6 @@
       ]
     }
   },
-  "required": [
-    "code",
-    "severity",
-    "message_ko",
-    "action"
-  ],
+  "required": ["code", "severity", "message_ko", "action"],
   "additionalProperties": false
 }

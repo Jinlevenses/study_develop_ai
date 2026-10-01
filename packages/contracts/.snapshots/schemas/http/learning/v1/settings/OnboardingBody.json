@@ -60,19 +60,11 @@
             "maximum": 5
           }
         },
-        "required": [
-          "track",
-          "declared_level"
-        ],
+        "required": ["track", "declared_level"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "career_years",
-    "weekly_minutes",
-    "path_id",
-    "declarations"
-  ],
+  "required": ["career_years", "weekly_minutes", "path_id", "declarations"],
   "additionalProperties": false
 }

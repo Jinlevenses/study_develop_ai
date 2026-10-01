@@ -8,24 +8,13 @@
     },
     "scope": {
       "type": "string",
-      "enum": [
-        "item",
-        "family"
-      ]
+      "enum": ["item", "family"]
     },
     "evidence_policy": {
       "type": "string",
-      "enum": [
-        "void",
-        "halve",
-        "keep"
-      ]
+      "enum": ["void", "halve", "keep"]
     }
   },
-  "required": [
-    "reason_ko",
-    "scope",
-    "evidence_policy"
-  ],
+  "required": ["reason_ko", "scope", "evidence_policy"],
   "additionalProperties": false
 }

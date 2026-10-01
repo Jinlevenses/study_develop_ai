@@ -17,9 +17,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "grounded_min"
-          ],
+          "required": ["grounded_min"],
           "additionalProperties": false
         },
         "G3": {
@@ -49,18 +47,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "gt",
-                "le"
-              ],
+              "required": ["gt", "le"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "key_min",
-            "other_max",
-            "repair_band"
-          ],
+          "required": ["key_min", "other_max", "repair_band"],
           "additionalProperties": false
         },
         "G4": {
@@ -70,9 +61,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "require_key_match"
-          ],
+          "required": ["require_key_match"],
           "additionalProperties": false
         },
         "G5": {
@@ -84,9 +73,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "ambiguous_max"
-          ],
+          "required": ["ambiguous_max"],
           "additionalProperties": false
         },
         "G6": {
@@ -103,10 +90,7 @@
               "maximum": 3
             }
           },
-          "required": [
-            "mean_min",
-            "each_min"
-          ],
+          "required": ["mean_min", "each_min"],
           "additionalProperties": false
         },
         "G7": {
@@ -118,9 +102,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "leak_max"
-          ],
+          "required": ["leak_max"],
           "additionalProperties": false
         },
         "G8": {
@@ -145,10 +127,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "ge",
-                "lt"
-              ],
+              "required": ["ge", "lt"],
               "additionalProperties": false
             },
             "same_knowledge_min": {
@@ -157,11 +136,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "duplicate_min",
-            "judge_band",
-            "same_knowledge_min"
-          ],
+          "required": ["duplicate_min", "judge_band", "same_knowledge_min"],
           "additionalProperties": false
         },
         "G9": {
@@ -176,10 +151,7 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "target_p_min",
-            "adjacent_ok"
-          ],
+          "required": ["target_p_min", "adjacent_ok"],
           "additionalProperties": false
         },
         "G11": {
@@ -191,9 +163,7 @@
               "maximum": 3
             }
           },
-          "required": [
-            "explanation_min"
-          ],
+          "required": ["explanation_min"],
           "additionalProperties": false
         },
         "G13": {
@@ -205,9 +175,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "each_max"
-          ],
+          "required": ["each_max"],
           "additionalProperties": false
         },
         "regate": {
@@ -215,25 +183,14 @@
           "properties": {
             "G3": {
               "type": "string",
-              "enum": [
-                "void",
-                "halve",
-                "keep"
-              ]
+              "enum": ["void", "halve", "keep"]
             },
             "G5": {
               "type": "string",
-              "enum": [
-                "void",
-                "halve",
-                "keep"
-              ]
+              "enum": ["void", "halve", "keep"]
             }
           },
-          "required": [
-            "G3",
-            "G5"
-          ],
+          "required": ["G3", "G5"],
           "additionalProperties": false
         },
         "llm_only": {
@@ -248,9 +205,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "grounded_min"
-              ],
+              "required": ["grounded_min"],
               "additionalProperties": false
             },
             "G3": {
@@ -267,10 +222,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "key_min",
-                "other_max"
-              ],
+              "required": ["key_min", "other_max"],
               "additionalProperties": false
             },
             "G5": {
@@ -282,9 +234,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "ambiguous_max"
-              ],
+              "required": ["ambiguous_max"],
               "additionalProperties": false
             },
             "G7": {
@@ -296,39 +246,18 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "leak_max"
-              ],
+              "required": ["leak_max"],
               "additionalProperties": false
             },
             "require_G4": {
               "type": "boolean"
             }
           },
-          "required": [
-            "G2",
-            "G3",
-            "G5",
-            "G7",
-            "require_G4"
-          ],
+          "required": ["G2", "G3", "G5", "G7", "require_G4"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "G2",
-        "G3",
-        "G4",
-        "G5",
-        "G6",
-        "G7",
-        "G8",
-        "G9",
-        "G11",
-        "G13",
-        "regate",
-        "llm_only"
-      ],
+      "required": ["G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G11", "G13", "regate", "llm_only"],
       "additionalProperties": false
     },
     "judge_bands": {
@@ -351,16 +280,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "accept",
-                "reject"
-              ],
+              "required": ["accept", "reject"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "targets_mc"
-          ],
+          "required": ["targets_mc"],
           "additionalProperties": false
         },
         "AI-J02": {
@@ -380,16 +304,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "accept",
-                "reject"
-              ],
+              "required": ["accept", "reject"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "equiv"
-          ],
+          "required": ["equiv"],
           "additionalProperties": false
         },
         "AI-J03": {
@@ -409,10 +328,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "accept",
-                "reject"
-              ],
+              "required": ["accept", "reject"],
               "additionalProperties": false
             },
             "mc": {
@@ -424,9 +340,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "present"
-              ],
+              "required": ["present"],
               "additionalProperties": false
             },
             "bps": {
@@ -456,12 +370,7 @@
                       "maximum": 1
                     }
                   },
-                  "required": [
-                    "coverage",
-                    "accuracy",
-                    "structure",
-                    "depth"
-                  ],
+                  "required": ["coverage", "accuracy", "structure", "depth"],
                   "additionalProperties": false
                 },
                 "partial_credit": {
@@ -475,19 +384,11 @@
                   "maximum": 5
                 }
               },
-              "required": [
-                "w",
-                "partial_credit",
-                "deep_level_min"
-              ],
+              "required": ["w", "partial_credit", "deep_level_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "cov",
-            "mc",
-            "bps"
-          ],
+          "required": ["cov", "mc", "bps"],
           "additionalProperties": false
         },
         "AI-J04": {
@@ -507,10 +408,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "accept",
-                "reject"
-              ],
+              "required": ["accept", "reject"],
               "additionalProperties": false
             },
             "defect": {
@@ -527,10 +425,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "accept",
-                "reject"
-              ],
+              "required": ["accept", "reject"],
               "additionalProperties": false
             },
             "mc": {
@@ -542,9 +437,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "present"
-              ],
+              "required": ["present"],
               "additionalProperties": false
             },
             "partial_credit": {
@@ -553,12 +446,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "kp",
-            "defect",
-            "mc",
-            "partial_credit"
-          ],
+          "required": ["kp", "defect", "mc", "partial_credit"],
           "additionalProperties": false
         },
         "AI-J05": {
@@ -573,9 +461,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "accept"
-              ],
+              "required": ["accept"],
               "additionalProperties": false
             },
             "teaching": {
@@ -610,13 +496,7 @@
                       "maximum": 1
                     }
                   },
-                  "required": [
-                    "accuracy",
-                    "simplicity",
-                    "examples",
-                    "gaps",
-                    "fixes_mc"
-                  ],
+                  "required": ["accuracy", "simplicity", "examples", "gaps", "fixes_mc"],
                   "additionalProperties": false
                 },
                 "taught_min": {
@@ -625,17 +505,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "w",
-                "taught_min"
-              ],
+              "required": ["w", "taught_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "fixes_mc",
-            "teaching"
-          ],
+          "required": ["fixes_mc", "teaching"],
           "additionalProperties": false
         },
         "AI-J06": {
@@ -650,9 +524,7 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "confidence_min"
-              ],
+              "required": ["confidence_min"],
               "additionalProperties": false
             },
             "error_cause": {
@@ -664,16 +536,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "confidence_min"
-              ],
+              "required": ["confidence_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "which_mc",
-            "error_cause"
-          ],
+          "required": ["which_mc", "error_cause"],
           "additionalProperties": false
         },
         "AI-J12": {
@@ -688,15 +555,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "merge_candidate_min"
-              ],
+              "required": ["merge_candidate_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "same_concept"
-          ],
+          "required": ["same_concept"],
           "additionalProperties": false
         },
         "AI-J13": {
@@ -711,15 +574,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "auto_min"
-              ],
+              "required": ["auto_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "section"
-          ],
+          "required": ["section"],
           "additionalProperties": false
         },
         "AI-J14": {
@@ -734,15 +593,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "verified_min"
-              ],
+              "required": ["verified_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "supported"
-          ],
+          "required": ["supported"],
           "additionalProperties": false
         },
         "AI-J15": {
@@ -762,16 +617,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "conflict_min",
-                "review_min"
-              ],
+              "required": ["conflict_min", "review_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "contradict"
-          ],
+          "required": ["contradict"],
           "additionalProperties": false
         },
         "AI-J16": {
@@ -786,15 +636,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "quarantine_min"
-              ],
+              "required": ["quarantine_min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "injection"
-          ],
+          "required": ["injection"],
           "additionalProperties": false
         },
         "AI-J17": {
@@ -813,10 +659,7 @@
                   "const": "partial"
                 }
               },
-              "required": [
-                "confidence_min",
-                "below"
-              ],
+              "required": ["confidence_min", "below"],
               "additionalProperties": false
             },
             "asks_answer": {
@@ -828,16 +671,11 @@
                   "maximum": 1
                 }
               },
-              "required": [
-                "flag"
-              ],
+              "required": ["flag"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "label",
-            "asks_answer"
-          ],
+          "required": ["label", "asks_answer"],
           "additionalProperties": false
         },
         "AI-J18": {
@@ -849,14 +687,7 @@
               "type": "array",
               "items": {
                 "type": "string",
-                "enum": [
-                  "G2",
-                  "G3",
-                  "G5",
-                  "G6",
-                  "G7",
-                  "G11"
-                ]
+                "enum": ["G2", "G3", "G5", "G6", "G7", "G11"]
               }
             },
             "centrality": {
@@ -868,16 +699,11 @@
                   "maximum": 3
                 }
               },
-              "required": [
-                "min"
-              ],
+              "required": ["min"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "gates_as",
-            "centrality"
-          ],
+          "required": ["gates_as", "centrality"],
           "additionalProperties": false
         },
         "AI-J19": {
@@ -901,17 +727,11 @@
                   "const": "user_decision_required"
                 }
               },
-              "required": [
-                "confidence_min",
-                "confidence_min_judge_only",
-                "below"
-              ],
+              "required": ["confidence_min", "confidence_min_judge_only", "below"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "appeal_label"
-          ],
+          "required": ["appeal_label"],
           "additionalProperties": false
         },
         "injection": {
@@ -923,9 +743,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "flag"
-          ],
+          "required": ["flag"],
           "additionalProperties": false
         },
         "jev_low_confidence": {
@@ -955,10 +773,6 @@
       "additionalProperties": false
     }
   },
-  "required": [
-    "version",
-    "gates",
-    "judge_bands"
-  ],
+  "required": ["version", "gates", "judge_bands"],
   "additionalProperties": false
 }

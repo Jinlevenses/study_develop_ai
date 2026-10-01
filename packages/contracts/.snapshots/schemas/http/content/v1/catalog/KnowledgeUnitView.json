@@ -27,11 +27,7 @@
     },
     "volatility": {
       "type": "string",
-      "enum": [
-        "stable",
-        "evolving",
-        "volatile"
-      ]
+      "enum": ["stable", "evolving", "volatile"]
     },
     "valid_as_of": {
       "anyOf": [
@@ -94,10 +90,7 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "start",
-                  "end"
-                ],
+                "required": ["start", "end"],
                 "additionalProperties": false
               },
               {
@@ -106,24 +99,11 @@
             ]
           }
         },
-        "required": [
-          "source_id",
-          "locator",
-          "span"
-        ],
+        "required": ["source_id", "locator", "span"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "ku_id",
-    "statement_ko",
-    "facet",
-    "scope",
-    "volatility",
-    "valid_as_of",
-    "deprecated_by",
-    "source_refs"
-  ],
+  "required": ["ku_id", "statement_ko", "facet", "scope", "volatility", "valid_as_of", "deprecated_by", "source_refs"],
   "additionalProperties": false
 }

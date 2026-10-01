@@ -12,9 +12,7 @@
       "const": "/api/v1/ai/secrets"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "NFR-SEC-004"
-      ]
+      "enum": ["NFR-SEC-004"]
     },
     "deadlineMs": {
       "const": null
@@ -67,11 +63,7 @@
                   },
                   "source": {
                     "type": "string",
-                    "enum": [
-                      "keychain",
-                      "file",
-                      "env"
-                    ]
+                    "enum": ["keychain", "file", "env"]
                   },
                   "last4": {
                     "type": "string",
@@ -91,12 +83,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "provider_id",
-                  "source",
-                  "last4",
-                  "verified_at"
-                ],
+                "required": ["provider_id", "source", "last4", "verified_at"],
                 "additionalProperties": false
               }
             },
@@ -105,11 +92,7 @@
               "properties": {
                 "backend": {
                   "type": "string",
-                  "enum": [
-                    "keychain",
-                    "file",
-                    "env_only"
-                  ]
+                  "enum": ["keychain", "file", "env_only"]
                 },
                 "locked": {
                   "type": "boolean"
@@ -118,10 +101,7 @@
                   "anyOf": [
                     {
                       "type": "string",
-                      "enum": [
-                        "os",
-                        "passphrase"
-                      ]
+                      "enum": ["os", "passphrase"]
                     },
                     {
                       "type": "null"
@@ -129,18 +109,11 @@
                   ]
                 }
               },
-              "required": [
-                "backend",
-                "locked",
-                "kek_kind"
-              ],
+              "required": ["backend", "locked", "kek_kind"],
               "additionalProperties": false
             }
           },
-          "required": [
-            "secrets",
-            "store"
-          ],
+          "required": ["secrets", "store"],
           "additionalProperties": false
         }
       }

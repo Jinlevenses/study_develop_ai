@@ -12,9 +12,7 @@
       "const": "/internal/v1/acquisition/inbox/{inbox_id}:triage"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-IMP-014"
-      ]
+      "enum": ["FR-IMP-014"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "inbox_id"
-          ],
+          "required": ["inbox_id"],
           "additionalProperties": false
         },
         "body": {
@@ -76,10 +70,7 @@
                   "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
                 }
               },
-              "required": [
-                "action",
-                "concept_id"
-              ],
+              "required": ["action", "concept_id"],
               "additionalProperties": false
             },
             {
@@ -90,9 +81,7 @@
                   "const": "probe"
                 }
               },
-              "required": [
-                "action"
-              ],
+              "required": ["action"],
               "additionalProperties": false
             },
             {
@@ -107,10 +96,7 @@
                   "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
                 }
               },
-              "required": [
-                "action",
-                "job_id"
-              ],
+              "required": ["action", "job_id"],
               "additionalProperties": false
             },
             {
@@ -121,9 +107,7 @@
                   "const": "discard"
                 }
               },
-              "required": [
-                "action"
-              ],
+              "required": ["action"],
               "additionalProperties": false
             }
           ]
@@ -146,10 +130,7 @@
             },
             "masking": {
               "type": "string",
-              "enum": [
-                "full",
-                "partial"
-              ]
+              "enum": ["full", "partial"]
             },
             "source_url": {
               "anyOf": [
@@ -164,13 +145,7 @@
             },
             "state": {
               "type": "string",
-              "enum": [
-                "new",
-                "triaged",
-                "linked",
-                "imported",
-                "discarded"
-              ]
+              "enum": ["new", "triaged", "linked", "imported", "discarded"]
             },
             "matches": {
               "maxItems": 10,
@@ -187,10 +162,7 @@
                     "type": "number"
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "score"
-                ],
+                "required": ["concept_id", "score"],
                 "additionalProperties": false
               }
             },

@@ -7,14 +7,7 @@
     },
     "target_kind": {
       "type": "string",
-      "enum": [
-        "concept",
-        "ku",
-        "misconception",
-        "item",
-        "case",
-        "source"
-      ]
+      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
     },
     "target_id": {
       "type": "string"
@@ -54,11 +47,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "applied",
-        "conflicted",
-        "reverted"
-      ]
+      "enum": ["applied", "conflicted", "reverted"]
     },
     "conflict_id": {
       "anyOf": [

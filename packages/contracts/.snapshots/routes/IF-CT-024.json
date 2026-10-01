@@ -12,9 +12,7 @@
       "const": "/internal/v1/catalog/cases"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-STD-025",
-        "FR-CUR-016"
-      ]
+      "enum": ["FR-STD-025", "FR-CUR-016"]
     },
     "deadlineMs": {
       "const": null
@@ -149,21 +144,12 @@
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "case_id",
-                  "title_ko",
-                  "tracks",
-                  "level",
-                  "variants",
-                  "floor"
-                ],
+                "required": ["case_id", "title_ko", "tracks", "level", "variants", "floor"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "cases"
-          ],
+          "required": ["cases"],
           "additionalProperties": false
         }
       }

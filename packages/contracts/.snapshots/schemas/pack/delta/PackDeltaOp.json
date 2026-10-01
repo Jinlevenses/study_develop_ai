@@ -62,20 +62,11 @@
             },
             "knowledge_type": {
               "type": "string",
-              "enum": [
-                "D",
-                "C",
-                "P",
-                "S"
-              ]
+              "enum": ["D", "C", "P", "S"]
             },
             "tier": {
               "type": "string",
-              "enum": [
-                "A",
-                "B",
-                "C"
-              ]
+              "enum": ["A", "B", "C"]
             },
             "title_ko": {
               "type": "string",
@@ -107,11 +98,7 @@
             },
             "volatility": {
               "type": "string",
-              "enum": [
-                "stable",
-                "evolving",
-                "volatile"
-              ]
+              "enum": ["stable", "evolving", "volatile"]
             },
             "required_for_level": {
               "anyOf": [
@@ -173,11 +160,7 @@
                     "maxLength": 400
                   }
                 },
-                "required": [
-                  "mermaid",
-                  "alt",
-                  "summary"
-                ],
+                "required": ["mermaid", "alt", "summary"],
                 "additionalProperties": false
               }
             },
@@ -204,12 +187,7 @@
                   },
                   "usage": {
                     "type": "string",
-                    "enum": [
-                      "link_only",
-                      "paraphrase",
-                      "short_quote",
-                      "code_adapted"
-                    ]
+                    "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
                   },
                   "retrieved_at": {
                     "type": "string",
@@ -238,15 +216,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "source_id",
-                  "locator",
-                  "section",
-                  "usage",
-                  "retrieved_at",
-                  "product_version",
-                  "quote"
-                ],
+                "required": ["source_id", "locator", "section", "usage", "retrieved_at", "product_version", "quote"],
                 "additionalProperties": false
               }
             },
@@ -291,11 +261,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "record"
-      ],
+      "required": ["op", "base_version", "record"],
       "additionalProperties": false
     },
     {
@@ -348,11 +314,7 @@
             },
             "vol": {
               "type": "string",
-              "enum": [
-                "stable",
-                "evolving",
-                "volatile"
-              ]
+              "enum": ["stable", "evolving", "volatile"]
             },
             "valid_as_of": {
               "anyOf": [
@@ -401,12 +363,7 @@
                   },
                   "usage": {
                     "type": "string",
-                    "enum": [
-                      "link_only",
-                      "paraphrase",
-                      "short_quote",
-                      "code_adapted"
-                    ]
+                    "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
                   },
                   "retrieved_at": {
                     "type": "string",
@@ -435,26 +392,13 @@
                     ]
                   }
                 },
-                "required": [
-                  "source_id",
-                  "locator",
-                  "section",
-                  "usage",
-                  "retrieved_at",
-                  "product_version",
-                  "quote"
-                ],
+                "required": ["source_id", "locator", "section", "usage", "retrieved_at", "product_version", "quote"],
                 "additionalProperties": false
               }
             },
             "trust": {
               "type": "string",
-              "enum": [
-                "authored",
-                "verified",
-                "user",
-                "llm_unverified"
-              ]
+              "enum": ["authored", "verified", "user", "llm_unverified"]
             },
             "origin": {
               "type": "string",
@@ -462,11 +406,7 @@
             },
             "status": {
               "type": "string",
-              "enum": [
-                "published",
-                "needs_review",
-                "deprecated"
-              ]
+              "enum": ["published", "needs_review", "deprecated"]
             },
             "ext": {
               "type": "object",
@@ -503,11 +443,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "record"
-      ],
+      "required": ["op", "base_version", "record"],
       "additionalProperties": false
     },
     {
@@ -538,12 +474,7 @@
           "maxLength": 80
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "concept_id",
-        "alias"
-      ],
+      "required": ["op", "base_version", "concept_id", "alias"],
       "additionalProperties": false
     },
     {
@@ -566,12 +497,7 @@
         },
         "target_kind": {
           "type": "string",
-          "enum": [
-            "concept",
-            "ku",
-            "misconception",
-            "item"
-          ]
+          "enum": ["concept", "ku", "misconception", "item"]
         },
         "target_id": {
           "type": "string",
@@ -589,13 +515,7 @@
           ]
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "target_kind",
-        "target_id",
-        "deprecated_by"
-      ],
+      "required": ["op", "base_version", "target_kind", "target_id", "deprecated_by"],
       "additionalProperties": false
     },
     {
@@ -659,10 +579,7 @@
             },
             "status": {
               "type": "string",
-              "enum": [
-                "active",
-                "deprecated"
-              ]
+              "enum": ["active", "deprecated"]
             },
             "ext": {
               "type": "object",
@@ -694,11 +611,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "record"
-      ],
+      "required": ["op", "base_version", "record"],
       "additionalProperties": false
     },
     {
@@ -741,10 +654,7 @@
             },
             "origin": {
               "type": "string",
-              "enum": [
-                "pack",
-                "runtime"
-              ]
+              "enum": ["pack", "runtime"]
             },
             "concept_id": {
               "type": "string",
@@ -820,19 +730,11 @@
             },
             "status": {
               "type": "string",
-              "enum": [
-                "draft",
-                "active",
-                "retired"
-              ]
+              "enum": ["draft", "active", "retired"]
             },
             "author": {
               "type": "string",
-              "enum": [
-                "seed",
-                "llm",
-                "user"
-              ]
+              "enum": ["seed", "llm", "user"]
             },
             "prompt_version": {
               "anyOf": [
@@ -884,11 +786,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "record"
-      ],
+      "required": ["op", "base_version", "record"],
       "additionalProperties": false
     },
     {
@@ -927,10 +825,7 @@
               },
               "origin": {
                 "type": "string",
-                "enum": [
-                  "pack",
-                  "runtime"
-                ]
+                "enum": ["pack", "runtime"]
               },
               "model_id": {
                 "anyOf": [
@@ -1023,10 +918,7 @@
               },
               "response_mode": {
                 "type": "string",
-                "enum": [
-                  "recognition",
-                  "production"
-                ]
+                "enum": ["recognition", "production"]
               },
               "level": {
                 "type": "integer",
@@ -1035,30 +927,15 @@
               },
               "bloom": {
                 "type": "string",
-                "enum": [
-                  "remember",
-                  "understand",
-                  "apply",
-                  "analyze",
-                  "evaluate",
-                  "create"
-                ]
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
               },
               "stakes": {
                 "type": "string",
-                "enum": [
-                  "S0",
-                  "S1",
-                  "S2"
-                ]
+                "enum": ["S0", "S1", "S2"]
               },
               "tier": {
                 "type": "string",
-                "enum": [
-                  "A",
-                  "B",
-                  "C"
-                ]
+                "enum": ["A", "B", "C"]
               },
               "n_options": {
                 "type": "integer",
@@ -1162,11 +1039,7 @@
                 "anyOf": [
                   {
                     "type": "string",
-                    "enum": [
-                      "cross_family",
-                      "same_family",
-                      "v7_review"
-                    ]
+                    "enum": ["cross_family", "same_family", "v7_review"]
                   },
                   {
                     "type": "null"
@@ -1232,11 +1105,7 @@
           }
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "records"
-      ],
+      "required": ["op", "base_version", "records"],
       "additionalProperties": false
     },
     {
@@ -1283,13 +1152,7 @@
           "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "item_id",
-        "gate_status",
-        "gate_result_id"
-      ],
+      "required": ["op", "base_version", "item_id", "gate_status", "gate_result_id"],
       "additionalProperties": false
     },
     {
@@ -1327,20 +1190,10 @@
         },
         "evidence_policy": {
           "type": "string",
-          "enum": [
-            "void",
-            "halve",
-            "keep"
-          ]
+          "enum": ["void", "halve", "keep"]
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "stem_family",
-        "prompt_version",
-        "evidence_policy"
-      ],
+      "required": ["op", "base_version", "stem_family", "prompt_version", "evidence_policy"],
       "additionalProperties": false
     },
     {
@@ -1405,13 +1258,7 @@
             },
             "case_kind": {
               "type": "string",
-              "enum": [
-                "incident",
-                "design",
-                "review",
-                "migration",
-                "tradeoff"
-              ]
+              "enum": ["incident", "design", "review", "migration", "tradeoff"]
             },
             "title_ko": {
               "type": "string",
@@ -1470,10 +1317,7 @@
                     "pattern": "^[a-z][a-z0-9_]{1,31}$"
                   }
                 },
-                "required": [
-                  "rules",
-                  "default_best"
-                ],
+                "required": ["rules", "default_best"],
                 "additionalProperties": false
               }
             },
@@ -1523,12 +1367,7 @@
                   },
                   "usage": {
                     "type": "string",
-                    "enum": [
-                      "link_only",
-                      "paraphrase",
-                      "short_quote",
-                      "code_adapted"
-                    ]
+                    "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
                   },
                   "retrieved_at": {
                     "type": "string",
@@ -1557,15 +1396,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "source_id",
-                  "locator",
-                  "section",
-                  "usage",
-                  "retrieved_at",
-                  "product_version",
-                  "quote"
-                ],
+                "required": ["source_id", "locator", "section", "usage", "retrieved_at", "product_version", "quote"],
                 "additionalProperties": false
               }
             },
@@ -1606,11 +1437,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "record"
-      ],
+      "required": ["op", "base_version", "record"],
       "additionalProperties": false
     },
     {
@@ -1692,11 +1519,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "record"
-      ],
+      "required": ["op", "base_version", "record"],
       "additionalProperties": false
     },
     {
@@ -1719,10 +1542,7 @@
         },
         "target_kind": {
           "type": "string",
-          "enum": [
-            "concept",
-            "ku"
-          ]
+          "enum": ["concept", "ku"]
         },
         "target_id": {
           "type": "string",
@@ -1742,15 +1562,7 @@
             },
             "source_type": {
               "type": "string",
-              "enum": [
-                "web",
-                "doc",
-                "book",
-                "rfc",
-                "paper",
-                "repo",
-                "user"
-              ]
+              "enum": ["web", "doc", "book", "rfc", "paper", "repo", "user"]
             },
             "title": {
               "type": "string",
@@ -1780,13 +1592,7 @@
             },
             "license_grade": {
               "type": "string",
-              "enum": [
-                "A",
-                "B",
-                "C",
-                "D",
-                "P"
-              ]
+              "enum": ["A", "B", "C", "D", "P"]
             },
             "fetched_at": {
               "anyOf": [
@@ -1830,13 +1636,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "op",
-        "base_version",
-        "target_kind",
-        "target_id",
-        "source"
-      ],
+      "required": ["op", "base_version", "target_kind", "target_id", "source"],
       "additionalProperties": false
     }
   ],

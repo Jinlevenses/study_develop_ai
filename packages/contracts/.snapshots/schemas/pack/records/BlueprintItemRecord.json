@@ -35,13 +35,6 @@
       "maximum": 1
     }
   },
-  "required": [
-    "kind",
-    "blueprint_id",
-    "section_key",
-    "parent_key",
-    "title_ko",
-    "weight"
-  ],
+  "required": ["kind", "blueprint_id", "section_key", "parent_key", "title_ko", "weight"],
   "additionalProperties": false
 }

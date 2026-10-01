@@ -8,29 +8,16 @@
     },
     "from": {
       "type": "string",
-      "enum": [
-        "unseen",
-        "learning",
-        "mastered"
-      ]
+      "enum": ["unseen", "learning", "mastered"]
     },
     "to": {
       "type": "string",
-      "enum": [
-        "unseen",
-        "learning",
-        "mastered"
-      ]
+      "enum": ["unseen", "learning", "mastered"]
     },
     "provisional": {
       "type": "boolean"
     }
   },
-  "required": [
-    "concept_id",
-    "from",
-    "to",
-    "provisional"
-  ],
+  "required": ["concept_id", "from", "to", "provisional"],
   "additionalProperties": false
 }

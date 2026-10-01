@@ -24,10 +24,7 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "seq",
-          "head_hash"
-        ],
+        "required": ["seq", "head_hash"],
         "additionalProperties": false
       }
     },
@@ -52,12 +49,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "checkpoint_id",
-    "devices",
-    "root_hash",
-    "source_file_sha256",
-    "created_at"
-  ],
+  "required": ["checkpoint_id", "devices", "root_hash", "source_file_sha256", "created_at"],
   "additionalProperties": false
 }

@@ -34,20 +34,11 @@
             "pattern": "^[0-9a-f]{64}$"
           }
         },
-        "required": [
-          "device_id",
-          "seq",
-          "head_hash"
-        ],
+        "required": ["device_id", "seq", "head_hash"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "checkpoint_id",
-    "root_hash",
-    "imported_events",
-    "devices"
-  ],
+  "required": ["checkpoint_id", "root_hash", "imported_events", "devices"],
   "additionalProperties": false
 }

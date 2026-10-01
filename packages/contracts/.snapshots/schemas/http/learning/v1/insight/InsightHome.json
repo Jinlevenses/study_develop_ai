@@ -6,13 +6,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "start_session",
-            "resume_session",
-            "onboarding",
-            "return_mode",
-            "paused"
-          ]
+          "enum": ["start_session", "resume_session", "onboarding", "return_mode", "paused"]
         },
         "label_ko": {
           "type": "string",
@@ -49,17 +43,10 @@
                 },
                 "energy": {
                   "type": "string",
-                  "enum": [
-                    "light",
-                    "normal",
-                    "deep"
-                  ]
+                  "enum": ["light", "normal", "deep"]
                 }
               },
-              "required": [
-                "minutes",
-                "energy"
-              ],
+              "required": ["minutes", "energy"],
               "additionalProperties": false
             },
             {
@@ -79,12 +66,7 @@
           ]
         }
       },
-      "required": [
-        "kind",
-        "label_ko",
-        "suggested",
-        "session_id"
-      ],
+      "required": ["kind", "label_ko", "suggested", "session_id"],
       "additionalProperties": false
     },
     "alerts": {
@@ -110,11 +92,7 @@
           },
           "severity": {
             "type": "string",
-            "enum": [
-              "info",
-              "warn",
-              "critical"
-            ]
+            "enum": ["info", "warn", "critical"]
           },
           "message_ko": {
             "type": "string",
@@ -134,10 +112,7 @@
                     "pattern": "^\\/[A-Za-z0-9/_$.?=&-]*$"
                   }
                 },
-                "required": [
-                  "label_ko",
-                  "href"
-                ],
+                "required": ["label_ko", "href"],
                 "additionalProperties": false
               },
               {
@@ -146,22 +121,13 @@
             ]
           }
         },
-        "required": [
-          "code",
-          "severity",
-          "message_ko",
-          "action"
-        ],
+        "required": ["code", "severity", "message_ko", "action"],
         "additionalProperties": false
       }
     },
     "energy_default": {
       "type": "string",
-      "enum": [
-        "light",
-        "normal",
-        "deep"
-      ]
+      "enum": ["light", "normal", "deep"]
     },
     "minutes_default": {
       "anyOf": [
@@ -206,11 +172,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "due_cards",
-        "new_budget",
-        "est_minutes"
-      ],
+      "required": ["due_cards", "new_budget", "est_minutes"],
       "additionalProperties": false
     },
     "weekly_goal": {
@@ -237,22 +199,10 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "target_sessions",
-        "done_sessions",
-        "streak_weeks",
-        "rest_tokens"
-      ],
+      "required": ["target_sessions", "done_sessions", "streak_weeks", "rest_tokens"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "primary_action",
-    "alerts",
-    "energy_default",
-    "minutes_default",
-    "today",
-    "weekly_goal"
-  ],
+  "required": ["primary_action", "alerts", "energy_default", "minutes_default", "today", "weekly_goal"],
   "additionalProperties": false
 }

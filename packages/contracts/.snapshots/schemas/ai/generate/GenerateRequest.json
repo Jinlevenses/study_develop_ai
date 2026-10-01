@@ -3,10 +3,7 @@
   "properties": {
     "lane": {
       "type": "string",
-      "enum": [
-        "interactive",
-        "conversational"
-      ]
+      "enum": ["interactive", "conversational"]
     },
     "input": {
       "type": "object",
@@ -31,12 +28,7 @@
           },
           "data_class": {
             "type": "string",
-            "enum": [
-              "C0",
-              "C1",
-              "C2",
-              "C3"
-            ]
+            "enum": ["C0", "C1", "C2", "C3"]
           },
           "untrusted": {
             "type": "boolean"
@@ -53,13 +45,7 @@
             ]
           }
         },
-        "required": [
-          "key",
-          "text",
-          "data_class",
-          "untrusted",
-          "source_ref"
-        ],
+        "required": ["key", "text", "data_class", "untrusted", "source_ref"],
         "additionalProperties": false
       }
     },
@@ -68,36 +54,18 @@
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "attempt",
-            "dialog_turn",
-            "blank_note",
-            "item",
-            "import",
-            "pack",
-            "calibration",
-            "appeal",
-            "system"
-          ]
+          "enum": ["attempt", "dialog_turn", "blank_note", "item", "import", "pack", "calibration", "appeal", "system"]
         },
         "phase": {
           "type": "string",
-          "enum": [
-            "pre_submit",
-            "post_submit",
-            "n_a"
-          ]
+          "enum": ["pre_submit", "post_submit", "n_a"]
         },
         "id": {
           "type": "string",
           "maxLength": 160
         }
       },
-      "required": [
-        "kind",
-        "phase",
-        "id"
-      ],
+      "required": ["kind", "phase", "id"],
       "additionalProperties": false
     },
     "stream": {
@@ -113,29 +81,13 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": [
-          "anthropic",
-          "openai",
-          "google",
-          "typesafe",
-          "local",
-          "other"
-        ]
+        "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
       }
     },
     "local_only": {
       "type": "boolean"
     }
   },
-  "required": [
-    "lane",
-    "input",
-    "blocks",
-    "context_ref",
-    "stream",
-    "deadline_ms",
-    "family_exclude",
-    "local_only"
-  ],
+  "required": ["lane", "input", "blocks", "context_ref", "stream", "deadline_ms", "family_exclude", "local_only"],
   "additionalProperties": false
 }

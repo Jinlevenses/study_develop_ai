@@ -12,9 +12,7 @@
       "const": "/api/v1/curation/item-health"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-QST-014"
-      ]
+      "enum": ["FR-QST-014"]
     },
     "deadlineMs": {
       "const": null
@@ -73,9 +69,7 @@
               "maximum": 200
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -178,16 +172,10 @@
                         "maximum": 9007199254740991
                       },
                       "p_correct": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
+                        "type": ["number", "null"]
                       },
                       "mean_latency_ms": {
-                        "type": [
-                          "number",
-                          "null"
-                        ]
+                        "type": ["number", "null"]
                       },
                       "option_freq": {
                         "type": "object",
@@ -200,12 +188,7 @@
                         }
                       }
                     },
-                    "required": [
-                      "n",
-                      "p_correct",
-                      "mean_latency_ms",
-                      "option_freq"
-                    ],
+                    "required": ["n", "p_correct", "mean_latency_ms", "option_freq"],
                     "additionalProperties": false
                   },
                   "updated_at": {
@@ -214,15 +197,7 @@
                     "maximum": 8640000000000000
                   }
                 },
-                "required": [
-                  "item_id",
-                  "concept_id",
-                  "format",
-                  "gate_status",
-                  "flags",
-                  "stats",
-                  "updated_at"
-                ],
+                "required": ["item_id", "concept_id", "format", "gate_status", "flags", "stats", "updated_at"],
                 "additionalProperties": false
               }
             },
@@ -238,10 +213,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

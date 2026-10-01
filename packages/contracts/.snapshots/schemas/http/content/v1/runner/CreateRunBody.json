@@ -19,19 +19,13 @@
     },
     "kind": {
       "type": "string",
-      "enum": [
-        "code",
-        "sql"
-      ]
+      "enum": ["code", "sql"]
     },
     "lang": {
       "anyOf": [
         {
           "type": "string",
-          "enum": [
-            "js",
-            "ts"
-          ]
+          "enum": ["js", "ts"]
         },
         {
           "type": "null"
@@ -45,19 +39,9 @@
     },
     "mode": {
       "type": "string",
-      "enum": [
-        "stdout",
-        "public_tests"
-      ]
+      "enum": ["stdout", "public_tests"]
     }
   },
-  "required": [
-    "run_id",
-    "item_id",
-    "kind",
-    "lang",
-    "code",
-    "mode"
-  ],
+  "required": ["run_id", "item_id", "kind", "lang", "code", "mode"],
   "additionalProperties": false
 }

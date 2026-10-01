@@ -7,14 +7,7 @@
     },
     "target_kind": {
       "type": "string",
-      "enum": [
-        "concept",
-        "ku",
-        "misconception",
-        "item",
-        "case",
-        "source"
-      ]
+      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
     },
     "target_id": {
       "type": "string",
@@ -37,15 +30,7 @@
       "maxLength": 500
     }
   },
-  "required": [
-    "patch_id",
-    "target_kind",
-    "target_id",
-    "field",
-    "base_version",
-    "new_value",
-    "reason_ko"
-  ],
+  "required": ["patch_id", "target_kind", "target_id", "field", "base_version", "new_value", "reason_ko"],
   "additionalProperties": false,
   "$defs": {
     "__schema0": {

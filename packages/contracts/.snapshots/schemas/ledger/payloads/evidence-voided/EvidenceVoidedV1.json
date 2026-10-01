@@ -17,23 +17,11 @@
     },
     "basis": {
       "type": "string",
-      "enum": [
-        "regate_g3",
-        "regate_g5",
-        "report",
-        "health",
-        "overlay",
-        "pack_upgrade"
-      ]
+      "enum": ["regate_g3", "regate_g5", "report", "health", "overlay", "pack_upgrade"]
     },
     "correction": {
       "type": "string",
-      "enum": [
-        "quarantined",
-        "demoted",
-        "key_fixed",
-        "retired"
-      ]
+      "enum": ["quarantined", "demoted", "key_fixed", "retired"]
     },
     "gate_result_id": {
       "type": "string",
@@ -48,14 +36,6 @@
       "pattern": "^ps_[0-9a-f]{16}$"
     }
   },
-  "required": [
-    "item_id",
-    "target_event_ids",
-    "basis",
-    "correction",
-    "gate_result_id",
-    "study_day",
-    "policy_version"
-  ],
+  "required": ["item_id", "target_event_ids", "basis", "correction", "gate_result_id", "study_day", "policy_version"],
   "additionalProperties": false
 }

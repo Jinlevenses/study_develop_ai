@@ -25,11 +25,7 @@
           "maximum": 65535
         }
       },
-      "required": [
-        "type",
-        "v",
-        "port"
-      ],
+      "required": ["type", "v", "port"],
       "additionalProperties": false
     },
     {
@@ -78,13 +74,7 @@
           "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
         }
       },
-      "required": [
-        "type",
-        "v",
-        "contracts_hash",
-        "schema_versions",
-        "app_version"
-      ],
+      "required": ["type", "v", "contracts_hash", "schema_versions", "app_version"],
       "additionalProperties": false
     },
     {
@@ -131,12 +121,7 @@
           "maxLength": 60
         }
       },
-      "required": [
-        "type",
-        "v",
-        "exit_code",
-        "code"
-      ],
+      "required": ["type", "v", "exit_code", "code"],
       "additionalProperties": false
     }
   ]

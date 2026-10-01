@@ -12,9 +12,7 @@
       "const": "/internal/v1/itembank/reports/{report_id}:resolve"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R2"
     },
     "fr": {
-      "enum": [
-        "FR-QST-016",
-        "FR-CUR-020"
-      ]
+      "enum": ["FR-QST-016", "FR-CUR-020"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "report_id"
-          ],
+          "required": ["report_id"],
           "additionalProperties": false
         },
         "body": {
@@ -67,11 +60,7 @@
           "properties": {
             "resolution": {
               "type": "string",
-              "enum": [
-                "fixed_overlay",
-                "retired",
-                "kept"
-              ]
+              "enum": ["fixed_overlay", "retired", "kept"]
             },
             "reason_ko": {
               "type": "string",
@@ -89,14 +78,7 @@
                     },
                     "target_kind": {
                       "type": "string",
-                      "enum": [
-                        "concept",
-                        "ku",
-                        "misconception",
-                        "item",
-                        "case",
-                        "source"
-                      ]
+                      "enum": ["concept", "ku", "misconception", "item", "case", "source"]
                     },
                     "target_id": {
                       "type": "string",
@@ -136,11 +118,7 @@
               ]
             }
           },
-          "required": [
-            "resolution",
-            "reason_ko",
-            "patch"
-          ],
+          "required": ["resolution", "reason_ko", "patch"],
           "additionalProperties": false,
           "$defs": {
             "__schema0": {
@@ -195,26 +173,14 @@
             },
             "reason": {
               "type": "string",
-              "enum": [
-                "key_wrong",
-                "ambiguous",
-                "outdated",
-                "other"
-              ]
+              "enum": ["key_wrong", "ambiguous", "outdated", "other"]
             },
             "text": {
-              "type": [
-                "string",
-                "null"
-              ]
+              "type": ["string", "null"]
             },
             "state": {
               "type": "string",
-              "enum": [
-                "received",
-                "classified",
-                "resolved"
-              ]
+              "enum": ["received", "classified", "resolved"]
             },
             "classification": {
               "anyOf": [
@@ -223,36 +189,17 @@
                   "properties": {
                     "label": {
                       "type": "string",
-                      "enum": [
-                        "key_wrong",
-                        "ambiguous",
-                        "outdated",
-                        "learner_wrong"
-                      ]
+                      "enum": ["key_wrong", "ambiguous", "outdated", "learner_wrong"]
                     },
                     "engine": {
                       "type": "string",
-                      "enum": [
-                        "D",
-                        "J",
-                        "LJ",
-                        "H",
-                        "S",
-                        "PENDING"
-                      ]
+                      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
                     },
                     "confidence": {
-                      "type": [
-                        "number",
-                        "null"
-                      ]
+                      "type": ["number", "null"]
                     }
                   },
-                  "required": [
-                    "label",
-                    "engine",
-                    "confidence"
-                  ],
+                  "required": ["label", "engine", "confidence"],
                   "additionalProperties": false
                 },
                 {
@@ -267,11 +214,7 @@
                   "properties": {
                     "kind": {
                       "type": "string",
-                      "enum": [
-                        "fixed_overlay",
-                        "retired",
-                        "kept"
-                      ]
+                      "enum": ["fixed_overlay", "retired", "kept"]
                     },
                     "reason_ko": {
                       "type": "string"
@@ -288,11 +231,7 @@
                       ]
                     }
                   },
-                  "required": [
-                    "kind",
-                    "reason_ko",
-                    "patch_id"
-                  ],
+                  "required": ["kind", "reason_ko", "patch_id"],
                   "additionalProperties": false
                 },
                 {

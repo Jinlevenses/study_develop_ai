@@ -1,8 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "stable",
-    "evolving",
-    "volatile"
-  ]
+  "enum": ["stable", "evolving", "volatile"]
 }

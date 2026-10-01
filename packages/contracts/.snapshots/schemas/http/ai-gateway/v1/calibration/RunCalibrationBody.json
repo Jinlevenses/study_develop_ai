@@ -34,10 +34,6 @@
       "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
     }
   },
-  "required": [
-    "job_id",
-    "task_id",
-    "work_order_id"
-  ],
+  "required": ["job_id", "task_id", "work_order_id"],
   "additionalProperties": false
 }

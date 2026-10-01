@@ -12,9 +12,7 @@
       "const": "/api/v1/sessions/{session_id}:complete"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,10 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "FR-DSH-008",
-        "FR-PRG-026"
-      ]
+      "enum": ["FR-DSH-008", "FR-PRG-026"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "session_id"
-          ],
+          "required": ["session_id"],
           "additionalProperties": false
         },
         "body": {
@@ -67,16 +60,10 @@
           "properties": {
             "reason": {
               "type": "string",
-              "enum": [
-                "finished",
-                "time_up",
-                "energy_limit"
-              ]
+              "enum": ["finished", "time_up", "energy_limit"]
             }
           },
-          "required": [
-            "reason"
-          ],
+          "required": ["reason"],
           "additionalProperties": false
         }
       }
@@ -156,13 +143,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "total",
-                "correct",
-                "partial",
-                "incorrect",
-                "pending"
-              ],
+              "required": ["total", "correct", "partial", "incorrect", "pending"],
               "additionalProperties": false
             },
             "mastery_changes": {
@@ -178,30 +159,17 @@
                   },
                   "from": {
                     "type": "string",
-                    "enum": [
-                      "unseen",
-                      "learning",
-                      "mastered"
-                    ]
+                    "enum": ["unseen", "learning", "mastered"]
                   },
                   "to": {
                     "type": "string",
-                    "enum": [
-                      "unseen",
-                      "learning",
-                      "mastered"
-                    ]
+                    "enum": ["unseen", "learning", "mastered"]
                   },
                   "provisional": {
                     "type": "boolean"
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "from",
-                  "to",
-                  "provisional"
-                ],
+                "required": ["concept_id", "from", "to", "provisional"],
                 "additionalProperties": false
               }
             },
@@ -234,11 +202,7 @@
                     ]
                   }
                 },
-                "required": [
-                  "concept_id",
-                  "predicted",
-                  "actual"
-                ],
+                "required": ["concept_id", "predicted", "actual"],
                 "additionalProperties": false
               }
             },
@@ -263,10 +227,7 @@
                   "maximum": 9007199254740991
                 }
               },
-              "required": [
-                "tomorrow",
-                "week"
-              ],
+              "required": ["tomorrow", "week"],
               "additionalProperties": false
             }
           },

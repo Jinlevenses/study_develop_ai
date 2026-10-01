@@ -3,10 +3,7 @@
   "properties": {
     "period": {
       "type": "string",
-      "enum": [
-        "day",
-        "month"
-      ]
+      "enum": ["day", "month"]
     },
     "period_start": {
       "type": "string",
@@ -43,19 +40,11 @@
               "maximum": 9007199254740991
             }
           },
-          "required": [
-            "metered_krw",
-            "subscription_nominal_krw"
-          ],
+          "required": ["metered_krw", "subscription_nominal_krw"],
           "additionalProperties": false
         }
       },
-      "required": [
-        "krw_spent",
-        "krw_budget",
-        "ratio",
-        "split"
-      ],
+      "required": ["krw_spent", "krw_budget", "ratio", "split"],
       "additionalProperties": false
     },
     "quota": {
@@ -70,10 +59,7 @@
           },
           "window": {
             "type": "string",
-            "enum": [
-              "5h",
-              "week"
-            ]
+            "enum": ["5h", "week"]
           },
           "used_pct": {
             "type": "number",
@@ -92,12 +78,7 @@
             ]
           }
         },
-        "required": [
-          "provider_id",
-          "window",
-          "used_pct",
-          "resets_at"
-        ],
+        "required": ["provider_id", "window", "used_pct", "resets_at"],
         "additionalProperties": false
       }
     },
@@ -164,10 +145,7 @@
             "maximum": 9007199254740991
           },
           "p95_ms": {
-            "type": [
-              "number",
-              "null"
-            ]
+            "type": ["number", "null"]
           },
           "fail_rate": {
             "type": "number",
@@ -180,14 +158,7 @@
             "maximum": 1
           }
         },
-        "required": [
-          "task_id",
-          "calls",
-          "krw",
-          "p95_ms",
-          "fail_rate",
-          "fallback_rate"
-        ],
+        "required": ["task_id", "calls", "krw", "p95_ms", "fail_rate", "fallback_rate"],
         "additionalProperties": false
       }
     },
@@ -212,29 +183,14 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "provider_id",
-          "calls",
-          "krw"
-        ],
+        "required": ["provider_id", "calls", "krw"],
         "additionalProperties": false
       }
     },
     "accepted_item_cost_krw": {
-      "type": [
-        "number",
-        "null"
-      ]
+      "type": ["number", "null"]
     }
   },
-  "required": [
-    "period",
-    "period_start",
-    "money",
-    "quota",
-    "by_task",
-    "by_provider",
-    "accepted_item_cost_krw"
-  ],
+  "required": ["period", "period_start", "money", "quota", "by_task", "by_provider", "accepted_item_cost_krw"],
   "additionalProperties": false
 }

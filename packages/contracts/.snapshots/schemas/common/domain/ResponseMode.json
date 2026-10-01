@@ -1,7 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "recognition",
-    "production"
-  ]
+  "enum": ["recognition", "production"]
 }

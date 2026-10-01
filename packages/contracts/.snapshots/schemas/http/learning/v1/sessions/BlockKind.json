@@ -1,15 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "lesson",
-    "items",
-    "blank_note",
-    "dialog",
-    "lab",
-    "case",
-    "artifact",
-    "jol",
-    "reflection",
-    "triage"
-  ]
+  "enum": ["lesson", "items", "blank_note", "dialog", "lab", "case", "artifact", "jol", "reflection", "triage"]
 }

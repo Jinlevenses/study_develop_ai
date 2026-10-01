@@ -3,15 +3,9 @@
   "properties": {
     "reason": {
       "type": "string",
-      "enum": [
-        "finished",
-        "time_up",
-        "energy_limit"
-      ]
+      "enum": ["finished", "time_up", "energy_limit"]
     }
   },
-  "required": [
-    "reason"
-  ],
+  "required": ["reason"],
   "additionalProperties": false
 }

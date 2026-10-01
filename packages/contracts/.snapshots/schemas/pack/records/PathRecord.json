@@ -62,14 +62,6 @@
       "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "required": [
-    "kind",
-    "path_id",
-    "title_ko",
-    "description_ko",
-    "tracks",
-    "concept_ids",
-    "content_hash"
-  ],
+  "required": ["kind", "path_id", "title_ko", "description_ko", "tracks", "concept_ids", "content_hash"],
   "additionalProperties": false
 }

@@ -12,9 +12,7 @@
       "const": "/internal/v1/backups/{epoch_id}"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-005"
-      ]
+      "enum": ["FR-SET-005"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "epoch_id"
-          ],
+          "required": ["epoch_id"],
           "additionalProperties": false
         }
       }
@@ -78,10 +72,7 @@
                 },
                 "kind": {
                   "type": "string",
-                  "enum": [
-                    "snapshot",
-                    "incremental"
-                  ]
+                  "enum": ["snapshot", "incremental"]
                 },
                 "created_at": {
                   "type": "integer",
@@ -90,11 +81,7 @@
                 },
                 "outcome": {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "aborted",
-                    "failed"
-                  ]
+                  "enum": ["ok", "aborted", "failed"]
                 },
                 "size_bytes": {
                   "type": "integer",
@@ -130,10 +117,7 @@
                           "type": "boolean"
                         }
                       },
-                      "required": [
-                        "at",
-                        "ok"
-                      ],
+                      "required": ["at", "ok"],
                       "additionalProperties": false
                     },
                     {
@@ -160,10 +144,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "copied_at",
-                    "encrypted"
-                  ],
+                  "required": ["copied_at", "encrypted"],
                   "additionalProperties": false
                 }
               },
@@ -242,11 +223,7 @@
                             "pattern": "^[0-9a-f]{64}$"
                           }
                         },
-                        "required": [
-                          "pack_id",
-                          "version",
-                          "manifest_hash"
-                        ],
+                        "required": ["pack_id", "version", "manifest_hash"],
                         "additionalProperties": false
                       }
                     },
@@ -258,12 +235,7 @@
                           "properties": {
                             "file": {
                               "type": "string",
-                              "enum": [
-                                "content.db",
-                                "learning.db",
-                                "ai.db",
-                                "ops.db"
-                              ]
+                              "enum": ["content.db", "learning.db", "ai.db", "ops.db"]
                             },
                             "sha256": {
                               "type": "string",
@@ -295,51 +267,27 @@
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "inbox_watermark": {
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "projection_hash": {
                               "type": "string",
@@ -368,10 +316,7 @@
                                     "pattern": "^[0-9a-f]{64}$"
                                   }
                                 },
-                                "required": [
-                                  "seq",
-                                  "hash"
-                                ],
+                                "required": ["seq", "hash"],
                                 "additionalProperties": false
                               }
                             }
@@ -392,12 +337,7 @@
                           "properties": {
                             "file": {
                               "type": "string",
-                              "enum": [
-                                "content.db",
-                                "learning.db",
-                                "ai.db",
-                                "ops.db"
-                              ]
+                              "enum": ["content.db", "learning.db", "ai.db", "ops.db"]
                             },
                             "sha256": {
                               "type": "string",
@@ -429,51 +369,27 @@
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "inbox_watermark": {
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "projection_hash": {
                               "type": "string",
@@ -502,10 +418,7 @@
                                     "pattern": "^[0-9a-f]{64}$"
                                   }
                                 },
-                                "required": [
-                                  "seq",
-                                  "hash"
-                                ],
+                                "required": ["seq", "hash"],
                                 "additionalProperties": false
                               }
                             }
@@ -526,12 +439,7 @@
                           "properties": {
                             "file": {
                               "type": "string",
-                              "enum": [
-                                "content.db",
-                                "learning.db",
-                                "ai.db",
-                                "ops.db"
-                              ]
+                              "enum": ["content.db", "learning.db", "ai.db", "ops.db"]
                             },
                             "sha256": {
                               "type": "string",
@@ -563,51 +471,27 @@
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "inbox_watermark": {
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "projection_hash": {
                               "type": "string",
@@ -636,10 +520,7 @@
                                     "pattern": "^[0-9a-f]{64}$"
                                   }
                                 },
-                                "required": [
-                                  "seq",
-                                  "hash"
-                                ],
+                                "required": ["seq", "hash"],
                                 "additionalProperties": false
                               }
                             }
@@ -660,12 +541,7 @@
                           "properties": {
                             "file": {
                               "type": "string",
-                              "enum": [
-                                "content.db",
-                                "learning.db",
-                                "ai.db",
-                                "ops.db"
-                              ]
+                              "enum": ["content.db", "learning.db", "ai.db", "ops.db"]
                             },
                             "sha256": {
                               "type": "string",
@@ -697,51 +573,27 @@
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "inbox_watermark": {
                               "type": "object",
                               "propertyNames": {
                                 "type": "string",
-                                "enum": [
-                                  "gateway",
-                                  "content",
-                                  "learning",
-                                  "ai-gateway",
-                                  "ops-api"
-                                ]
+                                "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                               },
                               "additionalProperties": {
                                 "type": "integer",
                                 "minimum": 0,
                                 "maximum": 9007199254740991
                               },
-                              "required": [
-                                "gateway",
-                                "content",
-                                "learning",
-                                "ai-gateway",
-                                "ops-api"
-                              ]
+                              "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                             },
                             "projection_hash": {
                               "type": "string",
@@ -770,10 +622,7 @@
                                     "pattern": "^[0-9a-f]{64}$"
                                   }
                                 },
-                                "required": [
-                                  "seq",
-                                  "hash"
-                                ],
+                                "required": ["seq", "hash"],
                                 "additionalProperties": false
                               }
                             }
@@ -790,23 +639,14 @@
                           "additionalProperties": false
                         }
                       },
-                      "required": [
-                        "content",
-                        "learning",
-                        "ai-gateway",
-                        "ops-api"
-                      ],
+                      "required": ["content", "learning", "ai-gateway", "ops-api"],
                       "additionalProperties": false
                     },
                     "excluded": {
                       "type": "array",
                       "items": {
                         "type": "string",
-                        "enum": [
-                          "insight.db",
-                          "ai-cache.db",
-                          "secrets/ai-keys.enc"
-                        ]
+                        "enum": ["insight.db", "ai-cache.db", "secrets/ai-keys.enc"]
                       }
                     }
                   },
@@ -832,10 +672,7 @@
               ]
             }
           },
-          "required": [
-            "summary",
-            "manifest"
-          ],
+          "required": ["summary", "manifest"],
           "additionalProperties": false
         }
       }

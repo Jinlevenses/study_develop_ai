@@ -38,11 +38,6 @@
       "maxLength": 80
     }
   },
-  "required": [
-    "provider_id",
-    "task_id",
-    "model_version_prev",
-    "model_version_new"
-  ],
+  "required": ["provider_id", "task_id", "model_version_prev", "model_version_new"],
   "additionalProperties": false
 }

@@ -12,11 +12,7 @@
     },
     "state": {
       "type": "string",
-      "enum": [
-        "received",
-        "revalidating",
-        "resolved"
-      ]
+      "enum": ["received", "revalidating", "resolved"]
     },
     "cl_x": {
       "type": "boolean"
@@ -27,12 +23,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "report_id",
-    "concept_id",
-    "state",
-    "cl_x",
-    "created_at"
-  ],
+  "required": ["report_id", "concept_id", "state", "cl_x", "created_at"],
   "additionalProperties": false
 }

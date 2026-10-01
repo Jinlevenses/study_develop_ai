@@ -12,9 +12,7 @@
       "const": "/api/v1/session/csrf"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": false
@@ -29,9 +27,7 @@
       "const": "R0"
     },
     "fr": {
-      "enum": [
-        "NFR-SEC-002"
-      ]
+      "enum": ["NFR-SEC-002"]
     },
     "deadlineMs": {
       "const": null
@@ -60,9 +56,7 @@
               "pattern": "^[A-Za-z0-9_-]{43}$"
             }
           },
-          "required": [
-            "csrf"
-          ],
+          "required": ["csrf"],
           "additionalProperties": false
         }
       }

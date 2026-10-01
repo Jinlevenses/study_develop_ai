@@ -21,11 +21,7 @@
           "exclusiveMinimum": 0
         }
       },
-      "required": [
-        "title",
-        "alias",
-        "body"
-      ],
+      "required": ["title", "alias", "body"],
       "additionalProperties": false
     },
     "strip_chars": {
@@ -44,12 +40,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "version",
-    "bm25",
-    "strip_chars",
-    "short_token_len",
-    "v3_switch_docs"
-  ],
+  "required": ["version", "bm25", "strip_chars", "short_token_len", "v3_switch_docs"],
   "additionalProperties": false
 }

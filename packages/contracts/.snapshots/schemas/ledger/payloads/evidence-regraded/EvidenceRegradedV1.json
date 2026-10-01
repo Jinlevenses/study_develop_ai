@@ -54,11 +54,7 @@
     },
     "stakes": {
       "type": "string",
-      "enum": [
-        "S0",
-        "S1",
-        "S2"
-      ]
+      "enum": ["S0", "S1", "S2"]
     },
     "concept_id": {
       "type": "string",
@@ -127,35 +123,19 @@
     },
     "response_mode": {
       "type": "string",
-      "enum": [
-        "recognition",
-        "production"
-      ]
+      "enum": ["recognition", "production"]
     },
     "tier": {
       "type": "string",
-      "enum": [
-        "A",
-        "B",
-        "C"
-      ]
+      "enum": ["A", "B", "C"]
     },
     "result": {
       "type": "string",
-      "enum": [
-        "correct",
-        "partial",
-        "incorrect",
-        "pending"
-      ]
+      "enum": ["correct", "partial", "incorrect", "pending"]
     },
     "band": {
       "type": "string",
-      "enum": [
-        "wrong",
-        "partial",
-        "right"
-      ]
+      "enum": ["wrong", "partial", "right"]
     },
     "score": {
       "type": "number",
@@ -189,14 +169,7 @@
     },
     "grader_engine": {
       "type": "string",
-      "enum": [
-        "D",
-        "J",
-        "LJ",
-        "H",
-        "S",
-        "PENDING"
-      ]
+      "enum": ["D", "J", "LJ", "H", "S", "PENDING"]
     },
     "calibrated": {
       "type": "boolean"
@@ -241,12 +214,7 @@
     },
     "ai_mode": {
       "type": "string",
-      "enum": [
-        "FULL",
-        "JUDGE_ONLY",
-        "LLM_ONLY",
-        "OFFLINE"
-      ]
+      "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
     },
     "content_policy_version": {
       "type": "string",
@@ -294,10 +262,7 @@
     },
     "reason": {
       "type": "string",
-      "enum": [
-        "pending_regrade",
-        "appeal"
-      ]
+      "enum": ["pending_regrade", "appeal"]
     },
     "new_rating": {
       "anyOf": [

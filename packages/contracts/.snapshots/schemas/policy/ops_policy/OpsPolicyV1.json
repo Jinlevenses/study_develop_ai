@@ -34,13 +34,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "incremental_per_day",
-        "snapshot_per_week",
-        "generations",
-        "quiesce_ms",
-        "snapshot_ms"
-      ],
+      "required": ["incremental_per_day", "snapshot_per_week", "generations", "quiesce_ms", "snapshot_ms"],
       "additionalProperties": false
     },
     "logs": {
@@ -57,10 +51,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "days",
-        "max_mb_per_svc"
-      ],
+      "required": ["days", "max_mb_per_svc"],
       "additionalProperties": false
     },
     "tripwire": {
@@ -77,10 +68,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "idle_rss_mb",
-        "cold_start_ms"
-      ],
+      "required": ["idle_rss_mb", "cold_start_ms"],
       "additionalProperties": false
     },
     "disk_warn_mb": {
@@ -89,12 +77,6 @@
       "maximum": 9007199254740991
     }
   },
-  "required": [
-    "version",
-    "backup",
-    "logs",
-    "tripwire",
-    "disk_warn_mb"
-  ],
+  "required": ["version", "backup", "logs", "tripwire", "disk_warn_mb"],
   "additionalProperties": false
 }

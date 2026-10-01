@@ -12,9 +12,7 @@
       "const": "/internal/v1/practice/notes/{block_id}/draft"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-STD-031"
-      ]
+      "enum": ["FR-STD-031"]
     },
     "deadlineMs": {
       "const": null
@@ -56,9 +52,7 @@
               "pattern": "^[0-9A-HJKMNP-TV-Z]{26}$"
             }
           },
-          "required": [
-            "block_id"
-          ],
+          "required": ["block_id"],
           "additionalProperties": false
         },
         "body": {
@@ -90,19 +84,12 @@
                     "maximum": 9007199254740991
                   }
                 },
-                "required": [
-                  "start",
-                  "end"
-                ],
+                "required": ["start", "end"],
                 "additionalProperties": false
               }
             }
           },
-          "required": [
-            "text",
-            "updated_at",
-            "uncertain_spans"
-          ],
+          "required": ["text", "updated_at", "uncertain_spans"],
           "additionalProperties": false
         }
       }
@@ -123,10 +110,7 @@
               "maximum": 8640000000000000
             }
           },
-          "required": [
-            "block_id",
-            "saved_at"
-          ],
+          "required": ["block_id", "saved_at"],
           "additionalProperties": false
         }
       }

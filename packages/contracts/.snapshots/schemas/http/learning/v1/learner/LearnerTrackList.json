@@ -56,19 +56,11 @@
             "maximum": 9007199254740991
           }
         },
-        "required": [
-          "track",
-          "level",
-          "provisional",
-          "needs_reconfirmation",
-          "mastered"
-        ],
+        "required": ["track", "level", "provisional", "needs_reconfirmation", "mastered"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "tracks"
-  ],
+  "required": ["tracks"],
   "additionalProperties": false
 }

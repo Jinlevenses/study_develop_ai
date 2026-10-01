@@ -6,23 +6,13 @@
       "properties": {
         "mode": {
           "type": "string",
-          "enum": [
-            "FULL",
-            "JUDGE_ONLY",
-            "LLM_ONLY",
-            "OFFLINE"
-          ]
+          "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
         },
         "previous_mode": {
           "anyOf": [
             {
               "type": "string",
-              "enum": [
-                "FULL",
-                "JUDGE_ONLY",
-                "LLM_ONLY",
-                "OFFLINE"
-              ]
+              "enum": ["FULL", "JUDGE_ONLY", "LLM_ONLY", "OFFLINE"]
             },
             {
               "type": "null"
@@ -64,30 +54,14 @@
               },
               "kind": {
                 "type": "string",
-                "enum": [
-                  "jev",
-                  "llm_api",
-                  "llm_cli",
-                  "generic_cli",
-                  "local_llm"
-                ]
+                "enum": ["jev", "llm_api", "llm_cli", "generic_cli", "local_llm"]
               },
               "status": {
                 "type": "string",
-                "enum": [
-                  "ok",
-                  "degraded",
-                  "down",
-                  "unconsented",
-                  "disabled"
-                ]
+                "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
               }
             },
-            "required": [
-              "id",
-              "kind",
-              "status"
-            ],
+            "required": ["id", "kind", "status"],
             "additionalProperties": false
           }
         },
@@ -100,14 +74,7 @@
           "type": "boolean"
         }
       },
-      "required": [
-        "mode",
-        "previous_mode",
-        "reasons",
-        "providers",
-        "changed_at",
-        "safe_mode"
-      ],
+      "required": ["mode", "previous_mode", "reasons", "providers", "changed_at", "safe_mode"],
       "additionalProperties": false
     },
     "providers": {
@@ -121,24 +88,11 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "jev",
-              "llm_api",
-              "llm_cli",
-              "generic_cli",
-              "local_llm"
-            ]
+            "enum": ["jev", "llm_api", "llm_cli", "generic_cli", "local_llm"]
           },
           "family": {
             "type": "string",
-            "enum": [
-              "anthropic",
-              "openai",
-              "google",
-              "typesafe",
-              "local",
-              "other"
-            ]
+            "enum": ["anthropic", "openai", "google", "typesafe", "local", "other"]
           },
           "display_name": {
             "type": "string",
@@ -146,13 +100,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "ok",
-              "degraded",
-              "down",
-              "unconsented",
-              "disabled"
-            ]
+            "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
           },
           "consent": {
             "type": "object",
@@ -176,19 +124,11 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "enum": [
-                    "judge",
-                    "generate",
-                    "batch"
-                  ]
+                  "enum": ["judge", "generate", "batch"]
                 }
               }
             },
-            "required": [
-              "granted",
-              "granted_at",
-              "scopes"
-            ],
+            "required": ["granted", "granted_at", "scopes"],
             "additionalProperties": false
           },
           "probe": {
@@ -211,16 +151,10 @@
                     ]
                   },
                   "logged_in": {
-                    "type": [
-                      "boolean",
-                      "null"
-                    ]
+                    "type": ["boolean", "null"]
                   },
                   "flags_ok": {
-                    "type": [
-                      "boolean",
-                      "null"
-                    ]
+                    "type": ["boolean", "null"]
                   },
                   "missing_flags": {
                     "maxItems": 20,
@@ -231,10 +165,7 @@
                     }
                   },
                   "key_present": {
-                    "type": [
-                      "boolean",
-                      "null"
-                    ]
+                    "type": ["boolean", "null"]
                   },
                   "models": {
                     "maxItems": 50,
@@ -294,27 +225,15 @@
           },
           "breaker": {
             "type": "string",
-            "enum": [
-              "closed",
-              "open",
-              "half_open"
-            ]
+            "enum": ["closed", "open", "half_open"]
           },
           "billing_mode": {
             "type": "string",
-            "enum": [
-              "metered",
-              "subscription",
-              "free",
-              "local"
-            ]
+            "enum": ["metered", "subscription", "free", "local"]
           },
           "trust": {
             "type": "string",
-            "enum": [
-              "verified",
-              "unverified"
-            ]
+            "enum": ["verified", "unverified"]
           },
           "models_by_tier": {
             "type": "object",
@@ -353,11 +272,7 @@
                 ]
               }
             },
-            "required": [
-              "low",
-              "mid",
-              "high"
-            ],
+            "required": ["low", "mid", "high"],
             "additionalProperties": false
           },
           "capabilities": {
@@ -376,12 +291,7 @@
                 "type": "boolean"
               }
             },
-            "required": [
-              "structured_output",
-              "json_schema_flag",
-              "streaming",
-              "multi_turn"
-            ],
+            "required": ["structured_output", "json_schema_flag", "streaming", "multi_turn"],
             "additionalProperties": false
           },
           "external_processor": {
@@ -417,32 +327,18 @@
           },
           "dependency": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "code": {
             "type": "string",
             "pattern": "^(GW|CT|LR|AI|OP|CLI)-(VAL|AUTH|ACL|NOTFOUND|CONFLICT|DEP|LIMIT|POLICY|INTERNAL)-\\d{3}$"
           }
         },
-        "required": [
-          "part",
-          "dependency",
-          "code"
-        ],
+        "required": ["part", "dependency", "code"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "mode",
-    "providers",
-    "degraded"
-  ],
+  "required": ["mode", "providers", "degraded"],
   "additionalProperties": false
 }

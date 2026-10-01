@@ -45,12 +45,6 @@
       ]
     }
   },
-  "required": [
-    "run_id",
-    "case_id",
-    "session_id",
-    "block_id",
-    "variant_seed"
-  ],
+  "required": ["run_id", "case_id", "session_id", "block_id", "variant_seed"],
   "additionalProperties": false
 }

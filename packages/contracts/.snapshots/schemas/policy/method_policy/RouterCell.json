@@ -49,28 +49,14 @@
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "remember",
-              "understand",
-              "apply",
-              "analyze",
-              "evaluate",
-              "create"
-            ]
+            "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
           },
           "additionalProperties": {
             "type": "number",
             "minimum": 0,
             "maximum": 1
           },
-          "required": [
-            "remember",
-            "understand",
-            "apply",
-            "analyze",
-            "evaluate",
-            "create"
-          ]
+          "required": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
         },
         {
           "type": "null"
@@ -79,12 +65,7 @@
     },
     "scaffolding": {
       "type": "string",
-      "enum": [
-        "full",
-        "faded",
-        "minimal",
-        "none"
-      ]
+      "enum": ["full", "faded", "minimal", "none"]
     },
     "digging_depth_max": {
       "anyOf": [
@@ -99,11 +80,6 @@
       ]
     }
   },
-  "required": [
-    "formats",
-    "bloom",
-    "scaffolding",
-    "digging_depth_max"
-  ],
+  "required": ["formats", "bloom", "scaffolding", "digging_depth_max"],
   "additionalProperties": false
 }

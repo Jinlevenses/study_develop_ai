@@ -12,9 +12,7 @@
       "const": "/internal/v1/logs"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": false
@@ -29,10 +27,7 @@
       "const": "R1"
     },
     "fr": {
-      "enum": [
-        "FR-SET-016",
-        "NFR-AVL-007"
-      ]
+      "enum": ["FR-SET-016", "NFR-AVL-007"]
     },
     "deadlineMs": {
       "const": null
@@ -56,13 +51,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "gateway",
-                    "content",
-                    "learning",
-                    "ai-gateway",
-                    "ops-api"
-                  ]
+                  "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
                 },
                 {
                   "type": "string",
@@ -72,13 +61,7 @@
             },
             "level": {
               "type": "string",
-              "enum": [
-                "debug",
-                "info",
-                "warn",
-                "error",
-                "fatal"
-              ]
+              "enum": ["debug", "info", "warn", "error", "fatal"]
             },
             "q": {
               "type": "string",
@@ -109,9 +92,7 @@
               "maximum": 500
             }
           },
-          "required": [
-            "limit"
-          ],
+          "required": ["limit"],
           "additionalProperties": false
         }
       }
@@ -134,13 +115,7 @@
                   },
                   "level": {
                     "type": "string",
-                    "enum": [
-                      "debug",
-                      "info",
-                      "warn",
-                      "error",
-                      "fatal"
-                    ]
+                    "enum": ["debug", "info", "warn", "error", "fatal"]
                   },
                   "svc": {
                     "type": "string",
@@ -248,10 +223,7 @@
               ]
             }
           },
-          "required": [
-            "items",
-            "next_cursor"
-          ],
+          "required": ["items", "next_cursor"],
           "additionalProperties": false
         }
       }

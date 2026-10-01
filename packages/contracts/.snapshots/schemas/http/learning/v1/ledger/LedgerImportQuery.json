@@ -10,9 +10,6 @@
       "const": "merge"
     }
   },
-  "required": [
-    "import_id",
-    "mode"
-  ],
+  "required": ["import_id", "mode"],
   "additionalProperties": false
 }

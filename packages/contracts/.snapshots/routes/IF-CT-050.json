@@ -12,9 +12,7 @@
       "const": "/internal/v1/runner/runs"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -76,19 +74,13 @@
             },
             "kind": {
               "type": "string",
-              "enum": [
-                "code",
-                "sql"
-              ]
+              "enum": ["code", "sql"]
             },
             "lang": {
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "js",
-                    "ts"
-                  ]
+                  "enum": ["js", "ts"]
                 },
                 {
                   "type": "null"
@@ -102,29 +94,14 @@
             },
             "mode": {
               "type": "string",
-              "enum": [
-                "stdout",
-                "public_tests"
-              ]
+              "enum": ["stdout", "public_tests"]
             },
             "source_kind": {
               "type": "string",
-              "enum": [
-                "learner",
-                "seed",
-                "t1"
-              ]
+              "enum": ["learner", "seed", "t1"]
             }
           },
-          "required": [
-            "run_id",
-            "item_id",
-            "kind",
-            "lang",
-            "code",
-            "mode",
-            "source_kind"
-          ],
+          "required": ["run_id", "item_id", "kind", "lang", "code", "mode", "source_kind"],
           "additionalProperties": false
         }
       }
@@ -143,15 +120,7 @@
               "anyOf": [
                 {
                   "type": "string",
-                  "enum": [
-                    "ok",
-                    "error",
-                    "timeout",
-                    "memory_limit",
-                    "output_limit",
-                    "rejected",
-                    "platform_disabled"
-                  ]
+                  "enum": ["ok", "error", "timeout", "memory_limit", "output_limit", "rejected", "platform_disabled"]
                 },
                 {
                   "type": "string",
@@ -242,20 +211,12 @@
                             ]
                           }
                         },
-                        "required": [
-                          "case_key",
-                          "ok",
-                          "message_ko"
-                        ],
+                        "required": ["case_key", "ok", "message_ko"],
                         "additionalProperties": false
                       }
                     }
                   },
-                  "required": [
-                    "passed",
-                    "failed",
-                    "cases"
-                  ],
+                  "required": ["passed", "failed", "cases"],
                   "additionalProperties": false
                 },
                 {
@@ -301,11 +262,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "columns",
-                    "rows",
-                    "truncated"
-                  ],
+                  "required": ["columns", "rows", "truncated"],
                   "additionalProperties": false
                 },
                 {

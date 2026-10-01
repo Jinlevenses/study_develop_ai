@@ -12,9 +12,7 @@
       "const": "/internal/v1/telemetry/settings"
     },
     "allowedCallers": {
-      "enum": [
-        "gateway"
-      ]
+      "enum": ["gateway"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-SET-021"
-      ]
+      "enum": ["FR-SET-021"]
     },
     "deadlineMs": {
       "const": null
@@ -53,11 +49,7 @@
           "properties": {
             "action_strength": {
               "type": "string",
-              "enum": [
-                "observe",
-                "suggest",
-                "auto_adjust"
-              ]
+              "enum": ["observe", "suggest", "auto_adjust"]
             },
             "muted": {
               "maxItems": 20,
@@ -68,10 +60,7 @@
               }
             }
           },
-          "required": [
-            "action_strength",
-            "muted"
-          ],
+          "required": ["action_strength", "muted"],
           "additionalProperties": false
         }
       }
@@ -84,11 +73,7 @@
           "properties": {
             "action_strength": {
               "type": "string",
-              "enum": [
-                "observe",
-                "suggest",
-                "auto_adjust"
-              ]
+              "enum": ["observe", "suggest", "auto_adjust"]
             },
             "muted": {
               "maxItems": 20,
@@ -99,10 +84,7 @@
               }
             }
           },
-          "required": [
-            "action_strength",
-            "muted"
-          ],
+          "required": ["action_strength", "muted"],
           "additionalProperties": false
         }
       }

@@ -31,12 +31,7 @@
             "maximum": 1
           }
         },
-        "required": [
-          "key",
-          "label_ko",
-          "levels",
-          "weight"
-        ],
+        "required": ["key", "label_ko", "levels", "weight"],
         "additionalProperties": false
       }
     },
@@ -67,18 +62,11 @@
             ]
           }
         },
-        "required": [
-          "key",
-          "statement_ko",
-          "ku_id"
-        ],
+        "required": ["key", "statement_ko", "ku_id"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "dimensions",
-    "key_points"
-  ],
+  "required": ["dimensions", "key_points"],
   "additionalProperties": false
 }

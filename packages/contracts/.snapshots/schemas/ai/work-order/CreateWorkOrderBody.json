@@ -22,47 +22,25 @@
     },
     "requested_by": {
       "type": "string",
-      "enum": [
-        "content",
-        "user",
-        "system"
-      ]
+      "enum": ["content", "user", "system"]
     },
     "context_ref": {
       "type": "object",
       "properties": {
         "kind": {
           "type": "string",
-          "enum": [
-            "attempt",
-            "dialog_turn",
-            "blank_note",
-            "item",
-            "import",
-            "pack",
-            "calibration",
-            "appeal",
-            "system"
-          ]
+          "enum": ["attempt", "dialog_turn", "blank_note", "item", "import", "pack", "calibration", "appeal", "system"]
         },
         "phase": {
           "type": "string",
-          "enum": [
-            "pre_submit",
-            "post_submit",
-            "n_a"
-          ]
+          "enum": ["pre_submit", "post_submit", "n_a"]
         },
         "id": {
           "type": "string",
           "maxLength": 160
         }
       },
-      "required": [
-        "kind",
-        "phase",
-        "id"
-      ],
+      "required": ["kind", "phase", "id"],
       "additionalProperties": false
     },
     "tasks": {
@@ -148,22 +126,11 @@
             ]
           }
         },
-        "required": [
-          "task_id",
-          "calls",
-          "est_input_tokens",
-          "est_output_tokens"
-        ],
+        "required": ["task_id", "calls", "est_input_tokens", "est_output_tokens"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "work_order_id",
-    "purpose",
-    "requested_by",
-    "context_ref",
-    "tasks"
-  ],
+  "required": ["work_order_id", "purpose", "requested_by", "context_ref", "tasks"],
   "additionalProperties": false
 }

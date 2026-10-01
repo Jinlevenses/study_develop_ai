@@ -12,9 +12,7 @@
       "const": "/api/v1/cards/{card_id}:suspend"
     },
     "allowedCallers": {
-      "enum": [
-        "browser"
-      ]
+      "enum": ["browser"]
     },
     "idempotent": {
       "const": true
@@ -29,9 +27,7 @@
       "const": "R3"
     },
     "fr": {
-      "enum": [
-        "FR-PRG-031"
-      ]
+      "enum": ["FR-PRG-031"]
     },
     "deadlineMs": {
       "const": null
@@ -57,9 +53,7 @@
               "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*):[a-z][a-z_]{0,31}:(?:r|p))$"
             }
           },
-          "required": [
-            "card_id"
-          ],
+          "required": ["card_id"],
           "additionalProperties": false
         },
         "body": {
@@ -67,16 +61,10 @@
           "properties": {
             "reason": {
               "type": "string",
-              "enum": [
-                "user",
-                "leech",
-                "irrelevant"
-              ]
+              "enum": ["user", "leech", "irrelevant"]
             }
           },
-          "required": [
-            "reason"
-          ],
+          "required": ["reason"],
           "additionalProperties": false
         }
       }
@@ -103,26 +91,15 @@
             },
             "response_mode": {
               "type": "string",
-              "enum": [
-                "recognition",
-                "production"
-              ]
+              "enum": ["recognition", "production"]
             },
             "tier": {
               "type": "string",
-              "enum": [
-                "A",
-                "B",
-                "C"
-              ]
+              "enum": ["A", "B", "C"]
             },
             "status": {
               "type": "string",
-              "enum": [
-                "active",
-                "suspended",
-                "retired"
-              ]
+              "enum": ["active", "suspended", "retired"]
             },
             "due_at": {
               "anyOf": [

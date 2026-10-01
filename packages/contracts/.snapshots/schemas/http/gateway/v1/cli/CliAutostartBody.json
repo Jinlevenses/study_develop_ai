@@ -3,15 +3,9 @@
   "properties": {
     "action": {
       "type": "string",
-      "enum": [
-        "on",
-        "off",
-        "status"
-      ]
+      "enum": ["on", "off", "status"]
     }
   },
-  "required": [
-    "action"
-  ],
+  "required": ["action"],
   "additionalProperties": false
 }

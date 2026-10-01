@@ -3,13 +3,7 @@
   "properties": {
     "consumer": {
       "type": "string",
-      "enum": [
-        "gateway",
-        "content",
-        "learning",
-        "ai-gateway",
-        "ops-api"
-      ]
+      "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
     },
     "subscriptions": {
       "maxItems": 40,
@@ -32,18 +26,11 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "durable",
-              "notify"
-            ]
+            "enum": ["durable", "notify"]
           },
           "on_poison": {
             "type": "string",
-            "enum": [
-              "halt",
-              "dead_letter",
-              "drop"
-            ]
+            "enum": ["halt", "dead_letter", "drop"]
           },
           "reads": {
             "minItems": 1,
@@ -54,20 +41,11 @@
             }
           }
         },
-        "required": [
-          "type",
-          "schema_versions",
-          "mode",
-          "on_poison",
-          "reads"
-        ],
+        "required": ["type", "schema_versions", "mode", "on_poison", "reads"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "consumer",
-    "subscriptions"
-  ],
+  "required": ["consumer", "subscriptions"],
   "additionalProperties": false
 }

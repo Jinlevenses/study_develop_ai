@@ -43,11 +43,7 @@
           "maximum": 0.97
         }
       },
-      "required": [
-        "A",
-        "B",
-        "C"
-      ],
+      "required": ["A", "B", "C"],
       "additionalProperties": false
     },
     "forecast": {
@@ -71,10 +67,7 @@
               "maximum": 1
             }
           },
-          "required": [
-            "min_history_windows",
-            "default_pct"
-          ],
+          "required": ["min_history_windows", "default_pct"],
           "additionalProperties": false
         },
         "governor": {
@@ -82,22 +75,10 @@
           "const": "lower_bound"
         }
       },
-      "required": [
-        "window_days",
-        "band",
-        "governor"
-      ],
+      "required": ["window_days", "band", "governor"],
       "additionalProperties": false
     }
   },
-  "required": [
-    "version",
-    "impl",
-    "w",
-    "enable_fuzz",
-    "enable_short_term",
-    "request_retention",
-    "forecast"
-  ],
+  "required": ["version", "impl", "w", "enable_fuzz", "enable_short_term", "request_retention", "forecast"],
   "additionalProperties": false
 }

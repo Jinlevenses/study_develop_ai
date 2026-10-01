@@ -36,13 +36,7 @@
           "const": 0
         }
       },
-      "required": [
-        "core",
-        "standard",
-        "breadth",
-        "archive",
-        "retired"
-      ],
+      "required": ["core", "standard", "breadth", "archive", "retired"],
       "additionalProperties": false
     },
     "depth_by_level": {
@@ -73,14 +67,7 @@
           "minimum": 0
         }
       },
-      "required": [
-        "L0",
-        "L1",
-        "L2",
-        "L3",
-        "L4",
-        "L5"
-      ],
+      "required": ["L0", "L1", "L2", "L3", "L4", "L5"],
       "additionalProperties": false
     },
     "retrievability": {
@@ -92,9 +79,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "recognition_factor"
-      ],
+      "required": ["recognition_factor"],
       "additionalProperties": false
     },
     "evidence": {
@@ -116,11 +101,7 @@
           "maximum": 9007199254740991
         }
       },
-      "required": [
-        "grader_weight",
-        "formats_weight",
-        "formats_target"
-      ],
+      "required": ["grader_weight", "formats_weight", "formats_target"],
       "additionalProperties": false
     },
     "validity": {
@@ -142,11 +123,7 @@
           "maximum": 1
         }
       },
-      "required": [
-        "valid",
-        "cl_x",
-        "deprecated"
-      ],
+      "required": ["valid", "cl_x", "deprecated"],
       "additionalProperties": false
     },
     "provisional_factor": {

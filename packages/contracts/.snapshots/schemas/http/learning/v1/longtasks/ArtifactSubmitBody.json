@@ -34,10 +34,6 @@
       ]
     }
   },
-  "required": [
-    "attempt_id",
-    "text",
-    "confidence"
-  ],
+  "required": ["attempt_id", "text", "confidence"],
   "additionalProperties": false
 }

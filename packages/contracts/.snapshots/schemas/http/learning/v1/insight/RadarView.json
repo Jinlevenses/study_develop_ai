@@ -27,12 +27,7 @@
             "maxLength": 100
           }
         },
-        "required": [
-          "concept_id",
-          "retention",
-          "due_at",
-          "reason_ko"
-        ],
+        "required": ["concept_id", "retention", "due_at", "reason_ko"],
         "additionalProperties": false
       }
     },
@@ -42,9 +37,6 @@
       "maximum": 8640000000000000
     }
   },
-  "required": [
-    "at_risk",
-    "computed_at"
-  ],
+  "required": ["at_risk", "computed_at"],
   "additionalProperties": false
 }

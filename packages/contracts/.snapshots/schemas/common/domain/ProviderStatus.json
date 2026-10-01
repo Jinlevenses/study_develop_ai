@@ -1,10 +1,4 @@
 {
   "type": "string",
-  "enum": [
-    "ok",
-    "degraded",
-    "down",
-    "unconsented",
-    "disabled"
-  ]
+  "enum": ["ok", "degraded", "down", "unconsented", "disabled"]
 }

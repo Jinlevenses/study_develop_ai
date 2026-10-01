@@ -3,10 +3,7 @@
   "properties": {
     "state": {
       "type": "string",
-      "enum": [
-        "open",
-        "resolved"
-      ]
+      "enum": ["open", "resolved"]
     },
     "cursor": {
       "type": "string",
@@ -19,8 +16,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }

@@ -7,15 +7,9 @@
     },
     "outcome": {
       "type": "string",
-      "enum": [
-        "completed",
-        "aborted"
-      ]
+      "enum": ["completed", "aborted"]
     }
   },
-  "required": [
-    "epoch_id",
-    "outcome"
-  ],
+  "required": ["epoch_id", "outcome"],
   "additionalProperties": false
 }

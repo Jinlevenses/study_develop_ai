@@ -21,13 +21,7 @@
         },
         "svc": {
           "type": "string",
-          "enum": [
-            "gateway",
-            "content",
-            "learning",
-            "ai-gateway",
-            "ops-api"
-          ]
+          "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
         },
         "boot_id": {
           "type": "string",
@@ -43,11 +37,7 @@
         },
         "profile": {
           "type": "string",
-          "enum": [
-            "prod",
-            "dev",
-            "test"
-          ]
+          "enum": ["prod", "dev", "test"]
         },
         "home": {
           "type": "string",
@@ -77,10 +67,7 @@
               "maximum": 65535
             }
           },
-          "required": [
-            "host",
-            "port"
-          ],
+          "required": ["host", "port"],
           "additionalProperties": false
         },
         "self_token": {
@@ -91,37 +78,19 @@
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "additionalProperties": {
             "type": "string",
             "pattern": "^[0-9a-f]{64}$"
           },
-          "required": [
-            "gateway",
-            "content",
-            "learning",
-            "ai-gateway",
-            "ops-api"
-          ]
+          "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
         },
         "peers": {
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "additionalProperties": {
             "type": "object",
@@ -131,18 +100,10 @@
                 "format": "uri"
               }
             },
-            "required": [
-              "url"
-            ],
+            "required": ["url"],
             "additionalProperties": false
           },
-          "required": [
-            "gateway",
-            "content",
-            "learning",
-            "ai-gateway",
-            "ops-api"
-          ]
+          "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
         },
         "flags": {
           "type": "object",
@@ -157,21 +118,12 @@
               "type": "boolean"
             }
           },
-          "required": [
-            "safe_mode",
-            "batch_enabled",
-            "after_crash"
-          ],
+          "required": ["safe_mode", "batch_enabled", "after_crash"],
           "additionalProperties": false
         },
         "log_level": {
           "type": "string",
-          "enum": [
-            "debug",
-            "info",
-            "warn",
-            "error"
-          ]
+          "enum": ["debug", "info", "warn", "error"]
         }
       },
       "required": [
@@ -216,13 +168,7 @@
           "type": "object",
           "propertyNames": {
             "type": "string",
-            "enum": [
-              "gateway",
-              "content",
-              "learning",
-              "ai-gateway",
-              "ops-api"
-            ]
+            "enum": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
           },
           "additionalProperties": {
             "type": "object",
@@ -232,25 +178,13 @@
                 "format": "uri"
               }
             },
-            "required": [
-              "url"
-            ],
+            "required": ["url"],
             "additionalProperties": false
           },
-          "required": [
-            "gateway",
-            "content",
-            "learning",
-            "ai-gateway",
-            "ops-api"
-          ]
+          "required": ["gateway", "content", "learning", "ai-gateway", "ops-api"]
         }
       },
-      "required": [
-        "type",
-        "v",
-        "peers"
-      ],
+      "required": ["type", "v", "peers"],
       "additionalProperties": false
     },
     {
@@ -278,11 +212,7 @@
           "maximum": 10000
         }
       },
-      "required": [
-        "type",
-        "v",
-        "grace_ms"
-      ],
+      "required": ["type", "v", "grace_ms"],
       "additionalProperties": false
     },
     {
@@ -306,19 +236,10 @@
         },
         "level": {
           "type": "string",
-          "enum": [
-            "debug",
-            "info",
-            "warn",
-            "error"
-          ]
+          "enum": ["debug", "info", "warn", "error"]
         }
       },
-      "required": [
-        "type",
-        "v",
-        "level"
-      ],
+      "required": ["type", "v", "level"],
       "additionalProperties": false
     }
   ]

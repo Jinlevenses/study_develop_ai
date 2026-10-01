@@ -3,10 +3,7 @@
   "properties": {
     "format": {
       "type": "string",
-      "enum": [
-        "md",
-        "json"
-      ]
+      "enum": ["md", "json"]
     },
     "content": {
       "type": "string",
@@ -22,11 +19,6 @@
       "pattern": "^[0-9a-f]{64}$"
     }
   },
-  "required": [
-    "format",
-    "content",
-    "generated_at",
-    "sha256"
-  ],
+  "required": ["format", "content", "generated_at", "sha256"],
   "additionalProperties": false
 }

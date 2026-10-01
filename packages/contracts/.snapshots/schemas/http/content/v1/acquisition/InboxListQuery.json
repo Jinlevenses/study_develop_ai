@@ -3,13 +3,7 @@
   "properties": {
     "state": {
       "type": "string",
-      "enum": [
-        "new",
-        "triaged",
-        "linked",
-        "imported",
-        "discarded"
-      ]
+      "enum": ["new", "triaged", "linked", "imported", "discarded"]
     },
     "cursor": {
       "type": "string",
@@ -22,8 +16,6 @@
       "maximum": 200
     }
   },
-  "required": [
-    "limit"
-  ],
+  "required": ["limit"],
   "additionalProperties": false
 }
