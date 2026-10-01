@@ -1,0 +1,25 @@
+{
+  "name": "@fathom/tool-packc",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --conditions=source node_modules/vitest/vitest.mjs run --project unit --configLoader native",
+    "test:integration": "node --conditions=source node_modules/vitest/vitest.mjs run --project integration --configLoader native",
+    "test:security": "node --conditions=source node_modules/vitest/vitest.mjs run --project security --configLoader native"
+  },
+  "dependencies": {
+    "@fathom/contracts": "workspace:*",
+    "@fathom/shared-kernel": "workspace:*",
+    "d3-force": "3.0.0",
+    "yaml": "2.9.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@fathom/testkit": "workspace:*",
+    "@types/d3-force": "3.0.10",
+    "@types/node": "22.20.4",
+    "vitest": "5.0.2"
+  }
+}

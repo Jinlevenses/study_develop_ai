@@ -1,0 +1,28 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/boundaries.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// check:boundaries via Biome GritQL (no compiler API). $filename + regex capture groups.
+//  (a) alias:    services/<own>/**  importing @fathom/svc-<other>          -> capture-group inequality
+//  (b) apps/packages importing a service (alias or path containing /services/)
+//  (c) relative: any relative import that climbs OUT of services/<x>/src  (depth-specific regexes, d = 0..4)
+or {
+  `import $_ from $src`,
+  `import $src`,
+  `export * from $src`,
+  JsExportNamedFromClause() as $src,
+  `import($src)`,
+  `require($src)`
+} where {
+  or {
+    and {
+      $filename <: r".*services/([^/]+)/.*"($own),
+      $src <: r".*@fathom/svc-([^/\"']+).*"($other),
+      $own <: not $other
+    },
+    and { $filename <: r".*(?:apps|packages)/.*", $src <: r".*(?:@fathom/svc-|/services/).*" },
+    and { $filename <: r".*services/[^/]+/src/[^/]+$", $src <: r".*[\"'](?:\.\./){1}.*" },
+    and { $filename <: r".*services/[^/]+/src/(?:[^/]+/){1}[^/]+$", $src <: r".*[\"'](?:\.\./){2}.*" },
+    and { $filename <: r".*services/[^/]+/src/(?:[^/]+/){2}[^/]+$", $src <: r".*[\"'](?:\.\./){3}.*" },
+    and { $filename <: r".*services/[^/]+/src/(?:[^/]+/){3}[^/]+$", $src <: r".*[\"'](?:\.\./){4}.*" },
+    and { $filename <: r".*services/[^/]+/src/(?:[^/]+/){4}[^/]+$", $src <: r".*[\"'](?:\.\./){5}.*" }
+  },
+  register_diagnostic(span=$src, message="boundary/cross-service-import: only packages/contracts and packages/shared-kernel may be shared", severity="error")
+}

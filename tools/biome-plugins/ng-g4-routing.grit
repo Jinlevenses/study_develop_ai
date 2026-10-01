@@ -1,0 +1,11 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/ng-g4-routing.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// NG-G4 (scope: routing/router dirs): no lock semantics.
+or {
+  JsIdentifierBinding() as $hit,
+  JsReferenceIdentifier() as $hit,
+  JsLiteralMemberName() as $hit,
+  TsPropertySignatureTypeMember() as $hit
+} where {
+  $hit <: r"(?i)^\s*(?:is)?(?:locked|lock|unlock|hardGate|forceLock|blockedUntil)\b\??.*",
+  register_diagnostic(span=$hit, message="ng-g4/hard-lock: routing code must not lock on prerequisites (soft gate only)", severity="error")
+}

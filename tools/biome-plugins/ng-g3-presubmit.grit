@@ -1,0 +1,9 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/ng-g3-presubmit.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// NG-G3 (scope: **/pre-submit/**): pre-submit schemas must not carry answer/explanation fields.
+or {
+  JsPropertyObjectMember() as $hit,
+  TsPropertySignatureTypeMember() as $hit
+} where {
+  $hit <: r"(?s)^\s*[\"']?(?:answer_key|answerKey|explanation|correct_option|correct_options|correct_answer|correctAnswer|is_correct|isCorrect|model_answer|modelAnswer|exemplar_note|exemplarNote|rubric_answer|solution)[\"']?\??\s*:.*",
+  register_diagnostic(span=$hit, message="ng-g3/presubmit-field: answer/explanation only after submission", severity="error")
+}

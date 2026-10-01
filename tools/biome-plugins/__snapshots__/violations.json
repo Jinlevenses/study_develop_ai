@@ -1,0 +1,382 @@
+[
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 5,
+    "rule": "design/raw-color"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 6,
+    "rule": "design/raw-color"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 7,
+    "rule": "design/raw-color"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 9,
+    "rule": "design/raw-color"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 14,
+    "rule": "ng-g5/loss-copy"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 17,
+    "rule": "ng-g5/danger-due"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 18,
+    "rule": "ng-g5/loss-copy"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 19,
+    "rule": "ng-g1/reward-vocab"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 20,
+    "rule": "ng-g1/reward-vocab"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 21,
+    "rule": "ng-g2/social-vocab"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 22,
+    "rule": "ng-g2/social-vocab"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 24,
+    "rule": "ng-g2/network-share"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 27,
+    "rule": "ng-g5/push-api"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 28,
+    "rule": "ng-g5/push-api"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 32,
+    "rule": "ng-g5/danger-due"
+  },
+  {
+    "file": "apps/web/src/App.tsx",
+    "line": 35,
+    "rule": "ng-g6/video"
+  },
+  {
+    "file": "apps/web/src/leak.ts",
+    "line": 2,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "apps/web/src/styles.css",
+    "line": 4,
+    "rule": "ng-g5/danger-due"
+  },
+  {
+    "file": "apps/web/src/styles.css",
+    "line": 5,
+    "rule": "design/raw-color"
+  },
+  {
+    "file": "apps/web/src/styles.css",
+    "line": 6,
+    "rule": "ng-g1/reward-vocab"
+  },
+  {
+    "file": "apps/web/src/styles.css",
+    "line": 7,
+    "rule": "ng-g1/reward-vocab"
+  },
+  {
+    "file": "apps/web/src/styles.css",
+    "line": 8,
+    "rule": "design/raw-color"
+  },
+  {
+    "file": "packages/contracts/src/content.ts",
+    "line": 4,
+    "rule": "ng-g6/video"
+  },
+  {
+    "file": "packages/contracts/src/content.ts",
+    "line": 7,
+    "rule": "ng-g6/video"
+  },
+  {
+    "file": "packages/contracts/src/leak.ts",
+    "line": 2,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "packages/contracts/src/named-presubmit.ts",
+    "line": 8,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "packages/contracts/src/named-presubmit.ts",
+    "line": 13,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "packages/contracts/src/pre-submit/item-view.ts",
+    "line": 9,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "packages/contracts/src/pre-submit/item-view.ts",
+    "line": 9,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "packages/contracts/src/pre-submit/item-view.ts",
+    "line": 10,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "packages/contracts/src/pre-submit/item-view.ts",
+    "line": 10,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "packages/contracts/src/pre-submit/item-view.ts",
+    "line": 16,
+    "rule": "ng-g3/presubmit-field"
+  },
+  {
+    "file": "services/content/src/db.ts",
+    "line": 4,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/blank-note/draft.ts",
+    "line": 2,
+    "rule": "ng-g7/presubmit-ai-call"
+  },
+  {
+    "file": "services/learning/src/blank-note/draft.ts",
+    "line": 6,
+    "rule": "ng-g7/presubmit-ai-call"
+  },
+  {
+    "file": "services/learning/src/blank-note/draft.ts",
+    "line": 7,
+    "rule": "ng-g7/presubmit-ai-call"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 3,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 4,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 5,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 6,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 7,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 8,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/cross.ts",
+    "line": 11,
+    "rule": "boundary/cross-service-import"
+  },
+  {
+    "file": "services/learning/src/domain/practice/routing/route.ts",
+    "line": 2,
+    "rule": "ng-g4/hard-lock"
+  },
+  {
+    "file": "services/learning/src/domain/practice/routing/route.ts",
+    "line": 2,
+    "rule": "ng-g4/hard-lock"
+  },
+  {
+    "file": "services/learning/src/domain/practice/routing/route.ts",
+    "line": 4,
+    "rule": "ng-g4/hard-lock"
+  },
+  {
+    "file": "services/learning/src/domain/practice/routing/route.ts",
+    "line": 9,
+    "rule": "ng-g4/hard-lock"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 4,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 5,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 6,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 7,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 8,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 9,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 12,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 13,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 18,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 19,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 20,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 21,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 27,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 28,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 32,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/jev/bad.ts",
+    "line": 33,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/rubric.jev.ts",
+    "line": 2,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/rubric.jev.ts",
+    "line": 4,
+    "rule": "jev/index-*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 5,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 8,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 11,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 16,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 20,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 25,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 28,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 31,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 34,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 38,
+    "rule": "sql/*"
+  },
+  {
+    "file": "services/learning/src/store-bad.ts",
+    "line": 42,
+    "rule": "sql/*"
+  }
+]

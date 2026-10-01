@@ -1,0 +1,291 @@
+{
+  "taskId": "T-00-01",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    ".gitattributes",
+    ".gitignore",
+    ".graphifyignore",
+    ".node-version",
+    ".npmrc",
+    "apps/cli/README.md",
+    "apps/cli/package.json",
+    "apps/cli/tsconfig.build.json",
+    "apps/cli/tsconfig.json",
+    "apps/cli/vitest.config.ts",
+    "apps/web/README.md",
+    "apps/web/package.json",
+    "apps/web/tsconfig.build.json",
+    "apps/web/tsconfig.json",
+    "apps/web/vitest.config.ts",
+    "biome.json",
+    "docs/40-impl/reports/tasks/T-00-01.json",
+    "package.json",
+    "packages/contracts/README.md",
+    "packages/contracts/package.json",
+    "packages/contracts/tsconfig.build.json",
+    "packages/contracts/tsconfig.json",
+    "packages/contracts/vitest.config.ts",
+    "packages/design-tokens/README.md",
+    "packages/design-tokens/package.json",
+    "packages/design-tokens/tsconfig.build.json",
+    "packages/design-tokens/tsconfig.json",
+    "packages/design-tokens/vitest.config.ts",
+    "packages/shared-kernel/README.md",
+    "packages/shared-kernel/package.json",
+    "packages/shared-kernel/tsconfig.build.json",
+    "packages/shared-kernel/tsconfig.json",
+    "packages/shared-kernel/vitest.config.ts",
+    "packages/testkit/README.md",
+    "packages/testkit/package.json",
+    "packages/testkit/src/clock.ts",
+    "packages/testkit/src/prng.ts",
+    "packages/testkit/src/setup/no-network.ts",
+    "packages/testkit/src/vitest-preset.ts",
+    "packages/testkit/test/unit/clock/clock.spec.ts",
+    "packages/testkit/test/unit/preset/preset.spec.ts",
+    "packages/testkit/test/unit/prng/prng.spec.ts",
+    "packages/testkit/tsconfig.build.json",
+    "packages/testkit/tsconfig.json",
+    "packages/testkit/vitest.config.ts",
+    "packages/ui/README.md",
+    "packages/ui/package.json",
+    "packages/ui/tsconfig.build.json",
+    "packages/ui/tsconfig.json",
+    "packages/ui/vitest.config.ts",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "services/ai-gateway/README.md",
+    "services/ai-gateway/package.json",
+    "services/ai-gateway/tsconfig.build.json",
+    "services/ai-gateway/tsconfig.json",
+    "services/ai-gateway/vitest.config.ts",
+    "services/content/README.md",
+    "services/content/package.json",
+    "services/content/tsconfig.build.json",
+    "services/content/tsconfig.json",
+    "services/content/vitest.config.ts",
+    "services/gateway/README.md",
+    "services/gateway/package.json",
+    "services/gateway/tsconfig.build.json",
+    "services/gateway/tsconfig.json",
+    "services/gateway/vitest.config.ts",
+    "services/learning/README.md",
+    "services/learning/package.json",
+    "services/learning/tsconfig.build.json",
+    "services/learning/tsconfig.json",
+    "services/learning/vitest.config.ts",
+    "services/ops/README.md",
+    "services/ops/package.json",
+    "services/ops/tsconfig.build.json",
+    "services/ops/tsconfig.json",
+    "services/ops/vitest.config.ts",
+    "tools/biome-plugins/__snapshots__/clean.json",
+    "tools/biome-plugins/__snapshots__/violations.json",
+    "tools/biome-plugins/boundaries.grit",
+    "tools/biome-plugins/jev-index.grit",
+    "tools/biome-plugins/ng-g-css.grit",
+    "tools/biome-plugins/ng-g-ts.grit",
+    "tools/biome-plugins/ng-g3-presubmit-named.grit",
+    "tools/biome-plugins/ng-g3-presubmit.grit",
+    "tools/biome-plugins/ng-g4-routing.grit",
+    "tools/biome-plugins/ng-g6-contracts.grit",
+    "tools/biome-plugins/ng-g7-blank-note.grit",
+    "tools/biome-plugins/sql-template.grit",
+    "tools/fake-cli/README.md",
+    "tools/fake-cli/package.json",
+    "tools/fake-cli/tsconfig.build.json",
+    "tools/fake-cli/tsconfig.json",
+    "tools/fake-cli/vitest.config.ts",
+    "tools/gates/README.md",
+    "tools/gates/fixtures/biome-plugins/clean/apps/web/src/App.tsx",
+    "tools/gates/fixtures/biome-plugins/clean/apps/web/src/styles.css",
+    "tools/gates/fixtures/biome-plugins/clean/biome.fixture.json",
+    "tools/gates/fixtures/biome-plugins/clean/packages/contracts/src/ai-gateway-policy.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/contracts/src/content.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/contracts/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/contracts/src/post-submit/item-result.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/contracts/src/pre-submit/item-view.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/design-tokens/tokens.css",
+    "tools/gates/fixtures/biome-plugins/clean/packages/shared-kernel/src/ai-gateway-client.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/shared-kernel/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/shared-kernel/src/jev-client.ts",
+    "tools/gates/fixtures/biome-plugins/clean/packages/shared-kernel/src/sql.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/content/src/consumer.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/content/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/content/src/local.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/alias-ok.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/blank-note/draft.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/blank-note/post-submit/feedback.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/domain/practice/routing/route.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/jev/grade.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/store.ts",
+    "tools/gates/fixtures/biome-plugins/clean/services/learning/src/uses-sdk.ts",
+    "tools/gates/fixtures/biome-plugins/violations/apps/web/src/App.tsx",
+    "tools/gates/fixtures/biome-plugins/violations/apps/web/src/leak.ts",
+    "tools/gates/fixtures/biome-plugins/violations/apps/web/src/styles.css",
+    "tools/gates/fixtures/biome-plugins/violations/biome.fixture.json",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/ai-gateway-policy.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/content.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/leak.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/named-presubmit.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/post-submit/item-result.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/contracts/src/pre-submit/item-view.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/design-tokens/tokens.css",
+    "tools/gates/fixtures/biome-plugins/violations/packages/shared-kernel/src/ai-gateway-client.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/shared-kernel/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/shared-kernel/src/jev-client.ts",
+    "tools/gates/fixtures/biome-plugins/violations/packages/shared-kernel/src/sql.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/content/src/consumer.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/content/src/db.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/content/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/content/src/local.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/alias-evasion.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/blank-note/draft.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/blank-note/post-submit/feedback.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/cross.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/domain/practice/routing/prereq.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/domain/practice/routing/route.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/index.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/jev/bad.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/jev/grade.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/not-jev.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/rubric.jev.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/store-bad.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/store.ts",
+    "tools/gates/fixtures/biome-plugins/violations/services/learning/src/uses-sdk.ts",
+    "tools/gates/package.json",
+    "tools/gates/test/biome-plugins.test.mjs",
+    "tools/gates/test/workspace.test.mjs",
+    "tools/gates/tsconfig.build.json",
+    "tools/gates/tsconfig.json",
+    "tools/gates/vitest.config.ts",
+    "tools/graph/README.md",
+    "tools/graph/package.json",
+    "tools/graph/tsconfig.build.json",
+    "tools/graph/tsconfig.json",
+    "tools/graph/vitest.config.ts",
+    "tools/packc/README.md",
+    "tools/packc/package.json",
+    "tools/packc/tsconfig.build.json",
+    "tools/packc/tsconfig.json",
+    "tools/packc/vitest.config.ts",
+    "tools/si-docs/README.md",
+    "tools/si-docs/data/fr-iteration.json",
+    "tools/si-docs/package.json",
+    "tools/si-docs/tsconfig.build.json",
+    "tools/si-docs/tsconfig.json",
+    "tools/si-docs/vitest.config.ts",
+    "tsconfig.base.json",
+    "tsconfig.json",
+    "turbo.json"
+  ],
+  "testsAdded": [
+    "UT-TK-001..009",
+    "UT-GATE-230..239",
+    "IT-655..659"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/testkit typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/testkit test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-gates test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm -r --no-bail typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm -r --no-bail test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": null,
+      "skipped": "gate-not-yet-present"
+    },
+    {
+      "cmd": "pnpm test (agent env, AGENTS.md check)",
+      "exit": 0
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "ng-g-css.grit: biome format removed the ';' after 'language css' and inserted a blank line, so the ported-from header is line 4 (not 3); rule bodies unchanged.",
+    "UT-GATE-238: ng-g6/video diagnostics also come from ng-g-ts for the JSX <video> element in apps/web/src/App.tsx (3 total, matches brief count); assertion relaxed to contracts/src (string) or web/ui .tsx (element) instead of contracts/src only."
+  ],
+  "escalations": [
+    {
+      "type": "ambiguity",
+      "detail": "turbo 2.11.5 auto-appends a 'turborepo-agent-rules' block to root AGENTS.md (forbidden path) whenever a turbo command runs under an agent. T-00-01 reverted it, but any later 'pnpm test/build' will re-add it and break check:scope. Suggested fix (needs T1 decision since Brief 4.5 fixes turbo.json content): add \"agentGuidance\": false to turbo.json, or restore AGENTS.md after turbo runs."
+    },
+    {
+      "type": "spec",
+      "detail": "Brief 4.5 turbo.json amended by T1 decision (D-B12): top-level agentGuidance:false added; verified pnpm test/typecheck/lint under agent env leave AGENTS.md unchanged (hash f1b4fc3). Brief 5.2 UT-GATE-238 should be amended to 'contracts/src (string) or web/ui .tsx (element)'. engines.node >=22.15.0 vs native TS type stripping (>=22.18) needs a CR (.node-version pins 22.22.2). 6 must_bands rows have first_int outside first_int_range in source docs (FR-CUR-016, FR-QST-021, FR-STD-012, FR-UX-012, NFR-MAINT-002, NFR-UX-009): flag to T-00-05 / RTM owner."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-01",
+      "pgm": "PGM-SYS-101",
+      "req": [
+        "NFR-PORT-002",
+        "NFR-PORT-003",
+        "NFR-MAINT-005",
+        "CON-006"
+      ],
+      "tests": [
+        "IT-655..659"
+      ]
+    },
+    {
+      "wp": "WP-00-01",
+      "pgm": "PGM-GATE-023",
+      "req": [
+        "NFR-MAINT-001",
+        "NFR-MAINT-005",
+        "FR-UX-008"
+      ],
+      "tests": [
+        "UT-GATE-230..239"
+      ]
+    },
+    {
+      "wp": "WP-00-11",
+      "pgm": "PGM-TK-001",
+      "req": [
+        "NFR-MAINT-009"
+      ],
+      "tests": [
+        "UT-TK-001..009"
+      ]
+    }
+  ],
+  "notes": "All 70 pins resolved via pnpm view; pnpm@10.33.0 ok. Install warnings only the 2 expected (cyclic workspace deps, ignored build scripts). Plugin snapshot: clean 0, violations 76 (boundary 10, jev 18, sql 11, raw-color 6, g1 4, g2 2+1, g5 2+2+3, g3 7, g4 4, g6 3, g7 3). fr-iteration: FR 236, NFR 93, must_bands 74, all 8 expected values match. SUPPLEMENT r1: turbo.json agentGuidance:false (D-B12); prng.ts at() no longer uses a type assertion (1-element slice iteration + RangeError), the earlier 'as T' deviation is removed; AAA comments added to UT-TK-001..009 specs; IT-659 now deepEquals fr-iteration sources and rules; packages/contracts/README.md duplicate ADR-008 removed. Re-ran: testkit typecheck/test, tool-gates test, pnpm -r typecheck, pnpm typecheck, pnpm test, pnpm lint all exit 0; AGENTS.md unchanged."
+}

@@ -1,0 +1,11 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/ng-g7-blank-note.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// NG-G7 (scope: **/blank-note/** excluding post-submit): no AI generation reachable before submit.
+or {
+  `import $_ from $src` as $hit where { $src <: r".*(?:ai-gateway|anthropic|openai|typesafe-ai|llm-provider).*" },
+  JsIdentifierBinding() as $hit where {
+    $hit <: r"(?i)^(?:auto_?write|autocomplete|ai_?assist|suggest_?(?:note|text)|generate_?(?:note|text|summary)|complete_?note|draft_?with_?ai)\w*$"
+  },
+  `generate($_)` as $hit
+} where {
+  register_diagnostic(span=$hit, message="ng-g7/presubmit-ai-call: AI generation reachable from blank-note pre-submit code", severity="error")
+}

@@ -1,0 +1,98 @@
+{
+  "root": true,
+  "vcs": {
+    "enabled": false
+  },
+  "files": {
+    "includes": [
+      "**"
+    ]
+  },
+  "formatter": {
+    "enabled": false
+  },
+  "assist": {
+    "enabled": false
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "preset": "none"
+    }
+  },
+  "plugins": [
+    {
+      "path": "../../../../biome-plugins/boundaries.grit",
+      "includes": [
+        "**/apps/*/src/**",
+        "**/services/*/src/**",
+        "**/packages/*/src/**",
+        "**/tools/*/src/**"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/jev-index.grit",
+      "includes": [
+        "**/services/*/src/jev/**",
+        "**/*.jev.ts"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/sql-template.grit",
+      "includes": [
+        "**/services/*/src/**/*.ts",
+        "**/packages/shared-kernel/src/**/*.ts"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g-ts.grit",
+      "includes": [
+        "**/apps/web/src/**/*.ts",
+        "**/apps/web/src/**/*.tsx",
+        "**/packages/ui/src/**/*.ts",
+        "**/packages/ui/src/**/*.tsx",
+        "**/services/*/src/**/*.ts"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g-css.grit",
+      "includes": [
+        "**/apps/web/src/**/*.css",
+        "**/packages/ui/src/**/*.css"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g3-presubmit.grit",
+      "includes": [
+        "**/pre-submit/**"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g3-presubmit-named.grit",
+      "includes": [
+        "**/src/**/*.ts"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g4-routing.grit",
+      "includes": [
+        "**/apps/web/src/routing/**",
+        "**/services/learning/src/domain/practice/routing/**",
+        "**/*.route.ts"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g6-contracts.grit",
+      "includes": [
+        "**/packages/contracts/src/**"
+      ]
+    },
+    {
+      "path": "../../../../biome-plugins/ng-g7-blank-note.grit",
+      "includes": [
+        "**/blank-note/**",
+        "!**/post-submit/**"
+      ]
+    }
+  ]
+}

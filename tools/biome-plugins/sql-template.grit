@@ -1,0 +1,18 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/sql-template.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// check:sql via Biome GritQL. No dataflow: flags every prepare()/exec() argument that is not
+//  (a) a string literal (or literal + literal), (b) a template without ${}, (c) a template whose only ${} are ident()/sqlIdent()/placeholders()/sqlInt(),
+//  (d) an ALL_CAPS constant name.
+// NOTE: `not or { A, B }` misbehaves in Biome 2.5.14 GritQL, so every exclusion is its own `not` clause.
+or {
+  `$db.prepare($arg)`,
+  `$db.exec($arg)`
+} where {
+  $db <: not r"(?i)(?:re|rx|regex|regexp|pattern|matcher|[A-Za-z0-9_]*(?:Re|RE|Regex|Pattern))",
+  $db <: not JsRegexLiteralExpression(),
+  $arg <: not JsStringLiteralExpression(),
+  $arg <: not r"[A-Z][A-Z0-9_]*",
+  $arg <: not r"(?s)^(?:\"[^\"]*\"|'[^']*')(?:\s*\+\s*(?:\"[^\"]*\"|'[^']*'))+$",
+  $arg <: not r"(?s)^`(?:[^`$]|\$[^{])*`$",
+  $arg <: not r"(?s)^`(?:[^`$]|\$[^{]|\$\{\s*(?:ident|sqlIdent|placeholders|sqlInt)\([^`]*?\)\s*\})*`$",
+  register_diagnostic(span=$arg, message="sql/*: SQL text must be a literal (bind values with ?/:name; identifiers via ident())", severity="error")
+}

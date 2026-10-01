@@ -1,0 +1,10 @@
+/* ported-from: spikes/sp7-static-gates/fixture/violations/packages/design-tokens/tokens.css */
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #1a1a1a;
+  --color-due: #3b6ea8;
+  --color-danger: #b3261e;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --color-bg: #121212; --color-fg: #eeeeee; --color-due: #8ab4f8; }
+}

@@ -1,0 +1,66 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/ng-g-ts.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// NG-G / design lint on TS/TSX via Biome GritQL (repo-wide; design tokens excluded through biome.json "includes").
+or {
+  // ---- design/raw-color
+  JsStringLiteralExpression() as $hit where {
+    $hit <: r"(?i).*(?:#(?:[0-9a-f]{8}|[0-9a-f]{6})\b|\b(?:rgba?|hsla?|oklch|oklab|hwb)\(\s*[-0-9.%]).*",
+    register_diagnostic(span=$hit, message="design/raw-color: use a design token (var(--color-*))", severity="error")
+  },
+  JsPropertyObjectMember() as $hit where {
+    $hit <: r"(?is)^\s*\w*(?:color|background|bg|fill|stroke|border|shadow|outline)\w*\s*:\s*[\"']#[0-9a-f]{3,4}[\"'].*",
+    register_diagnostic(span=$hit, message="design/raw-color: use a design token (var(--color-*))", severity="error")
+  },
+  // ---- NG-G5 push / NG-G2 share
+  `Notification.requestPermission($_)` as $hit where {
+    register_diagnostic(span=$hit, message="ng-g5/push-api: Notification API unused", severity="error")
+  },
+  `new Notification($_)` as $hit where {
+    register_diagnostic(span=$hit, message="ng-g5/push-api: Notification API unused", severity="error")
+  },
+  `navigator.share($_)` as $hit where {
+    register_diagnostic(span=$hit, message="ng-g2/network-share: no network sharing", severity="error")
+  },
+  // ---- NG-G1 / NG-G2 vocabulary in declarations and object keys
+  JsIdentifierBinding() as $hit where {
+    $hit <: r"(?i).*(?:confetti|firework|sparkle).*|^xp(?:[A-Z_].*)?$|^XP(?:_.*)?$|.*Coin.*|.*coin[A-Z_].*",
+    register_diagnostic(span=$hit, message="ng-g1/reward-vocab: reward mechanic identifier", severity="error")
+  },
+  JsIdentifierBinding() as $hit where {
+    $hit <: r"(?i).*(?:leaderboard|scoreboard).*|^friends?(?:[A-Z_].*)?$|.*_friends?(?:_.*)?$",
+    register_diagnostic(span=$hit, message="ng-g2/social-vocab: social comparison identifier", severity="error")
+  },
+  JsLiteralMemberName() as $hit where {
+    $hit <: r"(?i).*(?:leaderboard|scoreboard|confetti|firework|sparkle).*|^friends?$",
+    register_diagnostic(span=$hit, message="ng-g2/social-vocab: object key implies a social/reward mechanic (ng-g1/ng-g2)", severity="error")
+  },
+  // ---- NG-G5 danger colour on due/overdue/streak (single string, or one cn()/clsx() call)
+  JsStringLiteralExpression() as $hit where {
+    $hit <: r"(?is).*\b(?:due|overdue|streak|backlog|missed)\b.*",
+    $hit <: r"(?is).*(?:\bdanger\b|\bdestructive\b|\bred\b).*",
+    register_diagnostic(span=$hit, message="ng-g5/danger-due: danger colour on due/overdue/streak", severity="error")
+  },
+  JsCallExpression() as $hit where {
+    $hit <: r"(?s)^(?:cn|clsx|classNames|twMerge)\(.*",
+    $hit <: r"(?is).*\b(?:due|overdue|streak|backlog|missed)\b.*",
+    $hit <: r"(?is).*(?:\bdanger\b|\bdestructive\b|\bred\b).*",
+    register_diagnostic(span=$hit, message="ng-g5/danger-due: danger colour on due/overdue/streak (cn())", severity="error")
+  },
+  // ---- NG-G5 copy (JSX text + strings)
+  JsxText() as $hit where {
+    $hit <: r"(?s).*(?:연체|게으름|스트릭이?\s*(?:끊|손실)|잃게\s*됩니다).*",
+    register_diagnostic(span=$hit, message="ng-g5/loss-copy: loss/overdue-fear vocabulary", severity="error")
+  },
+  JsStringLiteralExpression() as $hit where {
+    $hit <: r"(?s).*(?:연체|게으름|스트릭이?\s*(?:끊|손실)|잃게\s*됩니다).*",
+    register_diagnostic(span=$hit, message="ng-g5/loss-copy: loss/overdue-fear vocabulary", severity="error")
+  },
+  // ---- NG-G6 <video>
+  JsxSelfClosingElement() as $hit where {
+    $hit <: r"(?s)^<video\b.*",
+    register_diagnostic(span=$hit, message="ng-g6/video: <video> element", severity="error")
+  },
+  JsxOpeningElement() as $hit where {
+    $hit <: r"(?s)^<video\b.*",
+    register_diagnostic(span=$hit, message="ng-g6/video: <video> element", severity="error")
+  }
+}

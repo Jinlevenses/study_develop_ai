@@ -11,9 +11,11 @@ coverage/
 *.db-wal
 *.db-shm
 *.sqlite
+!**/test/fixtures/db/**/*.db
 .DS_Store
 playwright-report/
 test-results/
 graphify-out/cache/
 graphify-out/memory/
+graphify-out/reflections/
 .fathom-dev/

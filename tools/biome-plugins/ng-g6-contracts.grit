@@ -1,0 +1,11 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/ng-g6-contracts.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// NG-G6 (scope: packages/contracts): no video body type.
+or {
+  JsStringLiteralExpression() as $hit where {
+    $hit <: r"(?i)^[\"'](?:video|video/.+|lecture_video|youtube|vimeo)[\"']$"
+  },
+  JsLiteralMemberName() as $hit where { $hit <: r"(?i).*video.*" },
+  JsIdentifierBinding() as $hit where { $hit <: r"(?i).*video.*" }
+} where {
+  register_diagnostic(span=$hit, message="ng-g6/video: contracts must not define a video content type", severity="error")
+}

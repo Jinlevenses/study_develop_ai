@@ -1,0 +1,46 @@
+// ported-from: spikes/sp7-static-gates/biome-plugins/jev-index.grit (audit-fixed: rule-id 접두 메시지·개별 not 절 유지, Biome 2.5.14 정확 pin + 스냅샷 테스트)
+// check:jev-index via Biome GritQL. Scope is applied in biome.json ("includes": ["**/jev/**", "**/*.jev.*"]).
+or {
+  // candidates[3] / res.items[2]
+  `$arr[$n]` as $hit where {
+    $n <: r"[0-9]+",
+    $arr <: r"(?i)(?:^|.*\.)(?:candidates?|options?|choices?|units?|items?|answers?|claims?|statements?|criteria)$"
+  },
+  // options.at(0)
+  `$arr.at($n)` as $hit where {
+    $n <: r"[0-9]+",
+    $arr <: r"(?i)(?:^|.*\.)(?:candidates?|options?|choices?|units?|items?|answers?|claims?|statements?|criteria)$"
+  },
+  // "compare item 2", "항목 2번", "3번째", "second candidate", "candidates[3]" in plain strings
+  JsStringLiteralExpression() as $hit where {
+    $hit <: or {
+      r"(?i).*\b(?:items?|options?|choices?|candidates?|units?|claims?|statements?|answers?)\s*#?\s*[0-9]+\b.*",
+      r".*(?:항목|선택지|보기|후보|문항|단위|유닛)\s*#?\s*[0-9]+.*",
+      r".*[0-9]+\s*번째.*",
+      r"(?i).*\b(?:first|second|third|fourth|fifth|last)\s+(?:item|option|choice|candidate|unit|claim|statement|answer)s?\b.*",
+      r"(?i).*\b[0-9]+(?:st|nd|rd|th)\s+(?:item|option|choice|candidate|unit|claim|statement|answer)s?\b.*",
+      r"(?i).*\b(?:candidates|options|units|items|answers|choices)\s*\[\s*[0-9]+\s*\].*"
+    }
+  },
+  // same inside template chunks
+  JsTemplateChunkElement() as $hit where {
+    $hit <: or {
+      r"(?i).*\b(?:items?|options?|choices?|candidates?|units?|claims?|statements?|answers?)\s*#?\s*[0-9]+\b.*",
+      r".*(?:항목|선택지|보기|후보|문항|단위|유닛)\s*#?\s*[0-9]+.*",
+      r".*[0-9]+\s*번째.*",
+      r"(?i).*\b(?:first|second|third|fourth|fifth|last)\s+(?:item|option|choice|candidate|unit|claim|statement|answer)s?\b.*",
+      r"(?i).*\b[0-9]+(?:st|nd|rd|th)\s+(?:item|option|choice|candidate|unit|claim|statement|answer)s?\b.*"
+    }
+  },
+  // `${i + 1}. ...` numbering by position
+  JsTemplateElement() as $hit where { $hit <: r"\$\{\s*(?:i|j|k|idx|index|n|pos)(?:\s*[-+]\s*[0-9]+)?\s*\}" },
+  // positional response fields
+  JsPropertyObjectMember() as $hit where {
+    $hit <: r"(?s)^\s*(?:index|idx|position|ordinal|[A-Za-z]+_(?:index|idx|position)|[a-z]+(?:Index|Idx|Position))\s*:.*"
+  },
+  TsPropertySignatureTypeMember() as $hit where {
+    $hit <: r"(?s)^\s*(?:index|idx|position|ordinal|[A-Za-z]+_(?:index|idx|position)|[a-z]+(?:Index|Idx|Position))\??\s*:.*"
+  }
+} where {
+  register_diagnostic(span=$hit, message="jev/index-*: reference Jev items by object key, never by array position", severity="error")
+}

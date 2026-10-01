@@ -1,0 +1,2090 @@
+{
+  "format": "fathom-fr-iteration/1",
+  "sources": ["docs/01-planning/06-user-story-map.md §4.2", "docs/04-test/01-test-plan.md §18.1"],
+  "int_order": ["INT-1a", "INT-1b", "INT-2", "INT-3", "INT-4", "INT-5", "INT-6", "INT-7"],
+  "rules": {
+    "it_to_int": {
+      "IT-01 1a": "INT-1a",
+      "IT-01 1b": "INT-1b",
+      "IT-02": "INT-2",
+      "IT-03": "INT-3",
+      "IT-04": "INT-4",
+      "IT-05": "INT-5",
+      "IT-06": "INT-6",
+      "IT-07": "INT-7"
+    },
+    "nfr_table_it01": "USM §4.2 IT-01 1a 열에 있으면 INT-1a, 아니면 INT-1b",
+    "cross_cutting": "횡단(매 INT) = int_order 전부"
+  },
+  "assignments": {
+    "FR-AI-001": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-002": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-AI-003": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-AI-004": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-005": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-006": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-007": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-008": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-009": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-010": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-011": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-012": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-013": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-014": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-4"],
+      "notes": {
+        "INT-1b": "스파이크"
+      }
+    },
+    "FR-AI-015": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-016": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-017": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-018": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-019": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-020": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-AI-021": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-022": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-023": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-AI-024": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-025": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-026": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-AI-027": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-CUR-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-CUR-002": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-CUR-003": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-CUR-004": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-CUR-005": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-CUR-006": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-007": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-008": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-009": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-010": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-CUR-011": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-012": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-013": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-CUR-014": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-CUR-015": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-CUR-016": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a", "INT-6"],
+      "notes": {
+        "INT-1a": "스키마"
+      }
+    },
+    "FR-CUR-017": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-CUR-018": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-019": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-020": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-CUR-021": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-CUR-022": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-CUR-023": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-CUR-024": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-CUR-025": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-CUR-026": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-DSH-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-3"],
+      "notes": {
+        "INT-1b": "셸"
+      }
+    },
+    "FR-DSH-002": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-DSH-003": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-DSH-004": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-DSH-005": {
+      "first_int": "INT-3",
+      "ints": ["INT-3", "INT-7"],
+      "notes": {
+        "INT-7": "타임랩스"
+      }
+    },
+    "FR-DSH-006": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-DSH-007": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-DSH-008": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-7"],
+      "notes": {
+        "INT-7": "완성"
+      }
+    },
+    "FR-DSH-009": {
+      "first_int": "INT-3",
+      "ints": ["INT-3", "INT-7"],
+      "notes": {
+        "INT-3": "lite",
+        "INT-7": "완성"
+      }
+    },
+    "FR-DSH-010": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-DSH-011": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-DSH-012": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-DSH-013": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-DSH-014": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-DSH-015": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-DSH-016": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-IMP-001": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-002": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-003": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-004": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-005": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-006": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-007": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-008": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-009": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-010": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-011": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-012": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-013": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-IMP-014": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-LAB-001": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-002": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-003": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-004": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-005": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-006": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-007": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-008": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-LAB-009": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-LAB-010": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-LAB-011": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-LAB-012": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-LAB-013": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-014": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-LAB-015": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-LAB-016": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-LAB-017": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-PRG-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-PRG-002": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-PRG-003": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-PRG-004": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-PRG-005": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-PRG-006": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-PRG-007": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-PRG-008": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-PRG-009": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-010": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-011": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-012": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-013": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-PRG-014": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-015": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-PRG-016": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-PRG-017": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-018": {
+      "first_int": "INT-2",
+      "ints": ["INT-2", "INT-7"],
+      "notes": {
+        "INT-2": "lite",
+        "INT-7": "완성"
+      }
+    },
+    "FR-PRG-019": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-PRG-020": {
+      "first_int": "INT-2",
+      "ints": ["INT-2", "INT-7"],
+      "notes": {
+        "INT-2": "최소",
+        "INT-7": "완성"
+      }
+    },
+    "FR-PRG-021": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-PRG-022": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-PRG-023": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-024": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-025": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-026": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-027": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-PRG-028": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-PRG-029": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-PRG-030": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-PRG-031": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-PRG-032": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-PRG-033": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-QST-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-QST-002": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-QST-003": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-004": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-005": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-006": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-QST-007": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-QST-008": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-009": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-010": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-011": {
+      "first_int": "INT-2",
+      "ints": ["INT-2", "INT-4"],
+      "notes": {
+        "INT-2": "상태기계"
+      }
+    },
+    "FR-QST-012": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-013": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-QST-014": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-QST-015": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-QST-016": {
+      "first_int": "INT-3",
+      "ints": ["INT-3", "INT-5"],
+      "notes": {
+        "INT-3": "제외",
+        "INT-5": "분류·오버레이"
+      }
+    },
+    "FR-QST-017": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-4"],
+      "notes": {
+        "INT-1b": "D"
+      }
+    },
+    "FR-QST-018": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-QST-019": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-020": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-QST-021": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-5"],
+      "notes": {
+        "INT-5": "편향"
+      }
+    },
+    "FR-QST-022": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-QST-023": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-QST-024": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-QST-025": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-QST-026": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-001": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {
+        "INT-1a": "최소"
+      }
+    },
+    "FR-SET-002": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-SET-003": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-004": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-005": {
+      "first_int": "INT-3",
+      "ints": ["INT-3", "INT-7"],
+      "notes": {
+        "INT-3": "수동",
+        "INT-7": "자동"
+      }
+    },
+    "FR-SET-006": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {
+        "INT-3": "export"
+      }
+    },
+    "FR-SET-007": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-008": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-SET-009": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-010": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-011": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-SET-012": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-013": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-014": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-015": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {
+        "INT-1a": "up/down/status"
+      }
+    },
+    "FR-SET-016": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-017": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-018": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-019": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-020": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-021": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-022": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-023": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-024": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-SET-025": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-SET-026": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-STD-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-2"],
+      "notes": {
+        "INT-1b": "고정"
+      }
+    },
+    "FR-STD-002": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-003": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-004": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-005": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-006": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-007": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-008": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-009": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-010": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-STD-011": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-STD-012": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-013": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-STD-014": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-015": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-016": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-017": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-018": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b", "INT-3"],
+      "notes": {
+        "INT-1b": "BN-1"
+      }
+    },
+    "FR-STD-019": {
+      "first_int": "INT-3",
+      "ints": ["INT-3", "INT-4"],
+      "notes": {
+        "INT-3": "오프라인",
+        "INT-4": "Jev"
+      }
+    },
+    "FR-STD-020": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-021": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-022": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-023": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-024": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-025": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-026": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-027": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "FR-STD-028": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-029": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "FR-STD-030": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-031": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-STD-032": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "FR-STD-033": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "FR-STD-034": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-STD-035": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-UX-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-UX-002": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-003": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-004": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-UX-005": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-006": {
+      "first_int": "INT-6",
+      "ints": ["INT-6"],
+      "notes": {}
+    },
+    "FR-UX-007": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "FR-UX-008": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-UX-009": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-010": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-UX-011": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-012": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-013": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "FR-UX-014": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-015": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "FR-UX-016": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-AVL-001": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-AVL-002": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-AVL-003": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-AVL-004": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-AVL-005": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-AVL-006": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-AVL-007": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-AVL-008": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-AVL-009": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-AVL-010": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-AVL-011": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-AVL-012": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-DATA-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-DATA-002": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-DATA-003": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-DATA-004": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-DATA-005": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-DATA-006": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-DATA-007": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-DATA-008": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-DATA-009": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-DATA-010": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "NFR-DATA-011": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-DATA-012": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-DATA-013": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {
+        "INT-1a": "계약"
+      }
+    },
+    "NFR-MAINT-001": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-MAINT-002": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-MAINT-003": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-MAINT-004": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-MAINT-005": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-MAINT-006": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-MAINT-007": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-MAINT-008": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-MAINT-009": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-MAINT-010": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-MAINT-011": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-MAINT-012": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a", "INT-2"],
+      "notes": {
+        "INT-1a": "골격"
+      }
+    },
+    "NFR-MAINT-013": {
+      "first_int": "INT-2",
+      "ints": ["INT-2", "INT-5"],
+      "notes": {}
+    },
+    "NFR-PERF-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PERF-002": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-PERF-003": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PERF-004": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-PERF-005": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-PERF-006": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-PERF-007": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-PERF-008": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PERF-009": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-PERF-010": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-PERF-011": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-PERF-012": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-PORT-001": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-PORT-002": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PORT-003": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PORT-004": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-PORT-005": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PORT-006": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-PORT-007": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-PORT-008": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-PORT-009": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-SEC-001": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-002": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-003": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-004": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-SEC-005": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-SEC-006": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-SEC-007": {
+      "first_int": "INT-5",
+      "ints": ["INT-5"],
+      "notes": {}
+    },
+    "NFR-SEC-008": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-SEC-009": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-SEC-010": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-011": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-012": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-SEC-013": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-SEC-014": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-SEC-015": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-SEC-016": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-017": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-SEC-018": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-SEC-019": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-SEC-020": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-UX-001": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-UX-002": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-UX-003": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-UX-004": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-UX-005": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    },
+    "NFR-UX-006": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-UX-007": {
+      "first_int": "INT-7",
+      "ints": ["INT-7"],
+      "notes": {}
+    },
+    "NFR-UX-008": {
+      "first_int": "INT-1b",
+      "ints": ["INT-1b"],
+      "notes": {}
+    },
+    "NFR-UX-009": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a"],
+      "notes": {}
+    },
+    "NFR-UX-010": {
+      "first_int": "INT-2",
+      "ints": ["INT-2"],
+      "notes": {}
+    },
+    "NFR-UX-011": {
+      "first_int": "INT-4",
+      "ints": ["INT-4"],
+      "notes": {}
+    },
+    "NFR-UX-012": {
+      "first_int": "INT-1a",
+      "ints": ["INT-1a", "INT-1b", "INT-2", "INT-3", "INT-4", "INT-5", "INT-6", "INT-7"],
+      "notes": {
+        "INT-1a": "횡단"
+      }
+    },
+    "NFR-UX-013": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {
+        "INT-3": "①②"
+      }
+    },
+    "NFR-UX-014": {
+      "first_int": "INT-3",
+      "ints": ["INT-3"],
+      "notes": {}
+    }
+  },
+  "must_bands": [
+    {
+      "req": "FR-AI-011",
+      "levels": "UT-AI-200~299 + CT-AI-2nn + UT-WEB-2nn(판정 카드)",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-AI-012",
+      "levels": "UT-AI-200~299 + CT-AI-2nn + UT-WEB-2nn(판정 카드)",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-AI-013",
+      "levels": "UT-AI-200~299 + CT-AI-2nn + UT-WEB-2nn(판정 카드)",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-CUR-003",
+      "levels": "UT-CT-001~099 · UT-PACKC-0nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-CUR-004",
+      "levels": "UT-PACKC-008, CT-SYS-012",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-CUR-012",
+      "levels": "UT-CT-001~099 · UT-PACKC-0nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-CUR-016",
+      "levels": "UT-CT-0nn Case 상태기계 + E2E-3nn(M-19)",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-CUR-018",
+      "levels": "UT-CT-001~099 · UT-PACKC-0nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-CUR-019",
+      "levels": "UT-CT-001~099 · UT-PACKC-0nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-CUR-026",
+      "levels": "UT-PACKC-006",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-DSH-003",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-DSH-004",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-DSH-005",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-DSH-006",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-DSH-008",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-DSH-009",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-DSH-010",
+      "levels": "UT-LR-400~449 + UT-WEB-200~499 + E2E-5nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-LAB-003",
+      "levels": "UT-CT-400~499 + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-LAB-005",
+      "levels": "UT-CT-400~499 + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-LAB-006",
+      "levels": "UT-CT-400~499 + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-LAB-007",
+      "levels": "UT-CT-400~499 + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-LAB-011",
+      "levels": "UT-CT-400~499 + E2E-301~321",
+      "first_int_range": ["INT-6", "INT-7"]
+    },
+    {
+      "req": "FR-PRG-010",
+      "levels": "UT-LR-100~299 + UT-LR-500~599(속성)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-PRG-014",
+      "levels": "UT-LR-100~299 + UT-LR-500~599(속성)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-PRG-021",
+      "levels": "UT-LR-100~299 + UT-LR-500~599(속성)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-PRG-024",
+      "levels": "UT-LR-100~299 + UT-LR-500~599(속성)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-PRG-025",
+      "levels": "UT-LR-100~299 + UT-LR-500~599(속성)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-PRG-026",
+      "levels": "UT-LR-100~299 + UT-LR-500~599(속성)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-PRG-028",
+      "levels": "UT-LR-311·312",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-QST-004",
+      "levels": "UT-CT-209",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-QST-005",
+      "levels": "UT-CT-200~399 + CT-CT-2nn",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-QST-007",
+      "levels": "UT-PACKC-007",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-QST-010",
+      "levels": "UT-CT-200~399 + CT-CT-2nn",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-QST-012",
+      "levels": "UT-CT-200~399 + CT-CT-2nn",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "FR-QST-021",
+      "levels": "UT-CT-200~399 + CT-CT-2nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-QST-026",
+      "levels": "UT-CT-200~399 + CT-CT-2nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-SET-003",
+      "levels": "UT-OP-0nn~3nn + IT-500~599 + E2E-1nn",
+      "first_int_range": ["INT-6", "INT-7"]
+    },
+    {
+      "req": "FR-SET-006",
+      "levels": "UT-OP-0nn~3nn + IT-500~599 + E2E-1nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-SET-009",
+      "levels": "UT-OP-0nn~3nn + IT-500~599 + E2E-1nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-SET-010",
+      "levels": "UT-OP-0nn~3nn + IT-500~599 + E2E-1nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-SET-018",
+      "levels": "UT-OP-0nn~3nn + IT-500~599 + E2E-1nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-SET-019",
+      "levels": "UT-OP-0nn~3nn + IT-500~599 + E2E-1nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-003",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-004",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-005",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-006",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-007",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-010",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-STD-012",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-STD-013",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-STD-014",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-STD-017",
+      "levels": "UT-LR-300~399(composer·router 속성) + E2E-301~321",
+      "first_int_range": ["INT-6", "INT-7"]
+    },
+    {
+      "req": "FR-UX-001",
+      "levels": "UT-WEB-001~499 + E2E-501~505",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-UX-002",
+      "levels": "UT-WEB-001~499 + E2E-501~505",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "FR-UX-008",
+      "levels": "UT-WEB-001~499 + E2E-501~505",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-UX-010",
+      "levels": "UT-WEB-001~499 + E2E-501~505",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "FR-UX-012",
+      "levels": "E2E-501(18 라우트)",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-AVL-006",
+      "levels": "CT-*-601~610(IF-COM, 제목에 NFR-AVL-006 추가)",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-AVL-010",
+      "levels": "UT-CT-210·311",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "NFR-DATA-005",
+      "levels": "IT-001~099 + UT-LR-001~099",
+      "first_int_range": ["INT-4", "INT-5"]
+    },
+    {
+      "req": "NFR-DATA-007",
+      "levels": "IT-001~099 + UT-LR-001~099",
+      "first_int_range": ["INT-6", "INT-7"]
+    },
+    {
+      "req": "NFR-DATA-009",
+      "levels": "IT-001~099 + UT-LR-001~099",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "NFR-MAINT-002",
+      "levels": "UT-GATE-nnn(node:test) + CT-SYS-0nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-MAINT-007",
+      "levels": "UT-GATE-nnn(node:test) + CT-SYS-0nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "NFR-MAINT-008",
+      "levels": "UT-GATE-nnn(node:test) + CT-SYS-0nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-MAINT-010",
+      "levels": "UT-GATE-nnn(node:test) + CT-SYS-0nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-MAINT-013",
+      "levels": "UT-GATE-nnn(node:test) + CT-SYS-0nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "NFR-PORT-001",
+      "levels": "E2E-104(제목에 NFR-PORT-001 추가)",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "NFR-UX-004",
+      "levels": "E2E-501~505 + UT-WEB-2nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "NFR-UX-005",
+      "levels": "E2E-501~505 + UT-WEB-2nn",
+      "first_int_range": ["INT-2", "INT-3"]
+    },
+    {
+      "req": "NFR-UX-006",
+      "levels": "E2E-501~505 + UT-WEB-2nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-UX-007",
+      "levels": "E2E-501~505 + UT-WEB-2nn",
+      "first_int_range": ["INT-6", "INT-7"]
+    },
+    {
+      "req": "NFR-UX-009",
+      "levels": "E2E-501~505 + UT-WEB-2nn",
+      "first_int_range": ["INT-1b"]
+    },
+    {
+      "req": "NFR-UX-011",
+      "levels": "E2E-501~505 + UT-WEB-2nn",
+      "first_int_range": ["INT-4", "INT-5"]
+    }
+  ]
+}

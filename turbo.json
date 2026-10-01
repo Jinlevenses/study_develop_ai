@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "envMode": "loose",
+  "agentGuidance": false,
+  "tasks": {
+    "build": { "dependsOn": ["^build"], "outputs": ["dist/**"] },
+    "@fathom/testkit#build": { "dependsOn": [], "outputs": ["dist/**"] },
+    "typecheck": { "cache": false },
+    "lint": { "cache": false },
+    "test": { "cache": false },
+    "test:integration": { "cache": false },
+    "test:security": { "cache": false }
+  }
+}

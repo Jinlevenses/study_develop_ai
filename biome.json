@@ -1,0 +1,109 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "root": true,
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "files": {
+    "includes": [
+      "**",
+      "!**/dist",
+      "!**/*.gen.ts",
+      "!spikes",
+      "!tools/gates/fixtures",
+      "!tools/packc/fixtures",
+      "!tools/biome-plugins/__snapshots__",
+      "!graphify-out",
+      "!.fathom-dev",
+      "!docs"
+    ]
+  },
+  "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 120, "lineEnding": "lf" },
+  "javascript": { "formatter": { "quoteStyle": "single", "semicolons": "always", "trailingCommas": "all" } },
+  "linter": {
+    "rules": {
+      "preset": "recommended",
+      "suspicious": {
+        "noExplicitAny": "error",
+        "noConsole": "error",
+        "noImportCycles": "error",
+        "noEvolvingTypes": "error",
+        "useAwait": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "error",
+        "noDefaultExport": "error",
+        "noEnum": "error",
+        "noParameterAssign": "error",
+        "useImportType": "error",
+        "useNodejsImportProtocol": "error",
+        "noCommonJs": "error",
+        "useBlockStatements": "error",
+        "noProcessEnv": "error"
+      },
+      "performance": { "noBarrelFile": "error", "noReExportAll": "error" },
+      "security": { "noDangerouslySetInnerHtml": "error", "noGlobalEval": "error" },
+      "nursery": {
+        "noFloatingPromises": "error",
+        "noMisusedPromises": "error",
+        "useExhaustiveSwitchCases": "error"
+      },
+      "correctness": { "noUnusedImports": "error", "noUnusedVariables": "error" }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["**/vite.config.ts", "**/vitest.config.ts", "**/playwright.config.ts"],
+      "linter": { "rules": { "style": { "noDefaultExport": "off" } } }
+    },
+    {
+      "includes": [
+        "packages/shared-kernel/src/config/**",
+        "tools/**",
+        "**/test/**",
+        "tests/**",
+        "services/content/assets/runner/**"
+      ],
+      "linter": { "rules": { "style": { "noProcessEnv": "off" } } }
+    },
+    {
+      "includes": ["tools/**", "apps/cli/src/lib/output.ts"],
+      "linter": { "rules": { "suspicious": { "noConsole": "off" } } }
+    },
+    {
+      "includes": ["packages/testkit/src/playwright/**", "tests/e2e/**"],
+      "linter": { "rules": { "correctness": { "noEmptyPattern": "off" } } }
+    }
+  ],
+  "plugins": [
+    {
+      "path": "./tools/biome-plugins/boundaries.grit",
+      "includes": ["**/apps/*/src/**", "**/services/*/src/**", "**/packages/*/src/**", "**/tools/*/src/**"]
+    },
+    { "path": "./tools/biome-plugins/jev-index.grit", "includes": ["**/services/*/src/jev/**", "**/*.jev.ts"] },
+    {
+      "path": "./tools/biome-plugins/sql-template.grit",
+      "includes": ["**/services/*/src/**/*.ts", "**/packages/shared-kernel/src/**/*.ts"]
+    },
+    {
+      "path": "./tools/biome-plugins/ng-g-ts.grit",
+      "includes": [
+        "**/apps/web/src/**/*.ts",
+        "**/apps/web/src/**/*.tsx",
+        "**/packages/ui/src/**/*.ts",
+        "**/packages/ui/src/**/*.tsx",
+        "**/services/*/src/**/*.ts"
+      ]
+    },
+    {
+      "path": "./tools/biome-plugins/ng-g-css.grit",
+      "includes": ["**/apps/web/src/**/*.css", "**/packages/ui/src/**/*.css"]
+    },
+    { "path": "./tools/biome-plugins/ng-g3-presubmit.grit", "includes": ["**/pre-submit/**"] },
+    { "path": "./tools/biome-plugins/ng-g3-presubmit-named.grit", "includes": ["**/src/**/*.ts"] },
+    {
+      "path": "./tools/biome-plugins/ng-g4-routing.grit",
+      "includes": ["**/apps/web/src/routing/**", "**/services/learning/src/domain/practice/routing/**", "**/*.route.ts"]
+    },
+    { "path": "./tools/biome-plugins/ng-g6-contracts.grit", "includes": ["**/packages/contracts/src/**"] },
+    { "path": "./tools/biome-plugins/ng-g7-blank-note.grit", "includes": ["**/blank-note/**", "!**/post-submit/**"] }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@fathom/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./manifests/*.json": "./manifests/*.json",
+    "./events/__consumers__/*.json": "./src/events/__consumers__/*.json",
+    "./*": {
+      "source": "./src/*.ts",
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --conditions=source node_modules/vitest/vitest.mjs run --project unit --configLoader native",
+    "test:integration": "node --conditions=source node_modules/vitest/vitest.mjs run --project integration --configLoader native",
+    "test:security": "node --conditions=source node_modules/vitest/vitest.mjs run --project security --configLoader native",
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@fathom/testkit": "workspace:*",
+    "@types/node": "22.20.4",
+    "vitest": "5.0.2"
+  }
+}
