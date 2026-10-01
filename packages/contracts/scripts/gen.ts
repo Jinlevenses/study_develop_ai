@@ -398,7 +398,7 @@ function jsonSchemaOf(schema: z.ZodType, label: string): Record<string, unknown>
   return rest;
 }
 
-/** TS 리터럴 직렬화(작은따옴표 문자열·JSON 배열/객체·`as const` 친화). 키 순서 = 입력 순서. */
+/** TS 리터럴 직렬화(작은따옴표 문자열·JSON 배열/객체·`as const` 친화). 키 순서 = 입력 순서, 한 줄이 100자를 넘으면 줄을 나눈다. */
 function lit(v: unknown, indent: number): string {
   const pad = '  '.repeat(indent);
   const pad1 = '  '.repeat(indent + 1);
@@ -409,16 +409,23 @@ function lit(v: unknown, indent: number): string {
     return String(v);
   }
   if (Array.isArray(v)) {
-    return `[${v.map((x) => lit(x, indent)).join(', ')}]`;
+    const items = v.map((x) => lit(x, indent + 1));
+    const inline = `[${items.join(', ')}]`;
+    if (indent * 2 + inline.length <= 100 || items.length === 0) {
+      return inline;
+    }
+    return `[\n${items.map((x) => `${pad1}${x},`).join('\n')}\n${pad}]`;
   }
   if (isRec(v)) {
     const keys = Object.keys(v);
     if (keys.length === 0) {
       return '{}';
     }
-    const inline = keys.every((k) => !isRec(v[k]));
-    if (inline) {
-      return `{ ${keys.map((k) => `${litKey(k)}: ${lit(v[k], indent)}`).join(', ')} }`;
+    if (keys.every((k) => !isRec(v[k]))) {
+      const inline = `{ ${keys.map((k) => `${litKey(k)}: ${lit(v[k], indent + 1)}`).join(', ')} }`;
+      if (indent * 2 + inline.length <= 100 && !inline.includes('\n')) {
+        return inline;
+      }
     }
     return `{\n${keys.map((k) => `${pad1}${litKey(k)}: ${lit(v[k], indent + 1)},`).join('\n')}\n${pad}}`;
   }
@@ -867,9 +874,11 @@ function registryText(c: Collected, hash: string): string {
       `  ${lit(type, 0)}: { ifId: ${lit(ev.ifId, 0)}, producer: ${lit(ev.producer, 0)}, freeze: ${lit(ev.freeze, 0)}, slice: ${lit(ev.slice, 0)} },`,
     );
   }
-  const imports = [...importsByPath.keys()]
-    .sort(byCode)
-    .map((p) => `import { ${[...(importsByPath.get(p) ?? [])].sort(byCode).join(', ')} } from '${p}';`);
+  const imports = [...importsByPath.keys()].sort(byCode).map((p) => {
+    const names = [...(importsByPath.get(p) ?? [])].sort(byCode);
+    const inline = `import { ${names.join(', ')} } from '${p}';`;
+    return inline.length <= 100 ? inline : `import {\n${names.map((n) => `  ${n},`).join('\n')}\n} from '${p}';`;
+  });
   return [
     GEN_BANNER,
     ...imports,
