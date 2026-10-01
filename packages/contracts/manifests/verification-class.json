@@ -1,0 +1,97 @@
+{
+  "default": "V-build",
+  "exceptions": {
+    "FR-AI-001": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-AI-005": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-AI-006": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-AI-014": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-AI-015": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-DSH-013": {
+      "build": true,
+      "beyond": ["V-field"]
+    },
+    "FR-IMP-006": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-LAB-011": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-PRG-018": {
+      "build": true,
+      "beyond": ["V-field"]
+    },
+    "FR-QST-012": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "FR-SET-024": {
+      "build": true,
+      "beyond": ["V-ci", "V-live"]
+    },
+    "FR-UX-004": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-AVL-001": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-PERF-010": {
+      "build": true,
+      "beyond": ["V-field"]
+    },
+    "NFR-PORT-001": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-PORT-004": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-PORT-008": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-PORT-009": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-SEC-005": {
+      "build": true,
+      "beyond": ["V-ci"]
+    },
+    "NFR-SEC-008": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "NFR-SEC-020": {
+      "build": true,
+      "beyond": ["V-live"]
+    },
+    "NFR-UX-005": {
+      "build": true,
+      "beyond": ["V-field"]
+    },
+    "NFR-UX-006": {
+      "build": true,
+      "beyond": ["V-ci"]
+    }
+  }
+}

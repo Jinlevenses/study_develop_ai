@@ -1,0 +1,79 @@
+# V-live (TST-01 §4.5, CR-64) — 수동 실행 골격. 저장소 비밀은 이름만 참조한다(값·기본값 기재 금지).
+# 이 파일은 GitHub에서만 실행된다(로컬 검증 불가 — 구조는 tools/gates/test/run-gates.test.mjs 가 단언한다).
+name: live-smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: 'AI 제공자'
+        required: true
+        type: choice
+        default: jev
+        options:
+          - jev
+          - anthropic
+          - openai
+          - ollama
+      record:
+        description: 'cassette 녹화(바뀐 cassette 는 PR, T1 리뷰)'
+        required: false
+        type: boolean
+        default: false
+      task:
+        description: '녹화 과업 ID (record 가 true 일 때만 사용)'
+        required: false
+        type: string
+        default: all
+
+permissions:
+  contents: read
+
+concurrency:
+  group: live-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  v-live:
+    runs-on: ubuntu-24.04
+    environment: live
+    timeout-minutes: 60
+    env:
+      TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      PROVIDER: ${{ inputs.provider }}
+      RECORD_TASK: ${{ inputs.task }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable && corepack prepare pnpm@10.33.0 --activate
+      - name: install
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm i --frozen-lockfile --ignore-scripts
+      - name: doctor --live
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm fathom doctor --live
+      - name: record
+        if: ${{ inputs.record }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm ai:record --task "$RECORD_TASK" --provider "$PROVIDER"
+      # TODO(INT-4 WP-04-xx): Jev 3질문 타입(noul·choice·score 각 1건) — 형상·지연 기록
+      # TODO(INT-4 WP-04-xx): CLI canary SP-8 C1~C7(AI-01 §4.6) — 실패 시 trust = unverified 기대 확인
+      # TODO(INT-4 WP-04-xx): 구조화 출력 과업 5건(SP-5 적합률)
+      # TODO(INT-4 WP-04-xx): SP-1 캘리브레이션 작업 생성 → 승인 → ai:eval 지표(ai_calibration_run)
+      # TODO(INT-4 WP-04-xx): 키체인 3 OS 저장·조회·삭제(stdin, ps 0) — OS 지원 표 갱신

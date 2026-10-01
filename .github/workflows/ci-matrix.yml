@@ -1,0 +1,96 @@
+# V-ci (TST-01 §4.4, CR-64) — 릴리스 게이트 골격(병합 비차단). OS 3 x Node 2 매트릭스.
+# 이 파일은 GitHub에서만 실행된다(로컬 검증 불가 — 구조는 tools/gates/test/run-gates.test.mjs 가 단언한다).
+name: ci-matrix
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*', 'rc-*']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-matrix-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  v-ci:
+    name: v-ci (${{ matrix.os }}, node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+        node: ['22.22.x', '24.x']
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable && corepack prepare pnpm@10.33.0 --activate
+      - name: install
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm i --frozen-lockfile --ignore-scripts
+      - name: gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm check:gates
+      - name: unit
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm test
+      - name: contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm test:contract
+      - name: security
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm test:security
+      - name: integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm test:integration
+      # ubuntu 전용: Firefox·WebKit 스모크(@smoke 태그 + 쿠키 3 엔진 SEC-GW-010)
+      - name: engines smoke
+        if: matrix.os == 'ubuntu-24.04'
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm exec playwright install chromium firefox webkit
+          CI_MATRIX_ENGINES=1 pnpm test:e2e --grep @smoke
+      # INT-3·INT-4·WP-07-18에서 확장: windows 전용 — spawn·taskkill /T /F·Job Object 트리 kill, npm .cmd shim(npm 9·10·11), %LOCALAPPDATA%\Fathom·한글·공백 경로·MAX_PATH, -shm·필수 잠금·AV 잠금, win-rss-helper.ps1 주기 ≤ 50ms, DPAPI stdin, icacls ACL
+      # INT-3·INT-4·WP-07-18에서 확장: macos 전용 — ps -o rss= 50ms 감시 실측, security -i stdin, LaunchAgent plist
+      # INT-3·INT-4·WP-07-18에서 확장: ubuntu 전용 — kubeconform 오프라인 스키마 검사(deploy/k8s), 선택 kind 스모크
+      - name: runner_verified_platforms.json
+        shell: bash
+        run: echo "INT-3에서 구현(WP-03-01)"
+      - name: os-support.md
+        shell: bash
+        run: echo "INT-3에서 구현(WP-03-01)"
+      - name: upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v-ci-${{ matrix.os }}-${{ matrix.node }}
+          path: |
+            .reports/**
+            **/.reports/*.json
+            test-results/**
+          if-no-files-found: ignore
+          retention-days: 14

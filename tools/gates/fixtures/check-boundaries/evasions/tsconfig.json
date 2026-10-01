@@ -1,0 +1,27 @@
+// ported-from: spikes/sp7-static-gates/fixture/clean/tsconfig.json (audit-fixed: "types": [] — 타입 선언 없는 가짜 저장소, paths의 @legacy/b는 tokens가 놓치고 tsgo가 잡는 대조군으로 유지, tests 단위 포함)
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "types": [],
+    "paths": {
+      "@fathom/contracts": ["./packages/contracts/src/index.ts"],
+      "@fathom/contracts/*": ["./packages/contracts/src/*"],
+      "@fathom/shared-kernel": ["./packages/shared-kernel/src/index.ts"],
+      "@fathom/shared-kernel/*": ["./packages/shared-kernel/src/*"],
+      "@fathom/svc-a": ["./services/a/src/index.ts"],
+      "@fathom/svc-a/*": ["./services/a/src/*"],
+      "@fathom/svc-b": ["./services/b/src/index.ts"],
+      "@fathom/svc-b/*": ["./services/b/src/*"],
+      "@legacy/b": ["./services/b/src/index.ts"]
+    }
+  },
+  "include": ["services", "packages", "apps", "tests"]
+}

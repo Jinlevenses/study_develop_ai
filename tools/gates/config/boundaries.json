@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "units": [
+    { "unit": "packages/contracts", "allow": [] },
+    { "unit": "packages/shared-kernel", "allow": ["packages/contracts"] },
+    { "unit": "packages/design-tokens", "allow": [] },
+    { "unit": "packages/ui", "allow": ["packages/design-tokens"] },
+    {
+      "unit": "packages/testkit",
+      "allow": ["packages/contracts", "packages/shared-kernel", "packages/design-tokens", "packages/ui"]
+    },
+    { "unit": "services/*", "allow": ["packages/contracts", "packages/shared-kernel"] },
+    { "unit": "apps/web", "allow": ["packages/contracts", "packages/ui", "packages/design-tokens"] },
+    { "unit": "apps/cli", "allow": ["packages/contracts", "packages/shared-kernel"] },
+    { "unit": "tools/gates", "allow": [] },
+    { "unit": "tools/*", "allow": ["packages/contracts", "packages/shared-kernel"] },
+    { "unit": "tests", "allow": ["packages/contracts", "packages/shared-kernel", "packages/testkit"] }
+  ],
+  "test_only": {
+    "unit": "packages/testkit",
+    "allowed_from": ["**/test/**", "tests/**", "packages/testkit/**", "**/vitest.config.ts", "**/playwright.config.ts"]
+  },
+  "intra": {
+    "sqlite_direct": { "allow": ["packages/shared-kernel/src/sqlite/**", "packages/shared-kernel/src/service/**"] },
+    "bc": {
+      "services/content": ["catalog", "acquisition", "itembank", "grading", "runner"],
+      "services/learning": ["practice", "ledger", "learner-model", "insight", "curriculum-ref"],
+      "services/ai-gateway": ["control", "routing", "judge", "generate", "privacy"],
+      "services/ops": ["backup", "health", "doctor", "host", "upgrade", "autostart", "telemetry"]
+    },
+    "grading_no_catalog": { "from": "services/content/src/*/grading/**", "forbid_bc": "catalog" },
+    "domain_pure": {
+      "allow_packages": ["@fathom/contracts/*", "@fathom/shared-kernel/errors/errors"],
+      "third_party": { "services/learning": ["ts-fsrs"], "services/content": ["es-hangul"] }
+    },
+    "sk_pure": { "modules": ["packages/shared-kernel/src/errors", "packages/shared-kernel/src/redact"] },
+    "builtin_restricted": {
+      "child_process": [
+        "packages/shared-kernel/src/proc/**",
+        "packages/shared-kernel/src/jobs/**",
+        "services/content/src/infra/runner/**",
+        "services/ops/src/supervisor/**",
+        "apps/cli/src/lib/supervisor-launch.ts",
+        "tools/**"
+      ],
+      "worker_threads": ["services/learning/src/workers/**", "services/learning/src/infra/workers/**"]
+    },
+    "web_feature_cross": { "root": "apps/web/src/features" }
+  }
+}

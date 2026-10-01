@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "modes": [
+    {
+      "mode_id": "M-01",
+      "name_ko": "3단 레슨",
+      "ur14_family": "개념이해",
+      "offline_path": "임베디드 질문 D",
+      "e2e_ids": ["E2E-301", "SCN-01"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-02",
+      "name_ko": "먼저 풀어보기",
+      "ur14_family": "개념이해",
+      "offline_path": "결정적(증거 0, β만)",
+      "e2e_ids": ["E2E-302"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-03",
+      "name_ko": "OX 스프린트",
+      "ur14_family": "OX",
+      "offline_path": "O/X D + 교정 H→S",
+      "e2e_ids": ["E2E-303", "SCN-01"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-04",
+      "name_ko": "문제 믹스",
+      "ur14_family": "문제",
+      "offline_path": "결정적 + 정규화",
+      "e2e_ids": ["E2E-304"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-05",
+      "name_ko": "코드 읽기(출력 예측)",
+      "ur14_family": "문제",
+      "offline_path": "실행 결정적(T1)",
+      "e2e_ids": ["E2E-305"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-06",
+      "name_ko": "오류 찾기·설정 리뷰·로그",
+      "ur14_family": "문제",
+      "offline_path": "위치 D + 설명 H→S",
+      "e2e_ids": ["E2E-306"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-07",
+      "name_ko": "헷갈림 쌍",
+      "ur14_family": "문제",
+      "offline_path": "결정적",
+      "e2e_ids": ["E2E-307"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-08",
+      "name_ko": "페르미",
+      "ur14_family": "문제",
+      "offline_path": "로그 허용오차 D",
+      "e2e_ids": ["E2E-308"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-09",
+      "name_ko": "조건 반전 쌍",
+      "ur14_family": "문제",
+      "offline_path": "셀·쌍 D + pivot S",
+      "e2e_ids": ["E2E-309"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-10",
+      "name_ko": "코드 과제(Parsons 포함)",
+      "ur14_family": "실습",
+      "offline_path": "숨은 테스트 D(부모 판정)",
+      "e2e_ids": ["E2E-310"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-11",
+      "name_ko": "코드 회상 카타",
+      "ur14_family": "실습",
+      "offline_path": "숨은 테스트 D",
+      "e2e_ids": ["E2E-311"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-12",
+      "name_ko": "인프라 lite",
+      "ur14_family": "실습",
+      "offline_path": "정적 규칙 D",
+      "e2e_ids": ["E2E-312"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-13",
+      "name_ko": "백지노트",
+      "ur14_family": "백지노트",
+      "offline_path": "trigram H + KP 자기채점 + 보류",
+      "e2e_ids": ["E2E-313", "SCN-03"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-14",
+      "name_ko": "개념 디깅",
+      "ur14_family": "개념 디깅",
+      "offline_path": "질문 은행 × KU + S, D4~D5 MCQ D",
+      "e2e_ids": ["E2E-314"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-15",
+      "name_ko": "Feynman",
+      "ur14_family": "개념 디깅",
+      "offline_path": "스크립트 학생 + 체크리스트 S",
+      "e2e_ids": ["E2E-315"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-16",
+      "name_ko": "AI 답안 감사",
+      "ur14_family": "문제",
+      "offline_path": "주입 위치 D + 설명 S",
+      "e2e_ids": ["E2E-316"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-17",
+      "name_ko": "PR 리뷰",
+      "ur14_family": "실습",
+      "offline_path": "라인 범위 D + 자기매칭 S",
+      "e2e_ids": ["E2E-317"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-18",
+      "name_ko": "역출제",
+      "ur14_family": "문제",
+      "offline_path": "형식 D + 체크리스트 S + 보류",
+      "e2e_ids": ["E2E-318"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-19",
+      "name_ko": "Case",
+      "ur14_family": "실습",
+      "offline_path": "결정점 D ≥ 60% + 루브릭 S(잠정)",
+      "e2e_ids": ["E2E-319"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-20",
+      "name_ko": "산출물 + 반박",
+      "ur14_family": "실습",
+      "offline_path": "루브릭 S(잠정) + 반론 은행",
+      "e2e_ids": ["E2E-320"],
+      "status": "included"
+    },
+    {
+      "mode_id": "M-21",
+      "name_ko": "과거의 나",
+      "ur14_family": "백지노트",
+      "offline_path": "diff + S",
+      "e2e_ids": ["E2E-321"],
+      "status": "included"
+    }
+  ]
+}

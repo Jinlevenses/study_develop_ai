@@ -1,0 +1,211 @@
+# V-build (TST-01 §4.2·§4.3, CR-64) — 병합 차단 워크플로 골격.
+# TST §4.3의 "잡"은 같은 잡 안의 이름 붙은 스텝이다: 잡을 나누면 offline 잡마다 node_modules를 네트워크로 다시 받아야 한다.
+# 이 파일은 GitHub에서만 실행된다(로컬 검증 불가 — tools/gates/test/run-gates.test.mjs 가 텍스트 구조만 단언한다).
+name: ci-build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      int:
+        description: 'INT 식별자 (INT-1a|INT-1b|INT-2..INT-7|PG-3)'
+        required: false
+        default: 'INT-1a'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FATHOM_INT: ${{ inputs.int || vars.FATHOM_INT || 'INT-1a' }}
+
+jobs:
+  v-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      # 1. checkout · node · pnpm (online)
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable && corepack prepare pnpm@10.33.0 --activate
+          echo "PLAYWRIGHT_BROWSERS_PATH=$RUNNER_TEMP/pw-browsers" >> "$GITHUB_ENV"
+
+      # 2. setup (online) — audit 실패·레지스트리 불통은 잡 실패(fail-closed, D-TST-08). 실패 허용 플래그를 두지 않는다.
+      - name: setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm i --frozen-lockfile --ignore-scripts
+          mkdir -p ".reports/$FATHOM_INT"
+          pnpm audit --prod --audit-level high --json > ".reports/$FATHOM_INT/audit.json"
+
+      # 3. browsers (online) — V-build 컨테이너는 /opt/pw-browsers 를 쓰고 설치하지 않는다(GitHub 러너에만 해당, 1.56.1 = revision 1194)
+      - name: browsers
+        shell: bash
+        run: |
+          set -euo pipefail
+          pnpm exec playwright install chromium
+
+      # 4. offline wrapper — L-hard: 새 네트워크 네임스페이스 + lo 만 올린다(TST §3.3). 이후 모든 검증 스텝은 이 래퍼 안에서 실행한다.
+      - name: offline wrapper
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/offline.sh" <<'EOF'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          exec sudo -E unshare --net -- bash -c 'ip link set lo up && exec setpriv --reuid="$SUDO_UID" --regid="$SUDO_GID" --init-groups env PATH="$1" HOME="$2" "${@:3}"' _ "$PATH" "$HOME" "$@"
+          EOF
+          chmod +x "$RUNNER_TEMP/offline.sh"
+
+      # 5. offline probe — 연결 성공(exit 3)이면 잡 실패(L-hard 음성 탐침, TST §4.3)
+      - name: offline probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" node -e "require('node:https').get('https://registry.npmjs.org',()=>process.exit(3)).on('error',()=>process.exit(0))"
+          if [ -f tests/support/run-offline.mjs ]; then
+            "$RUNNER_TEMP/offline.sh" node tests/support/run-offline.mjs --probe-only
+          else
+            echo skipped
+          fi
+
+      # 6. gates (offline) — INT-1a 는 --warn-only(ADR-010 §10), INT-1b 부터 병합 차단
+      - name: gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm typecheck
+          "$RUNNER_TEMP/offline.sh" pnpm lint
+          WARN=""
+          if [ "$FATHOM_INT" = "INT-1a" ]; then
+            WARN="--warn-only"
+          fi
+          export WARN
+          "$RUNNER_TEMP/offline.sh" bash -c 'node tools/gates/run-gates.mjs --stage=g3 --int "$FATHOM_INT" --json $WARN > ".reports/$FATHOM_INT/gates.json"'
+          (cd tools/gates && "$RUNNER_TEMP/offline.sh" node --test --test-reporter=tap --test-reporter-destination="../../.reports/$FATHOM_INT/gates-ut.tap" "test/*.test.mjs")
+
+      # 7. unit (offline)
+      - name: unit
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:coverage -- --reporter=default --reporter=json --outputFile.json=.reports/ut.json
+          "$RUNNER_TEMP/offline.sh" pnpm test:determinism
+
+      # 8. contract (offline)
+      - name: contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:contract -- --reporter=default --reporter=json --outputFile.json=".reports/$FATHOM_INT/ct.json"
+
+      # 9. build (offline) — INT-7·PG-3 에서만 번들
+      - name: build
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm build
+          if [ "$FATHOM_INT" = "INT-7" ] || [ "$FATHOM_INT" = "PG-3" ]; then
+            "$RUNNER_TEMP/offline.sh" pnpm bundle
+          fi
+
+      # 10. integration · security (offline) — 패키지 실행분은 <pkg>/.reports/{it,sec}.json
+      - name: integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:integration -- --reporter=default --reporter=json --outputFile.json=".reports/$FATHOM_INT/it.json"
+      - name: security
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:security -- --reporter=default --reporter=json --outputFile.json=".reports/$FATHOM_INT/sec.json"
+
+      # 11. e2e (offline)
+      - name: e2e
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:offline
+          "$RUNNER_TEMP/offline.sh" pnpm test:e2e --grep-invert @offline
+
+      # 12. chaos · perf (offline)
+      - name: chaos
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:chaos
+      - name: perf
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm test:perf
+
+      # 13. ai-eval · packs (offline)
+      - name: ai-eval
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm ai:lint-prompts
+          "$RUNNER_TEMP/offline.sh" pnpm ai:eval --replay
+          "$RUNNER_TEMP/offline.sh" pnpm ai:eval:gates
+      - name: packs
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$FATHOM_INT" in
+            INT-1a)
+              echo "packs: INT-1a 는 팩 빌드 대상이 아니다"
+              ;;
+            INT-7|PG-3)
+              "$RUNNER_TEMP/offline.sh" pnpm packs:build --release
+              ;;
+            *)
+              "$RUNNER_TEMP/offline.sh" pnpm packs:build
+              ;;
+          esac
+
+      # 14. reports (offline) — SI 결과서·RTM 생성 후 g3 게이트로 RTM·매니페스트 검증
+      - name: reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$RUNNER_TEMP/offline.sh" pnpm si:reports --int "$FATHOM_INT"
+          "$RUNNER_TEMP/offline.sh" node tools/gates/check-rtm.mjs --int "$FATHOM_INT"
+          case "$FATHOM_INT" in
+            INT-7|PG-3)
+              "$RUNNER_TEMP/offline.sh" node tools/gates/check-manifest.mjs --int "$FATHOM_INT"
+              ;;
+            *)
+              "$RUNNER_TEMP/offline.sh" node tools/gates/check-manifest.mjs --int "$FATHOM_INT" --schedule tests/e2e/mode-schedule.json
+              ;;
+          esac
+
+      # 15. upload (online) — 실패해도 산출물은 올린다
+      - name: upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v-build-reports-${{ github.run_id }}
+          path: |
+            .reports/**
+            **/.reports/*.json
+            coverage/**
+            test-results/**
+          if-no-files-found: ignore
+          retention-days: 14
