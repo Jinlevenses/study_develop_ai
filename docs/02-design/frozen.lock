@@ -1,0 +1,365 @@
+{
+  "format": "fathom-frozen-lock/1",
+  "baseline": "Architecture Freeze Baseline v1.0",
+  "adr": "docs/02-design/adr/ADR-000-architecture-freeze.md",
+  "generated_at": "2026-10-01",
+  "generated_by": "WP-00-00 (T1)",
+  "algorithm": "sha256 (raw bytes, LF)",
+  "rules": {
+    "change_requires_trailer": [
+      "CR: CR-<nn>",
+      "ADR: ADR-<nnn>"
+    ],
+    "destructive_change": "ADR-017~ + 회고 승인 + frozen.lock 재생성 (ADR-000 §2.1)",
+    "additive_change": "CR (docs/02-design/cr/README.md 대장) (ADR-000 §2.2)",
+    "pending_semantics": "pending 항목은 freeze_at 통합(G3)에서 T1(WP-00-00 소유자)이 sha256을 계산해 files로 옮긴다. 그 전까지 check:frozen은 해당 경로를 owner_task 외 Task가 바꾸면 위반으로, 소유 Task의 생성·수정은 허용으로 본다."
+  },
+  "files": [
+    {
+      "path": "docs/02-design/adr/ADR-000-architecture-freeze.md",
+      "doc_id": "ADR-000",
+      "scope": "전체(동결 선언·변경 통제)",
+      "sha256": "879ef43fcee62554c29648a0d363a6f357f2b791462724f3148d8fdec4672917",
+      "bytes": 15020
+    },
+    {
+      "path": "docs/02-design/01-architecture.md",
+      "doc_id": "ARC-01",
+      "scope": "§5·§8·§9·§12.2~12.3·§12.6·§14.1~14.2·§16·§17·§18 상세",
+      "sha256": "42a14bd9445bd2f0d75bef4790ddf652a7687faa6f156dbbd1ad8bc8eaa90932",
+      "bytes": 240103
+    },
+    {
+      "path": "docs/02-design/adr/ADR-001-service-decomposition.md",
+      "doc_id": "ADR-001",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "b144b9197b1fa77d911eb234687eacc5103357554083d2920d5cb0cd168a0ead",
+      "bytes": 7849
+    },
+    {
+      "path": "docs/02-design/adr/ADR-002-database-per-service-node-sqlite.md",
+      "doc_id": "ADR-002",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "03ac8008004fdbd75bcae8d2e8d22d214c4dec54111b2a4d896d6e152bb49404",
+      "bytes": 13699
+    },
+    {
+      "path": "docs/02-design/adr/ADR-003-communication-outbox-events.md",
+      "doc_id": "ADR-003",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "8359c55fe8a9e19a7605666eafec9043b834b61f81107d7bb93d0011109727b7",
+      "bytes": 10099
+    },
+    {
+      "path": "docs/02-design/adr/ADR-004-content-and-policy-packs.md",
+      "doc_id": "ADR-004",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "8f0e0ebd843cec9cbe5b1e609b98af5e750c1ffb759525c0eafeb4accb8293f0",
+      "bytes": 12802
+    },
+    {
+      "path": "docs/02-design/adr/ADR-005-ai-provider-jev-routing.md",
+      "doc_id": "ADR-005",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "b301da0fc500d2450f48e005ea8698fe67b67f1cff27cc8ce1ad1cc07f38895d",
+      "bytes": 14284
+    },
+    {
+      "path": "docs/02-design/adr/ADR-006-frontend-stack.md",
+      "doc_id": "ADR-006",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "d731afe2e385f40a645ac22bd83894c7c4b5d39844efd97a44366bc792cd8870",
+      "bytes": 10015
+    },
+    {
+      "path": "docs/02-design/adr/ADR-007-runner-isolation.md",
+      "doc_id": "ADR-007",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "68f90e2abb0d73b8bbfb5c297fa0b54958ff658bd8a5bd2480e4634301ef2f45",
+      "bytes": 15905
+    },
+    {
+      "path": "docs/02-design/adr/ADR-008-monorepo-contracts-as-code.md",
+      "doc_id": "ADR-008",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "e6a7cda40300f24e802806198afc649634d7c157982537283733fbc43597230b",
+      "bytes": 11253
+    },
+    {
+      "path": "docs/02-design/adr/ADR-009-session-and-secrets.md",
+      "doc_id": "ADR-009",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "c713ee3a7a50f5634438e66f0a48b514555a526417fcf6dd7aecdf490dec9318",
+      "bytes": 10200
+    },
+    {
+      "path": "docs/02-design/adr/ADR-010-static-gates-ts7.md",
+      "doc_id": "ADR-010",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "3be680dfc3c5811d59d856ecbd1cff0dd942a6895a472d4a790e56b578f44ef8",
+      "bytes": 16383
+    },
+    {
+      "path": "docs/02-design/adr/ADR-011-evidence-ledger-replay.md",
+      "doc_id": "ADR-011",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "a4a6bb9a1224aa64f6da23556c271ff6df6957c067b587178bc9de4fa619ad05",
+      "bytes": 26715
+    },
+    {
+      "path": "docs/02-design/adr/ADR-012-supervisor-process-lifecycle.md",
+      "doc_id": "ADR-012",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "684f8c10040e7b0cb90ed129b3e746eb5f48e726e3bc0b2f19379769340c7812",
+      "bytes": 10481
+    },
+    {
+      "path": "docs/02-design/adr/ADR-013-backup-upgrade-rollback.md",
+      "doc_id": "ADR-013",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "46b84a215fa9c17368b593319b4aa1fcbba13e1be0c7c38aa7230d128d742db9",
+      "bytes": 11722
+    },
+    {
+      "path": "docs/02-design/adr/ADR-014-deployment-views.md",
+      "doc_id": "ADR-014",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "79af379e6294cc92f87a890104608c12166a77e4e9ddb36739b9a038176b0e58",
+      "bytes": 7088
+    },
+    {
+      "path": "docs/02-design/adr/ADR-015-observability.md",
+      "doc_id": "ADR-015",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "7da336b009c1083087b415e8c9dd8b7af3aad35bcc8c8a706956bfbe5d5cc397",
+      "bytes": 7331
+    },
+    {
+      "path": "docs/02-design/adr/ADR-016-privacy-firewall-data-classes.md",
+      "doc_id": "ADR-016",
+      "scope": "각 ADR '동결 영향' 절",
+      "sha256": "8a078671d9a3ebe91bf6a28547ab885c361e3c085ffe7c0be22ab503332022ef",
+      "bytes": 7284
+    },
+    {
+      "path": "docs/02-design/02-interface-spec.md",
+      "doc_id": "IF-01",
+      "scope": "코드 블록 전부(D 상세·O 개요)",
+      "sha256": "45a08199efb3da41232fd4d47a7efb64d2590628464eb62a4cffe6b20d475f9d",
+      "bytes": 396672
+    },
+    {
+      "path": "docs/02-design/03-database-design.md",
+      "doc_id": "DB-01",
+      "scope": "DDL 전부",
+      "sha256": "a654ebf0ce8018a1dd31a90dfcff8bc226fb27c9a07f691c5c5c11ca7b7225da",
+      "bytes": 465109
+    },
+    {
+      "path": "docs/02-design/04-data-collection-plan.md",
+      "doc_id": "DCP-01",
+      "scope": "§5.2 ID 문법·§6 스키마 형태·§7 검증 규칙",
+      "sha256": "da7a7f562e66a005084a1a01a12267c35b367a7b37d192e12c3acd64ba1b8d68",
+      "bytes": 263437
+    },
+    {
+      "path": "docs/02-design/05-ai-design.md",
+      "doc_id": "AI-01",
+      "scope": "과업 레지스트리·Jev 템플릿 키·ai_policy@v1 키",
+      "sha256": "05b8c56736adf511e6556c71c5297a8ab1c116597361ae1b50ad84076c78edef",
+      "bytes": 203401
+    },
+    {
+      "path": "docs/02-design/06-screen-design.md",
+      "doc_id": "SCR-01",
+      "scope": "라우트 18·렌더러 키",
+      "sha256": "a3e4491a9799343e6a09f7aab28c5b073034e913b8d7313168f4166d2996b94a",
+      "bytes": 167171
+    },
+    {
+      "path": "docs/02-design/07-design-system.md",
+      "doc_id": "DS-01",
+      "scope": "토큰 이름(값 비동결)",
+      "sha256": "4cb47692803457abd405b04815b3882d3f8015a7fdbb8607823a5ad6e7008a80",
+      "bytes": 81838
+    },
+    {
+      "path": "docs/02-design/08-wbs-iteration-plan.md",
+      "doc_id": "WBS-01·PGM-01",
+      "scope": "WP 소유 경로·반복 순서",
+      "sha256": "18c5daca30e27fb361e1a0b0d9d19e939645520fd177bdc6d3c754665c1c5334",
+      "bytes": 258271
+    },
+    {
+      "path": "docs/02-design/09-rtm.md",
+      "doc_id": "RTM-01",
+      "scope": "열 구조·Must/Should 행",
+      "sha256": "752e7b5357a9d192272c45b46abe5185e921a3dd4f4a3128e16085de49aff579",
+      "bytes": 113303
+    },
+    {
+      "path": "docs/02-design/10-design-review-log.md",
+      "doc_id": "DRL-01",
+      "scope": "기록",
+      "sha256": "88212d7d7f63ac9d7415ab1bf93499fdae398c3b97a79b0e64e5e1c1cf633ce7",
+      "bytes": 22274
+    },
+    {
+      "path": "docs/02-design/11-agent-build-brief.md",
+      "doc_id": "BRIEF-01",
+      "scope": "요약(정본 아님)",
+      "sha256": "c4600dab5a334b06d27eb9500ed6148b729d7a514770f5a121829b42f9bc4eef",
+      "bytes": 19233
+    },
+    {
+      "path": "docs/03-standards/01-dev-standards.md",
+      "doc_id": "STD-01",
+      "scope": "[M] 조항",
+      "sha256": "c81f92d39dc166d4febb27f44b6c4fd4040b6bc6f70adf761928230aa7a5c11d",
+      "bytes": 171864
+    },
+    {
+      "path": "docs/04-test/01-test-plan.md",
+      "doc_id": "TST-01",
+      "scope": "§11.2 번호 대역·게이트",
+      "sha256": "06cf856f1a9215e1dba3b5d5ce3adee9ef5a465ec93547967ca15ad47b2dcda6",
+      "bytes": 173215
+    },
+    {
+      "path": "CLAUDE.md",
+      "doc_id": "CLAUDE.md",
+      "scope": "에이전트 주입 지침(요약)",
+      "sha256": "6efd00418be1899d00ffcbfb3407c4bcc9d556bbc02b912cc7e11312c95db498",
+      "bytes": 9778
+    },
+    {
+      "path": "docs/00-brief/tech-stack-facts.md",
+      "doc_id": "TECH-FACTS",
+      "scope": "검증된 스택 사실(ADR-000 §6 기록 대상)",
+      "sha256": "a42a8ebf3c52ee13ecddfbff628aa4b8088f18e3cada86ddd511f558c0c6966e",
+      "bytes": 3122
+    }
+  ],
+  "pending": [
+    {
+      "glob": "packages/contracts/src/common/**",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/admin/**",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/ledger/**",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/manifests/**",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/events/envelope.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/events/consumer-manifest.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/db-hooks.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/policy/lock.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/policy/mastery_rules.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/manifests/modes.manifest.json",
+      "source": "ADR-000 F-4 · PG-2 #6",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/manifests/verification-class.json",
+      "source": "ADR-000 F-4 · PG-2 #6",
+      "owner_task": "T-00-02",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/pack/records.ts",
+      "source": "ADR-000 F-4 · CR-46",
+      "owner_task": "T-00-09",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/policy/ai_policy.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-09",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/contracts/src/policy/method_policy.ts",
+      "source": "ADR-000 F-4",
+      "owner_task": "T-00-10",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "services/*/src/app.ts",
+      "source": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
+      "owner_task": "T-00-12, T-00-13",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "services/ops/src/supervisor/**",
+      "source": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "owner_task": "T-00-11",
+      "freeze_at": "INT-1a"
+    },
+    {
+      "glob": "packages/testkit/src/golden-ledgers/**",
+      "source": "CR-65 (TST D-TST-20)",
+      "owner_task": "(IT-01 골든 원장 WP)",
+      "freeze_at": "INT-1b"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "policy/*@v1.yaml",
+      "reason": "값은 동결 아님(ADR-000 §1 '동결이 아닌 것') — policy.lock.json 해시로 별도 보호"
+    },
+    {
+      "path": "content/**",
+      "reason": "콘텐츠 파이프라인 규칙(DCP-01 §9)"
+    },
+    {
+      "path": "AGENTS.md",
+      "reason": "CLAUDE.md 요약 미러(STD-01 §17.7). 정본은 CLAUDE.md"
+    },
+    {
+      "path": "docs/02-design/cr/**",
+      "reason": "CR 대장 — 살아 있는 기록"
+    }
+  ]
+}
