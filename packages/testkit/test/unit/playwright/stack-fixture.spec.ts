@@ -1,4 +1,6 @@
+import { isUlid } from '@fathom/shared-kernel/ids/ids';
 import { describe, expect, it } from 'vitest';
+import { createUlidSequence, fixedUlid } from '../../../src/ids.js';
 import type { StackHandle } from '../../../src/playwright/stack-fixture.js';
 import { bootstrapRequest, createRequestCounter, isLoopbackUrl } from '../../../src/playwright/stack-fixture.js';
 
@@ -42,10 +44,24 @@ describe('stack-fixture helpers', () => {
     };
     // Act
     const { url, init } = bootstrapRequest(handle);
+    const second = bootstrapRequest(handle);
     // Assert
     expect(url).toBe('http://127.0.0.1:4847/api/v1/cli/bootstrap-token');
     expect(init.method).toBe('POST');
-    expect(init.headers).toEqual({ authorization: 'Bearer tok_abc', 'content-type': 'application/json' });
+    expect(init.headers).toEqual({
+      authorization: 'Bearer tok_abc',
+      'content-type': 'application/json',
+      'idempotency-key': expect.stringMatching(/^[0-9A-HJKMNP-TV-Z]{26}$/),
+    });
     expect(init.body).toBe('{"purpose":"open"}');
+    // IF-01 §2: 상태 변경 요청은 ULID(26자 Crockford base32 대문자) idempotency-key가 필수이고, 요청마다 새 키다 [NFR-SEC-019]
+    const key = (init.headers as Record<string, string>)['idempotency-key'];
+    const nextKey = (second.init.headers as Record<string, string>)['idempotency-key'];
+    expect(key).toHaveLength(26);
+    expect(isUlid(key)).toBe(true);
+    expect(nextKey).not.toBe(key);
+    // 키 생성기는 주입할 수 있다
+    const injected = bootstrapRequest(handle, createUlidSequence(7));
+    expect(injected.init.headers).toMatchObject({ 'idempotency-key': fixedUlid(7) });
   });
 });

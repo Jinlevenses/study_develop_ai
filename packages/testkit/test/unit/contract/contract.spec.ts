@@ -15,6 +15,7 @@ import {
   collectRoutes,
   findForbiddenFields,
   ifNumber,
+  planRouteContracts,
   TEST_CALLER_TOKENS,
 } from '../../../src/contract.js';
 import { fixedUlid } from '../../../src/ids.js';
@@ -302,7 +303,7 @@ describe('checkRouteContract (C2~C9)', () => {
     expect(await run(ListThings, fixtures.list as RouteFixture)).toEqual([]);
   });
 
-  it('UT-TK-035 pre-submit 스키마가 금지 필드를 노출하면 C9 위반이고 findForbiddenFields가 correct_option을 검출한다 [NFR-SEC-012]', async () => {
+  it('UT-TK-035 pre-submit 스키마 금지 필드(C9)·IF 번호 규칙·IF-COM 적합·래퍼 케이스 계획이 성립한다 [NFR-SEC-012][IR-015]', async () => {
     // pre-submit 스키마가 금지 필드를 노출하면 C9 위반이고 findForbiddenFields가 correct_option을 검출한다 [NFR-SEC-012]
     {
       // Assert
@@ -353,6 +354,46 @@ describe('checkRouteContract (C2~C9)', () => {
       expect(await run(HealthLiveRoute, caller('learning', 200), [], {}, comRoutes)).toEqual([]);
       expect(await run(MetricsGetRoute, caller('ops-api', 200), [], {}, comRoutes)).toEqual([]);
       expect(await run(AdminShutdownRoute, caller('ops-api', 202, { grace_ms: 1000 }), [], {}, comRoutes)).toEqual([]);
+    }
+    // 래퍼의 케이스 계획(planRouteContracts)이 C1 표 + 라우트별 케이스를 만들고 적합 서버에서 모두 통과한다 [IR-015]
+    // 케이스를 vitest `it`으로 등록하지 않고 한 `it` 안에서 직접 실행한다: `CT-<svc>-nnn` 제목이 vitest 결과(JSON)로 새어
+    // RTM·IR-015 계수에 가짜 계약 검증으로 잡히는 일을 막기 위함이다. 샘플 라우트의 ifId(IF-LR-9nnn)는 실제 번호와 겹치지 않는 픽스처다.
+    {
+      // Arrange
+      const plan = planRouteContracts({
+        unit: 'LR',
+        build: () =>
+          Promise.resolve({
+            app: createFakeServer(sampleRoutes),
+            registeredRoutes: () =>
+              sampleRoutes.map(({ route }) => ({
+                method: route.method,
+                url: route.path.replace(/\{([^}]+)\}/g, ':$1'),
+              })),
+            close: () => Promise.resolve(),
+          }),
+        groups: [
+          { CreateThing, ListThings, GetThing },
+          { GetQuestion, ALL: [CreateThing] },
+        ],
+        fixtures: new URL('./fixtures/', import.meta.url),
+        preSubmitSchemas: [SafeView],
+      });
+      // Assert
+      expect(plan.cases).toHaveLength(1 + 4);
+      expect(plan.cases[0]?.title).toContain('[C1]');
+      for (const ifId of ['IF-LR-9001', 'IF-LR-9002', 'IF-LR-9003', 'IF-LR-9004']) {
+        expect(plan.cases.some((c) => c.title.includes(`[${ifId}]`))).toBe(true);
+      }
+      // Act: 모든 케이스를 적합 서버에서 직접 실행한다(위반이 있으면 run()이 throw)
+      await plan.setup();
+      try {
+        for (const c of plan.cases) {
+          await c.run();
+        }
+      } finally {
+        await plan.teardown();
+      }
     }
   });
 });

@@ -1,3 +1,4 @@
+import { ulid } from '@fathom/shared-kernel/ids/ids';
 import type {
   Page,
   PlaywrightTestArgs,
@@ -63,13 +64,20 @@ export function createRequestCounter(): RequestCounter {
   };
 }
 
-/** IF-GW-001 부트스트랩 토큰 요청(HTTP로만 사용 — gateway 스키마를 import하지 않는다). */
-export function bootstrapRequest(h: StackHandle): { url: string; init: RequestInit } {
+/**
+ * IF-GW-001 부트스트랩 토큰 요청(HTTP로만 사용 — gateway 스키마를 import하지 않는다).
+ * IF-01 §2 헤더 표: 상태 변경(멱등 ✓) 라우트는 ULID `idempotency-key`가 필수이므로 요청마다 새 키를 싣는다(`newKey`는 테스트 주입용).
+ */
+export function bootstrapRequest(h: StackHandle, newKey: () => string = ulid): { url: string; init: RequestInit } {
   return {
     url: new URL('/api/v1/cli/bootstrap-token', h.gatewayUrl).href,
     init: {
       method: 'POST',
-      headers: { authorization: `Bearer ${h.cliToken}`, 'content-type': 'application/json' },
+      headers: {
+        authorization: `Bearer ${h.cliToken}`,
+        'content-type': 'application/json',
+        'idempotency-key': newKey(),
+      },
       body: JSON.stringify({ purpose: 'open' }),
     },
   };

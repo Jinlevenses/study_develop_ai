@@ -35,7 +35,6 @@
     "packages/testkit/test/integration/egress/fixtures/sampler-probe.mjs",
     "packages/testkit/test/unit/contract-arbitrary/contract-arbitrary.spec.ts",
     "packages/testkit/test/unit/contract/contract.spec.ts",
-    "packages/testkit/test/unit/contract/describe-route-contracts.spec.ts",
     "packages/testkit/test/unit/contract/fake-server.ts",
     "packages/testkit/test/unit/contract/fixtures/learning.questions.get.json",
     "packages/testkit/test/unit/contract/fixtures/learning.things.create.json",
@@ -238,7 +237,8 @@
     "SUPPLEMENT r2 contract.ts: new exports planRouteContracts()/RouteContractsConfig/RouteContractPlan (describeRouteContracts is now a thin registrar over it); CheckOptions gained optional notes?: string[] sink. C5 conflict variants are filtered through route.request.body.safeParse and use enum/ULID alternatives; when no schema-valid variant exists the conflict sub-check is skipped with a note instead of a C5 violation. PRE_SUBMIT_FORBIDDEN_SET replaces the `as readonly string[]` assertion.",
     "SUPPLEMENT r2 log.ts: interpolation args that are objects/arrays are deep-redacted copies (so %j/%o cannot leak); Error args become redacted 'Name: message'; class instances go through JSON round trip. reqIdBindingCache WeakMap removed (direct Object.hasOwn(bindings())); when a child binding already has req_id the merge object's req_id is dropped (binding wins) so the key is written once. UT-SK-058/060 extended.",
     "SUPPLEMENT r2 egress-recorder.mjs: exec/execSync record the shell (options.shell or /bin/sh, cmd.exe on win32), never the command string; UT-TK-045 asserts no secret in rows.",
-    "SUPPLEMENT r2 test IDs: duplicate it-IDs merged into one it per ID (UT-SK-017/058/060, UT-TK-011/028/029/033/035/040/043/048) with sub-cases in blocks; fake-server gained 'validate_first' quirk for the C5 tests."
+    "SUPPLEMENT r2 test IDs: duplicate it-IDs merged into one it per ID (UT-SK-017/058/060, UT-TK-011/028/029/033/035/040/043/048) with sub-cases in blocks; fake-server gained 'validate_first' quirk for the C5 tests.",
+    "SUPPLEMENT r3 (T1 major findings): (1) stack-fixture.ts bootstrapRequest()/openApp now send a ULID 'idempotency-key' header on POST /api/v1/cli/bootstrap-token (IF-01 §2 header table, IF-GW-001 idempotent); key comes from shared-kernel ulid() by default, with an optional injectable generator parameter (newKey) for tests; UT-TK-049 asserts presence, 26-char Crockford base32 uppercase format, per-request uniqueness and injection. (2) UT-TK-035 was used by two it titles; the planRouteContracts scenario from describe-route-contracts.spec.ts was moved as a sub-block into the single UT-TK-035 it in contract.spec.ts (title widened to cover it) and describe-route-contracts.spec.ts was deleted (also removed from changedFiles); this supersedes the SUPPLEMENT r2 note that placed that scenario in describe-route-contracts.spec.ts. No new test IDs; all stay within UT-TK-020~049."
   ],
   "escalations": [
     {
