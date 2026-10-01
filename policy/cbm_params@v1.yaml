@@ -1,0 +1,5 @@
+# file: policy/cbm_params@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/cbm_params.ts)
+version: cbm_params@v1
+score:                                  # FR-QST-024 · ARC §10.4 — 확신도 C1·C2·C3 순
+  correct: [1, 2, 3]
+  wrong: [0, -2, -6]

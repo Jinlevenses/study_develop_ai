@@ -1,0 +1,58 @@
+# file: policy/mastery_rules@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/mastery_rules.ts)
+version: mastery_rules@v1
+# provisional: CR-18~22 값은 SIM-PROMO(VC-1, INT-2 진입) 후 확정 — 첫 번들 릴리스 전까지 같은 @v1 안에서 수정 가능(DCP DN-31)
+epsilon: 1.0e-9                         # geq ε (ARC §10.4 · §11.4 형식 산입 비교)
+elo:                                    # ARC §4 learner-model
+  alpha: 0.8
+  b: 0.05
+  guess_correction: true                # SP-6 F0 추측 보정
+  unqualified_ceiling: 0                # SP-6 F4 실효 θ = min(θ, θ_q)
+  theta_q: { w_format_min: 0.7, w_grader_min: 0.6 }   # SP-6 F4 θ_q 산입 조건 = 형식 산입 2조건(DEC-CNV-19)
+theta_shrink:                           # CR-22 θ 증거 수축(시뮬레이터 재검증 후 확정)
+  theta_prior: -0.5
+  theta_shrink_n0: 10
+  theta_display_min_events: 30
+mastery:                                # FR-PRG-009 · DEC-CNV-19
+  p_min: 0.8
+  formats_min: 3
+  distinct_days_min: 2
+  format_counts: { w_format_min: 0.7, w_grader_min: 0.6 }   # geq(w_format, 0.7) ∧ geq(w_grader, 0.6) — 곱이 아님
+w_grader:                               # ARC §11.4
+  D: 1.0
+  J_calibrated: 0.9
+  J_uncalibrated: 0.7
+  J_low_confidence: 0.4
+  LJ: 0.6
+  H: 0.4
+  S: 0.3
+  PENDING: 0
+promotion:
+  empty_level: skip                     # SP-6 F1
+  required_mastered: { all_if_n_le: 3, ratio: 0.85, allow_misses: 1 }   # CR-20 n ≤ 3 ? n : min(n − 1, ceil(0.85·n))
+sparse:
+  depth_scope: track                    # CR-21 (FR-PRG-013 문자 그대로)
+d4:
+  floor_mode: min_with_possible         # SP-6 F3
+  possible_scope: level_le_k            # CR-21
+assessment:                             # CR-19 · ARC §7.3 (b)
+  items: 12
+  formats_min: 4
+  selection: round_robin_by_format
+  engines: [deterministic, calibrated_jev_if_sp1_pass]   # LJ·S 0
+  accuracy_min_correct: { '1': 10, '2': 10, '3': 10, '4': 11 }   # 출발 레벨 → 정답 수 하한(12문항 중)
+  cbm_denominator: chosen_confidence_max
+  cbm_min: { '1': 0.70, '2': 0.70, '3': 0.70, '4': 0.75 }
+  retry_days: 14
+ai_profiles:                            # CR-18 + Brief 결정(FULL·LLM_ONLY·OFFLINE 행)
+  FULL:                                 # Brief 결정 — SP-1 실패 = 미보정 Jev는 루브릭 1차 엔진 아님(ARC §7.3 (a)) → LLM-judge
+    rubric_engine: { sp1_pass: J, sp1_fail: LJ }
+    provisional_if_self_only: true
+  JUDGE_ONLY:                           # CR-18 ARC §7.3 (a)
+    rubric_engine: { sp1_pass: J, sp1_fail: S_provisional }
+    provisional_if_self_only: true
+  LLM_ONLY:                             # Brief 결정 — Jev 없음
+    rubric_engine: { sp1_pass: LJ, sp1_fail: LJ }
+    provisional_if_self_only: true
+  OFFLINE:                              # Brief 결정 — 자기채점 잠정(FR-PRG-033)
+    rubric_engine: { sp1_pass: S_provisional, sp1_fail: S_provisional }
+    provisional_if_self_only: true

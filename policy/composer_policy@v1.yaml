@@ -1,0 +1,41 @@
+# file: policy/composer_policy@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/composer_policy.ts)
+version: composer_policy@v1
+# path_weights(CR-52·DCP DN-22)는 ComposerPolicyV1에 키가 없어 넣지 않았다(strict 스키마) — T-00-15 contract_change 보고, T-00-10 -r1 가산 후 `path_weights: {}` 추가.
+score_weights:                          # PED §6.3 점수 함수 8항
+  utility: 0.30
+  urgency: 0.25
+  goal: 0.15
+  novelty: 0.10
+  preference: 0.10
+  fatigue: 0.05
+  switch_cost: 0.05
+  mix_delta: 0.10
+  softmax: { top_k: 3, tau: 0.3 }       # PED §6.3 softmax top-3 τ 0.3
+hard_constraints:                       # PED §6.4 HC-01~11 + FR-STD-002·004
+  HC-01: { same_mode_consecutive_max: 2 }
+  HC-02: { min_session_minutes: 15, modes_min: 3, short_template_slots: [W, R] }   # FR-STD-002 [T] 5분 템플릿 W→R(REQ 수용 기준 우선) [Brief 결정]
+  HC-03: { min_session_minutes: 25, constructive_interactive_share_min: 0.60 }
+  HC-04: { requeue_within_h: 24 }
+  HC-05: { new_blocked: true, review_interleaved: true }
+  HC-06: { boss_per_session_max: 1, last_graded_p_min: 0.80 }
+  HC-07: { first_item_ms_max: 2000 }
+  HC-08: { practice_p_min: 0.70, practice_p_max: 0.85, boss_p: 0.50 }
+  HC-09: { budget_overrun_max: 1.1 }
+  HC-10: { min_level: 4, worked_parsons_share_max: 0.05 }
+  HC-11: { variant_recent_exclude: 5 }
+entropy:                                # FR-STD-009 · ARC §10.4 H_min = min(2.3, 0.8·log2(min(k, B)))
+  h_min_formula: 'min(h_cap, coef * log2(min(k, B)))'
+  h_cap: 2.3
+  coef: 0.8
+  window_days: 7
+  single_mode_share_max: 0.60
+  freshness_boost: 2
+  weekly_quota: { digging: 1, lab: 1, blank_note: 1 }
+  suggest_only_min_level: 4
+boss: { min_session_minutes: 45, level_offset: 1, target_p: 0.50, evidence_weight_factor: 0.5 }   # FR-STD-004
+peak_end:
+  wave: { W: 0.90, R: 0.85, N: 0.75, D: 0.60, S: 0.50, C: 0.95 }   # PED §6.6 난이도 파도 그림 판독 [Brief 결정]
+wildcard:                               # FR-STD-003
+  per_week_min: 1
+  constraints: [diagram_only, one_sentence, no_jargon, explain_to_pm]
+  suggest_only_min_level: 4

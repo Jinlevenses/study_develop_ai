@@ -1,0 +1,8 @@
+# file: policy/search_params@v1.yaml   (owner: content · zod: packages/contracts/src/policy/search_params.ts)
+version: search_params@v1
+bm25: { title: 10, alias: 5, body: 1 }  # SP-4 V2 가중(ARC §10.4)
+# strip_chars [Brief 결정 — 원천에 문자 집합 없음]: FTS5 질의 문법 문자 + 따옴표·괄호·한중일 문장부호.
+#   식별자에 쓰이는 . - _ + # / 는 남긴다(node.js · k8s-probes · C++ · C# · CI/CD 검색 보존).
+strip_chars: '"''`“”‘’()[]{}<>*^:,;!?「」『』《》〈〉、。…·'
+short_token_len: 3                      # 이 길이 이하 토큰 = instr() 경로(ARC §10.4)
+v3_switch_docs: 20000                   # CR-24 V3 전환 문서 수

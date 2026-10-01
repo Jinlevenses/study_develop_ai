@@ -1,0 +1,44 @@
+# file: policy/gate_thresholds@v1.yaml   (owner: content · zod: packages/contracts/src/policy/gate_thresholds.ts)
+version: gate_thresholds@v1
+gates:                                    # 생성 문항 게이트(AI-J07~J11, G4는 AI-G11 + content D)
+  G2:  { grounded_min: 0.85 }
+  G3:  { key_min: 0.80, other_max: 0.20, repair_band: { gt: 0.20, le: 0.50 } }   # 다른 선택지 0.20 초과 0.50 이하 = repair, 초과 = 폐기
+  G4:  { require_key_match: true }
+  G5:  { ambiguous_max: 0.25 }
+  G6:  { mean_min: 1.5, each_min: 0.5 }   # 기대 점수(0~3)
+  G7:  { leak_max: 0.30 }
+  G8:  { duplicate_min: 0.90, judge_band: { ge: 0.70, lt: 0.90 }, same_knowledge_min: 0.70 }
+  G9:  { target_p_min: 0.50, adjacent_ok: true }
+  G11: { explanation_min: 2.0 }
+  G13: { each_max: 0.10 }
+  regate: { G3: void, G5: halve }         # 재게이트 보정(ARC §10.4)
+  llm_only:                               # LJ 게이트(보수): 위치 교차 2회 평균에 적용
+    G2: { grounded_min: 0.85 }            # = 두 번 모두 yes(0.85)일 때만 통과
+    G3: { key_min: 0.85, other_max: 0.15 }
+    G5: { ambiguous_max: 0.15 }
+    G7: { leak_max: 0.15 }
+    require_G4: true                      # LLM_ONLY는 타 계열 독립 풀이 필수
+judge_bands:                              # 채점·분류(content grading·acquisition)
+  AI-J01: { targets_mc: { accept: 0.70, reject: 0.40 } }
+  AI-J02: { equiv: { accept: 0.80, reject: 0.40 } }
+  AI-J03:
+    cov: { accept: 0.70, reject: 0.40 }   # ≥ accept 녹, < reject 회, 사이 = 부분(확인 요청)
+    mc:  { present: 0.60 }
+    bps: { w: { coverage: 0.40, accuracy: 0.25, structure: 0.20, depth: 0.15 }, partial_credit: 0.5, deep_level_min: 2 }
+  AI-J04:
+    kp: { accept: 0.70, reject: 0.40 }
+    defect: { accept: 0.70, reject: 0.40 }
+    mc: { present: 0.60 }
+    partial_credit: 0.5
+  AI-J05: { fixes_mc: { accept: 0.60 }, teaching: { w: { accuracy: 0.25, simplicity: 0.15, examples: 0.10, gaps: 0.20, fixes_mc: 0.30 }, taught_min: 0.80 } }
+  AI-J06: { which_mc: { confidence_min: 0.60 }, error_cause: { confidence_min: 0.60 } }
+  AI-J12: { same_concept: { merge_candidate_min: 0.70 } }
+  AI-J13: { section: { auto_min: 0.60 } }          # 미만 = 사용자 확정
+  AI-J14: { supported: { verified_min: 0.85 } }
+  AI-J15: { contradict: { conflict_min: 0.70, review_min: 0.40 } }
+  AI-J16: { injection: { quarantine_min: 0.50 } }
+  AI-J17: { label: { confidence_min: 0.60, below: partial }, asks_answer: { flag: 0.60 } }
+  AI-J18: { gates_as: [G2, G3, G5, G6], centrality: { min: 2.0 } }
+  AI-J19: { appeal_label: { confidence_min: 0.60, confidence_min_judge_only: 0.75, below: user_decision_required } }
+  injection: { flag: 0.50 }                         # 모든 과업 공통(§7.4-5)
+  jev_low_confidence: 0.60                          # 질문 confidence < 0.60 → w_grader J_low_confidence

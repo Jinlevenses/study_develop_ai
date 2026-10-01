@@ -1,0 +1,10 @@
+# file: policy/ldi_params@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/ldi_params.ts)
+version: ldi_params@v1
+# provisional: CR-28 — REQ §12.5 부록 A 초기값, SIM-LDI 민감도 분석 후 @v2 교체 가능(첫 번들 릴리스 전까지 같은 @v1 안에서 수정 가능, DCP DN-31)
+provisional: true                       # SP-3 감사 — 미확정
+retention_weights: { core: 1.0, standard: 0.7, breadth: 0.4, archive: 0.2, retired: 0 }   # REQ 부록 A
+depth_by_level: { L0: 0, L1: 1, L2: 2, L3: 3, L4: 5, L5: 8 }                               # REQ 부록 A
+retrievability: { recognition_factor: 0.8 }                                                 # REQ 부록 A
+evidence: { grader_weight: 0.5, formats_weight: 0.5, formats_target: 3 }                    # REQ 부록 A
+validity: { valid: 1.0, cl_x: 0.5, deprecated: 0 }                                          # REQ 부록 A
+provisional_factor: 0.8                                                                     # REQ 부록 A

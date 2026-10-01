@@ -1,0 +1,78 @@
+# file: services/ai-gateway/assets/tasks.yaml   (registry v1 — 과업 ID enum = @fathom/contracts/ai/tasks)
+# 앵커·별칭 전개본(parseYamlStrict 별칭 금지) — 값은 AI-01 §6.2와 동일, 로더는 _defaults를 버린다
+_defaults:
+  lj_interactive: [anthropic-api, openai-api, gemini-api, ollama]
+  lj_background:  [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama]
+  gen_api_first:  [anthropic-api, openai-api, gemini-api, claude-cli, codex-cli, gemini-cli, ollama]
+  gen_cli_first:  [claude-cli, anthropic-api, openai-api, gemini-api, codex-cli, gemini-cli, ollama]
+  stream_api:     [anthropic-api, openai-api, gemini-api, ollama]
+
+AI-J01: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J01, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J02: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J02, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J03: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [noul, score], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J03, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J04: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [noul, score], max_questions_per_request: 15, tier: high,
+          prompt: { id: AI-J04, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J05: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [noul, score], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J05, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J06: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [choice], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J06, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J07: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J07, channel: active }, prefer: [codex-cli, openai-api, gemini-cli, gemini-api, claude-cli, anthropic-api, ollama],
+          data_class_max: C0, family_constraint: different_from_generator, deadline_ms: 120000, requires_work_order: true }
+AI-J08: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [score], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J08, channel: active }, prefer: [codex-cli, openai-api, gemini-cli, gemini-api, claude-cli, anthropic-api, ollama],
+          data_class_max: C0, family_constraint: different_from_generator, deadline_ms: 120000, requires_work_order: true }
+AI-J09: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [choice], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J09, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C0, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-J10: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [score], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J10, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C0, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-J11: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J11, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C0, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-J12: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J12, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C2, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-J13: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [choice], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J13, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C2, family_constraint: none, deadline_ms: 120000, requires_work_order: false }  # Inbox는 interactive 레인 요청
+AI-J14: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J14, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C2, family_constraint: different_from_generator, deadline_ms: 120000, requires_work_order: true }
+AI-J15: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J15, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C2, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-J16: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [noul], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J16, channel: active }, prefer: [claude-cli, codex-cli, anthropic-api, openai-api, gemini-api, gemini-cli, ollama], data_class_max: C2, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-J17: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [choice, noul], max_questions_per_request: 15, tier: low,
+          prompt: { id: AI-J17, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J18: { kind: judge, lane: interactive, chain: [jev, llm-judge], question_types: [noul, score], max_questions_per_request: 15, tier: mid,
+          prompt: { id: AI-J18, channel: active }, prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 3000, requires_work_order: false }
+AI-J19: { kind: judge, lane: background, chain: [jev, llm-judge], question_types: [choice], max_questions_per_request: 15, tier: high,
+          prompt: { id: AI-J19, channel: active }, prefer: [anthropic-api, openai-api, claude-cli, codex-cli, gemini-api, gemini-cli],
+          data_class_max: C1, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+
+AI-G01: { kind: generate, lane: background, chain: [llm], schema: ai/ItemBatch@1, tier: mid, prompt: { id: AI-G01, channel: active },
+          prefer: [claude-cli, anthropic-api, openai-api, gemini-api, codex-cli, gemini-cli, ollama], deny: { ollama: ['stakes:S2'] }, data_class_max: C1, family_constraint: none, deadline_ms: 180000, requires_work_order: true }
+AI-G02: { kind: generate, lane: background, chain: [llm], schema: ai/ScenarioItem@1, tier: high, prompt: { id: AI-G02, channel: active },
+          prefer: [claude-cli, anthropic-api, openai-api, gemini-api, codex-cli], deny: { ollama: ['always'] },
+          data_class_max: C1, family_constraint: none, deadline_ms: 240000, requires_work_order: true }
+AI-G03: { kind: generate, lane: background, chain: [llm], schema: ai/CodeExercise@1, tier: mid, prompt: { id: AI-G03, channel: active },
+          prefer: [codex-cli, claude-cli, openai-api, anthropic-api, gemini-api], data_class_max: C0, family_constraint: none, deadline_ms: 180000, requires_work_order: true }
+AI-G04: { kind: generate, lane: background, chain: [llm], schema: ai/Explanation@1, tier: low, prompt: { id: AI-G04, channel: active },
+          prefer: [anthropic-api, openai-api, gemini-api, claude-cli, codex-cli, gemini-cli, ollama], data_class_max: C0, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-G05: { kind: generate, lane: background, chain: [llm], schema: ai/ImportDraft@1, tier: mid, prompt: { id: AI-G05, channel: active },
+          prefer: [claude-cli, anthropic-api, gemini-api, openai-api, gemini-cli, ollama], data_class_max: C2, family_constraint: none, deadline_ms: 240000, requires_work_order: true }
+AI-G06: { kind: generate, lane: conversational, chain: [llm], schema: ai/Feedback@1, tier: low, prompt: { id: AI-G06, channel: active },
+          prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 60000, requires_work_order: false }
+AI-G07: { kind: generate, lane: conversational, chain: [llm], schema: ai/Utterance@1, tier: low, prompt: { id: AI-G07, channel: active },
+          prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C1, family_constraint: none, deadline_ms: 60000, requires_work_order: false }
+AI-G08: { kind: generate, lane: conversational, chain: [llm], schema: ai/Explanation@1, tier: mid, prompt: { id: AI-G08, channel: active },
+          prefer: [anthropic-api, openai-api, gemini-api, ollama], data_class_max: C0, family_constraint: none, deadline_ms: 60000, requires_work_order: false }
+AI-G09: { kind: generate, lane: background, chain: [llm], schema: ai/ItemVariant@1, tier: low, prompt: { id: AI-G09, channel: active },
+          prefer: [ollama, anthropic-api, openai-api, gemini-api, claude-cli, codex-cli, gemini-cli], data_class_max: C0, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-G10: { kind: generate, lane: background, chain: [llm], tier: low, prompt: { id: AI-G10, channel: active },   # 내부 전용(HTTP 404) · 실제 레인·등급·제공자 = 원 호출
+          prefer: [anthropic-api, openai-api, gemini-api, claude-cli, codex-cli, gemini-cli, ollama], data_class_max: C2, family_constraint: none, deadline_ms: 60000, requires_work_order: false }
+AI-G11: { kind: generate, lane: background, chain: [llm], schema: ai/IndependentSolve@1, tier: mid, prompt: { id: AI-G11, channel: active },
+          prefer: [codex-cli, openai-api, gemini-cli, gemini-api, claude-cli, anthropic-api], data_class_max: C0, family_constraint: different_from_generator, deadline_ms: 120000, requires_work_order: true }
+AI-G12: { kind: generate, lane: background, chain: [llm], schema: ai/ModelAnswer@1, tier: mid, prompt: { id: AI-G12, channel: active },
+          prefer: [anthropic-api, openai-api, gemini-api, claude-cli, codex-cli, gemini-cli, ollama], data_class_max: C0, family_constraint: none, deadline_ms: 120000, requires_work_order: true }
+AI-G13: { kind: generate, lane: background, chain: [llm], schema: ai/Rubric@1, tier: high, prompt: { id: AI-G13, channel: active },
+          prefer: [claude-cli, anthropic-api, openai-api, gemini-api], deny: { ollama: ['always'] }, data_class_max: C0, family_constraint: none, deadline_ms: 180000, requires_work_order: true }

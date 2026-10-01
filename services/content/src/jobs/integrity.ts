@@ -1,0 +1,7 @@
+// content 전용 확장(팩 무결성 등)은 이 파일에 가산 — 기본 동작 = shared-kernel(DB-01 §12.1).
+import type { JobDefinition } from '@fathom/shared-kernel/jobs/jobs';
+import { loadSqliteRuntime, makeIntegrityJob } from '@fathom/shared-kernel/service/service';
+
+export function contentIntegrityJob(def: Parameters<typeof makeIntegrityJob>[0]): JobDefinition {
+  return makeIntegrityJob(def, loadSqliteRuntime);
+}

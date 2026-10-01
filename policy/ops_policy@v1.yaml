@@ -1,0 +1,6 @@
+# file: policy/ops_policy@v1.yaml   (owner: ops-api · zod: packages/contracts/src/policy/ops_policy.ts)
+version: ops_policy@v1
+backup: { incremental_per_day: 1, snapshot_per_week: 1, generations: 7, quiesce_ms: 2000, snapshot_ms: 30000 }   # ARC §10.4
+logs: { days: 14, max_mb_per_svc: 50 }                                                                         # ARC §10.4
+tripwire: { idle_rss_mb: 400, cold_start_ms: 10000 }                                                           # ARC §10.4 유휴 RSS 400MB · 콜드 10s
+disk_warn_mb: 500                                                                                              # ARC §10.4

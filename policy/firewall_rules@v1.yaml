@@ -1,0 +1,43 @@
+# file: policy/firewall_rules@v1.yaml   (owner: ai-gateway · zod: packages/contracts/src/policy/firewall_rules.ts)
+version: firewall_rules@v1               # 소비: ai-gateway egress + content ingress — AI-01 §10.3 원문 그대로(27규칙)
+mask_token: "⟨SECRET_{n}⟩"            # n = 페이로드 안 첫 등장 순 1부터, 같은 값 = 같은 토큰(결정적 → 캐시 키 안정)
+allow_literals: [example.com, example.org, example.net, test.invalid, localhost, "sk-ant-xxxx", "sk-xxxx"]   # 예시 값 오탐 방지
+rules:
+  - { id: FW-SEC-001, name: anthropic_key,  pattern: 'sk-ant-[A-Za-z0-9_-]{20,}',                                   action: mask }
+  - { id: FW-SEC-002, name: openai_key,     pattern: 'sk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{20,}',                    action: mask }
+  - { id: FW-SEC-003, name: google_api_key, pattern: 'AIza[0-9A-Za-z_-]{35}',                                       action: mask }
+  - { id: FW-SEC-004, name: github_token,   pattern: '(?:gh[pousr]_[A-Za-z0-9]{36,}|github_pat_[A-Za-z0-9_]{22,})', action: mask }
+  - { id: FW-SEC-005, name: aws_access_key, pattern: '\b(?:AKIA|ASIA)[0-9A-Z]{16}\b',                               action: mask }
+  - { id: FW-SEC-006, name: aws_secret,     pattern: '(?i)aws_secret_access_key\s*[:=]\s*[''"]?([A-Za-z0-9/+=]{40})', action: mask, group: 1 }
+  - { id: FW-SEC-007, name: slack_token,    pattern: 'xox[abprs]-[A-Za-z0-9-]{10,}',                                action: mask }
+  - { id: FW-SEC-008, name: jwt,            pattern: '\beyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}', action: mask }
+  - { id: FW-SEC-009, name: pem_private_key, pattern: '-----BEGIN (?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?PRIVATE KEY-----', action: block, c0_action: mask, span: until_end_marker }
+  - { id: FW-SEC-010, name: secret_assignment, pattern: '(?i)\b(?:password|passwd|pwd|secret|token|api[_-]?key|access[_-]?key)\b\s*[:=]\s*[''"]?([^\s''"]{8,})', action: mask, group: 1 }
+  - { id: FW-SEC-011, name: url_credentials, pattern: '\b[a-z][a-z0-9+.-]*://([^\s:/@]+:[^\s@/]+)@',                action: mask, group: 1 }
+  - { id: FW-SEC-012, name: auth_header,    pattern: '(?i)\bauthorization\s*:\s*(?:bearer|basic)\s+([A-Za-z0-9._~+/=-]{16,})', action: mask, group: 1 }
+  - { id: FW-SEC-013, name: npm_token,      pattern: '\bnpm_[A-Za-z0-9]{36}\b',                                    action: mask }
+  - { id: FW-SEC-014, name: payment_key,    pattern: '\b(?:sk|rk)_(?:live|test)_[A-Za-z0-9]{16,}',                 action: mask }
+  - { id: FW-SEC-015, name: azure_conn,     pattern: '(?i)AccountKey=([A-Za-z0-9+/=]{40,})',                       action: mask, group: 1 }
+  - { id: FW-PII-001, name: kr_rrn,         pattern: '\b\d{6}-?[1-4]\d{6}\b',                                       action: mask }   # 주민등록번호 형식
+  - { id: FW-PII-002, name: kr_phone,       pattern: '\b01[016789]-?\d{3,4}-?\d{4}\b',                              action: mask }
+  - { id: FW-PII-003, name: email,          pattern: '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b',          action: mask, except_allow_literals: true }
+  - { id: FW-PII-004, name: card_number,    pattern: '\b(?:\d[ -]?){13,19}\b',                                      action: mask, validate: luhn }
+  - { id: FW-PII-005, name: kr_biz_reg,     pattern: '\b\d{3}-\d{2}-\d{5}\b',                                       action: mask }   # 사업자등록번호 형식
+  - { id: FW-NET-001, name: private_ipv4,   pattern: '\b(?:10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])|192\.168)\.\d{1,3}\.\d{1,3}\b', action: mask }
+  - { id: FW-NET-002, name: internal_host,  pattern: '(?i)\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:corp|internal|intranet|lan|local|localdomain)\b', action: mask }
+  - { id: FW-NET-003, name: ipv6_ula,       pattern: '(?i)\bf[cd][0-9a-f]{2}:[0-9a-f:]{2,}\b',                      action: mask }
+  - { id: FW-NET-004, name: unc_path,       pattern: '\\\\[A-Za-z0-9._-]+\\[^\s]+',                                 action: mask }
+  - { id: FW-USR-000, name: user_patterns,  source: ai_firewall_pattern, action: force_local }   # 사내 도메인·사번·프로젝트 코드(사용자 등록, 기본 등급 C3)
+  - { id: FW-LCL-001, name: local_classifier, source: SYS-FWCLS, when: 'confidential && confidence >= 0.6', action: force_local }
+  - { id: FW-LOC-001, name: local_only_flag, source: request.local_only, action: force_local }
+injection_patterns:                     # §14 H 탐지(ingress I1.5·grading 공용) — 적중 = 의심 표시(AI-J16과 OR)
+  - '(?i)ignore\s+(?:all\s+|any\s+|the\s+)?(?:previous|prior|above)\s+(?:instructions|prompts|rules)'
+  - '(?i)\byou\s+are\s+now\b'
+  - '(?i)\b(?:system|assistant)\s*:\s'
+  - '(?i)</?(?:system|assistant|user|instructions?)>'
+  - '(?i)reveal\s+(?:your|the)\s+(?:system\s+)?prompt'
+  - '(?i)do\s+not\s+(?:tell|inform)\s+the\s+user'
+  - '이전\s*(?:지시|명령|프롬프트|규칙)\S*\s*(?:무시|잊)'
+  - '너는\s*이제'
+  - '(?:만점|최고\s*점수|정답\s*처리)\S*\s*(?:줘|주세요|하라|해라)'
+  - '(?i)(?:curl|wget)\s+https?://'

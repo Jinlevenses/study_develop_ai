@@ -1,0 +1,50 @@
+{
+  "ai_policy@v1": {
+    "owner": "ai-gateway",
+    "sha256": "43b84485e22fb99ae87b892b7fcc99b0fb2529fd76fb8eb1e5c8cde2a1027b19"
+  },
+  "cbm_params@v1": {
+    "owner": "learning",
+    "sha256": "488a310546e8cfc3b8f8a1192a713948d8c73883a087bdd97eba898108785ca8"
+  },
+  "composer_policy@v1": {
+    "owner": "learning",
+    "sha256": "738fb7a2c6092c315732e335dadb3e7017c2a2e7fe8cb23deb287ba556b9ff42"
+  },
+  "firewall_rules@v1": {
+    "owner": "ai-gateway",
+    "sha256": "70a0d560ec8ea03bf9ddbb29e85e924d6d701bfe54426e59156cb0e90856873f"
+  },
+  "fsrs_params@v1": {
+    "owner": "learning",
+    "sha256": "4a8071e529cc7e7764f5d3e7314aa589a4cbe0a29f8805bdc7c5dec83104df6c"
+  },
+  "gaming_params@v1": {
+    "owner": "learning",
+    "sha256": "b35d2f75e58dce03f248c5e337b5ca548a7165357591a6019ea0a2986f9bbf36"
+  },
+  "gate_thresholds@v1": {
+    "owner": "content",
+    "sha256": "a2151e68a4554eb1317bd47c2ad8db021414037956605f1bc7d663f06abc5712"
+  },
+  "ldi_params@v1": {
+    "owner": "learning",
+    "sha256": "b20772748b2b14fd61c7e988a76a8875ab87344294436aaf50452dcfcc37e22d"
+  },
+  "mastery_rules@v1": {
+    "owner": "learning",
+    "sha256": "3ff482c6c6cb3f2a1f3febffff46fd3f694e0b0c7f6d98fe9ce690970916d9fe"
+  },
+  "method_policy@v1": {
+    "owner": "learning",
+    "sha256": "d97f393840c3991e6cae0613b2a370c9e2b8d56dc14163e2f602a7c5507d48f6"
+  },
+  "ops_policy@v1": {
+    "owner": "ops-api",
+    "sha256": "d5d22e7c479a33edf4887e6319b1cad27875e88e31867144998c42cce18decc9"
+  },
+  "search_params@v1": {
+    "owner": "content",
+    "sha256": "8fc3f18ead5351dc7a6840c75d2cfc4e2cbc02d3e5163778a8965d450196b418"
+  }
+}

@@ -1,0 +1,74 @@
+# file: policy/ai_policy@v1.yaml   (owner: ai-gateway · zod: packages/contracts/src/policy/ai_policy.ts)
+version: ai_policy@v1
+budget: { monthly_krw: 30000, degrade_day: 20, warn: 0.8, stop: 1.0, per_call_usd_cap: 0.50 }
+jev:    { rps: 15, burst: 30, concurrency: 20, monthly_krw_cap: 3000, timeout_ms: { interactive: 3000, background: 10000 } }
+bulk:   { calls: 50, krw: 1000, quota_pct: 20 }
+quota_windows:                           # 보수 기본값(사용자 조정 가능, IF-AI-038)
+  claude-cli: { five_hour_calls: 30, five_hour_tokens: null, weekly_calls: 300 }
+  codex-cli:  { five_hour_calls: 30, five_hour_tokens: null, weekly_calls: 300 }
+  gemini-cli: { five_hour_calls: 60, five_hour_tokens: null, weekly_calls: 600 }
+  gcli-*:     { five_hour_calls: 30, five_hour_tokens: null, weekly_calls: 300 }
+batch_window: { idle_min: 10, require_ac: true }
+yield_interactive_cli: { enabled: true, resume_after_min: 10 }
+cli_concurrency: 2
+cli_per_minute: 20                       # 제공자별 분당 상한(구독 레이트 보호)
+rate_limits:                             # 토큰 버킷(rpm) · 동시성
+  anthropic-api: { rpm: 50, concurrency: 4 }
+  openai-api:    { rpm: 60, concurrency: 4 }
+  gemini-api:    { rpm: 30, concurrency: 2 }
+  ollama:        { rpm: 120, concurrency: 1 }
+aimd: { decrease: 0.5, recover_per_min: 0.1 }
+breaker: { window_s: 60, failures: 5, error_rate: 0.5, min_calls: 4, open_s: 60, open_max_s: 600 }
+mode: { upgrade_hold_s: 30 }
+cache_ttl_days:                          # AI-01 §11 TTL: judge 30 · generate 7 · 상한 90
+  judge: 30
+  generate: 7
+  max: 90
+  per_task:                              # T-00-09 D8 — 전수 record 35키로 펼침(원문 6키 + 기본값과 의미 동일)
+    AI-J01: 30
+    AI-J02: 30
+    AI-J03: 30
+    AI-J04: 30
+    AI-J05: 30
+    AI-J06: 30
+    AI-J07: 30
+    AI-J08: 30
+    AI-J09: 30
+    AI-J10: 30
+    AI-J11: 30
+    AI-J12: 30
+    AI-J13: 30
+    AI-J14: 30
+    AI-J15: 30
+    AI-J16: 30
+    AI-J17: 30
+    AI-J18: 30
+    AI-J19: 30
+    AI-G01: 7
+    AI-G02: 7
+    AI-G03: 7
+    AI-G04: 7
+    AI-G05: 7
+    AI-G06: 1                          # AI-01 §11
+    AI-G07: 0                          # 대화 원문 비축적
+    AI-G08: 7
+    AI-G09: 0                          # 변형 다양성
+    AI-G10: 7
+    AI-G11: 7
+    AI-G12: 7
+    AI-G13: 7
+    SYS-CANARY: 0
+    SYS-SMOKE: 0
+    SYS-FWCLS: 0
+fx_krw_per_usd: 1400                     # 사용자 조정 가능, 비용 화면에 기준 표시
+pricing:                                 # USD / 1M tokens. 릴리스 시 T1이 제공자 공시 단가로 채운다(as_of 필수, 누락 모델 = unknown_model)
+  as_of: null
+  models:
+    - { provider: jev, match: '.*', in: 0.042, out: 0.0, cache_read: 0.0 }
+    # - { provider: anthropic-api, match: '(?i)haiku', in: <공시가>, out: <공시가>, cache_read: <공시가> }   ← V-live doctor가 빈 항목 경고
+  unknown_model: { in: 15.0, out: 75.0, cache_read: 1.5 }   # 보수 상한(과소 추정 방지)
+cli_env: { pass_proxy: false }
+deadlines_ms: { interactive_max: 3000, conversational_max: 60000, background_max: 300000 }
+work_order: { approval_ttl_days: 7, approved_ttl_days: 30 }
+confirm_cards: { per_day_max: 3 }
+calibration: { gold_confirmed_min: 20, gold_confirmed_min_with_cross_review: 10, recalibrate_suggest_at: 30 }

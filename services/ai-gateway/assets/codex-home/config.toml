@@ -1,0 +1,7 @@
+# file: services/ai-gateway/assets/codex-home/config.toml — MCP·hooks·profiles 없음
+approval_policy = "never"
+sandbox_mode = "read-only"
+[history]
+persistence = "none"
+[tools]
+web_search = false

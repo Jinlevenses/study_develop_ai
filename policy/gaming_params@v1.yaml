@@ -1,0 +1,40 @@
+# file: policy/gaming_params@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/gaming_params.ts)
+version: gaming_params@v1
+# t_min = max(floor_ms, base_ms + 글자 수 ÷ chars_per_s × 1000) = max(1.2s, 0.4s + 글자 수 ÷ 25)(FR-QST-025) — 형식별 차등은 데이터 축적 후. FormatId 33종 전부.
+t_min_ms_by_format:
+  embedded:        { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  ox:              { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  mcq:             { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  cloze:           { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  short:           { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  matching:        { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  code_task:       { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  blank_note:      { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  digging_d4_mcq:  { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  error_find:      { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  confusable:      { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  fermi:           { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  cond_reversal:   { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  infra_lite:      { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  kata:            { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  audit:           { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  case_decision:   { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  code_predict:    { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  sql_task:        { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  essay:           { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  digging:         { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  feynman:         { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  pr_review:       { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  reverse_item:    { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  artifact:        { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  case_postmortem: { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  micro_judgment:  { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  ml_predict:      { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  mcq_multi:       { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  order:           { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  parsons:         { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  log_read:        { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+  config_review:   { floor_ms: 1200, base_ms: 400, chars_per_s: 25 }
+personalize_after: { responses: 200, quantile: 0.1 }   # 200응답 후 개인 분위수(ARC §10.4)
+rapid: { w: 0, grade_cap: 2 }           # 빠른 응답 → w 0 · grade ≤ Hard(ARC §10.4 · §11.4)
+hint_penalty: { factor_per_step: 0.8 }  # 힌트 단계당 감점 계수(FR-QST-025)

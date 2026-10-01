@@ -1,0 +1,10 @@
+# file: services/ai-gateway/assets/model-defaults.yaml   (값은 선택자 — 특정 모델 ID를 하드코딩하지 않는다)
+version: 1
+jev:            { pinned: { prefer_regex: '^jev-(?!latest)', fallback: 'jev-latest' } }   # 버전 고정 모델명 우선(R5 §5.5)
+anthropic-api:  { low: '(?i)haiku',  mid: '(?i)sonnet', high: '(?i)opus' }
+openai-api:     { low: '(?i)^gpt-[0-9.]+-mini$', mid: '(?i)^gpt-[0-9.]+$', high: '(?i)^gpt-[0-9.]+$' }
+gemini-api:     { low: '(?i)flash-lite', mid: '(?i)flash(?!-lite)', high: '(?i)pro' }
+ollama:         { any: { prefer_names: ['qwen', 'llama', 'gemma', 'mistral'], require_tag_param_min_b: 7 } }  # /api/tags에서 이름 접두 일치 첫 항목
+claude-cli:     { low: 'haiku', mid: 'sonnet', high: 'opus' }        # CLI 별칭(그대로 --model 값)
+codex-cli:      { low: null, mid: null, high: null }                 # null = '-m' 생략(CLI 기본 모델) — §19 D-AI-05
+gemini-cli:     { low: null, mid: null, high: null }

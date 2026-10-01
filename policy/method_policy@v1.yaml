@@ -1,0 +1,115 @@
+# file: policy/method_policy@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/method_policy.ts)
+version: method_policy@v1
+# router_25 — 행 D·C·P·S(지식 유형) + M(메타인지) × 열 레벨 '1'~'5'. 칸마다 형식 ≥ 2(FR-STD-007), TB-03·TB-04 금지 형식과 겹침 0.
+#   bloom = PED §4.2 레벨 행(D·C·P·S 같은 값, M = null) · scaffolding = PED §4.1 · digging_depth_max = C 행만(FR-STD-020, PED §4.3 D1~D4 → D4~D7)
+#   formats = PED §4.3 주력 방법 → FormatId [Brief 결정]
+router_25:
+  D:
+    '1': { formats: [ox, cloze, short, mcq], bloom: { remember: 0.40, understand: 0.35, apply: 0.20, analyze: 0.05, evaluate: 0, create: 0 }, scaffolding: full, digging_depth_max: null }
+    '2': { formats: [cloze, matching, short, mcq], bloom: { remember: 0.20, understand: 0.30, apply: 0.35, analyze: 0.15, evaluate: 0, create: 0 }, scaffolding: faded, digging_depth_max: null }
+    '3': { formats: [short, cloze, config_review, log_read], bloom: { remember: 0.10, understand: 0.15, apply: 0.30, analyze: 0.30, evaluate: 0.15, create: 0 }, scaffolding: minimal, digging_depth_max: null }
+    '4': { formats: [short, mcq, cloze], bloom: { remember: 0.05, understand: 0.10, apply: 0.15, analyze: 0.30, evaluate: 0.30, create: 0.10 }, scaffolding: none, digging_depth_max: null }
+    '5': { formats: [mcq, short], bloom: { remember: 0.05, understand: 0.05, apply: 0.05, analyze: 0.25, evaluate: 0.35, create: 0.25 }, scaffolding: none, digging_depth_max: null }
+  C:
+    '1': { formats: [embedded, ox, mcq], bloom: { remember: 0.40, understand: 0.35, apply: 0.20, analyze: 0.05, evaluate: 0, create: 0 }, scaffolding: full, digging_depth_max: 3 }   # FR-STD-020 L1 D3 상한
+    '2': { formats: [blank_note, essay, mcq, confusable], bloom: { remember: 0.20, understand: 0.30, apply: 0.35, analyze: 0.15, evaluate: 0, create: 0 }, scaffolding: faded, digging_depth_max: 4 }
+    '3': { formats: [blank_note, digging, digging_d4_mcq, confusable], bloom: { remember: 0.10, understand: 0.15, apply: 0.30, analyze: 0.30, evaluate: 0.15, create: 0 }, scaffolding: minimal, digging_depth_max: 4 }
+    '4': { formats: [digging, digging_d4_mcq, blank_note, cond_reversal], bloom: { remember: 0.05, understand: 0.10, apply: 0.15, analyze: 0.30, evaluate: 0.30, create: 0.10 }, scaffolding: none, digging_depth_max: 7 }
+    '5': { formats: [feynman, cond_reversal, essay, digging], bloom: { remember: 0.05, understand: 0.05, apply: 0.05, analyze: 0.25, evaluate: 0.35, create: 0.25 }, scaffolding: none, digging_depth_max: 7 }
+  P:
+    '1': { formats: [parsons, code_predict, order, mcq], bloom: { remember: 0.40, understand: 0.35, apply: 0.20, analyze: 0.05, evaluate: 0, create: 0 }, scaffolding: full, digging_depth_max: null }
+    '2': { formats: [code_task, code_predict, parsons, cloze], bloom: { remember: 0.20, understand: 0.30, apply: 0.35, analyze: 0.15, evaluate: 0, create: 0 }, scaffolding: faded, digging_depth_max: null }
+    '3': { formats: [error_find, code_task, log_read, infra_lite, kata], bloom: { remember: 0.10, understand: 0.15, apply: 0.30, analyze: 0.30, evaluate: 0.15, create: 0 }, scaffolding: minimal, digging_depth_max: null }
+    '4': { formats: [pr_review, audit, code_task, kata, sql_task], bloom: { remember: 0.05, understand: 0.10, apply: 0.15, analyze: 0.30, evaluate: 0.30, create: 0.10 }, scaffolding: none, digging_depth_max: null }
+    '5': { formats: [artifact, pr_review, code_task], bloom: { remember: 0.05, understand: 0.05, apply: 0.05, analyze: 0.25, evaluate: 0.35, create: 0.25 }, scaffolding: none, digging_depth_max: null }
+  S:
+    '1': { formats: [mcq, ox], bloom: { remember: 0.40, understand: 0.35, apply: 0.20, analyze: 0.05, evaluate: 0, create: 0 }, scaffolding: full, digging_depth_max: null }
+    '2': { formats: [mcq, confusable], bloom: { remember: 0.20, understand: 0.30, apply: 0.35, analyze: 0.15, evaluate: 0, create: 0 }, scaffolding: faded, digging_depth_max: null }
+    '3': { formats: [confusable, cond_reversal, case_decision, fermi], bloom: { remember: 0.10, understand: 0.15, apply: 0.30, analyze: 0.30, evaluate: 0.15, create: 0 }, scaffolding: minimal, digging_depth_max: null }
+    '4': { formats: [case_decision, case_postmortem, fermi, micro_judgment, cond_reversal], bloom: { remember: 0.05, understand: 0.10, apply: 0.15, analyze: 0.30, evaluate: 0.30, create: 0.10 }, scaffolding: none, digging_depth_max: null }
+    '5': { formats: [artifact, cond_reversal, micro_judgment, case_postmortem], bloom: { remember: 0.05, understand: 0.05, apply: 0.05, analyze: 0.25, evaluate: 0.35, create: 0.25 }, scaffolding: none, digging_depth_max: null }
+  M:                                    # 메타인지 행 — bloom 분포 없음(null), 비계는 레벨 공통(PED §4.1)
+    '1': { formats: [ox, mcq], bloom: null, scaffolding: full, digging_depth_max: null }
+    '2': { formats: [mcq, short], bloom: null, scaffolding: faded, digging_depth_max: null }
+    '3': { formats: [mcq, essay], bloom: null, scaffolding: minimal, digging_depth_max: null }
+    '4': { formats: [essay, micro_judgment], bloom: null, scaffolding: none, digging_depth_max: null }
+    '5': { formats: [essay, artifact], bloom: null, scaffolding: none, digging_depth_max: null }
+taboo:                                  # PED §4.5 → TabooRule [Brief 결정]
+  - id: TB-01
+    levels: [4, 5]
+    knowledge_types: []
+    effect: { kind: max_share, formats: [parsons, order], share_max: 0.05 }
+    reason_ko: '숙련자 역효과 — L4+ worked·Parsons 비중 ≤ 5%(HC-10)'
+  - id: TB-02
+    levels: [1]
+    knowledge_types: []
+    effect: { kind: digging_depth_max, depth: 3 }
+    reason_ko: '사전지식 부족 시 정교화 효과 없음 — L1 디깅 D3 상한'
+  - id: TB-03
+    levels: [1, 2, 3, 4, 5]
+    knowledge_types: [D]
+    effect: { kind: exclude_formats, formats: [case_decision, case_postmortem, artifact] }
+    reason_ko: '사실 지식 유형에 Case·산출물 금지(FR-STD-007)'
+  - id: TB-04
+    levels: [1, 2]
+    knowledge_types: []
+    effect: { kind: exclude_formats, formats: [case_decision, case_postmortem] }
+    reason_ko: '생산적 실패는 L3+에서만'
+  - id: TB-05
+    levels: [1, 2, 3, 4, 5]
+    knowledge_types: []
+    effect: { kind: evidence_weight, formats: [ox, embedded], w: 0.5 }
+    reason_ko: '추측 50% — OX·임베디드만으로 숙달 금지(w 0.5, 형식 산입 제외)'
+level_mix:                              # CNV §6.3 6활동군
+  groups:
+    code: [M-10]
+    retrieval: [M-03, M-04, M-05, M-11]
+    implement: [M-06, M-07, M-12, M-17]
+    blank_note: [M-13, M-21]
+    digging: [M-14, M-15, M-16, M-09]
+    case: [M-19, M-20, M-08]
+  shares:                               # 레벨 → code·retrieval·implement·blank_note·digging·case, 합 = 1
+    '1': { code: 0.35, retrieval: 0.30, implement: 0.15, blank_note: 0.15, digging: 0.05, case: 0 }
+    '2': { code: 0.25, retrieval: 0.30, implement: 0.25, blank_note: 0.15, digging: 0.05, case: 0 }
+    '3': { code: 0.10, retrieval: 0.25, implement: 0.30, blank_note: 0.20, digging: 0.10, case: 0.05 }
+    '4': { code: 0.05, retrieval: 0.20, implement: 0.20, blank_note: 0.15, digging: 0.20, case: 0.20 }
+    '5': { code: 0.05, retrieval: 0.15, implement: 0.10, blank_note: 0.15, digging: 0.25, case: 0.30 }   # L5 코드 "0~5%" → 0.05로 합 1 [Brief 결정]
+  tolerance: 0.10                       # FR-STD-008 ±10%p
+# formats — FormatId 33종 전부(IF-01 §13.4 FormatPolicy, w_format의 유일한 저장 위치, CR-36·DN-10).
+#   저작 25종 = DCP §6.5.1 표 열 그대로. grade_class = OFFLINE 채점 열의 첫 엔진(H·S → J 는 S [Brief 결정]).
+#   credit_eligible = w_format ≥ 0.7 [Brief 결정] · runner = 러너 열 ✓만(code_predict V4 = 팩 빌드 오라클 → false).
+#   런타임·모드 8종(confusable·kata·case_decision·case_postmortem·artifact·reverse_item·micro_judgment·ml_predict) = CNV §6.1 모드 열에서 도출 [Brief 결정].
+formats:
+  ox:             { w_format: 0.5, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 2 }, credit_eligible: false, runner: false, tiers: [A, B] }
+  mcq:            { w_format: 0.7, grade_class: D, response_mode: recognition, n_options: { min: 3, max: 5 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  mcq_multi:      { w_format: 0.8, grade_class: D, response_mode: recognition, n_options: { min: 4, max: 6 }, credit_eligible: true, runner: false, tiers: [A] }
+  cloze:          { w_format: 0.8, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  short:          { w_format: 0.8, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  order:          { w_format: 0.8, grade_class: D, response_mode: recognition, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A] }
+  matching:       { w_format: 0.7, grade_class: D, response_mode: recognition, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  code_predict:   { w_format: 1.0, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  error_find:     { w_format: 0.9, grade_class: D, response_mode: recognition, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A] }
+  parsons:        { w_format: 0.7, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A] }
+  code_task:      { w_format: 1.0, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: true, tiers: [A, B, C] }
+  sql_task:       { w_format: 1.0, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: true, tiers: [A, B, C] }
+  infra_lite:     { w_format: 0.9, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B, C] }
+  config_review:  { w_format: 0.9, grade_class: D, response_mode: recognition, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  log_read:       { w_format: 0.9, grade_class: D, response_mode: recognition, n_options: { min: 3, max: 5 }, credit_eligible: true, runner: false, tiers: [A] }
+  cond_reversal:  { w_format: 1.0, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 4 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  fermi:          { w_format: 1.0, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  blank_note:     { w_format: 0.9, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A] }        # H(trigram 힌트)·S → J: 기록 채점 = S [Brief 결정]
+  essay:          { w_format: 0.8, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  digging:        { w_format: 0.8, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }     # A·B(템플릿)
+  digging_d4_mcq: { w_format: 0.8, grade_class: D, response_mode: recognition, n_options: { min: 3, max: 5 }, credit_eligible: true, runner: false, tiers: [A] }
+  feynman:        { w_format: 0.9, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A] }
+  audit:          { w_format: 1.0, grade_class: D, response_mode: recognition, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  pr_review:      { w_format: 1.0, grade_class: D, response_mode: recognition, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }
+  embedded:       { w_format: 0.5, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 4 }, credit_eligible: false, runner: false, tiers: [A] }
+  confusable:     { w_format: 0.7, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 4 }, credit_eligible: true, runner: false, tiers: [A, B] }     # M-07
+  kata:           { w_format: 1.0, grade_class: D, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: true, tiers: [A, B, C] }    # M-11 숨은 테스트
+  case_decision:  { w_format: 1.0, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 4 }, credit_eligible: true, runner: false, tiers: [A, B] }    # M-19 결정점
+  case_postmortem: { w_format: 1.0, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }    # M-19 루브릭(OFFLINE 자기)
+  artifact:       { w_format: 1.0, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }     # M-20
+  reverse_item:   { w_format: 0.8, grade_class: S, response_mode: production, n_options: { min: 0, max: 0 }, credit_eligible: true, runner: false, tiers: [A, B] }     # M-18
+  micro_judgment: { w_format: 1.0, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 4 }, credit_eligible: true, runner: false, tiers: [A, B] }    # FR-STD-035 결정점 발췌 best_if 결정적
+  ml_predict:     { w_format: 0.7, grade_class: D, response_mode: recognition, n_options: { min: 2, max: 5 }, credit_eligible: true, runner: false, tiers: [A, B] }    # 근거 없음 — 보수값, T1′ 리뷰 대상
