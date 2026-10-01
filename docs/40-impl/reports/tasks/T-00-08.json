@@ -1,0 +1,269 @@
+{
+  "taskId": "T-00-08",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "packages/shared-kernel/src/eventing/eventing.ts",
+    "packages/shared-kernel/src/eventing/inbox.sql.ts",
+    "packages/shared-kernel/src/eventing/inbox.ts",
+    "packages/shared-kernel/src/eventing/outbox.sql.ts",
+    "packages/shared-kernel/src/eventing/outbox.ts",
+    "packages/shared-kernel/src/eventing/relay.sql.ts",
+    "packages/shared-kernel/src/eventing/relay.ts",
+    "packages/shared-kernel/src/eventing/retention.sql.ts",
+    "packages/shared-kernel/src/eventing/retention.ts",
+    "packages/shared-kernel/src/eventing/rewind.ts",
+    "packages/shared-kernel/src/eventing/row.ts",
+    "packages/shared-kernel/src/eventing/snapshot-read.ts",
+    "packages/shared-kernel/src/eventing/timeline.sql.ts",
+    "packages/shared-kernel/src/eventing/timeline.ts",
+    "packages/shared-kernel/src/eventing/transport.ts",
+    "packages/shared-kernel/src/idempotency/idempotency.sql.ts",
+    "packages/shared-kernel/src/idempotency/idempotency.ts",
+    "packages/shared-kernel/src/service/admin-routes.ts",
+    "packages/shared-kernel/src/service/app.ts",
+    "packages/shared-kernel/src/service/boot.ts",
+    "packages/shared-kernel/src/service/common-routes.ts",
+    "packages/shared-kernel/src/service/default-jobs.ts",
+    "packages/shared-kernel/src/service/infra-dir.ts",
+    "packages/shared-kernel/src/service/ipc-inbox.ts",
+    "packages/shared-kernel/src/service/maintenance.sql.ts",
+    "packages/shared-kernel/src/service/mode-migrate.ts",
+    "packages/shared-kernel/src/service/mode-restore.ts",
+    "packages/shared-kernel/src/service/mode-run.ts",
+    "packages/shared-kernel/src/service/modes.ts",
+    "packages/shared-kernel/src/service/pipeline.ts",
+    "packages/shared-kernel/src/service/problem.ts",
+    "packages/shared-kernel/src/service/process-port.ts",
+    "packages/shared-kernel/src/service/route-path.ts",
+    "packages/shared-kernel/src/service/route-runner.ts",
+    "packages/shared-kernel/src/service/serve-boot.ts",
+    "packages/shared-kernel/src/service/serve-listen.ts",
+    "packages/shared-kernel/src/service/serve-types.ts",
+    "packages/shared-kernel/src/service/serve.ts",
+    "packages/shared-kernel/src/service/service-state.ts",
+    "packages/shared-kernel/src/service/service.ts",
+    "packages/shared-kernel/src/service/shutdown.ts",
+    "packages/shared-kernel/src/service/sqlite-loader.ts",
+    "packages/shared-kernel/src/service/timers.ts",
+    "packages/shared-kernel/src/service/types.ts",
+    "packages/shared-kernel/src/service/write-gate.ts",
+    "packages/shared-kernel/test/integration/eventing/relay-e2e.spec.ts",
+    "packages/shared-kernel/test/integration/eventing/transport.spec.ts",
+    "packages/shared-kernel/test/integration/service/admin-jobs.spec.ts",
+    "packages/shared-kernel/test/integration/service/fixtures/def.ts",
+    "packages/shared-kernel/test/integration/service/fixtures/migrations/fixture/0001_fixture_items.sql",
+    "packages/shared-kernel/test/integration/service/fixtures/service-main.ts",
+    "packages/shared-kernel/test/integration/service/fixtures/warn-main.ts",
+    "packages/shared-kernel/test/integration/service/harness.ts",
+    "packages/shared-kernel/test/integration/service/ipc-child.spec.ts",
+    "packages/shared-kernel/test/integration/service/modes.spec.ts",
+    "packages/shared-kernel/test/integration/service/serve.spec.ts",
+    "packages/shared-kernel/test/unit/eventing/inbox.spec.ts",
+    "packages/shared-kernel/test/unit/eventing/maintenance.spec.ts",
+    "packages/shared-kernel/test/unit/eventing/outbox.spec.ts",
+    "packages/shared-kernel/test/unit/eventing/relay.spec.ts",
+    "packages/shared-kernel/test/unit/eventing/support.ts",
+    "packages/shared-kernel/test/unit/idempotency/http.spec.ts",
+    "packages/shared-kernel/test/unit/idempotency/store.spec.ts",
+    "packages/shared-kernel/test/unit/service/boot.spec.ts",
+    "packages/shared-kernel/test/unit/service/common.spec.ts",
+    "packages/shared-kernel/test/unit/service/contract.spec.ts",
+    "packages/shared-kernel/test/unit/service/extras.spec.ts",
+    "packages/shared-kernel/test/unit/service/modes.spec.ts",
+    "packages/shared-kernel/test/unit/service/pipeline.spec.ts",
+    "packages/shared-kernel/test/unit/service/problem.spec.ts",
+    "packages/shared-kernel/test/unit/service/quiesce.spec.ts",
+    "packages/shared-kernel/test/unit/service/routes.ts",
+    "packages/shared-kernel/test/unit/service/shutdown.spec.ts",
+    "packages/shared-kernel/test/unit/service/sqlite-loader.spec.ts",
+    "packages/shared-kernel/test/unit/service/support-boot.ts",
+    "packages/shared-kernel/test/unit/service/support.ts"
+  ],
+  "testsAdded": [
+    "UT-SK-006",
+    "UT-SK-007",
+    "UT-SK-009",
+    "UT-SK-013",
+    "UT-SK-014",
+    "UT-SK-140",
+    "UT-SK-141",
+    "UT-SK-142",
+    "UT-SK-143",
+    "UT-SK-144",
+    "UT-SK-145",
+    "UT-SK-146",
+    "UT-SK-147",
+    "UT-SK-148",
+    "UT-SK-149",
+    "UT-SK-150",
+    "UT-SK-151",
+    "UT-SK-152",
+    "UT-SK-153",
+    "UT-SK-154",
+    "UT-SK-155",
+    "UT-SK-156",
+    "UT-SK-157",
+    "UT-SK-158",
+    "UT-SK-159",
+    "UT-SK-160",
+    "UT-SK-161",
+    "UT-SK-162",
+    "UT-SK-163",
+    "UT-SK-164",
+    "UT-SK-165",
+    "UT-SK-166",
+    "UT-SK-167",
+    "UT-SK-168",
+    "UT-SK-170",
+    "UT-SK-171",
+    "UT-SK-172",
+    "UT-SK-173",
+    "UT-SK-174",
+    "UT-SK-175",
+    "UT-SK-176",
+    "UT-SK-177",
+    "UT-SK-178",
+    "UT-SK-179",
+    "UT-SK-180",
+    "UT-SK-181",
+    "UT-SK-182",
+    "UT-SK-183",
+    "UT-SK-184",
+    "UT-SK-185",
+    "UT-SK-186",
+    "UT-SK-187",
+    "UT-SK-188",
+    "UT-SK-189",
+    "UT-SK-190",
+    "UT-SK-191",
+    "UT-SK-192",
+    "UT-SK-193",
+    "UT-SK-194",
+    "UT-SK-195",
+    "UT-SK-196",
+    "UT-SK-197",
+    "UT-SK-198",
+    "UT-SK-199"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/shared-kernel typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/shared-kernel test (30 files, 196 tests)",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/shared-kernel test:integration (11 files, 51 tests)",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm exec biome ci packages/shared-kernel",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint (repo-wide)",
+      "exit": 1,
+      "note": "pre-existing, outside allowed_paths: packages/design-tokens/src/tokens.css Tailwind syntax parse errors; shared-kernel itself is clean"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "gate-selftest/boundaries/tsconfig-paths PASS; check:deps (10 errors: apps/web, ui, testkit, packc package.json) and check:security (1: shared-kernel/test/unit/redact/redact.spec.ts:10, T-00-03 file) fail before and after this task; 0 findings in T-00-08 paths"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-08",
+      "exit": 1,
+      "note": "164 findings, all in other lanes' uncommitted files (services/ops, packages/contracts, ...); 0 findings under packages/shared-kernel"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "RouteReply/ServiceApp.route: added an inferred generic S (status literal) — TS 7 widens `status: 200` to number in async block-bodied handlers passed to a generic route(); constraint S extends keyof R['response'] & number still rejects undeclared statuses at compile time. RouteReply<R> (one arg) is unchanged.",
+    "Fastify: logController(new LogController({disableRequestLogging:true, requestIdLogLabel:'req_id'})) + routerOptions.maxParamLength=512 instead of the deprecated top-level disableRequestLogging/requestIdLogLabel (FSTDEP023/024 warnings in 5.12.5); maxParamLength raised because IDs are up to 140 chars (default 100 would 404). text/plain default parser removed so non-JSON gets 415.",
+    "Additive options: createService opts.logDestination and opts.jobExecArgv (tests capture logs / fork TS jobs via tsx); purgeInfraOnce result also has `more`; createWriteGate opts.onAutoReopen; AssembleExtras (internal assembleApp, used by createService and tests; buildServiceApp signature unchanged); ModeContext defined (Brief only named it); ServiceDefinitionBase helper type; toProblem result has extra logMsg; ProcessPort has no extra members (warning target/rss/event-loop probe are separate exports of process-port.ts).",
+    "Health routes also honour x-fathom-deadline-ms (testkit C7 applies the 0 -> 504 check to every route incl. /healthz); /api requests ignore the header.",
+    "restore additionally runs the journal-mode WAL statement on the copied DB (VACUUM INTO output is not WAL) — constant JOURNAL_MODE_WAL in maintenance.sql.ts.",
+    "serve flow is split across serve.ts / serve-boot.ts / serve-listen.ts / serve-types.ts (+ipc-inbox.ts) to keep functions short; closure factories (startRelay, inboxPlugin, createWriteGate, installPipeline, assembleApp) still exceed 60 lines like createJobRunner/createPeerClient from T-00-04.",
+    "Two narrow `as` casts documented in place (route handler typing in app.ts, payload narrowing in inbox.ts); no any / non-null assertions.",
+    "In-flight request counting starts in onRequest, so quiesce's drain waits only on gated writes while shutdown's waitIdle waits on every request."
+  ],
+  "escalations": [
+    {
+      "kind": "scope",
+      "detail": "G2 gate check:sql (STD-SQL-04 pragma_allow in tools/gates/config/sql.json) flags packages/shared-kernel/src/service/maintenance.sql.ts (PRAGMA quick_check/integrity_check/foreign_key_check/wal_checkpoint/optimize/application_id/journal_mode). Brief §4.3.5 mandates this location; pragma_allow needs packages/shared-kernel/src/service/** (T1 CR candidate: STD-SQL-04 wording)."
+    },
+    {
+      "kind": "scope",
+      "detail": "G2 gate check:sql-typed (tools/gates/check-sql-typed.mjs) reports sql/dynamic-arg for every prepare()/exec() whose argument is an IMPORTED *.sql.ts constant (eventing, idempotency, service: ~40 sites) — Identifier classification uses getSymbolAtLocation().valueDeclaration which is undefined for import aliases (needs getAliasedSymbol). Same-file constants pass. Not worked around with sql-ok comments (would weaken the gate)."
+    },
+    {
+      "kind": "contract_change",
+      "detail": "testkit checkRouteContract C4 expects 2xx from every allowedCallers entry with the same body; InboxDeliverRoute allows 5 callers but IF-01 §3.3-1 requires caller == producer (403 otherwise). UT-SK-197 therefore asserts exactly the 4 mismatching-caller C4 findings for the inbox route and zero violations for the 9 COMMON_ADMIN_ROUTES; harness/route fixture needs a per-caller body or a C4 exemption for common.inbox.deliver."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-27",
+      "pgm": "PGM-SK-009",
+      "req": [
+        "NFR-DATA-013",
+        "NFR-AVL-011"
+      ],
+      "tests": [
+        "UT-SK-013",
+        "UT-SK-140..151",
+        "UT-SK-163"
+      ]
+    },
+    {
+      "wp": "WP-00-27",
+      "pgm": "PGM-SK-010",
+      "req": [
+        "NFR-DATA-012",
+        "NFR-DATA-013",
+        "NFR-AVL-005"
+      ],
+      "tests": [
+        "UT-SK-014",
+        "UT-SK-152..162"
+      ]
+    },
+    {
+      "wp": "WP-00-27",
+      "pgm": "PGM-SK-011",
+      "req": [
+        "NFR-AVL-011"
+      ],
+      "tests": [
+        "UT-SK-006",
+        "UT-SK-164..168"
+      ]
+    },
+    {
+      "wp": "WP-00-28",
+      "pgm": "PGM-SK-014",
+      "req": [
+        "NFR-MAINT-001",
+        "NFR-SEC-001",
+        "NFR-SEC-003",
+        "NFR-SEC-012",
+        "FR-SET-002",
+        "FR-SET-007"
+      ],
+      "tests": [
+        "UT-SK-007",
+        "UT-SK-009",
+        "UT-SK-170..199"
+      ]
+    }
+  ],
+  "notes": "WP-00-27 checkpoint passed before WP-00-28 (140 unit tests green). CR candidates: (1) inbox_dedupe has no correlation column -> AdminEventsView.inbox is always [] (add column or event_ids query param); (2) STD-SQL-04 PRAGMA location (maintenance.sql.ts in shared-kernel service). Ported spike: spikes/sp4-node-sqlite/src/warnings.mjs case 10 -> service/sqlite-loader.ts (ExperimentalWarning+SQLite only, no process.on('warning')). Container mode (ADR-014 §4) intentionally unimplemented -> 78 container_mode_unsupported (CR candidate)."
+}
