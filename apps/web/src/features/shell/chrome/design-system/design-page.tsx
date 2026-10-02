@@ -34,7 +34,7 @@ export function DesignSystemPage(): ReactElement {
   const mode: ThemeMode = theme ?? currentDocTheme();
   return (
     <div className="flex flex-col gap-8">
-      <header className="flex flex-wrap items-center justify-between gap-3">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-xl text-fg">디자인 시스템 · 토큰·컴포넌트 기준선</h1>
         <SegmentedControl
           options={THEME_OPTIONS}
@@ -46,7 +46,7 @@ export function DesignSystemPage(): ReactElement {
             }
           }}
         />
-      </header>
+      </div>
       <TokenSection mode={mode} />
       <TypeSection />
       <MaterialSection />

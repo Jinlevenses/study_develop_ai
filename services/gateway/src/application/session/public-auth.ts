@@ -1,8 +1,7 @@
-import type { PublicAuthHook } from '@fathom/shared-kernel/service/service';
-import { AppError, err, ok } from '@fathom/shared-kernel/errors/errors';
 import type { Result } from '@fathom/shared-kernel/errors/errors';
+import { AppError, err, ok } from '@fathom/shared-kernel/errors/errors';
+import type { PublicAuthHook } from '@fathom/shared-kernel/service/service';
 import type { Clock } from '@fathom/shared-kernel/time/time';
-import type { CliTokenReader } from '../cli/cli-token.js';
 import { COOKIE_NAME, readCookie, verifyCookie } from '../../domain/session/cookie.js';
 import { verifyCsrf } from '../../domain/session/csrf.js';
 import {
@@ -15,6 +14,7 @@ import {
 import type { RateLimiter } from '../../domain/session/guards-rate-limit.js';
 import type { SessionCrypto } from '../../domain/session/ports.js';
 import type { ActivityTracker } from '../../infra/activity/activity.js';
+import type { CliTokenReader } from '../cli/cli-token.js';
 
 // IF-01 §2.11 + ADR-009 §1-5 — `/api/` 공개 요청의 인증·검사. 앞 단계 실패가 이긴다(421 → CLI/브라우저 분기 → …).
 // AppError detail에는 원인 범주만 싣는다(토큰·쿠키·CSRF 값 0, STD-LOG-20).
@@ -56,9 +56,7 @@ function limited(d: PublicAuthDeps, key: string): Verdict | null {
   if (hit.allowed) {
     return null;
   }
-  return err(
-    new AppError('GW-LIMIT-001', 429, '요청 한도를 넘었다.', { extra: { retry_after_ms: hit.retryAfterMs } }),
-  );
+  return err(new AppError('GW-LIMIT-001', 429, '요청 한도를 넘었다.', { extra: { retry_after_ms: hit.retryAfterMs } }));
 }
 
 async function checkCli(d: PublicAuthDeps, req: Req): Promise<Verdict> {

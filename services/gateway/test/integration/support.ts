@@ -199,7 +199,11 @@ export const nextKey = (): string => {
   return fixedUlid(keySeq);
 };
 
-export type RealSession = { cookie: string; csrf: string; headers(extra?: Record<string, string>): Record<string, string> };
+export type RealSession = {
+  cookie: string;
+  csrf: string;
+  headers(extra?: Record<string, string>): Record<string, string>;
+};
 
 /** CLI 토큰으로 부트스트랩 토큰을 받아 교환까지 한 브라우저 세션(실 소켓). */
 export async function login(port: number): Promise<RealSession> {
@@ -218,7 +222,8 @@ export async function login(port: number): Promise<RealSession> {
   }
   const cookie = /fathom_sid=([^;]+)/.exec(String(exchanged.headers['set-cookie']))?.[1] ?? '';
   const base = { cookie: `fathom_sid=${cookie}` };
-  const csrf = ((await request(port, 'GET', '/api/v1/session/csrf', { headers: base })).json() as { csrf: string }).csrf;
+  const csrf = ((await request(port, 'GET', '/api/v1/session/csrf', { headers: base })).json() as { csrf: string })
+    .csrf;
   return { cookie, csrf, headers: (extra = {}) => ({ ...base, ...extra }) };
 }
 

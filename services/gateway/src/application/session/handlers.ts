@@ -1,13 +1,12 @@
-import type { ServiceDeps } from '@fathom/shared-kernel/service/service';
-import type { RouteContext, RouteReply } from '@fathom/shared-kernel/service/service';
-import { AppError } from '@fathom/shared-kernel/errors/errors';
+import type { RuntimeProfile } from '@fathom/contracts/common/domain';
 import type {
   SessionCsrfRoute,
   SessionExchangeRoute,
   SessionLogoutRoute,
   SessionStatusRoute,
 } from '@fathom/contracts/http/gateway/v1/session';
-import type { RuntimeProfile } from '@fathom/contracts/common/domain';
+import { AppError } from '@fathom/shared-kernel/errors/errors';
+import type { RouteContext, RouteReply, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { GatewayContext } from '../../config.js';
 import type { SessionCookie } from '../../domain/session/cookie.js';
 import { clearCookieHeader, needsRoll, setCookieHeader, signCookie } from '../../domain/session/cookie.js';
@@ -45,7 +44,9 @@ function rollHeaders(d: SessionHandlerDeps, cookie: SessionCookie): Readonly<Rec
   if (!needsRoll(cookie, now)) {
     return undefined;
   }
-  return { 'set-cookie': setCookieHeader(signCookie({ sid: cookie.sid, port: cookie.port, iat: now }, d.key, d.crypto)) };
+  return {
+    'set-cookie': setCookieHeader(signCookie({ sid: cookie.sid, port: cookie.port, iat: now }, d.key, d.crypto)),
+  };
 }
 
 export function createSessionHandlers(d: SessionHandlerDeps): {

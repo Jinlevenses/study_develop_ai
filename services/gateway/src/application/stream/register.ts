@@ -1,4 +1,4 @@
-import { StreamOpenRoute } from '@fathom/contracts/http/gateway/v1/stream';
+import type { StreamOpenRoute } from '@fathom/contracts/http/gateway/v1/stream';
 import { AppError } from '@fathom/shared-kernel/errors/errors';
 import type { RouteContext, ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { FastifyReply } from 'fastify';

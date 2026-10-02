@@ -1,17 +1,8 @@
 import { fixedUlid } from '@fathom/testkit/ids';
 import { afterEach, describe, expect, it } from 'vitest';
-import { openSse } from '../unit/sse.js';
 import type { SseConn } from '../unit/sse.js';
-import {
-  bootGateway,
-  CONTENT_AUTH,
-  cleanup,
-  freePort,
-  login,
-  request,
-  withHome,
-  writeCliToken,
-} from './support.js';
+import { openSse } from '../unit/sse.js';
+import { bootGateway, CONTENT_AUTH, cleanup, freePort, login, request, withHome, writeCliToken } from './support.js';
 
 afterEach(async () => {
   expect(await cleanup()).toBe(0);

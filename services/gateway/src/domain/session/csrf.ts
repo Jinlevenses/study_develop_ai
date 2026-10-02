@@ -6,12 +6,7 @@ export function csrfToken(sid: string, key: Uint8Array, crypto: SessionCrypto): 
   return crypto.macB64u(key, `csrf|${sid}`);
 }
 
-export function verifyCsrf(
-  header: string | undefined,
-  sid: string,
-  key: Uint8Array,
-  crypto: SessionCrypto,
-): boolean {
+export function verifyCsrf(header: string | undefined, sid: string, key: Uint8Array, crypto: SessionCrypto): boolean {
   if (header === undefined || header === '') {
     return false;
   }

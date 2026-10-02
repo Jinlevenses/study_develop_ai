@@ -1,6 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import { realProcessPort } from '@fathom/shared-kernel/service/service';
-import { createService } from '@fathom/shared-kernel/service/service';
+import { createService, realProcessPort } from '@fathom/shared-kernel/service/service';
 import { createGatewayDefinition } from '../../../src/config.js';
 
 // 통합 테스트용 gateway 진입점 — 실제 main.ts와 같은 모양에 `--fx-web-root=<dir>`만 더한다(createService의 argv 파서는 모르는 키를 거부한다).

@@ -48,6 +48,15 @@ function banner(id: string, severity: BannerT['severity'], since: number, href: 
   };
 }
 
+async function findHeader(): Promise<HTMLElement> {
+  await screen.findByRole('navigation', { name: '주요 메뉴' });
+  const header = document.querySelector('header');
+  if (header === null) {
+    throw new Error('헤더가 없습니다');
+  }
+  return header;
+}
+
 function press(target: Element | Document, init: KeyboardEventInit): void {
   fireEvent.keyDown(target, init);
 }
@@ -56,7 +65,7 @@ describe('shell chrome', () => {
   it('UT-WEB-447 18개 경로 모두에서 AiChip이 보이고 초기값 AI: 오프라인·hello FULL은 AI: 전체·home degraded_badge는 격하다 [FR-UX-010][FR-AI-003]', async () => {
     for (const path of PATHS) {
       const app = renderApp(path);
-      const header = await screen.findByRole('banner');
+      const header = await findHeader();
       expect(await within(header).findByText('AI: 오프라인'), path).toBeTruthy();
       act(() => app.es().emit('hello', HELLO('FULL')));
       expect(await within(header).findByText('AI: 전체'), path).toBeTruthy();
@@ -64,7 +73,7 @@ describe('shell chrome', () => {
       cleanup();
     }
     const degraded = renderApp('/map', { responses: [() => jsonResponse(200, homeView({ mode: 'JUDGE_ONLY', degraded: true }))] });
-    const header = await screen.findByRole('banner');
+    const header = await findHeader();
     expect(await within(header).findByText(/AI: 판단만/)).toBeTruthy();
     expect(within(header).getByText(/격하/)).toBeTruthy();
     expect(degraded.fetchCalls).toContain('/api/v1/home');

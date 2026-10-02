@@ -1,14 +1,10 @@
+import type { RuntimeProfile } from '@fathom/contracts/common/domain';
+import type { CliBootstrapTokenRoute, CliShutdownRoute, CliStatusRoute } from '@fathom/contracts/http/gateway/v1/cli';
 import { HealthBoardRoute } from '@fathom/contracts/http/ops/v1/health';
 import { SystemShutdownRoute } from '@fathom/contracts/http/ops/v1/system';
-import type {
-  CliBootstrapTokenRoute,
-  CliShutdownRoute,
-  CliStatusRoute,
-} from '@fathom/contracts/http/gateway/v1/cli';
 import { AppError } from '@fathom/shared-kernel/errors/errors';
 import type { PeerCallOptions } from '@fathom/shared-kernel/http-client/http-client';
 import type { RouteContext, RouteReply, ServiceDeps } from '@fathom/shared-kernel/service/service';
-import type { RuntimeProfile } from '@fathom/contracts/common/domain';
 import type { GatewayContext } from '../../config.js';
 import { peerFailureToAppError } from '../../infra/peers/failure.js';
 import { requirePeer } from '../../infra/peers/peers.js';
@@ -23,8 +19,13 @@ function callOpts(c: { deadlineAt: number; requestId: string; traceparent: strin
   return { deadlineAt: c.deadlineAt, requestId: c.requestId, traceparent: c.traceparent };
 }
 
-export function createCliHandlers(deps: ServiceDeps<null>, ctx: GatewayContext): {
-  bootstrapToken(c: RouteContext<typeof CliBootstrapTokenRoute>): Promise<RouteReply<typeof CliBootstrapTokenRoute, 201>>;
+export function createCliHandlers(
+  deps: ServiceDeps<null>,
+  ctx: GatewayContext,
+): {
+  bootstrapToken(
+    c: RouteContext<typeof CliBootstrapTokenRoute>,
+  ): Promise<RouteReply<typeof CliBootstrapTokenRoute, 201>>;
   status(c: RouteContext<typeof CliStatusRoute>): Promise<RouteReply<typeof CliStatusRoute, 200>>;
   shutdown(c: RouteContext<typeof CliShutdownRoute>): Promise<RouteReply<typeof CliShutdownRoute, 202>>;
 } {
@@ -54,7 +55,12 @@ export function createCliHandlers(deps: ServiceDeps<null>, ctx: GatewayContext):
       }
       return {
         status: 200,
-        body: { app_version: deps.appVersion, profile: profile(), url: `http://127.0.0.1:${port()}/`, health: res.value.body },
+        body: {
+          app_version: deps.appVersion,
+          profile: profile(),
+          url: `http://127.0.0.1:${port()}/`,
+          health: res.value.body,
+        },
       };
     },
     async shutdown(c): Promise<RouteReply<typeof CliShutdownRoute, 202>> {

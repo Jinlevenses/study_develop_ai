@@ -1,10 +1,10 @@
 import { AiMode } from '@fathom/contracts/common/domain';
-import { SseEventData } from '@fathom/contracts/http/gateway/v1/stream';
 import type { IntegrationEventEnvelope } from '@fathom/contracts/events/envelope';
+import type { SseResync } from '@fathom/contracts/http/gateway/v1/stream';
+import { SseEventData } from '@fathom/contracts/http/gateway/v1/stream';
 import type { Result } from '@fathom/shared-kernel/errors/errors';
 import { err, ok } from '@fathom/shared-kernel/errors/errors';
 import type { Clock } from '@fathom/shared-kernel/time/time';
-import type { SseResync } from '@fathom/contracts/http/gateway/v1/stream';
 import { dataFrame, heartbeatFrame, helloFrame, resyncFrame, retryFrame } from './frames.js';
 import type { RingEntry } from './ring.js';
 import { createRing } from './ring.js';

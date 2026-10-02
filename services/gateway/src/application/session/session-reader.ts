@@ -1,7 +1,7 @@
 import type { IncomingHttpHeaders } from 'node:http';
 import type { Clock } from '@fathom/shared-kernel/time/time';
-import { COOKIE_NAME, readCookie, verifyCookie } from '../../domain/session/cookie.js';
 import type { SessionCookie } from '../../domain/session/cookie.js';
+import { COOKIE_NAME, readCookie, verifyCookie } from '../../domain/session/cookie.js';
 import type { SessionCrypto } from '../../domain/session/ports.js';
 
 // 이미 `publicAuth`를 통과한 요청의 쿠키를 다시 읽는다 — 요청 간 캐시는 두지 않는다.

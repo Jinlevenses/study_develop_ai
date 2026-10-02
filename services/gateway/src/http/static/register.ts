@@ -8,7 +8,10 @@ import { registerStaticRoutes } from './static-route.js';
 
 // 웹 셸(AP-12) — 정적 루트가 정해지면 정적 + SPA 폴백, dev 프로파일이면 Vite 프록시. 와일드카드라 registerAll의 마지막이다.
 
-type Shell = { readonly kind: 'static'; readonly root: string } | { readonly kind: 'proxy' } | { readonly kind: 'none' };
+type Shell =
+  | { readonly kind: 'static'; readonly root: string }
+  | { readonly kind: 'proxy' }
+  | { readonly kind: 'none' };
 
 /** 루트 결정: `opts.webRoot`가 있으면 그 값(`null` = 정적 없음) · 아니면 dev → 프록시 · 그 밖 → 저장소의 `apps/web/dist/`. */
 function decideShell(deps: ServiceDeps<null>, ctx: GatewayContext): Shell {

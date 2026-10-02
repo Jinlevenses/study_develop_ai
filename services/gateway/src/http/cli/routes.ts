@@ -1,8 +1,4 @@
-import {
-  CliBootstrapTokenRoute,
-  CliShutdownRoute,
-  CliStatusRoute,
-} from '@fathom/contracts/http/gateway/v1/cli';
+import { CliBootstrapTokenRoute, CliShutdownRoute, CliStatusRoute } from '@fathom/contracts/http/gateway/v1/cli';
 import type { ServiceApp } from '@fathom/shared-kernel/service/service';
 import type { createCliHandlers } from '../../application/cli/handlers.js';
 

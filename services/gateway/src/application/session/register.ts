@@ -2,9 +2,9 @@ import type { ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/serv
 import type { GatewayContext } from '../../config.js';
 import { GATEWAY_LIMITS } from '../../config.js';
 import { createRateLimiter } from '../../domain/session/guards-rate-limit.js';
-import { createActivityTracker } from '../../infra/activity/activity.js';
 import { registerInternalRoutes } from '../../http/internal/routes.js';
 import { registerSessionRoutes } from '../../http/session/routes.js';
+import { createActivityTracker } from '../../infra/activity/activity.js';
 import { createCliTokenReader } from '../cli/cli-token.js';
 import { nodeSessionCrypto } from './crypto.js';
 import { createSessionHandlers } from './handlers.js';

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import http from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import type { Duplex } from 'node:stream';
@@ -80,7 +80,9 @@ describe('dev 단일 origin (Vite 프록시)', () => {
       upgraded = req.url ?? '';
       upstreamSockets.push(socket);
       const key = String(req.headers['sec-websocket-key']);
-      const accept = createHash('sha1').update(key + GUID).digest('base64');
+      const accept = createHash('sha1')
+        .update(key + GUID)
+        .digest('base64');
       socket.write(
         `HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ${accept}\r\n\r\n`,
       );

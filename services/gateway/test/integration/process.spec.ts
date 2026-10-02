@@ -3,23 +3,23 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { Problem } from '@fathom/contracts/common/problem';
 import { CliStatus } from '@fathom/contracts/http/gateway/v1/cli';
-import { SessionStatus } from '@fathom/contracts/http/gateway/v1/session';
 import { ActivityView } from '@fathom/contracts/http/gateway/v1/internal';
+import { SessionStatus } from '@fathom/contracts/http/gateway/v1/session';
 import { Operation } from '@fathom/contracts/http/ops/v1/operations';
 import { fixedUlid } from '@fathom/testkit/ids';
 import { afterEach, describe, expect, it } from 'vitest';
-import { healthBoard, operation } from '../unit/support.js';
 import type { SseConn } from '../unit/sse.js';
 import { openSse } from '../unit/sse.js';
+import { healthBoard, operation } from '../unit/support.js';
 import {
   bootGateway,
-  cleanup,
   CLI_TOKEN,
+  cleanup,
   freePort,
   login,
   nextKey,
-  occupyPort,
   OPS_AUTH,
+  occupyPort,
   request,
   SELF_TOKEN,
   startServer,
@@ -49,7 +49,13 @@ describe('gateway 실 프로세스', () => {
       const { svc, port, ready } = await bootGateway(home.path, {}, [`--fx-web-root=${web}`]);
       // Assert
       expect(svc.messages.map((m) => (m as { type: string }).type)).toEqual(['listening', 'ready']);
-      expect(ready).toEqual({ type: 'ready', v: 1, contracts_hash: 'c'.repeat(64), schema_versions: {}, app_version: '0.1.0' });
+      expect(ready).toEqual({
+        type: 'ready',
+        v: 1,
+        contracts_hash: 'c'.repeat(64),
+        schema_versions: {},
+        app_version: '0.1.0',
+      });
       expect((await request(port, 'GET', '/healthz')).status).toBe(200);
       expect((await request(port, 'GET', '/readyz')).status).toBe(200);
       expect((await request(port, 'GET', '/')).body).toBe('<html>it</html>');
@@ -85,7 +91,12 @@ describe('gateway 실 프로세스', () => {
       const status = await request(port, 'GET', '/api/v1/session', { headers });
       expect(SessionStatus.parse(status.json())).toMatchObject({ authenticated: true, port, profile: 'test' });
       const out = await request(port, 'POST', '/api/v1/session/logout', {
-        headers: { ...headers, origin, 'x-fathom-csrf': (csrf.json() as { csrf: string }).csrf, 'idempotency-key': nextKey() },
+        headers: {
+          ...headers,
+          origin,
+          'x-fathom-csrf': (csrf.json() as { csrf: string }).csrf,
+          'idempotency-key': nextKey(),
+        },
       });
       expect(out.status).toBe(204);
       // 재사용된 토큰은 401
@@ -107,7 +118,12 @@ describe('gateway 실 프로세스', () => {
       // Act
       const crossPort = await request(b.port, 'GET', '/api/v1/session', { headers: session.headers() });
       const crossOrigin = await request(b.port, 'POST', '/api/v1/session/logout', {
-        headers: { ...session.headers(), origin: `http://127.0.0.1:${a.port}`, 'x-fathom-csrf': session.csrf, 'idempotency-key': nextKey() },
+        headers: {
+          ...session.headers(),
+          origin: `http://127.0.0.1:${a.port}`,
+          'x-fathom-csrf': session.csrf,
+          'idempotency-key': nextKey(),
+        },
       });
       // Assert
       expect(crossPort.status).toBe(401);
@@ -132,7 +148,10 @@ describe('gateway 실 프로세스', () => {
       expect(a.port).not.toBe(busy);
       const session = await login(a.port);
       expect(session.cookie.split('.')[2]).toBe(String(a.port));
-      expect(SessionStatus.parse((await request(a.port, 'GET', '/api/v1/session', { headers: session.headers() })).json()).port).toBe(a.port);
+      expect(
+        SessionStatus.parse((await request(a.port, 'GET', '/api/v1/session', { headers: session.headers() })).json())
+          .port,
+      ).toBe(a.port);
       a.svc.child.send(shutdownMsg);
       expect(await a.svc.exit).toBe(0);
       // Arrange (b): dev — 폴백 후보 9개가 모두 점유돼 있으면 건너뛴다
@@ -227,7 +246,13 @@ describe('gateway 실 프로세스', () => {
         });
       });
       const { svc, port } = await bootGateway(home.path, {
-        peers: { gateway: { url: 'http://127.0.0.1:1' }, content: { url: 'http://127.0.0.1:2' }, learning: { url: 'http://127.0.0.1:3' }, 'ai-gateway': { url: 'http://127.0.0.1:4' }, 'ops-api': { url: `http://127.0.0.1:${ops.port}` } },
+        peers: {
+          gateway: { url: 'http://127.0.0.1:1' },
+          content: { url: 'http://127.0.0.1:2' },
+          learning: { url: 'http://127.0.0.1:3' },
+          'ai-gateway': { url: 'http://127.0.0.1:4' },
+          'ops-api': { url: `http://127.0.0.1:${ops.port}` },
+        },
       });
       const opId = fixedUlid(444);
       // Act
@@ -260,7 +285,13 @@ describe('gateway 실 프로세스', () => {
       writeCliToken(home.path);
       const closed = await freePort();
       const { svc, port } = await bootGateway(home.path, {
-        peers: { gateway: { url: 'http://127.0.0.1:1' }, content: { url: 'http://127.0.0.1:2' }, learning: { url: 'http://127.0.0.1:3' }, 'ai-gateway': { url: 'http://127.0.0.1:4' }, 'ops-api': { url: `http://127.0.0.1:${closed}` } },
+        peers: {
+          gateway: { url: 'http://127.0.0.1:1' },
+          content: { url: 'http://127.0.0.1:2' },
+          learning: { url: 'http://127.0.0.1:3' },
+          'ai-gateway': { url: 'http://127.0.0.1:4' },
+          'ops-api': { url: `http://127.0.0.1:${closed}` },
+        },
       });
       // Act
       const started = Date.now();
@@ -301,4 +332,3 @@ describe('gateway 실 프로세스', () => {
     });
   }, 60_000);
 });
-

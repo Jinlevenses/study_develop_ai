@@ -30,7 +30,10 @@ export async function loadOrCreateSessionKey(
       return new Uint8Array(existing);
     }
     // 형식 오류 — 길이만 기록하고 재생성한다(기존 세션은 무효화된다).
-    deps.log.warn({ event: 'gateway.session_key.invalid', length: existing.length }, 'session key invalid; regenerating');
+    deps.log.warn(
+      { event: 'gateway.session_key.invalid', length: existing.length },
+      'session key invalid; regenerating',
+    );
   }
   const fresh = deps.randomBytes(KEY_BYTES);
   await writeFileAtomic(file, fresh, { mode: 0o600 });
