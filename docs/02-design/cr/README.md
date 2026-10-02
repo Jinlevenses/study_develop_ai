@@ -74,12 +74,13 @@ PLAN-IT-01 §3 "CR 번호는 S0 착수 전 T1이 부여"에 따라 IT-00 이월(
 | CR-77 | INT-1a C-10 (graphify 기준 그래프) | `graphify-out/`은 **사람이 읽는 산출물만 커밋**: `GRAPH_REPORT.md`·`graph.html`. `graph.json`(≈7MB)·`manifest.json`·`.graphify_*`·`cache/`·날짜 백업 폴더는 매 통합마다 재작성되어 이력을 비대화하므로 `.gitignore` — 로컬에서 `pnpm graph:update`(= `graphify update .`)로 재생성. INT 스냅샷 지표는 `docs/40-impl/graph/INT-<id>/`(metrics·god-nodes)에 계속 커밋 | STD-GRF §18 "graphify-out/ 커밋" 문구, CLAUDE.md §6 | INT-1a 커밋 | 승인 |
 | CR-78 | INT-1a C-07 (`pnpm audit --prod --audit-level high`) | `pnpm-workspace.yaml` `overrides: lodash-es 4.18.1`(전이 의존 취약점 해소, 직접 의존 추가 0) | ARC §18 표 주석 | INT-1a 커밋 | 승인 |
 | CR-79 | INT-1a CO-N3 (타이밍 민감 테스트) | `turbo.json` `concurrency: "50%"` 임시 상한(4코어 컨테이너 과부하로 UT-SK-098·IT-521 간헐 실패). 근본 원인은 T-01-01에서 조사, 해소 시 제거 | ADR-008 §10 루트 스크립트 | INT-1a 커밋 | 승인(임시) |
+| CR-80 | INT-1a C-14 (STD-AGT-02 `model_id`) | 저장소에 푸시되는 산출물(완료 보고·INT 기록·커밋)에는 **실제 모델 ID를 기록하지 않는다**(저장소 정책). `model_id` 필드 = 티어 별칭 `T1`(상위 모델)·`T2s`(하위 모델)·`T2h`(최하위 모델). 실제 모델 대조는 오케스트레이터 워크플로 설정(티어→모델 매핑, 저장소 밖)으로 하며, INT 기록은 "티어 일치"만 판정 | STD-AGT-02 문구, TST C-14 | 전 반복 | 승인 |
 
 ## 4. 다음 번호
 
 | 종류 | 다음 번호 |
 |---|---|
-| CR | **CR-80** |
+| CR | **CR-81** |
 | ADR | **ADR-018** (ADR-017 = CR-73 보안 긴급 경로로 예약, 초안 T1) |
 
 ## 5. 관련
