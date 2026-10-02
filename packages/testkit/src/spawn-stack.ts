@@ -475,6 +475,8 @@ export async function scanLogs(home: string, deps: StackDeps): Promise<LogScan> 
 
 export type StopReport = {
   downExitCode: number | null;
+  /** `fathom down` 프로세스 결과(E2E-104가 stderr를 검사한다). */
+  down: ProcResult;
   forced: boolean;
   egress: EgressScan;
   logs: LogScan;
@@ -670,6 +672,7 @@ async function runStop(c: Ctx, egress: 'record' | 'off'): Promise<StopReport> {
   await deps.removeDir(homePath(c.home, 'tmp', 'egress'));
   return {
     downExitCode: down.exitCode,
+    down,
     forced,
     egress: egressScan,
     logs,

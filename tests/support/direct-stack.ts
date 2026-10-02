@@ -4,8 +4,9 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { BootstrapEnvelope, IpcServiceToSupervisor, IpcSupervisorToService } from '@fathom/contracts/admin/ipc';
 import { fixedUlid } from '@fathom/testkit/ids';
-import type { StackRuntime, StackService } from '@fathom/testkit/spawn-stack';
+import type { Stack, StackRuntime, StackService } from '@fathom/testkit/spawn-stack';
 import { APP_ROOT, serviceEntry } from '@fathom/testkit/spawn-stack';
+import type { Page } from '@playwright/test';
 
 // supervisor 없이 서비스 프로세스를 알려진 토큰으로 직접 띄우는 테스트 전용 런처(T-00-16 §4.4.3, [Brief 결정]).
 // supervisor가 만든 호출자 토큰은 설계상 밖으로 나오지 않아(NFR-SEC-003) ACL·봉투·토큰 누출 검증은 이 경로로만 가능하다.
@@ -261,4 +262,41 @@ export function isAlive(pid: number): boolean {
   } catch (e) {
     return typeof e === 'object' && e !== null && 'code' in e && e.code === 'EPERM';
   }
+}
+
+/** `.reports/<INT>/` 절대 경로(INT = `FATHOM_INT`, 형식 밖이면 `local`). 리포트 파일 쓰기용 — 디렉터리는 만들지 않는다. */
+export function reportDir(...segments: string[]): string {
+  // biome-ignore lint/suspicious/noUndeclaredEnvVars: 테스트 러너 env — turbo 캐시 대상 아님
+  const intEnv = process.env.FATHOM_INT ?? '';
+  const int = /^(INT-[0-9a-z]+|PG-3|local)$/.test(intEnv) ? intEnv : 'local';
+  return path.join(APP_ROOT, '.reports', int, ...segments);
+}
+
+/** E2E 공통: 부트스트랩 URL로 앱을 열고 교환(200)·세션 조회(200)·`bt=` 제거·`main` 랜드마크 표시까지 기다린다(T-00-12 §9). */
+export async function openApp(page: Page, stack: Pick<Stack, 'bootstrapOpenUrl'>): Promise<void> {
+  const openUrl = await stack.bootstrapOpenUrl();
+  const exchange = page.waitForResponse(
+    (r) =>
+      r.request().method() === 'POST' && new URL(r.url()).pathname === '/api/v1/session/exchange' && r.status() === 200,
+    { timeout: 30_000 },
+  );
+  const session = page.waitForResponse(
+    (r) => r.request().method() === 'GET' && new URL(r.url()).pathname === '/api/v1/session' && r.status() === 200,
+    { timeout: 30_000 },
+  );
+  await page.goto(openUrl);
+  await Promise.all([exchange, session]);
+  if (page.url().includes('bt=')) {
+    throw new Error('openApp: bootstrap token still in the URL after exchange');
+  }
+  await page.getByRole('main').waitFor({ state: 'visible', timeout: 30_000 });
+}
+
+/** `.reports/<INT>/egress/<spec>.json` — run-offline.mjs가 합쳐 `egress.json`으로 낸다. */
+export function writeEgressReport(
+  spec: string,
+  data: Partial<Record<'l1' | 'l2_remotes' | 'l3' | 'l4', number>>,
+): void {
+  mkdirSync(reportDir('egress'), { recursive: true });
+  writeFileSync(reportDir('egress', `${spec}.json`), `${JSON.stringify(data)}\n`);
 }

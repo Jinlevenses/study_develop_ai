@@ -75,7 +75,7 @@ import type { StackService } from '@fathom/testkit/spawn-stack';
 import { APP_ROOT, migrateHome } from '@fathom/testkit/spawn-stack';
 import { createTempHome } from '@fathom/testkit/temp-home';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { isAlive, launchDirect } from '../support/direct-stack.js';
+import { isAlive, launchDirect, reportDir } from '../support/direct-stack.js';
 
 // CT-SYS-003 — 호출자 × 라우트 행렬이 allowedCallers와 일치한다(ARC-01 §5.2, IF-01 §2.11, TST-01 §11.4).
 // 라우트 수집: contracts http/<svc>/v1/*.ts 전부(하위 pre-/post-submit 제외)를 정적 namespace import로 나열하고,
@@ -282,16 +282,23 @@ async function checkGatewayCli(ctx: Ctx, route: RouteDef): Promise<Verdict | nul
   return verdict;
 }
 
+/** 브라우저 GET: 자격 증명 없음 → 401 `GW-AUTH-003`, CLI 토큰 Bearer → 403 `GW-ACL-001`(IF-01 §2.5 오류 표 — Brief의 "401"보다 IF-01이 우선). */
 async function checkGatewayBrowserGet(ctx: Ctx, route: RouteDef): Promise<Verdict | null> {
-  const reply = await send(ctx.base, route, CLI_TOKEN);
-  if (reply.status === 404 && reply.code === 'GW-NOTFOUND-900') {
+  const bare = await send(ctx.base, route, null);
+  if (bare.status === 404 && bare.code === 'GW-NOTFOUND-900') {
     return 'pending';
   }
-  if (reply.status !== 401) {
+  if (bare.status !== 401 || bare.code !== 'GW-AUTH-003') {
     ctx.violations.push(
-      `gateway ${route.ifId} ${route.path} without cookie: expected 401, got ${describeReply(reply)}`,
+      `gateway ${route.ifId} ${route.path} without cookie: expected 401 GW-AUTH-003, got ${describeReply(bare)}`,
     );
     return null;
+  }
+  const withCli = await send(ctx.base, route, CLI_TOKEN);
+  if (withCli.status !== 403 || withCli.code !== 'GW-ACL-001') {
+    ctx.violations.push(
+      `gateway ${route.ifId} ${route.path} with cli token: expected 403 GW-ACL-001, got ${describeReply(withCli)}`,
+    );
   }
   return 'registered';
 }
@@ -348,15 +355,13 @@ function listedModules(): string[] {
 }
 
 function writeReport(by: Record<string, Stats>): void {
-  const intEnv = process.env.FATHOM_INT ?? '';
-  const int = /^(INT-[0-9a-z]+|PG-3|local)$/.test(intEnv) ? intEnv : 'local';
   const total = { registered: 0, pending: 0, positive_skipped: 0 };
   for (const s of Object.values(by)) {
     total.registered += s.registered;
     total.pending += s.pending;
     total.positive_skipped += s.positive_skipped;
   }
-  const dir = path.join(APP_ROOT, '.reports', int);
+  const dir = reportDir();
   mkdirSync(dir, { recursive: true });
   writeFileSync(path.join(dir, 'acl.json'), `${JSON.stringify({ ...total, by_service: by }, null, 2)}\n`);
 }
