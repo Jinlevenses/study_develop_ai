@@ -1,13 +1,13 @@
 import net from 'node:net';
+import { Problem } from '@fathom/contracts/common/problem';
 import { defineRoute } from '@fathom/contracts/common/route';
 import { S } from '@fathom/contracts/common/schema';
-import { Problem } from '@fathom/contracts/common/problem';
 import { afterEach, describe, expect, it } from 'vitest';
 import { z } from 'zod';
 import { ok } from '../../../src/errors/errors.js';
+import { DeadlineRoute, EchoRoute, ItemRoute } from './routes.js';
 import type { Rig } from './support.js';
 import { defOf, GATEWAY, LEARNING, rigOf } from './support.js';
-import { DeadlineRoute, EchoRoute, ItemRoute } from './routes.js';
 
 // T-01-01 §4.2-1·2 — 인증 분류 = 매칭된 라우트 기준 + 비정준 대상 거부 · 라우터 단계 오류 problem+json.
 

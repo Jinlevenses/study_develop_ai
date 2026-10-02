@@ -1,6 +1,5 @@
 # file: policy/composer_policy@v1.yaml   (owner: learning · zod: packages/contracts/src/policy/composer_policy.ts)
 version: composer_policy@v1
-# path_weights(CR-52·DCP DN-22)는 ComposerPolicyV1에 키가 없어 넣지 않았다(strict 스키마) — T-00-15 contract_change 보고, T-00-10 -r1 가산 후 `path_weights: {}` 추가.
 score_weights:                          # PED §6.3 점수 함수 8항
   utility: 0.30
   urgency: 0.25
@@ -39,3 +38,4 @@ wildcard:                               # FR-STD-003
   per_week_min: 1
   constraints: [diagram_only, one_sentence, no_jargon, explain_to_pm]
   suggest_only_min_level: 4
+path_weights: {}   # CR-52·DCP DN-22 — 경로별 가중(경로 정의 = 팩 x.paths)

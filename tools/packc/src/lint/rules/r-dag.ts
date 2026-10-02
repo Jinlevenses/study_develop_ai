@@ -75,9 +75,10 @@ export function ruleDag(ctx: LintContext): Finding[] {
       if (path === undefined) {
         break;
       }
-      const last = path[path.length - 1] ?? start;
+      const last: string = path[path.length - 1] ?? start;
+      const neighbours: readonly string[] = adj.get(last) ?? [];
       let found = false;
-      for (const w of adj.get(last) ?? []) {
+      for (const w of neighbours) {
         if (!inComp.has(w)) {
           continue;
         }

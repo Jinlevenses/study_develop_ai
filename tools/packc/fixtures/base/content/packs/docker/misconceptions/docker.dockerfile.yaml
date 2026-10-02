@@ -1,0 +1,40 @@
+# content/packs/docker/misconceptions/docker.dockerfile.yaml
+# yaml-language-server: $schema=../../../.schemas/misconceptions.schema.json
+schema_v: 1
+concept_id: docker.dockerfile
+mcs:
+  m01:
+    kind: sibling_confusion
+    meta_family: mf_phase_confusion
+    wrong_belief: "RUN에 적은 명령(예: RUN npm start)은 컨테이너를 시작할 때마다 실행된다."
+    correction: "RUN은 빌드 중 한 번만 실행되고 결과가 레이어로 굳는다. 시작할 때 실행할 명령은 CMD로 지정한다."
+    refutes: [k03]
+    prevalence: high
+  m02:
+    kind: mechanism_confusion
+    meta_family: mf_cost_blindness
+    wrong_belief: "Dockerfile의 명령 순서는 빌드 시간에 영향을 주지 않는다. 같은 명령이면 어떤 순서로 써도 같다."
+    correction: "앞 레이어가 바뀌면 그 뒤 레이어를 모두 다시 만든다. 자주 바뀌는 COPY를 앞에 두면 소스만 고쳐도 의존성 설치가 매번 다시 돈다."
+    refutes: [k08, k01]
+    prevalence: high
+  m03:
+    kind: mechanism_confusion
+    meta_family: mf_layer_responsibility
+    wrong_belief: "CMD는 셸 형식(CMD npm start)으로 써도 exec 형식과 신호 처리가 같다."
+    correction: "셸 형식은 /bin/sh -c가 먼저 실행되어 종료 신호가 앱에 전달되지 않을 수 있다. 신호를 앱이 직접 받게 하려면 exec 형식을 쓴다."
+    refutes: [k05]
+    prevalence: mid
+  m04:
+    kind: boundary
+    meta_family: mf_boundary_case
+    wrong_belief: "COPY ../shared/config.json ./처럼 빌드 컨텍스트 바깥의 파일도 상대 경로로 복사할 수 있다."
+    correction: "COPY는 빌드 컨텍스트 안의 파일만 볼 수 있다. 필요한 파일을 컨텍스트 안으로 옮기거나 컨텍스트 루트를 바꾼다."
+    refutes: [k07]
+    prevalence: mid
+  m05:
+    kind: sibling_confusion
+    meta_family: mf_copy_vs_share
+    wrong_belief: "COPY는 컨테이너가 시작될 때 호스트 폴더의 최신 파일을 가져온다(바인드 마운트처럼 동작한다)."
+    correction: "COPY는 빌드 시점에 파일을 이미지 안으로 복사한다. 실행 중 호스트 파일과 연결하려면 바인드 마운트를 쓴다."
+    refutes: [k03, k07]
+    prevalence: mid

@@ -29,7 +29,7 @@ export const HomeAlert = S({
   ]),
   severity: z.enum(['info', 'warn', 'critical']),
   message_ko: z.string().max(200),
-  action: S({ label_ko: z.string().max(40), href: z.string().regex(/^\/[A-Za-z0-9/_$.?=&-]*$/) }).nullable(),
+  action: S({ label_ko: z.string().max(40), href: z.string().regex(/^\/(?!\/)[A-Za-z0-9/_$.?=&-]*$/) }).nullable(),
 });
 export type HomeAlert = z.infer<typeof HomeAlert>;
 export const InsightHome = S({

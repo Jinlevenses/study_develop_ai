@@ -1,8 +1,18 @@
 import { z } from 'zod';
 import { Level, SlotId } from '../common/domain.js';
+import { PathId, TrackId } from '../common/ids.js';
 import { S } from '../common/schema.js';
 
 const P = z.number().min(0).max(1);
+
+// CR-52 — 경로별 가중(DCP-01 DN-22·§6.18, 경로 정의 = 팩 x.paths). 보존 계층 = FR-PRG-005(core·standard·breadth·archive).
+// 모듈 내부 상수 — export하면 gen이 스냅샷 1개(1101 → 1102)를 더 만들어 gen.spec.ts(허용 경로 밖)의 파일 수 단언이 깨진다.
+const RetentionTier = z.enum(['core', 'standard', 'breadth', 'archive']);
+const PathWeight = S({
+  track_priority: z.array(TrackId).min(1).max(20),
+  target_level: Level,
+  retention_tier: RetentionTier,
+});
 
 // [Brief 결정 §4.6 — CR-43 T1 저작] policy/composer_policy@v1.yaml 의 zod. 값 출처 = PED §6.3(점수 함수 8항·softmax top-3 τ 0.3)·§6.4(HC-01~11)·§6.6(난이도 파도).
 export const ComposerPolicyV1 = S({
@@ -67,5 +77,6 @@ export const ComposerPolicyV1 = S({
       .max(4),
     suggest_only_min_level: Level,
   }),
+  path_weights: z.record(PathId, PathWeight).optional(), // CR-52 — 없으면 `{}`로 본다(소비자 없음 = 가산)
 });
 export type ComposerPolicyV1 = z.infer<typeof ComposerPolicyV1>;

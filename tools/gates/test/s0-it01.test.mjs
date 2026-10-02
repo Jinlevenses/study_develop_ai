@@ -9,7 +9,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { evaluateImport } from '../check-boundaries.mjs';
 import { checkFile as checkDbPaths } from '../check-db-paths.mjs';
-import { checkSource as ngSource, loadNgConfig } from '../check-ng-g.mjs';
+import { loadNgConfig, checkSource as ngSource } from '../check-ng-g.mjs';
 import { scanSource } from '../check-security-scan.mjs';
 import { checkFile as checkSql, loadSqlConfig } from '../check-sql-template.mjs';
 import { checkSource as typoSource } from '../check-typo-ko.mjs';
@@ -99,6 +99,7 @@ test('UT-GATE-242 sql-typed: export { X } from 재수출 체인도 끝까지 해
 test('UT-GATE-243 sql-typed: import된 let·보간 const는 여전히 sql/dynamic-arg·sql/tainted-var 위반이다(완화 0) [NFR-SEC-016]', () => {
   const files = {
     [`${SRC}/a.sql.ts`]:
+      // biome-ignore lint/suspicious/noTemplateCurlyInString: 검사 대상 소스 문자열(fixture) — 템플릿 보간 자체가 입력이다
       "export let MUTABLE_SQL = 'SELECT 1';\nconst col = 'id';\nexport const BUILT = `SELECT ${col}`;\n",
     [`${SRC}/use.ts`]: `import { DatabaseSync } from 'node:sqlite';\nimport { MUTABLE_SQL as Q, BUILT } from './a.sql.js';\nexport function f(db: DatabaseSync) {\n  db.prepare(Q);\n  db.prepare(BUILT);\n}\n`,
   };
@@ -112,7 +113,7 @@ test('UT-GATE-243 sql-typed: import된 let·보간 const는 여전히 sql/dynami
       k.join('\n'),
     );
   });
-  const viol = run('check-sql-typed.mjs', FIX('check-sql-typed') + '/violations');
+  const viol = run('check-sql-typed.mjs', `${FIX('check-sql-typed')}/violations`);
   assert.ok(typedKeys(viol).includes('services/a/src/imported-let/use.ts:5:sql/dynamic-arg'));
 });
 
@@ -129,6 +130,7 @@ test('UT-GATE-244 check:sql: contracts/src의 PATTERNS[type].exec(key)는 sql/dy
     ['sql/dynamic-arg'],
   );
   // 면제는 sql/dynamic-arg 한정 — contracts에서도 보간·연결은 계속 잡는다.
+  // biome-ignore lint/suspicious/noTemplateCurlyInString: 검사 대상 소스 문자열(fixture) — 템플릿 보간 자체가 입력이다
   const interp = 'export const f = (db: { prepare(s: string): unknown }, x: string) => db.prepare(`SELECT ${x}`);\n';
   assert.deepEqual(
     checkSql('packages/contracts/src/x.ts', interp, sqlCfg).map((v) => v.rule),

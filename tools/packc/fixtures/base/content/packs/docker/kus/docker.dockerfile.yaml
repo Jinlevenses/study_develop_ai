@@ -1,0 +1,135 @@
+# content/packs/docker/kus/docker.dockerfile.yaml
+# yaml-language-server: $schema=../../../.schemas/kus.schema.json
+schema_v: 1
+concept_id: docker.dockerfile
+kus:
+  k01:
+    type: definition
+    facet: definition
+    statement: "Dockerfile은 이미지를 만드는 명령을 위에서 아래 순서로 적은 텍스트 파일이며, docker build가 이 순서대로 실행한다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [remember, understand]
+    cloze_keys: ["위에서 아래"]
+    accept: { "위에서 아래": ["위부터 아래", "위에서부터 아래로", "top-down"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/reference/dockerfile/", section: "Dockerfile reference", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k02:
+    type: mechanism
+    facet: mechanism
+    statement: "파일시스템 레이어를 만드는 명령은 RUN·COPY·ADD이고, CMD·ENV·EXPOSE는 파일을 바꾸지 않고 이미지 설정만 기록한다."
+    scope: "BuildKit 기준"
+    vol: evolving
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [understand, analyze]
+    cloze_keys: ["레이어", "이미지 설정"]
+    accept: { "레이어": ["layer", "이미지 레이어"], "이미지 설정": ["메타데이터", "metadata", "설정"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/build/building/best-practices/", section: "Building best practices", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k03:
+    type: comparison
+    facet: contrast
+    statement: "RUN은 이미지를 빌드하는 동안 한 번 실행되고, CMD는 컨테이너가 시작될 때 실행할 기본 명령을 지정한다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [understand]
+    cloze_keys: ["빌드하는 동안", "시작될 때"]
+    accept: { "빌드하는 동안": ["빌드할 때", "빌드 시점에", "빌드 중"], "시작될 때": ["시작할 때", "실행될 때", "실행 시점에"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/reference/dockerfile/#cmd", section: "CMD", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k04:
+    type: syntax
+    facet: code
+    statement: "FROM은 빌드 단계의 첫 명령(앞의 ARG 제외)으로, 이후 명령이 쌓일 베이스 이미지를 지정한다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [remember]
+    cloze_keys: ["베이스 이미지"]
+    accept: { "베이스 이미지": ["base image", "기반 이미지", "부모 이미지"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/reference/dockerfile/#from", section: "FROM", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k05:
+    type: config_fact
+    facet: code
+    statement: "CMD를 exec 형식(예: [\"node\", \"server.js\"])으로 쓰면 셸을 거치지 않아 종료 신호를 앱 프로세스가 직접 받고, 셸 형식은 /bin/sh -c가 먼저 실행되어 신호가 앱에 전달되지 않을 수 있다."
+    scope: "Linux 컨테이너"
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["exec 형식"]
+    accept: { "exec 형식": ["exec form", "exec폼", "JSON 배열 형식"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/reference/dockerfile/#shell-and-exec-form", section: "Shell and exec form", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k06:
+    type: property
+    facet: definition
+    statement: "한 Dockerfile에 CMD가 여러 개 있으면 마지막 CMD만 효력이 있다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [remember]
+    cloze_keys: ["마지막"]
+    accept: { "마지막": ["맨 마지막", "가장 아래", "last"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/reference/dockerfile/#cmd", section: "CMD", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k07:
+    type: constraint
+    facet: code
+    statement: "COPY의 원본 경로는 빌드 컨텍스트 기준이며, 컨텍스트 밖의 파일(예: ../shared/a.json)은 복사할 수 없다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["빌드 컨텍스트"]
+    accept: { "빌드 컨텍스트": ["build context", "컨텍스트", "빌드 문맥"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/build/concepts/context/", section: "Build context", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k08:
+    type: heuristic
+    facet: tradeoff
+    statement: "자주 바뀌는 소스 COPY를 의존성 설치 RUN 뒤에 두면, 소스만 바뀐 빌드에서 의존성 레이어의 캐시를 다시 쓸 수 있다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [apply, analyze]
+    cloze_keys: ["캐시"]
+    accept: { "캐시": ["빌드 캐시", "cache", "레이어 캐시"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/build/building/best-practices/#leverage-build-cache", section: "Leverage build cache", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k09:
+    type: config_fact
+    facet: code
+    statement: "빌드 컨텍스트 루트의 .dockerignore에 적은 경로는 컨텍스트에서 빠져 빌드로 전송되지 않고 COPY 대상도 되지 않는다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [remember, apply]
+    cloze_keys: [".dockerignore"]
+    accept: { ".dockerignore": ["dockerignore", ".dockerignore 파일"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/build/concepts/context/#dockerignore-files", section: ".dockerignore files", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k10:
+    type: heuristic
+    facet: operation
+    statement: "베이스 이미지를 latest 대신 버전 태그(또는 다이제스트)로 고정해야 같은 Dockerfile이 시간이 지나도 같은 베이스에서 빌드된다."
+    scope: ""
+    vol: evolving
+    valid_as_of: "2026-10-01"
+    level_min: 1
+    bloom_affordance: [apply, evaluate]
+    cloze_keys: ["버전 태그"]
+    accept: { "버전 태그": ["태그", "고정 태그", "다이제스트", "digest"] }
+    source_refs:
+      - { source_id: src.docker-docs, locator: "/build/building/best-practices/#choose-the-right-base-image", section: "Choose the right base image", usage: paraphrase, retrieved_at: "2026-10-01" }

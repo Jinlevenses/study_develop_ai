@@ -3,7 +3,7 @@ import { JobName } from '@fathom/contracts/admin/jobs';
 import { ServiceName } from '@fathom/contracts/common/ids';
 import { parseJsonStrict } from '@fathom/shared-kernel/canonical/canonical';
 import type { Result } from '@fathom/shared-kernel/errors/errors';
-import { err, ok } from '@fathom/shared-kernel/errors/errors';
+import { assertNever, err, ok } from '@fathom/shared-kernel/errors/errors';
 import { z } from 'zod';
 
 // §4.3.4 `--mode` 분기 — argv(`--key=value`·`--flag`만) 파싱. 모르는 키·모드·형식 오류 = 64.
@@ -104,7 +104,7 @@ export function parseModeArgs(argv: readonly string[]): Result<ParsedMode, strin
       return job.success ? ok({ mode: 'job', job: job.data }) : err('unknown or missing --job');
     }
     default:
-      return err('unknown --mode');
+      return assertNever(modeName);
   }
 }
 

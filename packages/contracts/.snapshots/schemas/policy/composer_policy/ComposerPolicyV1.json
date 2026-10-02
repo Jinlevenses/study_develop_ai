@@ -398,6 +398,60 @@
       },
       "required": ["per_week_min", "constraints", "suggest_only_min_level"],
       "additionalProperties": false
+    },
+    "path_weights": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "maxLength": 96,
+        "pattern": "^(?:path\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "track_priority": {
+            "minItems": 1,
+            "maxItems": 20,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "alg",
+                "cs",
+                "net",
+                "lang",
+                "fe",
+                "be",
+                "db",
+                "linux",
+                "docker",
+                "k8s",
+                "cicd",
+                "sre",
+                "cloud",
+                "sec",
+                "ml",
+                "llm",
+                "arch",
+                "eng",
+                "lead",
+                "data"
+              ]
+            }
+          },
+          "target_level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "retention_tier": {
+            "type": "string",
+            "enum": ["core", "standard", "breadth", "archive"]
+          }
+        },
+        "required": ["track_priority", "target_level", "retention_tier"],
+        "additionalProperties": false
+      }
     }
   },
   "required": ["version", "score_weights", "hard_constraints", "entropy", "boss", "peak_end", "wildcard"],

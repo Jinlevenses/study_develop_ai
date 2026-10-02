@@ -9,7 +9,7 @@
   },
   "composer_policy@v1": {
     "owner": "learning",
-    "sha256": "738fb7a2c6092c315732e335dadb3e7017c2a2e7fe8cb23deb287ba556b9ff42"
+    "sha256": "f3aece666f1bf84878cadcd1c6daea2ec23fd5f19b8c2926c1fb56503aa61fb6"
   },
   "firewall_rules@v1": {
     "owner": "ai-gateway",

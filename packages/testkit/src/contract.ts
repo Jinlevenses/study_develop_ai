@@ -41,13 +41,20 @@ export const TEST_CALLER_TOKENS: Readonly<Record<ServiceName, string>> = {
   'ops-api': '5'.repeat(64),
 };
 
+const FixtureRequest = S({
+  params: z.record(z.string(), z.string()).optional(),
+  query: z.record(z.string(), z.unknown()).optional(),
+  body: z.unknown().optional(),
+  headers: z.record(z.string(), z.string()).optional(),
+});
+
 export const RouteFixture = S({
-  request: S({
-    params: z.record(z.string(), z.string()).optional(),
-    query: z.record(z.string(), z.unknown()).optional(),
-    body: z.unknown().optional(),
-    headers: z.record(z.string(), z.string()).optional(),
-  }),
+  request: FixtureRequest,
+  /**
+   * 호출자마다 본문이 달라야 2xx가 되는 라우트(예: inbox 전달 — 호출자 = 이벤트 producer)의 호출자별 요청(CO-15, IR-015).
+   * C4의 "허용 호출자 2xx" 검사만 `request_by_caller[caller] ?? request`를 쓴다. 무토큰 401·허용 밖 403 검사와 C2·C3·C5~C9는 `request` 그대로.
+   */
+  request_by_caller: z.partialRecord(CallerName, FixtureRequest).optional(),
   caller: CallerName,
   expect: S({ status: z.number().int() }),
 });
@@ -424,6 +431,15 @@ async function checkMutations(probe: Probe): Promise<void> {
 // ---------------------------------------------------------------------------------------------------------------------
 // C4
 
+/** 호출자별 요청이 있으면 그 요청을 담은 probe(params·headers 포함)로 바꿔 보낸다(CO-15). */
+function forCaller(probe: Probe, caller: CallerName): { callerProbe: Probe; request: RouteFixture['request'] } {
+  const request = probe.fixture.request_by_caller?.[caller] ?? probe.fixture.request;
+  return {
+    callerProbe: request === probe.fixture.request ? probe : { ...probe, fixture: { ...probe.fixture, request } },
+    request,
+  };
+}
+
 async function checkAuth(probe: Probe): Promise<void> {
   const { route, fixture } = probe;
   const base = { body: fixture.request.body, query: fixture.request.query };
@@ -438,7 +454,8 @@ async function checkAuth(probe: Probe): Promise<void> {
     }
     for (const caller of allowed) {
       if (ServiceName.safeParse(caller).success) {
-        const res = await send(probe, { caller, ...base });
+        const { callerProbe, request } = forCaller(probe, caller);
+        const res = await send(callerProbe, { caller, body: request.body, query: request.query });
         if (res.statusCode < 200 || res.statusCode > 299) {
           violate(probe, 'C4', `allowed caller ${caller}: expected 2xx, got ${res.statusCode}`);
         }
@@ -447,7 +464,11 @@ async function checkAuth(probe: Probe): Promise<void> {
     return;
   }
   for (const caller of ['browser', 'cli'] as const) {
-    const res = await send(probe, { caller, ...base });
+    // 허용된 공개 호출자만 호출자별 본문을 쓴다(허용 밖은 401·403 기대 — 기본 요청).
+    const { callerProbe, request } = allowed.includes(caller)
+      ? forCaller(probe, caller)
+      : { callerProbe: probe, request: probe.fixture.request };
+    const res = await send(callerProbe, { caller, body: request.body, query: request.query });
     const ok = allowed.includes(caller)
       ? res.statusCode >= 200 && res.statusCode <= 299
       : [401, 403].includes(res.statusCode);

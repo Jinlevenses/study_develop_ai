@@ -1,5 +1,6 @@
 import path from 'node:path';
 import { COMMON_ADMIN_ROUTES } from '@fathom/contracts/admin/admin-routes';
+import { ServiceName } from '@fathom/contracts/common/ids';
 import type { RouteDef } from '@fathom/contracts/common/route';
 import { InboxDeliverRoute } from '@fathom/contracts/events/inbox';
 import type { RouteFixture } from '@fathom/testkit/contract';
@@ -84,6 +85,10 @@ const fixtures: Record<string, RouteFixture> = {
   'common.admin.integrity': { request: { body: { level: 'quick' } }, caller: 'ops-api', expect: { status: 200 } },
   'common.inbox.deliver': {
     request: { body: { producer: 'content', events: [event] } },
+    // IF §3.3-1: 호출자 = 이벤트 producer여야 2xx — C4의 허용 호출자 2xx 검사는 호출자마다 자기 producer 본문으로 보낸다(CO-15).
+    request_by_caller: Object.fromEntries(
+      ServiceName.options.map((svc) => [svc, { body: { producer: svc, events: [{ ...event, producer: svc }] } }]),
+    ),
     caller: 'content',
     expect: { status: 200 },
   },
@@ -136,11 +141,7 @@ describe('testkit 라우트 적합성 하네스 (content형 fixture 앱)', () =>
     }
   });
 
-  it('UT-SK-197 C2~C9: InboxDeliverRoute — 하네스 C4는 allowedCallers 5개 전부에 같은 본문으로 2xx를 기대하지만 IF §3.3-1은 호출자 ≠ producer를 403으로 정한다 → 그 4건 외 위반 0 [IF-COM-004]', async () => {
-    const violations = await check(InboxDeliverRoute);
-    const mismatches = ['gateway', 'learning', 'ai-gateway', 'ops-api'].map(
-      (s) => `C4: allowed caller ${s}: expected 2xx, got 403`,
-    );
-    expect(violations.map((v) => v.detail).sort()).toEqual(mismatches.sort());
+  it('UT-SK-197 C2~C9: InboxDeliverRoute — 호출자별 본문(request_by_caller)으로 C2~C9 위반 0 [IF-COM-004]', async () => {
+    expect(await check(InboxDeliverRoute)).toEqual([]);
   });
 });
