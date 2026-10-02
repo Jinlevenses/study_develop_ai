@@ -6,7 +6,7 @@ import type { TempHome } from '@fathom/testkit/temp-home';
 import { createTempHome } from '@fathom/testkit/temp-home';
 
 // 서비스 골격 통합 테스트 보조(서비스 간 테스트 코드 공유 금지 → 서비스마다 1벌). 자식 프로세스 = 실제 `src/main.ts`(tsx).
-export const SVC = 'learning';
+export const SVC = 'ops-api';
 export const SERVICE_DIR = fileURLToPath(new URL('../../../../', import.meta.url));
 export const MAIN = fileURLToPath(new URL('../../../../src/main.ts', import.meta.url));
 export const REPO_ROOT = fileURLToPath(new URL('../../../../../../', import.meta.url));

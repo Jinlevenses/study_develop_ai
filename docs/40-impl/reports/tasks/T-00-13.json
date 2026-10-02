@@ -1,0 +1,399 @@
+{
+  "taskId": "T-00-13",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "services/ai-gateway/assets/codex-home/config.toml",
+    "services/ai-gateway/assets/empty-mcp.json",
+    "services/ai-gateway/assets/model-defaults.yaml",
+    "services/ai-gateway/assets/prompts.lock.json",
+    "services/ai-gateway/assets/tasks.yaml",
+    "services/ai-gateway/migrations-cache/0001_cache.sql",
+    "services/ai-gateway/migrations/control/0001_control_core.sql",
+    "services/ai-gateway/migrations/judge/0001_judge_core.sql",
+    "services/ai-gateway/migrations/privacy/0001_privacy_core.sql",
+    "services/ai-gateway/migrations/routing/0001_routing_core.sql",
+    "services/ai-gateway/src/app.ts",
+    "services/ai-gateway/src/application/control/errors.ts",
+    "services/ai-gateway/src/application/control/ports.ts",
+    "services/ai-gateway/src/application/control/register.ts",
+    "services/ai-gateway/src/application/generate/errors.ts",
+    "services/ai-gateway/src/application/generate/ports.ts",
+    "services/ai-gateway/src/application/generate/register.ts",
+    "services/ai-gateway/src/application/judge/errors.ts",
+    "services/ai-gateway/src/application/judge/ports.ts",
+    "services/ai-gateway/src/application/judge/register.ts",
+    "services/ai-gateway/src/application/privacy/errors.ts",
+    "services/ai-gateway/src/application/privacy/ports.ts",
+    "services/ai-gateway/src/application/privacy/register.ts",
+    "services/ai-gateway/src/application/routing/errors.ts",
+    "services/ai-gateway/src/application/routing/ports.ts",
+    "services/ai-gateway/src/application/routing/register.ts",
+    "services/ai-gateway/src/config.ts",
+    "services/ai-gateway/src/infra/db/open.ts",
+    "services/ai-gateway/src/infra/events/handlers.ts",
+    "services/ai-gateway/src/infra/events/wiring.ts",
+    "services/ai-gateway/src/main.ts",
+    "services/ai-gateway/test/integration/migrations/helpers/boot.ts",
+    "services/ai-gateway/test/integration/migrations/jobs.spec.ts",
+    "services/ai-gateway/test/integration/migrations/migrate.spec.ts",
+    "services/ai-gateway/test/integration/migrations/serve.spec.ts",
+    "services/ai-gateway/test/integration/migrations/static.spec.ts",
+    "services/ai-gateway/test/unit/assets/assets.spec.ts",
+    "services/learning/migrations-insight/0001_insight_views.sql",
+    "services/learning/migrations/curriculum-ref/0001_curriculum_ref.sql",
+    "services/learning/migrations/learner-model/0001_projections.sql",
+    "services/learning/migrations/ledger/0001_ledger_core.sql",
+    "services/learning/migrations/practice/0001_practice_core.sql",
+    "services/learning/src/app.ts",
+    "services/learning/src/application/curriculum-ref/errors.ts",
+    "services/learning/src/application/curriculum-ref/ports.ts",
+    "services/learning/src/application/curriculum-ref/register.ts",
+    "services/learning/src/application/insight/errors.ts",
+    "services/learning/src/application/insight/ports.ts",
+    "services/learning/src/application/insight/register.ts",
+    "services/learning/src/application/learner-model/errors.ts",
+    "services/learning/src/application/learner-model/ports.ts",
+    "services/learning/src/application/learner-model/register.ts",
+    "services/learning/src/application/ledger/errors.ts",
+    "services/learning/src/application/ledger/ports.ts",
+    "services/learning/src/application/ledger/register.ts",
+    "services/learning/src/application/practice/errors.ts",
+    "services/learning/src/application/practice/ports.ts",
+    "services/learning/src/application/practice/register.ts",
+    "services/learning/src/config.ts",
+    "services/learning/src/infra/clients/content.client.ts",
+    "services/learning/src/infra/db/open.ts",
+    "services/learning/src/infra/events/handlers.ts",
+    "services/learning/src/infra/events/wiring.ts",
+    "services/learning/src/infra/insight-db/open.ts",
+    "services/learning/src/jobs/integrity.ts",
+    "services/learning/src/jobs/snapshot.ts",
+    "services/learning/src/main.ts",
+    "services/learning/test/integration/migrations/helpers/boot.ts",
+    "services/learning/test/integration/migrations/jobs.spec.ts",
+    "services/learning/test/integration/migrations/ledger.spec.ts",
+    "services/learning/test/integration/migrations/migrate.spec.ts",
+    "services/learning/test/integration/migrations/serve.spec.ts",
+    "services/learning/test/integration/migrations/static.spec.ts",
+    "services/ops/migrations/backup/0001_backup_core.sql",
+    "services/ops/migrations/health/0001_health_core.sql",
+    "services/ops/migrations/telemetry/0001_telemetry_core.sql",
+    "services/ops/migrations/upgrade/0001_upgrade_core.sql",
+    "services/ops/src/app.ts",
+    "services/ops/src/application/autostart/errors.ts",
+    "services/ops/src/application/autostart/ports.ts",
+    "services/ops/src/application/autostart/register.ts",
+    "services/ops/src/application/backup/errors.ts",
+    "services/ops/src/application/backup/ports.ts",
+    "services/ops/src/application/backup/register.ts",
+    "services/ops/src/application/doctor/errors.ts",
+    "services/ops/src/application/doctor/ports.ts",
+    "services/ops/src/application/doctor/register.ts",
+    "services/ops/src/application/health/errors.ts",
+    "services/ops/src/application/health/ports.ts",
+    "services/ops/src/application/health/register.ts",
+    "services/ops/src/application/host/errors.ts",
+    "services/ops/src/application/host/ports.ts",
+    "services/ops/src/application/host/register.ts",
+    "services/ops/src/application/telemetry/errors.ts",
+    "services/ops/src/application/telemetry/ports.ts",
+    "services/ops/src/application/telemetry/register.ts",
+    "services/ops/src/application/upgrade/errors.ts",
+    "services/ops/src/application/upgrade/ports.ts",
+    "services/ops/src/application/upgrade/register.ts",
+    "services/ops/src/config.ts",
+    "services/ops/src/infra/clients/ai-gateway.client.ts",
+    "services/ops/src/infra/clients/content.client.ts",
+    "services/ops/src/infra/clients/gateway.client.ts",
+    "services/ops/src/infra/clients/learning.client.ts",
+    "services/ops/src/infra/db/open.ts",
+    "services/ops/src/infra/events/handlers.ts",
+    "services/ops/src/infra/events/wiring.ts",
+    "services/ops/src/infra/supervisor-ipc/channel.ts",
+    "services/ops/src/infra/supervisor-ipc/client.ts",
+    "services/ops/src/main.ts",
+    "services/ops/test/integration/migrations/helpers/boot.ts",
+    "services/ops/test/integration/migrations/migrate.spec.ts",
+    "services/ops/test/integration/migrations/serve.spec.ts",
+    "services/ops/test/unit/supervisor-ipc/client.spec.ts",
+    "services/ops/test/unit/supervisor-ipc/fixtures/fake-channel.ts",
+    "services/ops/test/unit/supervisor-ipc/fixtures/ipc-child.ts",
+    "services/ops/test/unit/supervisor-ipc/infra-open.spec.ts",
+    "services/ops/test/unit/supervisor-ipc/real-ipc.spec.ts"
+  ],
+  "testsAdded": [
+    "IT-310",
+    "IT-311",
+    "IT-312",
+    "IT-313",
+    "IT-314",
+    "IT-315",
+    "IT-316",
+    "IT-317",
+    "IT-318",
+    "IT-319",
+    "IT-320",
+    "IT-321",
+    "IT-322",
+    "IT-323",
+    "IT-324",
+    "IT-325",
+    "IT-410",
+    "IT-411",
+    "IT-412",
+    "IT-413",
+    "IT-414",
+    "IT-415",
+    "IT-416",
+    "IT-417",
+    "IT-418",
+    "IT-419",
+    "IT-420",
+    "IT-421",
+    "IT-422",
+    "IT-423",
+    "IT-510",
+    "IT-511",
+    "IT-512",
+    "IT-513",
+    "IT-514",
+    "IT-515",
+    "IT-516",
+    "IT-517",
+    "IT-518",
+    "UT-AI-090",
+    "UT-AI-091",
+    "UT-AI-092",
+    "UT-AI-093",
+    "UT-AI-094",
+    "UT-AI-095",
+    "UT-AI-096",
+    "UT-AI-097",
+    "UT-OP-190",
+    "UT-OP-191",
+    "UT-OP-192",
+    "UT-OP-193",
+    "UT-OP-194",
+    "UT-OP-195",
+    "UT-OP-196",
+    "UT-OP-197",
+    "UT-OP-198"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts --offline",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-learning typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-learning test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-learning test:integration",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ai-gateway typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ai-gateway test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ai-gateway test:integration",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-ops test:integration",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm exec biome ci services/learning services/ai-gateway services/ops",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint (repo-wide)",
+      "exit": 1,
+      "note": "67 errors, all outside T-00-13 paths (apps/web, packages/ui, services/gateway, services/content in-flight lanes)"
+    },
+    {
+      "cmd": "pnpm lint:hooks",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "check:deps (10, apps/web·packages/ui·testkit·packc·root) and check:security (1, shared-kernel redact.spec) fail outside T-00-13 paths; gate-selftest, boundaries and tsconfig-paths PASS; 0 findings in services/{learning,ai-gateway,ops}"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-13",
+      "exit": 1,
+      "note": "flags only other lanes' uncommitted files (apps/web etc.); 0 findings for T-00-13 paths"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "empty-mcp.json is stored as the biome-formatted '{ \"mcpServers\": {} }\\n' (semantically identical to AI-01 §4.2 '{\"mcpServers\":{}}'): biome ci formats JSON and the byte-exact form fails pnpm lint; UT-AI-096 asserts parsed equality + the formatter-stable bytes",
+    "test helper boot.ts uses spawn (stdio 'ipc' when needed) instead of fork, because fork() requires an ipc stdio slot and Brief runMode must also support ipc:false",
+    "supervisor-ipc client uses global setTimeout/clearTimeout (+ .unref()) instead of node:timers imports so vitest fake timers (UT-OP-194) can control them",
+    "client methods reject (async) on invalid arguments instead of throwing synchronously; UT-OP-192/193 assert rejects + zero sends"
+  ],
+  "escalations": [
+    {
+      "kind": "scope",
+      "detail": "biome.json (frozen, outside allowed_paths) formats services/ai-gateway/assets/empty-mcp.json; to keep AI-01 byte-exact '{\"mcpServers\":{}}' a biome ignore entry for that file is needed (or a CR to AI-01 §4.2 wording)"
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-32",
+      "pgm": "PGM-LR-170",
+      "req": [
+        "NFR-MAINT-001",
+        "FR-SET-001"
+      ],
+      "tests": [
+        "IT-317",
+        "IT-322..325"
+      ]
+    },
+    {
+      "wp": "WP-00-32",
+      "pgm": "PGM-LR-171",
+      "req": [
+        "NFR-DATA-001",
+        "NFR-DATA-003",
+        "NFR-DATA-008",
+        "DR-020",
+        "CR-04",
+        "FR-SET-007"
+      ],
+      "tests": [
+        "IT-310..316",
+        "IT-318..319"
+      ]
+    },
+    {
+      "wp": "WP-00-32",
+      "pgm": "PGM-LR-172",
+      "req": [
+        "NFR-DATA-012"
+      ],
+      "tests": [
+        "IT-310..313",
+        "IT-318",
+        "IT-321"
+      ]
+    },
+    {
+      "wp": "WP-00-32",
+      "pgm": "PGM-LR-173",
+      "req": [
+        "NFR-DATA-012"
+      ],
+      "tests": [
+        "IT-320",
+        "IT-321"
+      ]
+    },
+    {
+      "wp": "WP-00-33",
+      "pgm": "PGM-AI-140",
+      "req": [
+        "NFR-MAINT-001",
+        "FR-AI-003",
+        "NFR-SEC-013"
+      ],
+      "tests": [
+        "IT-416..421",
+        "IT-423"
+      ]
+    },
+    {
+      "wp": "WP-00-33",
+      "pgm": "PGM-AI-141",
+      "req": [
+        "DR-018",
+        "NFR-SEC-004",
+        "NFR-DATA-005"
+      ],
+      "tests": [
+        "IT-410..415",
+        "IT-422"
+      ]
+    },
+    {
+      "wp": "WP-00-33",
+      "pgm": "PGM-AI-142",
+      "req": [
+        "CR-15"
+      ],
+      "tests": [
+        "IT-410",
+        "IT-411",
+        "IT-413",
+        "IT-414"
+      ]
+    },
+    {
+      "wp": "WP-00-33",
+      "pgm": "PGM-AI-143",
+      "req": [
+        "FR-AI-004",
+        "NFR-SEC-020"
+      ],
+      "tests": [
+        "UT-AI-090..097"
+      ]
+    },
+    {
+      "wp": "WP-00-34",
+      "pgm": "PGM-OP-001",
+      "req": [
+        "FR-SET-001"
+      ],
+      "tests": [
+        "IT-515..517"
+      ]
+    },
+    {
+      "wp": "WP-00-34",
+      "pgm": "PGM-OP-002",
+      "req": [
+        "FR-SET-002",
+        "FR-SET-007"
+      ],
+      "tests": [
+        "UT-OP-190..198"
+      ]
+    },
+    {
+      "wp": "WP-00-34",
+      "pgm": "PGM-OP-003",
+      "req": [
+        "NFR-DATA-012",
+        "FR-SET-007"
+      ],
+      "tests": [
+        "IT-510..514",
+        "IT-518"
+      ]
+    }
+  ],
+  "notes": "All 3 WPs complete (done). DDL sha256[:12]: ledger dd25e6388ff5 learner-model ffb0afac1088 practice 9e32424044d8 curriculum-ref c9d4b0b8c760 insight 0b37841a6075 | control e426eaa52b01 routing 806982ecda5d judge b8666ea4b249 privacy e99348430dcb cache 2f894b8bdbd3 | backup 27de210f5575 health 7c6d98e2c9fc telemetry eedae5329fa3 upgrade 7447924ec4d4. Deferred seeds: learning lr_device/policy.switched/lr_projection_meta, ai ai_provider/ai_gold_item, ops op_tripwire_state/op_host_state. lint:hooks exit 0 (0 errors). CR candidates hit: AI-01 §6.2 alias-expanded tasks.yaml (UT-AI-093 equivalence), DB-01 §2 learning table count vs §6.7 (tests extract from doc), SUBSCRIPTIONS-based manifest, first-boot seed in openInfra."
+}

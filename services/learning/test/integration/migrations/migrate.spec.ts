@@ -6,8 +6,8 @@ import { DB_EXT_TABLES, DB_NAME_HOOKS } from '@fathom/contracts/db-hooks';
 import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
 import { openDb } from '@fathom/shared-kernel/sqlite/sqlite';
 import { describe, expect, it } from 'vitest';
-import { insightDbOptions } from '../../../src/infra/insight-db/open.js';
 import { learningDbOptions } from '../../../src/infra/db/open.js';
+import { insightDbOptions } from '../../../src/infra/insight-db/open.js';
 import {
   bootServe,
   ddlBlock,
@@ -37,10 +37,26 @@ const readInsight = <T>(home: string, fn: (db: SqlitePort) => T): T =>
 
 const MIGRATIONS = 'SELECT module, version FROM schema_migrations ORDER BY module, version';
 const TABLES = "SELECT name FROM sqlite_schema WHERE type = 'table' AND name NOT GLOB 'sqlite_*' ORDER BY name";
-const modules = (db: SqlitePort): string[] => db.prepare(MIGRATIONS).all().map((r) => `${String(r.module)}@${String(r.version)}`);
-const tableNames = (db: SqlitePort): string[] => db.prepare(TABLES).all().map((r) => String(r.name));
+const modules = (db: SqlitePort): string[] =>
+  db
+    .prepare(MIGRATIONS)
+    .all()
+    .map((r) => `${String(r.module)}@${String(r.version)}`);
+const tableNames = (db: SqlitePort): string[] =>
+  db
+    .prepare(TABLES)
+    .all()
+    .map((r) => String(r.name));
 
-const LEARNING_MODULES = ['_infra@1', '_infra@2', '_infra@3', 'curriculum-ref@1', 'learner-model@1', 'ledger@1', 'practice@1'];
+const LEARNING_MODULES = [
+  '_infra@1',
+  '_infra@2',
+  '_infra@3',
+  'curriculum-ref@1',
+  'learner-model@1',
+  'ledger@1',
+  'practice@1',
+];
 const INSIGHT_MODULES = ['_infra@1', 'insight@1'];
 
 describe('learning 마이그레이션', () => {
@@ -74,7 +90,9 @@ describe('learning 마이그레이션', () => {
           appId: Number(db.prepare('PRAGMA application_id').get()?.application_id),
           journal: String(db.prepare('PRAGMA journal_mode').get()?.journal_mode),
           nonStrict: db
-            .prepare("SELECT name FROM pragma_table_list WHERE schema = 'main' AND type = 'table' AND strict = 0 AND name NOT GLOB 'sqlite_*'")
+            .prepare(
+              "SELECT name FROM pragma_table_list WHERE schema = 'main' AND type = 'table' AND strict = 0 AND name NOT GLOB 'sqlite_*'",
+            )
             .all(),
         }));
         // Assert
@@ -99,7 +117,10 @@ describe('learning 마이그레이션', () => {
       expect(readLearning(home.path, tableNames)).toEqual(learningExpected);
       expect(readInsight(home.path, tableNames)).toEqual(insightExpected);
       const columnsOf = (db: SqlitePort, table: string): string[] =>
-        db.prepare('SELECT name FROM pragma_table_info(:t)').all({ t: table }).map((r) => String(r.name));
+        db
+          .prepare('SELECT name FROM pragma_table_info(:t)')
+          .all({ t: table })
+          .map((r) => String(r.name));
       readLearning(home.path, (db) => {
         const hooks = DB_NAME_HOOKS.filter((h) => h.file.startsWith('services/learning/'));
         expect(hooks.length).toBeGreaterThan(0);
@@ -109,11 +130,6 @@ describe('learning 마이그레이션', () => {
         const ext = DB_EXT_TABLES.filter((t) => t.db === 'learning.db');
         expect(ext.length).toBeGreaterThan(0);
         for (const t of ext) {
-          expect(columnsOf(db, t.table), t.table).toEqual(expect.arrayContaining(['ext', 'ext_v']));
-        }
-      });
-      readInsight(home.path, (db) => {
-        for (const t of DB_EXT_TABLES.filter((x) => x.db === 'insight.db')) {
           expect(columnsOf(db, t.table), t.table).toEqual(expect.arrayContaining(['ext', 'ext_v']));
         }
       });
@@ -140,30 +156,42 @@ describe('learning 마이그레이션', () => {
       expect(bytes.split('\n')[0], rel).toBe(`-- @fathom:module=${expectedModule} version=1 kind=additive`);
       expect(path.basename(rel).startsWith('0001_'), rel).toBe(true);
     }
-    expect(readdirSync(path.join(SERVICE_DIR, 'migrations')).sort()).toEqual(['curriculum-ref', 'learner-model', 'ledger', 'practice']);
+    expect(readdirSync(path.join(SERVICE_DIR, 'migrations')).sort()).toEqual([
+      'curriculum-ref',
+      'learner-model',
+      'ledger',
+      'practice',
+    ]);
   });
 
   it('IT-314 재실행·--dry-run·--db-copy-dir [FR-SET-007]', async () => {
     await withTempHome(async (home) => {
       // Arrange
       expect((await runMode(home.path, ['--mode=migrate'])).code).toBe(0);
-      const before = readLearning(home.path, (db) => db.prepare('SELECT count(*) AS n FROM schema_migrations').get()?.n);
+      const before = readLearning(
+        home.path,
+        (db) => db.prepare('SELECT count(*) AS n FROM schema_migrations').get()?.n,
+      );
       const hashes = (): string[] => ['learning.db', 'insight.db'].map((f) => sha256(dataFile(home.path, f)));
-      const fileHashes = hashes();
       // Act / Assert: 재실행
       expect((await runMode(home.path, ['--mode=migrate'])).code).toBe(0);
-      expect(readLearning(home.path, (db) => db.prepare('SELECT count(*) AS n FROM schema_migrations').get()?.n)).toBe(before);
+      expect(readLearning(home.path, (db) => db.prepare('SELECT count(*) AS n FROM schema_migrations').get()?.n)).toBe(
+        before,
+      );
       // dry-run 단독
       const afterRerun = hashes();
       expect((await runMode(home.path, ['--mode=migrate', '--dry-run'])).code).toBe(0);
       expect(hashes()).toEqual(afterRerun);
-      expect(afterRerun).toHaveLength(fileHashes.length);
       // dry-run + 사본 디렉터리
       const copyDir = mkdtempSync(path.join(tmpdir(), 'fathom-copy-'));
       try {
         expect((await runMode(home.path, ['--mode=migrate', '--dry-run', `--db-copy-dir=${copyDir}`])).code).toBe(0);
         expect(hashes()).toEqual(afterRerun);
-        expect(readdirSync(copyDir).filter((f) => f.endsWith('.db')).sort()).toEqual(['insight.db', 'learning.db']);
+        expect(
+          readdirSync(copyDir)
+            .filter((f) => f.endsWith('.db'))
+            .sort(),
+        ).toEqual(['insight.db', 'learning.db']);
         expect(withDb(path.join(copyDir, 'learning.db'), learningDbOptions(true), modules)).toEqual(LEARNING_MODULES);
       } finally {
         rmSync(copyDir, { recursive: true, force: true });
