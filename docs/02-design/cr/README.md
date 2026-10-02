@@ -23,6 +23,7 @@
 | CR-35 ~ CR-56 | PG-2 교차 문서 정합 | 반영 완료 | [DRL-01 §2](../10-design-review-log.md), ARC-01 §22 |
 | AI-01 ★ 메모 D-AI-09·10·14·15·16·17·26 | AI 설계 → IF·DB | 반영 완료(D-AI-09 = CR-43) | AI-01 §19 설계 메모, ADR-000 §4 |
 | **CR-57 ~ CR-68** | **PG-2 잔여 CR 후보 번호 부여(WP-00-00)** | 아래 §3 | 이 파일 |
+| **CR-69 ~ CR-76** | **IT-01 S0 이월(T-01-01)** | 아래 §3.1 | 이 파일 |
 | 미결(값) | SIM-PROMO(CR-18~22 값) · SIM-LDI(`ldi_params@v1`) | VC-1(INT-2 진입 조건) | WBS-01 §5.5 |
 
 ## 3. CR-57 ~ CR-68 — PG-2 잔여 후보 번호 부여 (2026-10-01, T1 판정)
@@ -48,12 +49,30 @@ WBS-01 §4.1 진입 조건("CR 원천 전부를 번호로 받는다")에 따라,
 - **CR 아님으로 판정**: STD D-STD-17(`.gitignore` 두 줄 — T-00-01 소유 파일의 일반 변경), D-STD-15·DN-10(`[_]design.tsx` — 라우트 문자열 불변, INT-1a 단위 테스트로 확인).
 - **불일치 기록**: DRL-01 §5는 `check:frozen` 가동 주체를 WP-00-15로 적었으나 WBS-01 §4.2는 `check-frozen.mjs`를 WP-00-17 소유로 둔다 → **WBS(소유 경로 정본)를 따른다**(IT-00 = T-00-06).
 
+## 3.1 CR-69 ~ CR-76 · ADR-017 예약 — IT-01 S0 이월(T-01-01) 번호 부여 (2026-10-02, T1 판정)
+
+PLAN-IT-01 §3 "CR 번호는 S0 착수 전 T1이 부여"에 따라 IT-00 이월(CO-xx) 중 CR 후보에 번호를 준다. 적용 Task = **T-01-01**(Brief `docs/40-impl/briefs/IT-01/T-01-01.md`). 영향 문서(ARC §17.1·§18, STD-SQL-04, IF-01 §5 `insight.ts` 블록)의 문구 정정은 다음 개정 때 같은 트레일러로 한다.
+
+| CR | 원천 | 결정 | 영향 | 적용 Task | 상태 |
+|---|---|---|---|---|---|
+| CR-69 | CO-05 (T-00-06) | `deps.json` 허용표 가산: `react-is` 19.3.0(web) · `@testing-library/dom` 10.4.2·`@types/react` 19.3.0·`@types/react-dom` 19.3.0(web·ui, dev) · `@types/d3-force` 3.0.10(packc, dev) · `vite` 8.3.1 단위에 `(root)`·`packages/testkit` 가산. 새 설치 0 | ARC §17.1·§18 표 가산 | T-01-01 | 승인 · IT-01 적용 |
+| CR-70 | CO-07 (T-00-08) | `sql.json` `pragma_allow` += `packages/shared-kernel/src/service/maintenance.sql.ts`(유지보수 PRAGMA 상수 1파일). STD-SQL-04 "팩토리·마이그레이션 실행기" + "서비스 골격의 유지보수 루틴" | STD-SQL-04 문구 | T-01-01 | 승인 · IT-01 적용 |
+| CR-71 | CO-08 (T-00-06) | `sql.json` `db_paths_exempt` += `packages/contracts/src/{db-hooks.ts,admin/epoch-manifest.ts,admin/admin-routes.ts}`(DB 파일명 = 계약 데이터, 경로 조립 0) | ADR-010 게이트 예외 표 | T-01-01 | 승인 · IT-01 적용 |
+| CR-72 | CO-09 (T-00-03) | `boundaries.json` `builtin_restricted.child_process` += `packages/testkit/src/preload/**`, `biome.json` `noProcessEnv` off override += 같은 경로(테스트 전용 preload) → 정적 import 복귀·biome-ignore 2건 제거 | STD-TS-40·STD-CFG-20 예외 표 | T-01-01 | 승인 · IT-01 적용 |
+| CR-73 | CO-16 (T-00-10) | `HomeAlert.action.href` 정규식 `/^\/(?!\/)[A-Za-z0-9/_$.?=&-]*$/`(프로토콜 상대 `//host` 거부). 스냅샷 diff = `pattern` 변경(파괴 분류) → **ADR-017(보안 긴급 경로, 회고 사후 승인)** 트레일러와 함께 | IF-01 §5 `insight.ts` 블록 | T-01-01 | 승인 · IT-01 적용 |
+| CR-74 | CO-04 (T-00-01) | 루트 `engines.node` `>=22.18.0`(타입 스트리핑 기본 활성 하한, `.node-version` 22.22.2 불변) | ARC §18 런타임 행 | T-01-01 | 승인 · IT-01 적용 |
+| CR-75 | CO-14 (T-00-04 리뷰) | job 자식 env = `ALLOWED_ENV` 중 `*_API_KEY` **제외**(키는 ai-gateway 프로세스만, job 8종 중 키 사용 0) | STD-CFG-21 | T-01-01 | 승인 · IT-01 적용 |
+| CR-76 | (INT-1a 이월 실사) | `check:security` `security/secret-literal` 제외 += `packages/shared-kernel/test/unit/redact/**`(redact 단위 테스트 = 비밀 패턴 자체가 시험 대상, `evals/sets/secrets-50/**`와 같은 부류) | ADR-010 게이트 예외 표 | T-01-01 | 승인 · IT-01 적용 |
+
+- **CR 아님(게이트 결함 수정, T1 판정)**: `check:sql-typed` import 별칭 미해석(CO-06) · `check:sql` dynamic-arg가 `packages/contracts/src/**`(SQLite 접근 0 단위)의 `RegExp.exec`를 탐지 · `check:ng-g` `import { Sparkles as AiMark }`의 원 이름 탐지(CO-10) · `check:typo-ko` `<p>`+`text-xs`/`text-sm`(12.5·13.5px = DS-01 K11 캡션 하한 12.5px 이상)을 본문 미달로 판정. 각 수정은 `fixtures/<check>/clean` 회귀 동반.
+- **기존 CR 이행**: CO-17 `ComposerPolicyV1.path_weights` = CR-52(DCP DN-22) 전사(`.optional()` 가산).
+
 ## 4. 다음 번호
 
 | 종류 | 다음 번호 |
 |---|---|
-| CR | **CR-69** |
-| ADR | **ADR-017** |
+| CR | **CR-77** |
+| ADR | **ADR-018** (ADR-017 = CR-73 보안 긴급 경로로 예약, 초안 T1) |
 
 ## 5. 관련
 
