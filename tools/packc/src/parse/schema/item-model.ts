@@ -1,6 +1,7 @@
 // DCP-01 §6.6 — packs/<track>/item-models/<concept_id>.yaml (T1 바인딩 · T2 템플릿).
-import { ConceptId } from '@fathom/contracts/common/ids';
+
 import { Level } from '@fathom/contracts/common/domain';
+import { ConceptId } from '@fathom/contracts/common/ids';
 import { z } from 'zod';
 import { Bloom, FacetId, KuRef, ObjKey, ResponseMode, StemFamily } from './common.js';
 import { Opt } from './item.js';

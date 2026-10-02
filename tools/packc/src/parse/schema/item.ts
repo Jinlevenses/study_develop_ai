@@ -1,6 +1,7 @@
 // DCP-01 §6.5.2 — packs/<track>/items/<concept_id>.yaml. 저작 형식 22종(랩 기반 code_task·sql_task·infra_lite는 items 파일에 쓰지 않는다).
-import { ConceptId, RubricId } from '@fathom/contracts/common/ids';
+
 import { Level, Tag } from '@fathom/contracts/common/domain';
+import { ConceptId, RubricId } from '@fathom/contracts/common/ids';
 import { z } from 'zod';
 import { Bloom, FacetId, KuRef, McRef, Md, ObjKey, ResponseMode, StemFamily } from './common.js';
 
@@ -24,7 +25,19 @@ const ItemCommon = {
 };
 
 export const Opt = z.string().regex(/^opt_[a-h]$/);
-export const CodeLang = z.enum(['ts', 'js', 'sql', 'yaml', 'dockerfile', 'bash', 'python', 'json', 'http', 'text', 'diff']);
+export const CodeLang = z.enum([
+  'ts',
+  'js',
+  'sql',
+  'yaml',
+  'dockerfile',
+  'bash',
+  'python',
+  'json',
+  'http',
+  'text',
+  'diff',
+]);
 export const Code = z.object({ lang: CodeLang, src: z.string().min(1).max(4000) }).strict();
 export const Normalize = z
   .object({
@@ -202,7 +215,11 @@ export const Item = z.discriminatedUnion('format', [
       ...ItemCommon,
       stem: Md(20, 600),
       answer: z
-        .object({ value: z.number().positive(), unit: z.string().max(12), log10_tol: z.number().min(0.1).max(1).default(0.5) })
+        .object({
+          value: z.number().positive(),
+          unit: z.string().max(12),
+          log10_tol: z.number().min(0.1).max(1).default(0.5),
+        })
         .strict(),
       assumptions_rubric: RubricId.optional(),
     })

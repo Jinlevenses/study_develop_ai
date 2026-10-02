@@ -1,0 +1,40 @@
+# content/templates/rubrics/feynman-teach.yaml
+# yaml-language-server: $schema=../../.schemas/rubrics.schema.json
+schema_v: 1
+id: rb.feynman-teach
+title_ko: "파인만 가르치기"
+applies_to: [feynman]
+dims:
+  d_accuracy:
+    name_ko: "정확성"
+    weight: 1.5
+    levels:
+      l1: "핵심 내용이 틀렸거나 빠져 있어 사실과 맞지 않는다."
+      l2: "일부는 맞지만 틀린 부분이 섞여 있고 근거가 제시되지 않는다."
+      l3: "대체로 정확하며 핵심 주장 하나를 근거와 함께 뒷받침한다."
+      l4: "내용이 정확하고 근거와 구체적 예시로 모든 핵심 주장을 뒷받침한다."
+  d_simplicity:
+    name_ko: "단순화"
+    weight: 1
+    levels:
+      l1: "전문 용어를 풀지 않아 초심자가 이해하기 어렵다."
+      l2: "일부 용어만 풀고 나머지는 설명 없이 그대로 쓴다."
+      l3: "대부분의 용어를 쉬운 말로 풀고 비유 하나로 이해를 돕는다."
+      l4: "초심자도 따라올 수 있게 쉬운 말과 비유로 풀되 핵심은 왜곡하지 않는다."
+  d_example:
+    name_ko: "예시"
+    weight: 1
+    levels:
+      l1: "예시가 없거나 설명과 관계없는 예시를 든다."
+      l2: "예시를 들지만 설명의 어느 부분을 보여 주는지 밝히지 않는다."
+      l3: "설명에 맞는 구체적 예시를 들고 어떤 점을 보여 주는지 말한다."
+      l4: "구체적 예시와 반례를 함께 들어 핵심과 경계를 모두 보여 준다."
+  d_gap:
+    name_ko: "빈틈 교정"
+    weight: 1
+    levels:
+      l1: "자신의 설명에 빈틈이 있다는 점을 알아차리지 못한다."
+      l2: "빈틈이 있음은 인정하지만 어디가 부족한지 짚지 못한다."
+      l3: "부족한 부분을 짚고 보충할 내용 하나를 제시한다."
+      l4: "빈틈을 스스로 찾아 근거와 함께 고치고 고친 설명을 다시 제시한다."
+pass_mean: 2.5

@@ -1,0 +1,12 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "V1"
+    ]
+  }
+}

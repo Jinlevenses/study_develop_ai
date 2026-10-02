@@ -1,7 +1,7 @@
 // R-FMT — V1 사전 검사(validate/v1-schema.ts)와 짝: method_policy@v1.formats 키 집합 = FormatId.options(33).
 import { FormatId } from '@fathom/contracts/common/domain';
-import { byCode, finding } from '../../validate/finding.js';
 import type { Finding } from '../../validate/finding.js';
+import { byCode, finding } from '../../validate/finding.js';
 import type { LintContext } from '../../validate/model.js';
 
 export const METHOD_POLICY_REL = 'policy/method_policy@v1.yaml';

@@ -1,6 +1,7 @@
 // R-LVL — 선수 p, 개념 c: level(p) > level(c)+1 = error · level(p) > level(c) = warn.
-import { finding } from '../../validate/finding.js';
+
 import type { Finding } from '../../validate/finding.js';
+import { finding } from '../../validate/finding.js';
 import type { LintContext } from '../../validate/model.js';
 
 export function ruleLvl(ctx: LintContext): Finding[] {

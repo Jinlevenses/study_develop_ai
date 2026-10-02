@@ -1,0 +1,47 @@
+# content/packs/net/misconceptions/net.tcp-handshake.yaml
+# yaml-language-server: $schema=../../../.schemas/misconceptions.schema.json
+schema_v: 1
+concept_id: net.tcp-handshake
+mcs:
+  m01:
+    kind: mechanism_confusion
+    meta_family: mf_guarantee_overtrust
+    wrong_belief: "클라이언트가 SYN 하나를 보내면 그 순간 연결이 열려 바로 데이터를 보낼 수 있다."
+    correction: "SYN은 클라이언트의 시작 번호를 알릴 뿐이다. 서버가 그 번호를 확인하고 자기 번호를 알린 뒤 클라이언트가 다시 확인해야 양쪽이 ESTABLISHED가 된다."
+    refutes: [k01, k02]
+    prevalence: high
+  m02:
+    kind: overgeneralization
+    meta_family: mf_scope_overreach
+    wrong_belief: "TIME-WAIT 상태는 서버 쪽 소켓에만 생긴다."
+    correction: "TIME-WAIT은 먼저 FIN을 보낸 쪽에 생긴다. 클라이언트가 먼저 닫으면 클라이언트에, 서버가 먼저 닫으면 서버에 생긴다."
+    refutes: [k06]
+    prevalence: high
+  m03:
+    kind: mechanism_confusion
+    meta_family: mf_cost_blindness
+    wrong_belief: "TIME-WAIT은 쓸모없는 대기라서 마지막 ACK를 보내자마자 바로 CLOSED로 가도 아무 문제가 없다."
+    correction: "마지막 ACK가 유실되면 상대가 FIN을 다시 보내므로 응답할 쪽이 남아 있어야 하고, 이전 연결의 늦은 세그먼트가 새 연결에 섞이지 않도록 2MSL을 기다린다."
+    refutes: [k07]
+    prevalence: mid
+  m04:
+    kind: mechanism_confusion
+    meta_family: mf_layer_responsibility
+    wrong_belief: "CLOSE-WAIT 소켓이 쌓이는 것은 네트워크나 커널 문제라 애플리케이션 코드와는 관계가 없다."
+    correction: "CLOSE-WAIT은 상대의 FIN을 받은 뒤 이쪽 애플리케이션이 close를 부르기를 기다리는 상태다. 오래 쌓이면 코드에서 소켓을 닫지 않은 경로를 찾아야 한다."
+    refutes: [k08, k05]
+    prevalence: high
+  m05:
+    kind: overgeneralization
+    meta_family: mf_state_vs_event
+    wrong_belief: "한쪽이 FIN을 보내면 연결 전체가 그 즉시 닫혀 양쪽 모두 더 이상 데이터를 보낼 수 없다."
+    correction: "FIN은 보낸 쪽 방향만 닫는다. FIN을 받은 쪽은 자기가 close하기 전까지 반대 방향으로 데이터를 계속 보낼 수 있다."
+    refutes: [k05]
+    prevalence: mid
+  m06:
+    kind: causal_reversal
+    meta_family: mf_phase_confusion
+    wrong_belief: "서버 애플리케이션이 accept()를 호출해야 비로소 SYN+ACK가 나가며 핸드셰이크가 진행된다."
+    correction: "Linux에서는 커널이 핸드셰이크를 끝내 연결을 대기 큐에 넣어 두고, accept()는 이미 수립된 연결을 꺼내 줄 뿐이다."
+    refutes: [k09]
+    prevalence: mid

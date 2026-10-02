@@ -1,0 +1,11 @@
+# content/templates/dig/generic-04.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-04
+kind: dig
+depth: d4
+question_template: "{{concept.title_ko}}를 구현하거나 운영하는 쪽에서는 어떤 내부 상태나 자료를 관리해야 하나요?"
+expects_from: [mechanism, config_fact]
+followups:
+  fu_partial: { when: partial, question: "그 상태가 어디에 저장되고 언제 바뀌나요?" }
+  fu_dont_know: { when: dont_know, question: "이 개념이 무엇을 기억해야 다음 동작을 할 수 있을지 생각해 보세요." }

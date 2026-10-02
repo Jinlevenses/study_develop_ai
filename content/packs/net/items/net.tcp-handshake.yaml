@@ -1,0 +1,413 @@
+# content/packs/net/items/net.tcp-handshake.yaml
+# yaml-language-server: $schema=../../../.schemas/items.schema.json
+schema_v: 1
+concept_id: net.tcp-handshake
+items:
+  # ── 핵심 12 ──────────────────────────────────────────────
+  i01:
+    format: ox
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k02]
+    stem_family: sf_handshake_flow
+    roles: [pretest]
+    gate_status: authored
+    stem: "3방향 핸드셰이크에서 서버는 클라이언트의 SYN을 확인하는 ACK와 자기 SYN을 한 세그먼트에 담아 보낸다."
+    answer: true
+    correction_md: "맞다. 두 번째 세그먼트는 SYN+ACK 하나로, 클라이언트 번호의 확인과 서버 번호의 알림을 함께 싣는다."
+    explanation_md: "방향마다 '번호 알림 + 확인'이 필요하므로 원래 네 단계지만, 서버 쪽의 확인과 알림을 합쳐 세 세그먼트가 된다(k02). 두 개로 따로 보낸다고 생각했다면 합쳐 보내는 이 최적화를 놓친 것이다."
+  i02:
+    format: ox
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k01, k04]
+    mc_refs: [m01]
+    stem_family: sf_handshake_flow
+    gate_status: authored
+    stem: "클라이언트는 SYN을 보낸 직후 이미 연결이 열린 상태이므로, 서버의 응답을 기다리지 않고 바로 요청 데이터를 보낼 수 있다."
+    answer: false
+    false_mc: m01
+    correction_md: "틀렸다. SYN을 보낸 클라이언트는 SYN-SENT 상태이고, 서버의 SYN+ACK를 받고 ACK를 보내야 ESTABLISHED가 된다."
+    explanation_md: "SYN은 시작 번호를 알리는 첫 단계일 뿐이다(k01). 상태 전이로 보면 SYN-SENT → ESTABLISHED 사이에 서버의 SYN+ACK 수신이 반드시 끼어 있다(k04). 'SYN 한 번이면 열린다'는 오개념(m01)에서 나온 진술이다."
+  i03:
+    format: ox
+    facet: contrast
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k06]
+    mc_refs: [m02]
+    stem_family: sf_close_states
+    gate_status: authored
+    stem: "TIME-WAIT 상태는 서버 쪽 소켓에만 생기므로 클라이언트 호스트에서는 볼 수 없다."
+    answer: false
+    false_mc: m02
+    correction_md: "틀렸다. TIME-WAIT은 먼저 FIN을 보낸 쪽에 생긴다. 클라이언트가 먼저 닫으면 클라이언트에 생긴다."
+    explanation_md: "TIME-WAIT을 결정하는 것은 역할(클라이언트·서버)이 아니라 누가 먼저 닫았는가다(k06). 웹 서버에서 TIME-WAIT을 자주 보는 것은 서버가 먼저 닫는 구성이 많기 때문이지 서버 전용 상태라서가 아니다."
+  i04:
+    format: ox
+    facet: operation
+    response_mode: recognition
+    level: 2
+    bloom: analyze
+    ku_refs: [k08]
+    stem_family: sf_ops_diagnosis
+    gate_status: authored
+    stem: "서버에 CLOSE-WAIT 소켓이 계속 늘어난다면, 상대가 FIN을 보낸 뒤 서버 애플리케이션이 그 소켓을 닫지 않았을 가능성이 크다."
+    answer: true
+    correction_md: "맞다. CLOSE-WAIT은 FIN을 받은 쪽이 애플리케이션의 close를 기다리는 상태라, 쌓인다면 코드의 닫기 누락을 먼저 의심한다."
+    explanation_md: "CLOSE-WAIT에는 커널 타이머가 없어서 애플리케이션이 close하지 않으면 그대로 남는다(k08). 네트워크 장비나 커널 설정을 먼저 의심하면 원인을 놓친다."
+  i05:
+    format: mcq
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k02, k01]
+    mc_refs: [m01, m06]
+    stem_family: sf_handshake_flow
+    roles: [pretest]
+    gate_status: authored
+    stem: "TCP 연결 수립에 세그먼트가 세 개 오가는 이유로 가장 알맞은 것은?"
+    options:
+      opt_a: "양쪽이 시작 번호를 알리고 상대의 확인을 받아야 하는데, 서버가 확인과 알림을 한 번에 보내기 때문이다"
+      opt_b: "첫 SYN으로 연결은 이미 열리고, 나머지 둘은 양쪽이 연결 상태를 점검하는 확인 인사이기 때문이다"
+      opt_c: "서버 애플리케이션이 accept()를 호출할 시간을 벌도록 커널이 세그먼트를 한 번 더 주고받기 때문이다"
+      opt_d: "유실에 대비해 같은 SYN을 여러 번 보내 그중 하나만 도착해도 연결이 열리게 하기 때문이다"
+    answer: opt_a
+    distractor_mc: { opt_b: m01, opt_c: m06, opt_d: m01 }
+    option_rationale:
+      opt_a: "각 방향의 ISN이 알려지고 확인되어야 하며, 서버의 ACK와 SYN이 한 세그먼트에 실린다."
+      opt_b: "SYN만으로는 서버의 시작 번호를 모르므로 연결이 열린 것이 아니다."
+      opt_c: "핸드셰이크는 커널이 끝내고 accept()는 끝난 연결을 꺼낼 뿐이다."
+      opt_d: "세 세그먼트는 서로 다른 내용이며 같은 SYN의 반복이 아니다."
+    explanation_md: "정답은 opt_a다. 방향마다 번호 알림과 확인이 필요하고 서버 쪽 둘을 합쳐 세 개가 된다(k02, k01). opt_b는 'SYN 하나면 열린다'(m01), opt_c는 accept()가 핸드셰이크를 진행한다는 착각(m06)에서 나온다."
+  i06:
+    format: mcq
+    facet: contrast
+    response_mode: recognition
+    level: 2
+    bloom: apply
+    ku_refs: [k06, k07]
+    mc_refs: [m02, m03]
+    stem_family: sf_close_states
+    gate_status: authored
+    stem: "클라이언트(198.51.100.23)가 응답을 다 받은 뒤 먼저 FIN을 보내 연결을 닫았고, 서버(192.0.2.10)도 이어서 FIN을 보냈다. 이 연결의 TIME-WAIT은 어디에 생기는가?"
+    options:
+      opt_a: "클라이언트 쪽에 생긴다. 먼저 FIN을 보낸 쪽이 마지막 ACK 뒤 기다린다"
+      opt_b: "서버 쪽에 생긴다. 연결을 받아 준 쪽이 항상 마지막 정리를 맡아 기다린다"
+      opt_c: "어느 쪽에도 생기지 않는다. 마지막 ACK를 보내면 양쪽 모두 즉시 CLOSED가 된다"
+      opt_d: "서버 쪽에 생긴다. FIN을 나중에 보낸 쪽이 상대의 재접속에 대비해 기다린다"
+    answer: opt_a
+    distractor_mc: { opt_b: m02, opt_c: m03, opt_d: m02 }
+    option_rationale:
+      opt_a: "TIME-WAIT은 능동 종료 쪽, 즉 먼저 FIN을 보낸 클라이언트에 생긴다."
+      opt_b: "역할이 아니라 누가 먼저 닫았는지가 기준이다."
+      opt_c: "먼저 닫은 쪽은 유실된 ACK 재전송과 늦은 세그먼트 정리를 위해 기다려야 한다."
+      opt_d: "나중에 FIN을 보낸 쪽은 LAST-ACK를 거쳐 ACK를 받으면 바로 닫힌다."
+    explanation_md: "정답은 opt_a다. 먼저 FIN을 보낸 쪽이 TIME-WAIT에 머문다(k06). opt_b·opt_d는 TIME-WAIT을 서버 전용으로 보는 착각(m02), opt_c는 대기가 쓸모없다는 착각(m03)이며 2MSL 대기의 이유는 k07에 있다."
+  i07:
+    format: mcq
+    facet: operation
+    response_mode: recognition
+    level: 2
+    bloom: analyze
+    ku_refs: [k08, k05]
+    mc_refs: [m04, m05]
+    stem_family: sf_ops_diagnosis
+    gate_status: authored
+    stem: "API 서버에서 `ss -tan state close-wait`로 센 소켓 수가 하루 종일 줄지 않고 늘기만 한다. 가장 먼저 의심할 원인은?"
+    options:
+      opt_a: "상대가 FIN을 보냈는데 서버 코드의 일부 경로가 소켓을 닫지 않는다"
+      opt_b: "커널의 연결 종료 타이머가 너무 길게 설정되어 정리가 늦어진다"
+      opt_c: "상대가 FIN을 보낸 연결은 이미 끝났고 ss가 지난 기록을 보여 줄 뿐이다"
+      opt_d: "네트워크 장비가 마지막 ACK를 버려 커널이 재전송을 계속 기다린다"
+    answer: opt_a
+    distractor_mc: { opt_b: m04, opt_c: m05, opt_d: m04 }
+    option_rationale:
+      opt_a: "CLOSE-WAIT은 애플리케이션의 close를 기다리는 상태라 닫기 누락이 쌓임으로 드러난다."
+      opt_b: "CLOSE-WAIT에는 정리 타이머가 없다. 커널 설정으로 해결되지 않는다."
+      opt_c: "FIN은 한 방향만 닫으므로 소켓과 자원은 여전히 살아 있다."
+      opt_d: "마지막 ACK를 기다리는 것은 LAST-ACK 상태이며 CLOSE-WAIT과 다르다."
+    explanation_md: "정답은 opt_a다. CLOSE-WAIT 누적은 애플리케이션이 close하지 않았다는 신호다(k08). opt_b·opt_d는 원인을 커널·네트워크로 돌리는 착각(m04), opt_c는 FIN 하나로 연결 전체가 닫힌다는 착각(m05)이며 반쪽 닫힘은 k05에 있다."
+  i08:
+    format: cloze
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: remember
+    ku_refs: [k01, k04]
+    stem_family: sf_cloze_handshake
+    gate_status: authored
+    stem: "TCP 연결을 열 때 클라이언트가 먼저 {{b1}} 세그먼트를 보내고, 서버는 그 번호를 확인하면서 자기 번호를 함께 알린다. 마지막 ACK까지 오가면 양쪽 상태는 {{b2}}가 된다."
+    blanks:
+      b1: { accept: ["SYN", "SYN 플래그", "syn"] }
+      b2: { accept: ["ESTABLISHED", "ESTAB", "established"] }
+    explanation_md: "첫 세그먼트는 SYN이고(k01), 세 번째 ACK가 오가면 양쪽 모두 ESTABLISHED가 된다(k04). SYN-RECEIVED는 서버가 SYN+ACK를 보낸 직후의 중간 상태다."
+  i09:
+    format: short
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: apply
+    ku_refs: [k03]
+    stem_family: sf_seq_numbers
+    gate_status: authored
+    stem: "클라이언트가 보낸 SYN의 순서 번호가 1000이었다. 서버가 돌려주는 SYN+ACK 세그먼트의 확인 번호는 얼마인가?"
+    accept: ["1001"]
+    numeric: { value: 1001, tol_abs: 0 }
+    explanation_md: "SYN은 데이터가 없어도 순서 번호 하나를 차지하므로 다음에 기대하는 번호는 1000 + 1 = 1001이다(k03). 1000이라고 답했다면 SYN이 번호를 소비한다는 점을 놓친 것이다."
+  i10:
+    format: error_find
+    facet: code
+    response_mode: recognition
+    level: 2
+    bloom: analyze
+    ku_refs: [k08, k05]
+    mc_refs: [m04]
+    stem_family: sf_debug_socket
+    gate_status: authored
+    stem: "반쪽 닫힘을 직접 다루려고 `allowHalfOpen: true`를 켠 Node.js 서버다. 클라이언트가 연결을 끊은 뒤에도 서버 쪽 소켓이 CLOSE-WAIT에 계속 남는다. 원인이 된 줄을 고르세요."
+    code:
+      lang: js
+      src: |
+        const net = require('node:net');
+        // 반쪽 닫힘을 직접 다루려고 allowHalfOpen을 켰다
+        const server = net.createServer({ allowHalfOpen: true }, (socket) => {
+          socket.on('data', (chunk) => {
+            socket.write(`echo:${chunk}`);
+          });
+          socket.on('end', () => console.log('client finished sending'));
+        });
+        server.listen(8080, '127.0.0.1');
+    answer: { from: 7, to: 7 }
+    bug_mc: m04
+    hints:
+      h1: "클라이언트의 FIN이 도착하면 어떤 이벤트가 발생하는지 찾아보세요."
+      h2: "allowHalfOpen을 켜면 읽기 쪽이 끝나도 쓰기 쪽을 자동으로 닫지 않습니다."
+      h3: "'end' 이벤트 처리기에서 해야 할 일이 빠져 있습니다."
+      h4: "7번째 줄의 'end' 처리기가 로그만 남기고 `socket.end()`를 부르지 않아 서버가 자기 FIN을 보내지 않는다. 처리기 안에서 `socket.end()`를 호출한다."
+    explanation_md: "'end'는 상대의 FIN이 도착했다는 이벤트다. allowHalfOpen이 켜져 있으면 쓰기 쪽 종료는 애플리케이션 몫인데, 7번째 줄이 socket.end()를 부르지 않아 소켓이 CLOSE-WAIT에 남는다(k08, k05). 커널 문제로 보는 것은 m04다."
+  i11:
+    format: parsons
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: apply
+    ku_refs: [k01, k03, k06]
+    stem_family: sf_trace_order
+    gate_status: authored
+    stem: "데이터 없이 연결만 열었다가 클라이언트(C)가 먼저 닫았다. 서버(S)는 FIN을 받으면 ACK만 먼저 보내고 잠시 뒤 자기 FIN을 보냈다. 실제로 오간 세그먼트를 순서대로 배열하세요(필요 없는 줄이 섞여 있다)."
+    lang: text
+    lines:
+      ln_syn: "C → S  [SYN]      seq=100"
+      ln_synack: "S → C  [SYN,ACK]  seq=300 ack=101"
+      ln_ack: "C → S  [ACK]      seq=101 ack=301"
+      ln_fin1: "C → S  [FIN,ACK]  seq=101 ack=301"
+      ln_ack2: "S → C  [ACK]      seq=301 ack=102"
+      ln_fin2: "S → C  [FIN,ACK]  seq=301 ack=102"
+      ln_last: "C → S  [ACK]      seq=102 ack=302"
+      ln_bad1: "S → C  [SYN,ACK]  seq=300 ack=100"
+      ln_bad2: "C → S  [ACK]      seq=101 ack=300"
+    answer: [ln_syn, ln_synack, ln_ack, ln_fin1, ln_ack2, ln_fin2, ln_last]
+    distractors: [ln_bad1, ln_bad2]
+    explanation_md: "SYN과 FIN은 각각 번호 하나를 차지하므로 확인 번호는 받은 번호 + 1이다(k03). 그래서 ack=100·ack=300인 줄은 틀린 확인 번호다. 열기 세 세그먼트(k01) 뒤에 먼저 닫는 C의 FIN이 오고, 마지막 ACK를 보낸 C가 TIME-WAIT에 들어간다(k06)."
+  i12:
+    format: blank_note
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: understand
+    ku_refs: [k01, k02, k03, k04, k05, k06, k07, k08, k09, k10]
+    stem_family: sf_recall_free
+    gate_status: authored
+    prompt: "TCP 연결이 열리고 닫히는 과정을 처음 배우는 동료에게 설명한다고 생각하고 기억나는 대로 적어 보세요. 세그먼트 순서, 순서 번호, 상태 이름, TIME-WAIT과 CLOSE-WAIT의 의미를 다루면 좋습니다."
+    idea_units:
+      iu_three_way: { text: "SYN, SYN+ACK, ACK 세 세그먼트로 연결을 연다", ku_ref: k01, weight: 1.5, keywords: ["SYN", "3방향", "핸드셰이크", "handshake"] }
+      iu_isn: { text: "양쪽이 초기 순서 번호를 알리고 확인받는 것이 목적이다", ku_ref: k02, weight: 1.5, keywords: ["순서 번호", "ISN", "확인"] }
+      iu_plus_one: { text: "SYN·FIN은 번호 하나를 차지해 확인 번호가 +1 된다", ku_ref: k03, weight: 1, keywords: ["+1", "확인 번호", "ack"] }
+      iu_states: { text: "SYN-SENT·SYN-RECEIVED를 거쳐 ESTABLISHED가 된다", ku_ref: k04, weight: 0.5, keywords: ["SYN-SENT", "SYN-RECEIVED", "ESTABLISHED"] }
+      iu_half_close: { text: "종료는 방향마다 따로 일어나 반쪽 닫힘이 가능하다", ku_ref: k05, weight: 1, keywords: ["FIN", "반쪽", "half-close", "방향"] }
+      iu_time_wait_side: { text: "TIME-WAIT은 먼저 닫은 쪽에 생긴다", ku_ref: k06, weight: 1.5, keywords: ["TIME-WAIT", "먼저", "능동"] }
+      iu_2msl: { text: "2MSL 대기로 ACK 재전송과 늦은 세그먼트 혼입을 막는다", ku_ref: k07, weight: 1, keywords: ["2MSL", "MSL", "늦은 세그먼트"] }
+      iu_close_wait: { text: "CLOSE-WAIT 누적은 애플리케이션의 close 누락이다", ku_ref: k08, weight: 1.5, keywords: ["CLOSE-WAIT", "close", "누락"] }
+      iu_kernel: { text: "핸드셰이크는 커널이 하고 accept는 완성된 연결을 꺼낸다", ku_ref: k09, weight: 0.5, keywords: ["커널", "accept", "큐"] }
+      iu_rst: { text: "듣는 소켓이 없으면 RST가 오고 연결이 거부된다", ku_ref: k10, weight: 0.5, keywords: ["RST", "거부", "ECONNREFUSED"] }
+    solo_rubric: rb.solo-5
+    model_note_md: |
+      TCP는 데이터를 보내기 전에 SYN, SYN+ACK, ACK 세 세그먼트로 연결을 연다. 목적은 양쪽의 초기 순서 번호를
+      서로 알리고 확인받는 것이며, 서버가 확인과 자기 SYN을 합쳐 보내므로 세 번이면 된다. SYN과 FIN은 번호 하나를
+      차지해 확인 번호는 받은 번호 + 1이다. 상태는 SYN-SENT·SYN-RECEIVED를 거쳐 ESTABLISHED가 된다. 종료는 방향마다
+      FIN과 ACK로 따로 닫고, FIN을 받은 쪽도 close 전까지는 데이터를 보낼 수 있다. 먼저 닫은 쪽은 TIME-WAIT에서 2MSL을
+      기다려 마지막 ACK 재전송과 늦은 세그먼트 혼입을 막는다. CLOSE-WAIT이 쌓이면 애플리케이션이 소켓을 닫지 않은 것이다.
+      핸드셰이크는 커널이 처리하고 accept는 완성된 연결을 꺼낼 뿐이며, 듣는 소켓이 없으면 RST가 돌아온다.
+    explanation_md: "핵심 축은 '번호 합의(열기)'와 '방향별 종료(닫기)' 두 가지다. 상태 이름은 이 두 축에서 자연스럽게 따라 나온다. 모범 노트는 제출 후에만 공개된다."
+  # ── 부속 9 ───────────────────────────────────────────────
+  i13:
+    format: embedded
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k02]
+    stem_family: sf_embedded_check
+    gate_status: authored
+    shape: ox
+    stem: "SYN+ACK를 받기 전까지 클라이언트는 서버가 고른 시작 순서 번호를 알 수 없다."
+    answer: true
+    explanation_md: "서버의 시작 번호는 두 번째 세그먼트인 SYN+ACK에 처음 실린다(k02). 그래서 세 번째 ACK가 있어야 서버도 자기 번호가 확인되었음을 안다."
+  i14:
+    format: digging
+    facet: definition
+    response_mode: production
+    level: 2
+    bloom: remember
+    ku_refs: [k01]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d1
+    question: "TCP 연결 수립이 무엇인지, 그 과정에서 어떤 세그먼트가 오가는지 두 문장으로 말해 보세요."
+    expects:
+      kp_three: { text: "SYN, SYN+ACK, ACK 세 세그먼트를 주고받는다", ku_ref: k01 }
+      kp_before_data: { text: "데이터를 보내기 전에 끝내는 준비 절차다", ku_ref: k01 }
+    followups:
+      fu_partial: { when: partial, question: "첫 세그먼트에는 어떤 플래그가 켜져 있나요?" }
+      fu_dk: { when: dont_know, question: "전화를 걸 때 서로 들리는지 확인하는 과정을 떠올려 볼까요?" }
+    explanation_md: "D1은 정의를 자기 말로 꺼내는 단계다. 세 세그먼트의 이름과 '데이터 전에 한다'가 나오면 충분하다(k01)."
+  i15:
+    format: digging
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: understand
+    ku_refs: [k02, k03]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d2
+    question: "서버가 보내는 SYN+ACK 세그먼트에는 어떤 정보가 담기고, 그 확인 번호는 어떻게 정해지나요?"
+    expects:
+      kp_own_isn: { text: "서버 자신의 초기 순서 번호를 알린다", ku_ref: k02 }
+      kp_ack_plus: { text: "클라이언트 SYN 번호 + 1을 확인 번호로 보낸다", ku_ref: k03 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m01, question: "클라이언트의 SYN만으로 연결이 열린다면 서버의 시작 번호는 클라이언트가 어떻게 알까요?" }
+    explanation_md: "D2는 작동 원리다. SYN+ACK가 '확인'과 '알림'을 함께 싣고, SYN이 번호 하나를 차지해 +1이 된다는 점이 핵심이다(k02, k03)."
+  i16:
+    format: digging
+    facet: contrast
+    response_mode: production
+    level: 2
+    bloom: analyze
+    ku_refs: [k05, k06]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d3
+    question: "연결을 열 때는 세그먼트가 세 개인데, 닫을 때는 왜 보통 네 개가 오갈까요?"
+    expects:
+      kp_direction: { text: "종료는 방향마다 따로 일어나 FIN과 ACK가 두 쌍 필요하다", ku_ref: k05 }
+      kp_delay: { text: "FIN을 받은 쪽은 close할 때까지 데이터를 더 보낼 수 있어 ACK와 FIN을 합치기 어렵다", ku_ref: k05 }
+      kp_active: { text: "먼저 FIN을 보낸 쪽이 마지막 ACK를 보내고 TIME-WAIT에 들어간다", ku_ref: k06 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m05, question: "FIN을 받는 순간 양쪽 모두 보낼 수 없게 된다면, 서버가 응답의 나머지를 보내는 중이었을 때 어떻게 될까요?" }
+      fu_partial: { when: partial, question: "열 때는 서버가 ACK와 SYN을 합쳤는데, 닫을 때는 왜 ACK와 FIN을 늘 합치지 못할까요?" }
+    explanation_md: "D3는 설계 이유다. 열기와 달리 닫기는 상대가 아직 보낼 데이터가 있을 수 있어 ACK와 FIN 사이에 간격이 생긴다(k05). 먼저 닫은 쪽이 TIME-WAIT을 맡는다는 점까지 가면 좋다(k06)."
+  i17:
+    format: digging
+    facet: tradeoff
+    response_mode: production
+    level: 2
+    bloom: evaluate
+    ku_refs: [k07, k06]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d4
+    question: "TIME-WAIT 대기를 없애면 무엇을 얻고, 그 대가로 무엇을 잃나요?"
+    expects:
+      kp_gain: { text: "먼저 닫는 쪽의 소켓·포트 자원이 빨리 풀린다", ku_ref: k06 }
+      kp_cost: { text: "유실된 마지막 ACK를 다시 보낼 수 없고 늦은 세그먼트가 새 연결에 섞일 수 있다", ku_ref: k07 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m03, question: "마지막 ACK가 도중에 사라지면 상대는 무엇을 다시 보내고, 그때 응답할 소켓이 없다면 어떻게 될까요?" }
+    explanation_md: "D4는 트레이드오프다. 얻는 것(자원 회수 속도)과 잃는 것(종료 신뢰성·새 연결의 정확성)을 함께 말해야 한다(k07)."
+  i18:
+    format: digging
+    facet: operation
+    response_mode: production
+    level: 2
+    bloom: evaluate
+    ku_refs: [k08]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d5
+    question: "서버의 CLOSE-WAIT 소켓이 계속 늘어나는 상황은 어떤 조건에서 생기고, 왜 커널이 대신 정리해 주지 않나요? 결국 어떤 증상으로 드러나나요?"
+    expects:
+      kp_app_close: { text: "상대의 FIN 뒤 애플리케이션이 close하지 않으면 생긴다", ku_ref: k08 }
+      kp_no_timer: { text: "언제 다 보낼지는 애플리케이션만 알기 때문에 커널이 임의로 닫지 않는다", ku_ref: k08 }
+      kp_fd_exhaust: { text: "소켓이 쌓여 디스크립터 한도에 닿으면 새 연결을 받지 못한다", ku_ref: k08 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m04, question: "커널 설정을 바꿔도 줄지 않는다면, 그 소켓을 닫을 책임은 누구에게 있을까요?" }
+      fu_partial: { when: partial, question: "CLOSE-WAIT 소켓 하나가 프로세스 안에서 계속 차지하는 자원은 무엇인가요?" }
+    explanation_md: "D5는 실패 조건이다. 평소엔 조용하다가 부하가 길게 이어질 때 디스크립터 고갈로 새 연결 수락이 실패하며 드러난다는 점을 짚으면 된다(k08)."
+  i19:
+    format: digging_d4_mcq
+    facet: tradeoff
+    response_mode: recognition
+    level: 2
+    bloom: evaluate
+    ku_refs: [k07]
+    mc_refs: [m03, m02, m05]
+    stem_family: sf_dig_offline
+    gate_status: authored
+    depth: d4
+    stem: "TIME-WAIT 대기를 사실상 없앴을 때 치르는 대가로 가장 알맞은 것은?"
+    options:
+      opt_a: "유실된 마지막 ACK를 다시 못 보내고, 새 연결에 옛 연결의 세그먼트가 섞일 수 있다"
+      opt_b: "대가는 없다. TIME-WAIT은 정리 지연일 뿐이라 없애도 연결의 정확성에는 영향이 없다"
+      opt_c: "서버에 생기던 TIME-WAIT이 클라이언트로 옮겨 가 클라이언트의 포트가 대신 고갈된다"
+      opt_d: "FIN을 받은 쪽이 더 이상 데이터를 보낼 수 없게 되어 응답의 끝부분이 잘린다"
+    answer: opt_a
+    distractor_mc: { opt_b: m03, opt_c: m02, opt_d: m05 }
+    explanation_md: "정답은 opt_a다. 2MSL 대기는 마지막 ACK 재전송과 늦은 세그먼트 정리를 위해 있다(k07). opt_b는 대기를 쓸모없다고 보는 착각(m03), opt_c는 TIME-WAIT을 서버 전용으로 보는 착각(m02), opt_d는 FIN이 연결 전체를 닫는다는 착각(m05)이다."
+  i20:
+    format: digging_d4_mcq
+    facet: operation
+    response_mode: recognition
+    level: 2
+    bloom: evaluate
+    ku_refs: [k08, k09]
+    mc_refs: [m04, m05, m06]
+    stem_family: sf_dig_offline
+    gate_status: authored
+    depth: d5
+    stem: "서버의 CLOSE-WAIT 소켓이 줄지 않는 문제가 실제로 드러나는 상황으로 가장 알맞은 것은?"
+    options:
+      opt_a: "부하가 길게 이어지면 열린 디스크립터가 한도에 닿아 새 연결을 받지 못한다"
+      opt_b: "커널이 일정 시간 뒤 CLOSE-WAIT을 자동으로 닫으므로 드러나는 문제는 없다"
+      opt_c: "상대가 FIN을 보낸 연결은 이미 끝났으므로 자원을 차지하지 않아 문제가 없다"
+      opt_d: "애플리케이션이 accept()를 부르지 않아 새로 온 SYN에 SYN+ACK가 나가지 않는다"
+    answer: opt_a
+    distractor_mc: { opt_b: m04, opt_c: m05, opt_d: m06 }
+    explanation_md: "정답은 opt_a다. CLOSE-WAIT 소켓은 애플리케이션이 닫을 때까지 디스크립터를 붙잡고 있어 결국 새 연결 수락이 실패한다(k08). opt_b는 커널이 대신 정리한다는 착각(m04), opt_c는 FIN이 연결 전체를 닫는다는 착각(m05), opt_d는 핸드셰이크를 accept()가 진행한다는 착각(m06)이다(k09)."
+  i21:
+    format: feynman
+    facet: contrast
+    response_mode: production
+    level: 2
+    bloom: create
+    ku_refs: [k06, k07, k08, k05]
+    mc_refs: [m02, m04]
+    stem_family: sf_teach
+    gate_status: authored
+    student_persona: "웹 서버 운영을 막 맡은 주니어 개발자 서연. ss 출력에서 TIME-WAIT과 CLOSE-WAIT을 처음 보고 둘 다 장애라고 생각한다."
+    student_beliefs:
+      sb_server_only: { mc_ref: m02, opening_line: "TIME-WAIT은 서버에만 생기는 거죠? 클라이언트 쪽은 신경 안 써도 되잖아요." }
+      sb_kernel_blame: { mc_ref: m04, opening_line: "CLOSE-WAIT이 쌓이는 건 커널 설정 문제니까 sysctl만 고치면 되지 않나요?" }
+    checklist:
+      ck_active_side: { text: "TIME-WAIT은 먼저 닫은 쪽에 생긴다고 설명했다", ku_ref: k06 }
+      ck_why_wait: { text: "2MSL 대기가 필요한 두 가지 이유를 설명했다", ku_ref: k07 }
+      ck_app_close: { text: "CLOSE-WAIT 누적은 애플리케이션의 close 누락이라고 설명했다", ku_ref: k08 }
+      ck_half_close: { text: "FIN은 한 방향만 닫는다는 점을 설명했다", ku_ref: k05 }
+    rubric: rb.feynman-teach
+    explanation_md: "학생의 두 착각(TIME-WAIT 서버 전용, CLOSE-WAIT 커널 책임)을 직접 교정해야 높은 점수를 받는다. 두 상태가 어느 쪽에, 왜 생기는지를 대비해 설명하는 것이 핵심이다."

@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_v": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "enum": [
+        "alg",
+        "cs",
+        "net",
+        "lang",
+        "fe",
+        "be",
+        "db",
+        "linux",
+        "docker",
+        "k8s",
+        "cicd",
+        "sre",
+        "cloud",
+        "sec",
+        "ml",
+        "llm",
+        "arch",
+        "eng",
+        "lead",
+        "data"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+    },
+    "channel": {
+      "type": "string",
+      "const": "seed"
+    },
+    "track": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": [
+            "alg",
+            "cs",
+            "net",
+            "lang",
+            "fe",
+            "be",
+            "db",
+            "linux",
+            "docker",
+            "k8s",
+            "cicd",
+            "sre",
+            "cloud",
+            "sec",
+            "ml",
+            "llm",
+            "arch",
+            "eng",
+            "lead",
+            "data"
+          ]
+        },
+        "name_ko": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 30
+        },
+        "name_en": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "track_group": {
+          "type": "string",
+          "enum": ["foundation", "app", "infra", "security", "ai", "design_lead"]
+        },
+        "sort_order": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 99
+        },
+        "summary_ko": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 300
+        }
+      },
+      "required": ["id", "name_ko", "name_en", "track_group", "sort_order", "summary_ko"],
+      "additionalProperties": false
+    },
+    "requires": {
+      "type": "object",
+      "properties": {
+        "packc": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": ["mastery_rules", "gate_thresholds"]
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^v\\d+$"
+          }
+        }
+      },
+      "required": ["packc", "policy"],
+      "additionalProperties": false
+    },
+    "content_license": {
+      "type": "string",
+      "const": "repo"
+    }
+  },
+  "required": ["schema_v", "id", "version", "channel", "track", "requires", "content_license"],
+  "additionalProperties": false
+}

@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "const": "t2"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["ox", "mcq", "cloze", "short", "matching"]
+    },
+    "facet": {
+      "type": "string",
+      "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+    },
+    "response_mode": {
+      "type": "string",
+      "enum": ["recognition", "production"]
+    },
+    "stem_family": {
+      "type": "string",
+      "pattern": "^sf_[a-z0-9_]{2,28}$"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "enum": ["ku", "mc", "ku_set"]
+        },
+        "ku_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "definition",
+              "property",
+              "mechanism",
+              "procedure_step",
+              "constraint",
+              "comparison",
+              "syntax",
+              "config_fact",
+              "failure_mode",
+              "tradeoff",
+              "heuristic",
+              "example"
+            ]
+          }
+        },
+        "ku_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+          }
+        }
+      },
+      "required": ["from"],
+      "additionalProperties": false
+    },
+    "template": {
+      "type": "object",
+      "properties": {
+        "stem": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "options": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^opt_[a-h]$"
+          },
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "answer": {
+          "type": "string",
+          "maxLength": 200
+        }
+      },
+      "required": ["stem", "answer"],
+      "additionalProperties": false
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "dedupe_jaccard": {
+          "default": 0.85,
+          "type": "number"
+        },
+        "max_instances": {
+          "default": 12,
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 40
+        }
+      },
+      "additionalProperties": false
+    },
+    "metamorphic": {
+      "type": "object",
+      "properties": {
+        "preserve": {
+          "default": ["option_order"],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["paraphrase", "option_order"]
+          }
+        },
+        "flip": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["negate_condition", "swap_sibling"]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "stakes_max": {
+      "type": "string",
+      "const": "S1"
+    },
+    "schema_v": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "applies_to": {
+      "type": "object",
+      "properties": {
+        "tiers": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["A", "B"]
+          }
+        },
+        "ku_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "definition",
+              "property",
+              "mechanism",
+              "procedure_step",
+              "constraint",
+              "comparison",
+              "syntax",
+              "config_fact",
+              "failure_mode",
+              "tradeoff",
+              "heuristic",
+              "example"
+            ]
+          }
+        }
+      },
+      "required": ["tiers"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "kind",
+    "format",
+    "facet",
+    "response_mode",
+    "stem_family",
+    "source",
+    "template",
+    "constraints",
+    "metamorphic",
+    "stakes_max",
+    "schema_v",
+    "id",
+    "applies_to"
+  ],
+  "additionalProperties": false
+}

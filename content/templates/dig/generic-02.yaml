@@ -1,0 +1,11 @@
+# content/templates/dig/generic-02.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-02
+kind: dig
+depth: d2
+question_template: "{{concept.title_ko}}는 내부에서 어떤 순서로 동작하나요? 단계를 차례로 설명해 보세요."
+expects_from: [mechanism, procedure_step]
+followups:
+  fu_partial: { when: partial, question: "설명한 단계 사이에서 무엇이 다음 단계를 일으키나요?" }
+  fu_dont_know: { when: dont_know, question: "첫 단계만이라도 설명해 보세요. 입력은 무엇인가요?" }

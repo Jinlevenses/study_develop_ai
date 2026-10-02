@@ -1,0 +1,10 @@
+# content/packs/net/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: net
+version: "0.1.0"
+channel: seed
+track: { id: net, name_ko: "네트워크·프로토콜", name_en: "Networking & Protocols", track_group: foundation, sort_order: 3,
+         summary_ko: "계층 모델·TCP/IP·DNS·HTTP·TLS까지, 데이터가 네트워크를 건너 전달되는 원리와 진단 방법" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

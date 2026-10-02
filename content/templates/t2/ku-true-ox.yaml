@@ -1,0 +1,17 @@
+# content/templates/t2/ku-true-ox.yaml
+# yaml-language-server: $schema=../../.schemas/templates-t2.schema.json
+schema_v: 1
+id: ku-true-ox
+kind: t2
+format: ox
+facet: definition
+response_mode: recognition
+stem_family: sf_t2_true_ox
+source: { from: ku, ku_types: [definition, property, mechanism, constraint, config_fact] }
+template:
+  stem: "{{ku.statement}}"
+  answer: "true"
+constraints: { dedupe_jaccard: 0.85, max_instances: 12 }
+metamorphic: { preserve: [paraphrase], flip: [] }
+stakes_max: S1
+applies_to: { tiers: [A, B] }

@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_v": {
+      "type": "number",
+      "const": 1
+    },
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "kus": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^k\\d{2}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "definition",
+              "property",
+              "mechanism",
+              "procedure_step",
+              "constraint",
+              "comparison",
+              "syntax",
+              "config_fact",
+              "failure_mode",
+              "tradeoff",
+              "heuristic",
+              "example"
+            ]
+          },
+          "facet": {
+            "type": "string",
+            "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 200
+          },
+          "scope": {
+            "default": "",
+            "type": "string",
+            "maxLength": 80
+          },
+          "vol": {
+            "type": "string",
+            "enum": ["stable", "evolving", "volatile"]
+          },
+          "valid_as_of": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "level_min": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "bloom_affordance": {
+            "minItems": 1,
+            "maxItems": 3,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+            }
+          },
+          "cloze_keys": {
+            "default": [],
+            "maxItems": 4,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 30
+            }
+          },
+          "accept": {
+            "default": {},
+            "type": "object",
+            "propertyNames": {
+              "type": "string"
+            },
+            "additionalProperties": {
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              }
+            }
+          },
+          "source_refs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source_id": {
+                  "type": "string",
+                  "maxLength": 96,
+                  "pattern": "^(?:src\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+                },
+                "locator": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "section": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "usage": {
+                  "type": "string",
+                  "enum": ["link_only", "paraphrase", "short_quote", "code_adapted"]
+                },
+                "retrieved_at": {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+                },
+                "product_version": {
+                  "type": "string",
+                  "maxLength": 40
+                },
+                "quote": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              },
+              "required": ["source_id", "locator", "section", "usage", "retrieved_at"],
+              "additionalProperties": false
+            }
+          },
+          "deprecated_by": {
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^k\\d{2}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "type",
+          "facet",
+          "statement",
+          "vol",
+          "valid_as_of",
+          "level_min",
+          "bloom_affordance",
+          "source_refs"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["schema_v", "concept_id", "kus"],
+  "additionalProperties": false
+}

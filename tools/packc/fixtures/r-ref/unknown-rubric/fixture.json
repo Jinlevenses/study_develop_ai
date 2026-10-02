@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/items/docker.dockerfile.yaml",
+      "from": "rubric: rb.explain-generic",
+      "to": "rubric: rb.nope-generic"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-REF"
+    ]
+  }
+}

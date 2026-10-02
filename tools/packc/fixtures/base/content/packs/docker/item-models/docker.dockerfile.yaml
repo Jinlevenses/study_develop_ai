@@ -1,0 +1,18 @@
+schema_v: 1
+concept_id: docker.dockerfile
+models:
+  im01:
+    kind: t1
+    generator: t1.docker_layer_cache
+    format: mcq
+    facet: mechanism
+    response_mode: recognition
+    level: 1
+    bloom: apply
+    stem_family: sf_layer_cache
+    params:
+      changed_step:
+        type: enum
+        values: { copy_src: "소스 복사", run_install: "의존성 설치" }
+      step_count: { type: int, min: 3, max: 6 }
+    ku_refs: [k02, k03]

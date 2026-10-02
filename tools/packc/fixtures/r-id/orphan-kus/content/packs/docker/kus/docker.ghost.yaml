@@ -1,0 +1,42 @@
+schema_v: 1
+concept_id: docker.ghost
+kus:
+  k01:
+    type: definition
+    facet: definition
+    statement: "프로브는 kubelet이 컨테이너의 상태를 주기적으로 검사하는 장치이며 liveness·readiness·startup 세 종류가 있다."
+    scope: ""
+    vol: evolving
+    valid_as_of: "2026-10-01"
+    level_min: 2
+    bloom_affordance: [remember, understand]
+    cloze_keys: ["kubelet"]
+    accept: { "kubelet": ["쿠블렛"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/", section: "Configure Probes", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k02:
+    type: mechanism
+    facet: mechanism
+    statement: "liveness 프로브가 실패하면 kubelet이 컨테이너를 재시작하고, readiness 프로브가 실패하면 서비스 엔드포인트에서 Pod를 제외한다."
+    scope: ""
+    vol: evolving
+    valid_as_of: "2026-10-01"
+    level_min: 2
+    bloom_affordance: [understand, analyze]
+    cloze_keys: ["재시작", "제외"]
+    accept: { "재시작": ["restart"], "제외": ["제거", "뺀다"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/", section: "Liveness, Readiness", usage: paraphrase, retrieved_at: "2026-10-01" }
+  k03:
+    type: config_fact
+    facet: code
+    statement: "readiness 프로브는 httpGet·tcpSocket·exec 중 하나로 정의하며 periodSeconds로 검사 주기를 정한다."
+    scope: ""
+    vol: evolving
+    valid_as_of: "2026-10-01"
+    level_min: 2
+    bloom_affordance: [apply]
+    cloze_keys: ["periodSeconds"]
+    accept: {}
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/", section: "Probe configuration", usage: paraphrase, retrieved_at: "2026-10-01" }

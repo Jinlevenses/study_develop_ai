@@ -1,0 +1,148 @@
+# content/packs/k8s/kus/k8s.probes.yaml
+# yaml-language-server: $schema=../../../.schemas/kus.schema.json
+schema_v: 1
+concept_id: k8s.probes
+kus:
+  k01:
+    type: definition
+    facet: definition
+    statement: "프로브는 각 노드의 kubelet이 컨테이너에 주기적으로 실행하는 진단이며, 그 결과가 재시작이나 트래픽 제외 판단의 근거가 된다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [remember, understand]
+    cloze_keys: ["kubelet"]
+    accept: { "kubelet": ["큐블릿", "노드의 kubelet", "kubelet 에이전트"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/workloads/pods/pod-lifecycle/#container-probes", section: "Container probes", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k02:
+    type: mechanism
+    facet: mechanism
+    statement: "liveness 프로브가 실패 임계값만큼 연속 실패하면 kubelet은 컨테이너를 종료하고, 이후 동작은 Pod의 restartPolicy를 따른다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["restartPolicy"]
+    accept: { "restartPolicy": ["재시작 정책", "restart policy"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/configuration/liveness-readiness-startup-probes/#liveness-probe", section: "Liveness probe", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k03:
+    type: mechanism
+    facet: mechanism
+    statement: "readiness 프로브가 실패하면 Pod가 Ready 상태를 잃어 Service 엔드포인트에서 빠지지만 컨테이너는 재시작되지 않는다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, analyze]
+    cloze_keys: ["Service 엔드포인트"]
+    accept: { "Service 엔드포인트": ["엔드포인트", "endpoints", "EndpointSlice", "서비스 엔드포인트"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/configuration/liveness-readiness-startup-probes/#readiness-probe", section: "Readiness probe", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k04:
+    type: mechanism
+    facet: mechanism
+    statement: "startupProbe가 설정되어 있으면 그것이 성공할 때까지 liveness와 readiness 프로브는 실행되지 않는다."
+    scope: "Kubernetes ≥ 1.20 startupProbe"
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["startupProbe"]
+    accept: { "startupProbe": ["startup probe", "스타트업 프로브", "시작 프로브"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/configuration/liveness-readiness-startup-probes/#startup-probe", section: "Startup probe", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k05:
+    type: config_fact
+    facet: code
+    statement: "startupProbe가 컨테이너에 허용하는 최대 시작 시간은 대략 failureThreshold와 periodSeconds를 곱한 값이다."
+    scope: "Kubernetes ≥ 1.20 startupProbe"
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [apply]
+    cloze_keys: ["failureThreshold", "periodSeconds"]
+    accept: { "failureThreshold": ["실패 임계값", "failure threshold"], "periodSeconds": ["주기", "period", "검사 주기"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-startup-probes", section: "Protect slow starting containers with startup probes", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k06:
+    type: config_fact
+    facet: code
+    statement: "프로브 방식은 exec, httpGet, tcpSocket, grpc이며, httpGet은 200 이상 400 미만의 상태 코드를 성공으로 판정한다."
+    scope: "Kubernetes ≥ 1.27 grpc 방식"
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [remember, apply]
+    cloze_keys: ["400 미만"]
+    accept: { "400 미만": ["400보다 작은", "399 이하", "<400"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/workloads/pods/pod-lifecycle/#check-mechanisms", section: "Check mechanisms", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k07:
+    type: config_fact
+    facet: code
+    statement: "프로브 필드를 생략하면 periodSeconds는 10초, timeoutSeconds는 1초, failureThreshold는 3, initialDelaySeconds는 0초가 기본값이다."
+    scope: ""
+    vol: evolving
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [remember]
+    cloze_keys: ["10초", "1초"]
+    accept: { "10초": ["10", "10s"], "1초": ["1", "1s"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes", section: "Configure Probes", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k08:
+    type: heuristic
+    facet: tradeoff
+    statement: "liveness 프로브는 프로세스 자신의 상태만 확인해야 하며, 외부 의존성까지 확인하면 의존성 장애 하나로 모든 Pod가 함께 재시작될 수 있다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [evaluate, analyze]
+    cloze_keys: ["외부 의존성"]
+    accept: { "외부 의존성": ["의존성", "외부 서비스", "dependency", "데이터베이스"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/", section: "Configure Liveness, Readiness and Startup Probes", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k09:
+    type: property
+    facet: definition
+    statement: "readiness 프로브가 없는 컨테이너는 실행되자마자 준비된 것으로 간주되어 곧바로 트래픽을 받는다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand]
+    cloze_keys: ["준비된 것으로"]
+    accept: { "준비된 것으로": ["Ready로", "준비 완료로", "성공으로"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/workloads/pods/pod-lifecycle/#container-probes", section: "Container probes", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k10:
+    type: constraint
+    facet: code
+    statement: "liveness와 startup 프로브의 successThreshold는 1이어야 하며, 1보다 큰 값은 readiness 프로브에서만 쓸 수 있다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [remember]
+    cloze_keys: ["successThreshold"]
+    accept: { "successThreshold": ["성공 임계값", "success threshold"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes", section: "Configure Probes", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }
+  k11:
+    type: property
+    facet: mechanism
+    statement: "readiness 프로브는 시작할 때 한 번이 아니라 컨테이너가 실행되는 동안 계속 주기적으로 실행된다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand]
+    cloze_keys: ["계속 주기적으로"]
+    accept: { "계속 주기적으로": ["주기적으로", "계속", "내내"] }
+    source_refs:
+      - { source_id: src.k8s-docs, locator: "/concepts/configuration/liveness-readiness-startup-probes/#readiness-probe", section: "Readiness probe", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "1.34" }

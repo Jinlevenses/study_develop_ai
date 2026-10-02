@@ -1,0 +1,140 @@
+# content/packs/lang/kus/lang.js-event-loop.yaml
+# yaml-language-server: $schema=../../../.schemas/kus.schema.json
+schema_v: 1
+concept_id: lang.js-event-loop
+kus:
+  k01:
+    type: definition
+    facet: definition
+    statement: "JavaScript는 호출 스택 하나에서 코드를 실행하며, 이벤트 루프는 스택이 비면 대기 중인 태스크를 하나 꺼내 실행하는 일을 반복한다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [remember, understand]
+    cloze_keys: ["호출 스택", "태스크"]
+    accept: { "호출 스택": ["콜 스택", "call stack", "실행 스택"], "태스크": ["task", "매크로태스크", "macrotask"] }
+    source_refs:
+      - { source_id: src.whatwg-html, locator: "/webappapis.html#event-loop-processing-model", section: "Event loop: Processing model", usage: paraphrase, retrieved_at: "2026-10-02" }
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/JavaScript/Reference/Execution_model", section: "JavaScript execution model", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k02:
+    type: property
+    facet: mechanism
+    statement: "실행을 시작한 콜백은 끝날 때까지 다른 콜백에게 중간에 끼어들기를 당하지 않는다(실행 완료 보장)."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand]
+    cloze_keys: ["실행 완료"]
+    accept: { "실행 완료": ["run-to-completion", "run to completion", "완료까지 실행"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/JavaScript/Reference/Execution_model#run-to-completion", section: "Run-to-completion", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k03:
+    type: mechanism
+    facet: mechanism
+    statement: "태스크 하나가 끝나면 이벤트 루프는 다음 태스크로 넘어가기 전에 마이크로태스크 큐가 빌 때까지 마이크로태스크를 모두 실행한다."
+    scope: "브라우저 · Node.js ≥ 11"
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["마이크로태스크 큐가 빌 때까지"]
+    accept: { "마이크로태스크 큐가 빌 때까지": ["큐가 빌 때까지", "모두", "전부", "바닥날 때까지"] }
+    source_refs:
+      - { source_id: src.whatwg-html, locator: "/webappapis.html#perform-a-microtask-checkpoint", section: "Perform a microtask checkpoint", usage: paraphrase, retrieved_at: "2026-10-02" }
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide", section: "Using microtasks in JavaScript with queueMicrotask()", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k04:
+    type: definition
+    facet: contrast
+    statement: "setTimeout 콜백은 태스크로 예약되고, Promise의 then·catch·finally 콜백과 queueMicrotask 콜백은 마이크로태스크로 예약된다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [remember, understand]
+    cloze_keys: ["마이크로태스크"]
+    accept: { "마이크로태스크": ["microtask", "마이크로 태스크", "잡", "job"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide", section: "Using microtasks in JavaScript with queueMicrotask()", usage: paraphrase, retrieved_at: "2026-10-02" }
+      - { source_id: src.node-docs, locator: "/globals.html#queuemicrotaskcallback", section: "queueMicrotask(callback)", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "22" }
+  k05:
+    type: property
+    facet: mechanism
+    statement: "setTimeout(fn, 0)의 0은 최소 지연이라서, fn은 현재 스크립트와 그 뒤의 마이크로태스크가 모두 끝난 다음에야 실행된다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["최소 지연"]
+    accept: { "최소 지연": ["최소 대기 시간", "최소 시간", "minimum delay"] }
+    source_refs:
+      - { source_id: src.node-docs, locator: "/timers.html#settimeoutcallback-delay-args", section: "setTimeout(callback[, delay[, ...args]])", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "22" }
+      - { source_id: src.whatwg-html, locator: "/timers-and-user-prompts.html#timers", section: "Timers", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k06:
+    type: mechanism
+    facet: code
+    statement: "Promise 생성자에 넘긴 executor 함수는 생성 시점에 동기로 즉시 실행되고, 나중에 비동기로 실행되는 것은 then에 등록한 콜백이다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["동기로 즉시"]
+    accept: { "동기로 즉시": ["즉시", "동기적으로", "바로", "동기로"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/Promise", section: "Promise() constructor", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k07:
+    type: mechanism
+    facet: code
+    statement: "async 함수는 첫 await까지 호출한 쪽에서 동기로 실행되고, await 뒤의 나머지는 기다린 값이 준비되면 마이크로태스크로 이어서 실행된다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, apply]
+    cloze_keys: ["첫 await"]
+    accept: { "첫 await": ["첫 번째 await", "await", "처음 await"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/JavaScript/Reference/Statements/async_function", section: "async function", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k08:
+    type: failure_mode
+    facet: operation
+    statement: "마이크로태스크를 처리하는 중에 새로 예약된 마이크로태스크도 같은 차례에 실행되므로, 계속 자신을 다시 예약하면 태스크와 렌더링이 무한히 밀린다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [analyze, evaluate]
+    cloze_keys: ["같은 차례"]
+    accept: { "같은 차례": ["같은 체크포인트", "그 자리", "이번 차례"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide", section: "Using microtasks in JavaScript with queueMicrotask()", usage: paraphrase, retrieved_at: "2026-10-02" }
+  k09:
+    type: failure_mode
+    facet: operation
+    statement: "오래 걸리는 동기 계산은 호출 스택을 붙잡아, 그 계산이 끝날 때까지 타이머·I/O 콜백과 화면 갱신을 모두 지연시킨다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [understand, analyze]
+    cloze_keys: ["호출 스택을 붙잡아"]
+    accept: { "호출 스택을 붙잡아": ["스택을 점유해", "이벤트 루프를 막아", "루프를 블로킹해"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/JavaScript/Reference/Execution_model#never_blocking", section: "Never blocking", usage: paraphrase, retrieved_at: "2026-10-02" }
+      - { source_id: src.node-docs, locator: "/timers.html#settimeoutcallback-delay-args", section: "setTimeout(callback[, delay[, ...args]])", usage: paraphrase, retrieved_at: "2026-10-02", product_version: "22" }
+  k10:
+    type: heuristic
+    facet: tradeoff
+    statement: "무거운 계산은 작은 조각으로 나눠 태스크로 이어 실행하거나 워커로 옮겨야 그 사이에 이벤트 루프가 다른 콜백을 처리할 수 있다."
+    scope: ""
+    vol: stable
+    valid_as_of: "2026-10-02"
+    level_min: 2
+    bloom_affordance: [apply, evaluate]
+    cloze_keys: ["작은 조각"]
+    accept: { "작은 조각": ["조각", "청크", "chunk", "작은 단위"] }
+    source_refs:
+      - { source_id: src.mdn, locator: "/en-US/docs/Web/JavaScript/Reference/Execution_model#never_blocking", section: "Never blocking", usage: paraphrase, retrieved_at: "2026-10-02" }

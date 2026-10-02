@@ -1,7 +1,7 @@
 import { Sha256Hex, Ulid } from '@fathom/contracts/common/ids';
 import { EpochMs } from '@fathom/contracts/common/time';
 import { LedgerEventType } from '@fathom/contracts/ledger/envelope';
-import { sha256Hex } from '@fathom/shared-kernel/canonical/canonical';
+import { parseJsonStrict, sha256Hex } from '@fathom/shared-kernel/canonical/canonical';
 import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
 import { z } from 'zod';
 import { LEDGER_EXPORT_ROWS } from '../../infra/ledger/ledger.sql.js';
@@ -118,20 +118,28 @@ export function parseLedgerJsonl(text: string): LedgerJsonl {
   if (lines.length < 2) {
     return fail('truncated: header and footer required', lines.length);
   }
+  // JSON.parse의 SyntaxError 메시지는 입력 조각을 담는다 — 원문을 버리고 줄 번호만 보고한다(STD-LOG-22).
+  const parseLine = (line: string, lineNo: number, what: string): unknown => {
+    try {
+      return parseJsonStrict(line);
+    } catch {
+      return fail(`${what} is not valid json`, lineNo);
+    }
+  };
   const headerLine = lines[0] ?? '';
-  const header = LedgerJsonlHeader.safeParse(JSON.parse(headerLine));
+  const header = LedgerJsonlHeader.safeParse(parseLine(headerLine, 1, 'header'));
   if (!header.success) {
     return fail('header invalid', 1);
   }
   const footerLine = lines.at(-1) ?? '';
-  const footer = LedgerJsonlFooter.safeParse(JSON.parse(footerLine));
+  const footer = LedgerJsonlFooter.safeParse(parseLine(footerLine, lines.length, 'footer'));
   if (!footer.success) {
     return fail('footer missing or invalid', lines.length);
   }
   const eventLines = lines.slice(1, -1);
   const events: LedgerJsonlEvent[] = [];
   eventLines.forEach((line, i) => {
-    const parsed = LedgerJsonlEvent.safeParse(JSON.parse(line));
+    const parsed = LedgerJsonlEvent.safeParse(parseLine(line, i + 2, 'event'));
     if (!parsed.success) {
       fail('event invalid', i + 2);
       return;

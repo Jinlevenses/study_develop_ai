@@ -1,0 +1,40 @@
+# content/packs/lang/misconceptions/lang.js-event-loop.yaml
+# yaml-language-server: $schema=../../../.schemas/misconceptions.schema.json
+schema_v: 1
+concept_id: lang.js-event-loop
+mcs:
+  m01:
+    kind: sibling_confusion
+    meta_family: mf_sync_async_boundary
+    wrong_belief: "setTimeout(fn, 0)은 지연이 0이므로, 그 뒤에 등록한 Promise.then 콜백보다 먼저 실행된다."
+    correction: "setTimeout 콜백은 태스크라 다음 바퀴에 실행되고, then 콜백은 마이크로태스크라 현재 태스크가 끝나자마자 실행된다. 등록 순서와 관계없이 then이 먼저다."
+    refutes: [k03, k05]
+    prevalence: high
+  m02:
+    kind: mechanism_confusion
+    meta_family: mf_sync_async_boundary
+    wrong_belief: "async 함수는 호출하는 순간 별도 스레드에서 호출한 코드와 동시에 실행된다."
+    correction: "async 함수도 같은 스레드에서 첫 await까지 동기로 실행되고, 나머지는 마이크로태스크로 나중에 이어질 뿐이다. 병렬 실행이 아니다."
+    refutes: [k07, k01]
+    prevalence: high
+  m03:
+    kind: mechanism_confusion
+    meta_family: mf_phase_confusion
+    wrong_belief: "new Promise에 넘긴 함수(executor)도 then 콜백처럼 비동기로 나중에 실행된다."
+    correction: "executor는 Promise를 만드는 그 자리에서 동기로 즉시 실행된다. 비동기로 미뤄지는 것은 then·catch·finally에 등록한 콜백이다."
+    refutes: [k06]
+    prevalence: mid
+  m04:
+    kind: mechanism_confusion
+    meta_family: mf_boundary_case
+    wrong_belief: "이벤트 루프는 태스크 하나, 마이크로태스크 하나를 번갈아 실행하므로 마이크로태스크 안에서 새로 예약한 마이크로태스크는 다음 태스크 뒤로 밀린다."
+    correction: "태스크가 끝나면 마이크로태스크 큐가 빌 때까지 모두 실행하고, 그 사이 새로 예약된 것도 같은 차례에 처리한다. 그래서 then을 이어 붙인 콜백들이 타이머보다 먼저 연달아 실행된다."
+    refutes: [k03, k08]
+    prevalence: mid
+  m05:
+    kind: mechanism_confusion
+    meta_family: mf_guarantee_overtrust
+    wrong_belief: "setTimeout(fn, 100)은 정확히 100ms 뒤에 fn이 실행된다는 것을 보장한다."
+    correction: "지연값은 최소 대기 시간일 뿐이다. 그 시점에 호출 스택이 다른 계산으로 바쁘거나 마이크로태스크가 남아 있으면 fn은 그만큼 늦게 실행된다."
+    refutes: [k05, k09]
+    prevalence: high

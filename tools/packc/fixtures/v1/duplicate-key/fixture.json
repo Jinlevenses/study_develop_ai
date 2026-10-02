@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/k8s/concepts/k8s.probes.md",
+      "from": "level: 2\ntier: B",
+      "to": "level: 2\nlevel: 2\ntier: B"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "V1"
+    ]
+  }
+}

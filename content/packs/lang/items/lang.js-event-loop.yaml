@@ -1,0 +1,423 @@
+# content/packs/lang/items/lang.js-event-loop.yaml
+# yaml-language-server: $schema=../../../.schemas/items.schema.json
+schema_v: 1
+concept_id: lang.js-event-loop
+items:
+  # ── 핵심 12 ──────────────────────────────────────────────
+  i01:
+    format: ox
+    facet: contrast
+    response_mode: recognition
+    level: 2
+    bloom: remember
+    ku_refs: [k04]
+    stem_family: sf_queue_kind
+    roles: [pretest]
+    gate_status: authored
+    stem: "`Promise.then`에 등록한 콜백은 마이크로태스크로, `setTimeout`에 넘긴 콜백은 태스크로 예약된다."
+    answer: true
+    correction_md: "맞다. then·catch·finally·queueMicrotask 콜백은 마이크로태스크, setTimeout 콜백은 태스크다."
+    explanation_md: "어느 큐에 들어가는지가 실행 순서를 정한다(k04). 둘 다 '비동기'라고 같은 큐에 넣으면 then이 타이머보다 먼저 실행되는 이유를 설명할 수 없다."
+  i02:
+    format: ox
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k03, k05]
+    mc_refs: [m01]
+    stem_family: sf_queue_kind
+    gate_status: authored
+    stem: "한 스크립트에서 `setTimeout(a, 0)`을 먼저 호출하고 `Promise.resolve().then(b)`를 나중에 호출하면, 지연이 0이므로 a가 b보다 먼저 실행된다."
+    answer: false
+    false_mc: m01
+    correction_md: "틀렸다. b는 마이크로태스크라 스크립트가 끝나자마자 실행되고, a는 태스크라 그 뒤 다음 차례에 실행된다."
+    explanation_md: "등록 순서보다 큐의 종류가 우선한다. 태스크가 끝나면 마이크로태스크를 모두 비운 뒤 다음 태스크로 가고(k03), 0은 최소 지연일 뿐이다(k05). '0초니까 먼저'라는 생각이 m01이다."
+  i03:
+    format: ox
+    facet: code
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k06]
+    mc_refs: [m03]
+    stem_family: sf_sync_part
+    gate_status: authored
+    stem: "`new Promise((resolve) => { console.log('x'); resolve(); })`에서 'x'는 then 콜백처럼 현재 스크립트가 끝난 뒤에 출력된다."
+    answer: false
+    false_mc: m03
+    correction_md: "틀렸다. executor는 Promise를 만드는 그 자리에서 동기로 실행되므로 'x'는 곧바로 출력된다."
+    explanation_md: "Promise 생성자는 넘겨받은 함수를 즉시 호출한다(k06). 비동기로 미뤄지는 것은 then에 등록한 콜백뿐이며, executor까지 미뤄진다고 보는 것이 m03이다."
+  i04:
+    format: ox
+    facet: code
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k07]
+    stem_family: sf_sync_part
+    gate_status: authored
+    stem: "async 함수 본문에서 첫 `await`보다 앞에 있는 코드는 그 함수를 호출한 시점에 호출한 쪽에서 곧바로 실행된다."
+    answer: true
+    correction_md: "맞다. async 함수는 첫 await를 만날 때까지 동기로 실행되고, 그 뒤의 나머지만 마이크로태스크로 이어진다."
+    explanation_md: "async 함수는 다른 스레드에서 도는 것이 아니라 같은 스레드에서 await까지 진행한 뒤 Promise를 돌려준다(k07). 그래서 호출 직후의 동기 코드보다 첫 await 앞부분이 먼저 실행된다."
+  i05:
+    format: mcq
+    facet: contrast
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k04, k03]
+    mc_refs: [m01, m04, m03]
+    stem_family: sf_queue_kind
+    roles: [pretest]
+    gate_status: authored
+    stem: "다음 중 현재 실행 중인 스크립트가 끝난 직후, 대기 중인 `setTimeout(fn, 0)` 콜백보다 **먼저** 실행되는 것은?"
+    options:
+      opt_a: "`queueMicrotask`에 넘긴 콜백"
+      opt_b: "`setTimeout`에 두 번째로 넘긴 콜백"
+      opt_c: "`setInterval`의 첫 번째 콜백"
+      opt_d: "다음 사용자 클릭 이벤트의 처리기"
+    answer: opt_a
+    distractor_mc: { opt_b: m01, opt_c: m04, opt_d: m04 }
+    option_rationale:
+      opt_a: "queueMicrotask 콜백은 마이크로태스크라 스크립트가 끝나자마자 실행된다."
+      opt_b: "두 번째 setTimeout도 태스크라 먼저 등록된 타이머 뒤에 실행된다."
+      opt_c: "setInterval 콜백도 타이머 태스크라 마이크로태스크보다 늦다."
+      opt_d: "이벤트 처리기도 태스크라 마이크로태스크를 모두 비운 뒤에야 차례가 온다."
+    explanation_md: "정답은 opt_a다. 마이크로태스크는 태스크가 끝날 때마다 다음 태스크보다 먼저 모두 실행된다(k03, k04). 나머지 셋은 모두 태스크라 큐 순서를 기다린다. 타이머가 먼저라고 보는 것은 m01, 태스크와 마이크로태스크가 번갈아 돈다고 보는 것은 m04다."
+  i06:
+    format: mcq
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: apply
+    ku_refs: [k07, k01]
+    mc_refs: [m02, m03]
+    stem_family: sf_sync_part
+    gate_status: authored
+    stem: "`async function f() { heavy(); await g(); }`에서 `heavy()`는 1초 걸리는 동기 계산이다. 메인 코드가 `f(); console.log('done');`를 실행할 때 일어나는 일로 가장 알맞은 것은?"
+    options:
+      opt_a: "heavy()가 1초 동안 같은 스레드를 붙잡은 뒤에야 'done'이 출력된다"
+      opt_b: "f가 별도 스레드에서 돌기 때문에 'done'은 기다림 없이 곧바로 출력된다"
+      opt_c: "async 함수 본문 전체가 나중에 실행되므로 'done'이 heavy()보다 먼저 출력된다"
+      opt_d: "await가 있는 함수는 호출 즉시 일시 정지되어 heavy()는 g()가 끝난 뒤 실행된다"
+    answer: opt_a
+    distractor_mc: { opt_b: m02, opt_c: m03, opt_d: m02 }
+    option_rationale:
+      opt_a: "첫 await 앞의 heavy()는 호출 시점에 동기로 실행된다."
+      opt_b: "async 함수도 같은 스레드에서 돈다."
+      opt_c: "본문은 첫 await까지 즉시 실행된다. executor·본문을 미뤄진다고 보는 착각과 같다."
+      opt_d: "멈추는 지점은 await를 만나는 순간이지 함수 시작이 아니다."
+    explanation_md: "정답은 opt_a다. async 함수는 첫 await까지 호출한 쪽에서 동기로 실행되고(k07), JS는 호출 스택 하나에서 돈다(k01). opt_b·opt_d는 async를 별도 실행 흐름으로 보는 m02, opt_c는 동기 부분까지 미뤄진다고 보는 m03에서 나온다."
+  i07:
+    format: mcq
+    facet: operation
+    response_mode: recognition
+    level: 2
+    bloom: analyze
+    ku_refs: [k09, k05]
+    mc_refs: [m05, m02, m04]
+    stem_family: sf_blocking
+    gate_status: authored
+    stem: "브라우저 페이지에서 버튼을 누르면 300ms 걸리는 동기 계산이 돈다. 그동안 예약해 둔 `setTimeout(tick, 50)`과 화면 갱신은 어떻게 되는가?"
+    options:
+      opt_a: "계산이 끝날 때까지 tick도 화면 갱신도 실행되지 못하고 그 뒤로 밀린다"
+      opt_b: "tick은 정확히 50ms 뒤에 실행이 보장되므로 계산 도중에 끼어들어 실행된다"
+      opt_c: "타이머 콜백은 별도 스레드에서 돌기 때문에 계산과 동시에 실행된다"
+      opt_d: "계산 도중에 tick과 계산이 한 줄씩 번갈아 실행되어 둘 다 조금씩 늦어진다"
+    answer: opt_a
+    distractor_mc: { opt_b: m05, opt_c: m02, opt_d: m04 }
+    option_rationale:
+      opt_a: "실행 중인 콜백은 끝날 때까지 끼어들기를 당하지 않으므로 다른 콜백과 렌더링이 모두 기다린다."
+      opt_b: "지연값은 최소 대기 시간이며 정확한 실행 시각을 보장하지 않는다."
+      opt_c: "타이머 콜백도 같은 스레드의 이벤트 루프에서 실행된다."
+      opt_d: "콜백 단위로 끝까지 실행되며 줄 단위로 섞이지 않는다."
+    explanation_md: "정답은 opt_a다. 긴 동기 계산은 호출 스택을 붙잡아 타이머와 화면 갱신을 모두 미룬다(k09). 50은 최소 지연일 뿐이다(k05). opt_b는 m05, opt_c는 m02, opt_d는 실행이 섞인다고 보는 m04에서 나온다."
+  i08:
+    format: cloze
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: remember
+    ku_refs: [k03, k04]
+    stem_family: sf_cloze_loop
+    gate_status: authored
+    stem: "이벤트 루프는 태스크 하나를 실행한 뒤 다음 태스크로 가기 전에 {{b1}} 큐를 빌 때까지 모두 실행한다. Promise의 then 콜백은 이 큐에, setTimeout 콜백은 {{b2}} 큐에 들어간다."
+    blanks:
+      b1: { accept: ["마이크로태스크", "microtask", "마이크로 태스크"] }
+      b2: { accept: ["태스크", "task", "매크로태스크", "macrotask", "타이머"] }
+    explanation_md: "태스크가 끝날 때마다 마이크로태스크 큐를 비운다(k03). then 콜백은 마이크로태스크, setTimeout 콜백은 태스크다(k04). 두 큐를 바꿔 쓰면 실행 순서 예측이 거꾸로 된다."
+  i09:
+    format: short
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: apply
+    ku_refs: [k03, k04]
+    stem_family: sf_order_short
+    gate_status: authored
+    stem: "`setTimeout(c, 0); Promise.resolve().then(a).then(b);`를 실행했다. 콜백 a·b·c가 실행되는 순서를 쉼표로 이어 쓰세요(예: x,y,z)."
+    accept: ["a,b,c", "abc", "a→b→c"]
+    normalize: { case: insensitive, space: remove }
+    explanation_md: "a는 마이크로태스크, b는 a가 끝난 뒤 예약되는 마이크로태스크이고, 같은 체크포인트 안에서 연달아 실행된다(k03). c는 태스크라 마이크로태스크가 모두 끝난 뒤에 온다(k04). c,a,b라고 답했다면 등록 순서를 따른 것이다."
+  i10:
+    format: code_predict
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: apply
+    ku_refs: [k03, k04]
+    mc_refs: [m01, m04]
+    stem_family: sf_predict_output
+    gate_status: authored
+    stem: "다음 코드를 Node.js 22로 실행하면 표준 출력에 무엇이 찍히는가? 한 줄에 하나씩 순서대로 쓰세요."
+    code:
+      lang: js
+      src: |
+        setTimeout(() => {
+          console.log('timer 1');
+          Promise.resolve().then(() => console.log('then in timer 1'));
+        }, 0);
+        setTimeout(() => console.log('timer 2'), 0);
+        Promise.resolve().then(() => console.log('then'));
+        console.log('sync');
+    answer:
+      stdout: |-
+        sync
+        then
+        timer 1
+        then in timer 1
+        timer 2
+    explanation_md: "동기 코드 'sync'가 먼저고, 스크립트(첫 태스크)가 끝나면 마이크로태스크 'then'이 실행된다(k03). 이어서 태스크 'timer 1'이 돌고, 그 안에서 예약한 마이크로태스크가 다음 태스크 'timer 2'보다 먼저 실행된다(k04). 'timer 2'를 'then in timer 1'보다 앞에 두었다면 m04, 'timer 1'을 'then'보다 앞에 두었다면 m01이다."
+  i11:
+    format: code_predict
+    facet: code
+    response_mode: production
+    level: 2
+    bloom: apply
+    ku_refs: [k07, k04, k05]
+    mc_refs: [m02, m01]
+    stem_family: sf_predict_output
+    gate_status: authored
+    stem: "다음 코드를 Node.js 22로 실행하면 표준 출력에 무엇이 찍히는가? 한 줄에 하나씩 순서대로 쓰세요."
+    code:
+      lang: js
+      src: |
+        async function load() {
+          console.log('load start');
+          await null;
+          console.log('after await');
+        }
+        console.log('begin');
+        setTimeout(() => console.log('timeout'), 0);
+        load();
+        queueMicrotask(() => console.log('microtask'));
+        console.log('end');
+    answer:
+      stdout: |-
+        begin
+        load start
+        end
+        after await
+        microtask
+        timeout
+    explanation_md: "load()는 첫 await까지 동기로 돌아 'load start'를 찍고, 나머지는 마이크로태스크로 예약된다(k07). 그 예약이 queueMicrotask보다 먼저라 'after await'가 'microtask'보다 앞선다. 'timeout'은 태스크라 맨 끝이다(k04, k05). 'load start'를 'end' 뒤에 두었다면 m02다."
+  i12:
+    format: blank_note
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: understand
+    ku_refs: [k01, k02, k03, k04, k05, k06, k07, k08, k09, k10]
+    stem_family: sf_recall_free
+    gate_status: authored
+    prompt: "JavaScript 비동기 코드의 실행 순서를 처음 배우는 동료에게 설명한다고 생각하고 기억나는 대로 적어 보세요. 호출 스택, 태스크와 마이크로태스크, Promise와 async 함수의 동기 부분, 루프를 막는 코드를 다루면 좋습니다."
+    idea_units:
+      iu_stack: { text: "호출 스택 하나에서 실행하고 루프가 태스크를 하나씩 꺼낸다", ku_ref: k01, weight: 1, keywords: ["호출 스택", "이벤트 루프", "단일 스레드"] }
+      iu_rtc: { text: "실행 중인 콜백은 끝날 때까지 끼어들기를 당하지 않는다", ku_ref: k02, weight: 0.5, keywords: ["실행 완료", "run-to-completion"] }
+      iu_drain: { text: "태스크가 끝나면 마이크로태스크를 큐가 빌 때까지 모두 실행한다", ku_ref: k03, weight: 2, keywords: ["마이크로태스크", "모두", "비운다"] }
+      iu_which_queue: { text: "then·queueMicrotask는 마이크로태스크, setTimeout은 태스크다", ku_ref: k04, weight: 1.5, keywords: ["then", "setTimeout", "queueMicrotask"] }
+      iu_zero: { text: "setTimeout 0은 최소 지연이라 마이크로태스크 뒤에 실행된다", ku_ref: k05, weight: 1, keywords: ["0", "최소", "지연"] }
+      iu_executor: { text: "Promise executor는 동기로 즉시 실행된다", ku_ref: k06, weight: 1, keywords: ["executor", "동기", "생성자"] }
+      iu_await: { text: "async 함수는 첫 await까지 동기, 나머지는 마이크로태스크다", ku_ref: k07, weight: 1.5, keywords: ["async", "await", "동기"] }
+      iu_starve: { text: "마이크로태스크를 계속 예약하면 태스크와 렌더링이 굶는다", ku_ref: k08, weight: 1, keywords: ["굶", "무한", "렌더링"] }
+      iu_block: { text: "긴 동기 계산은 타이머와 화면 갱신을 모두 미룬다", ku_ref: k09, weight: 1, keywords: ["블로킹", "막는다", "지연"] }
+      iu_chunk: { text: "무거운 일은 조각내거나 워커로 옮긴다", ku_ref: k10, weight: 0.5, keywords: ["조각", "워커", "worker"] }
+    solo_rubric: rb.solo-5
+    model_note_md: |
+      JavaScript는 호출 스택 하나에서 실행되고, 이벤트 루프는 스택이 비면 태스크를 하나 꺼내 끝까지 실행한다. 실행 중인
+      콜백은 다른 콜백에게 끼어들기를 당하지 않는다. 태스크가 끝나면 다음 태스크 전에 마이크로태스크 큐를 빌 때까지 모두
+      실행하며, 그 사이 새로 예약된 것도 같은 차례에 처리한다. then·catch·finally·queueMicrotask와 await 뒤 코드는
+      마이크로태스크, setTimeout·I/O 콜백은 태스크다. 그래서 setTimeout 0은 최소 지연일 뿐 then보다 늦다. Promise
+      executor와 async 함수의 첫 await 앞부분은 동기로 즉시 실행된다. 긴 동기 계산이나 끝없는 마이크로태스크는 타이머와
+      렌더링을 막으므로 무거운 일은 조각내 태스크로 잇거나 워커로 옮긴다.
+    explanation_md: "핵심 축은 '어느 큐에 들어가는가'와 '무엇이 동기로 즉시 실행되는가' 두 가지다. 모범 노트는 제출 후에만 공개된다."
+  # ── 부속 9 ───────────────────────────────────────────────
+  i13:
+    format: embedded
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: apply
+    ku_refs: [k03]
+    mc_refs: [m04]
+    stem_family: sf_embedded_check
+    gate_status: authored
+    shape: mcq
+    stem: "then 콜백 안에서 또 다른 then 콜백을 예약했다. 이미 대기 중인 setTimeout 콜백과 비교하면 새로 예약한 콜백은 언제 실행되는가?"
+    options:
+      opt_a: "대기 중인 setTimeout 콜백보다 먼저"
+      opt_b: "대기 중인 setTimeout 콜백이 끝난 다음"
+      opt_c: "다음 화면 갱신이 끝난 다음"
+    answer: opt_a
+    explanation_md: "마이크로태스크 체크포인트는 처리 중에 추가된 마이크로태스크까지 비운 뒤 끝나므로, 새 then 콜백도 다음 태스크인 setTimeout 콜백보다 먼저 실행된다(k03)."
+  i14:
+    format: digging
+    facet: definition
+    response_mode: production
+    level: 2
+    bloom: remember
+    ku_refs: [k01]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d1
+    question: "이벤트 루프가 무엇이고 왜 필요한지 두 문장으로 말해 보세요."
+    expects:
+      kp_single: { text: "JS는 호출 스택 하나에서 실행된다", ku_ref: k01 }
+      kp_loop: { text: "스택이 비면 대기 중인 태스크를 하나씩 꺼내 실행하기를 반복한다", ku_ref: k01 }
+    followups:
+      fu_partial: { when: partial, question: "스레드가 하나뿐인데 타이머와 네트워크 응답을 어떻게 함께 기다릴 수 있을까요?" }
+      fu_dk: { when: dont_know, question: "식당 주문을 한 명의 직원이 처리한다면 어떤 순서로 일할지부터 떠올려 볼까요?" }
+    explanation_md: "D1은 정의를 자기 말로 꺼내는 단계다. '호출 스택 하나'와 '태스크를 하나씩 꺼내 실행'이 나오면 충분하다(k01)."
+  i15:
+    format: digging
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: understand
+    ku_refs: [k03, k04]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d2
+    question: "태스크와 마이크로태스크는 각각 무엇으로 예약되고, 둘의 실행 순서는 어떻게 정해지나요?"
+    expects:
+      kp_apis: { text: "setTimeout은 태스크, then·queueMicrotask는 마이크로태스크로 예약된다", ku_ref: k04 }
+      kp_order: { text: "태스크 하나가 끝나면 마이크로태스크를 모두 비운 뒤 다음 태스크로 간다", ku_ref: k03 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m01, question: "setTimeout(fn, 0)을 먼저 등록했는데 then 콜백이 먼저 실행되는 이유는 무엇일까요?" }
+    explanation_md: "D2는 작동 원리다. 큐의 종류와 '태스크 하나 → 마이크로태스크 전부' 순서를 함께 말해야 한다(k03, k04)."
+  i16:
+    format: digging
+    facet: contrast
+    response_mode: production
+    level: 2
+    bloom: analyze
+    ku_refs: [k03, k02]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d3
+    question: "왜 Promise 콜백을 타이머와 같은 태스크 큐가 아니라 별도의 마이크로태스크 큐에 두고, 태스크가 끝날 때마다 모두 비울까요?"
+    expects:
+      kp_asap: { text: "현재 작업의 후속 처리를 다른 이벤트나 렌더링보다 먼저, 가능한 한 빨리 끝내기 위해서다", ku_ref: k03 }
+      kp_consistent: { text: "후속 처리 사이에 다른 태스크가 끼어들지 않아 상태가 일관되게 유지된다", ku_ref: k02 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m04, question: "마이크로태스크를 태스크와 하나씩 번갈아 실행한다면 then을 이어 붙인 코드 사이에 무엇이 끼어들 수 있을까요?" }
+      fu_partial: { when: partial, question: "then 콜백 사이에 클릭 처리기가 끼어든다면 어떤 문제가 생길 수 있을까요?" }
+    explanation_md: "D3는 설계 이유다. '빨리'와 '끼어들기 없이' 두 가지 이유를 함께 짚으면 좋다(k03, k02)."
+  i17:
+    format: digging
+    facet: tradeoff
+    response_mode: production
+    level: 2
+    bloom: evaluate
+    ku_refs: [k08, k10]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d4
+    question: "다음 작업 조각을 queueMicrotask로 예약하는 것과 setTimeout으로 예약하는 것을 비교하면, 각각 무엇을 얻고 무엇을 잃나요?"
+    expects:
+      kp_micro: { text: "마이크로태스크는 빨리 실행되지만 계속 이어지면 태스크와 렌더링이 굶는다", ku_ref: k08 }
+      kp_task: { text: "setTimeout은 조각 사이에 다른 콜백과 렌더링에 차례를 넘기지만 그만큼 늦게 실행된다", ku_ref: k10 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m04, question: "마이크로태스크 안에서 예약한 마이크로태스크는 다음 태스크 전에 실행될까요, 뒤에 실행될까요?" }
+    explanation_md: "D4는 트레이드오프다. 응답 속도(마이크로태스크)와 양보(태스크) 사이의 선택이라는 점을 함께 말해야 한다(k08, k10)."
+  i18:
+    format: digging
+    facet: operation
+    response_mode: production
+    level: 2
+    bloom: evaluate
+    ku_refs: [k09, k05]
+    stem_family: sf_dig_chain
+    gate_status: authored
+    depth: d5
+    question: "Node.js 서버에서 setTimeout 콜백이 지정한 시간보다 몇 초씩 늦게 실행되는 현상은 어떤 조건에서 생기나요? 왜 그런가요?"
+    expects:
+      kp_block: { text: "다른 콜백의 긴 동기 계산이 호출 스택을 붙잡고 있으면 타이머 콜백이 차례를 얻지 못한다", ku_ref: k09 }
+      kp_min: { text: "지연값은 최소 대기 시간이라 그보다 늦어질 수 있다", ku_ref: k05 }
+    followups:
+      fu_mc: { when: misconception, mc_ref: m05, question: "setTimeout이 정확한 시각을 보장한다면 이 현상은 어떻게 설명할 수 있을까요?" }
+      fu_partial: { when: partial, question: "그 순간 호출 스택에서는 무엇이 돌고 있었을까요?" }
+    explanation_md: "D5는 실패 조건이다. 평소엔 정확해 보이다가 무거운 동기 작업이 끼는 순간 지연이 드러난다는 점을 짚으면 된다(k09, k05)."
+  i19:
+    format: digging_d4_mcq
+    facet: tradeoff
+    response_mode: recognition
+    level: 2
+    bloom: evaluate
+    ku_refs: [k08, k10]
+    mc_refs: [m04, m02, m01]
+    stem_family: sf_dig_offline
+    gate_status: authored
+    depth: d4
+    stem: "큰 배열을 1,000개씩 나눠 처리하면서 화면이 멈추지 않게 하려 한다. 다음 조각을 `queueMicrotask`로 예약할 때 치르는 대가로 가장 알맞은 것은?"
+    options:
+      opt_a: "조각들이 같은 체크포인트에서 연달아 실행되어, 다 끝날 때까지 렌더링과 다른 태스크가 밀린다"
+      opt_b: "마이크로태스크는 태스크 하나마다 하나씩만 실행되므로 setTimeout과 같은 효과를 내며 대가는 없다"
+      opt_c: "queueMicrotask 콜백은 별도 스레드에서 돌기 때문에 화면은 멈추지 않고 대가도 없다"
+      opt_d: "마이크로태스크는 setTimeout(fn, 0)보다 늦게 실행되므로 전체 처리 시간만 조금 길어진다"
+    answer: opt_a
+    distractor_mc: { opt_b: m04, opt_c: m02, opt_d: m01 }
+    explanation_md: "정답은 opt_a다. 처리 중에 새로 예약된 마이크로태스크도 같은 차례에 실행되므로 조각을 나눈 효과가 사라진다(k08). 차례를 넘기려면 태스크로 잇는다(k10). opt_b는 m04, opt_c는 m02, opt_d는 m01에서 나온다."
+  i20:
+    format: digging_d4_mcq
+    facet: operation
+    response_mode: recognition
+    level: 2
+    bloom: evaluate
+    ku_refs: [k09, k05]
+    mc_refs: [m05, m02, m04]
+    stem_family: sf_dig_offline
+    gate_status: authored
+    depth: d5
+    stem: "Node.js 서버에서 `setTimeout(fn, 100)`으로 예약한 작업이 가끔 2초 넘게 늦게 실행된다. 가장 그럴듯한 원인은?"
+    options:
+      opt_a: "그 사이 실행된 어떤 콜백이 2초 가까운 동기 계산으로 호출 스택을 붙잡았다"
+      opt_b: "setTimeout은 정확한 실행 시각을 보장하므로 Node.js 런타임의 결함이다"
+      opt_c: "fn은 별도 스레드에서 돌기 때문에 운영체제의 스레드 스케줄링이 늦어졌다"
+      opt_d: "타이머 콜백과 마이크로태스크가 하나씩 번갈아 돌아 차례를 기다리느라 늦어졌다"
+    answer: opt_a
+    distractor_mc: { opt_b: m05, opt_c: m02, opt_d: m04 }
+    explanation_md: "정답은 opt_a다. 지연값은 최소일 뿐이고(k05), 긴 동기 계산이 스택을 붙잡으면 타이머 콜백은 그 계산이 끝날 때까지 기다린다(k09). opt_b는 m05, opt_c는 m02, opt_d는 m04에서 나온다."
+  i21:
+    format: feynman
+    facet: contrast
+    response_mode: production
+    level: 2
+    bloom: create
+    ku_refs: [k03, k04, k05, k07]
+    mc_refs: [m01, m02]
+    stem_family: sf_teach
+    gate_status: authored
+    student_persona: "프런트엔드 개발을 시작한 지 석 달 된 하린. 콜백 순서가 헷갈릴 때마다 setTimeout 0을 넣어 해결해 왔다."
+    student_beliefs:
+      sb_timeout_first: { mc_ref: m01, opening_line: "setTimeout을 0으로 주면 제일 먼저 실행되니까 then보다 빠르잖아요." }
+      sb_async_thread: { mc_ref: m02, opening_line: "async 함수는 다른 스레드에서 도니까 무거운 계산을 넣어도 화면이 안 멈추죠?" }
+    checklist:
+      ck_drain: { text: "태스크가 끝날 때마다 마이크로태스크를 모두 비운다고 설명했다", ku_ref: k03 }
+      ck_queues: { text: "then은 마이크로태스크, setTimeout은 태스크라고 설명했다", ku_ref: k04 }
+      ck_min_delay: { text: "setTimeout 0은 최소 지연일 뿐이라고 설명했다", ku_ref: k05 }
+      ck_async_sync: { text: "async 함수는 같은 스레드에서 첫 await까지 동기로 돈다고 설명했다", ku_ref: k07 }
+    rubric: rb.feynman-teach
+    explanation_md: "학생의 두 착각(setTimeout 0이 가장 빠르다, async는 별도 스레드다)을 직접 교정해야 높은 점수를 받는다. 큐의 종류와 동기 구간을 함께 설명하는 것이 핵심이다."

@@ -1,0 +1,40 @@
+# content/templates/rubrics/explain-generic.yaml
+# yaml-language-server: $schema=../../.schemas/rubrics.schema.json
+schema_v: 1
+id: rb.explain-generic
+title_ko: "설명 일반"
+applies_to: [essay]
+dims:
+  d_accuracy:
+    name_ko: "정확성"
+    weight: 1.5
+    levels:
+      l1: "핵심 내용이 틀렸거나 빠져 있어 사실과 맞지 않는다."
+      l2: "일부는 맞지만 틀린 부분이 섞여 있고 근거가 제시되지 않는다."
+      l3: "대체로 정확하며 핵심 주장 하나를 근거와 함께 뒷받침한다."
+      l4: "내용이 정확하고 근거와 구체적 예시로 모든 핵심 주장을 뒷받침한다."
+  d_mechanism:
+    name_ko: "인과 설명"
+    weight: 1
+    levels:
+      l1: "원인과 결과의 연결이 없거나 틀리게 설명한다."
+      l2: "결과만 말하고 그것이 일어나는 이유는 설명하지 못한다."
+      l3: "원인에서 결과로 이어지는 과정을 대체로 맞게 설명하고 근거 하나를 든다."
+      l4: "단계별 인과를 빠짐없이 설명하고 근거와 예시로 각 연결을 뒷받침한다."
+  d_example:
+    name_ko: "예시와 적용"
+    weight: 1
+    levels:
+      l1: "예시가 없거나 개념과 맞지 않는 예시를 든다."
+      l2: "예시를 들지만 개념과의 연결을 설명하지 않는다."
+      l3: "개념에 맞는 예시를 들고 어떻게 적용되는지 대체로 설명한다."
+      l4: "서로 다른 상황의 예시를 들어 적용 조건과 한계까지 설명한다."
+  d_clarity:
+    name_ko: "명료성"
+    weight: 0.5
+    levels:
+      l1: "문장이 모호하고 흐름을 따라가기 어렵다."
+      l2: "뜻은 전달되지만 순서가 흐트러지고 용어가 일관되지 않는다."
+      l3: "순서가 분명하고 용어를 대체로 일관되게 쓴다."
+      l4: "군더더기 없이 논리 순서가 분명하며 용어를 정확하고 일관되게 쓴다."
+pass_mean: 2.5

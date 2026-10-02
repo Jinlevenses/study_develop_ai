@@ -2,12 +2,12 @@
 // R-FMT 사전 검사: items 파일은 union 파싱 전에 각 items.<key>.format을 본다 — FormatId 밖 또는 NON_AUTHORING = R-FMT error.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { z } from 'zod';
+import type { z } from 'zod';
 import { PACKC_VERSION } from '../emit/manifest.js';
 import { isAuthoringFormat, isNonAuthoringFormat } from '../format-map.js';
 import type { FileKind } from '../parse/discover.js';
-import { parseBody } from '../parse/markdown.js';
 import type { RawFile } from '../parse/load.js';
+import { parseBody } from '../parse/markdown.js';
 import { ConceptFrontmatter } from '../parse/schema/concept.js';
 import { ItemFile } from '../parse/schema/item.js';
 import { ItemModelFile } from '../parse/schema/item-model.js';
@@ -18,8 +18,8 @@ import { RubricFile } from '../parse/schema/rubric.js';
 import { SourceRegistry } from '../parse/schema/source.js';
 import { SourceRequestFile, TemplateDigFile, TemplateT2File } from '../parse/schema/template.js';
 import { V7Record } from '../parse/schema/v7.js';
-import { finding } from './finding.js';
 import type { Finding } from './finding.js';
+import { finding } from './finding.js';
 import type { LoadedFile } from './model.js';
 
 export type V1Context = { readonly policyDir: string };
@@ -75,7 +75,9 @@ function preCheckItems(file: string, data: unknown): { data: unknown; findings: 
     const format = isRecord(item) ? item.format : undefined;
     if (typeof format === 'string' && !isAuthoringFormat(format)) {
       const why = isNonAuthoringFormat(format) ? 'runtime-only format' : 'not an IF-01 FormatId';
-      findings.push(finding('R-FMT', 'error', file, `items.${key}.format`, `format '${format}' cannot be authored (${why})`));
+      findings.push(
+        finding('R-FMT', 'error', file, `items.${key}.format`, `format '${format}' cannot be authored (${why})`),
+      );
       continue;
     }
     kept[key] = item;
@@ -118,7 +120,15 @@ function packExtras(file: string, track: string, pack: PackYaml, ctx: V1Context)
     const hi = triple(m[2] ?? '0.0.0');
     const cur = triple(PACKC_VERSION);
     if (cmpTriple(cur, lo) < 0 || cmpTriple(cur, hi) >= 0) {
-      out.push(finding('V1', 'error', file, 'requires.packc', `packc ${PACKC_VERSION} does not satisfy ${pack.requires.packc}`));
+      out.push(
+        finding(
+          'V1',
+          'error',
+          file,
+          'requires.packc',
+          `packc ${PACKC_VERSION} does not satisfy ${pack.requires.packc}`,
+        ),
+      );
     }
   }
   for (const [name, v] of Object.entries(pack.requires.policy)) {
@@ -164,7 +174,12 @@ export function validateV1(raw: RawFile, ctx: V1Context): V1Result {
   return { file: findings.some((f) => f.severity === 'error') ? null : loaded, findings };
 }
 
-function narrow(kind: FileKind, meta: { rel: string; disc: RawFile['disc'] }, value: unknown, body: string | null): LoadedFile | null {
+function narrow(
+  kind: FileKind,
+  meta: { rel: string; disc: RawFile['disc'] },
+  value: unknown,
+  body: string | null,
+): LoadedFile | null {
   switch (kind) {
     case 'pack':
       return { ...meta, kind, data: PackYaml.parse(value) };

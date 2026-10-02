@@ -1,0 +1,32 @@
+# content/templates/rubrics/solo-5.yaml
+# yaml-language-server: $schema=../../.schemas/rubrics.schema.json
+schema_v: 1
+id: rb.solo-5
+title_ko: "SOLO 5단 백지노트"
+applies_to: [blank_note]
+dims:
+  d_coverage:
+    name_ko: "아이디어 포괄"
+    weight: 1
+    levels:
+      l1: "핵심 아이디어가 거의 없거나 주제와 어긋나 있다."
+      l2: "핵심 아이디어 일부만 나열하고 근거나 예시가 없다."
+      l3: "핵심 아이디어를 대부분 다루며 하나 이상을 근거와 함께 쓴다."
+      l4: "핵심 아이디어를 빠짐없이 다루고 근거와 예시로 각각 뒷받침한다."
+  d_structure:
+    name_ko: "구조 수준"
+    weight: 1.5
+    levels:
+      l1: "아이디어를 하나만 짚고 그것들 사이의 관계는 쓰지 않는 단일 구조 수준이다."
+      l2: "아이디어를 여럿 나열하지만 서로의 관계는 연결하지 못하는 다중 구조 수준이다."
+      l3: "아이디어 사이의 인과와 포함 관계를 연결해 전체를 설명하는 관계 구조 수준이다."
+      l4: "관계 구조를 새로운 상황이나 상위 원리로 일반화하는 확장 추상 수준이다."
+  d_accuracy:
+    name_ko: "정확성"
+    weight: 1
+    levels:
+      l1: "핵심 내용이 틀렸거나 빠져 있어 사실과 맞지 않는다."
+      l2: "일부는 맞지만 틀린 부분이 섞여 있고 근거가 제시되지 않는다."
+      l3: "대체로 정확하며 핵심 주장 하나를 근거와 함께 뒷받침한다."
+      l4: "내용이 정확하고 근거와 구체적 예시로 모든 핵심 주장을 뒷받침한다."
+pass_mean: 2.5

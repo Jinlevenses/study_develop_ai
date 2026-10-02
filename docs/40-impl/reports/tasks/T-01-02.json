@@ -46,23 +46,73 @@
     "IT-330..335"
   ],
   "commands": [
-    { "cmd": "pnpm --filter @fathom/svc-learning typecheck", "exit": 0 },
-    { "cmd": "pnpm --filter @fathom/svc-learning test", "exit": 0, "note": "21 files, 161 passed + 1 expected fail (others' lane)" },
-    { "cmd": "pnpm --filter @fathom/svc-learning test:integration", "exit": 0, "note": "7 files, 31 passed" },
-    { "cmd": "pnpm --filter @fathom/testkit typecheck", "exit": 0 },
-    { "cmd": "node --disable-warning=ExperimentalWarning --import tsx --conditions=source services/learning/test/golden/ledger/generate-golden.ts", "exit": 0, "note": "basic/two-device/corrections: identical" },
-    { "cmd": "pnpm lint", "exit": 0 },
-    { "cmd": "node tools/gates/run-gates.mjs --stage=g1", "exit": 0 },
-    { "cmd": "node tools/gates/check-ledger-writer.mjs", "exit": 0 },
-    { "cmd": "node tools/gates/check-sql-typed.mjs", "exit": 0 },
-    { "cmd": "node tools/gates/check-boundaries.mjs", "exit": 0 },
-    { "cmd": "node tools/gates/check-sql-template.mjs", "exit": 0 },
-    { "cmd": "node tools/gates/check-scope.mjs --task T-01-02", "exit": 1, "note": "690 scope/outside-allowed rows, all from other tasks' uncommitted files in the shared working tree (content/, T-01-03, T-01-06 ...); 0 rows for T-01-02 paths. Re-check on the squashed T-01-02 branch." }
+    {
+      "cmd": "pnpm --filter @fathom/svc-learning typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-learning test",
+      "exit": 0,
+      "note": "22 files, 165 passed + 1 expected fail (after SUPPLEMENT 1)"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-learning test:integration",
+      "exit": 0,
+      "note": "7 files, 31 passed"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/testkit typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "node --disable-warning=ExperimentalWarning --import tsx --conditions=source services/learning/test/golden/ledger/generate-golden.ts",
+      "exit": 0,
+      "note": "basic/two-device/corrections: identical"
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/check-ledger-writer.mjs",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/check-sql-typed.mjs",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/check-boundaries.mjs",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/check-sql-template.mjs",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-01-02",
+      "exit": 1,
+      "note": "690 scope/outside-allowed rows, all from other tasks' uncommitted files in the shared working tree (content/, T-01-03, T-01-06 ...); 0 rows for T-01-02 paths. Re-check on the squashed T-01-02 branch."
+    }
   ],
   "graphify": [
-    { "q": "query 'ledger writer append lr_event' --budget 1500", "summary": "graph.json present; only generic eventing/outbox/contracts nodes returned, no existing learning ledger implementation (greenfield dirs)." },
-    { "q": "explain 'LedgerPorts'", "summary": "consumed by learning/src/config.ts only (type import); shape preserved." },
-    { "q": "affected 'LedgerPorts' --depth 2", "within_scope": true, "summary": "config.ts, app.ts, main.ts — type unchanged, typecheck green; none edited." }
+    {
+      "q": "query 'ledger writer append lr_event' --budget 1500",
+      "summary": "graph.json present; only generic eventing/outbox/contracts nodes returned, no existing learning ledger implementation (greenfield dirs)."
+    },
+    {
+      "q": "explain 'LedgerPorts'",
+      "summary": "consumed by learning/src/config.ts only (type import); shape preserved."
+    },
+    {
+      "q": "affected 'LedgerPorts' --depth 2",
+      "within_scope": true,
+      "summary": "config.ts, app.ts, main.ts — type unchanged, typecheck green; none edited."
+    }
   ],
   "deviations": [
     "importInTx start point per device = hash of local row (device, first_seq-1) when the file does not begin at seq 1 (== local head for incremental imports), instead of 'local current head' only; otherwise a full re-import of an already-present ledger could not be idempotent (UT-LR-061).",
@@ -70,7 +120,12 @@
     "two-device golden: device B first imports A's phase-1 ledger (so B does not bootstrap its own policy.switched), then both devices act independently; B's whole ledger is merged back into A (A's rows = duplicates). Brief said 'each in its own DB' - see escalation.",
     "LEDGER_INSERT is exported from ledger-writer.ts (only file with the INSERT literal) so UT-LR-069 can compare it to DB-01 §6.3; LEDGER_REPLAY* statements add experiment_arm and recorded_at columns (needed by LedgerEventEnvelope).",
     "createCheckpoint/verifyLedger live in application/ledger (per Brief) and import SQL constants from infra/ledger/ledger.sql.ts; JSONL (fathom.ledger.v1) line zod schemas are defined locally in application/ledger/jsonl.ts and testkit golden-ledgers.ts (file format, not a contracts schema).",
-    "Checkpoint heads/anchor `seq` are >= 1 (JSONL header devices schema); an empty ledger yields devices {} (root = sha256('{}'))."
+    "Checkpoint heads/anchor `seq` are >= 1 (JSONL header devices schema); an empty ledger yields devices {} (root = sha256('{}')).",
+    "SUPPLEMENT 1 (T1 review): LedgerWriter no longer caches localDeviceId/policyKnown — each appendInTx SELECTs lr_device (is_local=1) and policy.switched inside the tx, so a caller rollback after >=2 appendInTx calls cannot leave an orphan device_id or a phantom 'policy known' state (NFR-DATA-013). Test: UT-LR-033 (second case) in writer.spec.ts.",
+    "SUPPLEMENT 1: importInTx now validates every event BEFORE any write (after verifyChains): upcast -> schema_version_unsupported, LEDGER_PAYLOADS[type][v] -> payload_invalid (path+code only), isValidLedgerIdempotencyKey -> key_invalid; any failure returns err with device_id/device_seq and writes 0 rows (DB-01 §6.3 whole-import rejection; no integrity alarm raised, it is input rejection). Tests: three UT-LR-062 cases in import.spec.ts (IDs 030~069 are all allocated, so they share UT-LR-062).",
+    "SUPPLEMENT 1: application/ledger/{checkpoint,verify}.ts no longer import infra/ledger/hash-port.js (local HashPort from @fathom/shared-kernel/canonical/canonical). They still import SQL constants from infra/ledger/ledger.sql.js — Brief-mandated placement (application functions + infra SQL); recorded as an accepted exception for T1 to confirm; reader-port injection would change Brief-fixed signatures.",
+    "SUPPLEMENT 1: parseLedgerJsonl parses lines via parseJsonStrict inside try/catch and reports only 'invalid json (line N)' — SyntaxError text (which embeds input snippets) is dropped (STD-LOG-22). Test added in UT-LR-068. JSONL line schemas remain duplicated in testkit golden-ledgers.ts; moving them to contracts would need a CR (proposal, not done: frozen scope).",
+    "SUPPLEMENT 1: commit attribution — integrator must commit T-01-02 as one squash with trailers Task: T-01-02, Refs: WP-01-05, CR: CR-65, Golden: ... and include packages/testkit/src/golden-ledgers/; check:scope must be re-run on a clean T-01-02 branch (shared working tree makes it exit 1 from other lanes' files)."
   ],
   "escalations": [
     {
@@ -79,11 +134,77 @@
     }
   ],
   "rtmUpdates": [
-    { "wp": "WP-01-05", "pgm": "PGM-LR-060", "req": ["FR-PRG-001", "FR-PRG-002", "NFR-DATA-013"], "tests": ["UT-LR-001..002", "UT-LR-009..012", "UT-LR-030..039", "UT-LR-061..067", "UT-LR-069", "IT-330..335"] },
-    { "wp": "WP-01-05", "pgm": "PGM-LR-061", "req": ["FR-PRG-003", "CR-27"], "tests": ["UT-LR-004", "UT-LR-006..007", "UT-LR-045..054", "UT-LR-610..619"] },
-    { "wp": "WP-01-05", "pgm": "PGM-LR-062", "req": ["NFR-DATA-002", "NFR-DATA-011", "FR-PRG-027"], "tests": ["UT-LR-003", "UT-LR-005", "UT-LR-040..044", "UT-LR-055..057"] },
-    { "wp": "WP-01-05", "pgm": "PGM-LR-063", "req": ["NFR-DATA-001", "NFR-DATA-003"], "tests": ["UT-LR-008", "UT-LR-058..060", "CT-LR-801..817"] },
-    { "wp": "WP-01-05", "pgm": "PGM-LR-064", "req": ["NFR-DATA-013", "QAS-08"], "tests": ["CT-LR-505", "UT-LR-012"] }
+    {
+      "wp": "WP-01-05",
+      "pgm": "PGM-LR-060",
+      "req": [
+        "FR-PRG-001",
+        "FR-PRG-002",
+        "NFR-DATA-013"
+      ],
+      "tests": [
+        "UT-LR-001..002",
+        "UT-LR-009..012",
+        "UT-LR-030..039",
+        "UT-LR-061..067",
+        "UT-LR-069",
+        "IT-330..335"
+      ]
+    },
+    {
+      "wp": "WP-01-05",
+      "pgm": "PGM-LR-061",
+      "req": [
+        "FR-PRG-003",
+        "CR-27"
+      ],
+      "tests": [
+        "UT-LR-004",
+        "UT-LR-006..007",
+        "UT-LR-045..054",
+        "UT-LR-610..619"
+      ]
+    },
+    {
+      "wp": "WP-01-05",
+      "pgm": "PGM-LR-062",
+      "req": [
+        "NFR-DATA-002",
+        "NFR-DATA-011",
+        "FR-PRG-027"
+      ],
+      "tests": [
+        "UT-LR-003",
+        "UT-LR-005",
+        "UT-LR-040..044",
+        "UT-LR-055..057"
+      ]
+    },
+    {
+      "wp": "WP-01-05",
+      "pgm": "PGM-LR-063",
+      "req": [
+        "NFR-DATA-001",
+        "NFR-DATA-003"
+      ],
+      "tests": [
+        "UT-LR-008",
+        "UT-LR-058..060",
+        "CT-LR-801..817"
+      ]
+    },
+    {
+      "wp": "WP-01-05",
+      "pgm": "PGM-LR-064",
+      "req": [
+        "NFR-DATA-013",
+        "QAS-08"
+      ],
+      "tests": [
+        "CT-LR-505",
+        "UT-LR-012"
+      ]
+    }
   ],
   "notes": "1) Golden sets (CR-65): basic 1500 ev root 735c1187ed32..., two-device 1200 ev (2 devices, A 743 + B 457) root 426f8ee5e443..., corrections 600 ev root 7a588261b882...; ledger_sha256 in meta.json; generator deterministic (same seed twice = same bytes, in-memory and file DB). 2) IT-333 FULL append n=1000: p99 1.9ms (re-run 8.5ms, max 131ms) vs 100ms bound. 3) Alarm wiring (degraded banner/doctor) deferred to IT-03; handler registration/wiring (INBOX_HANDLERS, config/app) deferred to T-01-09. 4) graphify available (read-only queries only). 5) Commit trailers: Task: T-01-02, Refs: WP-01-05, CR: CR-65, Golden: initial golden ledgers basic/two-device/corrections (CR-65)."
 }

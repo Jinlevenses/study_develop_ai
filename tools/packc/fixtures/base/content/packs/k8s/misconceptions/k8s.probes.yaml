@@ -1,0 +1,10 @@
+schema_v: 1
+concept_id: k8s.probes
+mcs:
+  m01:
+    kind: sibling_confusion
+    meta_family: mf_phase_confusion
+    wrong_belief: "readiness 프로브가 실패하면 kubelet이 컨테이너를 재시작한다."
+    correction: "재시작은 liveness 프로브의 몫이다. readiness 실패는 서비스 엔드포인트에서 Pod를 제외할 뿐 재시작하지 않는다."
+    refutes: [k02]
+    prevalence: high

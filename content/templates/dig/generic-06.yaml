@@ -1,0 +1,11 @@
+# content/templates/dig/generic-06.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-06
+kind: dig
+depth: d6
+question_template: "{{concept.title_ko}}에 대해 흔히 믿는 주장 하나를 골라, 그 주장이 틀리는 반례를 들어 보세요."
+expects_from: [property, failure_mode]
+followups:
+  fu_partial: { when: partial, question: "그 반례가 성립하는 조건을 더 좁혀 보세요." }
+  fu_dont_know: { when: dont_know, question: "\"항상\" 또는 \"절대\"가 들어간 설명을 찾아 그것이 깨지는 경우를 생각해 보세요." }

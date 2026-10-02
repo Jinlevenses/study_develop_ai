@@ -1,0 +1,31 @@
+schema_v: 1
+batch_id: v7.docker.001
+pack_id: docker
+created_at: "2026-10-01"
+scope:
+  record_ids:
+    - docker.dockerfile.i01
+    - docker.dockerfile.i02
+    - docker.dockerfile.i03
+    - docker.dockerfile.i04
+    - docker.dockerfile.i05
+    - docker.dockerfile.i06
+policy: tier_a_20pct
+author: { wp: WP-T-docker.A, model_id: T2, context_id: ctx-author-001 }
+reviewer: { wp: WP-REV, model_id: T1, context_id: ctx-review-001, prompt_id: "review.v7.items@1.0.0", tier: upper }
+sampling:
+  seed: 7
+  sampled_ids:
+    - docker.dockerfile.i02
+    - docker.dockerfile.i05
+checklist_version: "v7-checklist@1"
+findings: {}
+defect_rate: 0
+decision: approve
+approved_hashes:
+  docker.dockerfile.i01: "6b3ebcc8beb76219554bee0b839e7a98792f3c34029a544ba9db67a146de3b2a"
+  docker.dockerfile.i02: "0b06ac5ff065255ad0f22a94253bd6bb3543dabf1d3dbe23a912937cf56ef274"
+  docker.dockerfile.i03: "b608404ca6d1a9a8a633c660641b56e2f7df288c4c031a8e3381dc59921a28fe"
+  docker.dockerfile.i04: "bdb7d3c0e6f839c91c303419287c0f05c69f9765ebc979523f5dd3a2e3ac2806"
+  docker.dockerfile.i05: "ca61c6a528dba8c8ba3a19d9846375a7d886e124acbe4b1d17833c457c8afe85"
+  docker.dockerfile.i06: "10410abba561aa897a4ef33d5b06488c86687a4701e17ae41d6d90ff6f0fb752"

@@ -1,0 +1,18 @@
+# content/packs/k8s/item-models/k8s.probes.yaml
+# yaml-language-server: $schema=../../../.schemas/item-models.schema.json
+schema_v: 1
+concept_id: k8s.probes
+models:
+  im01:
+    kind: t2
+    format: ox
+    facet: contrast
+    response_mode: recognition
+    stem_family: sf_t2_probe_mc_ox
+    source: { from: mc }
+    template:
+      stem: "{{concept.title_ko}}: {{mc.wrong_belief}}"
+      answer: "false"
+    constraints: { dedupe_jaccard: 0.85, max_instances: 12 }
+    metamorphic: { preserve: [option_order], flip: [] }
+    stakes_max: S1

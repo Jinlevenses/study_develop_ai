@@ -1,0 +1,10 @@
+# content/packs/db/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: db
+version: "0.1.0"
+channel: seed
+track: { id: db, name_ko: "데이터베이스", name_en: "Databases", track_group: app, sort_order: 7,
+         summary_ko: "SQL·인덱스·트랜잭션·격리 수준·복제까지, 데이터를 안전하고 빠르게 저장·조회하는 방법" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

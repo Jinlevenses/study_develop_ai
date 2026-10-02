@@ -1,0 +1,40 @@
+# content/templates/rubrics/fermi-assumptions.yaml
+# yaml-language-server: $schema=../../.schemas/rubrics.schema.json
+schema_v: 1
+id: rb.fermi-assumptions
+title_ko: "페르미 추정 가정"
+applies_to: [fermi_assumptions]
+dims:
+  d_decomposition:
+    name_ko: "분해"
+    weight: 1
+    levels:
+      l1: "문제를 나누지 않고 값 하나를 바로 찍는다."
+      l2: "나누기는 하지만 항목이 겹치거나 빠진 부분이 많다."
+      l3: "문제를 곱셈 가능한 항목으로 나누고 빠진 항목이 거의 없다."
+      l4: "겹침과 누락 없이 나누고 각 항목의 근거를 함께 제시한다."
+  d_assumptions:
+    name_ko: "가정 명시"
+    weight: 1.5
+    levels:
+      l1: "가정을 밝히지 않아 값의 출처를 알 수 없다."
+      l2: "가정을 일부만 밝히고 값이 어디서 왔는지 쓰지 않는다."
+      l3: "주요 가정을 모두 밝히고 값 하나 이상을 근거와 함께 쓴다."
+      l4: "모든 가정을 밝히고 각 값의 근거와 불확실한 정도를 함께 쓴다."
+  d_magnitude:
+    name_ko: "자릿수 감각"
+    weight: 1
+    levels:
+      l1: "결과가 자릿수 단위로 현실과 크게 어긋난다."
+      l2: "자릿수는 가깝지만 어긋난 이유를 설명하지 못한다."
+      l3: "자릿수가 현실과 맞고 오차의 주요 원인 하나를 짚는다."
+      l4: "자릿수가 맞고 오차의 원인과 범위를 근거와 함께 설명한다."
+  d_sanity:
+    name_ko: "검산"
+    weight: 0.5
+    levels:
+      l1: "결과를 되돌아보지 않고 그대로 제출한다."
+      l2: "결과를 한 번 훑지만 비교할 기준을 쓰지 않는다."
+      l3: "알려진 값이나 상식과 비교해 결과를 한 번 확인한다."
+      l4: "독립된 방법이나 기준값과 비교해 결과를 확인하고 차이를 설명한다."
+pass_mean: 2.5

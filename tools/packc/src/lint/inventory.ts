@@ -1,6 +1,7 @@
 // R-POOL · cap 인벤토리(Brief T-01-03 §4.6). 판정은 반드시 @fathom/contracts/pack/feasibility의 structuralFeasibility() 호출(재구현 0).
-import { AiMode } from '@fathom/contracts/common/domain';
+
 import type { FormatId } from '@fathom/contracts/common/domain';
+import { AiMode } from '@fathom/contracts/common/domain';
 import type { TrackId } from '@fathom/contracts/common/ids';
 import type { FeasibilityBlocker } from '@fathom/contracts/common/practice';
 import type { AssessmentInventory } from '@fathom/contracts/pack/feasibility';
@@ -107,11 +108,36 @@ export function buildInventory(
     return { items: c?.items ?? 0, formats: sortedUnique([...(c?.formats ?? [])]) };
   };
   const assessmentPool: Inventory['assessment_pool'] = {
-    '1': { FULL: cell('1', 'FULL'), JUDGE_ONLY: cell('1', 'JUDGE_ONLY'), LLM_ONLY: cell('1', 'LLM_ONLY'), OFFLINE: cell('1', 'OFFLINE') },
-    '2': { FULL: cell('2', 'FULL'), JUDGE_ONLY: cell('2', 'JUDGE_ONLY'), LLM_ONLY: cell('2', 'LLM_ONLY'), OFFLINE: cell('2', 'OFFLINE') },
-    '3': { FULL: cell('3', 'FULL'), JUDGE_ONLY: cell('3', 'JUDGE_ONLY'), LLM_ONLY: cell('3', 'LLM_ONLY'), OFFLINE: cell('3', 'OFFLINE') },
-    '4': { FULL: cell('4', 'FULL'), JUDGE_ONLY: cell('4', 'JUDGE_ONLY'), LLM_ONLY: cell('4', 'LLM_ONLY'), OFFLINE: cell('4', 'OFFLINE') },
-    '5': { FULL: cell('5', 'FULL'), JUDGE_ONLY: cell('5', 'JUDGE_ONLY'), LLM_ONLY: cell('5', 'LLM_ONLY'), OFFLINE: cell('5', 'OFFLINE') },
+    '1': {
+      FULL: cell('1', 'FULL'),
+      JUDGE_ONLY: cell('1', 'JUDGE_ONLY'),
+      LLM_ONLY: cell('1', 'LLM_ONLY'),
+      OFFLINE: cell('1', 'OFFLINE'),
+    },
+    '2': {
+      FULL: cell('2', 'FULL'),
+      JUDGE_ONLY: cell('2', 'JUDGE_ONLY'),
+      LLM_ONLY: cell('2', 'LLM_ONLY'),
+      OFFLINE: cell('2', 'OFFLINE'),
+    },
+    '3': {
+      FULL: cell('3', 'FULL'),
+      JUDGE_ONLY: cell('3', 'JUDGE_ONLY'),
+      LLM_ONLY: cell('3', 'LLM_ONLY'),
+      OFFLINE: cell('3', 'OFFLINE'),
+    },
+    '4': {
+      FULL: cell('4', 'FULL'),
+      JUDGE_ONLY: cell('4', 'JUDGE_ONLY'),
+      LLM_ONLY: cell('4', 'LLM_ONLY'),
+      OFFLINE: cell('4', 'OFFLINE'),
+    },
+    '5': {
+      FULL: cell('5', 'FULL'),
+      JUDGE_ONLY: cell('5', 'JUDGE_ONLY'),
+      LLM_ONLY: cell('5', 'LLM_ONLY'),
+      OFFLINE: cell('5', 'OFFLINE'),
+    },
   };
   return { track, concepts: list, assessment_pool: assessmentPool, cases: [] };
 }
@@ -155,12 +181,10 @@ export function computeCap(mastery: Mastery, inv: Inventory): CapResult {
       }
     }
   }
-  const flat = [
-    ...blockers.L1.OFFLINE,
-    ...blockers.L2.OFFLINE,
-    ...blockers.L3.OFFLINE,
-    ...blockers.L4.OFFLINE,
-  ].slice(0, 100);
+  const flat = [...blockers.L1.OFFLINE, ...blockers.L2.OFFLINE, ...blockers.L3.OFFLINE, ...blockers.L4.OFFLINE].slice(
+    0,
+    100,
+  );
   return {
     per_mode: perMode,
     offline_cap_level: perMode.OFFLINE,

@@ -1,0 +1,11 @@
+# content/templates/dig/generic-07.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-07
+kind: dig
+depth: d7
+question_template: "시스템을 설계할 때 {{concept.title_ko}}를 고려하면 어떤 결정이 달라지나요?"
+expects_from: [tradeoff, heuristic]
+followups:
+  fu_partial: { when: partial, question: "그 결정의 비용은 누가 치르나요?" }
+  fu_dont_know: { when: dont_know, question: "이 개념을 무시한 설계가 어떤 문제를 겪을지 생각해 보세요." }

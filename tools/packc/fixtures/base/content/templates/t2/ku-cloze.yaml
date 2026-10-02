@@ -1,0 +1,15 @@
+schema_v: 1
+id: ku-cloze
+applies_to: { tiers: [A, B], ku_types: [definition, mechanism] }
+kind: t2
+format: cloze
+facet: definition
+response_mode: production
+stem_family: sf_ku_cloze
+source: { from: ku, ku_types: [definition, mechanism] }
+template:
+  stem: "{{ku.cloze}}"
+  answer: "{{ku.cloze}}"
+constraints: { dedupe_jaccard: 0.85, max_instances: 12 }
+metamorphic: { preserve: [paraphrase], flip: [] }
+stakes_max: S1

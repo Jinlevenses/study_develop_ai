@@ -1,0 +1,10 @@
+# content/packs/eng/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: eng
+version: "0.1.0"
+channel: seed
+track: { id: eng, name_ko: "엔지니어링 실천", name_en: "Software Engineering Practice", track_group: design_lead, sort_order: 18,
+         summary_ko: "Git·테스트·코드 리뷰·요구사항·SI 산출물까지, 품질 있는 소프트웨어를 만드는 실천" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

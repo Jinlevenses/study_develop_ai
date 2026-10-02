@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/k8s/concepts/k8s.probes.md",
+      "from": "prereqs: [k8s.pod]",
+      "to": "prereqs: [k8s.ghost]"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-REF"
+    ]
+  }
+}

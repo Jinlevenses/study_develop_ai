@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/k8s/concepts/k8s.probes.md",
+      "from": "aliases: [\"Probes\", \"헬스 체크\"]",
+      "to": "aliases: [\"헬스 체크\"]"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-ALIAS"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+# content/packs/lead/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: lead
+version: "0.1.0"
+channel: seed
+track: { id: lead, name_ko: "기술 리더십", name_en: "Technical Leadership", track_group: design_lead, sort_order: 19,
+         summary_ko: "의사소통·기술 결정·설계 문서·멘토링까지, 팀과 조직에서 기술적 판단을 이끄는 방법" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

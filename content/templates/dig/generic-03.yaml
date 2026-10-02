@@ -1,0 +1,11 @@
+# content/templates/dig/generic-03.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-03
+kind: dig
+depth: d3
+question_template: "{{concept.title_ko}}가 기대대로 동작하지 않는 경계 조건은 무엇인가요?"
+expects_from: [constraint, failure_mode]
+followups:
+  fu_partial: { when: partial, question: "그 조건에서 실제로 어떤 증상이 보이나요?" }
+  fu_dont_know: { when: dont_know, question: "입력이 아주 크거나 0일 때를 생각해 보세요." }

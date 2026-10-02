@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/pack.yaml",
+      "from": "content_license: repo",
+      "to": "content_license: repo\nbogus: 1"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "V1"
+    ]
+  }
+}

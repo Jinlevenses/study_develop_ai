@@ -1,6 +1,7 @@
 // DCP-01 §6.2.1 — packs/<track>/concepts/<concept_id>.md frontmatter.
-import { ConceptId, TrackId } from '@fathom/contracts/common/ids';
+
 import { KnowledgeType, Level, Tag, Tier, Volatility } from '@fathom/contracts/common/domain';
+import { ConceptId, TrackId } from '@fathom/contracts/common/ids';
 import { z } from 'zod';
 import { Bloom, IsoDate, KeyMap, ObjKey, SourceRef } from './common.js';
 

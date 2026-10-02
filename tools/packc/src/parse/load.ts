@@ -2,8 +2,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseYamlStrict } from '@fathom/shared-kernel/policy/policy';
-import { finding } from '../validate/finding.js';
 import type { Finding } from '../validate/finding.js';
+import { finding } from '../validate/finding.js';
 import type { DiscoveredFile } from './discover.js';
 import { splitFrontmatter } from './frontmatter.js';
 

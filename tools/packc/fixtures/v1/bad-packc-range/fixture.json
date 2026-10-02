@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/pack.yaml",
+      "from": ">=0.1.0 <1.0.0",
+      "to": ">=1.0.0 <2.0.0"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "V1"
+    ]
+  }
+}

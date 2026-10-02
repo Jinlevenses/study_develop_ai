@@ -1,0 +1,223 @@
+// 트랙 20개 상수(Brief T-01-03 §4.7 TRACKS 표 — R4 §3.2 순서 · DCP-01 §6.1 track_group 배정). scaffold가 pack.yaml을 만들 때만 쓴다.
+export type TrackGroupName = 'foundation' | 'app' | 'infra' | 'security' | 'ai' | 'design_lead';
+
+export type TrackDef = {
+  readonly id: string;
+  readonly sort: number;
+  readonly group: TrackGroupName;
+  readonly name_ko: string;
+  readonly name_en: string;
+  readonly summary_ko: string;
+  readonly volatility: 'stable' | 'evolving' | 'volatile';
+  /** DCP-01 §8.6 "트랙 기본 출처". */
+  readonly source_id: string;
+};
+
+export const TRACKS: readonly TrackDef[] = [
+  {
+    id: 'alg',
+    sort: 1,
+    group: 'foundation',
+    name_ko: '알고리즘·자료구조',
+    name_en: 'Algorithms & Data Structures',
+    summary_ko: '복잡도 분석부터 자료구조·그래프·동적 계획법까지, 문제를 효율적으로 푸는 방법',
+    volatility: 'stable',
+    source_id: 'src.the-algorithms',
+  },
+  {
+    id: 'cs',
+    sort: 2,
+    group: 'foundation',
+    name_ko: '컴퓨터 시스템',
+    name_en: 'Computer Systems',
+    summary_ko: '프로세스·메모리·파일 시스템·동시성까지, 프로그램이 운영체제와 하드웨어 위에서 실행되는 원리',
+    volatility: 'stable',
+    source_id: 'src.ostep',
+  },
+  {
+    id: 'net',
+    sort: 3,
+    group: 'foundation',
+    name_ko: '네트워크·프로토콜',
+    name_en: 'Networking & Protocols',
+    summary_ko: '계층 모델·TCP/IP·DNS·HTTP·TLS까지, 데이터가 네트워크를 건너 전달되는 원리와 진단 방법',
+    volatility: 'stable',
+    source_id: 'src.rfc-9293',
+  },
+  {
+    id: 'lang',
+    sort: 4,
+    group: 'foundation',
+    name_ko: '프로그래밍 언어·런타임',
+    name_en: 'Programming Languages & Runtimes',
+    summary_ko: '타입·함수·비동기·메모리 관리까지, 코드가 언어 런타임에서 실행되는 방식',
+    volatility: 'stable',
+    source_id: 'src.node-docs',
+  },
+  {
+    id: 'fe',
+    sort: 5,
+    group: 'app',
+    name_ko: '프론트엔드',
+    name_en: 'Frontend',
+    summary_ko: 'DOM·컴포넌트·상태 관리·렌더링 성능까지, 브라우저에서 사용자 인터페이스를 만드는 방법',
+    volatility: 'evolving',
+    source_id: 'src.mdn',
+  },
+  {
+    id: 'be',
+    sort: 6,
+    group: 'app',
+    name_ko: '백엔드',
+    name_en: 'Backend',
+    summary_ko: 'API 설계·인증·트랜잭션·메시징까지, 서버 애플리케이션을 설계하고 구현하는 방법',
+    volatility: 'stable',
+    source_id: 'src.rfc-9110',
+  },
+  {
+    id: 'db',
+    sort: 7,
+    group: 'app',
+    name_ko: '데이터베이스',
+    name_en: 'Databases',
+    summary_ko: 'SQL·인덱스·트랜잭션·격리 수준·복제까지, 데이터를 안전하고 빠르게 저장·조회하는 방법',
+    volatility: 'stable',
+    source_id: 'src.postgres-docs',
+  },
+  {
+    id: 'linux',
+    sort: 8,
+    group: 'foundation',
+    name_ko: '서버·리눅스 운영',
+    name_en: 'Linux & Server Operations',
+    summary_ko: '권한·프로세스·셸·systemd·cgroups까지, 리눅스 서버를 다루고 운영하는 방법',
+    volatility: 'stable',
+    source_id: 'src.linux-man-pages',
+  },
+  {
+    id: 'docker',
+    sort: 9,
+    group: 'infra',
+    name_ko: '컨테이너',
+    name_en: 'Containers (Docker/OCI)',
+    summary_ko: '이미지·레이어·빌드·실행·네트워크·보안까지, 컨테이너로 애플리케이션을 포장하고 운영하는 방법',
+    volatility: 'stable',
+    source_id: 'src.docker-docs',
+  },
+  {
+    id: 'k8s',
+    sort: 10,
+    group: 'infra',
+    name_ko: '쿠버네티스',
+    name_en: 'Kubernetes',
+    summary_ko: 'Pod·Deployment·Service·Probe·오토스케일링까지, 컨테이너를 클러스터에서 배포하고 운영하는 방법',
+    volatility: 'evolving',
+    source_id: 'src.k8s-docs',
+  },
+  {
+    id: 'cicd',
+    sort: 11,
+    group: 'infra',
+    name_ko: 'CI/CD·DevOps',
+    name_en: 'CI/CD & DevOps',
+    summary_ko: '빌드·테스트 자동화·배포 전략·시크릿 관리까지, 변경을 안전하고 빠르게 전달하는 방법',
+    volatility: 'evolving',
+    source_id: 'src.github-actions-docs',
+  },
+  {
+    id: 'sre',
+    sort: 12,
+    group: 'infra',
+    name_ko: 'SRE·관측성',
+    name_en: 'SRE & Observability',
+    summary_ko: '모니터링·SLO·장애 대응·재해 복구까지, 서비스 신뢰성을 측정하고 지키는 방법',
+    volatility: 'stable',
+    source_id: 'src.google-sre-book',
+  },
+  {
+    id: 'cloud',
+    sort: 13,
+    group: 'infra',
+    name_ko: '클라우드·IaC',
+    name_en: 'Cloud & IaC',
+    summary_ko: '서비스 모델·IAM·VPC·IaC까지, 클라우드 자원을 설계하고 코드로 관리하는 방법',
+    volatility: 'evolving',
+    source_id: 'src.ms-learn-azure',
+  },
+  {
+    id: 'sec',
+    sort: 14,
+    group: 'security',
+    name_ko: '보안',
+    name_en: 'Security',
+    summary_ko: '인증·인가·주입·XSS·사고 대응까지, 소프트웨어를 위협으로부터 지키는 방법',
+    volatility: 'evolving',
+    source_id: 'src.owasp-top10',
+  },
+  {
+    id: 'ml',
+    sort: 15,
+    group: 'ai',
+    name_ko: 'AI/ML',
+    name_en: 'AI & Machine Learning',
+    summary_ko: '학습·평가 지표·과적합·신경망·트랜스포머까지, 머신러닝 모델을 만들고 평가하는 원리',
+    volatility: 'evolving',
+    source_id: 'src.pytorch-docs',
+  },
+  {
+    id: 'llm',
+    sort: 16,
+    group: 'ai',
+    name_ko: 'LLM·GenAI 엔지니어링',
+    name_en: 'LLM & GenAI Engineering',
+    summary_ko: '프롬프트·구조화 출력·도구 사용·RAG·평가까지, LLM 기반 기능을 만들고 운영하는 방법',
+    volatility: 'volatile',
+    source_id: 'src.hf-transformers-docs',
+  },
+  {
+    id: 'arch',
+    sort: 17,
+    group: 'design_lead',
+    name_ko: '아키텍처·시스템 설계',
+    name_en: 'Software Architecture & System Design',
+    summary_ko: '설계 원칙·품질 속성·CAP·캐싱 아키텍처까지, 시스템 구조를 결정하고 설명하는 방법',
+    volatility: 'stable',
+    source_id: 'src.system-design-primer',
+  },
+  {
+    id: 'eng',
+    sort: 18,
+    group: 'design_lead',
+    name_ko: '엔지니어링 실천',
+    name_en: 'Software Engineering Practice',
+    summary_ko: 'Git·테스트·코드 리뷰·요구사항·SI 산출물까지, 품질 있는 소프트웨어를 만드는 실천',
+    volatility: 'stable',
+    source_id: 'src.git-docs',
+  },
+  {
+    id: 'lead',
+    sort: 19,
+    group: 'design_lead',
+    name_ko: '기술 리더십',
+    name_en: 'Technical Leadership',
+    summary_ko: '의사소통·기술 결정·설계 문서·멘토링까지, 팀과 조직에서 기술적 판단을 이끄는 방법',
+    volatility: 'stable',
+    source_id: 'src.dora-research',
+  },
+  {
+    id: 'data',
+    sort: 20,
+    group: 'app',
+    name_ko: '데이터 엔지니어링',
+    name_en: 'Data Engineering',
+    summary_ko: 'ETL·차원 모델링·오케스트레이션·스트리밍까지, 데이터 파이프라인을 설계하고 운영하는 방법',
+    volatility: 'evolving',
+    source_id: 'src.postgres-docs',
+  },
+];
+
+const BY_ID = new Map(TRACKS.map((t) => [t.id, t] as const));
+
+export function trackOf(id: string): TrackDef | undefined {
+  return BY_ID.get(id);
+}

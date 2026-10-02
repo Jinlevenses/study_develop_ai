@@ -1,14 +1,17 @@
-import { parseJsonStrict } from '@fathom/shared-kernel/canonical/canonical';
+import { canonicalJson, parseJsonStrict, sha256Hex } from '@fathom/shared-kernel/canonical/canonical';
 import type { Result } from '@fathom/shared-kernel/errors/errors';
 import { err, ok } from '@fathom/shared-kernel/errors/errors';
 import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
 import type { AnchorViolation } from '../../domain/ledger/chain/anchor.js';
 import { verifyAnchor } from '../../domain/ledger/chain/anchor.js';
+import type { HashPort } from '../../domain/ledger/chain/hash.js';
 import type { ChainBreak, ChainReport, ChainRow, DeviceHead } from '../../domain/ledger/chain/verify.js';
 import { verifyChains } from '../../domain/ledger/chain/verify.js';
-import { NODE_HASH_PORT } from '../../infra/ledger/hash-port.js';
 import { LEDGER_CHAIN_ROWS, LEDGER_HASH_AT, LR_CHECKPOINT_LATEST } from '../../infra/ledger/ledger.sql.js';
 import type { LedgerFault } from './ports.js';
+
+// 해시 포트 = shared-kernel 정준 JSON + SHA-256 (application은 구체 infra를 import하지 않는다 — STD-01 §2).
+const HASH_PORT: HashPort = { canonical: canonicalJson, sha256: (value) => sha256Hex(value) };
 
 // FR-PRG-003 · ADR-011 §2 — 체인 전체 검증 + 외부 앵커 대조(꼬리 변조·절단). doctor·야간 무결성·restore 검사의 공통 엔진.
 export type LedgerInspection = {
@@ -62,7 +65,7 @@ export function inspectLedger(
   db: SqlitePort,
   opts: { readonly anchor?: Readonly<Record<string, DeviceHead>> } = {},
 ): LedgerInspection {
-  const report = verifyChains(NODE_HASH_PORT, chainRows(db));
+  const report = verifyChains(HASH_PORT, chainRows(db));
   const given = opts.anchor;
   const anchor = given ?? checkpointAnchor(db);
   const hashAt = db.prepare(LEDGER_HASH_AT);

@@ -210,6 +210,36 @@ describe('LedgerWriter 부트스트랩', () => {
     expect(count(h.db, 'lr_device')).toBe(1);
   });
 
+  it('UT-LR-033 한 tx에서 appendInTx 2회 후 롤백 → 다음 append가 기기·정책을 다시 만든다(고아 device_id 0) [NFR-DATA-013]', async () => {
+    const h = await makeHarness();
+    expect(() =>
+      h.db.tx(() => {
+        // 첫 호출이 lr_device·policy.switched를 INSERT하고, 둘째 호출은 그 미커밋 행을 SELECT로 본다.
+        expect(h.writer.appendInTx(fixtureDraft('card.enrolled')).ok).toBe(true);
+        expect(h.writer.appendInTx(fixtureDraft('card.status_changed')).ok).toBe(true);
+        expect(count(h.db, 'lr_device')).toBe(1);
+        throw new Error('caller rollback');
+      }),
+    ).toThrow('caller rollback');
+    expect(count(h.db, 'lr_device')).toBe(0);
+    expect(count(h.db, 'lr_event')).toBe(0);
+
+    expect(h.writer.append(fixtureDraft('card.enrolled')).ok).toBe(true);
+    const devices = h.db.prepare('SELECT device_id FROM lr_device WHERE is_local = 1').all();
+    expect(devices).toHaveLength(1);
+    const all = rows(h.db);
+    expect(all[0]).toMatchObject({ device_seq: 1, type: 'policy.switched' });
+    expect(all.map((r) => r.type)).toEqual(['policy.switched', 'card.enrolled']);
+    const known = new Set(
+      h.db
+        .prepare('SELECT device_id FROM lr_device')
+        .all()
+        .map((r) => r.device_id),
+    );
+    expect(all.every((r) => known.has(r.device_id))).toBe(true);
+    expect(new Set(all.map((r) => r.device_id)).size).toBe(1);
+  });
+
   it('UT-LR-034 duplicate = applier·hook 0회 [FR-PRG-001][NFR-DATA-013]', async () => {
     const h = await makeHarness();
     let hooks = 0;

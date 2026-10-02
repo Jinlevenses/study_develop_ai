@@ -1,0 +1,40 @@
+# content/packs/k8s/misconceptions/k8s.probes.yaml
+# yaml-language-server: $schema=../../../.schemas/misconceptions.schema.json
+schema_v: 1
+concept_id: k8s.probes
+mcs:
+  m01:
+    kind: sibling_confusion
+    meta_family: mf_layer_responsibility
+    wrong_belief: "readiness 프로브가 실패하면 kubelet이 그 컨테이너를 재시작한다."
+    correction: "재시작은 liveness(와 startup) 실패의 결과다. readiness 실패는 컨테이너를 그대로 두고 Pod를 Service 엔드포인트에서 빼기만 한다."
+    refutes: [k03, k02]
+    prevalence: high
+  m02:
+    kind: overgeneralization
+    meta_family: mf_scope_overreach
+    wrong_belief: "liveness 프로브에는 데이터베이스·캐시 같은 의존 서비스 연결까지 확인하는 엔드포인트를 넣어야 한다."
+    correction: "의존성 장애는 재시작으로 고쳐지지 않는다. liveness에 넣으면 의존성이 잠시 끊길 때 모든 Pod가 함께 재시작되어 장애가 커지므로, liveness는 프로세스 자신만 확인한다."
+    refutes: [k08]
+    prevalence: high
+  m03:
+    kind: mechanism_confusion
+    meta_family: mf_phase_confusion
+    wrong_belief: "startupProbe를 두어도 liveness 프로브는 처음부터 함께 돌기 때문에, 시작이 느린 앱은 liveness의 initialDelaySeconds를 크게 잡는 수밖에 없다."
+    correction: "startupProbe가 있으면 성공할 때까지 liveness·readiness가 실행되지 않는다. 시작 허용 시간은 startupProbe의 failureThreshold × periodSeconds로 정한다."
+    refutes: [k04, k05]
+    prevalence: mid
+  m04:
+    kind: mechanism_confusion
+    meta_family: mf_state_vs_event
+    wrong_belief: "readiness 프로브는 시작할 때 한 번 통과하면 그 뒤로는 다시 검사하지 않는다."
+    correction: "readiness는 컨테이너가 실행되는 내내 주기적으로 돈다. 실행 중에 실패하면 그때 엔드포인트에서 빠지고, 다시 성공하면 돌아온다."
+    refutes: [k11, k03]
+    prevalence: mid
+  m05:
+    kind: boundary
+    meta_family: mf_boundary_case
+    wrong_belief: "httpGet 프로브는 상태 코드 200만 성공으로 보므로, 302 리다이렉트를 돌려주면 프로브가 실패한다."
+    correction: "httpGet 프로브는 200 이상 400 미만을 모두 성공으로 판정한다. 302도 성공이라, 로그인 페이지로 리다이렉트하는 경로를 프로브로 쓰면 실제 장애를 놓칠 수 있다."
+    refutes: [k06]
+    prevalence: mid

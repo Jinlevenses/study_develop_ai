@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/k8s/items/k8s.probes.yaml",
+      "from": "  i01:\n    format: ox",
+      "to": "  i01:\n    format: kata"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-FMT"
+    ]
+  }
+}

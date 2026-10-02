@@ -1,0 +1,63 @@
+{
+  "taskId": "T-01-05", "tier": "T1", "model_id": "T1",
+  "status": "done",
+  "changedFiles": [
+    "content/packs/net/concepts/net.tcp-handshake.md",
+    "content/packs/net/kus/net.tcp-handshake.yaml",
+    "content/packs/net/misconceptions/net.tcp-handshake.yaml",
+    "content/packs/net/items/net.tcp-handshake.yaml",
+    "content/packs/net/item-models/net.tcp-handshake.yaml",
+    "content/packs/k8s/concepts/k8s.probes.md",
+    "content/packs/k8s/kus/k8s.probes.yaml",
+    "content/packs/k8s/misconceptions/k8s.probes.yaml",
+    "content/packs/k8s/items/k8s.probes.yaml",
+    "content/packs/k8s/item-models/k8s.probes.yaml",
+    "content/packs/lang/concepts/lang.js-event-loop.md",
+    "content/packs/lang/kus/lang.js-event-loop.yaml",
+    "content/packs/lang/misconceptions/lang.js-event-loop.yaml",
+    "content/packs/lang/items/lang.js-event-loop.yaml",
+    "content/packs/lang/item-models/lang.js-event-loop.yaml",
+    "content/sources/requests/WP-C-SK.yaml",
+    "docs/40-impl/reports/tasks/T-01-05.json"
+  ],
+  "testsAdded": [],
+  "commands": [
+    { "cmd": "pnpm content:check --pack net,k8s,lang (baseline, Tier C skeletons)", "exit": 0 },
+    { "cmd": "pnpm content:check --pack net (1st: R-3STAGE theory 797 chars)", "exit": 1 },
+    { "cmd": "pnpm content:check --pack net", "exit": 0 },
+    { "cmd": "pnpm content:check --pack k8s", "exit": 0 },
+    { "cmd": "pnpm content:check --pack lang (1st: R-3STAGE theory 781 chars)", "exit": 1 },
+    { "cmd": "pnpm content:check --pack lang", "exit": 0 },
+    { "cmd": "node <scratchpad>/lang/worked.js (concept Worked example; output A,B,C,D,E,F matches body text fence)", "exit": 0 },
+    { "cmd": "node <scratchpad>/lang/i10.js -> stdout 'sync\\nthen\\ntimer 1\\nthen in timer 1\\ntimer 2\\n' (Node v22.22.2)", "exit": 0 },
+    { "cmd": "node <scratchpad>/lang/i11.js -> stdout 'begin\\nload start\\nend\\nafter await\\nmicrotask\\ntimeout\\n' (Node v22.22.2)", "exit": 0 },
+    { "cmd": "node <scratchpad>/lang/verify.mjs (re-extracts i10/i11 code.src from YAML, runs node, compares with answer.stdout after dropping one trailing \\n): i10 MATCH, i11 MATCH", "exit": 0 },
+    { "cmd": "node --check <scratchpad>/net-i10.js (net error_find code syntax)", "exit": 0 },
+    { "cmd": "node <scratchpad>/selfcheck.mjs (SK-02 counts, slot formats, distractor_mc coverage, R-STEM, cloze_keys substring, answer-not-longest)", "exit": 0 },
+    { "cmd": "pnpm content:check --pack net,k8s,lang", "exit": 0 },
+    { "cmd": "pnpm content:check", "exit": 0 },
+    { "cmd": "node --import tsx --conditions=source tools/packc/src/cli.ts hashes --pack net", "exit": 0 },
+    { "cmd": "node --import tsx --conditions=source tools/packc/src/cli.ts hashes --pack k8s", "exit": 0 },
+    { "cmd": "node --import tsx --conditions=source tools/packc/src/cli.ts hashes --pack lang", "exit": 0 },
+    { "cmd": "pnpm packs:build --pack net,k8s,lang --out-dir <scratchpad>/dist", "exit": 0 },
+    { "cmd": "pnpm lint", "exit": 0 },
+    { "cmd": "node tools/gates/run-gates.mjs --stage=g1", "exit": 0 },
+    { "cmd": "node tools/gates/check-scope.mjs --task T-01-05", "exit": 1 },
+    { "cmd": "node tools/gates/check-scope.mjs --task T-01-05 --changed-from <list of this task's 17 files>", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/tool-packc typecheck", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/tool-packc test (222 passed)", "exit": 0 }
+  ],
+  "graphify": "graph.json present; `graphify query \"content check R-3STAGE concept tier A\" --budget 1500` returned only code nodes (contracts/gates/web) — content YAML/MD is not in the graph and no code was edited, so explain/affected were not applicable",
+  "deviations": [
+    "k8s.probes OX slot i04 uses the m05 false statement (httpGet 302 = success) instead of a startup-probe true statement so that every MC is exercised by at least one item; startup ordering is still covered by i07, i11, i16. OX false count: net 2, k8s 3, lang 2 (Brief: >= 2).",
+    "net code fence is `bash` (view-only ss commands) plus a synthetic `text` output fence; lang Worked example is runnable js whose printed output was verified with node."
+  ],
+  "escalations": [
+    { "type": "scope", "detail": "Plain `check-scope --task T-01-05` exits 1 with 626 outside-allowed errors, all from other lanes' uncommitted working-tree changes (tools/packc, services/*, packages/*, untracked T-01-04 content). With this task's own file list via --changed-from it exits 0 (17 files, 0 errors). Resolves when the orchestrator commits per task." }
+  ],
+  "rtmUpdates": [
+    { "wp": "WP-C-SK", "pgm": null, "req": ["FR-CUR-005", "FR-CUR-008", "FR-CUR-009"], "tests": ["SK-01..04"] },
+    { "wp": "WP-C-SK", "pgm": null, "req": ["FR-QST-001", "FR-QST-007", "FR-STD-020"], "tests": ["SK-02", "SK-05", "SK-06"] }
+  ],
+  "notes": "① cu: start=2026-10-02T07:32:54Z end=2026-10-02T07:49:14Z active_min=17 check_runs=9 (+1 packs:build) ② net/k8s/lang: KU 10/11/10 · MC 6/5/5 · items 21×3 (i01-04 ox, i05-07 mcq, i08 cloze, i09 short, i10-11 net error_find+parsons / k8s config_review(df×3)+error_find / lang code_predict×2, i12 blank_note, i13 embedded, i14-18 digging d1-d5, i19-20 digging_d4_mcq d4/d5, i21 feynman); MCQ+D4/D5 distractors 15/15 per concept linked to MCs; im01: lang t1.event_loop_order (§4.4 block verbatim, ku_refs k03,k04,k05,k07), net/k8s t2 ox ③ selfcheck A1-A12: net ✓×12 · k8s ✓×12 · lang ✓×12 (A6 fixed: 7 MCQ options rebalanced so the key is never the uniquely longest) ④ context_id=wp-c-sk.t1.author.2026-10-02T0732Z ⑤ T1' review: RFC 9293 section anchors (§3.4.2, §3.5.2, §3.6.1) and listen(2) 'Linux ≥ 2.2' accept-queue semantics; k8s defaults/k07 (vol evolving), grpc ≥1.27, startupProbe ≥1.20, i20 fd-exhaustion claim; lang k03 scope 'Node.js ≥ 11', i11 relies on single-tick `await null` ordering (verified on Node 22.22.2); src.whatwg-html is requested (merged:false) and cited by lang concept/KUs."
+}

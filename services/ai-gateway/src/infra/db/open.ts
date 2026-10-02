@@ -2,7 +2,12 @@ import { fileURLToPath } from 'node:url';
 import type { ServiceDatabase, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
 import type { Clock } from '@fathom/shared-kernel/time/time';
+import { createAiGate } from '../../application/control/answer-gate.js';
 import type { AiInfra } from '../../config.js';
+import { BUILTIN_PROVIDERS } from '../../domain/control/provider-catalog.js';
+import { loadRegistryView } from '../assets/registry-loader.js';
+import { SEED_PROVIDER } from './ai-control.sql.js';
+import { createControlStore } from './ai-control-store.js';
 
 // DB-01 §2 — ai.db(제어·라우팅·판정·프라이버시)·ai-cache.db(재생성 캐시, 백업 제외).
 export const AI_DB: ServiceDatabase = {
@@ -34,12 +39,24 @@ const SEED_MODE_STATE =
 const MODE_STATE_PRESENT = 'SELECT mode FROM ai_mode_state WHERE id = 1';
 
 /**
+ * 내장 제공자 8행(enabled 1·동의 0)도 같은 tx에서 `INSERT OR IGNORE`로 시드한다 — 재기동 멱등, 사용자 변경 덮어쓰기 0(CO-20).
  * 첫 기동 = OFFLINE(FR-AI-003 · AI-01 §5.1 "동의 0건 → OFFLINE"). 첫 상태 설정은 전이가 아니므로
  * `ai_mode_history`·outbox(`ai.mode.changed`)는 쓰지 않는다 — 첫 전이는 control WP의 동의 흐름이 기록한다.
  */
 export function seedFirstBoot(db: SqlitePort, clock: Clock): 'seeded' | 'present' {
   return db.tx((): 'seeded' | 'present' => {
-    const inserted = db.prepare(SEED_MODE_STATE).run({ now: clock.now() });
+    const now = clock.now();
+    const inserted = db.prepare(SEED_MODE_STATE).run({ now });
+    for (const p of BUILTIN_PROVIDERS) {
+      db.prepare(SEED_PROVIDER).run({
+        provider_id: p.provider_id,
+        kind: p.db_kind,
+        display_name: p.display_name,
+        billing: p.billing,
+        trust: p.trust,
+        now,
+      });
+    }
     if (inserted.changes === 1) {
       return 'seeded';
     }
@@ -64,5 +81,8 @@ export function openInfra(deps: ServiceDeps<null>, opts: { readonly assetsDir: s
   if (firstBoot === 'seeded') {
     deps.log.info({ event: 'control.mode.seeded', mode: 'OFFLINE' }, 'first boot AI mode');
   }
-  return { db, cacheDb: openedDb(deps, AI_CACHE_DB.file), assetsDir: opts.assetsDir, firstBoot };
+  const registry = loadRegistryView(opts.assetsDir, deps.log);
+  const store = createControlStore(db);
+  const gate = createAiGate({ registry, readMode: () => store.readModeState().mode });
+  return { db, cacheDb: openedDb(deps, AI_CACHE_DB.file), assetsDir: opts.assetsDir, firstBoot, registry, store, gate };
 }

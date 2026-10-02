@@ -1,0 +1,30 @@
+schema_v: 1
+id: rb.explain-generic
+title_ko: "일반 설명 루브릭"
+applies_to: [essay]
+dims:
+  d_accuracy:
+    name_ko: "정확성"
+    weight: 2
+    levels:
+      l1: "핵심 주장이 사실과 어긋난다."
+      l2: "주장은 맞지만 근거가 부정확하다."
+      l3: "주장과 근거가 모두 정확하다."
+      l4: "정확하고 한계와 예외도 함께 설명한다."
+  d_reasoning:
+    name_ko: "근거 제시"
+    weight: 1
+    levels:
+      l1: "근거 없이 결론만 말한다."
+      l2: "근거를 하나 들지만 결론과 이어지지 않는다."
+      l3: "근거가 결론을 뒷받침하도록 이어진다."
+      l4: "반례를 고려해 근거의 강도까지 평가한다."
+  d_clarity:
+    name_ko: "명료성"
+    weight: 1
+    levels:
+      l1: "문장이 모호해 의미를 파악하기 어렵다."
+      l2: "의미는 통하지만 군더더기가 많다."
+      l3: "간결하고 용어가 일관된다."
+      l4: "비전문가도 따라갈 수 있게 예를 곁들인다."
+pass_mean: 2.5

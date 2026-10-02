@@ -1,10 +1,10 @@
 // R-REF — 존재해야 하는 참조(개념·KU·MC·루브릭·출처·본문 지시문·링크·도식)와 문항 내부 키 정합(Brief T-01-03 §4.4).
 import { conceptLinksOf, directivesOf, fencesOf } from '../../parse/markdown.js';
 import type { Item } from '../../parse/schema/item.js';
-import { byCode, finding } from '../../validate/finding.js';
 import type { Finding } from '../../validate/finding.js';
-import { fullId } from '../../validate/model.js';
+import { byCode, finding } from '../../validate/finding.js';
 import type { ConceptFile, ItemFileEntry, ItemModelFileEntry, LintContext } from '../../validate/model.js';
+import { fullId } from '../../validate/model.js';
 
 type Sink = (file: string, keypath: string, message: string) => void;
 
@@ -44,14 +44,22 @@ function checkConcept(c: ConceptFile, ctx: LintContext, err: Sink): void {
   for (const sec of c.body.sections) {
     for (const dir of directivesOf(sec.lines)) {
       if (dir.name === 'lab' || dir.name === 'case') {
-        err(c.rel, `body.${sec.title}`, `unsupported-in-it01: ::${dir.name}[${dir.arg ?? ''}] is not supported in IT-01`);
+        err(
+          c.rel,
+          `body.${sec.title}`,
+          `unsupported-in-it01: ::${dir.name}[${dir.arg ?? ''}] is not supported in IT-01`,
+        );
       } else if (dir.name === 'embed') {
         const arg = dir.arg ?? '';
         const format = idx.itemFormatById.get(arg);
         if (format === undefined) {
           err(c.rel, `body.${sec.title}`, `::embed[${arg}] refers to an unknown item`);
         } else if (format !== 'embedded') {
-          err(c.rel, `body.${sec.title}`, `::embed[${arg}] must refer to an item of format 'embedded' (is '${format}')`);
+          err(
+            c.rel,
+            `body.${sec.title}`,
+            `::embed[${arg}] must refer to an item of format 'embedded' (is '${format}')`,
+          );
         }
       }
     }

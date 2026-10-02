@@ -1,4 +1,6 @@
 // R-3STAGE — 개념 본문 3단(이론·코드·핵심) 구조 검사(Brief T-01-03 §4.4 표 · §4.7 Tier C 템플릿).
+
+import type { MdSection } from '../../parse/markdown.js';
 import {
   countChars,
   countSentences,
@@ -9,9 +11,8 @@ import {
   listItemCount,
   sectionText,
 } from '../../parse/markdown.js';
-import type { MdSection } from '../../parse/markdown.js';
-import { finding } from '../../validate/finding.js';
 import type { Finding } from '../../validate/finding.js';
+import { finding } from '../../validate/finding.js';
 import type { ConceptFile, LintContext } from '../../validate/model.js';
 
 export const STAGES = ['이론', '코드', '핵심'] as const;
@@ -25,7 +26,13 @@ export function tierCCore(titleKo: string): string {
   ].join('\n');
 }
 
-function checkTierA(c: ConceptFile, theory: MdSection, code: MdSection, core: MdSection, err: (kp: string, m: string) => void): void {
+function checkTierA(
+  c: ConceptFile,
+  theory: MdSection,
+  code: MdSection,
+  core: MdSection,
+  err: (kp: string, m: string) => void,
+): void {
   const d = c.data;
   if (d.learning === undefined) {
     err('learning', 'Tier A requires a learning block');
@@ -71,7 +78,11 @@ function checkTierA(c: ConceptFile, theory: MdSection, code: MdSection, core: Md
   if (never === null || listItemCount(never) < 2) {
     err('body.핵심', "'### 언제 쓰지 않나' needs at least 2 list items");
   }
-  if (d.learning !== undefined && Object.keys(d.learning.contrast_pairs).length > 0 && !h3Titles(core.lines).includes('대조')) {
+  if (
+    d.learning !== undefined &&
+    Object.keys(d.learning.contrast_pairs).length > 0 &&
+    !h3Titles(core.lines).includes('대조')
+  ) {
     err('body.핵심', "contrast_pairs need a '### 대조' heading");
   }
   if (!directivesOf(core.lines).some((x) => x.name === 'ku-list')) {
@@ -93,14 +104,23 @@ function checkTierB(theory: MdSection, code: MdSection, core: MdSection, err: (k
   const caseBlock = h3Block(code.lines, '사례');
   const caseOk = caseBlock !== null && countSentences(caseBlock) >= 3;
   if (!fenceOk && !caseOk) {
-    err('body.코드', "Tier B code needs a first code fence of at most 15 lines or a '### 사례' section with at least 3 sentences");
+    err(
+      'body.코드',
+      "Tier B code needs a first code fence of at most 15 lines or a '### 사례' section with at least 3 sentences",
+    );
   }
   if (!directivesOf(core.lines).some((x) => x.name === 'ku-list')) {
     err('body.핵심', 'core needs a ::ku-list line');
   }
 }
 
-function checkTierC(c: ConceptFile, theory: MdSection, code: MdSection, core: MdSection, err: (kp: string, m: string) => void): void {
+function checkTierC(
+  c: ConceptFile,
+  theory: MdSection,
+  code: MdSection,
+  core: MdSection,
+  err: (kp: string, m: string) => void,
+): void {
   if (c.data.learning !== undefined) {
     err('learning', 'Tier C must not have a learning block');
   }
@@ -134,7 +154,10 @@ export function ruleThreeStage(ctx: LintContext): Finding[] {
     const titles = body.sections.map((s) => s.title);
     const ordered = titles.length === STAGES.length && STAGES.every((t, i) => titles[i] === t);
     if (!ordered) {
-      err('body', `H2 sections must be exactly ${STAGES.join(' · ')} in this order (found: ${titles.join(' · ') || 'none'})`);
+      err(
+        'body',
+        `H2 sections must be exactly ${STAGES.join(' · ')} in this order (found: ${titles.join(' · ') || 'none'})`,
+      );
       continue;
     }
     const [theory, code, core] = body.sections;

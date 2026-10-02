@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/k8s/items/k8s.probes.yaml",
+      "from": "    answer: opt_a\n",
+      "to": "    answer: opt_d\n"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-REF"
+    ]
+  }
+}

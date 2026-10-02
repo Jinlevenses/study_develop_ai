@@ -1,7 +1,11 @@
+import type { LedgerEventEnvelope } from '@fathom/contracts/ledger/envelope';
+import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
 import { fixedUlid } from '@fathom/testkit/ids';
 import { describe, expect, it } from 'vitest';
 import { createCheckpoint } from '../../../src/application/ledger/checkpoint.js';
 import { parseLedgerJsonl, readExportEvents, serializeLedgerJsonl } from '../../../src/application/ledger/jsonl.js';
+import { eventHash } from '../../../src/domain/ledger/chain/hash.js';
+import { NODE_HASH_PORT } from '../../../src/infra/ledger/hash-port.js';
 import { createLedgerReplayReader } from '../../../src/infra/ledger/replay-source.js';
 import { fixtureDraft, LEDGER_TYPES } from '../../contract/ledger/ledger-fixtures.js';
 import { envelopeChain } from './support/chains.js';
@@ -97,6 +101,80 @@ describe('importInTx', () => {
   });
 });
 
+describe('importInTx 검증(쓰기 전 전체 거부)', () => {
+  /** 체인 해시를 다시 계산해 자기 일관적인 이벤트로 만든다(해시 검사는 통과, 내용만 잘못). */
+  const rehash = (e: LedgerEventEnvelope, patch: Partial<LedgerEventEnvelope>): LedgerEventEnvelope => {
+    const next = { ...e, ...patch };
+    return {
+      ...next,
+      hash: eventHash(NODE_HASH_PORT, {
+        event_id: next.event_id,
+        device_id: next.device_id,
+        device_seq: next.device_seq,
+        client_ts: next.client_ts,
+        type: next.type,
+        schema_version: next.schema_version,
+        idempotency_key: next.idempotency_key,
+        payload: next.payload,
+        prev_hash: next.prev_hash,
+      }),
+    };
+  };
+  const emptyTables = (h: { db: SqlitePort }): void => {
+    expect(h.db.prepare('SELECT count(*) AS n FROM lr_event').get()?.n).toBe(0);
+    expect(h.db.prepare('SELECT count(*) AS n FROM lr_device').get()?.n).toBe(0);
+  };
+
+  it('UT-LR-062 미지원 schema_version(v2) = schema_version_unsupported, 쓰기 0, replay 가능 [NFR-DATA-011][FR-PRG-003]', async () => {
+    const h = await makeHarness();
+    const good = envelopeChain(DEV_A, [1_000, 2_000], 1);
+    const first = good[0];
+    expect(first).toBeDefined();
+    if (first === undefined) {
+      return;
+    }
+    const v2 = rehash(first, { schema_version: 2 });
+    const res = h.db.tx(() => h.writer.importInTx([v2]));
+    expect(!res.ok && res.error).toMatchObject({
+      kind: 'schema_version_unsupported',
+      device_id: DEV_A,
+      device_seq: 1,
+    });
+    emptyTables(h);
+    expect(h.alarms).toEqual([]);
+    expect([...createLedgerReplayReader().replay(h.db)]).toEqual([]);
+  });
+
+  it('UT-LR-062 잘못된 payload = payload_invalid(경로·코드만, 값 0), 쓰기 0 [NFR-DATA-011][FR-PRG-003]', async () => {
+    const h = await makeHarness();
+    const secret = 'learner-secret-answer-xyz';
+    const [first, second] = envelopeChain(DEV_A, [1_000, 2_000], 1);
+    expect(first && second).toBeTruthy();
+    if (first === undefined || second === undefined) {
+      return;
+    }
+    const bad = rehash(first, { payload: { ...first.payload, concept_id: secret } });
+    const chained = rehash(second, { prev_hash: bad.hash });
+    const res = h.db.tx(() => h.writer.importInTx([bad, chained]));
+    expect(!res.ok && res.error.kind).toBe('payload_invalid');
+    expect(JSON.stringify(res)).not.toContain(secret);
+    emptyTables(h);
+  });
+
+  it('UT-LR-062 잘못된 멱등 키 = key_invalid, 쓰기 0(정상 기기 B도 적재 0) [NFR-DATA-011][FR-PRG-003]', async () => {
+    const h = await makeHarness();
+    const first = envelopeChain(DEV_A, [1_000], 1)[0];
+    expect(first).toBeDefined();
+    if (first === undefined) {
+      return;
+    }
+    const badKey = rehash(first, { idempotency_key: 'bogus' });
+    const res = h.db.tx(() => h.writer.importInTx([...envelopeChain(DEV_B, [1, 2], 2), badKey]));
+    expect(!res.ok && res.error).toMatchObject({ kind: 'key_invalid', device_id: DEV_A, device_seq: 1 });
+    emptyTables(h);
+  });
+});
+
 describe('JSONL', () => {
   it('UT-LR-068 export/parse 왕복(header·footer lines_sha256), payload는 저장 문자열 그대로 [FR-SET-022]', async () => {
     const h = await makeHarness();
@@ -139,6 +217,17 @@ describe('JSONL', () => {
     expect(flipped).not.toBe(text);
     expect(() => parseLedgerJsonl(flipped)).toThrow(/lines_sha256 mismatch/);
     expect(() => parseLedgerJsonl(lines.slice(0, 4).join('\n'))).toThrow(/footer missing or invalid/);
+
+    // 깨진 JSON 줄: 줄 번호만 보고하고 원문 조각(SyntaxError 메시지)은 담지 않는다.
+    const secretLine = '{"kind":"event","payload":"learner-secret-xyz",';
+    let message = '';
+    try {
+      parseLedgerJsonl([lines[0], secretLine, lines.at(-2), lines.at(-1)].join('\n'));
+    } catch (e) {
+      message = e instanceof Error ? e.message : '';
+    }
+    expect(message).toMatch(/event is not valid json \(line 2\)/);
+    expect(message).not.toContain('learner-secret-xyz');
 
     // 증분: since 체크포인트 seq 이후만
     expect(readExportEvents(h.db, { [fixedUlid(0)]: { seq: 15 } }).map((e) => e.device_seq)).toEqual([16, 17]);

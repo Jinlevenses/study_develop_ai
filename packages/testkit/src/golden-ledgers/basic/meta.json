@@ -1,0 +1,34 @@
+{
+  "format": "fathom.golden-ledger.v1",
+  "set": "basic",
+  "seed": 101,
+  "events": 1500,
+  "devices": {
+    "01J00000000000000000000000": {
+      "seq": 1500,
+      "head_hash": "5ebefa630ad96eca0f5bcb5c92ecdc7c9e92a7de8530a4b23528eaab50b06802"
+    }
+  },
+  "root_hash": "735c1187ed32d4cb673b953755d0b90b1c1816b1db34b455750a768588e89b3d",
+  "types": {
+    "ai_mode.observed": 6,
+    "attempt.graded": 1219,
+    "card.enrolled": 12,
+    "card.status_changed": 14,
+    "declaration.sealed": 6,
+    "evidence.regraded": 12,
+    "evidence.upgraded": 12,
+    "evidence.voided": 8,
+    "evidence.weight_adjusted": 8,
+    "lesson.completed": 60,
+    "level.promoted": 6,
+    "level.provisional_resolved": 3,
+    "policy.switched": 1,
+    "pretest.answered": 45,
+    "profile.setting_changed": 12,
+    "promotion.exam_completed": 6,
+    "self_assessment.recorded": 70
+  },
+  "ledger_sha256": "89a162190f0c9fa892778382439bf70b63b60dabe12060b5e57a6c973e8b88a3",
+  "generated_by": "services/learning/test/golden/ledger/generate-golden.ts"
+}

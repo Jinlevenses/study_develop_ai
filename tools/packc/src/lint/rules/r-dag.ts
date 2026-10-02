@@ -1,6 +1,7 @@
 // R-DAG — 전체 트리 prereqs 그래프 순환 0. 순환(강연결 성분) 1개당 finding 1개, 가장 작은 id에서 시작하는 회전 `a → b → a`.
-import { byCode, finding } from '../../validate/finding.js';
+
 import type { Finding } from '../../validate/finding.js';
+import { byCode, finding } from '../../validate/finding.js';
 import type { LintContext } from '../../validate/model.js';
 
 export function ruleDag(ctx: LintContext): Finding[] {
@@ -8,10 +9,7 @@ export function ruleDag(ctx: LintContext): Finding[] {
   const adj = new Map<string, string[]>();
   for (const id of nodes) {
     const c = ctx.idx.conceptById.get(id);
-    adj.set(
-      id,
-      [...new Set(c?.data.prereqs ?? [])].filter((p) => ctx.idx.conceptById.has(p)).sort(byCode),
-    );
+    adj.set(id, [...new Set(c?.data.prereqs ?? [])].filter((p) => ctx.idx.conceptById.has(p)).sort(byCode));
   }
   // Tarjan SCC
   let counter = 0;

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { CaseCatalogQuery, CaseCatalogView, CatalogCasesListRoute } from '../../../src/http/content/v1/catalog.js';
 import { HomeAlert } from '../../../src/http/learning/v1/insight.js';
 import { ComposerPolicyV1 } from '../../../src/policy/composer_policy.js';
 
@@ -124,5 +125,28 @@ describe('S0-IT01 계약 가산(CR-52·CR-73)', () => {
     expect(HomeAlert.safeParse(alert('/x?y=1')).success).toBe(true);
     expect(HomeAlert.safeParse({ ...alert('/x?y=1'), code: 'nope' }).success).toBe(false);
     expect(HomeAlert.safeParse({ ...alert('/x?y=1'), extra: 1 }).success).toBe(false);
+  });
+
+  it('UT-CON-247 Case 카탈로그 계약(IF-CT-024): 내부 GET·gateway 전용·FR-CUR-016 선언, CaseCatalogView 1건 통과·여분 키 거부·level 범위 [FR-CUR-016][IF-CT-024]', () => {
+    expect(CatalogCasesListRoute).toMatchObject({
+      ifId: 'IF-CT-024',
+      method: 'GET',
+      path: '/internal/v1/catalog/cases',
+      allowedCallers: ['gateway'],
+    });
+    expect(CatalogCasesListRoute.fr).toContain('FR-CUR-016');
+    const row = {
+      case_id: 'k8s.case.liveness-restart-storm',
+      title_ko: '재시작 폭풍',
+      tracks: ['k8s'],
+      level: 3,
+      variants: 2,
+      floor: false,
+    };
+    expect(CaseCatalogView.safeParse({ cases: [row] }).success).toBe(true);
+    expect(CaseCatalogView.safeParse({ cases: [{ ...row, extra: 1 }] }).success).toBe(false);
+    expect(CaseCatalogView.safeParse({ cases: [{ ...row, case_id: 'liveness-restart-storm' }] }).success).toBe(false);
+    expect(CaseCatalogQuery.safeParse({ track: 'k8s', level: '3' }).success).toBe(true);
+    expect(CaseCatalogQuery.safeParse({ level: '6' }).success).toBe(false);
   });
 });

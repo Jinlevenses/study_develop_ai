@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_v": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^generic-0[1-9]$"
+    },
+    "kind": {
+      "type": "string",
+      "const": "dig"
+    },
+    "depth": {
+      "type": "string",
+      "enum": ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]
+    },
+    "question_template": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 300
+    },
+    "expects_from": {
+      "minItems": 1,
+      "maxItems": 6,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "definition",
+          "property",
+          "mechanism",
+          "procedure_step",
+          "constraint",
+          "comparison",
+          "syntax",
+          "config_fact",
+          "failure_mode",
+          "tradeoff",
+          "heuristic",
+          "example"
+        ]
+      }
+    },
+    "followups": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]{1,31}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "when": {
+            "type": "string",
+            "enum": ["partial", "misconception", "dont_know", "off_topic"]
+          },
+          "question": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 300
+          }
+        },
+        "required": ["when", "question"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["schema_v", "id", "kind", "depth", "question_template", "expects_from"],
+  "additionalProperties": false
+}

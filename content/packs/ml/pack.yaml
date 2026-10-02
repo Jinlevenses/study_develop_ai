@@ -1,0 +1,10 @@
+# content/packs/ml/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: ml
+version: "0.1.0"
+channel: seed
+track: { id: ml, name_ko: "AI/ML", name_en: "AI & Machine Learning", track_group: ai, sort_order: 15,
+         summary_ko: "학습·평가 지표·과적합·신경망·트랜스포머까지, 머신러닝 모델을 만들고 평가하는 원리" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

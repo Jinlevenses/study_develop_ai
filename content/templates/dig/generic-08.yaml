@@ -1,0 +1,11 @@
+# content/templates/dig/generic-08.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-08
+kind: dig
+depth: d3
+question_template: "{{concept.title_ko}}를 잘못 썼을 때 가장 먼저 나타나는 증상은 무엇이고, 어떻게 알아차리나요?"
+expects_from: [failure_mode, heuristic]
+followups:
+  fu_partial: { when: partial, question: "그 증상을 다른 원인과 구별하는 단서는 무엇인가요?" }
+  fu_dont_know: { when: dont_know, question: "로그나 지표에서 무엇이 달라질지 생각해 보세요." }

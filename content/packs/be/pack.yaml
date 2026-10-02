@@ -1,0 +1,10 @@
+# content/packs/be/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: be
+version: "0.1.0"
+channel: seed
+track: { id: be, name_ko: "백엔드", name_en: "Backend", track_group: app, sort_order: 6,
+         summary_ko: "API 설계·인증·트랜잭션·메시징까지, 서버 애플리케이션을 설계하고 구현하는 방법" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

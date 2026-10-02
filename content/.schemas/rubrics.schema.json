@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_v": {
+      "type": "number",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 96,
+      "pattern": "^(?:rb\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+    },
+    "title_ko": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "applies_to": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["case", "artifact", "essay", "feynman", "blank_note", "fermi_assumptions"]
+      }
+    },
+    "dims": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^d_[a-z0-9_]{1,20}$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "name_ko": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "weight": {
+            "default": 1,
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 2
+          },
+          "levels": {
+            "type": "object",
+            "properties": {
+              "l1": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "l2": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "l3": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "l4": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              }
+            },
+            "required": ["l1", "l2", "l3", "l4"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["name_ko", "levels"],
+        "additionalProperties": false
+      }
+    },
+    "pass_mean": {
+      "default": 2.5,
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4
+    }
+  },
+  "required": ["schema_v", "id", "title_ko", "applies_to", "dims"],
+  "additionalProperties": false
+}

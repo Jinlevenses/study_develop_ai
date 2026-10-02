@@ -1,0 +1,18 @@
+# content/packs/net/item-models/net.tcp-handshake.yaml
+# yaml-language-server: $schema=../../../.schemas/item-models.schema.json
+schema_v: 1
+concept_id: net.tcp-handshake
+models:
+  im01:
+    kind: t2
+    format: ox
+    facet: mechanism
+    response_mode: recognition
+    stem_family: sf_t2_tcp_state_ox
+    source: { from: ku, ku_types: [mechanism, property, procedure_step], ku_refs: [k02, k03, k04, k05, k06, k07] }
+    template:
+      stem: "{{concept.title_ko}}: {{ku.statement}}"
+      answer: "true"
+    constraints: { dedupe_jaccard: 0.85, max_instances: 12 }
+    metamorphic: { preserve: [option_order], flip: [] }
+    stakes_max: S1

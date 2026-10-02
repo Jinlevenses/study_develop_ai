@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/concepts/docker.image-layer.md",
+      "from": "- 왜 필요한가:",
+      "to": "- 이유:"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-3STAGE"
+    ]
+  }
+}

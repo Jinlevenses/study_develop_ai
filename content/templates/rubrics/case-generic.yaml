@@ -1,0 +1,40 @@
+# content/templates/rubrics/case-generic.yaml
+# yaml-language-server: $schema=../../.schemas/rubrics.schema.json
+schema_v: 1
+id: rb.case-generic
+title_ko: "사례 대응 일반"
+applies_to: [case]
+dims:
+  d_diagnosis:
+    name_ko: "진단"
+    weight: 1.5
+    levels:
+      l1: "증상만 되풀이하고 원인을 짚지 못하거나 엉뚱한 원인을 든다."
+      l2: "그럴듯한 원인을 들지만 사례의 단서로 뒷받침하지 못한다."
+      l3: "사례의 단서를 근거로 가장 유력한 원인을 하나 짚는다."
+      l4: "여러 가설을 단서로 비교해 원인을 좁히고 확인 방법까지 제시한다."
+  d_mitigation:
+    name_ko: "완화"
+    weight: 1
+    levels:
+      l1: "피해를 줄일 즉각 조치가 없거나 상황을 악화시키는 조치를 든다."
+      l2: "조치를 들지만 순서나 위험을 고려하지 않는다."
+      l3: "피해를 줄이는 조치를 순서대로 제시하고 위험 하나를 짚는다."
+      l4: "조치의 순서와 위험, 되돌리는 방법까지 근거와 함께 제시한다."
+  d_prevention:
+    name_ko: "예방"
+    weight: 1
+    levels:
+      l1: "재발을 막을 방안이 없거나 사례와 무관하다."
+      l2: "일반적인 방안을 들지만 이번 원인과 연결하지 못한다."
+      l3: "이번 원인에 맞는 재발 방지책을 하나 근거와 함께 제시한다."
+      l4: "근본 원인에 맞는 방지책을 여럿 제시하고 효과를 확인할 지표를 든다."
+  d_communication:
+    name_ko: "소통"
+    weight: 0.5
+    levels:
+      l1: "상황 공유가 없거나 이해관계자가 알아듣기 어렵다."
+      l2: "상황은 전하지만 영향과 다음 단계를 밝히지 않는다."
+      l3: "영향 범위와 현재 상태를 대체로 분명하게 전달한다."
+      l4: "영향 범위와 현재 상태, 다음 단계와 시점을 대상에 맞게 전달한다."
+pass_mean: 2.5

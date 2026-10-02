@@ -1,6 +1,7 @@
 // DCP-01 §6.3 — packs/<track>/kus/<concept_id>.yaml.
-import { ConceptId } from '@fathom/contracts/common/ids';
+
 import { Level, Volatility } from '@fathom/contracts/common/domain';
+import { ConceptId } from '@fathom/contracts/common/ids';
 import { z } from 'zod';
 import { Bloom, FacetId, IsoDate, SourceRef } from './common.js';
 

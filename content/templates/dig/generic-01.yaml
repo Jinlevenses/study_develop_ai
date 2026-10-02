@@ -1,0 +1,11 @@
+# content/templates/dig/generic-01.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-01
+kind: dig
+depth: d1
+question_template: "{{concept.title_ko}}를 자기 말로 한 문장으로 정의해 보세요. 무엇을 하는 것인가요?"
+expects_from: [definition, property]
+followups:
+  fu_partial: { when: partial, question: "정의에 빠진 핵심 요소가 하나 있습니다. 그것이 없으면 다른 개념과 어떻게 구별되나요?" }
+  fu_dont_know: { when: dont_know, question: "이 개념이 등장하는 상황을 하나 떠올려 보세요. 그때 무슨 일이 일어나나요?" }

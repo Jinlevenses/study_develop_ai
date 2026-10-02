@@ -1,0 +1,10 @@
+# content/packs/docker/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: docker
+version: "0.1.0"
+channel: seed
+track: { id: docker, name_ko: "컨테이너", name_en: "Containers (Docker/OCI)", track_group: infra, sort_order: 9,
+         summary_ko: "이미지·레이어·빌드·실행·네트워크·보안까지, 컨테이너로 애플리케이션을 포장하고 운영하는 방법" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/k8s/concepts/k8s.probes.md",
+      "from": "sources:\n  - { source_id: src.k8s-docs, locator: \"/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/\", section: \"Configure Liveness, Readiness and Startup Probes\", usage: paraphrase, retrieved_at: \"2026-10-01\" }\n",
+      "to": "sources: []\n"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-SRC"
+    ]
+  }
+}

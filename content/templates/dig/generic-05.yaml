@@ -1,0 +1,11 @@
+# content/templates/dig/generic-05.yaml
+# yaml-language-server: $schema=../../.schemas/templates-dig.schema.json
+schema_v: 1
+id: generic-05
+kind: dig
+depth: d5
+question_template: "{{concept.title_ko}}와 비슷한 대안을 하나 골라 비교해 보세요. 무엇을 얻고 무엇을 잃나요?"
+expects_from: [comparison, tradeoff]
+followups:
+  fu_partial: { when: partial, question: "그 차이가 실제 선택을 바꾸는 상황은 언제인가요?" }
+  fu_dont_know: { when: dont_know, question: "같은 문제를 푸는 다른 방법이 있는지 떠올려 보세요." }

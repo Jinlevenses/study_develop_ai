@@ -1,0 +1,10 @@
+schema_v: 1
+id: generic-01
+kind: dig
+depth: d1
+question_template: "{{concept.title_ko}}이(가) 무엇인지 자신의 말로 설명해 보세요."
+expects_from: [definition]
+followups:
+  fu_partial:
+    when: partial
+    question: "방금 설명에서 빠진 핵심 한 가지를 더 짚어 줄 수 있나요?"

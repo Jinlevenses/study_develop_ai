@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/concepts/docker.dockerfile.md",
+      "from": "```mermaid dg_build_flow",
+      "to": "```mermaid dg_other_flow"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-REF"
+    ]
+  }
+}

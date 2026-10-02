@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/concepts/docker.dockerfile.md",
+      "from": "::embed[docker.dockerfile.i13]",
+      "to": "::embed[docker.dockerfile.i01]"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-REF"
+    ]
+  }
+}

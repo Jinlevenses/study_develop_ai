@@ -1,0 +1,18 @@
+# content/sources/requests/WP-C-SK.yaml
+# yaml-language-server: $schema=../../.schemas/sources-requests.schema.json
+schema_v: 1
+wp: WP-C-SK
+requests:
+  src.whatwg-html:
+    kind: doc
+    title: "HTML Living Standard"
+    publisher: "WHATWG"
+    base_url: "https://html.spec.whatwg.org/multipage"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "WHATWG HTML 표준 저작권 고지(CC BY 4.0) — WP-INT 재확인" }
+    attribution_template: "출처: HTML Living Standard (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+    reason: "lang.js-event-loop — 이벤트 루프 처리 모델(태스크·마이크로태스크 체크포인트)의 1차 정의"
+    merged: false

@@ -1,0 +1,3665 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_v": {
+      "type": "number",
+      "const": 1
+    },
+    "concept_id": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^(?:(?:u\\.[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*|(?:alg|cs|net|lang|fe|be|db|linux|docker|k8s|cicd|sre|cloud|sec|ml|llm|arch|eng|lead|data)\\.[a-z0-9]+(?:-[a-z0-9]+)*))$"
+    },
+    "items": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^i\\d{2,3}$"
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "ox"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "answer": {
+                "type": "boolean"
+              },
+              "false_mc": {
+                "type": "string",
+                "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+              },
+              "correction_md": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "answer",
+              "correction_md"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "mcq"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 600
+              },
+              "code": {
+                "type": "object",
+                "properties": {
+                  "lang": {
+                    "type": "string",
+                    "enum": ["ts", "js", "sql", "yaml", "dockerfile", "bash", "python", "json", "http", "text", "diff"]
+                  },
+                  "src": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "required": ["lang", "src"],
+                "additionalProperties": false
+              },
+              "options": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              },
+              "answer": {
+                "type": "string",
+                "pattern": "^opt_[a-h]$"
+              },
+              "distractor_mc": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "option_rationale": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 5,
+                  "maxLength": 300
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "options",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "mcq_multi"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 600
+              },
+              "options": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              },
+              "answer": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "boolean",
+                  "const": true
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "options",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "cloze"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 600
+              },
+              "blanks": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^b[1-9]$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "accept": {
+                      "minItems": 1,
+                      "maxItems": 8,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 60
+                      }
+                    },
+                    "normalize": {
+                      "default": {},
+                      "type": "object",
+                      "properties": {
+                        "nfkc": {
+                          "default": true,
+                          "type": "boolean"
+                        },
+                        "case": {
+                          "default": "insensitive",
+                          "type": "string",
+                          "enum": ["sensitive", "insensitive"]
+                        },
+                        "space": {
+                          "default": "collapse",
+                          "type": "string",
+                          "enum": ["collapse", "remove"]
+                        },
+                        "strip_josa": {
+                          "default": true,
+                          "type": "boolean"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["accept"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "blanks"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "short"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 600
+              },
+              "accept": {
+                "default": [],
+                "maxItems": 12,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80
+                }
+              },
+              "accept_regex": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "numeric": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number"
+                  },
+                  "tol_abs": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "tol_rel": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 0.5
+                  },
+                  "unit": {
+                    "type": "string",
+                    "maxLength": 10
+                  }
+                },
+                "required": ["value"],
+                "additionalProperties": false
+              },
+              "normalize": {
+                "default": {},
+                "type": "object",
+                "properties": {
+                  "nfkc": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "case": {
+                    "default": "insensitive",
+                    "type": "string",
+                    "enum": ["sensitive", "insensitive"]
+                  },
+                  "space": {
+                    "default": "collapse",
+                    "type": "string",
+                    "enum": ["collapse", "remove"]
+                  },
+                  "strip_josa": {
+                    "default": true,
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "order"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "steps": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^s_[a-z0-9]{1,8}$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 2,
+                  "maxLength": 200
+                }
+              },
+              "answer": {
+                "minItems": 3,
+                "maxItems": 8,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "steps",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "matching"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "left": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^l_[a-z0-9]{1,8}$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 120
+                }
+              },
+              "right": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^r_[a-z0-9]{1,8}$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "answer": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string"
+                },
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "left",
+              "right",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "code_predict"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "code": {
+                "type": "object",
+                "properties": {
+                  "lang": {
+                    "type": "string",
+                    "enum": ["js", "ts", "sql"]
+                  },
+                  "src": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "required": ["lang", "src"],
+                "additionalProperties": false
+              },
+              "answer": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "auto"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "stdout": {
+                        "type": "string",
+                        "maxLength": 2000
+                      }
+                    },
+                    "required": ["stdout"],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "code",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "error_find"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "code": {
+                "type": "object",
+                "properties": {
+                  "lang": {
+                    "type": "string",
+                    "enum": ["ts", "js", "sql", "yaml", "dockerfile", "bash", "python", "json", "http", "text", "diff"]
+                  },
+                  "src": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "required": ["lang", "src"],
+                "additionalProperties": false
+              },
+              "answer": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  },
+                  "to": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 9007199254740991
+                  }
+                },
+                "required": ["from", "to"],
+                "additionalProperties": false
+              },
+              "bug_mc": {
+                "type": "string",
+                "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "code",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "parsons"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "lang": {
+                "type": "string",
+                "enum": ["ts", "js", "sql", "yaml", "dockerfile", "bash", "python", "json", "http", "text", "diff"]
+              },
+              "lines": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^ln_[a-z0-9]{1,8}$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              },
+              "answer": {
+                "minItems": 3,
+                "maxItems": 15,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "distractors": {
+                "default": [],
+                "maxItems": 3,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "indent": {
+                "default": false,
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "lang",
+              "lines",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "config_review"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "artifact": {
+                "type": "object",
+                "properties": {
+                  "lang": {
+                    "type": "string",
+                    "enum": ["yaml", "dockerfile", "json", "ini", "toml", "hcl"]
+                  },
+                  "src": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "required": ["lang", "src"],
+                "additionalProperties": false
+              },
+              "defect_manifest": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^df_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "from": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "to": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "rule": {
+                      "type": "string",
+                      "maxLength": 60
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": ["high", "mid", "low"]
+                    },
+                    "mc_ref": {
+                      "type": "string",
+                      "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                    },
+                    "note": {
+                      "type": "string",
+                      "minLength": 5,
+                      "maxLength": 200
+                    }
+                  },
+                  "required": ["from", "to", "rule", "severity", "note"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "artifact",
+              "defect_manifest"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "log_read"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "log": {
+                "type": "object",
+                "properties": {
+                  "lang": {
+                    "type": "string",
+                    "enum": ["ts", "js", "sql", "yaml", "dockerfile", "bash", "python", "json", "http", "text", "diff"]
+                  },
+                  "src": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "required": ["lang", "src"],
+                "additionalProperties": false
+              },
+              "options": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              },
+              "answer": {
+                "type": "string",
+                "pattern": "^opt_[a-h]$"
+              },
+              "distractor_mc": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "log",
+              "options",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "cond_reversal"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "scenario": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 600
+              },
+              "conditions": {
+                "type": "object",
+                "properties": {
+                  "cond_a": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 300
+                  },
+                  "cond_b": {
+                    "type": "string",
+                    "minLength": 10,
+                    "maxLength": 300
+                  }
+                },
+                "required": ["cond_a", "cond_b"],
+                "additionalProperties": false
+              },
+              "options": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                }
+              },
+              "answer": {
+                "type": "object",
+                "properties": {
+                  "cond_a": {
+                    "type": "string",
+                    "pattern": "^opt_[a-h]$"
+                  },
+                  "cond_b": {
+                    "type": "string",
+                    "pattern": "^opt_[a-h]$"
+                  }
+                },
+                "required": ["cond_a", "cond_b"],
+                "additionalProperties": false
+              },
+              "pivot_md": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "scenario",
+              "conditions",
+              "options",
+              "answer",
+              "pivot_md"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "fermi"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 600
+              },
+              "answer": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "unit": {
+                    "type": "string",
+                    "maxLength": 12
+                  },
+                  "log10_tol": {
+                    "default": 0.5,
+                    "type": "number",
+                    "minimum": 0.1,
+                    "maximum": 1
+                  }
+                },
+                "required": ["value", "unit"],
+                "additionalProperties": false
+              },
+              "assumptions_rubric": {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:rb\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "stem",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "blank_note"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 400
+              },
+              "idea_units": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^iu_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "maxLength": 160
+                    },
+                    "ku_ref": {
+                      "type": "string",
+                      "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                    },
+                    "weight": {
+                      "default": 1,
+                      "type": "number",
+                      "minimum": 0.5,
+                      "maximum": 2
+                    },
+                    "keywords": {
+                      "minItems": 1,
+                      "maxItems": 8,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "maxLength": 30
+                      }
+                    }
+                  },
+                  "required": ["text", "ku_ref", "keywords"],
+                  "additionalProperties": false
+                }
+              },
+              "solo_rubric": {
+                "default": "rb.solo-5",
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:rb\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              },
+              "model_note_md": {
+                "type": "string",
+                "minLength": 50,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "prompt",
+              "idea_units",
+              "model_note_md"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "essay"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 600
+              },
+              "key_points": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^kp_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "maxLength": 160
+                    },
+                    "ku_ref": {
+                      "type": "string",
+                      "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                    }
+                  },
+                  "required": ["text", "ku_ref"],
+                  "additionalProperties": false
+                }
+              },
+              "rubric": {
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:rb\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              },
+              "model_answer_md": {
+                "type": "string",
+                "minLength": 50,
+                "maxLength": 2000
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "prompt",
+              "key_points",
+              "rubric",
+              "model_answer_md"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "digging"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "depth": {
+                "type": "string",
+                "enum": ["d1", "d2", "d3", "d4", "d5", "d6", "d7"]
+              },
+              "question": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "expects": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^kp_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "maxLength": 160
+                    },
+                    "ku_ref": {
+                      "type": "string",
+                      "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                    }
+                  },
+                  "required": ["text", "ku_ref"],
+                  "additionalProperties": false
+                }
+              },
+              "followups": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_]{1,31}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "when": {
+                      "type": "string",
+                      "enum": ["partial", "misconception", "dont_know", "off_topic"]
+                    },
+                    "mc_ref": {
+                      "type": "string",
+                      "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                    },
+                    "question": {
+                      "type": "string",
+                      "minLength": 10,
+                      "maxLength": 300
+                    }
+                  },
+                  "required": ["when", "question"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "depth",
+              "question",
+              "expects"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "digging_d4_mcq"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "depth": {
+                "type": "string",
+                "enum": ["d4", "d5"]
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 600
+              },
+              "options": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 240
+                }
+              },
+              "answer": {
+                "type": "string",
+                "pattern": "^opt_[a-h]$"
+              },
+              "distractor_mc": {
+                "default": {},
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "depth",
+              "stem",
+              "options",
+              "answer"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "feynman"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "student_persona": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "student_beliefs": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^sb_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "mc_ref": {
+                      "type": "string",
+                      "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                    },
+                    "opening_line": {
+                      "type": "string",
+                      "minLength": 10,
+                      "maxLength": 200
+                    }
+                  },
+                  "required": ["mc_ref", "opening_line"],
+                  "additionalProperties": false
+                }
+              },
+              "checklist": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^ck_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "maxLength": 160
+                    },
+                    "ku_ref": {
+                      "type": "string",
+                      "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                    }
+                  },
+                  "required": ["text", "ku_ref"],
+                  "additionalProperties": false
+                }
+              },
+              "rubric": {
+                "default": "rb.feynman-teach",
+                "type": "string",
+                "maxLength": 96,
+                "pattern": "^(?:rb\\.[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "student_persona",
+              "student_beliefs",
+              "checklist"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "audit"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "artifact_md": {
+                "type": "string",
+                "minLength": 100,
+                "maxLength": 3000
+              },
+              "defect_manifest": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^df_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string",
+                      "maxLength": 200
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["factual", "omission", "unsafe", "outdated", "overclaim"]
+                    },
+                    "mc_ref": {
+                      "type": "string",
+                      "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                    },
+                    "correction": {
+                      "type": "string",
+                      "minLength": 5,
+                      "maxLength": 300
+                    }
+                  },
+                  "required": ["quote", "kind", "correction"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "prompt",
+              "artifact_md",
+              "defect_manifest"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "pr_review"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "prompt": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "diff": {
+                "type": "object",
+                "properties": {
+                  "lang": {
+                    "type": "string",
+                    "const": "diff"
+                  },
+                  "src": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4000
+                  }
+                },
+                "required": ["lang", "src"],
+                "additionalProperties": false
+              },
+              "defect_manifest": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^df_[a-z0-9_]{1,20}$"
+                },
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "maxLength": 120
+                    },
+                    "from": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "to": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 9007199254740991
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": ["security_weakness", "std_violation", "perf_resource"]
+                    },
+                    "cwe": {
+                      "type": "string",
+                      "pattern": "^CWE-\\d{1,4}$"
+                    },
+                    "std_clause": {
+                      "type": "string",
+                      "maxLength": 60
+                    },
+                    "note": {
+                      "type": "string",
+                      "minLength": 5,
+                      "maxLength": 300
+                    }
+                  },
+                  "required": ["file", "from", "to", "kind", "note"],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "prompt",
+              "diff",
+              "defect_manifest"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "const": "embedded"
+              },
+              "facet": {
+                "type": "string",
+                "enum": ["definition", "mechanism", "code", "tradeoff", "contrast", "operation"]
+              },
+              "response_mode": {
+                "type": "string",
+                "enum": ["recognition", "production"]
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 5
+              },
+              "bloom": {
+                "type": "string",
+                "enum": ["remember", "understand", "apply", "analyze", "evaluate", "create"]
+              },
+              "stakes": {
+                "default": "S2",
+                "type": "string",
+                "enum": ["S1", "S2"]
+              },
+              "ku_refs": {
+                "minItems": 1,
+                "maxItems": 16,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:k\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.k\\d{2})$"
+                }
+              },
+              "mc_refs": {
+                "default": [],
+                "maxItems": 6,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+                }
+              },
+              "stem_family": {
+                "type": "string",
+                "pattern": "^sf_[a-z0-9_]{2,28}$"
+              },
+              "roles": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["pretest", "placement", "timecapsule"]
+                }
+              },
+              "tags": {
+                "default": [],
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^(qa|lc|ctx|stack|cert|mode):[a-z0-9_.-]{1,40}$"
+                }
+              },
+              "gate_status": {
+                "type": "string",
+                "const": "authored"
+              },
+              "explanation_md": {
+                "type": "string",
+                "minLength": 20,
+                "maxLength": 800
+              },
+              "hints": {
+                "type": "object",
+                "properties": {
+                  "h1": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h2": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 300
+                  },
+                  "h3": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 400
+                  },
+                  "h4": {
+                    "type": "string",
+                    "minLength": 5,
+                    "maxLength": 800
+                  }
+                },
+                "required": ["h1", "h2", "h3", "h4"],
+                "additionalProperties": false
+              },
+              "shape": {
+                "type": "string",
+                "enum": ["ox", "mcq"]
+              },
+              "stem": {
+                "type": "string",
+                "minLength": 10,
+                "maxLength": 300
+              },
+              "answer": {
+                "anyOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^opt_[a-h]$"
+                  }
+                ]
+              },
+              "options": {
+                "type": "object",
+                "propertyNames": {
+                  "type": "string",
+                  "pattern": "^opt_[a-h]$"
+                },
+                "additionalProperties": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 160
+                }
+              },
+              "false_mc": {
+                "type": "string",
+                "pattern": "^(?:m\\d{2}|[a-z0-9]+\\.[a-z0-9]+(?:-[a-z0-9]+)*\\.m\\d{2})$"
+              }
+            },
+            "required": [
+              "format",
+              "facet",
+              "response_mode",
+              "level",
+              "bloom",
+              "ku_refs",
+              "stem_family",
+              "gate_status",
+              "explanation_md",
+              "shape",
+              "stem",
+              "answer"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": ["schema_v", "concept_id", "items"],
+  "additionalProperties": false
+}

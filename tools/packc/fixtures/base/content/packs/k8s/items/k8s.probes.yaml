@@ -1,0 +1,87 @@
+schema_v: 1
+concept_id: k8s.probes
+items:
+  i01:
+    format: ox
+    facet: definition
+    response_mode: recognition
+    level: 2
+    bloom: remember
+    ku_refs: [k01]
+    stem_family: sf_probe_kinds
+    gate_status: authored
+    explanation_md: "프로브는 kubelet이 컨테이너 상태를 검사하는 장치이며 세 종류가 있다."
+    stem: "프로브는 kubelet이 컨테이너 상태를 주기적으로 검사하는 장치다."
+    answer: true
+    correction_md: "맞다. 프로브는 kubelet이 수행하는 주기적 검사다."
+  i02:
+    format: ox
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k02]
+    mc_refs: [m01]
+    stem_family: sf_probe_effects
+    gate_status: authored
+    explanation_md: "재시작을 일으키는 것은 liveness 프로브이고 readiness 프로브는 트래픽만 끊는다."
+    stem: "readiness 프로브가 실패하면 kubelet이 컨테이너를 재시작한다."
+    answer: false
+    false_mc: m01
+    correction_md: "틀렸다. readiness 실패는 엔드포인트 제외이고 재시작은 liveness 실패의 결과다."
+  i03:
+    format: mcq
+    facet: mechanism
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k02]
+    mc_refs: [m01]
+    stem_family: sf_probe_effects
+    gate_status: authored
+    explanation_md: "liveness 실패는 재시작, readiness 실패는 엔드포인트 제외로 이어진다."
+    stem: "liveness 프로브가 연속으로 실패했을 때 kubelet이 하는 일은 무엇인가?"
+    options:
+      opt_a: "컨테이너를 재시작한다"
+      opt_b: "서비스 엔드포인트에서 Pod를 제외한다"
+      opt_c: "Pod를 다른 노드로 옮긴다"
+    answer: opt_a
+    distractor_mc:
+      opt_b: m01
+    option_rationale:
+      opt_a: "liveness 실패의 결과가 재시작이다."
+      opt_b: "이것은 readiness 실패의 결과다."
+  i04:
+    format: cloze
+    facet: code
+    response_mode: production
+    level: 2
+    bloom: apply
+    ku_refs: [k03]
+    stem_family: sf_probe_config
+    gate_status: authored
+    explanation_md: "검사 주기는 periodSeconds 필드로 정한다."
+    stem: "readiness 프로브의 검사 주기는 {{b1}} 필드로 정한다."
+    blanks:
+      b1:
+        accept: ["periodSeconds"]
+  i05:
+    format: matching
+    facet: contrast
+    response_mode: recognition
+    level: 2
+    bloom: understand
+    ku_refs: [k02]
+    stem_family: sf_probe_effects
+    gate_status: authored
+    explanation_md: "프로브 종류마다 실패했을 때의 결과가 다르다."
+    stem: "프로브 종류와 실패했을 때의 결과를 짝지어라."
+    left:
+      l_live: "liveness 실패"
+      l_ready: "readiness 실패"
+    right:
+      r_restart: "컨테이너 재시작"
+      r_remove: "엔드포인트에서 제외"
+    answer:
+      l_live: r_restart
+      l_ready: r_remove

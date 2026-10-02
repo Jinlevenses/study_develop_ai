@@ -9,9 +9,7 @@ import { SourceEntry } from './source.js';
 export const TemplateT2File = ItemModelT2.extend({
   schema_v: z.literal(1),
   id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-  applies_to: z
-    .object({ tiers: z.array(z.enum(['A', 'B'])).min(1), ku_types: z.array(KuType).optional() })
-    .strict(),
+  applies_to: z.object({ tiers: z.array(z.enum(['A', 'B'])).min(1), ku_types: z.array(KuType).optional() }).strict(),
 }).strict();
 export type TemplateT2File = z.infer<typeof TemplateT2File>;
 

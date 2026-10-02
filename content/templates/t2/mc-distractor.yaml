@@ -1,0 +1,18 @@
+# content/templates/t2/mc-distractor.yaml
+# yaml-language-server: $schema=../../.schemas/templates-t2.schema.json
+schema_v: 1
+id: mc-distractor
+kind: t2
+format: mcq
+facet: mechanism
+response_mode: recognition
+stem_family: sf_t2_mcq
+source: { from: ku_set, ku_types: [definition, mechanism, property] }
+template:
+  stem: "{{concept.title_ko}}에 대한 설명으로 옳은 것은?"
+  options: { opt_a: "{{ku.statement}}", opt_b: "{{mc.1.wrong_belief}}", opt_c: "{{mc.2.wrong_belief}}" }
+  answer: "opt_a"
+constraints: { dedupe_jaccard: 0.85, max_instances: 12 }
+metamorphic: { preserve: [option_order], flip: [] }
+stakes_max: S1
+applies_to: { tiers: [A, B] }

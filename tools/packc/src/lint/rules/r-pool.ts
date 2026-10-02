@@ -1,7 +1,8 @@
 // R-POOL — 트랙마다 cap 계산(§4.6) 결과의 blocker를 finding 1개로 요약. blocker가 있으면 warn, --release면 error.
 // 판정은 반드시 @fathom/contracts/pack/feasibility의 structuralFeasibility() 호출(lint/inventory.ts) — 재구현 0.
-import { finding } from '../../validate/finding.js';
+
 import type { Finding } from '../../validate/finding.js';
+import { finding } from '../../validate/finding.js';
 import type { LintContext } from '../../validate/model.js';
 import { buildInventory, computeCap } from '../inventory.js';
 

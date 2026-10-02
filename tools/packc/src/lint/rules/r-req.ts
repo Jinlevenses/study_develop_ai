@@ -1,6 +1,7 @@
 // R-REQ — Tier A/B: required_for_level === level · Tier C: null.
-import { finding } from '../../validate/finding.js';
+
 import type { Finding } from '../../validate/finding.js';
+import { finding } from '../../validate/finding.js';
 import type { LintContext } from '../../validate/model.js';
 
 export function ruleReq(ctx: LintContext): Finding[] {
@@ -12,7 +13,15 @@ export function ruleReq(ctx: LintContext): Finding[] {
         out.push(finding('R-REQ', 'error', c.rel, 'required_for_level', 'Tier C must have required_for_level: null'));
       }
     } else if (req !== level) {
-      out.push(finding('R-REQ', 'error', c.rel, 'required_for_level', `Tier ${tier} must have required_for_level = level (${level})`));
+      out.push(
+        finding(
+          'R-REQ',
+          'error',
+          c.rel,
+          'required_for_level',
+          `Tier ${tier} must have required_for_level = level (${level})`,
+        ),
+      );
     }
   }
   return out;

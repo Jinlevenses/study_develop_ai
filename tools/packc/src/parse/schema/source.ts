@@ -19,7 +19,10 @@ export const SourceEntry = z
     license: z
       .object({ spdx: z.string().max(40), grade: Grade, verified_at: IsoDate, evidence: z.string().max(200) })
       .strict(),
-    code_license: z.object({ spdx: z.string().max(40), grade: Grade }).strict().optional(),
+    code_license: z
+      .object({ spdx: z.string().max(40), grade: Grade })
+      .strict()
+      .optional(),
     attribution_template: z.string().max(200),
     allowed_usage: z.array(Usage).min(1),
     primary: z.boolean().default(false),

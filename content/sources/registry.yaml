@@ -1,0 +1,466 @@
+# content/sources/registry.yaml
+# yaml-language-server: $schema=../.schemas/sources-registry.schema.json
+schema_v: 1
+sources:
+  src.k8s-docs:
+    kind: doc
+    title: "Kubernetes Documentation"
+    publisher: "The Kubernetes Authors"
+    base_url: "https://kubernetes.io/docs"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    code_license: { spdx: Apache-2.0, grade: A }
+    attribution_template: "출처: Kubernetes Documentation (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.docker-docs:
+    kind: doc
+    title: "Docker Documentation"
+    publisher: "Docker Inc."
+    base_url: "https://docs.docker.com"
+    license: { spdx: Apache-2.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: Docker Documentation (Apache-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.react-docs:
+    kind: doc
+    title: "React Documentation"
+    publisher: "Meta Platforms"
+    base_url: "https://react.dev"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    code_license: { spdx: MIT, grade: A }
+    attribution_template: "출처: React Documentation (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.ts-handbook:
+    kind: doc
+    title: "TypeScript Handbook"
+    publisher: "Microsoft"
+    base_url: "https://www.typescriptlang.org/docs/handbook"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    code_license: { spdx: MIT, grade: A }
+    attribution_template: "출처: TypeScript Handbook (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.node-docs:
+    kind: doc
+    title: "Node.js Documentation"
+    publisher: "OpenJS Foundation"
+    base_url: "https://nodejs.org/docs/latest/api"
+    license: { spdx: MIT, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: Node.js Documentation (MIT), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.python-docs:
+    kind: doc
+    title: "Python Documentation"
+    publisher: "Python Software Foundation"
+    base_url: "https://docs.python.org/3"
+    license: { spdx: PSF-2.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    code_license: { spdx: 0BSD, grade: A }
+    attribution_template: "출처: Python Documentation (PSF-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.postgres-docs:
+    kind: doc
+    title: "PostgreSQL Documentation"
+    publisher: "PostgreSQL Global Development Group"
+    base_url: "https://www.postgresql.org/docs/current"
+    license: { spdx: PostgreSQL, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: PostgreSQL Documentation (PostgreSQL License), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.otel-docs:
+    kind: doc
+    title: "OpenTelemetry Documentation"
+    publisher: "OpenTelemetry Authors"
+    base_url: "https://opentelemetry.io/docs"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: OpenTelemetry Documentation (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.prometheus-docs:
+    kind: doc
+    title: "Prometheus Documentation"
+    publisher: "Prometheus Authors"
+    base_url: "https://prometheus.io/docs"
+    license: { spdx: Apache-2.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: Prometheus Documentation (Apache-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.cncf-glossary:
+    kind: doc
+    title: "Cloud Native Glossary"
+    publisher: "CNCF"
+    base_url: "https://glossary.cncf.io"
+    license: { spdx: Apache-2.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: Cloud Native Glossary (Apache-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: false
+    fetch: { method: none }
+    versioned_by: none
+  src.ms-learn-azure:
+    kind: doc
+    title: "Microsoft Learn — Azure Documentation"
+    publisher: "Microsoft"
+    base_url: "https://learn.microsoft.com/azure"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    code_license: { spdx: MIT, grade: A }
+    attribution_template: "출처: Microsoft Learn — Azure Documentation (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.hf-transformers-docs:
+    kind: doc
+    title: "Hugging Face Transformers Documentation"
+    publisher: "Hugging Face"
+    base_url: "https://huggingface.co/docs/transformers"
+    license: { spdx: Apache-2.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: Hugging Face Transformers Documentation (Apache-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.github-actions-docs:
+    kind: doc
+    title: "GitHub Actions Documentation"
+    publisher: "GitHub"
+    base_url: "https://docs.github.com/actions"
+    repo: "github.com/github/docs"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    code_license: { spdx: MIT, grade: A }
+    attribution_template: "출처: GitHub Actions Documentation (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.pytorch-docs:
+    kind: doc
+    title: "PyTorch Documentation"
+    publisher: "PyTorch Foundation"
+    base_url: "https://pytorch.org/docs/stable"
+    license: { spdx: BSD-3-Clause, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: PyTorch Documentation (BSD-3-Clause), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.go-docs:
+    kind: doc
+    title: "Go Documentation"
+    publisher: "The Go Authors"
+    base_url: "https://go.dev/doc"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    code_license: { spdx: BSD-3-Clause, grade: A }
+    attribution_template: "출처: Go Documentation (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.the-algorithms:
+    kind: repo
+    title: "TheAlgorithms"
+    publisher: "The Algorithms community"
+    base_url: "https://github.com/TheAlgorithms"
+    repo: "github.com/TheAlgorithms/JavaScript"
+    license: { spdx: MIT, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: TheAlgorithms (MIT), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: false
+    fetch: { method: none }
+    versioned_by: none
+  src.javascript-algorithms:
+    kind: repo
+    title: "javascript-algorithms"
+    publisher: "trekhleb"
+    base_url: "https://github.com/trekhleb/javascript-algorithms"
+    repo: "github.com/trekhleb/javascript-algorithms"
+    license: { spdx: MIT, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: javascript-algorithms (MIT), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: false
+    fetch: { method: none }
+    versioned_by: none
+  src.system-design-primer:
+    kind: repo
+    title: "The System Design Primer"
+    publisher: "donnemartin"
+    base_url: "https://github.com/donnemartin/system-design-primer"
+    repo: "github.com/donnemartin/system-design-primer"
+    license: { spdx: CC-BY-4.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: The System Design Primer (CC BY 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: false
+    fetch: { method: none }
+    versioned_by: none
+  src.cncf-curriculum:
+    kind: repo
+    title: "CNCF Certification Curriculum"
+    publisher: "CNCF"
+    base_url: "https://github.com/cncf/curriculum"
+    repo: "github.com/cncf/curriculum"
+    license: { spdx: Apache-2.0, grade: A, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: CNCF Certification Curriculum (Apache-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote, code_adapted]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.mdn:
+    kind: doc
+    title: "MDN Web Docs"
+    publisher: "Mozilla"
+    base_url: "https://developer.mozilla.org"
+    license: { spdx: CC-BY-SA-2.5, grade: B, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    code_license: { spdx: CC0-1.0, grade: A }
+    attribution_template: "출처: MDN Web Docs (CC BY-SA 2.5), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.owasp-top10:
+    kind: doc
+    title: "OWASP Top 10"
+    publisher: "OWASP Foundation"
+    base_url: "https://owasp.org/Top10"
+    license: { spdx: CC-BY-SA-4.0, grade: B, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: OWASP Top 10 (CC BY-SA 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.owasp-cheatsheets:
+    kind: doc
+    title: "OWASP Cheat Sheet Series"
+    publisher: "OWASP Foundation"
+    base_url: "https://cheatsheetseries.owasp.org"
+    license: { spdx: CC-BY-SA-4.0, grade: B, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: OWASP Cheat Sheet Series (CC BY-SA 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: false
+    fetch: { method: none }
+    versioned_by: none
+  src.owasp-asvs:
+    kind: doc
+    title: "OWASP Application Security Verification Standard"
+    publisher: "OWASP Foundation"
+    base_url: "https://owasp.org/www-project-application-security-verification-standard"
+    license: { spdx: CC-BY-SA-4.0, grade: B, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: OWASP Application Security Verification Standard (CC BY-SA 4.0), {section}, {url} · 의역·재구성함"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.linux-man-pages:
+    kind: doc
+    title: "Linux man-pages"
+    publisher: "Linux man-pages project"
+    base_url: "https://man7.org/linux/man-pages"
+    license: { spdx: Linux-man-pages-copyleft, grade: B, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: Linux man-pages (Linux man-pages copyleft), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.git-docs:
+    kind: doc
+    title: "Git Documentation"
+    publisher: "Git project"
+    base_url: "https://git-scm.com/docs"
+    repo: "github.com/git/git"
+    license: { spdx: GPL-2.0-only, grade: B, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: Git Documentation (GPL-2.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: product_version
+  src.google-sre-book:
+    kind: book
+    title: "Site Reliability Engineering"
+    publisher: "Google"
+    base_url: "https://sre.google/sre-book/table-of-contents"
+    license: { spdx: CC-BY-NC-ND-4.0, grade: C, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: Site Reliability Engineering (CC BY-NC-ND 4.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.google-sre-workbook:
+    kind: book
+    title: "The Site Reliability Workbook"
+    publisher: "Google"
+    base_url: "https://sre.google/workbook/table-of-contents"
+    license: { spdx: CC-BY-NC-ND-4.0, grade: C, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: The Site Reliability Workbook (CC BY-NC-ND 4.0), {section}, {url}"
+    allowed_usage: [link_only, paraphrase]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.cwe:
+    kind: doc
+    title: "Common Weakness Enumeration"
+    publisher: "MITRE"
+    base_url: "https://cwe.mitre.org"
+    license: { spdx: LicenseRef-MITRE-CWE-ToU, grade: C, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: Common Weakness Enumeration (MITRE CWE 이용약관), {section}, {url}"
+    allowed_usage: [link_only, paraphrase]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.attention-paper:
+    kind: paper
+    title: "Attention Is All You Need"
+    publisher: "Vaswani et al."
+    base_url: "https://arxiv.org/abs/1706.03762"
+    ref_text: "arXiv:1706.03762 (NeurIPS 2017)"
+    license: { spdx: LicenseRef-arXiv-nonexclusive, grade: C, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: Attention Is All You Need (arXiv 비독점 배포 허가), {section}, {url}"
+    allowed_usage: [link_only, paraphrase]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.roadmap-sh:
+    kind: web
+    title: "roadmap.sh"
+    publisher: "roadmap.sh"
+    base_url: "https://roadmap.sh"
+    license: { spdx: LicenseRef-All-rights-reserved, grade: D, verified_at: "2026-10-02", evidence: "R4 §7.2 ✔실측 2026-09-30" }
+    attribution_template: "출처: roadmap.sh (All rights reserved), {section}, {url}"
+    allowed_usage: [link_only]
+    primary: false
+    fetch: { method: none }
+    versioned_by: none
+  src.ostep:
+    kind: book
+    title: "Operating Systems: Three Easy Pieces"
+    publisher: "Remzi and Andrea Arpaci-Dusseau"
+    base_url: "https://pages.cs.wisc.edu/~remzi/OSTEP"
+    license: { spdx: LicenseRef-All-rights-reserved, grade: D, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: Operating Systems: Three Easy Pieces (All rights reserved), {section}, {url}"
+    allowed_usage: [link_only]
+    primary: false
+    fetch: { method: none }
+    versioned_by: edition
+  src.dora-research:
+    kind: web
+    title: "DORA Research"
+    publisher: "DORA"
+    base_url: "https://dora.dev/research"
+    license: { spdx: LicenseRef-All-rights-reserved, grade: D, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: DORA Research (All rights reserved), {section}, {url}"
+    allowed_usage: [link_only]
+    primary: false
+    fetch: { method: none }
+    versioned_by: edition
+  src.rfc-9110:
+    kind: rfc
+    title: "RFC 9110: HTTP Semantics"
+    publisher: "IETF"
+    base_url: "https://www.rfc-editor.org/rfc/rfc9110"
+    ref_text: "RFC 9110"
+    license: { spdx: LicenseRef-IETF-Trust-TLP, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: RFC 9110: HTTP Semantics (IETF Trust TLP), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.rfc-9293:
+    kind: rfc
+    title: "RFC 9293: Transmission Control Protocol (TCP)"
+    publisher: "IETF"
+    base_url: "https://www.rfc-editor.org/rfc/rfc9293"
+    ref_text: "RFC 9293"
+    license: { spdx: LicenseRef-IETF-Trust-TLP, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: RFC 9293: Transmission Control Protocol (TCP) (IETF Trust TLP), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.rfc-8446:
+    kind: rfc
+    title: "RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3"
+    publisher: "IETF"
+    base_url: "https://www.rfc-editor.org/rfc/rfc8446"
+    ref_text: "RFC 8446"
+    license: { spdx: LicenseRef-IETF-Trust-TLP, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: RFC 8446: The Transport Layer Security (TLS) Protocol Version 1.3 (IETF Trust TLP), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.rfc-1035:
+    kind: rfc
+    title: "RFC 1035: Domain Names — Implementation and Specification"
+    publisher: "IETF"
+    base_url: "https://www.rfc-editor.org/rfc/rfc1035"
+    ref_text: "RFC 1035"
+    license: { spdx: LicenseRef-IETF-Trust-TLP, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: RFC 1035: Domain Names — Implementation and Specification (IETF Trust TLP), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.rfc-6749:
+    kind: rfc
+    title: "RFC 6749: The OAuth 2.0 Authorization Framework"
+    publisher: "IETF"
+    base_url: "https://www.rfc-editor.org/rfc/rfc6749"
+    ref_text: "RFC 6749"
+    license: { spdx: LicenseRef-IETF-Trust-TLP, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: RFC 6749: The OAuth 2.0 Authorization Framework (IETF Trust TLP), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.rfc-7519:
+    kind: rfc
+    title: "RFC 7519: JSON Web Token (JWT)"
+    publisher: "IETF"
+    base_url: "https://www.rfc-editor.org/rfc/rfc7519"
+    ref_text: "RFC 7519"
+    license: { spdx: LicenseRef-IETF-Trust-TLP, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: RFC 7519: JSON Web Token (JWT) (IETF Trust TLP), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: none
+  src.nist-800-63b:
+    kind: doc
+    title: "NIST SP 800-63B Digital Identity Guidelines"
+    publisher: "NIST"
+    base_url: "https://pages.nist.gov/800-63-3/sp800-63b.html"
+    license: { spdx: LicenseRef-US-Gov-Public-Domain, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: NIST SP 800-63B Digital Identity Guidelines (미국 정부 공공저작물), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition
+  src.law-pipa:
+    kind: doc
+    title: "개인정보 보호법"
+    publisher: "국가법령정보센터"
+    base_url: "https://www.law.go.kr"
+    ref_text: "개인정보 보호법(법률)"
+    license: { spdx: LicenseRef-KR-Copyright-Act-Art7, grade: P, verified_at: "2026-10-02", evidence: "R4 §7.2·DCP §8.6 △ — WP-INT가 원문 LICENSE 재확인" }
+    attribution_template: "출처: 개인정보 보호법 (공공저작물), {section}, {url}"
+    allowed_usage: [link_only, paraphrase, short_quote]
+    primary: true
+    fetch: { method: none }
+    versioned_by: edition

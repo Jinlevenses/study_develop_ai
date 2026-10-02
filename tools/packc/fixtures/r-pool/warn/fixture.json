@@ -1,0 +1,12 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [],
+  "args": [],
+  "expect": {
+    "exit": 0,
+    "rules": [
+      "R-POOL"
+    ]
+  }
+}

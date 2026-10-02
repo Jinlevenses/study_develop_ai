@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/concepts/docker.image-layer.md",
+      "from": "prereqs: []",
+      "to": "prereqs: [docker.dockerfile]"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-DAG"
+    ]
+  }
+}

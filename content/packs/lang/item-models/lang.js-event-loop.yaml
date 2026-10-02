@@ -1,0 +1,21 @@
+# content/packs/lang/item-models/lang.js-event-loop.yaml
+# yaml-language-server: $schema=../../../.schemas/item-models.schema.json
+schema_v: 1
+concept_id: lang.js-event-loop
+models:
+  im01:
+    kind: t1
+    generator: t1.event_loop_order
+    format: code_predict
+    facet: mechanism
+    response_mode: production
+    level: 2
+    bloom: apply
+    stem_family: sf_t1_event_loop_order
+    params:
+      n_sync: { type: int, min: 1, max: 3 }
+      n_microtask: { type: int, min: 1, max: 3 }
+      n_macrotask: { type: int, min: 1, max: 2 }
+      nesting: { type: enum, values: { none: "중첩 없음", micro_in_macro: "setTimeout 콜백 안에서 Promise.then 예약", macro_in_micro: "Promise.then 콜백 안에서 setTimeout 예약" } }
+      apis: { type: enum, values: { basic: "console.log·setTimeout·Promise.then", with_queue_microtask: "queueMicrotask 포함", with_await: "async 함수와 await 포함" } }
+    ku_refs: [k03, k04, k05, k07]

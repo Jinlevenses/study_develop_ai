@@ -1,0 +1,10 @@
+# content/packs/k8s/pack.yaml
+# yaml-language-server: $schema=../../.schemas/pack.schema.json
+schema_v: 1
+id: k8s
+version: "0.1.0"
+channel: seed
+track: { id: k8s, name_ko: "쿠버네티스", name_en: "Kubernetes", track_group: infra, sort_order: 10,
+         summary_ko: "Pod·Deployment·Service·Probe·오토스케일링까지, 컨테이너를 클러스터에서 배포하고 운영하는 방법" }
+requires: { packc: ">=0.1.0 <1.0.0", policy: { mastery_rules: v1, gate_thresholds: v1 } }
+content_license: repo

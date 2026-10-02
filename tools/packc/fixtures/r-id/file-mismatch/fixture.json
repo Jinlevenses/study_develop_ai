@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/concepts/docker.run-lifecycle.md",
+      "from": "id: docker.run-lifecycle\n",
+      "to": "id: docker.run-lifecycles\n"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-ID"
+    ]
+  }
+}

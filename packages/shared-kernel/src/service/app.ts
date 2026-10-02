@@ -90,12 +90,12 @@ export type AppInternals = {
 function narrowHandler<R extends RouteDef, S extends keyof R['response'] & number>(
   handler: (ctx: RouteContext<R>) => Promise<RouteReply<R, S>>,
 ): InternalHandler {
-  return handler as unknown as InternalHandler;
+  return handler as InternalHandler;
 }
 function narrowStreamHandler<R extends RouteDef>(
   handler: (ctx: RouteContext<R>, reply: FastifyReply) => Promise<void>,
 ): InternalStreamHandler {
-  return handler as unknown as InternalStreamHandler;
+  return handler as InternalStreamHandler;
 }
 
 function fullDatabase<P>(def: ServiceDefinition<P>): { file: string } | null {

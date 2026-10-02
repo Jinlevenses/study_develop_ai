@@ -1,7 +1,7 @@
 // R-ID(+R-NS·R-FILE·R-ID-SLUG 흡수) — ID 형식·네임스페이스·파일 이름·전역 유일·파생 ID·루브릭/템플릿/출처/V7 이름 규칙.
 import { ConceptId, ItemId, ItemModelId, KuId, MisconceptionId } from '@fathom/contracts/common/ids';
-import { finding } from '../../validate/finding.js';
 import type { Finding } from '../../validate/finding.js';
+import { finding } from '../../validate/finding.js';
 import type { LintContext } from '../../validate/model.js';
 
 const RESERVED_SLUGS: ReadonlySet<string> = new Set(['case', 'art', 'lab']);
@@ -13,7 +13,8 @@ function escapeRe(s: string): string {
 export function ruleId(ctx: LintContext): Finding[] {
   const out: Finding[] = [];
   const { model, idx } = ctx;
-  const err = (file: string, keypath: string, message: string) => out.push(finding('R-ID', 'error', file, keypath, message));
+  const err = (file: string, keypath: string, message: string) =>
+    out.push(finding('R-ID', 'error', file, keypath, message));
 
   // 개념 파일
   const firstById = new Map<string, string>();

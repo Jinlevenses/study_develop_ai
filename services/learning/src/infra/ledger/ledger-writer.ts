@@ -8,6 +8,7 @@ import { err, ok } from '@fathom/shared-kernel/errors/errors';
 import type { SqlitePort, Stmt } from '@fathom/shared-kernel/sqlite/sqlite';
 import type { Clock } from '@fathom/shared-kernel/time/time';
 import { monotonicClientTs } from '@fathom/shared-kernel/time/time';
+import type { z } from 'zod';
 import type {
   CurrentPolicySet,
   IntegrityAlarm,
@@ -25,6 +26,7 @@ import { eventHash, GENESIS_HASH } from '../../domain/ledger/chain/hash.js';
 import type { ChainRow, DeviceHead } from '../../domain/ledger/chain/verify.js';
 import { verifyChains } from '../../domain/ledger/chain/verify.js';
 import { studyDayOf } from '../../domain/ledger/time/study-day.js';
+import { upcast } from '../../domain/ledger/upcasters/registry.js';
 import { NODE_HASH_PORT } from './hash-port.js';
 import {
   LEDGER_DEVICE_HEAD,
@@ -107,6 +109,48 @@ function validateDraft(draft: LedgerAppendDraft): Result<Readonly<Record<string,
   return ok(parsed.data);
 }
 
+/** import 이벤트 하나의 검증: upcast(지원 버전) → LEDGER_PAYLOADS(저장 버전→현재 버전 payload) → 멱등 키 형식. detail에는 값이 없다. */
+function validateImportEvent(e: LedgerEventEnvelope): LedgerFault | null {
+  const where = { device_id: e.device_id, device_seq: e.device_seq };
+  const up = upcast(e.type, e.schema_version, e.payload);
+  if (!up.ok) {
+    return { kind: 'schema_version_unsupported', detail: up.error.detail, ...where };
+  }
+  const byVersion: Readonly<Record<number, z.ZodType>> = LEDGER_PAYLOADS[e.type];
+  const schema = byVersion[up.value.schema_version];
+  if (schema === undefined) {
+    return {
+      kind: 'schema_version_unsupported',
+      detail: `${e.type}: no payload schema v${up.value.schema_version}`,
+      ...where,
+    };
+  }
+  const parsed = schema.safeParse(up.value.payload);
+  if (!parsed.success) {
+    const issue = parsed.error.issues[0];
+    const path = issue === undefined ? '(root)' : issue.path.map(String).join('.') || '(root)';
+    return {
+      kind: 'payload_invalid',
+      detail: `${e.type} payload invalid at ${path}: ${issue?.code ?? 'unknown'}`,
+      ...where,
+    };
+  }
+  if (!isValidLedgerIdempotencyKey(e.type, e.idempotency_key)) {
+    return { kind: 'key_invalid', detail: `idempotency_key does not match ${e.type}`, ...where };
+  }
+  return null;
+}
+
+function validateImportEvents(events: readonly LedgerEventEnvelope[]): LedgerFault | null {
+  for (const e of events) {
+    const fault = validateImportEvent(e);
+    if (fault !== null) {
+      return fault;
+    }
+  }
+  return null;
+}
+
 type InsertStep =
   | { readonly kind: 'inserted'; readonly event: LedgerEventEnvelope }
   | { readonly kind: 'duplicate'; readonly event_id: string }
@@ -115,8 +159,8 @@ type InsertStep =
 
 export function createLedgerWriter(deps: LedgerWriterDeps): LedgerWriter {
   const { db, clock, newId, applier, alarm } = deps;
-  let localDeviceId: string | null = null;
-  let policyKnown = false;
+  // [캐시 없음] 기기·정책 존재는 매 append마다 인덱스 SELECT로 확인한다(tx 안). 같은 호출자 tx에서 appendInTx를 두 번 부르고
+  // 롤백해도 롤백된 device_id·정책 상태가 writer에 남지 않는다(NFR-DATA-013, UT-LR-033).
 
   // 지연 준비 문장(문장은 연결에 묶인다 — writer는 db 하나를 쓴다).
   let headStmt: Stmt | null = null;
@@ -140,15 +184,11 @@ export function createLedgerWriter(deps: LedgerWriterDeps): LedgerWriter {
     return hashAtStmt;
   };
 
-  /** 1. 로컬 기기. 캐시는 SELECT로 찾았을 때만(INSERT는 같은 tx가 롤백되면 무효). */
+  /** 1. 로컬 기기. 캐시하지 않는다(INSERT·SELECT 모두 같은 tx 안 — 호출자가 롤백하면 함께 사라진다). */
   function ensureDevice(): string {
-    if (localDeviceId !== null) {
-      return localDeviceId;
-    }
     const found = db.prepare(LR_DEVICE_LOCAL).get();
     if (found !== undefined) {
-      localDeviceId = String(found.device_id);
-      return localDeviceId;
+      return String(found.device_id);
     }
     const id = newId();
     db.prepare(LR_DEVICE_INSERT_LOCAL).run({ device_id: id, platform: deps.platform, created_at: clock.now() });
@@ -266,13 +306,12 @@ export function createLedgerWriter(deps: LedgerWriterDeps): LedgerWriter {
     return ok({ kind: 'appended', event });
   }
 
-  /** 2. 초기 정책 이벤트(DB-01 §5 ②, CO-20): 요청 이벤트보다 먼저. 존재를 SELECT로 확인했을 때만 캐시한다. */
+  /** 2. 초기 정책 이벤트(DB-01 §5 ②, CO-20): 요청 이벤트보다 먼저. 존재는 매번 SELECT로 확인한다(캐시 없음). */
   function ensureInitialPolicy(deviceId: string, requested: LedgerEventType): Result<null, LedgerFault> {
-    if (policyKnown || requested === 'policy.switched') {
+    if (requested === 'policy.switched') {
       return ok(null);
     }
     if (db.prepare(LEDGER_POLICY_EXISTS).get() !== undefined) {
-      policyKnown = true;
       return ok(null);
     }
     const ps = deps.policySet();
@@ -366,6 +405,11 @@ export function createLedgerWriter(deps: LedgerWriterDeps): LedgerWriter {
         device_id: broken.device_id,
         device_seq: broken.device_seq,
       });
+    }
+    // 쓰기 전에 전부 검증한다(DB-01 §6.3 "import 전체 거부"): 지원하지 않는 schema_version·잘못된 payload·키 형식은 한 건이라도 있으면 0행.
+    const invalid = validateImportEvents(sorted);
+    if (invalid !== null) {
+      return err(invalid);
     }
     const now = clock.now();
     for (const deviceId of seen) {

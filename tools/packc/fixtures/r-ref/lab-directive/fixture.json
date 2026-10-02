@@ -1,0 +1,18 @@
+{
+  "base": "base",
+  "delete": [],
+  "replace": [
+    {
+      "file": "content/packs/docker/concepts/docker.dockerfile.md",
+      "from": "단계 과제는 랩 WP에서 추가한다.",
+      "to": "::lab[docker.lab.dockerfile-faded]"
+    }
+  ],
+  "args": [],
+  "expect": {
+    "exit": 1,
+    "rules": [
+      "R-REF"
+    ]
+  }
+}
