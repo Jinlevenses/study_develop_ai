@@ -184,13 +184,6 @@ export function realStackDeps(): StackDeps {
 
 // ───────── 경로 · 실행 형태 ─────────
 
-const SERVICE_DIR: Readonly<Record<StackService, string>> = {
-  gateway: 'gateway',
-  content: 'content',
-  learning: 'learning',
-  'ai-gateway': 'ai-gateway',
-  'ops-api': 'ops',
-};
 const ENTRY_TABLE: Readonly<Record<StackRuntime, Readonly<Record<StackService, string>>>> = {
   dist: {
     gateway: 'services/gateway/dist/main.js',
@@ -568,7 +561,7 @@ async function killLeftovers(c: Ctx, graceful: boolean): Promise<boolean> {
   const lock = await readLockFile(c);
   const pids = await servicePids(c);
   let forced = false;
-  if (lock !== null && lock.ok && c.deps.isAlive(lock.value.pid)) {
+  if (lock?.ok && c.deps.isAlive(lock.value.pid)) {
     const sup = lock.value.pid;
     if (graceful) {
       c.deps.signal(sup, 'SIGTERM');
@@ -640,7 +633,7 @@ async function runStop(c: Ctx, egress: 'record' | 'off'): Promise<StopReport> {
   const preEgress = await scanEgress(c.home, deps); // 정지 전 관측(정지 실패 진단용)
   const preLogs = await scanLogs(c.home, deps);
   const lock = await readLockFile(c);
-  const supPid = lock !== null && lock.ok ? lock.value.pid : null;
+  const supPid = lock?.ok ? lock.value.pid : null;
   const pids = await servicePids(c);
   const cli = cliInvocation(c.appRoot, c.runtime, ['down', '--profile=test']);
   const down = await deps.spawn(cli.bin, cli.args, { env: ctxEnv(c, egress), cwd: c.appRoot, timeoutMs: 30_000 });
@@ -680,7 +673,7 @@ async function runStop(c: Ctx, egress: 'record' | 'off'): Promise<StopReport> {
     forced,
     egress: egressScan,
     logs,
-    finalRegistry: final !== null && final.ok ? final.value : null,
+    finalRegistry: final?.ok ? final.value : null,
   };
 }
 
@@ -720,7 +713,7 @@ function buildStack(
     let last: RegistryView | null = null;
     const hit = await poll(c, timeoutMs, async () => {
       const reg = await readRegistryFile(c);
-      last = reg !== null && reg.ok ? reg.value : last;
+      last = reg?.ok ? reg.value : last;
       const s = last?.services[svc];
       const pidOk = o?.notPid === undefined || s?.pid !== o.notPid;
       return s !== undefined && s.state === state && pidOk ? s : null;
@@ -787,7 +780,7 @@ export async function launchStack(opts: StackOptions = {}, deps: StackDeps = rea
   });
   const bootMs = deps.now() - t0;
   const reg = await readRegistryFile(c);
-  const regValue = reg !== null && reg.ok ? reg.value : null;
+  const regValue = reg?.ok ? reg.value : null;
   const upFailed = (detail: string): Promise<never> =>
     killLeftovers(c, true).then(() => {
       throw fail({
