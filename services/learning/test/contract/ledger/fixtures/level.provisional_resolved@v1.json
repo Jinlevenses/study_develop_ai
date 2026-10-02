@@ -1,0 +1,8 @@
+{
+  "track": "k8s",
+  "level": 2,
+  "outcome": "confirmed",
+  "needs_reconfirmation": false,
+  "regrade_verdict_ids": ["01J0000000000000000000002V"],
+  "study_day": "2026-09-21"
+}

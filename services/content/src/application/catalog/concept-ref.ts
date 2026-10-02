@@ -69,5 +69,8 @@ export function conceptRefsOfInstall(db: SqlitePort, installId: string): Concept
 
 /** 활성 설치 전부의 ConceptRef(concept_id 순) — 활성 뷰만 읽는다. */
 export function conceptRefsOfActive(db: SqlitePort): ConceptRef[] {
-  return buildConceptRefs(db.prepare(SELECT_ACTIVE_CONCEPT_REF_ROWS).all(), db.prepare(SELECT_ACTIVE_PREREQ_EDGES).all());
+  return buildConceptRefs(
+    db.prepare(SELECT_ACTIVE_CONCEPT_REF_ROWS).all(),
+    db.prepare(SELECT_ACTIVE_PREREQ_EDGES).all(),
+  );
 }

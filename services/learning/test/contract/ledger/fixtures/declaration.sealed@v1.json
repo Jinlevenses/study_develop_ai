@@ -1,0 +1,10 @@
+{
+  "declaration_id": "01J00000000000000000000027",
+  "kind": "time_capsule",
+  "content_hash": "0fd214b24f5a9d15e9664c629f160060c57917af72311ef2e898999d82316ad7",
+  "sealed_payload": {
+    "goal": "probe-design"
+  },
+  "unseal_at": null,
+  "study_day": "2026-09-21"
+}

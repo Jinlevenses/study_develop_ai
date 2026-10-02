@@ -1,0 +1,14 @@
+{
+  "kind": "jol",
+  "target": {
+    "kind": "concept",
+    "id": "k8s.probes"
+  },
+  "value": {
+    "kind": "probability",
+    "p": 0.7
+  },
+  "session_id": "01J0000000000000000000000D",
+  "study_day": "2026-09-21",
+  "policy_version": "ps_5e1f0a9c3b7d2468"
+}

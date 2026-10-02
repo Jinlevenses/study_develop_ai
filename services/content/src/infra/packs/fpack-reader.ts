@@ -1,8 +1,8 @@
 import { closeSync, fstatSync, openSync, readSync } from 'node:fs';
 import path from 'node:path';
-import { PackKpi } from '@fathom/contracts/http/content/v1/catalog';
 import { FeasibilityBlocker } from '@fathom/contracts/common/practice';
 import { S } from '@fathom/contracts/common/schema';
+import { PackKpi } from '@fathom/contracts/http/content/v1/catalog';
 import { FpackManifest } from '@fathom/contracts/pack/manifest';
 import { BundleRecord } from '@fathom/contracts/pack/records';
 import { canonicalJson, parseJsonStrict, sha256Hex } from '@fathom/shared-kernel/canonical/canonical';

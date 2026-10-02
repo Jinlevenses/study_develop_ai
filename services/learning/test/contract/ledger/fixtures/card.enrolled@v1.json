@@ -1,0 +1,9 @@
+{
+  "card_id": "k8s.probes:definition:p",
+  "concept_id": "k8s.probes",
+  "facet": "definition",
+  "response_mode": "production",
+  "tier": "A",
+  "study_day": "2026-09-21",
+  "policy_version": "ps_5e1f0a9c3b7d2468"
+}

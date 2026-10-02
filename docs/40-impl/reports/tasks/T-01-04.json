@@ -1,0 +1,38 @@
+{
+  "taskId": "T-01-04", "tier": "T2h", "model_id": "T2h",
+  "status": "done",
+  "changedFiles": [
+    "content/README.md",
+    "content/templates/t2/*.yaml (5)",
+    "content/templates/dig/generic-01..08.yaml (8)",
+    "content/templates/rubrics/*.yaml (6)",
+    "content/sources/registry.yaml",
+    "content/packs/*/pack.yaml (20)",
+    "content/packs/*/concepts/*.md (469)",
+    "content/.schemas/*.schema.json (12)"
+  ],
+  "testsAdded": [],
+  "commands": [
+    { "cmd": "pnpm i --frozen-lockfile --ignore-scripts", "exit": 0 },
+    { "cmd": "pnpm content:scaffold --as-of 2026-10-02", "exit": 0 },
+    { "cmd": "pnpm content:check", "exit": 0 },
+    { "cmd": "pnpm content:schemas --check", "exit": 0 },
+    { "cmd": "biome check content", "exit": 0 },
+    { "cmd": "pnpm lint (workspace-wide)", "exit": 1 },
+    { "cmd": "node tools/gates/run-gates.mjs --stage=g1", "exit": 0 },
+    { "cmd": "node tools/gates/check-scope.mjs --task T-01-04", "exit": 1 },
+    { "cmd": "pnpm packs:build --out-dir <scratchpad>", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/tool-packc typecheck", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/tool-packc test", "exit": 0 }
+  ],
+  "graphify": "unavailable",
+  "deviations": [],
+  "escalations": [
+    { "type": "scope", "detail": "Workspace-wide `pnpm lint` fails only on files in services/learning (other lanes' uncommitted work); content/ is lint-clean. check-scope reports 210 outside-allowed errors, all from other lanes' dirty working tree (tools/packc, services/*, packages/*); 0 findings under content/. Both resolve when the orchestrator commits per-task." }
+  ],
+  "rtmUpdates": [
+    { "wp": "WP-C-00", "pgm": null, "req": ["FR-CUR-001", "FR-CUR-005", "FR-CUR-009"], "tests": ["C00-01..09"] },
+    { "wp": "WP-C-00", "pgm": null, "req": ["FR-CUR-012"], "tests": ["C00-04", "C00-06"] }
+  ],
+  "notes": "1) scaffold stdout: 'scaffold rows=469 edges=518 created=469 skipped=0 packs_created=20'; rerun created=0 skipped=469. 2) content:check: packs=20 files=509 errors=0 warnings=20 (all R-POOL, expected for Tier C). 3) one content:check run plus --json; packs:build wrote 20 .fpack to scratchpad (not committed); packc 222 unit tests pass. 4) Rubric l1..l4 written per Brief rule; solo-5 d_structure uses unistructural/multistructural/relational/extended-abstract; l1 text 10..300 chars verified by schema. 5) net.tcp-handshake, k8s.probes, lang.js-event-loop skeletons left as scaffold output (tier C) for T-01-05."
+}

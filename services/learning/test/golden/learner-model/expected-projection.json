@@ -1,0 +1,34 @@
+{
+  "format": "fathom.golden-projection.v1",
+  "fsrs_impl": "ts-fsrs@5.4.2",
+  "sets": {
+    "mini": {
+      "ledger_sha256": "43bac974aff3f8e0df329c024cabdc48d5f70a279b9a0e3071dbee374b56556a",
+      "event_count": 605,
+      "cards": 13,
+      "concepts": 4,
+      "projection_hash": "689208335e2821fbb21a8465073e21008449f3333ae6dbd1e09d464415f52b4c"
+    },
+    "basic": {
+      "ledger_sha256": "89a162190f0c9fa892778382439bf70b63b60dabe12060b5e57a6c973e8b88a3",
+      "event_count": 1500,
+      "cards": 12,
+      "concepts": 3,
+      "projection_hash": "0ad51de586b835eb5b52214590f0d353595c1abb67663c61117f2b6f3bf55493"
+    },
+    "two-device": {
+      "ledger_sha256": "166e131a59fc67189efab2f4c436497ddbbf854f2d310abdc3f9a2222fb25ad1",
+      "event_count": 1200,
+      "cards": 12,
+      "concepts": 3,
+      "projection_hash": "ba35e2957f2f49015dffa0c18c949c86449722933abf8445174c16b799f59cf6"
+    },
+    "corrections": {
+      "ledger_sha256": "9de889062cc5b2b8bc4c2ed2c7af94fc078750a7e08bb0957acb881af00f7892",
+      "event_count": 600,
+      "cards": 12,
+      "concepts": 3,
+      "projection_hash": "296a0c2c5d5b1a698b135b946e5135b43c3e815c88437359a850f6576f7318af"
+    }
+  }
+}

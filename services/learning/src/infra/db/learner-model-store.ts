@@ -19,7 +19,12 @@ import { CardRowSchema, ConceptRowSchema } from './learner-model-state-schema.js
 // DB-01 §6.7 lr_card_state·lr_concept_state — 투영 저장소(라이브 또는 shadow 테이블). 정본 = state_json(정준 JSON).
 // 읽은 행은 즉시 로컬 zod로 파싱한다. 시각은 epoch ms 정수, 불리언은 상태 JSON 안에서만(바인딩 0).
 
-type Statements = { readonly getCard: Stmt; readonly putCard: Stmt; readonly getConcept: Stmt; readonly putConcept: Stmt };
+type Statements = {
+  readonly getCard: Stmt;
+  readonly putCard: Stmt;
+  readonly getConcept: Stmt;
+  readonly putConcept: Stmt;
+};
 
 function prepareStatements(db: SqlitePort, tables: ProjectionTables): Statements {
   if (tables === SHADOW_TABLES) {

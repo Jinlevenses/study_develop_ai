@@ -1,0 +1,25 @@
+{
+  "policy_version": "ps_5e1f0a9c3b7d2468",
+  "previous_policy_version": "ps_5e1f0a9c3b7d2468",
+  "members": {
+    "mastery_rules": {
+      "version": "mastery_rules@v1",
+      "sha256": "8174fb694d7f5d9617492c13de643273a9a1a863259898d746a78d41ea2b1403"
+    },
+    "fsrs_params": {
+      "version": "fsrs_params@v1",
+      "sha256": "009eb48823e0ef6e71d9cf5d35ac4fb12b54bb50ac1038d0f5f741cc3e6f3224"
+    },
+    "cbm_params": {
+      "version": "cbm_params@v1",
+      "sha256": "c94200ef91e54c870ec4852798554e65c64164b7e2bc949d3bb5ade166cfdbef"
+    },
+    "gaming_params": {
+      "version": "gaming_params@v1",
+      "sha256": "2a9dab025584b632a8568cb908f89cea993529f1cdc9c7e006c214032600e702"
+    }
+  },
+  "overrides_sha256": null,
+  "replay_report_ref": null,
+  "study_day": "2026-09-21"
+}

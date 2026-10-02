@@ -1,0 +1,12 @@
+{
+  "target_event_ids": ["01J00000000000000000000001"],
+  "adjustment": {
+    "kind": "factor",
+    "factor": 0.5
+  },
+  "cause": "correction_halve",
+  "item_id": "k8s.probes.i03",
+  "gate_result_id": "01J0000000000000000000000Z",
+  "study_day": "2026-09-21",
+  "policy_version": "ps_5e1f0a9c3b7d2468"
+}

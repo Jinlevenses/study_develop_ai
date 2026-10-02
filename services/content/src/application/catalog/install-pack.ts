@@ -19,11 +19,11 @@ import {
 import { listBundledPacks, selectBundledPacks } from '../../infra/packs/bundled-packs.js';
 import type { VerifiedFpack } from '../../infra/packs/fpack-reader.js';
 import { readFpack } from '../../infra/packs/fpack-reader.js';
+import { catalogFault } from './errors.js';
 import { activateInstall } from './ingest/activate.js';
 import { failUnfinishedInstalls, insertInstallRows, markInstallFailed } from './ingest/install-rows.js';
 import { sanitizeFailureCode } from './ingest/pack-load-run.js';
 import type { IngestRegistry } from './ports.js';
-import { catalogFault } from './errors.js';
 import type { Row } from './row-read.js';
 import { int, intOrNull, str, strOrNull } from './row-read.js';
 
@@ -266,7 +266,10 @@ export function createPackInstaller(deps: PackInstallerDeps): PackInstaller {
           req.install_id,
         );
       } catch (e) {
-        deps.log.error({ install_id: req.install_id, err: e instanceof Error ? e.message : String(e) }, 'catalog.pack.activate.failed');
+        deps.log.error(
+          { install_id: req.install_id, err: e instanceof Error ? e.message : String(e) },
+          'catalog.pack.activate.failed',
+        );
         failPlans(req.install_id, memory, current, remaining, 'pack_load:activation_failed');
         return;
       }
@@ -317,7 +320,10 @@ export function createPackInstaller(deps: PackInstallerDeps): PackInstaller {
         const background = runPlans(req, memory, planned.value.plans)
           .catch((e: unknown) => {
             memory.failure = { detail: 'pack_load:internal', error_id: deps.newId(), finished_at: deps.clock.now() };
-            deps.log.error({ install_id: req.install_id, err: e instanceof Error ? e.message : String(e) }, 'catalog.pack.install.crashed');
+            deps.log.error(
+              { install_id: req.install_id, err: e instanceof Error ? e.message : String(e) },
+              'catalog.pack.install.crashed',
+            );
           })
           .finally(() => {
             memory.phase = null;

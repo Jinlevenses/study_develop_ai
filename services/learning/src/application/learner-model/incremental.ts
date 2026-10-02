@@ -161,18 +161,25 @@ function pickConcept(slice: ProjectionSlice, id: string): ConceptRow | undefined
 }
 
 /**
- * 키 재도출(정정·지각 도착·동률·shadow 캐치업): 정정 인덱스 = 전체 정정 이벤트 + 개념 키별 upgraded/regraded,
+ * 키 재도출(정정·지각 도착·동률·shadow 캐치업): 정정 인덱스 = 전체 정정 이벤트 + 개념 키·카드 키별 upgraded/regraded,
  * 카드 키마다 byCard 폴드의 그 카드 행, 개념 키마다 byConcept 폴드의 그 개념 행을 store에 쓴다(행이 없으면 생략).
  */
 export function rederiveKeys(deps: IncrementalDeps, keys: AffectedKeys): void {
   const { db, source, store } = deps;
   const supersedes: LedgerEventEnvelope[] = [];
-  for (const conceptId of keys.concept_ids) {
-    for (const e of source.byConcept(db, conceptId)) {
+  const collect = (events: IterableIterator<LedgerEventEnvelope>): void => {
+    for (const e of events) {
       if (e.type === 'evidence.upgraded' || e.type === 'evidence.regraded') {
         supersedes.push(e);
       }
     }
+  };
+  for (const conceptId of keys.concept_ids) {
+    collect(source.byConcept(db, conceptId));
+  }
+  // card.status_changed는 concept_id가 없어 concept_ids = [] — 카드 키에서도 supersede 사슬을 모아야 void·weight_adjust가 root로 정규화된다.
+  for (const cardId of keys.card_ids) {
+    collect(source.byCard(db, cardId));
   }
   const index = buildCorrectionIndex([...source.corrections(db), ...supersedes]);
   const resolve = (ps: string) => deps.params.resolve(db, ps);

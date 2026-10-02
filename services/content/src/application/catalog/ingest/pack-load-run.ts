@@ -11,7 +11,7 @@ import { readFpack } from '../../../infra/packs/fpack-reader.js';
 import type { IngestContext, IngestRegistry, PackIngestHandler } from '../ports.js';
 import { int, str } from '../row-read.js';
 import { DELETE_PACK, MARK_PACK_READY } from './catalog-ingest.sql.js';
-import { isCatalogKind, insertCatalogRecord, prepareCatalogInserts } from './load-records.js';
+import { insertCatalogRecord, isCatalogKind, prepareCatalogInserts } from './load-records.js';
 
 // PGM-CT-002 job `pack-load` 핵심 — Brief T-01-07 §4.5. 동기 함수(tx 안 await 0, STD-ASY-02) — job 래퍼(jobs/pack-load.ts)가 비동기 경계를 맡는다.
 
@@ -58,8 +58,16 @@ function routeByKind(registry: IngestRegistry): Map<string, PackIngestHandler> {
   return byKind;
 }
 
-function countOf(db: SqlitePort, sql: string, bind: Readonly<Record<string, string>> | null): number {
-  const row = bind === null ? db.prepare(sql).get() : db.prepare(sql).get(bind);
+function countAppliedDeltas(db: SqlitePort, packId: string): number {
+  const row = db.prepare(SELECT_APPLIED_DELTA_COUNT).get({ pack_id: packId });
+  if (row === undefined) {
+    throw new Error('invariant: count query returned no row');
+  }
+  return int(row, 'n');
+}
+
+function countOverlayEvents(db: SqlitePort): number {
+  const row = db.prepare(SELECT_OVERLAY_EVENT_COUNT).get();
   if (row === undefined) {
     throw new Error('invariant: count query returned no row');
   }
@@ -82,7 +90,9 @@ export function runPackLoad(
       throw new PackLoadError('install_state_invalid');
     }
     const packId = str(row, 'pack_id');
-    for (const failed of db.prepare(SELECT_FAILED_INSTALLS_OF_PACK).all({ pack_id: packId, install_id: args.install_id })) {
+    for (const failed of db
+      .prepare(SELECT_FAILED_INSTALLS_OF_PACK)
+      .all({ pack_id: packId, install_id: args.install_id })) {
       const failedId = str(failed, 'install_id');
       for (const handler of deps.ingest.handlers) {
         handler.purge(db, failedId);
@@ -111,7 +121,7 @@ export function runPackLoad(
   }
 
   // 4(선검사). 재적용 자리 — 적용된 PackDelta가 있으면 새 설치 위에 되살릴 수 없으므로(IT-04 수입 WP 전) 쓰기 전에 실패한다.
-  if (countOf(db, SELECT_APPLIED_DELTA_COUNT, { pack_id: target.pack_id }) > 0) {
+  if (countAppliedDeltas(db, target.pack_id) > 0) {
     throw new PackLoadError('delta_reapply_unsupported');
   }
   // 미지원 kind는 조용히 버리지 않는다 — 첫 INSERT 전에 실패시킨다.
@@ -176,7 +186,7 @@ export function runPackLoad(
     install_id: args.install_id,
     records: Object.fromEntries([...counts].sort(([a], [b]) => cmpIds(a, b))),
     batches,
-    overlay_events: countOf(db, SELECT_OVERLAY_EVENT_COUNT, null),
+    overlay_events: countOverlayEvents(db),
     duration_ms: Math.max(0, deps.clock.now() - startedAt),
   };
 }

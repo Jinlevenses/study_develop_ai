@@ -86,8 +86,7 @@ export function activateInstall(deps: ActivateDeps, installId: string, requestId
     const track = str(row, 'track_id');
     const prevPointer = db.prepare(SELECT_ACTIVE_POINTER).get({ pack_id: packId });
     const prevInstallId = prevPointer === undefined ? null : str(prevPointer, 'install_id');
-    const prevRow =
-      prevInstallId === null ? undefined : db.prepare(SELECT_PACK_ROW).get({ install_id: prevInstallId });
+    const prevRow = prevInstallId === null ? undefined : db.prepare(SELECT_PACK_ROW).get({ install_id: prevInstallId });
     const previousVersion = prevRow === undefined ? null : str(prevRow, 'version');
 
     const maxRow = db.prepare(SELECT_MAX_CATALOG_VERSION).get();

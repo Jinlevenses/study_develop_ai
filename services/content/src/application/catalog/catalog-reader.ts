@@ -13,12 +13,15 @@ import { str, strOrNull } from './row-read.js';
 export function createCatalogReader(db: SqlitePort): CatalogReader {
   return {
     activeInstalls(): readonly ActiveInstall[] {
-      return db.prepare(SELECT_ACTIVE_INSTALLS).all().map((row) => ({
-        packId: str(row, 'pack_id'),
-        installId: str(row, 'install_id'),
-        version: str(row, 'version'),
-        trackId: strOrNull(row, 'track_id'),
-      }));
+      return db
+        .prepare(SELECT_ACTIVE_INSTALLS)
+        .all()
+        .map((row) => ({
+          packId: str(row, 'pack_id'),
+          installId: str(row, 'install_id'),
+          version: str(row, 'version'),
+          trackId: strOrNull(row, 'track_id'),
+        }));
     },
     conceptForItems(conceptId: string): ConceptForItems | null {
       const concept = db.prepare(SELECT_ACTIVE_CONCEPT_INSTALL).get({ concept_id: conceptId });
@@ -30,8 +33,14 @@ export function createCatalogReader(db: SqlitePort): CatalogReader {
       return {
         conceptId,
         installId,
-        kuIds: db.prepare(SELECT_ACTIVE_KU_IDS).all(bind).map((r) => str(r, 'ku_id')),
-        misconceptionIds: db.prepare(SELECT_ACTIVE_MC_IDS).all(bind).map((r) => str(r, 'mc_id')),
+        kuIds: db
+          .prepare(SELECT_ACTIVE_KU_IDS)
+          .all(bind)
+          .map((r) => str(r, 'ku_id')),
+        misconceptionIds: db
+          .prepare(SELECT_ACTIVE_MC_IDS)
+          .all(bind)
+          .map((r) => str(r, 'mc_id')),
       };
     },
   };

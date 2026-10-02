@@ -1,0 +1,29 @@
+{
+  "exam_id": "01J0000000000000000000002H",
+  "track": "k8s",
+  "level": 2,
+  "item_ids": [
+    "k8s.probes.i01",
+    "k8s.probes.i02",
+    "k8s.probes.i03",
+    "k8s.probes.i04",
+    "k8s.probes.i05",
+    "k8s.probes.i06",
+    "k8s.probes.i07",
+    "k8s.probes.i08",
+    "k8s.probes.i09",
+    "k8s.probes.i10",
+    "k8s.probes.i11",
+    "k8s.probes.i12"
+  ],
+  "formats": ["mcq", "short", "cloze", "code_task", "essay"],
+  "correct_count": 10,
+  "cbm_ratio": 0.833,
+  "passed": true,
+  "profile": {
+    "policy_version": "ps_5e1f0a9c3b7d2468",
+    "ai_mode": "OFFLINE",
+    "sp1_state": "unknown"
+  },
+  "study_day": "2026-09-21"
+}

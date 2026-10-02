@@ -18,7 +18,10 @@ export interface LedgerReplaySource {
 }
 
 /** 원장 append와 같은 BEGIN IMMEDIATE tx 안에서 동기 호출. T-01-02 §4.1 ProjectionApplier와 구조 동일(ledger 코드 import 0).
- *  Promise 반환 금지. 예외(ts-fsrs FSRSValidationError 포함)는 감싸지 말고 그대로 던진다 — 경보·롤백은 writer 몫. */
+ *  Promise 반환 금지. 예외(ts-fsrs FSRSValidationError 포함)는 감싸지 말고 그대로 던진다 — 경보·롤백은 writer 몫.
+ *  사전 조건: apply는 이 기기의 로컬 append(정정이 대상보다 먼저 들어올 수 없는 순서)에만 쓴다. fast path는 새 attempt.graded를
+ *  EMPTY_CORRECTIONS로 적용하므로, 병합(merge)으로 도착 순서가 뒤집힌 배치는 apply로 흘리지 말고 job merge → rebuild(replay 2-패스)로 처리한다.
+ *  (병합 소비자 = T-01-09/IT-02.) */
 export interface ProjectionApplier {
   apply(db: SqlitePort, event: LedgerEventEnvelope): void;
 }

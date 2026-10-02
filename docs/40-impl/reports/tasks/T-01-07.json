@@ -1,0 +1,90 @@
+{
+  "taskId": "T-01-07",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "partial",
+  "blocked_by": "T-01-01",
+  "changedFiles": [
+    "services/content/src/application/catalog/ports.ts",
+    "services/content/src/application/catalog/errors.ts",
+    "services/content/src/application/catalog/row-read.ts",
+    "services/content/src/application/catalog/concept-ref.ts",
+    "services/content/src/application/catalog/catalog-reader.ts",
+    "services/content/src/application/catalog/catalog-query.ts",
+    "services/content/src/application/catalog/export-curriculum.ts",
+    "services/content/src/application/catalog/install-pack.ts",
+    "services/content/src/application/catalog/ingest/catalog-ingest.sql.ts",
+    "services/content/src/application/catalog/ingest/install-rows.ts",
+    "services/content/src/application/catalog/ingest/load-records.ts",
+    "services/content/src/application/catalog/ingest/pack-load-run.ts",
+    "services/content/src/application/catalog/ingest/activate.ts",
+    "services/content/src/domain/catalog/catalog-version.ts",
+    "services/content/src/domain/catalog/cursor.ts",
+    "services/content/src/domain/catalog/install/decide.ts",
+    "services/content/src/domain/catalog/install/diff.ts",
+    "services/content/src/domain/catalog/install/semver.ts",
+    "services/content/src/domain/catalog/install/view.ts",
+    "services/content/src/infra/packs/ustar.ts",
+    "services/content/src/infra/packs/merkle.ts",
+    "services/content/src/infra/packs/fpack-reader.ts",
+    "services/content/src/infra/packs/bundled-packs.ts",
+    "services/content/src/infra/db/ct-catalog-read.sql.ts",
+    "services/content/src/jobs/pack-load.ts",
+    "services/content/test/unit/catalog/fpack-verify.spec.ts",
+    "services/content/test/unit/catalog/domain.spec.ts",
+    "services/content/test/unit/catalog/pack-load.spec.ts",
+    "services/content/test/unit/catalog/install-pack.spec.ts",
+    "services/content/test/unit/catalog/catalog-query.spec.ts",
+    "services/content/test/unit/catalog/support/fpack-writer.ts",
+    "services/content/test/unit/catalog/support/db.ts",
+    "services/content/test/unit/catalog/support/jobs.ts",
+    "services/content/test/unit/catalog/support/stage.ts",
+    "services/content/test/unit/catalog/support/context.ts",
+    "services/content/test/integration/catalog/installer.spec.ts",
+    "services/content/test/integration/catalog/support.ts",
+    "services/content/test/integration/catalog/fixtures/job-entry.ts",
+    "services/content/test/contract/events/catalog-pack-activated.spec.ts",
+    "services/content/test/contract/events/catalog-concept-changed.spec.ts"
+  ],
+  "testsAdded": [
+    "UT-CT-001",
+    "UT-CT-020..027",
+    "UT-CT-028..033",
+    "UT-CT-034..039",
+    "UT-CT-040..044",
+    "UT-CT-045..049",
+    "IT-230..238",
+    "CT-CT-501",
+    "CT-CT-502"
+  ],
+  "commands": [
+    { "cmd": "pnpm --filter @fathom/svc-content typecheck", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/svc-content test", "exit": 0, "note": "7 files, 68 tests (unit + contract); domain/catalog line coverage 98%" },
+    { "cmd": "pnpm --filter @fathom/svc-content test:integration", "exit": 1, "note": "IT-230..238 (9) pass; 2 failures are pre-existing IT-227/IT-228 in test/integration/migrations/serve.spec.ts (expect 401, get 404 — shared-kernel pipeline INT-1a carry-over folded into T-01-01); not in this task's paths" },
+    { "cmd": "pnpm lint", "exit": 0, "note": "biome ci prints errors only in other lanes (tools/packc, services/learning); `biome ci services/content` = 0 errors" },
+    { "cmd": "node tools/gates/run-gates.mjs --stage=g1", "exit": 0 },
+    { "cmd": "node tools/gates/check-content-ingest.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-sql-typed.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-boundaries.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-scope.mjs --task T-01-07", "exit": 1, "note": "98 errors, all in other lanes' dirty files (tools/packc, packages/*, policy/*, services/learning, docs reports T-01-01/03); 0 under services/content" }
+  ],
+  "graphify": [
+    { "q": "query 'catalog pack install' --budget 1500", "summary": "returned only contracts/testkit nodes (PackInstallView, InstalledPackList, gen.ts); no content-service code nodes in the graph yet" },
+    { "q": "affected 'CatalogReader' --depth 2", "summary": "no unique node match (graph predates the catalog code); verified with rg that only itembank ports.ts imports the type and its signature is unchanged", "within_scope": true }
+  ],
+  "deviations": [
+    "catalog-query.ts: invalid-cursor error code is the literal const CURSOR_INVALID_CODE = 'CT-VAL-903' (typed literal required by AppError) instead of calling commonErrorCode('CT','VAL-903') inline; UT-CT-047 asserts the two are equal.",
+    "Test fpack writer sets manifest.offline_cap_level = max(1, track cap) because FpackManifest.offline_cap_level is Level (1..5) while TrackRecord/ct_track allow 0..5.",
+    "Brief order kept: concept_removed validation runs before decideInstall, so reactivating an older retired install is rejected if the active version added concepts (stable-ID rule wins over allow_downgrade)."
+  ],
+  "escalations": [
+    { "type": "none_blocking", "detail": "IT-227/IT-228 (content serve percent-encoded / absolute-form path 401 vs 404) fail in the working tree independent of this task; owner T-01-01 (INT-1a carry-over)." }
+  ],
+  "rtmUpdates": [
+    { "wp": "WP-01-02", "pgm": "PGM-CT-001", "req": ["FR-CUR-002", "FR-CUR-004", "FR-SET-014", "CR-12"], "tests": ["UT-CT-001", "UT-CT-020..033", "UT-CT-040..044", "IT-230..232", "IT-234..236"] },
+    { "wp": "WP-01-02", "pgm": "PGM-CT-002", "req": ["FR-CUR-002"], "tests": ["UT-CT-034..039", "IT-233", "IT-238"] },
+    { "wp": "WP-01-02", "pgm": "PGM-CT-003", "req": ["FR-CUR-001", "FR-CUR-009"], "tests": ["UT-CT-045..047", "UT-CT-049"] },
+    { "wp": "WP-01-02", "pgm": "PGM-CT-004", "req": ["FR-CUR-001", "CR-41"], "tests": ["UT-CT-048", "IT-237", "CT-CT-501", "CT-CT-502"] }
+  ],
+  "notes": "1) IT-238 (300 concepts, 3,002 records, real child job): total install ~1.0-1.1 s, row-insert tx ~2.5 ms, activation tx ~24-28 ms (target <= 100 ms). 2) Test .fpack writer re-implements T-01-03 sec.4.8 independently (ustar, merkle, canonical hashes); merkle vectors match (UT-CT-020) and real packc output (tools/packc build on fixtures/base: docker@0.1.0 56 records, k8s@0.1.0 15 records) passes readFpack unchanged. 3) ct_pack.ext keys: catalog.request_id, catalog.previous_version (install), catalog.version (activation; also on ct_concept.ext), catalog.error_id, catalog.finished_at (failure). 4) CR candidates: report.inventory for AssessmentInventory (export emits no inventory lines); catalog_version as a real column instead of ext; FpackManifest.offline_cap_level Level(1..5) cannot express track cap 0. 5) T-01-11 wiring: jobs += makePackLoadJob({ingest}); createPackInstaller({db,outbox,jobs,clock,newId,log,home,packsDir,ingest}); createCatalogQuery(db) for IF-CT-003..005; exportCurriculum(db,query,clock) for IF-CT-007; call installer.recoverInterrupted() at boot and installer.idle() on shutdown; IngestRegistry = itembank handler (T-01-10)."
+}

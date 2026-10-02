@@ -1,0 +1,63 @@
+{
+  "taskId": "T-01-01",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "partial",
+  "changedFiles": [
+    "biome.json", "package.json",
+    "tools/gates/config/{deps,sql,boundaries}.json", "tools/gates/check-{sql-typed,sql-template,ng-g,typo-ko,security-scan}.mjs", "tools/gates/fixtures/**", "tools/gates/test/{s0-it01.test.mjs,typo-ko.test.mjs,workspace.test.mjs}",
+    "packages/testkit/src/{chaos.ts,contract.ts,preload/egress-recorder.mjs}",
+    "packages/testkit/test/unit/contract/s0-it01-c4.spec.ts", "packages/testkit/test/integration/egress/s0-it01-static-import.spec.ts",
+    "packages/shared-kernel/src/service/{canonical-path,pipeline,problem,route-runner,modes,app}.ts", "packages/shared-kernel/src/jobs/jobs.ts", "packages/shared-kernel/src/sqlite/migrate.ts",
+    "packages/shared-kernel/test/unit/{service,jobs,http-client,sqlite}/s0-it01-*.spec.ts", "packages/shared-kernel/test/unit/service/{canonical-path,pipeline,contract}.spec.ts", "packages/shared-kernel/test/integration/jobs/s0-it01-env.spec.ts",
+    "packages/contracts/src/policy/composer_policy.ts", "packages/contracts/src/http/learning/v1/insight.ts", "packages/contracts/.snapshots/**", "packages/contracts/src/events/registry.gen.ts",
+    "packages/contracts/test/unit/s0-it01/s0-it01.spec.ts", "policy/composer_policy@v1.yaml", "policy/policy.lock.json",
+    "tests/security/encoded-path.spec.ts"
+  ],
+  "testsAdded": ["UT-GATE-240..256", "UT-SK-200..225", "UT-SK-197(strengthened)", "UT-TK-070..074", "UT-CON-240..242", "UT-CON-244..246", "UT-CON-247", "SEC-SYS-010..018"],
+  "commands": [
+    { "cmd": "pnpm --filter @fathom/tool-gates typecheck && test", "exit": 0, "note": "227 pass" },
+    { "cmd": "pnpm --filter @fathom/contracts typecheck && test", "exit": 0, "note": "204 pass" },
+    { "cmd": "pnpm --filter @fathom/shared-kernel typecheck && test && test:integration", "exit": 0, "note": "218 + 56 pass" },
+    { "cmd": "pnpm --filter @fathom/testkit typecheck && test && test:integration", "exit": 0, "note": "58 + 5 pass" },
+    { "cmd": "pnpm contracts:gen (x2) / pnpm policy:lock (x2)", "exit": 0, "note": "second run diff 0; policy.lock changes only composer_policy@v1 sha256" },
+    { "cmd": "pnpm typecheck", "exit": 0 },
+    { "cmd": "pnpm build && vitest --project security tests/security/encoded-path.spec.ts", "exit": 0, "note": "6 tests (SEC-SYS-010..018)" },
+    { "cmd": "node tools/gates/run-gates.mjs --stage=g1", "exit": 0 },
+    { "cmd": "node tools/gates/run-gates.mjs --stage=g2", "exit": 1, "note": "only check:sql / check:sql-typed fail, in other lanes' in-flight files (services/learning jobs/rebuild.ts, replay-verify.ts, projection-hash.ts; services/content pack-load-run.ts). check:frozen 0, all other gates PASS" },
+    { "cmd": "pnpm lint", "exit": 1, "note": "remaining diagnostics only in other lanes' files (services/content, services/learning, tools/packc); none in T-01-01 files" },
+    { "cmd": "pnpm test (root)", "exit": 1, "note": "svc-gateway UT-GW-112/116 fail (expect 401 for /internal-disguised paths, now 404) — scope escalation; svc-content test:integration IT-227/228 same" },
+    { "cmd": "node tools/gates/check-scope.mjs --task T-01-01", "exit": 1, "note": "39 violations, all other lanes' files (tools/packc, services/content, services/learning); none from T-01-01" }
+  ],
+  "graphify": [
+    { "q": "query 'pipeline authenticate canonical path'", "summary": "authenticate()/Pipeline in shared-kernel service/pipeline.ts; gateway domain/session/path.ts is the ported reference" },
+    { "q": "affected 'installPipeline' --depth 2", "within_scope": true, "summary": "assembleApp/buildServiceApp/serve.ts/service.ts — all inside shared-kernel service/**" }
+  ],
+  "rtmUpdates": [
+    { "co": "CO-01..10", "pgm": "PGM-GATE-002/005/010/011/015, PGM-SYS-101", "req": ["NFR-MAINT-001", "NFR-MAINT-005", "NFR-SEC-016"], "tests": ["UT-GATE-240..256"] },
+    { "co": "CO-11..14", "pgm": "PGM-SK-007/013/014/015", "req": ["NFR-SEC-003", "NFR-AVL-002", "NFR-AVL-004"], "tests": ["UT-SK-200..225", "SEC-SYS-010..018"] },
+    { "co": "CO-16..17", "pgm": "PGM-CON-005(part)/007/008/017(part)", "req": ["FR-CUR-019", "FR-DSH-001"], "tests": ["UT-CON-240..246"] },
+    { "co": "CO-15", "pgm": "PGM-TK-008", "req": ["IR-015"], "tests": ["UT-TK-070..074", "UT-SK-197"] },
+    { "co": "CO-N7(part)", "pgm": "PGM-SYS", "req": ["FR-CUR-016"], "tests": ["UT-CON-247"] }
+  ],
+  "escalations": [
+    { "type": "scope", "detail": "UT-GW-112/116 (services/gateway/test/unit/session-flow.spec.ts) and IT-227/228 (services/content/test/integration/migrations/serve.spec.ts) assert 401 for /internal-disguised encoded/absolute-form paths (INT-1a interim); shared pipeline now returns 404 <S>-NOTFOUND-900 as Brief §4.2-1 and SEC-SYS-010/015 require. Services tests are forbidden here: update those expectations to 404." },
+    { "type": "scope", "detail": "g2 sql/sql-typed failures: services/learning/src/jobs/rebuild.ts (5), replay-verify.ts (1), infra/projection/projection-hash.ts (1), services/content/src/application/catalog/ingest/pack-load-run.ts:62 (1) — owned by T-01-0x lanes (need '// sql-ok:' or sanctioned helper); also biome format/organizeImports in services/content, services/learning, tools/packc." },
+    { "type": "scope", "detail": "CO-N3: UT-SK-098 not reproduced (8/8 isolated pass). Likely cause: vacuumInto on a read-only WAL connection gets SQLITE_BUSY (busy handler not applied to WAL read-mark/recovery) against a flat-out writer; fix belongs in packages/shared-kernel/src/sqlite/sqlite.ts (bounded retry), not allowed. turbo.json concurrency 50% retained." },
+    { "type": "scope", "detail": "CO-N5/N6 (vitest reporters to .reports/<INT>/, coverage-summary.json) need packages/testkit/src/vitest-preset.ts and package scripts — outside allowed_paths." },
+    { "type": "scope", "detail": "Appendix Z-3 (ui-prefs localStorage) escalation only, no code change. Remaining STD-TS-12 single-step narrowing casts (shared-kernel app.ts narrowHandler/narrowStreamHandler now plain `as`, http-client narrowParsedResponse, web api-client.ts:313/324) cannot be replaced by zod parsing generically: needs allowlist CR (next number, T1)." },
+    { "type": "scope", "detail": "docs/02-design/09-rtm.md is frozen (needs CR trailer); not edited. FR-CUR-016 orphan is mapped via title tag [FR-CUR-016] in UT-CON-247; RTM row text could add UT-CON-247. E2E-506 'unknown' = result absent from INT-1a e2e.json (design-baseline spec not in the run), not a parser defect. si-docs untouched." }
+  ],
+  "deviations": [
+    "RetentionTier kept module-private (Brief says export): exporting adds a 1102nd snapshot and breaks gen.spec.ts (UT-CON-220/232/233, file count 1101, outside allowed paths).",
+    "request_by_caller uses z.partialRecord(CallerName, ...) (z.record with enum keys is exhaustive in zod 4).",
+    "UT-SK-197 InboxDeliverRoute fixture now carries request_by_caller; existing migrate.spec 'absent dir' assertion changed gap -> io_error as Brief §4.2-7 mandates.",
+    "services/*/test/security per-service tests not added: tests/security/encoded-path.spec.ts covers all 5 services (SEC-SYS-010..018)."
+  ],
+  "notes": [
+    "N/A: CO-22 (closed in T-00-11 r2); CO-02 empty-mcp.json accepted; WP-01-00 pre-submit/item.ts untouched (FormatId already absorbed).",
+    "Checkpoints 1-4 implemented; supervisor/web casts from Appendix Z-2 already gone (only app.ts as unknown as remained, now plain as).",
+    "check:frozen local run: 0 diagnostics (09-rtm.md edit reverted). Commit trailers: Task T-01-01, Refs CO-01..17, CR CR-52, CR-69..CR-76, ADR ADR-017 (HomeAlert snapshot pattern).",
+    "graphify: available, queries run (see graphify)."
+  ]
+}

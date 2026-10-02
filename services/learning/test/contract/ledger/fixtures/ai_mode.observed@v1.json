@@ -1,0 +1,13 @@
+{
+  "mode": "OFFLINE",
+  "providers": [
+    {
+      "id": "jev",
+      "kind": "jev",
+      "status": "ok"
+    }
+  ],
+  "source_event_id": "01J0000000000000000000001X",
+  "observed_at": 1790000300000,
+  "study_day": "2026-09-21"
+}

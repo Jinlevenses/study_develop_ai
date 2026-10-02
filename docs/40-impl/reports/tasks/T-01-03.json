@@ -1,0 +1,320 @@
+{
+  "taskId": "T-01-03",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "tools/packc/src/cli.ts",
+    "tools/packc/src/emit/build.ts",
+    "tools/packc/src/emit/det-ulid.ts",
+    "tools/packc/src/emit/hash.ts",
+    "tools/packc/src/emit/manifest.ts",
+    "tools/packc/src/emit/merkle.ts",
+    "tools/packc/src/emit/records.ts",
+    "tools/packc/src/emit/report.ts",
+    "tools/packc/src/emit/tar.ts",
+    "tools/packc/src/format-map.ts",
+    "tools/packc/src/lint/inventory.ts",
+    "tools/packc/src/lint/rules/r-3stage.ts",
+    "tools/packc/src/lint/rules/r-alias.ts",
+    "tools/packc/src/lint/rules/r-dag.ts",
+    "tools/packc/src/lint/rules/r-fmt.ts",
+    "tools/packc/src/lint/rules/r-id.ts",
+    "tools/packc/src/lint/rules/r-lvl.ts",
+    "tools/packc/src/lint/rules/r-pool.ts",
+    "tools/packc/src/lint/rules/r-ref.ts",
+    "tools/packc/src/lint/rules/r-req.ts",
+    "tools/packc/src/lint/rules/r-src.ts",
+    "tools/packc/src/lint/run.ts",
+    "tools/packc/src/parse/discover.ts",
+    "tools/packc/src/parse/frontmatter.ts",
+    "tools/packc/src/parse/load.ts",
+    "tools/packc/src/parse/markdown.ts",
+    "tools/packc/src/parse/schema/common.ts",
+    "tools/packc/src/parse/schema/concept.ts",
+    "tools/packc/src/parse/schema/item-model.ts",
+    "tools/packc/src/parse/schema/item.ts",
+    "tools/packc/src/parse/schema/ku.ts",
+    "tools/packc/src/parse/schema/misconception.ts",
+    "tools/packc/src/parse/schema/pack.ts",
+    "tools/packc/src/parse/schema/rubric.ts",
+    "tools/packc/src/parse/schema/source.ts",
+    "tools/packc/src/parse/schema/template.ts",
+    "tools/packc/src/parse/schema/v7.ts",
+    "tools/packc/src/scaffold/r4.ts",
+    "tools/packc/src/scaffold/render.ts",
+    "tools/packc/src/scaffold/scaffold.ts",
+    "tools/packc/src/scaffold/tracks.ts",
+    "tools/packc/src/schemas/schemas.ts",
+    "tools/packc/src/validate/finding.ts",
+    "tools/packc/src/validate/model.ts",
+    "tools/packc/src/validate/policy.ts",
+    "tools/packc/src/validate/v1-schema.ts",
+    "tools/packc/src/validate/v7-binding.ts",
+    "tools/packc/test/integration/cli/cli.spec.ts",
+    "tools/packc/test/unit/cli/cli.spec.ts",
+    "tools/packc/test/unit/cli/helpers.ts",
+    "tools/packc/test/unit/emit/emit.spec.ts",
+    "tools/packc/test/unit/emit/extra-items.ts",
+    "tools/packc/test/unit/emit/tar-reader.ts",
+    "tools/packc/test/unit/lint/fixtures.spec.ts",
+    "tools/packc/test/unit/lint/pool-fmt-id.spec.ts",
+    "tools/packc/test/unit/lint/rules.spec.ts",
+    "tools/packc/test/unit/parse/parse.spec.ts",
+    "tools/packc/test/unit/scaffold/scaffold.spec.ts",
+    "tools/packc/test/unit/schemas/schemas.spec.ts",
+    "tools/packc/test/unit/validate/v1-schema.spec.ts",
+    "tools/packc/test/unit/validate/v7.spec.ts",
+    "tools/packc/fixtures/**"
+  ],
+  "testsAdded": [
+    "IT-660",
+    "IT-661",
+    "IT-662",
+    "IT-663",
+    "IT-664",
+    "IT-665",
+    "IT-666",
+    "IT-667",
+    "IT-668",
+    "IT-669",
+    "UT-PACKC-001",
+    "UT-PACKC-002",
+    "UT-PACKC-003",
+    "UT-PACKC-004",
+    "UT-PACKC-007",
+    "UT-PACKC-008",
+    "UT-PACKC-010",
+    "UT-PACKC-011",
+    "UT-PACKC-012",
+    "UT-PACKC-013",
+    "UT-PACKC-014",
+    "UT-PACKC-015",
+    "UT-PACKC-016",
+    "UT-PACKC-017",
+    "UT-PACKC-018",
+    "UT-PACKC-019",
+    "UT-PACKC-020",
+    "UT-PACKC-021",
+    "UT-PACKC-022",
+    "UT-PACKC-023",
+    "UT-PACKC-024",
+    "UT-PACKC-025",
+    "UT-PACKC-026",
+    "UT-PACKC-027",
+    "UT-PACKC-028",
+    "UT-PACKC-029",
+    "UT-PACKC-030",
+    "UT-PACKC-031",
+    "UT-PACKC-032",
+    "UT-PACKC-033",
+    "UT-PACKC-034",
+    "UT-PACKC-035",
+    "UT-PACKC-036",
+    "UT-PACKC-037",
+    "UT-PACKC-038",
+    "UT-PACKC-039",
+    "UT-PACKC-040",
+    "UT-PACKC-041",
+    "UT-PACKC-042",
+    "UT-PACKC-043",
+    "UT-PACKC-044",
+    "UT-PACKC-045",
+    "UT-PACKC-046",
+    "UT-PACKC-047",
+    "UT-PACKC-048",
+    "UT-PACKC-049",
+    "UT-PACKC-065",
+    "UT-PACKC-066",
+    "UT-PACKC-067",
+    "UT-PACKC-068",
+    "UT-PACKC-069",
+    "UT-PACKC-070",
+    "UT-PACKC-071",
+    "UT-PACKC-072",
+    "UT-PACKC-073",
+    "UT-PACKC-074",
+    "UT-PACKC-075",
+    "UT-PACKC-076",
+    "UT-PACKC-077",
+    "UT-PACKC-078",
+    "UT-PACKC-079",
+    "UT-PACKC-080",
+    "UT-PACKC-081",
+    "UT-PACKC-082",
+    "UT-PACKC-083",
+    "UT-PACKC-084",
+    "UT-PACKC-085",
+    "UT-PACKC-086",
+    "UT-PACKC-087",
+    "UT-PACKC-090",
+    "UT-PACKC-091",
+    "UT-PACKC-092",
+    "UT-PACKC-093",
+    "UT-PACKC-094",
+    "UT-PACKC-095",
+    "UT-PACKC-096",
+    "UT-PACKC-097",
+    "UT-PACKC-098",
+    "UT-PACKC-099"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0,
+      "note": "not re-run (no dependency changes)"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-packc typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-packc test",
+      "exit": 0,
+      "note": "12 files, 222 tests"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/tool-packc test:integration",
+      "exit": 0,
+      "note": "10 passed, 1 skipped (IT-668: no repository content/ yet)"
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "blocked_by": "other lanes",
+      "note": "packc paths clean (biome check on all T-01-03 paths: no findings); the 7 remaining errors are in services/learning/** (other task)"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-01-03",
+      "exit": 1,
+      "note": "no finding inside tools/packc or T-01-03.json; the 78 errors are other lanes' dirty files in the shared working tree (services/content, services/learning, packages/*, tests/security, T-01-01/T-01-07 reports)"
+    },
+    {
+      "cmd": "node --disable-warning=ExperimentalWarning --import tsx --conditions=source tools/packc/src/cli.ts scaffold --content-dir <tmp>/content --as-of 2026-10-02",
+      "exit": 0,
+      "note": "rows=469 edges=518 created=469 packs_created=20"
+    },
+    {
+      "cmd": "... cli.ts check --content-dir <tmp>/content (registry + templates copied from base fixture)",
+      "exit": 0,
+      "note": "packs=20 files=495 errors=0 warnings=20 (R-POOL warn)"
+    }
+  ],
+  "graphify": "graph.json present but packc is a new tool with no importers: `graphify query` returned only unrelated gate/config nodes, `graphify affected structuralFeasibility --depth 2` returned no affected nodes; code located with rg",
+  "deviations": [
+    "ConceptRecord.ext key 'pack.stage2_kind' (Brief 4.8, DCP 5.3) is not representable: contracts Ext regex ^pack\\.[a-z_]+$ rejects digits. packc emits 'pack.stage_kind' instead (escalation contract_change below).",
+    "edge and alias records carry no content_hash (IF-01 EdgeRecord/AliasRecord are strict without the field); Brief rule 4 is applied only to kinds that have the field. gate_result keeps the reviewed item hash.",
+    "Item V1 union has the 22 items-file formats; code_task/sql_task/infra_lite are lab-only (DCP 6.5.2 / line 709, existing item.ts) and are rejected in items files. UT-PACKC-020~022 test 22 valid + the 3 lab formats rejected.",
+    "check --only filters only V2 and V7 findings; V1 findings (incl. the R-FMT pre-check) are always reported and counted. V7 stage runs only when the selected scope has no V1/V2 error.",
+    "Unresolved-blocker rule of Brief 4.5 is applied batch-wide (any blocker finding with resolution != fixed in the winning batch keeps all its items authored).",
+    "Negative fixture format extended with an optional 'replace' list (string patches) beside base/delete/args/expect; fixture.json files are packc-owned.",
+    "Fixture copies: DCP 13.1 concept had its two ::lab lines replaced by one sentence (as the Brief says); docker Tier C prereqs set to [] and k8s.pod prereq = [docker.dockerfile] so the mini tree is closed; no DCP sample content needed other changes (it passed V1/V2 as written).",
+    "pnpm lint / check-scope are red only because of other lanes' files in the shared working tree; all T-01-03 paths pass biome check."
+  ],
+  "escalations": [
+    {
+      "type": "contract_change",
+      "detail": "contracts/pack/t2-expand absent (CR-32) - T2X skipped (non-blocking)"
+    },
+    {
+      "type": "contract_change",
+      "detail": "IF-01 pack/records.ts Ext regex ^pack\\.[a-z_]+$ rejects 'pack.stage2_kind' (digit) required by DCP 5.3 / Brief 4.8; packc uses 'pack.stage_kind'. Proposal: allow digits ([a-z0-9_]+) via CR (non-blocking, T-01-07 stores ext opaquely)"
+    },
+    {
+      "type": "contract_change",
+      "detail": "non-blocking: DB-01 merkle_root wording (files[].sha256) differs from IF-01 binary merkle; IF followed. RubricRecord weight <= 1 vs DCP 0.5~2: packc normalises and keeps raw weights in ext['pack.raw_weights']"
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-001",
+      "req": [
+        "FR-CUR-002"
+      ],
+      "tests": [
+        "UT-PACKC-010..015",
+        "UT-PACKC-094..099"
+      ]
+    },
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-002",
+      "req": [
+        "FR-CUR-003"
+      ],
+      "tests": [
+        "UT-PACKC-016..029"
+      ]
+    },
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-003",
+      "req": [
+        "FR-CUR-003",
+        "FR-CUR-004",
+        "FR-CUR-005",
+        "FR-CUR-025"
+      ],
+      "tests": [
+        "UT-PACKC-001",
+        "UT-PACKC-002",
+        "UT-PACKC-008",
+        "UT-PACKC-030..049"
+      ]
+    },
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-004",
+      "req": [
+        "FR-CUR-002",
+        "FR-CUR-009"
+      ],
+      "tests": [
+        "UT-PACKC-003",
+        "UT-PACKC-065..079",
+        "IT-663",
+        "IT-664"
+      ]
+    },
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-005",
+      "req": [
+        "FR-CUR-001",
+        "FR-CUR-009"
+      ],
+      "tests": [
+        "UT-PACKC-080..087",
+        "IT-660"
+      ]
+    },
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-011",
+      "req": [
+        "FR-CUR-003"
+      ],
+      "tests": [
+        "UT-PACKC-090..093",
+        "IT-665"
+      ]
+    },
+    {
+      "wp": "WP-01-01",
+      "pgm": "PGM-PACKC-012",
+      "req": [
+        "FR-QST-007",
+        "FR-STD-033"
+      ],
+      "tests": [
+        "UT-PACKC-007"
+      ]
+    }
+  ],
+  "notes": "1) checkpoints: scaffold+check, build, schemas all pass in this run (checkpoint-1 delivered by the earlier partial report, superseded). 2) scaffold rows=469 edges=518 missing=0. 3) base build merkle_root docker fabf51b39b12 (k8s differs). 4) fixture adjustments: see deviations (::lab lines, closed prereqs). 5) follow-up rules not implemented (R-TIERSPEC, R-MCLINK, R-STEM, R-EMBED, R-DIG, R-MD, R-KEYS, R-CLOZE, R-DEFECT, R-GATE, R-LAB, R-TS, R-CASE, R-L4SRC, R-LIC, R-SAFE, R-VOL, R-ENTRY, R-LAYER, R-DIST, R-DEPTH, R-ORPHAN, R-RMODE, R-FACET, R-FLOOR, R-PATH, R-ALT rest, R-ID post-publish delete check)"
+}

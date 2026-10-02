@@ -1,12 +1,7 @@
+import { COMMON_ERRORS } from '@fathom/contracts/common/errors';
 import type { Cursor } from '@fathom/contracts/common/pagination';
 import { Page } from '@fathom/contracts/common/pagination';
-import { COMMON_ERRORS, commonErrorCode } from '@fathom/contracts/common/errors';
-import {
-  ConceptSummary,
-  InstalledPackList,
-  PackKpi,
-  TrackCatalog,
-} from '@fathom/contracts/http/content/v1/catalog';
+import { ConceptSummary, InstalledPackList, PackKpi, TrackCatalog } from '@fathom/contracts/http/content/v1/catalog';
 import { FpackManifest } from '@fathom/contracts/pack/manifest';
 import { parseJsonStrict } from '@fathom/shared-kernel/canonical/canonical';
 import type { Result } from '@fathom/shared-kernel/errors/errors';
@@ -29,6 +24,8 @@ import { int, intOrNull, str, strOrNull } from './row-read.js';
 // 오버레이 합성(`ct_overlay_head`)은 IT-01에서 하지 않는다: 오버레이 쓰기 경로 = IT-03이라 그때까지 활성 설치 행이 곧 서빙 값이다.
 
 const DEFAULT_LIMIT = 200;
+/** = `commonErrorCode('CT', 'VAL-903')`(UT-CT-047이 같음을 단언). 리터럴 타입이 필요해 상수로 둔다. */
+export const CURSOR_INVALID_CODE = 'CT-VAL-903';
 const ReportSlice = z.looseObject({
   kpi: PackKpi,
   tier_counts: z.looseObject({ A: z.number().int(), B: z.number().int(), C: z.number().int() }),
@@ -144,9 +141,7 @@ export function createCatalogQuery(db: SqlitePort): CatalogQuery {
       if (query.cursor !== undefined) {
         const decoded = decodeConceptCursor(query.cursor);
         if (decoded === null) {
-          return err(
-            new AppError(commonErrorCode('CT', 'VAL-903'), COMMON_ERRORS['VAL-903'].status, 'cursor is invalid'),
-          );
+          return err(new AppError(CURSOR_INVALID_CODE, COMMON_ERRORS['VAL-903'].status, 'cursor is invalid'));
         }
         cursorLevel = decoded.level;
         cursorId = decoded.concept_id;

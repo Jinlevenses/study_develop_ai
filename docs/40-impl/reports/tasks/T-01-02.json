@@ -1,0 +1,89 @@
+{
+  "taskId": "T-01-02",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "services/learning/src/application/ledger/ports.ts",
+    "services/learning/src/application/ledger/errors.ts",
+    "services/learning/src/application/ledger/checkpoint.ts",
+    "services/learning/src/application/ledger/verify.ts",
+    "services/learning/src/application/ledger/jsonl.ts",
+    "services/learning/src/application/ledger/inbox/grading-verdict-issued.ts",
+    "services/learning/src/domain/ledger/chain/hash.ts",
+    "services/learning/src/domain/ledger/chain/verify.ts",
+    "services/learning/src/domain/ledger/chain/anchor.ts",
+    "services/learning/src/domain/ledger/order/total-order.ts",
+    "services/learning/src/domain/ledger/time/study-day.ts",
+    "services/learning/src/domain/ledger/upcasters/registry.ts",
+    "services/learning/src/infra/ledger/ledger-writer.ts",
+    "services/learning/src/infra/ledger/ledger.sql.ts",
+    "services/learning/src/infra/ledger/replay-source.ts",
+    "services/learning/src/infra/ledger/integrity-alarm.ts",
+    "services/learning/src/infra/ledger/study-day.ts",
+    "services/learning/src/infra/ledger/hash-port.ts",
+    "services/learning/test/unit/ledger/**",
+    "services/learning/test/golden/ledger/**",
+    "services/learning/test/integration/ledger/**",
+    "services/learning/test/contract/ledger/**",
+    "services/learning/test/contract/events/grading-verdict-issued.spec.ts",
+    "packages/testkit/src/golden-ledgers/**"
+  ],
+  "testsAdded": [
+    "UT-LR-001..012",
+    "UT-LR-030..039",
+    "UT-LR-040..044",
+    "UT-LR-045..049",
+    "UT-LR-050..054",
+    "UT-LR-055..057",
+    "UT-LR-058..060",
+    "UT-LR-061..063",
+    "UT-LR-064..066",
+    "UT-LR-067..069",
+    "UT-LR-610..619",
+    "CT-LR-801..817",
+    "CT-LR-505",
+    "IT-330..335"
+  ],
+  "commands": [
+    { "cmd": "pnpm --filter @fathom/svc-learning typecheck", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/svc-learning test", "exit": 0, "note": "21 files, 161 passed + 1 expected fail (others' lane)" },
+    { "cmd": "pnpm --filter @fathom/svc-learning test:integration", "exit": 0, "note": "7 files, 31 passed" },
+    { "cmd": "pnpm --filter @fathom/testkit typecheck", "exit": 0 },
+    { "cmd": "node --disable-warning=ExperimentalWarning --import tsx --conditions=source services/learning/test/golden/ledger/generate-golden.ts", "exit": 0, "note": "basic/two-device/corrections: identical" },
+    { "cmd": "pnpm lint", "exit": 0 },
+    { "cmd": "node tools/gates/run-gates.mjs --stage=g1", "exit": 0 },
+    { "cmd": "node tools/gates/check-ledger-writer.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-sql-typed.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-boundaries.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-sql-template.mjs", "exit": 0 },
+    { "cmd": "node tools/gates/check-scope.mjs --task T-01-02", "exit": 1, "note": "690 scope/outside-allowed rows, all from other tasks' uncommitted files in the shared working tree (content/, T-01-03, T-01-06 ...); 0 rows for T-01-02 paths. Re-check on the squashed T-01-02 branch." }
+  ],
+  "graphify": [
+    { "q": "query 'ledger writer append lr_event' --budget 1500", "summary": "graph.json present; only generic eventing/outbox/contracts nodes returned, no existing learning ledger implementation (greenfield dirs)." },
+    { "q": "explain 'LedgerPorts'", "summary": "consumed by learning/src/config.ts only (type import); shape preserved." },
+    { "q": "affected 'LedgerPorts' --depth 2", "within_scope": true, "summary": "config.ts, app.ts, main.ts — type unchanged, typecheck green; none edited." }
+  ],
+  "deviations": [
+    "importInTx start point per device = hash of local row (device, first_seq-1) when the file does not begin at seq 1 (== local head for incremental imports), instead of 'local current head' only; otherwise a full re-import of an already-present ledger could not be idempotent (UT-LR-061).",
+    "appendInTx skips the automatic initial policy.switched when the requested draft is itself policy.switched (avoids a duplicate/second policy event).",
+    "two-device golden: device B first imports A's phase-1 ledger (so B does not bootstrap its own policy.switched), then both devices act independently; B's whole ledger is merged back into A (A's rows = duplicates). Brief said 'each in its own DB' - see escalation.",
+    "LEDGER_INSERT is exported from ledger-writer.ts (only file with the INSERT literal) so UT-LR-069 can compare it to DB-01 §6.3; LEDGER_REPLAY* statements add experiment_arm and recorded_at columns (needed by LedgerEventEnvelope).",
+    "createCheckpoint/verifyLedger live in application/ledger (per Brief) and import SQL constants from infra/ledger/ledger.sql.ts; JSONL (fathom.ledger.v1) line zod schemas are defined locally in application/ledger/jsonl.ts and testkit golden-ledgers.ts (file format, not a contracts schema).",
+    "Checkpoint heads/anchor `seq` are >= 1 (JSONL header devices schema); an empty ledger yields devices {} (root = sha256('{}'))."
+  ],
+  "escalations": [
+    {
+      "type": "ambiguity",
+      "detail": "Two devices that each bootstrap their own policy.switched (DB-01 §5 ②, key 'policy:<ps>') collide on the UNIQUE idempotency_key when merged: the remote device's seq-1 row is ignored, breaking its chain (importInTx correctly returns chain_broken). ADR-011 §7 does not say how to merge devices that independently created the same keyed first event. Golden two-device avoids it (B imports A first). Needs T1 decision before IT-03 multi-device merge (e.g. new device seeds from merged ledger / policy key rule)."
+    }
+  ],
+  "rtmUpdates": [
+    { "wp": "WP-01-05", "pgm": "PGM-LR-060", "req": ["FR-PRG-001", "FR-PRG-002", "NFR-DATA-013"], "tests": ["UT-LR-001..002", "UT-LR-009..012", "UT-LR-030..039", "UT-LR-061..067", "UT-LR-069", "IT-330..335"] },
+    { "wp": "WP-01-05", "pgm": "PGM-LR-061", "req": ["FR-PRG-003", "CR-27"], "tests": ["UT-LR-004", "UT-LR-006..007", "UT-LR-045..054", "UT-LR-610..619"] },
+    { "wp": "WP-01-05", "pgm": "PGM-LR-062", "req": ["NFR-DATA-002", "NFR-DATA-011", "FR-PRG-027"], "tests": ["UT-LR-003", "UT-LR-005", "UT-LR-040..044", "UT-LR-055..057"] },
+    { "wp": "WP-01-05", "pgm": "PGM-LR-063", "req": ["NFR-DATA-001", "NFR-DATA-003"], "tests": ["UT-LR-008", "UT-LR-058..060", "CT-LR-801..817"] },
+    { "wp": "WP-01-05", "pgm": "PGM-LR-064", "req": ["NFR-DATA-013", "QAS-08"], "tests": ["CT-LR-505", "UT-LR-012"] }
+  ],
+  "notes": "1) Golden sets (CR-65): basic 1500 ev root 735c1187ed32..., two-device 1200 ev (2 devices, A 743 + B 457) root 426f8ee5e443..., corrections 600 ev root 7a588261b882...; ledger_sha256 in meta.json; generator deterministic (same seed twice = same bytes, in-memory and file DB). 2) IT-333 FULL append n=1000: p99 1.9ms (re-run 8.5ms, max 131ms) vs 100ms bound. 3) Alarm wiring (degraded banner/doctor) deferred to IT-03; handler registration/wiring (INBOX_HANDLERS, config/app) deferred to T-01-09. 4) graphify available (read-only queries only). 5) Commit trailers: Task: T-01-02, Refs: WP-01-05, CR: CR-65, Golden: initial golden ledgers basic/two-device/corrections (CR-65)."
+}

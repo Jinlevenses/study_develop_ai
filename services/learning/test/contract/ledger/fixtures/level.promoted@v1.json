@@ -1,0 +1,24 @@
+{
+  "track": "k8s",
+  "from": 1,
+  "to": 2,
+  "provisional": false,
+  "basis": "promotion_exam",
+  "gates": [
+    {
+      "gate_id": "REQUIRED_MASTERED",
+      "label_ko": "필수 개념 숙달",
+      "met": true,
+      "value": 0.9,
+      "threshold": 0.85,
+      "evidence_event_ids": [],
+      "shortfall_ko": null
+    }
+  ],
+  "profile": {
+    "policy_version": "ps_5e1f0a9c3b7d2468",
+    "ai_mode": "OFFLINE",
+    "sp1_state": "unknown"
+  },
+  "study_day": "2026-09-21"
+}

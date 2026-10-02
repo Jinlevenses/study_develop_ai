@@ -1,4 +1,4 @@
-import { Ulid, Sha256Hex } from '@fathom/contracts/common/ids';
+import { Sha256Hex, Ulid } from '@fathom/contracts/common/ids';
 import { S } from '@fathom/contracts/common/schema';
 import { homePath } from '@fathom/shared-kernel/config/config';
 import type { JobDefinition } from '@fathom/shared-kernel/jobs/jobs';
@@ -8,8 +8,8 @@ import { loadSqliteRuntime } from '@fathom/shared-kernel/service/service';
 import type { Clock } from '@fathom/shared-kernel/time/time';
 import { systemClock } from '@fathom/shared-kernel/time/time';
 import { z } from 'zod';
-import type { IngestRegistry } from '../application/catalog/ports.js';
 import { PackLoadError, runPackLoad, sanitizeFailureCode } from '../application/catalog/ingest/pack-load-run.js';
+import type { IngestRegistry } from '../application/catalog/ports.js';
 import { CONTENT_DB } from '../infra/db/open.js';
 
 // PGM-CT-002 job `pack-load`(STD-DIR-21: 파일 이름 = job 이름) — 단명 자식 프로세스에서 비활성 설치 범위 행을 적재한다.

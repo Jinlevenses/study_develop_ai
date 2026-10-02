@@ -1,0 +1,9 @@
+{
+  "item_id": "k8s.probes.i03",
+  "target_event_ids": ["01J00000000000000000000001", "01J00000000000000000000002"],
+  "basis": "regate_g3",
+  "correction": "quarantined",
+  "gate_result_id": "01J0000000000000000000000Z",
+  "study_day": "2026-09-21",
+  "policy_version": "ps_5e1f0a9c3b7d2468"
+}

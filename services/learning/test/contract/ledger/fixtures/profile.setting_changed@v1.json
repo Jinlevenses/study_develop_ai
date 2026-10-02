@@ -1,0 +1,6 @@
+{
+  "key": "session.default_minutes",
+  "from": 25,
+  "to": 45,
+  "study_day": "2026-09-21"
+}

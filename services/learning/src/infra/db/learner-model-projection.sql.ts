@@ -34,3 +34,22 @@ export const POLICY_SWITCHED_BY_PS =
 
 export const CARD_COUNT_LIVE = `SELECT count(*) AS n FROM ${ident(LIVE_TABLES.card)}`;
 export const CONCEPT_COUNT_LIVE = `SELECT count(*) AS n FROM ${ident(LIVE_TABLES.concept)}`;
+
+// ───────── 전체 행 읽기(replay-verify 비교용 — 라이브 투영 표 2종) ─────────
+
+export const CARD_ALL_LIVE = `SELECT card_id, concept_id, facet, response_mode, tier, status, last_ts, state_json FROM ${ident(LIVE_TABLES.card)} ORDER BY card_id`;
+export const CONCEPT_ALL_LIVE = `SELECT concept_id, track_id, last_ts, state_json FROM ${ident(LIVE_TABLES.concept)} ORDER BY concept_id`;
+
+// ───────── shadow 교체(DB-01 §6.4 1~4 — rebuild job) ─────────
+// shadow DDL 자체는 sqlite_schema에서 읽은 소유 투영 DDL을 이름 치환해 실행한다(`// sql-ok:` — jobs/rebuild.ts).
+
+export const SCHEMA_TABLE_DDL = "SELECT sql FROM sqlite_schema WHERE type = 'table' AND name = :name";
+export const SCHEMA_INDEX_DDLS =
+  "SELECT sql FROM sqlite_schema WHERE type = 'index' AND tbl_name = :name AND sql IS NOT NULL ORDER BY name";
+
+export const SHADOW_DROP_CARD = `DROP TABLE IF EXISTS ${ident(SHADOW_TABLES.card)}`;
+export const SHADOW_DROP_CONCEPT = `DROP TABLE IF EXISTS ${ident(SHADOW_TABLES.concept)}`;
+export const SWAP_DROP_CARD = `DROP TABLE ${ident(LIVE_TABLES.card)}`;
+export const SWAP_DROP_CONCEPT = `DROP TABLE ${ident(LIVE_TABLES.concept)}`;
+export const SWAP_RENAME_CARD = `ALTER TABLE ${ident(SHADOW_TABLES.card)} RENAME TO ${ident(LIVE_TABLES.card)}`;
+export const SWAP_RENAME_CONCEPT = `ALTER TABLE ${ident(SHADOW_TABLES.concept)} RENAME TO ${ident(LIVE_TABLES.concept)}`;

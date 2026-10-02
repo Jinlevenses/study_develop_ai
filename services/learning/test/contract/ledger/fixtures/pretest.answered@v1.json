@@ -1,0 +1,13 @@
+{
+  "attempt_id": "01J00000000000000000000019",
+  "verdict_id": "01J0000000000000000000001A",
+  "item_id": "net.tcp-handshake.i02",
+  "item_content_hash": "fb9c8e330364e4fbab1c1c8551ef646e8b5428e2a23de4bd869cb8c7f534f03f",
+  "concept_id": "net.tcp-handshake",
+  "item_beta": -0.2,
+  "item_n_options": 4,
+  "result": "incorrect",
+  "latency_ms": 5400,
+  "study_day": "2026-09-21",
+  "policy_version": "ps_5e1f0a9c3b7d2468"
+}
