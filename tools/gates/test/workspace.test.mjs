@@ -237,6 +237,12 @@ const EXPECTED_GITIGNORE = [
   'graphify-out/reflections/',
   '.fathom-dev/',
   '.reports/',
+  // CR-77: graphify 원시 그래프는 로컬 재생성(pnpm graph:update) — 커밋 대상 아님
+  '# CR-77: graphify raw graph regenerated locally (pnpm graph:update)',
+  'graphify-out/graph.json',
+  'graphify-out/manifest.json',
+  'graphify-out/.graphify_*',
+  'graphify-out/20*/',
 ];
 
 /** STD-01 §18.5 `.graphifyignore` 18줄. */
@@ -386,7 +392,7 @@ describe('워크스페이스 스모크', () => {
 
   it('IT-659 .gitignore·.gitattributes·.graphifyignore·fr-iteration.json 시드 [NFR-MAINT-011][NFR-PORT-003]', () => {
     assert.deepEqual(lines('.gitignore'), EXPECTED_GITIGNORE);
-    assert.equal(EXPECTED_GITIGNORE.length, 22);
+    assert.equal(EXPECTED_GITIGNORE.length, 27); // 22 + CR-77 5줄
     assert.deepEqual(lines('.gitattributes'), [
       '* text=auto eol=lf',
       '*.png binary',

@@ -34,7 +34,8 @@ export type MigrateFailure = {
     | 'downgrade'
     | 'needs_migrate'
     | 'apply_failed'
-    | 'integrity_failed';
+    | 'integrity_failed'
+    | 'io_error';
   readonly exitCode: 1 | 78;
   readonly file: string | null;
   readonly detail: string;
@@ -107,7 +108,7 @@ function readOneFile(
   try {
     bytes = readFileSync(fullPath);
   } catch (e) {
-    return fail('name_invalid', 78, fullPath, `unreadable: ${messageOf(e)}`);
+    return fail('io_error', 78, fullPath, `unreadable: ${messageOf(e)}`);
   }
   const text = bytes.toString('utf8');
   const firstLine = (text.split('\n', 1)[0] ?? '').replace(/\r$/, '');
@@ -154,7 +155,7 @@ export function readMigrationBundle(dirs: readonly MigrationDir[]): Result<Migra
     try {
       entries = readdirSync(dir.dir).filter((f) => f.endsWith('.sql'));
     } catch (e) {
-      return fail('gap', 78, dir.dir, `migration directory unreadable: ${messageOf(e)}`);
+      return fail('io_error', 78, dir.dir, `migration directory unreadable: ${messageOf(e)}`);
     }
     entries.sort();
     const parsed: { fileName: string; number: number; desc: string }[] = [];

@@ -308,7 +308,7 @@ describe('응답 검증 · 데드라인', () => {
 });
 
 describe('라우터 단계 오류', () => {
-  it('UT-SK-169 잘못된 퍼센트 인코딩 URL은 problem+json 400(VAL-900)이고, %XX·절대형으로 위장한 /internal 경로도 호출자 토큰 없이는 401이다 [IF-COM-001][NFR-SEC-003]', async () => {
+  it('UT-SK-169 잘못된 퍼센트 인코딩 URL은 problem+json 400(VAL-900)이고, %XX로 위장한 /internal 경로는 인증 전에 404(NOTFOUND-900)다 [IF-COM-001][NFR-SEC-003]', async () => {
     // Arrange
     const rig = await make();
     // Act
@@ -318,14 +318,16 @@ describe('라우터 단계 오류', () => {
     expect(res.headers['content-type']).toMatch(/^application\/problem\+json/);
     expect(isUlid(res.headers['x-request-id'])).toBe(true);
     expect(problemOf(res.body).code).toMatch(/-VAL-900$/);
-    // Act: 인증 등급은 일치한 라우트 경로로 정한다(원문 접두어 우회 차단)
+    // Act: 비정준 대상은 인증·핸들러에 닿기 전에 404로 거절한다(T-01-01 §4.2-1; INT-1a는 401이었다 — 우회 차단을 404로 강화)
     const encoded = await rig.app.fastify.inject({ method: 'GET', url: '/%69nternal/v1/test/deadline' });
     const absolute = await rig.app.fastify.inject({
       method: 'GET',
       url: 'http://127.0.0.1:1/internal/v1/test/deadline',
     });
     // Assert
-    expect(encoded.statusCode).toBe(401);
+    expect(encoded.statusCode).toBe(404);
+    expect(problemOf(encoded.body).code).toBe('CT-NOTFOUND-900');
+    // light-my-request는 절대형 대상을 origin-form으로 정규화하므로 정규형과 같은 401이다(실제 absolute-form은 UT-SK-200 이후·SEC-SYS-015).
     expect(absolute.statusCode).toBe(401);
   });
 });

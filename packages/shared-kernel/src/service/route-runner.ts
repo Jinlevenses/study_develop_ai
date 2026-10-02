@@ -299,6 +299,11 @@ export function createRouteRunner(deps: RunnerDeps): {
       await als.run({ traceparent: st.traceparent, requestId: st.requestId }, () =>
         handler(context(st, parts, key, req), reply),
       );
+      // 핸들러가 응답을 hijack해 열어 둔 스트림(SSE 등, Fastify 5: hijack 시 `sent` = true)은 in-flight에서 뺀다 — 열린 스트림이
+      // 종료 대기(waitIdle)를 grace 전체로 늘리지 않게 한다. 스트림은 shutdown 훅(hub.closeAll)이 닫는다(NFR-AVL-004, ADR-012 §8).
+      if (reply.sent && !reply.raw.writableEnded) {
+        pipeline.release(req);
+      }
     } catch (e) {
       pipeline.replyProblem(req, reply, e);
     } finally {

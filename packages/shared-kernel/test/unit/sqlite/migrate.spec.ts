@@ -156,9 +156,10 @@ describe('번들 읽기', () => {
     await writeMigration(dir, '0001_a.sql', header(1));
     await writeMigration(dir, 'README.md', '# not a migration');
     expect(readMigrationBundle(dirs).ok).toBe(true);
+    // 읽을 수 없는 디렉터리는 번호 빈틈(gap)이 아니라 I/O 오류(io_error)다(CO-14 d, T-01-01 §4.2-7).
     expect(readMigrationBundle([{ module: 'mod', dir: path.join(sandbox, 'absent') }])).toMatchObject({
       ok: false,
-      error: { reason: 'gap' },
+      error: { reason: 'io_error', exitCode: 78 },
     });
   });
 

@@ -11,6 +11,7 @@ import type { Logger } from '@fathom/shared-kernel/log/log';
 import type { MetricsRegistry } from '@fathom/shared-kernel/metrics/metrics';
 import type { Clock } from '@fathom/shared-kernel/time/time';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
+import { classOfUrl, isNonCanonicalTarget, type RouteClass, routeClassOf } from './canonical-path.js';
 import type { ProblemResult } from './problem.js';
 import { appErrorCode, mapFramework, toProblem } from './problem.js';
 import type { ServiceState } from './service-state.js';
@@ -48,13 +49,14 @@ export interface Pipeline {
   stateOf(req: FastifyRequest): ReqState;
   /** 오류를 problem+json으로 응답한다. 이미 응답이 나갔으면 로그만 남긴다. */
   replyProblem(req: FastifyRequest, reply: FastifyReply, e: unknown): ProblemResult;
+  /** 요청을 in-flight에서 뺀다(멱등). hijack한 스트림 요청은 응답이 열려 있어도 종료 대기(waitIdle)를 막지 않도록 호출한다(NFR-AVL-004). */
+  release(req: FastifyRequest): void;
 }
 
 const TRACEPARENT_RE = /^00-([0-9a-f]{32})-([0-9a-f]{16})-(0[01])$/;
 const DEFAULT_DEADLINE_MS = 2000;
 const MAX_DEADLINE_MS = 600_000;
 const DURATION_BUCKETS_MS: readonly number[] = [5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000];
-const HEALTH_PATHS: ReadonlySet<string> = new Set(['/healthz', '/readyz']);
 
 export function pathOf(url: string): string {
   const q = url.indexOf('?');
@@ -151,8 +153,9 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
       typeof config === 'object' && config !== null && 'route' in config && isRouteDef(config.route)
         ? config.route
         : null;
-    // 일치한 라우트가 있으면 그 선언 경로가 분류 기준이다(authenticate 주석 참고).
-    const path = route === null ? pathOf(req.url) : route.path;
+    // 분류(cache-control·health 판정·데드라인·인증)는 일치한 라우트의 선언 경로만 기준으로 한다 — 원문 `req.url` 접두 비교 0(NFR-SEC-003).
+    // 라우트가 없으면(404) 디코딩 경로로 cache-control 등급만 정한다.
+    const cls: RouteClass = route === null ? classOfUrl(req.url) : routeClassOf(route.path);
     const st: ReqState = {
       recvAt,
       startPerf: performance.now(),
@@ -167,13 +170,17 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
     states.set(req, st);
     deps.state.enterRequest();
     reply.header('x-request-id', req.id);
-    if (path.startsWith('/api/') || path.startsWith('/internal/')) {
+    if (cls === 'api' || cls === 'internal') {
       reply.header('cache-control', 'no-store');
     }
-    if (path.startsWith('/internal/') && !isUlid(req.headers['x-request-id'])) {
+    // 비정준 요청 대상(인코딩 접두·비예약 문자 인코딩·absolute-form·asterisk-form)은 인증·핸들러에 닿기 전에 404로 거절한다.
+    if (isNonCanonicalTarget(req.url)) {
+      throw new AppError(appErrorCode(deps.svc, 'NOTFOUND-900'), 404, '정의되지 않은 경로다.');
+    }
+    if (cls === 'internal' && !isUlid(req.headers['x-request-id'])) {
       st.log.warn({ event: 'http.request_id.missing' }, 'x-request-id missing or invalid');
     }
-    const health = HEALTH_PATHS.has(path);
+    const health = cls === 'health';
     if (!health && deps.state.shuttingDown) {
       throw new AppError(appErrorCode(deps.svc, 'DEP-900'), 503, '종료 중이다.');
     }
@@ -184,19 +191,20 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
       return;
     }
     if (!health) {
-      await authenticate(req, route, st);
+      await authenticate(req, route, st, cls);
     }
     // 공개(/api) 요청의 데드라인은 서버가 정한다 — 헤더는 서비스 간 홉(내부·health)에서만 읽는다.
-    st.deadlineAt = path.startsWith('/api/')
-      ? recvAt + (route.deadlineMs ?? DEFAULT_DEADLINE_MS)
-      : parseDeadline(req.headers['x-fathom-deadline-ms'], recvAt, deps.svc, route.deadlineMs);
+    st.deadlineAt =
+      cls === 'api'
+        ? recvAt + (route.deadlineMs ?? DEFAULT_DEADLINE_MS)
+        : parseDeadline(req.headers['x-fathom-deadline-ms'], recvAt, deps.svc, route.deadlineMs);
   });
 
-  async function authenticate(req: FastifyRequest, route: RouteDef, st: ReqState): Promise<void> {
+  async function authenticate(req: FastifyRequest, route: RouteDef, st: ReqState, cls: RouteClass): Promise<void> {
     // 인증 등급은 원문 req.url이 아니라 일치한 라우트의 선언 경로로 정한다 — find-my-way는 %XX 디코딩·절대형 대상(RFC 9112 3.2.2)을
     // 라우팅하지만 원문 접두어는 그대로라 `/%69nternal/…`·`GET http://host/internal/…`이 인증을 건너뛰었다(INT-1a, T-00-12 보안 에스컬레이션).
-    const path = route.path;
-    if (path.startsWith('/internal/')) {
+    // 비정준 대상은 onRequest 맨 앞에서 이미 404로 거절됐다.
+    if (cls === 'internal') {
       const who = checkInternalAccess(deps.auth, req.headers.authorization, route.allowedCallers);
       if (!who.ok) {
         const ok401 = who.error.status === 401;
@@ -209,13 +217,17 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
       st.caller = who.value;
       return;
     }
-    if (path.startsWith('/api/')) {
+    if (cls === 'api') {
       if (deps.publicAuth === undefined) {
         throw new Error('invariant: /api route served without a publicAuth hook');
       }
       const result = await deps.publicAuth({ headers: req.headers, method: req.method, url: req.url });
       if (!result.ok) {
         throw result.error;
+      }
+      // 공개 라우트도 선언한 호출자(browser·cli)만 받는다(STD-SEC-20, IF-01 §2.11).
+      if (!route.allowedCallers.includes(result.value)) {
+        throw new AppError(appErrorCode(deps.svc, 'ACL-900'), 403, '허용되지 않은 호출자다.');
       }
       st.caller = result.value;
     }
@@ -263,5 +275,5 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
     replyProblem(req, reply, new AppError(appErrorCode(deps.svc, 'NOTFOUND-900'), 404, '정의되지 않은 경로다.'));
   });
 
-  return { stateOf, replyProblem };
+  return { stateOf, replyProblem, release: leave };
 }

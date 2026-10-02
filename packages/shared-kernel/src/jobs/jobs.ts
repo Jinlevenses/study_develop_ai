@@ -232,10 +232,16 @@ const DEFAULT_QUEUE_MAX = 8;
 const SHUTDOWN_GRACE_MS = 2000;
 const CLOSE_GRACE_MS = 1000;
 
-/** 자식 env = `ALLOWED_ENV` 이름 중 값이 있는 것만(STD-CFG-21). 부모 env 전체를 상속하지 않는다. */
-function allowlistedEnv(): Record<string, string> {
+// 로컬 job 자식은 AI 공급자를 부르지 않는다 — 비밀(`*_API_KEY`)은 ai-gateway 부모에만 있고 자식 env로 내려가지 않는다(CR-75, NFR-SEC-005).
+const SECRET_ENV_RE = /_API_KEY$/;
+
+/** 자식 env = `ALLOWED_ENV` 이름 중 값이 있는 것만, 단 `*_API_KEY`는 제외(STD-CFG-21, CR-75). 부모 env 전체를 상속하지 않는다. */
+export function allowlistedEnv(): Record<string, string> {
   const env: Record<string, string> = {};
   for (const name of ALLOWED_ENV) {
+    if (SECRET_ENV_RE.test(name)) {
+      continue;
+    }
     const value = readAllowedEnv(name);
     if (value !== undefined) {
       env[name] = value;

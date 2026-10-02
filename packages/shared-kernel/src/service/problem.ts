@@ -163,10 +163,16 @@ export function mapFramework(e: unknown, svc: ServiceName): unknown {
   if (code === 'FST_ERR_CTP_INVALID_MEDIA_TYPE') {
     return new AppError(appErrorCode(svc, 'VAL-904'), 415, 'Content-Type은 application/json이어야 한다.', { cause: e });
   }
-  if (code === 'FST_ERR_BAD_URL' || code === 'FST_ERR_MAX_PARAM_LENGTH') {
+  if (code === 'FST_ERR_BAD_URL') {
     return new AppError(appErrorCode(svc, 'VAL-900'), 400, '요청 경로를 해석할 수 없다.', {
       cause: e,
-      extra: { errors: [{ path: '', message: '경로가 올바르지 않거나 너무 길다', rule: 'url' }] },
+      extra: { errors: [{ path: 'url', message: '잘못된 퍼센트 인코딩', rule: 'bad_url' }] },
+    });
+  }
+  if (code === 'FST_ERR_MAX_PARAM_LENGTH') {
+    return new AppError(appErrorCode(svc, 'VAL-900'), 400, '요청 경로를 해석할 수 없다.', {
+      cause: e,
+      extra: { errors: [{ path: 'url', message: '경로 파라미터가 너무 길다', rule: 'max_param_length' }] },
     });
   }
   if (code?.startsWith('FST_ERR_') === true && status === 400) {
