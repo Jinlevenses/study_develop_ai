@@ -1,0 +1,11 @@
+God nodes (most connected):
+  1. S() - 139 edges
+  2. Ulid - 89 edges
+  3. cn() - 83 edges
+  4. ok() - 81 edges
+  5. err() - 76 edges
+  6. EpochMs - 62 edges
+  7. ServiceName - 62 edges
+  8. GateEngineError - 59 edges
+  9. ServiceDeps - 56 edges
+  10. ServiceApp - 55 edges

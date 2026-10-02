@@ -107,9 +107,17 @@ function fullDatabase<P>(def: ServiceDefinition<P>): { file: string } | null {
 }
 
 type RouteRecord = { method: string; url: string };
+type FrameworkErrorSink = (error: Error, req: FastifyRequest, reply: FastifyReply) => void;
 
 /** Fastify 인스턴스(고정 옵션) · onRoute 수집 · 콘텐츠 파서 구성. `routes`는 `registeredRoutes()`의 원천이다. */
-function createFastify(log: Logger): { fastify: FastifyInstance; routes: RouteRecord[] } {
+function createFastify(log: Logger): {
+  fastify: FastifyInstance;
+  routes: RouteRecord[];
+  bindFrameworkErrors: (sink: FrameworkErrorSink) => void;
+} {
+  // 라우터 단계 오류(잘못된 퍼센트 인코딩 URL·과대 path 파라미터)는 훅 파이프라인에 닿기 전에 Fastify가 직접 응답한다.
+  // 파이프라인이 만들어진 뒤 `bindFrameworkErrors`로 problem+json 응답기를 연결한다(INT-1a, T-00-12 에스컬레이션).
+  let frameworkSink: FrameworkErrorSink | null = null;
   const frameworkLog: FastifyBaseLogger = log; // pino Logger → Fastify 기본 로거 타입(app.fastify가 `FastifyInstance` 기본형이 되도록)
   const fastify: FastifyInstance = Fastify({
     loggerInstance: frameworkLog,
@@ -121,6 +129,13 @@ function createFastify(log: Logger): { fastify: FastifyInstance; routes: RouteRe
     return503OnClosing: true,
     forceCloseConnections: 'idle',
     routerOptions: { maxParamLength: MAX_PARAM_LENGTH },
+    frameworkErrors: (error: Error, req: FastifyRequest, reply: FastifyReply): void => {
+      if (frameworkSink === null) {
+        void reply.code(400).send();
+        return;
+      }
+      frameworkSink(error, req, reply);
+    },
   });
   const routes: RouteRecord[] = [];
   fastify.addHook('onRoute', (opts) => {
@@ -135,7 +150,13 @@ function createFastify(log: Logger): { fastify: FastifyInstance; routes: RouteRe
       done(null, payload);
     },
   );
-  return { fastify, routes };
+  return {
+    fastify,
+    routes,
+    bindFrameworkErrors: (sink) => {
+      frameworkSink = sink;
+    },
+  };
 }
 
 function isStreamRoute(route: RouteDef): boolean {
@@ -226,7 +247,7 @@ export async function assembleApp<P>(
     },
   });
 
-  const { fastify, routes } = createFastify(log);
+  const { fastify, routes, bindFrameworkErrors } = createFastify(log);
   const registry = buildErrorRegistry(def.svc, def.errors);
   const pipeline = installPipeline(fastify, {
     svc: def.svc,
@@ -238,6 +259,10 @@ export async function assembleApp<P>(
     registry,
     publicAuth: def.publicAuth,
     als,
+  });
+  bindFrameworkErrors((error, req, reply) => {
+    void reply.header('x-request-id', req.id);
+    pipeline.replyProblem(req, reply, error);
   });
   const idempotency = createIdempotencyStore({ db: fullDb, clock });
   const runner = createRouteRunner({ svc: def.svc, pipeline, gate, idempotency, als, log });

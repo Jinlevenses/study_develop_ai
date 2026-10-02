@@ -122,10 +122,10 @@ describe('content serve 기동 검사', () => {
       );
       // Assert
       expect(plain.status).toBe(401);
-      expect(encoded.status).toBe(404);
-      expect(JSON.parse(encoded.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
-      expect(encodedPost.status).toBe(404);
-      expect(JSON.parse(encodedPost.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      // 루트 수정(INT-1a): 파이프라인이 일치한 라우트 경로로 인증하므로 위장 경로도 정규형과 같은 401이다(404 가드는 이중 방어로 남는다)
+      expect(encoded.status).toBe(401);
+      expect(JSON.parse(encoded.body).code).toBe(JSON.parse(plain.body).code);
+      expect(encodedPost.status).toBe(401);
       svc.child.send({ type: 'shutdown', v: 1, grace_ms: 200 });
       expect(await svc.exit).toBe(0);
     });
@@ -165,11 +165,10 @@ describe('content serve 기동 검사', () => {
         outcome: 'completed',
       });
       // Assert
-      expect(metrics.status).toBe(404);
-      expect(JSON.parse(metrics.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
-      expect(quiesce.status).toBe(404);
-      expect(JSON.parse(quiesce.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      expect(metrics.status).toBe(401); // 루트 수정(INT-1a): 절대형 대상도 일치한 라우트 경로로 인증한다
+      expect(quiesce.status).toBe(401);
       expect(plain.status).toBe(401);
+      expect(JSON.parse(metrics.body).code).toBe(JSON.parse(plain.body).code);
       expect(real.status).toBe(200);
       expect(resume.status).toBe(200);
       svc.child.send({ type: 'shutdown', v: 1, grace_ms: 200 });

@@ -213,7 +213,7 @@ const EXPECTED_ROOT_SCRIPTS = {
   bundle: 'echo skipped',
 };
 
-/** STD-01 §15.3 `.gitignore` 21줄(D-STD-17 두 줄 포함). */
+/** STD-01 §15.3 `.gitignore` 21줄(D-STD-17 두 줄 포함) + `.reports/`(TST-01 §3 si-docs 원천, E2E json reporter 산출물; INT-1a 통합 추가) = 22줄. */
 const EXPECTED_GITIGNORE = [
   'node_modules/',
   'dist/',
@@ -236,6 +236,7 @@ const EXPECTED_GITIGNORE = [
   'graphify-out/memory/',
   'graphify-out/reflections/',
   '.fathom-dev/',
+  '.reports/',
 ];
 
 /** STD-01 §18.5 `.graphifyignore` 18줄. */
@@ -282,7 +283,17 @@ describe('워크스페이스 스모크', () => {
   it('IT-655 pnpm-workspace·.npmrc·.node-version·루트 package.json 기본 필드 [NFR-PORT-002][NFR-PORT-003]', () => {
     assert.deepEqual(
       lines('pnpm-workspace.yaml').filter((l) => l !== ''),
-      ['packages:', '  - apps/*', '  - services/*', '  - packages/*', '  - tools/*', 'onlyBuiltDependencies: []'],
+      [
+        'packages:',
+        '  - apps/*',
+        '  - services/*',
+        '  - packages/*',
+        '  - tools/*',
+        'onlyBuiltDependencies: []',
+        // INT-1a: pnpm audit --prod high(GHSA-r5fr-rjxr-66jc) 해소 — mermaid>chevrotain 경유 lodash-es를 패치본으로 고정(전이 의존만).
+        'overrides:',
+        '  lodash-es: 4.18.1',
+      ],
     );
     assert.deepEqual(lines('.npmrc'), [
       'engine-strict=true',
@@ -375,7 +386,7 @@ describe('워크스페이스 스모크', () => {
 
   it('IT-659 .gitignore·.gitattributes·.graphifyignore·fr-iteration.json 시드 [NFR-MAINT-011][NFR-PORT-003]', () => {
     assert.deepEqual(lines('.gitignore'), EXPECTED_GITIGNORE);
-    assert.equal(EXPECTED_GITIGNORE.length, 21);
+    assert.equal(EXPECTED_GITIGNORE.length, 22);
     assert.deepEqual(lines('.gitattributes'), [
       '* text=auto eol=lf',
       '*.png binary',

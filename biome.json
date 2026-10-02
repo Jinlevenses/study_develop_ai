@@ -17,6 +17,7 @@
     ]
   },
   "formatter": { "indentStyle": "space", "indentWidth": 2, "lineWidth": 120, "lineEnding": "lf" },
+  "css": { "parser": { "tailwindDirectives": true } },
   "javascript": { "formatter": { "quoteStyle": "single", "semicolons": "always", "trailingCommas": "all" } },
   "linter": {
     "rules": {
@@ -50,6 +51,14 @@
     }
   },
   "overrides": [
+    {
+      "includes": [
+        "packages/design-tokens/src/tokens.css",
+        "packages/design-tokens/src/typography.css",
+        "apps/web/src/styles/app.css"
+      ],
+      "formatter": { "enabled": false }
+    },
     {
       "includes": ["**/vite.config.ts", "**/vitest.config.ts", "**/playwright.config.ts"],
       "linter": { "rules": { "style": { "noDefaultExport": "off" } } }

@@ -20,3 +20,8 @@ graphify-out/memory/
 graphify-out/reflections/
 .fathom-dev/
 .reports/
+# CR-77: graphify raw graph regenerated locally (pnpm graph:update)
+graphify-out/graph.json
+graphify-out/manifest.json
+graphify-out/.graphify_*
+graphify-out/20*/

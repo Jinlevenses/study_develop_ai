@@ -103,6 +103,8 @@ export function parseModeArgs(argv: readonly string[]): Result<ParsedMode, strin
       const job = JobName.safeParse(map.value.get('job'));
       return job.success ? ok({ mode: 'job', job: job.data }) : err('unknown or missing --job');
     }
+    default:
+      return err('unknown --mode');
   }
 }
 

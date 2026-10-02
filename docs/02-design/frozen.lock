@@ -2,7 +2,7 @@
   "format": "fathom-frozen-lock/1",
   "baseline": "Architecture Freeze Baseline v1.0",
   "adr": "docs/02-design/adr/ADR-000-architecture-freeze.md",
-  "generated_at": "2026-10-01",
+  "generated_at": "2026-10-02",
   "generated_by": "WP-00-00 (T1)",
   "algorithm": "sha256 (raw bytes, LF)",
   "rules": {
@@ -238,105 +238,534 @@
       "scope": "검증된 스택 사실(ADR-000 §6 기록 대상)",
       "sha256": "a42a8ebf3c52ee13ecddfbff628aa4b8088f18e3cada86ddd511f558c0c6966e",
       "bytes": 3122
+    },
+    {
+      "path": "packages/contracts/src/common/degraded.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "aaefcbef5060bdde8b70382d5b0e480118a4f28761731df61777a71a3542b4a6",
+      "bytes": 437
+    },
+    {
+      "path": "packages/contracts/src/common/domain.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "38c60ab7203cd10553484c351db87615ae166459593340b2484b77cd8349dbbd",
+      "bytes": 4767
+    },
+    {
+      "path": "packages/contracts/src/common/errors.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "6d1b82d64ecc2fe6f08a30053f28dfaa959683bf02e98fac66b082c40ea8fb21",
+      "bytes": 2521
+    },
+    {
+      "path": "packages/contracts/src/common/ids.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "a19cae50aa0b99daf0327e078b2e2eb19f5e2efdee81934f5aa192a63f4a5aa0",
+      "bytes": 5598
+    },
+    {
+      "path": "packages/contracts/src/common/ndjson.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "6c623a5bcc115768b79ccff170486116aaed7475c8f8be91f2624c9978847ae4",
+      "bytes": 335
+    },
+    {
+      "path": "packages/contracts/src/common/pagination.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "a916d0a5456ff6d9a7bc5f24adf405f148630764dbbb8d860420a7dcd28df7ad",
+      "bytes": 475
+    },
+    {
+      "path": "packages/contracts/src/common/practice.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "137200dd497f87a02a455be4ef62cc4b9dc9b142cc06d6281601f951f893d79e",
+      "bytes": 5656
+    },
+    {
+      "path": "packages/contracts/src/common/problem.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "11e9140c0c03a9ca3fccb8728b290f09c7bb908cb9562b86334f766a03cc0682",
+      "bytes": 1552
+    },
+    {
+      "path": "packages/contracts/src/common/route.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "09827bbaedaefa6b27763c00be4f2d07798fa450e777d979f34aa9a15ed1fe0c",
+      "bytes": 980
+    },
+    {
+      "path": "packages/contracts/src/common/schema.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "cd3c3ccf3074aff18b7aacfca9040735c9386bdcb4dad92aa8e1f921de3f3c0f",
+      "bytes": 236
+    },
+    {
+      "path": "packages/contracts/src/common/time.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "94a579867f554630c9a54a6989a7960f0d32d457d387c70c0c0f4f92ed0d6128",
+      "bytes": 589
+    },
+    {
+      "path": "packages/contracts/src/admin/admin-routes.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "6f4907d34c652ede6cc50229ffd3c9cf6f82ab9488fa9434b83b7d8db5c0065a",
+      "bytes": 8853
+    },
+    {
+      "path": "packages/contracts/src/admin/epoch-manifest.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "2f9e907dca960c644bcebb34bf3e6f4a9981439aa3eb9b63e0a8991bde39776b",
+      "bytes": 1533
+    },
+    {
+      "path": "packages/contracts/src/admin/ipc.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "f967bb0835387a1d73fae11018d09ad3e50f86eb1f0029023249565483510afb",
+      "bytes": 4612
+    },
+    {
+      "path": "packages/contracts/src/admin/jobs.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "21e0604ef4f177195ed2b3487c71a07e37cdee8007b481d786f2b39c696e3f80",
+      "bytes": 1215
+    },
+    {
+      "path": "packages/contracts/src/ledger/envelope.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "cbdd61122ab648c0d976c9502af7bbc566552356e6ff8d233955f53972765944",
+      "bytes": 1831
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/ai-mode-observed.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "ca06a5cfd185251fbcb98d42ab217a3e417093e33fd1cfd8d0da1dac6361941d",
+      "bytes": 565
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/attempt-graded.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "b54f6bdd8fc81ae0bac0b2df15723881c710cb83e22d8cc8c3db0b8579b60be3",
+      "bytes": 773
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/card-enrolled.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "740380b0002b58bf99ea6f253bc3b73355c6dee428868c1da571a7e212902b44",
+      "bytes": 532
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/card-status-changed.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "cae15c26d491ef50ecf0c0cd056c11372adcec5106801b5d9c957181ad34e2af",
+      "bytes": 501
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/declaration-sealed.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "2b2ef528fbc257c47b28630900547d603853696eb3d8e9efa45e5fa0fa1aa745",
+      "bytes": 552
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/evidence-regraded.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "3ca3aae0c0cf109ae29fb9e5caf1d460dc6b81f4d137ca7be0fb32ea67decd5a",
+      "bytes": 741
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/evidence-upgraded.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "4189b97e9f7f6feb6bb1fe3133c23d5bf74fb598846d9fbe64060e21fc4a9174",
+      "bytes": 863
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/evidence-voided.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "134292dddc7cef10e14a7683fddba549a7a639d36b9e09496839df96ce90004c",
+      "bytes": 698
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/evidence-weight-adjusted.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "99f64e19c0723b3a8023432bca8972fdef47e054b4a88088d8d07c4338a76060",
+      "bytes": 944
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/lesson-completed.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "e2537537d3c7c26fb6989080fd96f2e8f3e795f48212fed0790549fca4e03307",
+      "bytes": 510
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/level-promoted.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "52c90bfdee796c191feda3cb974d6b76b64ebf45e5ea33e14ce8f7df43aac3b6",
+      "bytes": 746
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/level-provisional-resolved.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "81305afa545c616a8ec1d22871a5b6b73c7a7a631ee2da463c11153a2726c4a0",
+      "bytes": 689
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/policy-switched.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "980beba9217559c98709adb3087e0f95e99174a0fc35a49db4e6125ff5ccb1ec",
+      "bytes": 570
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/pretest-answered.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "1efc76d4ee47548b8e3d8d65578ce929864308e3036b9240338ddcd76f6d2bad",
+      "bytes": 698
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/profile-setting-changed.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "63b68ff74b07d957501f76135ca216c9e5bf6bf7b46ee9313280ff666017cc64",
+      "bytes": 374
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/promotion-exam-completed.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "fb911fafd52e4807d5382e599e4b6715e9b9e683ff047c102a8b92bd1af20e68",
+      "bytes": 754
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/self-assessment-recorded.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "13a6cba3a209d92599a9033b72afab79ae11dd026fc03dfa766ad5bc41d7750a",
+      "bytes": 935
+    },
+    {
+      "path": "packages/contracts/src/ledger/payloads/verdict-carried.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "a2c09bd937baae2bda374422a4adf4c9711874c6bb267c5de5ed59825227b10f",
+      "bytes": 1777
+    },
+    {
+      "path": "packages/contracts/src/ledger/types.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "93c4d73a2229c1320b70cb052d34f425318218f18abc5450071e6d9dd123c462",
+      "bytes": 4433
+    },
+    {
+      "path": "packages/contracts/src/ledger/versions.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "d0a66566ec960b9621924f46ca72957cc0f5ceb2e33b776017583aabebb677f5",
+      "bytes": 692
+    },
+    {
+      "path": "packages/contracts/src/manifests/modes.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "6216e78c53cf24e7111c5b9a712344220a42d04e90c2fd1b5d8c3c89b3dff21f",
+      "bytes": 908
+    },
+    {
+      "path": "packages/contracts/src/manifests/verification-class.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "f94270e03f2447c1622bfdc3ce4df3d5ca2981f3ac56cad5161329ccd4e3e987",
+      "bytes": 513
+    },
+    {
+      "path": "packages/contracts/src/events/envelope.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "bf6ee60ccab7eab1abdb93b138c0d0ec5d9e1c6c558bae9e267ccb71b5c3179d",
+      "bytes": 1436
+    },
+    {
+      "path": "packages/contracts/src/events/consumer-manifest.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "8f1a97e55ad560becd9c1ad3c262c06f636876cab7134d7685c9e72d425cfd59",
+      "bytes": 702
+    },
+    {
+      "path": "packages/contracts/src/db-hooks.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "c59eb1e17e9e40365889a6351dfd837caff1dbf39188354610f41dee451473d7",
+      "bytes": 5926
+    },
+    {
+      "path": "packages/contracts/src/policy/lock.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "8012f934b20db8aa1b7b15cafb3c4ee9033be1a6d3d7ac26f1ad9d667e2612dd",
+      "bytes": 780
+    },
+    {
+      "path": "packages/contracts/src/policy/mastery_rules.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-02, frozen at INT-1a)",
+      "sha256": "022586cc0ad51e9691c504e1670a35fd6befcdb7ee99a0ae2d1564f18721024f",
+      "bytes": 2027
+    },
+    {
+      "path": "packages/contracts/manifests/modes.manifest.json",
+      "doc_id": "ADR-000 F-4 · PG-2 #6",
+      "scope": "ADR-000 F-4 · PG-2 #6 (T-00-02, frozen at INT-1a)",
+      "sha256": "6b28072b9f4f36628115e74cee0553e777a271b4272023a800038fdd5773af20",
+      "bytes": 4595
+    },
+    {
+      "path": "packages/contracts/manifests/verification-class.json",
+      "doc_id": "ADR-000 F-4 · PG-2 #6",
+      "scope": "ADR-000 F-4 · PG-2 #6 (T-00-02, frozen at INT-1a)",
+      "sha256": "ca13eec1329f6ba3a41d454bacefb46e6323b13e686729f1b47b707e195e9c80",
+      "bytes": 1778
+    },
+    {
+      "path": "packages/contracts/src/pack/records.ts",
+      "doc_id": "ADR-000 F-4 · CR-46",
+      "scope": "ADR-000 F-4 · CR-46 (T-00-09, frozen at INT-1a)",
+      "sha256": "258753a7fcf183e87ad9202b67f4b144b953358ae77b3afbaf4955ba948f5262",
+      "bytes": 11920
+    },
+    {
+      "path": "packages/contracts/src/policy/ai_policy.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-09, frozen at INT-1a)",
+      "sha256": "43e151600363f80e308bf39d204e5f49657316515b7d1d2537ae4fb607fbabb0",
+      "bytes": 2931
+    },
+    {
+      "path": "packages/contracts/src/policy/method_policy.ts",
+      "doc_id": "ADR-000 F-4",
+      "scope": "ADR-000 F-4 (T-00-10, frozen at INT-1a)",
+      "sha256": "52b4cc7064acc3dcd71fd38fa1ee561af0803c09cfc93895306b2460c3144a14",
+      "bytes": 3966
+    },
+    {
+      "path": "services/ai-gateway/src/app.ts",
+      "doc_id": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
+      "scope": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결) (T-00-12, T-00-13, frozen at INT-1a)",
+      "sha256": "9c6aa62fb3726bdd250b9689c269fbda07f9df74b320198e1d10cadafdb19fae",
+      "bytes": 678
+    },
+    {
+      "path": "services/content/src/app.ts",
+      "doc_id": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
+      "scope": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결) (T-00-12, T-00-13, frozen at INT-1a)",
+      "sha256": "39465aea6ff07c5fc1a6358d7c03e1b99e25134b8680aef6d3a2cba809bd2284",
+      "bytes": 1268
+    },
+    {
+      "path": "services/gateway/src/app.ts",
+      "doc_id": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
+      "scope": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결) (T-00-12, T-00-13, frozen at INT-1a)",
+      "sha256": "fcd0d9ff43e314c8816c6a71be30571a9b39da2ff7bda521a2c3b9eb44e8180a",
+      "bytes": 1166
+    },
+    {
+      "path": "services/learning/src/app.ts",
+      "doc_id": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
+      "scope": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결) (T-00-12, T-00-13, frozen at INT-1a)",
+      "sha256": "424d7a2cf954a4352a4c0c5ce46f47a0bc84c1c0730362727cb8db7db7b0bd08",
+      "bytes": 728
+    },
+    {
+      "path": "services/ops/src/app.ts",
+      "doc_id": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
+      "scope": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결) (T-00-12, T-00-13, frozen at INT-1a)",
+      "sha256": "c8d7ee121231c3825c2630a94d633ca638b9e12d0a27bdf2e00726c525a699a7",
+      "bytes": 875
+    },
+    {
+      "path": "services/ops/src/supervisor/args.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "d7db05fdbbe74ca9786564f25720205a514f2ad61fcd47f0adc5370069ea215d",
+      "bytes": 3391
+    },
+    {
+      "path": "services/ops/src/supervisor/bootstrap.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "1bc6ca6349e0c4cdbacda9e915af839224f57ea77d4b859c362c03604846f52b",
+      "bytes": 1877
+    },
+    {
+      "path": "services/ops/src/supervisor/bundle.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "492545b55d6ae76da31a86fdcbfcbca4d2e45abf20db9c022d0cb6a0b032a33a",
+      "bytes": 5726
+    },
+    {
+      "path": "services/ops/src/supervisor/child-env.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "0be917e56555f45a10434faeabcb343ecf422b2392cd0a718f12bb212b1aed6c",
+      "bytes": 1889
+    },
+    {
+      "path": "services/ops/src/supervisor/child.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "d22dd04ec2c425a56af7d3371af3309b7448b0fb532e64a5977771060eecb539",
+      "bytes": 6428
+    },
+    {
+      "path": "services/ops/src/supervisor/context.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "078d3f9ee3492bffc02bd4cfc27d8bfe6927a29042dac6e91891db9c72d9443c",
+      "bytes": 3845
+    },
+    {
+      "path": "services/ops/src/supervisor/control-ipc.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "f6e35273aa01533e60acd5bd02ee0162fa17cdb7e6145fbd77d1b6f601790822",
+      "bytes": 3251
+    },
+    {
+      "path": "services/ops/src/supervisor/dev-watch.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "9f04598cb435e702b3f53f5535e95fe6650f2a16526456d67058ae8b8df21985",
+      "bytes": 4363
+    },
+    {
+      "path": "services/ops/src/supervisor/handshake.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "3e16ec5cb02574e2c63587548298a98b13a9e54ec7c9833f1e01c91fdfcb95a0",
+      "bytes": 863
+    },
+    {
+      "path": "services/ops/src/supervisor/lifecycle.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "59cf3bc66f1f1a8943014857622ce2a883825b15f28856fdf3e22ea33771ed5a",
+      "bytes": 9404
+    },
+    {
+      "path": "services/ops/src/supervisor/log-sink.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "7b3e5a143d6dacb0307ea69ae852e34f5c59ef5ec5dc1a68fa3f0085543d98c9",
+      "bytes": 8099
+    },
+    {
+      "path": "services/ops/src/supervisor/main.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "d5442f699f36f491c8eaff78fdebe0796a5589b15e5d99e55a0650b5d2b87ac2",
+      "bytes": 4547
+    },
+    {
+      "path": "services/ops/src/supervisor/messages.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "5d264a93d0a6b8620dd5c059271d774a961d32d0a2ca508b8864bd282b3cee88",
+      "bytes": 4286
+    },
+    {
+      "path": "services/ops/src/supervisor/ports.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "b9c154a5494b561d65cb6a12af9a717047f723502b7bcc0d251119cc19e64caa",
+      "bytes": 2296
+    },
+    {
+      "path": "services/ops/src/supervisor/process-table.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "668b4d421f4230c3989d19362b3ac1a3bcb05b0c942d0459e01578b9454f4c3c",
+      "bytes": 3395
+    },
+    {
+      "path": "services/ops/src/supervisor/restart-policy.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "e469ebca38980ee25d2f23941f6df0a0bfa96a1fd4fb60f05f601074fe191afd",
+      "bytes": 1696
+    },
+    {
+      "path": "services/ops/src/supervisor/run-mode.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "eae492226bfbfba0b53d67a06ac06703c11a59f3b8b9daf1fb410e8876fba476",
+      "bytes": 5277
+    },
+    {
+      "path": "services/ops/src/supervisor/runtime-files.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "e7002f92ba017e573552b02deb21a368dba3129a6e89ab24dd143625319d35c3",
+      "bytes": 8990
+    },
+    {
+      "path": "services/ops/src/supervisor/supervisor.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "eb62a034c73d1d4c51fd43307ca5453f11489816fea46d952aad8ff381ed44e3",
+      "bytes": 7901
+    },
+    {
+      "path": "services/ops/src/supervisor/tokens.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "257e5bf0cea41ad6d4078392481e922a04d97fcd358717f1ea71d4949c5220a3",
+      "bytes": 846
+    },
+    {
+      "path": "services/ops/src/supervisor/types.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "a90d784634091e3f3da48d6c068f930f06bd3ae8c3236bf4ca0a9cce631a007a",
+      "bytes": 1682
+    },
+    {
+      "path": "services/ops/src/supervisor/vite.ts",
+      "doc_id": "WBS-01 WP-00-29 (INT-1a 후 동결)",
+      "scope": "WBS-01 WP-00-29 (INT-1a 후 동결) (T-00-11, frozen at INT-1a)",
+      "sha256": "0579c6b90fe88d05dd2d3c006ff062b2635aa9981f190f81a9088079c70bb09c",
+      "bytes": 1814
     }
   ],
   "pending": [
-    {
-      "glob": "packages/contracts/src/common/**",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/admin/**",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/ledger/**",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/manifests/**",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/events/envelope.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/events/consumer-manifest.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/db-hooks.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/policy/lock.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/policy/mastery_rules.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/manifests/modes.manifest.json",
-      "source": "ADR-000 F-4 · PG-2 #6",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/manifests/verification-class.json",
-      "source": "ADR-000 F-4 · PG-2 #6",
-      "owner_task": "T-00-02",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/pack/records.ts",
-      "source": "ADR-000 F-4 · CR-46",
-      "owner_task": "T-00-09",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/policy/ai_policy.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-09",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "packages/contracts/src/policy/method_policy.ts",
-      "source": "ADR-000 F-4",
-      "owner_task": "T-00-10",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "services/*/src/app.ts",
-      "source": "WBS-01 §2.2 PR-4 (register<Bc>() 목록 INT-1a 후 동결)",
-      "owner_task": "T-00-12, T-00-13",
-      "freeze_at": "INT-1a"
-    },
-    {
-      "glob": "services/ops/src/supervisor/**",
-      "source": "WBS-01 WP-00-29 (INT-1a 후 동결)",
-      "owner_task": "T-00-11",
-      "freeze_at": "INT-1a"
-    },
     {
       "glob": "packages/testkit/src/golden-ledgers/**",
       "source": "CR-65 (TST D-TST-20)",

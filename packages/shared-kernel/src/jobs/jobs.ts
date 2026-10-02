@@ -84,7 +84,10 @@ export function serveJob(defs: readonly JobDefinition[], channel: JobChannel): P
     const emit = (message: Record<string, unknown>): boolean => {
       const parsed = IpcJob.safeParse({ v: 1, ...(jobId === undefined ? {} : { re: jobId }), ...message });
       if (!parsed.success) {
-        throw new Error('invariant: serveJob built an invalid IpcJob message');
+        // 핸들러 결과가 IpcJob에 맞지 않는 경우 — throw하면 promise 콜백에서 미처리 거부로 남아 job이 멈춘다(T-00-04 리뷰 minor).
+        controller.abort();
+        conclude(EXIT_SOFTWARE);
+        return false;
       }
       try {
         channel.send(parsed.data);

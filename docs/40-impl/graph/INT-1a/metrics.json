@@ -1,0 +1,85 @@
+{
+  "int_id": "INT-1a",
+  "created_at": 1790908580813,
+  "graphify_version": "0.9.72",
+  "commit": "b787800d883240431c2eed7e76d389a485981af7",
+  "nodes": 5488,
+  "edges": 13038,
+  "communities": 217,
+  "nodes_by_unit": {
+    "apps/cli": 197,
+    "apps/web": 577,
+    "packages/contracts": 1192,
+    "packages/design-tokens": 76,
+    "packages/shared-kernel": 703,
+    "packages/testkit": 294,
+    "packages/ui": 346,
+    "services/ai-gateway": 111,
+    "services/gateway": 292,
+    "services/learning": 115,
+    "services/ops": 416,
+    "tools/fake-cli": 44,
+    "tools/gates": 331,
+    "tools/graph": 81,
+    "tools/packc": 74,
+    "tools/si-docs": 254
+  },
+  "god_nodes_top10": [
+    {
+      "label": "gen.ts",
+      "degree": 208,
+      "source_file": "packages/contracts/scripts/gen.ts"
+    },
+    {
+      "label": "common/ids.ts",
+      "degree": 179,
+      "source_file": "packages/contracts/src/common/ids.ts"
+    },
+    {
+      "label": "schema.ts",
+      "degree": 140,
+      "source_file": "packages/contracts/src/common/schema.ts"
+    },
+    {
+      "label": "S()",
+      "degree": 139,
+      "source_file": "packages/contracts/src/common/schema.ts"
+    },
+    {
+      "label": "service.ts",
+      "degree": 131,
+      "source_file": "packages/shared-kernel/src/service/service.ts"
+    },
+    {
+      "label": "domain.ts",
+      "degree": 97,
+      "source_file": "packages/contracts/src/common/domain.ts"
+    },
+    {
+      "label": "sqlite.ts",
+      "degree": 97,
+      "source_file": "packages/shared-kernel/src/sqlite/sqlite.ts"
+    },
+    {
+      "label": "Ulid",
+      "degree": 89,
+      "source_file": "packages/contracts/src/common/ids.ts"
+    },
+    {
+      "label": "v1/ai.ts",
+      "degree": 89,
+      "source_file": "packages/contracts/src/http/gateway/v1/ai.ts"
+    },
+    {
+      "label": "spawn-stack.ts",
+      "degree": 88,
+      "source_file": "packages/testkit/src/spawn-stack.ts"
+    }
+  ],
+  "cross_service_edges": [],
+  "cross_service_edge_count": 0,
+  "audit_graph": {
+    "exit": 0,
+    "skipped": false
+  }
+}

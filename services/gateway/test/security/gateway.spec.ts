@@ -67,7 +67,8 @@ describe('gateway 보안', () => {
         headers,
         ...(method === 'POST' ? { body: { purpose: 'open' } } : {}),
       });
-      expect([404, 421], `${method} ${url}`).toContain(res.status);
+      // 루트 수정 후 /internal 위장 경로는 파이프라인이 일치한 라우트 경로로 인증해 호출자 토큰 부재 401이 먼저 나온다(INT-1a)
+      expect([401, 404, 421], `${method} ${url}`).toContain(res.status);
       expect(res.headers['set-cookie'], `${method} ${url}`).toBeUndefined();
       expect(res.body, `${method} ${url}`).not.toContain('bootstrap_token');
     }

@@ -442,7 +442,8 @@ export function createPeerClient(opts: PeerClientOptions): PeerClientPort & { ci
       }
       const admission = admit();
       if (admission === null) {
-        return finish(fail('circuit_open'));
+        // 재시도 중 서킷이 열렸다면 마지막 실제 실패를 가리지 않는다(T-00-04 리뷰 minor).
+        return finish(attempt === 0 ? fail('circuit_open') : last);
       }
       const wasProbe = admission === 'probe';
       const base = opts.baseUrl();
@@ -452,49 +453,57 @@ export function createPeerClient(opts: PeerClientOptions): PeerClientPort & { ci
         result = err({ kind: 'connect_failed', dependency: opts.peer });
         outcome = 'connect_failure';
       } else {
-        const headers: Record<string, string> = {
-          authorization: `Bearer ${opts.token}`,
-          accept: 'application/json',
-          'x-request-id': requestId,
-          'x-fathom-deadline-ms': String(remaining),
-        };
-        if (payload !== null) {
-          headers['content-type'] = 'application/json; charset=utf-8';
-          headers['content-length'] = String(payload.length);
-        }
-        if (idempotencyKey !== undefined) {
-          headers['idempotency-key'] = idempotencyKey;
-        }
-        const traceparent = nextTraceparent(callOpts?.traceparent);
-        if (traceparent !== null) {
-          headers.traceparent = traceparent;
-        }
-        const t = await transportOnce(
-          request,
-          agent,
-          new URL(base),
-          route.method,
-          pathAndQuery,
-          headers,
-          payload,
-          remaining,
-        );
-        if (t.kind === 'fail') {
-          if (t.failure === 'too_large') {
-            result = err({
-              kind: 'contract_violation',
-              dependency: opts.peer,
-              status: 0,
-              detail: `response exceeded ${MAX_RESPONSE_BYTES} bytes`,
-            });
-            outcome = 'other';
-          } else {
-            result = err({ kind: t.failure, dependency: opts.peer });
-            outcome = t.failure === 'timeout' ? 'other' : 'connect_failure';
+        try {
+          const headers: Record<string, string> = {
+            authorization: `Bearer ${opts.token}`,
+            accept: 'application/json',
+            'x-request-id': requestId,
+            'x-fathom-deadline-ms': String(remaining),
+          };
+          if (payload !== null) {
+            headers['content-type'] = 'application/json; charset=utf-8';
+            headers['content-length'] = String(payload.length);
           }
-        } else {
-          result = interpret(route, t);
-          outcome = result.ok ? 'success' : 'other';
+          if (idempotencyKey !== undefined) {
+            headers['idempotency-key'] = idempotencyKey;
+          }
+          const traceparent = nextTraceparent(callOpts?.traceparent);
+          if (traceparent !== null) {
+            headers.traceparent = traceparent;
+          }
+          const t = await transportOnce(
+            request,
+            agent,
+            new URL(base),
+            route.method,
+            pathAndQuery,
+            headers,
+            payload,
+            remaining,
+          );
+          if (t.kind === 'fail') {
+            if (t.failure === 'too_large') {
+              result = err({
+                kind: 'contract_violation',
+                dependency: opts.peer,
+                status: 0,
+                detail: `response exceeded ${MAX_RESPONSE_BYTES} bytes`,
+              });
+              outcome = 'other';
+            } else {
+              result = err({ kind: t.failure, dependency: opts.peer });
+              outcome = t.failure === 'timeout' ? 'other' : 'connect_failure';
+            }
+          } else {
+            result = interpret(route, t);
+            outcome = result.ok ? 'success' : 'other';
+          }
+        } catch (e) {
+          // 예기치 못한 예외가 시험 호출 점유를 남기면 half_open이 영구히 막힌다(T-00-04 리뷰 minor).
+          if (wasProbe) {
+            probeInFlight = false;
+          }
+          throw e;
         }
       }
       recordAttempt(wasProbe, outcome);

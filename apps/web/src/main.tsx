@@ -1,3 +1,4 @@
+import './lib/zod-config.js';
 import '@fontsource-variable/geist';
 import '@fontsource-variable/jetbrains-mono';
 import 'd2coding/d2coding-subset.css';

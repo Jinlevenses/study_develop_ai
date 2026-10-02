@@ -146,12 +146,13 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
   fastify.addHook('onRequest', async (req, reply) => {
     const recvAt = deps.clock.now();
     const trace = nextTrace(req.headers.traceparent);
-    const path = pathOf(req.url);
     const config: unknown = req.routeOptions.config;
     const route =
       typeof config === 'object' && config !== null && 'route' in config && isRouteDef(config.route)
         ? config.route
         : null;
+    // 일치한 라우트가 있으면 그 선언 경로가 분류 기준이다(authenticate 주석 참고).
+    const path = route === null ? pathOf(req.url) : route.path;
     const st: ReqState = {
       recvAt,
       startPerf: performance.now(),
@@ -192,7 +193,9 @@ export function installPipeline(fastify: FastifyInstance, deps: PipelineDeps): P
   });
 
   async function authenticate(req: FastifyRequest, route: RouteDef, st: ReqState): Promise<void> {
-    const path = pathOf(req.url);
+    // 인증 등급은 원문 req.url이 아니라 일치한 라우트의 선언 경로로 정한다 — find-my-way는 %XX 디코딩·절대형 대상(RFC 9112 3.2.2)을
+    // 라우팅하지만 원문 접두어는 그대로라 `/%69nternal/…`·`GET http://host/internal/…`이 인증을 건너뛰었다(INT-1a, T-00-12 보안 에스컬레이션).
+    const path = route.path;
     if (path.startsWith('/internal/')) {
       const who = checkInternalAccess(deps.auth, req.headers.authorization, route.allowedCallers);
       if (!who.ok) {

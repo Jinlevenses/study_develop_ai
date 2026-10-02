@@ -67,11 +67,19 @@ PLAN-IT-01 §3 "CR 번호는 S0 착수 전 T1이 부여"에 따라 IT-00 이월(
 - **CR 아님(게이트 결함 수정, T1 판정)**: `check:sql-typed` import 별칭 미해석(CO-06) · `check:sql` dynamic-arg가 `packages/contracts/src/**`(SQLite 접근 0 단위)의 `RegExp.exec`를 탐지 · `check:ng-g` `import { Sparkles as AiMark }`의 원 이름 탐지(CO-10) · `check:typo-ko` `<p>`+`text-xs`/`text-sm`(12.5·13.5px = DS-01 K11 캡션 하한 12.5px 이상)을 본문 미달로 판정. 각 수정은 `fixtures/<check>/clean` 회귀 동반.
 - **기존 CR 이행**: CO-17 `ComposerPolicyV1.path_weights` = CR-52(DCP DN-22) 전사(`.optional()` 가산).
 
+## 3.2 CR-77 ~ CR-79 — INT-1a 통합 판정 후속 (2026-10-02, T1 판정)
+
+| CR | 원천 | 결정 | 영향 | 적용 | 상태 |
+|---|---|---|---|---|---|
+| CR-77 | INT-1a C-10 (graphify 기준 그래프) | `graphify-out/`은 **사람이 읽는 산출물만 커밋**: `GRAPH_REPORT.md`·`graph.html`. `graph.json`(≈7MB)·`manifest.json`·`.graphify_*`·`cache/`·날짜 백업 폴더는 매 통합마다 재작성되어 이력을 비대화하므로 `.gitignore` — 로컬에서 `pnpm graph:update`(= `graphify update .`)로 재생성. INT 스냅샷 지표는 `docs/40-impl/graph/INT-<id>/`(metrics·god-nodes)에 계속 커밋 | STD-GRF §18 "graphify-out/ 커밋" 문구, CLAUDE.md §6 | INT-1a 커밋 | 승인 |
+| CR-78 | INT-1a C-07 (`pnpm audit --prod --audit-level high`) | `pnpm-workspace.yaml` `overrides: lodash-es 4.18.1`(전이 의존 취약점 해소, 직접 의존 추가 0) | ARC §18 표 주석 | INT-1a 커밋 | 승인 |
+| CR-79 | INT-1a CO-N3 (타이밍 민감 테스트) | `turbo.json` `concurrency: "50%"` 임시 상한(4코어 컨테이너 과부하로 UT-SK-098·IT-521 간헐 실패). 근본 원인은 T-01-01에서 조사, 해소 시 제거 | ADR-008 §10 루트 스크립트 | INT-1a 커밋 | 승인(임시) |
+
 ## 4. 다음 번호
 
 | 종류 | 다음 번호 |
 |---|---|
-| CR | **CR-77** |
+| CR | **CR-80** |
 | ADR | **ADR-018** (ADR-017 = CR-73 보안 긴급 경로로 예약, 초안 T1) |
 
 ## 5. 관련

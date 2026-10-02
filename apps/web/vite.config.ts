@@ -30,5 +30,6 @@ export default defineConfig({
   resolve: { conditions: ['source', ...defaultClientConditions] },
   define: { __FATHOM_APP_VERSION__: JSON.stringify(readRootVersion()) },
   server: { host: '127.0.0.1', port: 5173, strictPort: true },
-  build: { outDir: 'dist', emptyOutDir: true, target: 'es2023', sourcemap: false },
+  // assetsInlineLimit 0: 작은 폰트(woff2)를 data: URI로 인라인하지 않는다 — gateway CSP font-src 'self'(INT-1a, E2E-506).
+  build: { outDir: 'dist', emptyOutDir: true, target: 'es2023', sourcemap: false, assetsInlineLimit: 0 },
 });

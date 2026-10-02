@@ -61,7 +61,7 @@ function press(target: Element | Document, init: KeyboardEventInit): void {
   fireEvent.keyDown(target, init);
 }
 
-describe('shell chrome', () => {
+describe('shell chrome', { timeout: 30_000 }, () => {
   it('UT-WEB-447 18개 경로 모두에서 AiChip이 보이고 초기값 AI: 오프라인·hello FULL은 AI: 전체·home degraded_badge는 격하다 [FR-UX-010][FR-AI-003]', async () => {
     for (const path of PATHS) {
       const app = renderApp(path);

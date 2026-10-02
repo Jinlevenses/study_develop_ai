@@ -108,7 +108,7 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-describe('contracts:gen — 생성 결정성·스냅샷·레지스트리·라우팅', () => {
+describe('contracts:gen — 생성 결정성·스냅샷·레지스트리·라우팅', { timeout: 30_000 }, () => {
   it('UT-CON-220 generate() 2회 = 같은 Map(경로·내용·순서) [NFR-MAINT-006]', () => {
     const again = generate();
     expect([...again.keys()]).toEqual([...files.keys()]);

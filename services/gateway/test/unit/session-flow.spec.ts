@@ -374,8 +374,12 @@ describe('경로 우회 방어 (퍼센트 인코딩)', () => {
       const res = await r.inject(method, url, {
         ...(method === 'POST' ? { body: { purpose: 'open' }, headers: { 'idempotency-key': nextKey() } } : {}),
       });
-      expect(res.status, `${method} ${url}`).toBe(404);
-      expect(problem(res.body).code, `${method} ${url}`).toBe('GW-NOTFOUND-900');
+      // 루트 수정(INT-1a): /internal 위장 경로는 파이프라인이 일치한 라우트 경로로 인증해 호출자 토큰 부재 401이 먼저 나온다.
+      const internal = url.includes('nternal');
+      expect(res.status, `${method} ${url}`).toBe(internal ? 401 : 404);
+      if (!internal) {
+        expect(problem(res.body).code, `${method} ${url}`).toBe('GW-NOTFOUND-900');
+      }
       expect(res.headers['set-cookie'], `${method} ${url}`).toBeUndefined();
       expect(res.body, `${method} ${url}`).not.toContain('bootstrap_token');
     }
@@ -459,8 +463,11 @@ describe('경로 우회 방어 (absolute-form 요청 대상)', () => {
         ],
         body,
       );
-      expect(res.status, `${method} ${target}`).toBe(404);
-      expect(problem(res.body).code, `${method} ${target}`).toBe('GW-NOTFOUND-900');
+      const internal = target.includes('/internal/'); // 루트 수정(INT-1a): 절대형 /internal 대상도 라우트 경로로 인증 → 401
+      expect(res.status, `${method} ${target}`).toBe(internal ? 401 : 404);
+      if (!internal) {
+        expect(problem(res.body).code, `${method} ${target}`).toBe('GW-NOTFOUND-900');
+      }
       expect(res.body, `${method} ${target}`).not.toContain('bootstrap_token');
     }
     const plain = await rawRequest(port, [

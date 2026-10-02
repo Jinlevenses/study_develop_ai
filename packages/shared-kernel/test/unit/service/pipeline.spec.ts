@@ -306,3 +306,26 @@ describe('응답 검증 · 데드라인', () => {
     expect(EchoRoute.path).toBe('/internal/v1/test/echo');
   });
 });
+
+describe('라우터 단계 오류', () => {
+  it('UT-SK-169 잘못된 퍼센트 인코딩 URL은 problem+json 400(VAL-900)이고, %XX·절대형으로 위장한 /internal 경로도 호출자 토큰 없이는 401이다 [IF-COM-001][NFR-SEC-003]', async () => {
+    // Arrange
+    const rig = await make();
+    // Act
+    const res = await rig.app.fastify.inject({ method: 'GET', url: '/internal/v1/test/%E0%A4%A', headers: GATEWAY });
+    // Assert
+    expect(res.statusCode).toBe(400);
+    expect(res.headers['content-type']).toMatch(/^application\/problem\+json/);
+    expect(isUlid(res.headers['x-request-id'])).toBe(true);
+    expect(problemOf(res.body).code).toMatch(/-VAL-900$/);
+    // Act: 인증 등급은 일치한 라우트 경로로 정한다(원문 접두어 우회 차단)
+    const encoded = await rig.app.fastify.inject({ method: 'GET', url: '/%69nternal/v1/test/deadline' });
+    const absolute = await rig.app.fastify.inject({
+      method: 'GET',
+      url: 'http://127.0.0.1:1/internal/v1/test/deadline',
+    });
+    // Assert
+    expect(encoded.statusCode).toBe(401);
+    expect(absolute.statusCode).toBe(401);
+  });
+});

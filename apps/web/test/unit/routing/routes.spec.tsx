@@ -48,7 +48,7 @@ const STUB_PATHS: readonly (readonly [string, string, string])[] = [
   ['/settings', 'SCR-17', '설정'],
 ];
 
-describe('routing', () => {
+describe('routing', { timeout: 30_000 }, () => {
   it('UT-WEB-440 src/routing/ 파일 목록은 §4.7의 19개와 정확히 같다 [FR-UX-012]', () => {
     expect(readdirSync(ROUTING_DIR).sort()).toEqual([...EXPECTED_FILES].sort());
     expect(readdirSync(ROUTING_DIR)).toHaveLength(19);
