@@ -75,12 +75,13 @@ PLAN-IT-01 §3 "CR 번호는 S0 착수 전 T1이 부여"에 따라 IT-00 이월(
 | CR-78 | INT-1a C-07 (`pnpm audit --prod --audit-level high`) | `pnpm-workspace.yaml` `overrides: lodash-es 4.18.1`(전이 의존 취약점 해소, 직접 의존 추가 0) | ARC §18 표 주석 | INT-1a 커밋 | 승인 |
 | CR-79 | INT-1a CO-N3 (타이밍 민감 테스트) | `turbo.json` `concurrency: "50%"` 임시 상한(4코어 컨테이너 과부하로 UT-SK-098·IT-521 간헐 실패). 근본 원인은 T-01-01에서 조사, 해소 시 제거 | ADR-008 §10 루트 스크립트 | INT-1a 커밋 | 승인(임시) |
 | CR-80 | INT-1a C-14 (STD-AGT-02 `model_id`) | 저장소에 푸시되는 산출물(완료 보고·INT 기록·커밋)에는 **실제 모델 ID를 기록하지 않는다**(저장소 정책). `model_id` 필드 = 티어 별칭 `T1`(상위 모델)·`T2s`(하위 모델)·`T2h`(최하위 모델). 실제 모델 대조는 오케스트레이터 워크플로 설정(티어→모델 매핑, 저장소 밖)으로 하며, INT 기록은 "티어 일치"만 판정 | STD-AGT-02 문구, TST C-14 | 전 반복 | 승인 |
+| CR-81 | INT-1a 판정 이월(STD-TS-12 A-05) | 동결 파일 `services/ops/src/supervisor/{tokens,ports,bundle,child}.ts`의 `as` 캐스트를 zod 파싱·타입 빌더로 대체하는 **비행동 변경**을 허용(T-01-01). 공개 동작·IPC 계약·테스트 기대값 불변. 적용 커밋에 `CR: CR-81` 트레일러, T1이 `frozen.lock` 해당 4파일 sha256 재계산 | ADR-000 F-? supervisor 동결 항목 | T-01-01 | 승인 |
 
 ## 4. 다음 번호
 
 | 종류 | 다음 번호 |
 |---|---|
-| CR | **CR-81** |
+| CR | **CR-82** |
 | ADR | **ADR-018** (ADR-017 = CR-73 보안 긴급 경로로 예약, 초안 T1) |
 
 ## 5. 관련
