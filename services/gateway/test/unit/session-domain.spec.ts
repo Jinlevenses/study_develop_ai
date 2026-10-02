@@ -20,6 +20,7 @@ import {
   isStateChanging,
 } from '../../src/domain/session/guards.js';
 import { createRateLimiter } from '../../src/domain/session/guards-rate-limit.js';
+import { classifyPathOf, decodedPathOf, isEncodedBypass, isGuardedPath } from '../../src/domain/session/path.js';
 
 const KEY = new Uint8Array(32).fill(1);
 const SID = 'AAAAAAAAAAAAAAAAAAAAAA'; // 22자
@@ -138,7 +139,7 @@ describe('가드 · rate limit · 토큰 저장소 (순수 규칙)', () => {
     expect(checkClientVersion('web', '0.1.0')).toBe(false);
   });
 
-  it('UT-GW-100a 고정 창 rate limiter: 한도 초과·retryAfterMs·창 경과 후 허용·키 독립·키 수 상한 [NFR-SEC-017][STD-SEC-28]', () => {
+  it('UT-GW-110 고정 창 rate limiter: 한도 초과·retryAfterMs·창 경과 후 허용·키 독립·키 수 상한 [NFR-SEC-017][STD-SEC-28]', () => {
     // Arrange
     const limiter = createRateLimiter({ max: 3, windowMs: 1000, maxKeys: 2 });
     // Act / Assert
@@ -171,7 +172,7 @@ describe('가드 · rate limit · 토큰 저장소 (순수 규칙)', () => {
     expect(store.consume('never-issued', 1000)).toBe(false);
   });
 
-  it('UT-GW-021a 발급 17개째 → 가장 이른 것 무효 [NFR-SEC-019]', () => {
+  it('UT-GW-111 발급 17개째 → 가장 이른 것 무효 [NFR-SEC-019]', () => {
     const store = createBootstrapTokenStore({ ttlMs: 60_000, maxOutstanding: 16, hash: (t) => t });
     for (let i = 1; i <= 17; i += 1) {
       store.issue(`t${i}`, i);
@@ -192,5 +193,39 @@ describe('가드 · rate limit · 토큰 저장소 (순수 규칙)', () => {
     expect(gatewayFallbacks('prod')).toEqual([4748, 4749, 4750, 4751, 4752, 4753, 4754, 4755, 4756]);
     expect(gatewayFallbacks('dev')).toEqual([4848, 4849, 4850, 4851, 4852, 4853, 4854, 4855, 4856]);
     expect(gatewayFallbacks('test')).toEqual([]);
+  });
+});
+
+describe('경로 정규형 검사', () => {
+  it('UT-GW-115 isEncodedBypass: 디코딩하면 /api/·/internal/인데 원본이 정규형이 아니면 true, 정규형·무관 경로·잘못된 인코딩은 false [NFR-SEC-019]', () => {
+    const bypass = [
+      '/%61pi/v1/cli/status',
+      '/%69nternal/v1/activity?x=1',
+      '/api%2Fv1/session',
+      '/api/v1/%63li/status',
+      '/api/v1/cli/%62ootstrap-token',
+      '/api/v1/%2e%2e/cli/status',
+    ];
+    const fine = [
+      '/api/v1/cli/status',
+      '/internal/v1/activity',
+      '/api/v1/concepts/%ED%95%9C',
+      '/api/v1/things/a%20b',
+      '/',
+      '/assets/app-%41b.js',
+      '/%61bout',
+      '/api/v1/%E0%A4%A',
+    ];
+    for (const u of bypass) {
+      expect(isEncodedBypass(u), u).toBe(true);
+    }
+    for (const u of fine) {
+      expect(isEncodedBypass(u), u).toBe(false);
+    }
+    expect(decodedPathOf('/%61pi/x?q=%62')).toBe('/api/x');
+    expect(decodedPathOf('/%E0%A4%A')).toBeNull();
+    expect(classifyPathOf('/%E0%A4%A')).toBe('/%E0%A4%A');
+    expect(isGuardedPath('/%61pi/v1/x')).toBe(true);
+    expect(isGuardedPath('/about')).toBe(false);
   });
 });

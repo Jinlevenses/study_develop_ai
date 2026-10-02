@@ -1,9 +1,28 @@
+import 'fake-indexeddb/auto';
+import { SessionsAttemptsSubmitRoute } from '@fathom/contracts/http/gateway/v1/sessions';
+import { createFakeClock } from '@fathom/testkit/clock';
 import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { openDB } from 'idb';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { BootGate, createBootSignals } from '../../../src/features/shell/chrome/boot-gate.js';
-import { createQueueCountsSource } from '../../../src/features/shell/chrome/shell-deps.js';
+import { createQueueCountsSource, QueueHost } from '../../../src/features/shell/chrome/shell-deps.js';
+import { createApiClient } from '../../../src/lib/api-client.js';
+import { APP_VERSION } from '../../../src/lib/app-version.js';
+import { type AttemptRecord, openAttemptQueue, readAttemptCounts } from '../../../src/lib/attempt-queue.js';
 import type { BootState } from '../../../src/lib/bootstrap.js';
-import { problemBody } from '../lib/support/fixtures.js';
+import { bootstrapSession } from '../../../src/lib/bootstrap.js';
+import { createCsrfStore } from '../../../src/lib/csrf.js';
+import {
+  attemptPayload,
+  CSRF_43,
+  fakeFetch,
+  jsonResponse,
+  newAttempt,
+  problemBody,
+  problemResponse,
+  TOKEN_43,
+  ULID_A,
+} from '../lib/support/fixtures.js';
 
 const showToast = vi.hoisted(() => vi.fn());
 vi.mock('@fathom/ui/components/toast', () => ({ showToast, Toaster: () => null }));
@@ -128,5 +147,99 @@ describe('boot gate', () => {
     resolve({ kind: 'ready', status: STATUS, versionMismatch: false });
     await waitFor(() => expect(screen.getByText('준비된 앱')).toBeTruthy());
     expect(showToast).toHaveBeenCalledTimes(1);
+  });
+  it('UT-WEB-453 attempt 큐는 BootGate가 ready가 된 뒤에만 열려 교환·status·csrf보다 먼저 attempts 요청이 나가지 않는다 [NFR-SEC-019][NFR-AVL-002]', async () => {
+    const clock = createFakeClock();
+    const seed = async (dbName: string): Promise<void> => {
+      const db = await openDB(dbName, 1, {
+        upgrade(upgradeDb) {
+          upgradeDb.createObjectStore('attempts', { keyPath: 'idempotency_key' });
+        },
+      });
+      const rec: AttemptRecord = {
+        ...newAttempt(ULID_A),
+        payload: attemptPayload(ULID_A),
+        created_at: clock.now() - 1000,
+        tries: 0,
+        state: 'pending',
+        last_error_code: null,
+      };
+      await db.put('attempts', rec);
+      db.close();
+    };
+    const statusBody = {
+      authenticated: true,
+      port: 4747,
+      app_version: APP_VERSION,
+      boot_id: ULID_A,
+      profile: 'dev',
+      safe_mode: false,
+      maintenance: 'none',
+    };
+    const mount = (dbName: string, responses: Parameters<typeof fakeFetch>) => {
+      const f = fakeFetch(...responses);
+      const csrf = createCsrfStore();
+      const api = createApiClient({ fetch: f.fetch, csrf, newKey: () => 'K' });
+      const queueCounts = createQueueCountsSource();
+      const history = { state: null, replaceState: vi.fn() };
+      const location = { hash: `#bt=${TOKEN_43}`, pathname: '/', search: '' };
+      const open = () =>
+        openAttemptQueue({
+          dbName,
+          send: (rec) =>
+            api.call(
+              SessionsAttemptsSubmitRoute,
+              { params: { session_id: rec.session_id }, body: rec.payload },
+              { idempotencyKey: rec.idempotency_key },
+            ),
+          now: clock.now,
+          setTimer: () => 0,
+          clearTimer: () => undefined,
+          onChange: queueCounts.notify,
+        });
+      render(
+        <BootGate
+          boot={() => bootstrapSession({ location, history, api, csrf })}
+          signals={createBootSignals()}
+          queueCounts={queueCounts.source}
+        >
+          {() => <QueueHost open={open}>{() => <div>큐 열림</div>}</QueueHost>}
+        </BootGate>,
+      );
+      return f;
+    };
+
+    // 세션이 끊긴 상태: 큐를 열지 않으므로 attempts 요청 0 · 레코드는 pending으로 남아 나중에 자동 전송된다
+    const lostDb = 'boot-queue-lost';
+    await seed(lostDb);
+    const lost = mount(lostDb, [
+      () => jsonResponse(200, { session_established: true, port: 4747, app_version: APP_VERSION, profile: 'dev' }),
+      () => problemResponse(401, 'GW-AUTH-003'),
+    ]);
+    await screen.findByText('브라우저 세션이 끊겼습니다.');
+    expect(lost.calls.map((c) => c.url)).toEqual(['/api/v1/session/exchange', '/api/v1/session']);
+    expect(await readAttemptCounts({ now: clock.now, dbName: lostDb })).toEqual({
+      pending: 1,
+      sending: 0,
+      failed_permanent: 0,
+      retryInMs: null,
+    });
+    cleanup();
+
+    // 정상 부트: 교환 → status → csrf가 끝난 뒤에야 attempts가 나가고 CSRF 헤더가 실린다
+    const okDb = 'boot-queue-ok';
+    await seed(okDb);
+    const ok = mount(okDb, [
+      () => jsonResponse(200, { session_established: true, port: 4747, app_version: APP_VERSION, profile: 'dev' }),
+      () => jsonResponse(200, statusBody),
+      () => jsonResponse(200, { csrf: CSRF_43 }),
+      () => problemResponse(503, 'GW-UNAVAILABLE-001'),
+    ]);
+    await screen.findByText('큐 열림');
+    await waitFor(() => expect(ok.calls).toHaveLength(4));
+    const urls = ok.calls.map((c) => c.url);
+    expect(urls.slice(0, 3)).toEqual(['/api/v1/session/exchange', '/api/v1/session', '/api/v1/session/csrf']);
+    expect(urls[3]).toBe(`/api/v1/sessions/${ULID_A}/attempts`);
+    expect(ok.calls[3]?.headers['x-fathom-csrf']).toBe(CSRF_43);
   });
 });

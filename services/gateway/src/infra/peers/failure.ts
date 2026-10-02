@@ -51,6 +51,10 @@ export function peerFailureToAppError(f: PeerFailure, log?: Logger): AppError {
     case 'problem': {
       const p = f.problem;
       if (!isErrorCode(p.code)) {
+        log?.error(
+          { event: 'gateway.peer.unknown_problem_code', dependency: f.dependency, status: p.status },
+          'peer problem code outside the registry',
+        );
         return new AppError('GW-INTERNAL-900', 500);
       }
       const extra = extrasOf(p);

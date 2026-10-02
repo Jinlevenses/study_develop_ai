@@ -167,6 +167,34 @@
       "cmd": "node tools/gates/check-manifest.mjs --json",
       "exit": 1,
       "note": "expected: 21x manifest/e2e-missing + 1 warn; manifest/renderer-key=0, manifest/renderer-missing=0"
+    },
+    {
+      "cmd": "SUPPLEMENT-1: pnpm --filter @fathom/app-web typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "SUPPLEMENT-1: pnpm --filter @fathom/app-web test",
+      "exit": 0,
+      "note": "26 files, 65 tests"
+    },
+    {
+      "cmd": "SUPPLEMENT-1: pnpm --filter @fathom/app-web build",
+      "exit": 0
+    },
+    {
+      "cmd": "SUPPLEMENT-1: biome ci apps/web",
+      "exit": 1,
+      "note": "only app.css @source parse/format (biome.json tailwindDirectives, T-00-01 escalation unchanged); all other apps/web files clean"
+    },
+    {
+      "cmd": "SUPPLEMENT-1: node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "check:deps (package.json of other lanes + apps/web devDeps react-is/@types/react*/@testing-library/dom, frozen files) and check:security (shared-kernel redact.spec) only; 0 findings in apps/web src/test"
+    },
+    {
+      "cmd": "SUPPLEMENT-1: node tools/gates/check-scope.mjs --task T-00-14",
+      "exit": 1,
+      "note": "15 findings, all services/gateway|content (other lanes mixed into shared WIP commits); 0 in apps/web"
     }
   ],
   "graphify": "unavailable",
@@ -179,7 +207,8 @@
     "stores/layout.ts adds drawerOpen/toggleDrawer/closeDrawer (Mod+\\ below lg opens the context Drawer); stores export factory + default instance each.",
     "theme.ts additionally exports windowMedia/currentDocTheme/useDocTheme (react hook); watchSystemTheme always re-resolves a11y attrs (contrast/transparency/motion), colour theme only changes when pref=system.",
     "shell-deps.tsx also exports createQueueCountsSource (external store for attempt-queue counts); boot-gate.tsx exports createBootSignals; boot dedupes per attempt (StrictMode-safe).",
-    "app.css is the exact 4 lines; fonts: d2coding/d2coding-subset.css (pulls ~4MB of woff/ttf into dist). Test support files live in apps/web/test/unit/{lib,routing}/support/ (fixtures, events, fake-event-source, harness)."
+    "app.css is the exact 4 lines; fonts: d2coding/d2coding-subset.css (pulls ~4MB of woff/ttf into dist). Test support files live in apps/web/test/unit/{lib,routing}/support/ (fixtures, events, fake-event-source, harness).",
+    "SUPPLEMENT-1: ui-prefs.writePref returns false (not TypeError) for >4096-char values; UT-WEB-036 assertion changed accordingly. QueueHost/readAttemptCounts added inside existing allowed files (shell-deps.tsx, attempt-queue.ts)."
   ],
   "escalations": [
     {
@@ -193,6 +222,10 @@
     {
       "type": "ambiguity",
       "detail": "STD-WEB-14 vs DS DN-D5 resolved per Brief 4.0-2 (ui-prefs.ts single localStorage module + public/theme-init.js); CR candidate for T1."
+    },
+    {
+      "type": "scope",
+      "detail": "Reviewer item: root package.json `version` missing (APP_VERSION 0.0.0) and gateway rejects non-exact client header with 409 GW-CONFLICT-010 on every call, so a version mismatch ends in ErrorPanel at boot and the ready+versionMismatch toast path is unreachable. T0/T-00-01 must add the root version and cross-lane (IF-GW) must confirm how mismatch presents at boot. biome.json tailwindDirectives also still pending (T-00-01)."
     }
   ],
   "rtmUpdates": [
@@ -296,5 +329,5 @@
       ]
     }
   ],
-  "notes": "1) /_design = file route '[_]design.tsx' -> fullPath '/_design' (no D-STD-15 fallback). 2) addExtensions:true kept; routeTree.gen.ts has @ts-nocheck but route/search types infer correctly (verified invalid Link to/search errors). 3) d2coding CSS = d2coding/d2coding-subset.css. 4) check-manifest: renderer-key 0, renderer-missing 0 (only e2e-missing 21 + formats-unverified warn). 5) IT-00 gateway has no /api/v1/home -> chips/slot run on SSE values (home 404 silently ignored); attempt-queue UI/SSE wiring in main.tsx untested in browser (build + dev server transform verified)."
+  "notes": "1) /_design = file route '[_]design.tsx' -> fullPath '/_design' (no D-STD-15 fallback). 2) addExtensions:true kept; routeTree.gen.ts has @ts-nocheck but route/search types infer correctly (verified invalid Link to/search errors). 3) d2coding CSS = d2coding/d2coding-subset.css. 4) check-manifest: renderer-key 0, renderer-missing 0 (only e2e-missing 21 + formats-unverified warn). 5) IT-00 gateway has no /api/v1/home -> chips/slot run on SSE values (home 404 silently ignored); attempt-queue UI/SSE wiring in main.tsx untested in browser (build + dev server transform verified). || SUPPLEMENT round 1 (T1 review): (MAJOR) main.tsx no longer opens the attempt queue before session bootstrap: bootstrapSession now starts first (hash cleared in its synchronous part, before any await, at app level), BootGate renders immediately, the queue is opened only after BootGate reaches ready via new QueueHost (shell-deps.tsx) -> openQueueOnce() (module-memoised so StrictMode opens/flushes once); sse.start() runs in ReadyShell after the queue is open. Pre-ready AppOffShell count uses new read-only readAttemptCounts() (lib/attempt-queue.ts; no send, no flush). New test UT-WEB-453 (boot-gate.spec.tsx): session-lost boot => 0 attempts requests and record stays pending; healthy boot => exchange, status, csrf, then attempts with x-fathom-csrf. Limit: main.tsx itself (top-level side-effect assembly) is still not unit-executed; the test covers BootGate+bootstrapSession+QueueHost+queue ordering. (minor) attempt-queue: runFlush skips records whose cache state is failed_permanent; deps.send rejection is treated as a network result (pending + backoff) - test added to UT-WEB-023. svg-mount: SMIL animate/set/animateMotion/animateTransform removed; <style> text loses @import and external url() (url(#frag) kept) - UT-WEB-037 extended. routing harness: createFakeClock for hotkeys, manualTimers for SSE (no Date.now / real timers); exposes clock/timers. invalidation-map: rules keyed per schema_version (RULES_BY_VERSION); missing version => 'all'. ui-prefs: writePref returns false for values > 4096 chars instead of TypeError (deviation from Brief 4.0-2 wording, which limits TypeError to non-allow-listed keys; UT-WEB-036 updated); stores/hat.ts default instance left eager as Brief 4.9 asks for default instances. mermaid-figure: explicit MermaidConfig return type; altKo check moved after hooks. "
 }

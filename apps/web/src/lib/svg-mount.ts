@@ -1,4 +1,22 @@
-const FORBIDDEN_ELEMENTS = new Set(['script', 'foreignobject', 'iframe', 'object', 'embed', 'audio', 'video']);
+// SMIL 요소는 마운트 뒤 `<a>`의 href를 `javascript:`로 바꿔 칠 수 있어 통째로 제거한다(CSP는 2차 방어).
+const FORBIDDEN_ELEMENTS = new Set([
+  'script',
+  'foreignobject',
+  'iframe',
+  'object',
+  'embed',
+  'audio',
+  'video',
+  'animate',
+  'set',
+  'animatemotion',
+  'animatetransform',
+]);
+
+/** `<style>` 텍스트에서 `@import`와 외부 `url(...)`을 제거한다(`url(#frag)`는 유지). */
+function scrubStyleText(text: string): string {
+  return text.replace(/@import\b[^;]*;?/gi, '').replace(/url\(\s*(?!['"]?\s*#)[^)]*\)/gi, 'none');
+}
 
 function scrub(el: Element): void {
   for (const attr of [...el.attributes]) {
@@ -32,6 +50,9 @@ export function sanitizeSvg(text: string, parser?: DOMParser): SVGSVGElement | n
   scrub(root);
   for (const el of root.querySelectorAll('*')) {
     scrub(el);
+  }
+  for (const style of root.querySelectorAll('style')) {
+    style.textContent = scrubStyleText(style.textContent ?? '');
   }
   return root instanceof SVGSVGElement ? root : null;
 }

@@ -1,5 +1,5 @@
 import type { SessionStatus as SessionStatusT } from '@fathom/contracts/http/gateway/v1/session';
-import { createContext, type ReactElement, type ReactNode, useContext } from 'react';
+import { createContext, type ReactElement, type ReactNode, useContext, useEffect, useState } from 'react';
 import type { ApiClient } from '../../../lib/api-client.js';
 import type { AttemptQueue, QueueCounts } from '../../../lib/attempt-queue.js';
 import type { HotkeyManager } from '../../../lib/hotkeys.js';
@@ -72,4 +72,30 @@ export function useShellDeps(): ShellDeps {
     throw new Error('ShellDepsProvider 밖에서 셸 의존성을 읽었습니다');
   }
   return deps;
+}
+
+export interface QueueHostProps {
+  /** 큐를 연다(호출 시점에 곧바로 flush되므로 BootGate가 `ready`가 된 뒤에만 마운트된다). 앱 수명 동안 한 번만 열도록 호출 측이 메모이즈한다. */
+  readonly open: () => Promise<AttemptQueue | null>;
+  readonly children: (queue: AttemptQueue | null) => ReactNode;
+}
+
+/**
+ * attempt 큐를 `ready` 이후에 여는 호스트(Brief §4.6-5). 세션 교환·status·csrf가 끝나기 전에는 마운트되지 않으므로
+ * 큐의 즉시 flush가 쿠키·CSRF 없이 나가 영구 실패로 굳는 일이 없다. 열리기 전에는 아무것도 그리지 않는다.
+ */
+export function QueueHost({ open, children }: QueueHostProps): ReactNode {
+  const [state, setState] = useState<{ readonly queue: AttemptQueue | null } | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    void open().then((queue) => {
+      if (!cancelled) {
+        setState({ queue });
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
+  return state === null ? null : children(state.queue);
 }

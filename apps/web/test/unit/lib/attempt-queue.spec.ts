@@ -20,6 +20,7 @@ import {
   problemBody,
   problemResponse,
   ULID_A,
+  ULID_B,
 } from './support/fixtures.js';
 
 let dbSeq = 0;
@@ -318,5 +319,39 @@ describe('attempt-queue', () => {
       h.queue.submit({ ...newAttempt(ULID_A), idempotency_key: '01J0000000000000000000000Z' }),
     ).rejects.toBeInstanceOf(TypeError);
     h.queue.close();
+  });
+
+  it('UT-WEB-023 send가 reject하면 sending에 멈추지 않고 network 결과로 pending·백오프이며, flush 도중 영구 실패로 바뀐 레코드는 다시 보내지 않는다 [NFR-AVL-002][NFR-AVL-011]', async () => {
+    const h = await harness([net]);
+    h.send.mockImplementation(() => Promise.reject(new Error('res.text() 실패')));
+    const outcome = await h.queue.submit(newAttempt(ULID_A));
+    expect(outcome).toEqual({ kind: 'retrying', delayMs: 1000, code: null });
+    expect(h.queue.counts()).toMatchObject({ pending: 1, sending: 0, failed_permanent: 0 });
+    expect((await h.queue.list())[0]).toMatchObject({ state: 'pending', tries: 1 });
+    h.queue.close();
+
+    const g = await harness([net]);
+    await g.queue.submit(newAttempt(ULID_A));
+    await g.queue.submit(newAttempt(ULID_B));
+    let releaseA: (r: ApiResult<unknown>) => void = () => undefined;
+    g.send.mockImplementation((rec) =>
+      rec.idempotency_key === ULID_A
+        ? new Promise<ApiResult<unknown>>((resolve) => {
+            releaseA = resolve;
+          })
+        : Promise.resolve(prob(400, 'LR-VALIDATION-001')),
+    );
+    g.send.mockClear();
+    const flushing = g.queue.flush();
+    await vi.waitFor(() => expect(g.send).toHaveBeenCalledTimes(1)); // A가 전송 중(스냅샷에는 A·B 둘 다 있다)
+    expect(await g.queue.retryNow(ULID_B)).toEqual({ kind: 'failed_permanent', code: 'LR-VALIDATION-001' });
+    releaseA(ok());
+    await flushing;
+    const bSends = g.send.mock.calls.filter(([rec]) => rec.idempotency_key === ULID_B);
+    expect(bSends).toHaveLength(1);
+    expect((await g.queue.list()).map((r) => [r.idempotency_key, r.state, r.tries])).toEqual([
+      [ULID_B, 'failed_permanent', 2],
+    ]);
+    g.queue.close();
   });
 });

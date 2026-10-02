@@ -54,6 +54,23 @@ describe('gateway 보안', () => {
       ['GET', '/api/v1/cli/status', { ...evil, ...cli }],
       ['POST', '/api/v1/session/logout', { ...evil, ...s.mutate() }],
     ];
+    // 퍼센트 인코딩으로 접두사를 숨긴 경로도 Host가 틀리면 어떤 2xx도 받지 못한다(경로 우회 방어가 먼저 404 또는 Host가 421)
+    const encoded: [string, string, Record<string, string>][] = [
+      ['POST', '/%61pi/v1/cli/bootstrap-token', { ...evil, ...cli, 'idempotency-key': nextKey() }],
+      ['GET', '/%61pi/v1/cli/status', { ...evil, ...cli }],
+      ['GET', '/%69nternal/v1/activity', evil],
+      ['GET', '/api/v1/%63li/status', { ...evil, ...cli }],
+    ];
+    for (const [method, url, headers] of encoded) {
+      const res = await r.inject(method, url, {
+        withHost: false,
+        headers,
+        ...(method === 'POST' ? { body: { purpose: 'open' } } : {}),
+      });
+      expect([404, 421], `${method} ${url}`).toContain(res.status);
+      expect(res.headers['set-cookie'], `${method} ${url}`).toBeUndefined();
+      expect(res.body, `${method} ${url}`).not.toContain('bootstrap_token');
+    }
     for (const [method, url, headers, body] of probes) {
       const res = await r.inject(method, url, { withHost: false, headers, ...(body === undefined ? {} : { body }) });
       expect(res.status, `${method} ${url}`).toBe(421);
@@ -128,7 +145,7 @@ describe('gateway 보안', () => {
     expect(errorLine).toBeDefined();
   });
 
-  it('SEC-GW-009 CSP 헤더가 정적·API·problem 응답에서 D-STD-24 문자열과 정확히 일치, prod 정적 HTML의 script-src에 unsafe-inline 0 [CR-61]', async () => {
+  it('SEC-GW-009 CSP 헤더가 정적·API·problem 응답에서 D-STD-24 문자열과 정확히 일치, prod 정적 HTML의 script-src에 unsafe-inline 0 [CR-61][NFR-PORT-006]', async () => {
     // Arrange
     const r = await rig({ webRoot: webRoot(), profile: 'prod' });
     const s = await r.login();
@@ -153,43 +170,39 @@ describe('gateway 보안', () => {
 });
 
 describe('gateway 바인딩 (실 프로세스)', () => {
-  it('SEC-GW-005a 봉투 listen.host 0.0.0.0 → fatal{78, listen_host_forbidden} + exit 78 [NFR-SEC-001]', async () => {
+  it('SEC-GW-005 봉투 listen.host 0.0.0.0 → fatal{78, listen_host_forbidden} + exit 78 · Linux: 기동 중 /proc/net/tcp(+tcp6)의 LISTEN 행 중 gateway 포트의 로컬 주소 = 127.0.0.1만 [NFR-SEC-001]', async () => {
     await withHome(async (home) => {
       const svc = forkGateway(home.path);
       svc.child.send({ ...envelope(home.path), listen: { host: '0.0.0.0', port: 4747 } });
       expect(await svc.waitFor('fatal')).toEqual({ type: 'fatal', v: 1, exit_code: 78, code: 'listen_host_forbidden' });
       expect(await svc.exit).toBe(78);
     });
-  }, 60_000);
-
-  it.runIf(process.platform === 'linux')(
-    'SEC-GW-005b Linux: 기동 중 /proc/net/tcp(+tcp6)의 LISTEN 행 중 gateway 포트의 로컬 주소 = 127.0.0.1만 [NFR-SEC-001]',
-    async () => {
-      await withHome(async (home) => {
-        // Arrange
-        writeCliToken(home.path);
-        const { svc, port } = await bootGateway(home.path);
-        // Act
-        const rows: string[] = [];
-        for (const table of ['/proc/net/tcp', '/proc/net/tcp6']) {
-          try {
-            rows.push(...readFileSync(table, 'utf8').split('\n').slice(1));
-          } catch {
-            // tcp6가 없는 커널
-          }
+    if (process.platform !== 'linux') {
+      return; // /proc/net/tcp는 Linux 전용
+    }
+    await withHome(async (home) => {
+      // Arrange
+      writeCliToken(home.path);
+      const { svc, port } = await bootGateway(home.path);
+      // Act
+      const rows: string[] = [];
+      for (const table of ['/proc/net/tcp', '/proc/net/tcp6']) {
+        try {
+          rows.push(...readFileSync(table, 'utf8').split('\n').slice(1));
+        } catch {
+          // tcp6가 없는 커널
         }
-        const hex = port.toString(16).toUpperCase().padStart(4, '0');
-        const listening = rows
-          .map((l) => l.trim().split(/\s+/))
-          .filter((c) => c[3] === '0A' && (c[1] ?? '').endsWith(`:${hex}`))
-          .map((c) => c[1]?.split(':')[0]);
-        // Assert
-        expect(listening.length).toBeGreaterThan(0);
-        expect(new Set(listening)).toEqual(new Set(['0100007F'])); // 127.0.0.1(리틀 엔디언)
-        svc.child.send({ type: 'shutdown', v: 1, grace_ms: 300 });
-        expect(await svc.exit).toBe(0);
-      });
-    },
-    60_000,
-  );
+      }
+      const hex = port.toString(16).toUpperCase().padStart(4, '0');
+      const listening = rows
+        .map((l) => l.trim().split(/\s+/))
+        .filter((c) => c[3] === '0A' && (c[1] ?? '').endsWith(`:${hex}`))
+        .map((c) => c[1]?.split(':')[0]);
+      // Assert
+      expect(listening.length).toBeGreaterThan(0);
+      expect(new Set(listening)).toEqual(new Set(['0100007F'])); // 127.0.0.1(리틀 엔디언)
+      svc.child.send({ type: 'shutdown', v: 1, grace_ms: 300 });
+      expect(await svc.exit).toBe(0);
+    });
+  }, 120_000);
 });

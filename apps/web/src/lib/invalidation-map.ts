@@ -30,7 +30,8 @@ const ALL: Invalidation = 'all';
 type Rule = (payload: unknown) => Invalidation;
 
 // payload를 EVENT_PAYLOADS[type][1]로 검증한 뒤에만 키를 만든다. 실패 = 전체 무효화(IR-016 누락 0).
-const RULES: Readonly<Record<SseEventType, Rule>> = {
+// 규칙은 schema_version별이다 — contracts에 v2 payload가 생기면 RULES_BY_VERSION에 그 버전의 규칙을 추가한다.
+const RULES_V1: Readonly<Record<SseEventType, Rule>> = {
   'catalog.pack.activated': (p) => {
     const r = EVENT_PAYLOADS['catalog.pack.activated'][1].safeParse(p);
     return r.success ? [qk.tracks(), qk.track(r.data.track), qk.conceptAll(), qk.map()] : ALL;
@@ -105,14 +106,19 @@ const RULES: Readonly<Record<SseEventType, Rule>> = {
   },
 };
 
+const RULES_BY_VERSION: ReadonlyMap<SseEventType, ReadonlyMap<number, Rule>> = new Map(
+  SSE_EVENT_TYPES.map((type) => [type, new Map([[1, RULES_V1[type]]])]),
+);
+
 export function isSseEventType(type: string): type is SseEventType {
   return SSE_EVENT_TYPES.some((t) => t === type);
 }
 
-/** 이벤트 → 무효화할 query key 목록. 모르는 type·버전·payload 파싱 실패 → `'all'`(Brief 결정). */
+/** 이벤트 → 무효화할 query key 목록. 모르는 type·규칙 없는 버전·payload 파싱 실패 → `'all'`(Brief 결정). */
 export function invalidationsFor(type: string, schemaVersion: number, payload: unknown): Invalidation {
-  if (!isSseEventType(type) || schemaVersion !== 1) {
+  if (!isSseEventType(type)) {
     return ALL;
   }
-  return RULES[type](payload);
+  const rule = RULES_BY_VERSION.get(type)?.get(schemaVersion);
+  return rule === undefined ? ALL : rule(payload);
 }

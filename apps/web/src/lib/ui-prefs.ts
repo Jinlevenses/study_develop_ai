@@ -47,13 +47,13 @@ export function readPref(key: UiPrefKey, storage?: Storage | null): string | nul
   }
 }
 
-/** `value === null`은 삭제. 저장 성공 여부를 돌려준다. */
+/** `value === null`은 삭제. 저장 성공 여부를 돌려준다(4,096자 초과 값은 저장하지 않고 false). */
 export function writePref(key: UiPrefKey, value: string | null, storage?: Storage | null): boolean {
   if (!isAllowedKey(key)) {
     throw new TypeError(`허용되지 않은 UI 선호 키: ${key}`);
   }
   if (value !== null && value.length > UI_PREF_MAX_LENGTH) {
-    throw new TypeError(`UI 선호 값은 ${String(UI_PREF_MAX_LENGTH)}자 이하여야 합니다`);
+    return false; // 값이 너무 길다 — 저장소 문제와 같이 '저장 실패'로 알린다(TypeError는 허용 키 밖 전용)
   }
   const s = resolveStorage(storage);
   if (s === null) {

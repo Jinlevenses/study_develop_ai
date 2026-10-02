@@ -42,6 +42,26 @@ describe('svg-mount', () => {
     expect(svg.querySelector('#s')?.getAttribute('style')).toBe('fill: blue');
     expect(svg.getAttribute('viewBox')).toBe('0 0 10 10');
 
+    // SMIL로 href를 바꿔 치는 우회·<style>의 외부 url/@import
+    const smil = sanitizeSvg(`<svg xmlns="http://www.w3.org/2000/svg">
+      <style>@import url(http://evil.example/x.css); .a { fill: url(http://evil.example/f); stroke: url(#grad) } .b { fill: blue }</style>
+      <a href="#ok"><animate attributeName="href" values="javascript:alert(1)"/><set attributeName="href" to="javascript:alert(1)"/><text>t</text></a>
+      <animateMotion path="M0,0"/><animateTransform attributeName="transform"/>
+    </svg>`);
+    expect(smil).not.toBeNull();
+    if (smil === null) {
+      return;
+    }
+    const smilNames = [...smil.querySelectorAll('*')].map((e) => e.localName.toLowerCase());
+    for (const bad of ['animate', 'set', 'animatemotion', 'animatetransform']) {
+      expect(smilNames, bad).not.toContain(bad);
+    }
+    const styleText = smil.querySelector('style')?.textContent ?? '';
+    expect(styleText).not.toMatch(/@import|evil\.example/);
+    expect(styleText).toContain('url(#grad)');
+    expect(styleText).toContain('.b { fill: blue }');
+    expect(smil.innerHTML.toLowerCase()).not.toContain('javascript:');
+
     expect(sanitizeSvg('<svg><g></svg')).toBeNull();
     expect(sanitizeSvg('not xml at all')).toBeNull();
     expect(sanitizeSvg('<html xmlns="http://www.w3.org/1999/xhtml"><body/></html>')).toBeNull();

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import http from 'node:http';
 import type { AddressInfo } from 'node:net';
+import net from 'node:net';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import type { Duplex } from 'node:stream';
@@ -66,7 +66,7 @@ describe('정적 · CSP (실 소켓)', () => {
 const GUID = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11';
 
 describe('dev 단일 origin (Vite 프록시)', () => {
-  it('IT-102 dev: /src/main.tsx?x=1 경로·쿼리 그대로 중계, /api는 업스트림 미도달, 업그레이드 요청이 업스트림 upgrade에 도달해 101 수신 [AP-12]', async () => {
+  it('IT-102 dev: /src/main.tsx?x=1 경로·쿼리 그대로 중계, /api는 업스트림 미도달, Host가 틀린 업그레이드는 421로 업스트림 upgrade 미도달, 옳은 업그레이드는 도달해 101 수신 [AP-12][NFR-PORT-006]', async () => {
     // Arrange: 업스트림 = 테스트 node:http 서버(수동 WebSocket 핸드셰이크)
     const seen: string[] = [];
     let upgraded: string | null = null;
@@ -104,29 +104,29 @@ describe('dev 단일 origin (Vite 프록시)', () => {
     expect(seen).toHaveLength(1);
     expect(evil.status).toBe(421);
     expect(js.headers['content-security-policy']).toBe(cspFor('dev', 4747));
-    // Act: 업그레이드(HMR WebSocket)
-    const status = await new Promise<number>((resolve, reject) => {
-      const req = http.request({
-        host: '127.0.0.1',
-        port,
-        path: '/?token=abc',
-        headers: {
-          host: HOST,
-          connection: 'Upgrade',
-          upgrade: 'websocket',
-          'sec-websocket-version': '13',
-          'sec-websocket-key': Buffer.from('0123456789abcdef').toString('base64'),
-          'sec-websocket-protocol': 'vite-hmr',
-        },
+    // Act: 업그레이드(HMR WebSocket) — Host가 틀린 요청(preHandler 421)과 옳은 요청
+    const key = Buffer.from('0123456789abcdef').toString('base64');
+    const upgradeHead = (hostHeader: string): string =>
+      `GET /?token=abc HTTP/1.1\r\nhost: ${hostHeader}\r\nconnection: Upgrade\r\nupgrade: websocket\r\nsec-websocket-version: 13\r\nsec-websocket-key: ${key}\r\nsec-websocket-protocol: vite-hmr\r\n\r\n`;
+    // 원시 소켓으로 보낸다 — 421은 비-업그레이드 응답 직후 소켓이 닫혀 http.request는 'socket hang up'을 낼 수 있다
+    const upgrade = (hostHeader: string): Promise<number> =>
+      new Promise<number>((resolve, reject) => {
+        const socket = net.connect(port, '127.0.0.1', () => socket.write(upgradeHead(hostHeader)));
+        let head = '';
+        socket.on('data', (c: Buffer) => {
+          head += c.toString('latin1');
+          const line = /^HTTP\/1\.1 (\d{3}) /.exec(head);
+          if (line !== null) {
+            socket.destroy();
+            resolve(Number(line[1]));
+          }
+        });
+        socket.on('error', reject);
       });
-      req.on('upgrade', (res, socket) => {
-        socket.destroy();
-        resolve(res.statusCode ?? 0);
-      });
-      req.on('response', (res) => resolve(res.statusCode ?? 0));
-      req.on('error', reject);
-      req.end();
-    });
+    const evilUpgrade = await upgrade('evil.test:4747');
+    expect(evilUpgrade).toBe(421); // 업그레이드도 fastify 라우팅(preHandler)을 지난다 — 업스트림에는 닿지 않는다
+    expect(upgraded).toBeNull();
+    const status = await upgrade(HOST);
     expect(status).toBe(101);
     await vi.waitFor(() => expect(upgraded).toBe('/?token=abc'));
     for (const socket of upstreamSockets) {

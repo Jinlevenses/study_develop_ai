@@ -355,6 +355,59 @@ describe('session.key · CLI 토큰 분리', () => {
   });
 });
 
+describe('경로 우회 방어 (퍼센트 인코딩)', () => {
+  it('UT-GW-112 인증 없이 /%61pi/…·/%69nternal/…·/api%2Fv1/… → 404 GW-NOTFOUND-900, 토큰·쿠키 발급 0, 정규형은 그대로 401 [NFR-SEC-019][NFR-SEC-002]', async () => {
+    // Arrange
+    const r = await rig();
+    const probes: [string, string][] = [
+      ['POST', '/%61pi/v1/cli/bootstrap-token'],
+      ['GET', '/%61pi/v1/cli/status'],
+      ['GET', '/%69nternal/v1/activity'],
+      ['GET', '/%61pi/v1/session'],
+      ['GET', '/api%2Fv1/cli/status'],
+      ['GET', '/api/v1/%63li/status'],
+      ['POST', '/api/v1/cli/%62ootstrap-token'],
+    ];
+    // Act / Assert
+    for (const [method, url] of probes) {
+      const res = await r.inject(method, url, {
+        ...(method === 'POST' ? { body: { purpose: 'open' }, headers: { 'idempotency-key': nextKey() } } : {}),
+      });
+      expect(res.status, `${method} ${url}`).toBe(404);
+      expect(problem(res.body).code, `${method} ${url}`).toBe('GW-NOTFOUND-900');
+      expect(res.headers['set-cookie'], `${method} ${url}`).toBeUndefined();
+      expect(res.body, `${method} ${url}`).not.toContain('bootstrap_token');
+    }
+    const plain = await r.inject('GET', '/api/v1/cli/status');
+    expect(plain.status).toBe(401);
+    expect(problem(plain.body).code).toBe('GW-AUTH-007');
+  });
+
+  it('UT-GW-113 브라우저 쿠키만으로 /api/v1/%63li/status·POST bootstrap-token(쿠키+CSRF+Origin) → 404, 정규형은 403 GW-ACL-001 · 잘못된 Host는 421/404 [FR-SET-015][NFR-SEC-019][NFR-SEC-002]', async () => {
+    // Arrange
+    const r = await rig();
+    const s = await r.login();
+    // Act
+    const plain = await r.inject('GET', '/api/v1/cli/status', { headers: s.headers() });
+    const enc = await r.inject('GET', '/api/v1/%63li/status', { headers: s.headers() });
+    const mint = await r.inject('POST', '/api/v1/%63li/bootstrap-token', {
+      headers: s.mutate({ origin: ORIGIN, 'idempotency-key': nextKey() }),
+      body: { purpose: 'open' },
+    });
+    const evil = await r.inject('GET', '/%61pi/v1/cli/status', {
+      withHost: false,
+      headers: { host: `evil.test:${PORT}` },
+    });
+    // Assert
+    expect(plain.status).toBe(403);
+    expect(problem(plain.body).code).toBe('GW-ACL-001');
+    expect(enc.status).toBe(404);
+    expect(mint.status).toBe(404);
+    expect(mint.body).not.toContain('bootstrap_token');
+    expect([404, 421]).toContain(evil.status);
+  });
+});
+
 describe('rate limit', () => {
   it('UT-GW-100 같은 세션 300회 200 → 301번째 429 GW-LIMIT-001 + retry-after ≥ 1 + retry_after_ms, 창 경과 후 200, 다른 세션·CLI 독립 [NFR-SEC-017][STD-SEC-28]', async () => {
     // Arrange

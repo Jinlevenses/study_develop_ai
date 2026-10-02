@@ -101,6 +101,40 @@ function byCreatedAt(a: AttemptRecord, b: AttemptRecord): number {
   return a.idempotency_key < b.idempotency_key ? -1 : a.idempotency_key > b.idempotency_key ? 1 : 0;
 }
 
+/**
+ * 읽기 전용 개수 — 전송 없이 IndexedDB의 미전송 레코드만 센다(BootGate 이전·AppOffShell용).
+ * 큐를 열면 즉시 flush하므로 세션 부트스트랩(교환·status·csrf) 전에는 이 함수만 쓴다(Brief §4.6-5).
+ * 7일 초과 레코드는 세지 않는다(큐를 열 때 삭제되는 것과 같은 기준).
+ */
+export async function readAttemptCounts(opts: {
+  readonly now: () => number;
+  readonly dbName?: string;
+}): Promise<QueueCounts> {
+  const db = await openDB<AttemptsDb>(opts.dbName ?? ATTEMPT_DB_NAME, 1, {
+    upgrade(upgradeDb) {
+      upgradeDb.createObjectStore(ATTEMPT_STORE, { keyPath: 'idempotency_key' });
+    },
+  });
+  try {
+    const cutoff = opts.now() - RETENTION_MS;
+    let pending = 0;
+    let failed = 0;
+    for (const rec of await db.getAll(ATTEMPT_STORE)) {
+      if (rec.created_at < cutoff) {
+        continue;
+      }
+      if (rec.state === 'failed_permanent') {
+        failed += 1;
+      } else {
+        pending += 1; // 잔존 sending도 열면 pending으로 되돌아간다
+      }
+    }
+    return { pending, sending: 0, failed_permanent: failed, retryInMs: null };
+  } finally {
+    db.close();
+  }
+}
+
 export async function openAttemptQueue(deps: AttemptQueueDeps): Promise<AttemptQueue> {
   const db: IDBPDatabase<AttemptsDb> = await openDB<AttemptsDb>(deps.dbName ?? ATTEMPT_DB_NAME, 1, {
     upgrade(upgradeDb) {
@@ -170,7 +204,13 @@ export async function openAttemptQueue(deps: AttemptQueueDeps): Promise<AttemptQ
   async function sendRecord(base: AttemptRecord): Promise<SendOutcome> {
     const sending: AttemptRecord = { ...base, tries: base.tries + 1, state: 'sending' };
     await putRecord(sending);
-    const result = await deps.send(sending);
+    let result: ApiResult<unknown>;
+    try {
+      result = await deps.send(sending);
+    } catch (e) {
+      // send가 reject해도 레코드가 sending에 멈추지 않게 network 결과로 취급한다(백오프 후 재시도).
+      result = { ok: false, kind: 'network', message: e instanceof Error ? e.message : String(e) };
+    }
     const outcome = judge(sending.tries, result);
     if (outcome.kind === 'sent') {
       await removeRecord(sending.idempotency_key);
@@ -202,6 +242,9 @@ export async function openAttemptQueue(deps: AttemptQueueDeps): Promise<AttemptQ
       const current = cache.get(rec.idempotency_key);
       if (current === undefined) {
         continue; // 같은 사이클 안에서 이미 삭제됨
+      }
+      if (current.state === 'failed_permanent') {
+        continue; // 스냅샷 이후 동시 submit·retryNow가 영구 실패로 돌린 레코드는 다시 보내지 않는다
       }
       const outcome = await sendOnce(current.state === 'sending' ? { ...current, state: 'pending' } : current);
       if (outcome.kind === 'retrying') {

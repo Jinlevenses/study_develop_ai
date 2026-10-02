@@ -1,6 +1,8 @@
+import { AppError } from '@fathom/shared-kernel/errors/errors';
 import type { ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { GatewayContext } from '../../config.js';
 import { cspFor } from '../../constants.js';
+import { isEncodedBypass } from '../../domain/session/path.js';
 
 // CR-61 · D-STD-24 — 보안 헤더 훅(registerAll 첫 번째: 이후 등록되는 모든 gateway 응답에 적용). `/internal/`·하이잭된 SSE는 제외한다.
 // 429 응답에는 problem의 `retry_after_ms`로 `retry-after`를 단다(Brief §4.1.4).
@@ -22,7 +24,24 @@ function retryAfterSeconds(payload: unknown): string {
   return '1';
 }
 
+/**
+ * 경로 우회 방어(UT-GW-112~115 · SEC-GW-002 · NFR-SEC-019) — 라우터는 `%XX`를 풀고 매칭하지만 공통 파이프라인의 인증은 원본 접두사를 본다.
+ * 디코딩하면 `/api/`·`/internal/`인데 원본이 정규형이 아닌 요청(`/%61pi/…`, `/api/v1/%63li/…`)은 어느 핸들러에도 닿기 전에 404로 거른다.
+ * 파이프라인 훅 뒤에 등록되지만 핸들러보다 앞이라(onRequest 순차 실행) 인증 누락이 응답으로 새지 않는다.
+ * 근본 원인(shared-kernel pipeline.ts의 원본 접두사 분류)은 T-00-08에 security 에스컬레이션으로 올렸다 — 수정이 들어와도 이 방어는 무해한 이중 방어다.
+ */
+export function registerPathGuard(app: ServiceApp): void {
+  app.fastify.addHook('onRequest', (req, _reply, done) => {
+    if (isEncodedBypass(req.url)) {
+      done(new AppError('GW-NOTFOUND-900', 404, '정의되지 않은 경로다.'));
+      return;
+    }
+    done();
+  });
+}
+
 export function registerSecurityHeaders(app: ServiceApp, deps: ServiceDeps<null>, ctx: GatewayContext): void {
+  registerPathGuard(app);
   const profile = ctx.opts.profileOverride ?? deps.profile;
   app.fastify.addHook('onSend', (req, reply, payload, done) => {
     const q = req.url.indexOf('?');

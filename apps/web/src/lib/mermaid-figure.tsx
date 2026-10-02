@@ -4,8 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import { mountSvg } from './svg-mount.js';
 import { useDocTheme } from './theme.js';
 
+export interface MermaidConfig {
+  readonly startOnLoad: false;
+  readonly securityLevel: 'strict';
+  readonly theme: 'base';
+  readonly htmlLabels: false;
+  readonly flowchart: { readonly htmlLabels: false };
+  readonly themeVariables: ReturnType<typeof mermaidThemeVariables>;
+}
+
 /** `htmlLabels: false` = `foreignObject` 미사용 → svg-mount sanitize와 호환(Brief 결정). */
-export function mermaidConfig(mode: 'dark' | 'light') {
+export function mermaidConfig(mode: 'dark' | 'light'): MermaidConfig {
   return {
     startOnLoad: false,
     securityLevel: 'strict',
@@ -25,9 +34,6 @@ export interface MermaidFigureProps {
 }
 
 export function MermaidFigure({ code, altKo, id }: MermaidFigureProps): ReactElement {
-  if (altKo === '') {
-    throw new TypeError('MermaidFigure는 altKo(한국어 대체 설명)가 필수입니다');
-  }
   const mode = useDocTheme();
   const host = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
@@ -54,6 +60,9 @@ export function MermaidFigure({ code, altKo, id }: MermaidFigureProps): ReactEle
       cancelled = true;
     };
   }, [code, id, mode]);
+  if (altKo === '') {
+    throw new TypeError('MermaidFigure는 altKo(한국어 대체 설명)가 필수입니다'); // 훅 호출 순서가 조건부가 되지 않도록 훅 뒤에서 검사한다
+  }
   return (
     <figure aria-describedby={captionId}>
       <div ref={host} />

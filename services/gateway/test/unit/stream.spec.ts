@@ -1,3 +1,4 @@
+import { EventEmitter } from 'node:events';
 import type { AddressInfo } from 'node:net';
 import { Problem } from '@fathom/contracts/common/problem';
 import { ConsumerManifest } from '@fathom/contracts/events/consumer-manifest';
@@ -7,8 +8,10 @@ import { SseEventData } from '@fathom/contracts/http/gateway/v1/stream';
 import { fixedUlid } from '@fathom/testkit/ids';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { SseClient } from '../../src/application/stream/hub.js';
-import { createSseHub } from '../../src/application/stream/hub.js';
+import { createSseHub, MAX_STALLED_WRITES } from '../../src/application/stream/hub.js';
 import { gatewayManifest } from '../../src/application/stream/manifest.js';
+import { createStreamHandler } from '../../src/application/stream/register.js';
+import type { GatewayContext } from '../../src/config.js';
 import { GATEWAY_LIMITS } from '../../src/config.js';
 import type { SseConn } from './sse.js';
 import { openSse } from './sse.js';
@@ -196,7 +199,7 @@ describe('SSE 허브 (프레임 · 링 · 재연결)', () => {
     expect(c.writes[0]).toBe('retry: 2000\n\n');
   });
 
-  it('UT-GW-058a 허브: 같은 세션 9번째 → too_many, 하나 해제 후 다시 허용, 다른 세션 독립 [NFR-SEC-017][IF-GW-005]', () => {
+  it('UT-GW-063 허브: 같은 세션 9번째 → too_many, 하나 해제 후 다시 허용, 다른 세션 독립 [NFR-SEC-017][IF-GW-005]', () => {
     const h = hub();
     const releases: (() => void)[] = [];
     for (let i = 0; i < 8; i += 1) {
@@ -212,7 +215,7 @@ describe('SSE 허브 (프레임 · 링 · 재연결)', () => {
     expect(h.open(fake(), { sid: 'a', lastEventId: undefined }).ok).toBe(true);
   });
 
-  it('UT-GW-060a 허브: attach 전 publish·open = invariant, 쓰기 예외 → 해제 [IR-016]', () => {
+  it('UT-GW-064 허브: attach 전 publish·open = invariant, 쓰기 예외 → 해제 [IR-016]', () => {
     const h = createSseHub({ ring: 10, heartbeatMs: 1000, retryMs: 2000, maxPerSession: 8 });
     expect(() => h.publish([event(1)])).toThrow(/invariant/);
     const h2 = hub();
@@ -226,11 +229,105 @@ describe('SSE 허브 (프레임 · 링 · 재연결)', () => {
     expect(h2.activeStreams()).toBe(0);
   });
 
+  it('UT-GW-066 허브: write()가 연속 false(백프레셔)인 느린 클라이언트 → 한도(32) 도달 시 해제 + close, 한 번 true면 카운트 리셋 [IR-016][STD-ASY-10]', () => {
+    // Arrange
+    const h = hub();
+    const state = { accept: false };
+    const slow: SseClient & { closed: boolean } = {
+      closed: false,
+      write(): boolean {
+        return state.accept;
+      },
+      close(): void {
+        slow.closed = true;
+      },
+    };
+    expect(h.open(slow, { sid: 's', lastEventId: undefined }).ok).toBe(true); // retry·hello 2회 = false 2회
+    // Act / Assert: 한도 직전까지는 유지, 중간에 true가 한 번 오면 리셋
+    for (let n = 1; n <= MAX_STALLED_WRITES - 3; n += 1) {
+      h.publish([event(n)]);
+    }
+    expect(h.activeStreams()).toBe(1);
+    state.accept = true;
+    h.publish([event(100)]);
+    state.accept = false;
+    for (let n = 101; n <= 100 + MAX_STALLED_WRITES - 1; n += 1) {
+      h.publish([event(n)]);
+    }
+    expect(h.activeStreams()).toBe(1);
+    expect(slow.closed).toBe(false);
+    h.publish([event(999)]);
+    expect(h.activeStreams()).toBe(0);
+    expect(slow.closed).toBe(true);
+  });
+
   it('UT-GW-062 gatewayManifest() 17구독·전부 notify/drop·ConsumerManifest 통과 [NFR-AVL-005][IF-COM-004]', () => {
     const m = gatewayManifest();
     expect(ConsumerManifest.parse(m).consumer).toBe('gateway');
     expect(m.subscriptions).toHaveLength(17);
     expect(m.subscriptions.every((s) => s.mode === 'notify' && s.on_poison === 'drop')).toBe(true);
+  });
+});
+
+describe('SSE 핸들러 (끊긴 연결 · 느린 클라이언트)', () => {
+  type RawStub = EventEmitter & {
+    destroyed: boolean;
+    writableLength: number;
+    writableNeedDrain: boolean;
+    writeHead(): void;
+    write(): boolean;
+    end(): void;
+    destroy(): void;
+  };
+  const rawStub = (o: { destroyed: boolean; writableLength?: number }): RawStub => {
+    const raw: RawStub = Object.assign(new EventEmitter(), {
+      destroyed: o.destroyed,
+      writableLength: o.writableLength ?? 0,
+      writableNeedDrain: false,
+      writeHead: (): void => undefined,
+      write: (): boolean => true,
+      end: (): void => undefined,
+      destroy: (): void => {
+        raw.destroyed = true;
+        raw.emit('close');
+      },
+    });
+    return raw;
+  };
+  const invoke = (h: ReturnType<typeof hub>, raw: RawStub): Promise<void> => {
+    const ctx = {
+      sessionReader: { read: () => ({ sid: 'sid-1' }) },
+      hub: h,
+    } as unknown as GatewayContext;
+    const handler = createStreamHandler(ctx);
+    const route = { requestId: fixedUlid(5), raw: { headers: {}, socket: { destroyed: raw.destroyed } } };
+    const reply = { hijack: (): void => undefined, raw };
+    return handler(
+      route as unknown as Parameters<typeof handler>[0],
+      reply as unknown as Parameters<typeof handler>[1],
+    );
+  };
+
+  it('UT-GW-067 인증 중 이미 끊긴 요청(raw.destroyed) → open 직후 연결 해제 · 열려 있는 연결은 close 이벤트로 해제 · 버퍼 상한 초과 → destroy로 해제 [IR-016][STD-ASY-10]', async () => {
+    // Arrange / Act: 이미 끊긴 요청
+    const h = hub();
+    await invoke(h, rawStub({ destroyed: true }));
+    // Assert: 연결이 허브에 남지 않는다(8개 한도·active_streams 누수 0)
+    expect(h.activeStreams()).toBe(0);
+    // Act: 정상 연결 → close 이벤트
+    const live = rawStub({ destroyed: false });
+    await invoke(h, live);
+    expect(h.activeStreams()).toBe(1);
+    live.emit('close');
+    expect(h.activeStreams()).toBe(0);
+    // Act: 쓰기 버퍼가 상한을 넘은 느린 클라이언트 — 다음 쓰기(하트비트·이벤트)에서 destroy
+    const slow = rawStub({ destroyed: false });
+    await invoke(h, slow);
+    expect(h.activeStreams()).toBe(1);
+    slow.writableLength = GATEWAY_LIMITS.sseMaxBufferedBytes + 1;
+    h.publish([event(1)]);
+    expect(slow.destroyed).toBe(true);
+    expect(h.activeStreams()).toBe(0);
   });
 });
 
@@ -258,7 +355,7 @@ const deliver = (
 ): ReturnType<Rig['inject']> => r.inject('POST', '/internal/v1/inbox', { headers: auth, body: { producer, events } });
 
 describe('SSE 라우트 (실 소켓)', () => {
-  it('UT-GW-057b 응답 헤더 3종(text/event-stream; charset=utf-8·no-store·x-accel-buffering: no) + retry 첫 출력 [IR-016][NFR-AVL-005]', async () => {
+  it('UT-GW-065 응답 헤더 3종(text/event-stream; charset=utf-8·no-store·x-accel-buffering: no) + retry 첫 출력 [IR-016][NFR-AVL-005]', async () => {
     const r = await makeRig();
     rigs.push(r);
     const port = await listening(r);

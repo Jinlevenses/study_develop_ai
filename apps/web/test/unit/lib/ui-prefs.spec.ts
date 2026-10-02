@@ -44,7 +44,8 @@ describe('ui-prefs', () => {
     expect(() => readPref('fathom.token' as never, s)).toThrow(TypeError);
     expect(() => writePref('csrf' as never, 'x', s)).toThrow(TypeError);
     expect(() => readPref('fathom.ctx.' as never, s)).toThrow(TypeError);
-    expect(() => writePref('fathom.theme', 'x'.repeat(4097), s)).toThrow(TypeError);
+    expect(writePref('fathom.theme', 'x'.repeat(4097), s)).toBe(false); // 길이 초과는 TypeError가 아니라 저장 실패
+    expect(readPref('fathom.theme', s)).toBeNull();
     expect(writePref('fathom.theme', 'x'.repeat(4096), s)).toBe(true);
     // 접근 예외
     const broken = {

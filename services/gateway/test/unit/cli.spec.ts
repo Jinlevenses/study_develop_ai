@@ -1,4 +1,5 @@
 import { mkdtempSync, writeFileSync } from 'node:fs';
+import type { AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { Problem } from '@fathom/contracts/common/problem';
@@ -13,8 +14,9 @@ import { fixedUlid } from '@fathom/testkit/ids';
 import { afterEach, describe, expect, it } from 'vitest';
 import { GATEWAY_ERROR_REGISTRY } from '../../src/infra/peers/error-registry.js';
 import { peerFailureToAppError } from '../../src/infra/peers/failure.js';
+import { openSse } from './sse.js';
 import type { Rig } from './support.js';
-import { APP_VERSION, CLI_TOKEN, CONTENT_AUTH, healthBoard, makeRig, nextKey, OPS_AUTH } from './support.js';
+import { APP_VERSION, CLI_TOKEN, CONTENT_AUTH, HOST, healthBoard, makeRig, nextKey, OPS_AUTH } from './support.js';
 
 const rigs: Rig[] = [];
 afterEach(async () => {
@@ -161,7 +163,7 @@ describe('CLI status · shutdown (하위 ops-api 통과)', () => {
 });
 
 describe('피어 오류 매핑 · 레지스트리', () => {
-  it('UT-GW-107 peerFailureToAppError 5종 매핑(timeout → 504 GW-DEP-902, contract_violation → 500 GW-INTERNAL-900 + error 로그) [STD-API-04]', () => {
+  it('UT-GW-107 peerFailureToAppError 5종 매핑(timeout → 504 GW-DEP-902, contract_violation → 500 GW-INTERNAL-900 + error 로그) [STD-API-04][FR-SET-015]', () => {
     // Arrange
     const lines: string[] = [];
     const log = createLogger('gateway', {
@@ -212,7 +214,7 @@ describe('피어 오류 매핑 · 레지스트리', () => {
     expect(passed).toMatchObject({ code: 'CT-CONFLICT-013', status: 409, extra: { retry_after_ms: 200 } });
   });
 
-  it('UT-GW-108 GATEWAY_ERROR_REGISTRY에 CT-NOTFOUND-900·LR-CONFLICT-011·OP-DEP-001·AI-POLICY-001 존재, 키 충돌 0 [STD-API-04]', () => {
+  it('UT-GW-108 GATEWAY_ERROR_REGISTRY에 CT-NOTFOUND-900·LR-CONFLICT-011·OP-DEP-001·AI-POLICY-001 존재, 키 충돌 0 [STD-API-04][FR-SET-015]', () => {
     for (const code of [
       'CT-NOTFOUND-900',
       'LR-CONFLICT-011',
@@ -266,7 +268,7 @@ describe('등록 라우트 · 활동', () => {
     expect(routes).toHaveLength(16);
   });
 
-  it('UT-GW-028 활동: 브라우저 POST·GET이 last_user_activity_at 갱신, CLI 요청은 미갱신, idle_ms = now − last [FR-AI-010]', async () => {
+  it('UT-GW-028 활동: 브라우저 POST·GET이 last_user_activity_at 갱신, CLI 요청·SSE 연결은 미갱신, idle_ms = now − last [FR-AI-010]', async () => {
     // Arrange
     const r = await rig();
     const view = async (): Promise<ActivityView> =>
@@ -287,6 +289,23 @@ describe('등록 라우트 · 활동', () => {
     expect(await view()).toEqual({ last_user_activity_at: r.clock.now(), idle_ms: 0, active_streams: 0 });
     r.clock.advance(250);
     expect((await view()).idle_ms).toBe(250);
+    // SSE 연결(⑧ 예외: STREAM_PATH)은 활동이 아니다 — last_user_activity_at 불변, idle_ms는 계속 자란다
+    const lastBefore = (await view()).last_user_activity_at;
+    await r.app.fastify.listen({ host: '127.0.0.1', port: 0 });
+    const port = (r.app.fastify.server.address() as AddressInfo).port;
+    r.clock.advance(4000);
+    const sse = await openSse(port, { host: HOST, ...s.headers() });
+    expect(sse.kind).toBe('stream');
+    if (sse.kind === 'stream') {
+      await sse.conn.waitFor('event: hello');
+    }
+    const afterStream = await view();
+    expect(afterStream.last_user_activity_at).toBe(lastBefore);
+    expect(afterStream.idle_ms).toBe(4250);
+    expect(afterStream.active_streams).toBe(1);
+    if (sse.kind === 'stream') {
+      sse.conn.close();
+    }
   });
 
   it('UT-GW-029 /internal/v1/activity: ops-api 토큰 200 ActivityView, content 토큰 403, 토큰 없음 401 [FR-AI-010][IF-GW-199]', async () => {

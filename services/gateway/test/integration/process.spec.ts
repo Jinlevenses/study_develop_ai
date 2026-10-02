@@ -1,4 +1,5 @@
 import { mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { Problem } from '@fathom/contracts/common/problem';
@@ -34,6 +35,17 @@ afterEach(async () => {
   }
   expect(await cleanup()).toBe(0);
 });
+
+const DEV_FALLBACK_PORTS: readonly number[] = Array.from({ length: 9 }, (_, i) => 4848 + i);
+
+/** 127.0.0.1:<port>에 실제로 바인드해 보고 곧바로 닫는다 — 비어 있으면 true. */
+function isPortFree(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const probe = createServer();
+    probe.once('error', () => resolve(false));
+    probe.listen(port, '127.0.0.1', () => probe.close(() => resolve(true)));
+  });
+}
 
 const shutdownMsg = { type: 'shutdown', v: 1, grace_ms: 1000 };
 const cli = { authorization: `Bearer ${CLI_TOKEN}` };
@@ -154,14 +166,15 @@ describe('gateway 실 프로세스', () => {
       ).toBe(a.port);
       a.svc.child.send(shutdownMsg);
       expect(await a.svc.exit).toBe(0);
-      // Arrange (b): dev — 폴백 후보 9개가 모두 점유돼 있으면 건너뛴다
-      const b = await bootGateway(home.path, { profile: 'dev', listen: { host: '127.0.0.1', port: busy } });
-      if (b.port < 4848 || b.port > 4856) {
-        b.svc.child.send(shutdownMsg);
-        await b.svc.exit;
-        ctx.skip(`dev 폴백 포트 4848~4856이 모두 점유돼 있다(실제 ${b.port})`);
+      // Arrange (b): dev — 폴백 후보 9개가 모두 점유돼 있을 때만 건너뛴다(getter가 []이면 OS 포트로 떨어져 아래 단언이 실패해야 한다)
+      const freePorts = (
+        await Promise.all(DEV_FALLBACK_PORTS.map(async (p) => ((await isPortFree(p)) ? p : null)))
+      ).filter((p) => p !== null);
+      if (freePorts.length === 0) {
+        ctx.skip('dev 폴백 포트 4848~4856이 모두 점유돼 있다');
         return;
       }
+      const b = await bootGateway(home.path, { profile: 'dev', listen: { host: '127.0.0.1', port: busy } });
       expect(b.port).toBeGreaterThanOrEqual(4848);
       expect(b.port).toBeLessThanOrEqual(4856);
       b.svc.child.send(shutdownMsg);
@@ -307,7 +320,7 @@ describe('gateway 실 프로세스', () => {
     });
   }, 60_000);
 
-  it('IT-112 /internal/v1/activity 실 HTTP(ops-api 토큰) 200 · IT-113 기동·요청·종료 동안 stderr 0줄(ExperimentalWarning 포함) [FR-AI-010][NFR-PORT-002]', async () => {
+  it('IT-112 /internal/v1/activity 실 HTTP(ops-api 토큰) 200 · 스트림 연결 중 active_streams = 1 [FR-AI-010]', async () => {
     await withHome(async (home) => {
       // Arrange
       writeCliToken(home.path);
@@ -327,6 +340,21 @@ describe('gateway 실 프로세스', () => {
       const view = ActivityView.parse(res.json());
       expect(view.last_user_activity_at).not.toBeNull();
       expect(ActivityView.parse(withStream.json()).active_streams).toBe(1);
+      expect(await svc.exit).toBe(0);
+    });
+  }, 60_000);
+
+  it('IT-113 기동·요청·종료 동안 stderr 0줄(ExperimentalWarning 포함) [NFR-PORT-002]', async () => {
+    await withHome(async (home) => {
+      // Arrange
+      writeCliToken(home.path);
+      const { svc, port } = await bootGateway(home.path);
+      const session = await login(port);
+      // Act
+      await request(port, 'GET', '/api/v1/session', { headers: session.headers() });
+      await request(port, 'GET', '/internal/v1/activity', { headers: OPS_AUTH });
+      svc.child.send(shutdownMsg);
+      // Assert
       expect(await svc.exit).toBe(0);
       expect(svc.stderr()).toBe('');
     });

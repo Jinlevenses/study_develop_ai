@@ -3,6 +3,7 @@ import { AppError } from '@fathom/shared-kernel/errors/errors';
 import type { RouteContext, ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { FastifyReply } from 'fastify';
 import type { GatewayContext } from '../../config.js';
+import { GATEWAY_LIMITS } from '../../constants.js';
 import { registerStreamRoutes } from '../../http/stream/routes.js';
 import type { SseClient } from './hub.js';
 
@@ -41,21 +42,40 @@ export function createStreamHandler(
     const client: SseClient = {
       write(chunk: string): boolean {
         start();
+        if (reply.raw.writableLength > GATEWAY_LIMITS.sseMaxBufferedBytes) {
+          reply.raw.destroy(); // 느린 클라이언트 — 버퍼 상한 초과(close 이벤트가 연결을 해제한다)
+          return false;
+        }
         return reply.raw.write(chunk);
       },
       close(): void {
-        if (started) {
+        if (!started) {
+          return;
+        }
+        if (reply.raw.writableNeedDrain) {
+          reply.raw.destroy(); // 밀린 버퍼가 있으면 end()는 끝나지 않는다
+        } else {
           reply.raw.end();
         }
       },
     };
+    // `close`/`error`는 첫 쓰기 전에 붙인다 — 인증 중 클라이언트가 끊겨 이벤트를 놓치는 일이 없게(STD-ASY-10).
+    let release: (() => void) | null = null;
+    let gone = false;
+    const onGone = (): void => {
+      gone = true;
+      release?.();
+    };
+    reply.raw.on('close', onGone);
+    reply.raw.on('error', onGone);
     const opened = ctx.hub.open(client, { sid, lastEventId: lastEventIdOf(c.raw) });
     if (!opened.ok) {
       throw new AppError('GW-LIMIT-002', 429, '세션당 SSE 연결 수를 넘었다.');
     }
-    const release = opened.value;
-    reply.raw.on('close', release);
-    reply.raw.on('error', release); // STD-ASY-10
+    release = opened.value;
+    if (gone || reply.raw.destroyed || c.raw.socket?.destroyed === true) {
+      release(); // 핸들러가 돌기 전에 이미 끊긴 요청 — 'close'는 다시 오지 않는다
+    }
     return Promise.resolve();
   };
 }

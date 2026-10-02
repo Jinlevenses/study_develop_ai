@@ -48,7 +48,7 @@ async function serve(home: string): Promise<{ svc: IpcChild; port: number; ready
 }
 
 describe('content serve 기동 검사', () => {
-  it('IT-213 DB 없음 → fatal needs_migrate + exit 78, 적용 파일 변조(sha256) → serve exit 78 schema_sha_mismatch [DB-01 §11.3][E0-4]', async () => {
+  it('IT-214 DB 없음 → fatal needs_migrate + exit 78, 적용 파일 변조(sha256) → serve exit 78 schema_sha_mismatch [DB-01 §11.3][E0-4]', async () => {
     await withHome(async (home) => {
       // Arrange / Act: DB 없음
       const none = forkContent({ FATHOM_HOME: home.path });
@@ -102,6 +102,31 @@ describe('content serve 기동 검사', () => {
       // Assert
       expect(await svc.exit).toBe(0);
       expect(svc.stdout() + svc.stderr()).not.toContain(SELF_TOKEN);
+    });
+  }, 60_000);
+
+  it('IT-227 퍼센트 인코딩 접두사 우회: /%69nternal/v1/metrics·/%69nternal/v1/admin/quiesce(토큰 없음) → 404 CT-NOTFOUND-900(정규형은 401) [NFR-SEC-003][NFR-SEC-019]', async () => {
+    await withHome(async (home) => {
+      // Arrange
+      const { svc, port } = await serve(home.path);
+      // Act
+      const plain = await httpRequest(port, 'GET', '/internal/v1/metrics');
+      const encoded = await httpRequest(port, 'GET', '/%69nternal/v1/metrics');
+      const encodedPost = await httpRequest(
+        port,
+        'POST',
+        '/%69nternal/v1/admin/quiesce',
+        { 'idempotency-key': fixedUlid(700) },
+        { epoch_id: fixedUlid(701) },
+      );
+      // Assert
+      expect(plain.status).toBe(401);
+      expect(encoded.status).toBe(404);
+      expect(JSON.parse(encoded.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      expect(encodedPost.status).toBe(404);
+      expect(JSON.parse(encodedPost.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      svc.child.send({ type: 'shutdown', v: 1, grace_ms: 200 });
+      expect(await svc.exit).toBe(0);
     });
   }, 60_000);
 

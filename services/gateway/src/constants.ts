@@ -1,4 +1,5 @@
 import type { RuntimeProfile } from '@fathom/contracts/common/domain';
+import { COOKIE_FUTURE_SKEW_S, COOKIE_MAX_AGE_S, COOKIE_ROLL_AFTER_S } from './domain/session/cookie.js';
 
 // config.ts가 다시 내보내는 순수 상수·함수 — app.ts를 거치지 않는 말단 모듈이라 http/·infra/가 config.ts와 순환하지 않고 가져다 쓴다.
 
@@ -7,9 +8,9 @@ export const DEFAULT_VITE_ORIGIN = 'http://127.0.0.1:5173';
 export const GATEWAY_LIMITS = {
   bootstrapTtlMs: 60_000,
   bootstrapMaxOutstanding: 16,
-  cookieMaxAgeS: 34_560_000,
-  cookieRollAfterS: 86_400,
-  cookieFutureSkewS: 300,
+  cookieMaxAgeS: COOKIE_MAX_AGE_S,
+  cookieRollAfterS: COOKIE_ROLL_AFTER_S,
+  cookieFutureSkewS: COOKIE_FUTURE_SKEW_S,
   rateMax: 300,
   rateWindowMs: 60_000,
   rateMaxKeys: 10_000,
@@ -17,6 +18,7 @@ export const GATEWAY_LIMITS = {
   sseHeartbeatMs: 15_000,
   sseRetryMs: 2_000,
   sseMaxPerSession: 8,
+  sseMaxBufferedBytes: 1_048_576,
 } as const;
 
 /** prod 4748~4756 · dev 4848~4856 · test [] (T-00-11 §4.1.6과 같은 값). */

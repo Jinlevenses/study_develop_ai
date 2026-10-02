@@ -12,6 +12,7 @@ import {
   isStateChanging,
 } from '../../domain/session/guards.js';
 import type { RateLimiter } from '../../domain/session/guards-rate-limit.js';
+import { classifyPathOf, isEncodedBypass } from '../../domain/session/path.js';
 import type { SessionCrypto } from '../../domain/session/ports.js';
 import type { ActivityTracker } from '../../infra/activity/activity.js';
 import type { CliTokenReader } from '../cli/cli-token.js';
@@ -44,11 +45,6 @@ const fail = (code: ConstructorParameters<typeof AppError>[0], status: number, d
 function header(req: Req, name: string): string | undefined {
   const v = req.headers[name];
   return Array.isArray(v) ? v[0] : v;
-}
-
-function pathOf(url: string): string {
-  const q = url.indexOf('?');
-  return q >= 0 ? url.slice(0, q) : url;
 }
 
 function limited(d: PublicAuthDeps, key: string): Verdict | null {
@@ -124,13 +120,17 @@ function checkBrowser(d: PublicAuthDeps, req: Req, path: string, port: number): 
 
 export function createPublicAuth(d: PublicAuthDeps): PublicAuthHook {
   return async (req) => {
-    const path = pathOf(req.url);
+    // 분류는 디코딩한 경로로 — 라우터가 `%XX`를 풀어 매칭하므로 원본 접두사로 가르면 우회된다. 비정규형은 아예 거른다.
+    const path = classifyPathOf(req.url);
     const port = d.listenPort();
     if (port === null) {
       throw new Error('invariant: gateway listen port unknown while serving /api/');
     }
     if (!checkHost(header(req, 'host'), port)) {
       return fail('GW-AUTH-005', 421, 'Host가 허용되지 않는다.'); // ①
+    }
+    if (isEncodedBypass(req.url)) {
+      return fail('GW-NOTFOUND-900', 404, '정의되지 않은 경로다.');
     }
     return path.startsWith(CLI_PREFIX) ? await checkCli(d, req) : checkBrowser(d, req, path, port);
   };

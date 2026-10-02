@@ -8,9 +8,10 @@ export const COOKIE_NAME = 'fathom_sid';
 export type SessionCookie = { readonly sid: string; readonly port: number; readonly iat: number }; // iat = epoch 초
 
 const COOKIE_RE = /^v1\.([A-Za-z0-9_-]{22})\.([1-9]\d{0,4})\.(\d{1,12})\.([A-Za-z0-9_-]{43})$/;
-const MAX_AGE_S = 34_560_000;
-const FUTURE_SKEW_S = 300;
-const ROLL_AFTER_S = 86_400;
+/** 한도의 정본 — `constants.ts`의 `GATEWAY_LIMITS`가 이 값을 가져다 쓴다(복제 금지). */
+export const COOKIE_MAX_AGE_S = 34_560_000;
+export const COOKIE_FUTURE_SKEW_S = 300;
+export const COOKIE_ROLL_AFTER_S = 86_400;
 const MAX_PORT = 65_535;
 
 /** `Cookie` 헤더(`; ` 구분)에서 첫 `name=` 값을 돌려준다(디코드 없음). */
@@ -56,14 +57,14 @@ export function verifyCookie(
   if (!crypto.equal(mac, crypto.macB64u(key, messageOf(cookie)))) {
     return err('bad_mac');
   }
-  if (cookie.iat > nowS + FUTURE_SKEW_S || nowS - cookie.iat > MAX_AGE_S) {
+  if (cookie.iat > nowS + COOKIE_FUTURE_SKEW_S || nowS - cookie.iat > COOKIE_MAX_AGE_S) {
     return err('expired');
   }
   return ok(cookie);
 }
 
 export function setCookieHeader(value: string): string {
-  return `${COOKIE_NAME}=${value}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${MAX_AGE_S}`;
+  return `${COOKIE_NAME}=${value}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${COOKIE_MAX_AGE_S}`;
 }
 
 export function clearCookieHeader(): string {
@@ -72,5 +73,5 @@ export function clearCookieHeader(): string {
 
 /** 사용 시 하루 1회 갱신 — `iat`가 24시간 이상 지났으면 true. */
 export function needsRoll(c: SessionCookie, nowS: number): boolean {
-  return nowS - c.iat >= ROLL_AFTER_S;
+  return nowS - c.iat >= COOKIE_ROLL_AFTER_S;
 }

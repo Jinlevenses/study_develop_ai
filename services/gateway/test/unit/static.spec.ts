@@ -92,7 +92,7 @@ describe('정적 파일 · SPA 폴백', () => {
     expect(cachePolicy('assets/app.js')).toBe('no-cache');
   });
 
-  it('UT-GW-152 경로 조작(%2e%2e·%2f·NUL·잘못된 %) → 404, 응답 본문에 루트 밖 파일 내용 0 [STD-SEC-03]', async () => {
+  it('UT-GW-152 경로 조작(%2e%2e·%2f·NUL·잘못된 %) → 404, 응답 본문에 루트 밖 파일 내용 0 [STD-SEC-03][NFR-PORT-006]', async () => {
     // Arrange: 루트 밖 형제 파일
     const secret = path.join(path.dirname(web), `${path.basename(web)}-secret.txt`);
     writeFileSync(secret, 'TOP-SECRET-CONTENT');
@@ -158,7 +158,7 @@ describe('정적 파일 · SPA 폴백', () => {
     expect(String(prod.headers['content-security-policy'])).toContain("script-src 'self';");
   });
 
-  it('UT-GW-155 webRoot = 빈 디렉터리 → 기동 warn 1줄(gateway.static.web_root_missing)·SPA 경로 404·/api/v1/session 정상 [AP-12]', async () => {
+  it('UT-GW-155 webRoot = 빈 디렉터리 → 기동 warn 1줄(gateway.static.web_root_missing)·SPA 경로 404·/api/v1/session 정상 [AP-12][NFR-PORT-006]', async () => {
     // Arrange
     const empty = mkdtempSync(path.join(tmpdir(), 'gw-empty-'));
     dirs.push(empty);
@@ -183,5 +183,15 @@ describe('정적 파일 · SPA 폴백', () => {
     const none = await rig({ webRoot: null });
     expect((await none.inject('GET', '/')).status).toBe(404);
     expect(HOST).toBe('127.0.0.1:4747');
+  });
+
+  it('UT-GW-114 /%61pi/v1/nope·/%69nternal/x → SPA index가 아니라 404 GW-NOTFOUND-900 [AP-12][NFR-SEC-019]', async () => {
+    const r = await rig();
+    for (const url of ['/%61pi/v1/nope', '/%69nternal/v1/x']) {
+      const res = await r.inject('GET', url);
+      expect(res.status, url).toBe(404);
+      expect(code(res.body), url).toBe('GW-NOTFOUND-900');
+      expect(res.body, url).not.toContain('fathom-index');
+    }
   });
 });

@@ -1,3 +1,4 @@
+import { createFakeClock, type FakeClock } from '@fathom/testkit/clock';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createMemoryHistory, RouterProvider } from '@tanstack/react-router';
 import { cleanup, type RenderResult, render } from '@testing-library/react';
@@ -16,7 +17,7 @@ import { useHotkeysStore } from '../../../../src/stores/hotkeys.js';
 import { useLayoutStore } from '../../../../src/stores/layout.js';
 import { usePaletteStore } from '../../../../src/stores/palette.js';
 import { FakeEventSource } from '../../lib/support/fake-event-source.js';
-import { fakeFetch, problemResponse } from '../../lib/support/fixtures.js';
+import { fakeFetch, type ManualTimers, manualTimers, problemResponse } from '../../lib/support/fixtures.js';
 
 // happy-dom에 없는 브라우저 API — Radix가 마운트 때 쓴다.
 class FakeResizeObserver {
@@ -42,6 +43,9 @@ export interface RenderedApp {
   readonly fetchCalls: () => string[];
   readonly queueCounts: ReturnType<typeof createQueueCountsSource>;
   readonly es: () => FakeEventSource;
+  /** 실시계·실타이머 0(STD-TST-03) — 단축키 시퀀스 창은 `clock`, SSE 재연결 타이머는 `timers`로 진행한다. */
+  readonly clock: FakeClock;
+  readonly timers: ManualTimers;
 }
 
 export interface RenderOptions {
@@ -70,6 +74,8 @@ export function renderApp(path: string, opts: RenderOptions = {}): RenderedApp {
   const api = createApiClient({ fetch: f.fetch, csrf, newKey: () => 'K' });
   const queryClient = createQueryClient();
   const queueCounts = createQueueCountsSource();
+  const clock = createFakeClock();
+  const timers = manualTimers();
   const sse = createSseConnection({
     EventSourceCtor: FakeEventSource,
     invalidate: () => undefined,
@@ -77,13 +83,13 @@ export function renderApp(path: string, opts: RenderOptions = {}): RenderedApp {
     onSessionLost: () => undefined,
     onResync: () => undefined,
     onFlushAttempts: () => undefined,
-    setTimer: (fn, ms) => setTimeout(fn, ms),
-    clearTimer: (h) => clearTimeout(typeof h === 'number' ? h : undefined),
+    setTimer: timers.setTimer,
+    clearTimer: timers.clearTimer,
   });
   if (opts.startSse !== false) {
     sse.start();
   }
-  const hotkeys = createHotkeyManager({ platform: 'other', now: () => Date.now() });
+  const hotkeys = createHotkeyManager({ platform: 'other', now: clock.now });
   const deps: ShellDeps = { api, sse, queue: null, queueCounts: queueCounts.source, hotkeys, status: null };
   const router = createAppRouter({ queryClient, api }, createMemoryHistory({ initialEntries: [path] }));
   const tree: ReactElement = (
@@ -101,6 +107,8 @@ export function renderApp(path: string, opts: RenderOptions = {}): RenderedApp {
     sse,
     fetchCalls: () => f.calls.map((c) => c.url),
     queueCounts,
+    clock,
+    timers,
     es: () => {
       const e = FakeEventSource.instances[0];
       if (e === undefined) {
