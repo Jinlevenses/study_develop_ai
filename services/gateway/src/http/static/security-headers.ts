@@ -1,6 +1,6 @@
 import type { ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { GatewayContext } from '../../config.js';
-import { cspFor } from '../../config.js';
+import { cspFor } from '../../constants.js';
 
 // CR-61 · D-STD-24 — 보안 헤더 훅(registerAll 첫 번째: 이후 등록되는 모든 gateway 응답에 적용). `/internal/`·하이잭된 SSE는 제외한다.
 // 429 응답에는 problem의 `retry_after_ms`로 `retry-after`를 단다(Brief §4.1.4).

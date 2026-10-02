@@ -66,6 +66,8 @@ export function BootGate({ boot, signals, queueCounts, children }: BootGateProps
   const [phase, setPhase] = useState<Phase>({ kind: 'booting' });
   const [attempt, setAttempt] = useState(0);
   const toasted = useRef(false);
+  // StrictMode가 효과를 두 번 돌려도 부트(토큰 교환 포함)는 시도당 한 번만 실행한다.
+  const inflight = useRef<{ readonly attempt: number; readonly promise: Promise<BootState> } | null>(null);
   const counts = useSyncExternalStore(queueCounts.subscribe, queueCounts.getSnapshot);
 
   useEffect(() => {
@@ -80,11 +82,13 @@ export function BootGate({ boot, signals, queueCounts, children }: BootGateProps
     return off;
   }, [signals]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: attempt는 "다시 시도" 때 부트를 다시 돌리는 트리거다
   useEffect(() => {
     let cancelled = false;
     setPhase({ kind: 'booting' });
-    void boot().then((next) => {
+    if (inflight.current === null || inflight.current.attempt !== attempt) {
+      inflight.current = { attempt, promise: boot() };
+    }
+    void inflight.current.promise.then((next) => {
       if (cancelled) {
         return;
       }

@@ -86,8 +86,10 @@ describe('routing', () => {
     const validate = (path: string, raw: Record<string, unknown>): unknown => {
       const route: unknown = Object.entries(app.router.routesByPath).find(([p]) => p === path)?.[1];
       const options =
-        typeof route === 'object' && route !== null && 'options' in route ? (route.options as Record<string, unknown>) : {};
-      const fn = options['validateSearch'];
+        typeof route === 'object' && route !== null && 'options' in route
+          ? (route.options as Record<string, unknown>)
+          : {};
+      const fn = options.validateSearch;
       if (typeof fn !== 'function') {
         throw new Error(`${path}: validateSearch 없음`);
       }
@@ -99,7 +101,15 @@ describe('routing', () => {
       ['/concepts/$conceptId', { tab: 'code', lens: 3, edit: 1, src: 1 }],
       [
         '/map',
-        { track: 'k8s', layers: 'mastery,retention', as_of: 1_790_000_000_000, bp: 'cert-cka@2026', view: 'table', focus: 'k8s.probes', panel: 'paths' },
+        {
+          track: 'k8s',
+          layers: 'mastery,retention',
+          as_of: 1_790_000_000_000,
+          bp: 'cert-cka@2026',
+          view: 'table',
+          focus: 'k8s.probes',
+          panel: 'paths',
+        },
       ],
       ['/evidence/$conceptId', { tab: 'events' }],
       ['/review/weekly', { week: '2026-W40', tab: 'radar' }],

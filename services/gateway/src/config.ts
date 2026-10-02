@@ -9,29 +9,28 @@ import type { SessionReader } from './application/session/session-reader.js';
 import type { SseHub } from './application/stream/hub.js';
 import { createSseHub } from './application/stream/hub.js';
 import { gatewayManifest } from './application/stream/manifest.js';
+import {
+  cspFor as cspForProfile,
+  gatewayFallbacks as fallbacksFor,
+  GATEWAY_LIMITS as LIMITS,
+  DEFAULT_VITE_ORIGIN as VITE_ORIGIN,
+} from './constants.js';
 import type { BootstrapTokenStore } from './domain/session/bootstrap-token.js';
 import { createBootstrapTokenStore } from './domain/session/bootstrap-token.js';
 import type { ActivityTracker } from './infra/activity/activity.js';
 import { GATEWAY_ERROR_REGISTRY } from './infra/peers/error-registry.js';
 
 // gateway 서비스 정의(PGM-GW-001·003) — 바뀔 수 있는 설정은 여기에 두고 app.ts는 등록 목록만 둔다.
+// 순수 상수·함수(GATEWAY_LIMITS·gatewayFallbacks·cspFor·DEFAULT_VITE_ORIGIN)의 구현은 constants.ts(말단 모듈)에 두고 여기서 같은 이름으로 노출한다 — http/·infra/가 config.ts와 순환하지 않게.
 
-export const DEFAULT_VITE_ORIGIN = 'http://127.0.0.1:5173';
-
-export const GATEWAY_LIMITS = {
-  bootstrapTtlMs: 60_000,
-  bootstrapMaxOutstanding: 16,
-  cookieMaxAgeS: 34_560_000,
-  cookieRollAfterS: 86_400,
-  cookieFutureSkewS: 300,
-  rateMax: 300,
-  rateWindowMs: 60_000,
-  rateMaxKeys: 10_000,
-  sseRing: 1_000,
-  sseHeartbeatMs: 15_000,
-  sseRetryMs: 2_000,
-  sseMaxPerSession: 8,
-} as const;
+export const DEFAULT_VITE_ORIGIN = VITE_ORIGIN;
+export const GATEWAY_LIMITS = LIMITS;
+export function gatewayFallbacks(profile: RuntimeProfile): readonly number[] {
+  return fallbacksFor(profile);
+}
+export function cspFor(profile: RuntimeProfile, port: number): string {
+  return cspForProfile(profile, port);
+}
 
 export type GatewayDefinitionOptions = {
   /** 자기 main 파일 절대 경로. */
@@ -57,6 +56,8 @@ export type GatewayContext = {
   readonly hub: SseHub;
   readonly tokens: BootstrapTokenStore;
   readonly randomBytes: (n: number) => Uint8Array;
+  /** 봉투 `web_root`와 같은 값 — `defaultWebRoot()`(이 파일 위치가 깊이를 정한다). */
+  readonly defaultWebRoot: string;
   activity: ActivityTracker | null;
   publicAuth: PublicAuthHook | null;
   sessionReader: SessionReader | null;
@@ -65,38 +66,6 @@ export type GatewayContext = {
   /** registerAll이 Fastify 서버를 넘긴다 — 실제 listen 포트를 지연 조회하는 데 쓴다. */
   bindServer(server: { address(): string | AddressInfo | null }): void;
 };
-
-/** prod 4748~4756 · dev 4848~4856 · test [] (T-00-11 §4.1.6과 같은 값). */
-export function gatewayFallbacks(profile: RuntimeProfile): readonly number[] {
-  const start = profile === 'prod' ? 4748 : profile === 'dev' ? 4848 : null;
-  return start === null ? [] : Array.from({ length: 9 }, (_, i) => start + i);
-}
-
-const CSP_COMMON = [
-  "default-src 'self'",
-  "script-src 'self'",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
-  "font-src 'self'",
-  "connect-src 'self'",
-  "object-src 'none'",
-  "base-uri 'none'",
-  "frame-ancestors 'none'",
-  "form-action 'self'",
-] as const;
-
-/** D-STD-24(CR-61) — dev는 Vite HMR 때문에 인라인 스크립트와 실제 포트의 ws 연결을 허용한다(Brief 결정: 4847 고정 대신 실제 포트). */
-export function cspFor(profile: RuntimeProfile, port: number): string {
-  if (profile !== 'dev') {
-    return CSP_COMMON.join('; ');
-  }
-  return CSP_COMMON.map((d) => {
-    if (d === "script-src 'self'") {
-      return "script-src 'self' 'unsafe-inline'";
-    }
-    return d === "connect-src 'self'" ? `connect-src 'self' ws://127.0.0.1:${port}` : d;
-  }).join('; ');
-}
 
 /** 봉투 `web_root`와 같은 값 — `services/gateway/src/config.ts`·`dist/config.js` 둘 다 저장소 루트의 `apps/web/dist/`가 된다. */
 export function defaultWebRoot(): string {
@@ -130,17 +99,18 @@ function createGatewayContext(opts: GatewayDefinitionOptions): GatewayContext {
   return {
     opts,
     hub: createSseHub({
-      ring: GATEWAY_LIMITS.sseRing,
-      heartbeatMs: GATEWAY_LIMITS.sseHeartbeatMs,
-      retryMs: GATEWAY_LIMITS.sseRetryMs,
-      maxPerSession: GATEWAY_LIMITS.sseMaxPerSession,
+      ring: LIMITS.sseRing,
+      heartbeatMs: LIMITS.sseHeartbeatMs,
+      retryMs: LIMITS.sseRetryMs,
+      maxPerSession: LIMITS.sseMaxPerSession,
     }),
     tokens: createBootstrapTokenStore({
-      ttlMs: GATEWAY_LIMITS.bootstrapTtlMs,
-      maxOutstanding: GATEWAY_LIMITS.bootstrapMaxOutstanding,
+      ttlMs: LIMITS.bootstrapTtlMs,
+      maxOutstanding: LIMITS.bootstrapMaxOutstanding,
       hash: (t) => nodeSessionCrypto.hashB64u(t),
     }),
     randomBytes: opts.randomBytes ?? nodeRandomBytes,
+    defaultWebRoot: defaultWebRoot(),
     activity: null,
     publicAuth: null,
     sessionReader: null,

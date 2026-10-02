@@ -240,7 +240,6 @@ async function listening(r: Rig): Promise<number> {
 }
 async function stream(
   port: number,
-  r: Rig,
   s: { headers(): Record<string, string> },
   extra: Record<string, string> = {},
 ): Promise<SseConn> {
@@ -264,7 +263,7 @@ describe('SSE 라우트 (실 소켓)', () => {
     rigs.push(r);
     const port = await listening(r);
     const s = await r.login();
-    const conn = await stream(port, r, s);
+    const conn = await stream(port, s);
     expect(conn.status).toBe(200);
     expect(conn.headers['content-type']).toBe('text/event-stream; charset=utf-8');
     expect(conn.headers['cache-control']).toBe('no-store');
@@ -282,7 +281,7 @@ describe('SSE 라우트 (실 소켓)', () => {
     const b = await r.login();
     const open: SseConn[] = [];
     for (let i = 0; i < 8; i += 1) {
-      open.push(await stream(port, r, a));
+      open.push(await stream(port, a));
     }
     // Act
     const ninth = await openSse(port, { host: HOST, ...a.headers() });
@@ -293,7 +292,7 @@ describe('SSE 라우트 (실 소켓)', () => {
       expect(Problem.parse(JSON.parse(ninth.body)).code).toBe('GW-LIMIT-002');
       expect(ninth.headers['content-type']).toContain('application/problem+json');
     }
-    const independent = await stream(port, r, b);
+    const independent = await stream(port, b);
     independent.close();
     open[0]?.close();
     await vi.waitFor(async () => {
@@ -313,7 +312,7 @@ describe('SSE 라우트 (실 소켓)', () => {
     const r = await makeRig();
     rigs.push(r);
     const port = await listening(r);
-    const conn = await stream(port, r, await r.login());
+    const conn = await stream(port, await r.login());
     // Act
     const subscribed = await deliver(r, CONTENT_AUTH, 'content', [
       event(1, 'catalog.pack.activated', { pack_id: 'k8s' }),
@@ -334,14 +333,14 @@ describe('SSE 라우트 (실 소켓)', () => {
     rigs.push(r);
     const port = await listening(r);
     const s = await r.login();
-    const first = await stream(port, r, s);
+    const first = await stream(port, s);
     expect(first.text()).toContain('"ai_mode":"OFFLINE"');
     const aiEvent: IntegrationEventEnvelope = {
       ...event(1, 'ai.mode.changed', { mode: 'FULL', changed_at: 1 }),
       producer: 'ai-gateway',
     };
     expect((await deliver(r, AI_AUTH, 'ai-gateway', [aiEvent])).status).toBe(200);
-    const second = await stream(port, r, s);
+    const second = await stream(port, s);
     expect(second.text()).toContain('"ai_mode":"FULL"');
     first.close();
     second.close();
@@ -353,7 +352,7 @@ describe('SSE 라우트 (실 소켓)', () => {
     rigs.push(r);
     const port = await listening(r);
     const s = await r.login();
-    const conns = [await stream(port, r, s), await stream(port, r, s)];
+    const conns = [await stream(port, s), await stream(port, s)];
     const active = async (): Promise<number> =>
       ActivityView.parse((await r.inject('GET', '/internal/v1/activity', { headers: OPS_AUTH })).json()).active_streams;
     expect(await active()).toBe(2);

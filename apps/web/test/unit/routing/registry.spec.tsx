@@ -12,9 +12,40 @@ import './support/harness.js';
 const REGISTRY_PATH = join(import.meta.dirname, '../../../src/features/practice/renderers/registry.ts');
 const MANIFEST_PATH = join(import.meta.dirname, '../../../../../packages/contracts/manifests/modes.manifest.json');
 
-const KBD = new Set(['global', 'player', 'timeline', 'ox', 'choice', 'cloze', 'list', 'editor', 'reorder', 'matching', 'bugline', 'srs', 'note', 'dialog', 'depth_map', 'lesson', 'form', 'none']);
+const KBD = new Set([
+  'global',
+  'player',
+  'timeline',
+  'ox',
+  'choice',
+  'cloze',
+  'list',
+  'editor',
+  'reorder',
+  'matching',
+  'bugline',
+  'srs',
+  'note',
+  'dialog',
+  'depth_map',
+  'lesson',
+  'form',
+  'none',
+]);
 const OFFLINE = new Set(['deterministic', 'self', 'pending', 'alt_evidence']);
-const FORBIDDEN = ['실패', '게으름', '연체', '밀린', '놓쳤', '스트릭이 끊', '잃게 됩니다', 'XP', '코인', '레벨업!', '랭킹'];
+const FORBIDDEN = [
+  '실패',
+  '게으름',
+  '연체',
+  '밀린',
+  '놓쳤',
+  '스트릭이 끊',
+  '잃게 됩니다',
+  'XP',
+  '코인',
+  '레벨업!',
+  '랭킹',
+];
 
 describe('renderer registry', () => {
   it('UT-WEB-444 RENDERERS 키 집합은 FormatId ∪ BlockKind(41)이고 offline·kbd가 유효하며 전부 NotYetRenderer다 [FR-STD-033][FR-UX-016]', () => {
@@ -39,11 +70,15 @@ describe('renderer registry', () => {
     const ids = new Set([...src.matchAll(/e2e_id:\s*'(E2E-\d+)'/g)].map((m) => m[1]));
     const manifest: unknown = JSON.parse(readFileSync(MANIFEST_PATH, 'utf8'));
     const modes =
-      typeof manifest === 'object' && manifest !== null && 'modes' in manifest && Array.isArray(manifest.modes) ? manifest.modes : [];
+      typeof manifest === 'object' && manifest !== null && 'modes' in manifest && Array.isArray(manifest.modes)
+        ? manifest.modes
+        : [];
     expect(modes).toHaveLength(21);
     for (const mode of modes) {
       const e2eIds: unknown = mode.e2e_ids;
-      const list = Array.isArray(e2eIds) ? e2eIds.filter((x): x is string => typeof x === 'string' && x.startsWith('E2E-')) : [];
+      const list = Array.isArray(e2eIds)
+        ? e2eIds.filter((x): x is string => typeof x === 'string' && x.startsWith('E2E-'))
+        : [];
       expect(list.length, `${String(mode.mode_id)} e2e`).toBeGreaterThan(0);
       for (const id of list) {
         expect(ids.has(id), `${String(mode.mode_id)} ${id}`).toBe(true);

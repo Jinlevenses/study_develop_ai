@@ -15,9 +15,7 @@ export const UI_PREF_MAX_LENGTH = 4096;
 const CTX_PREFIX = 'fathom.ctx.';
 
 function isAllowedKey(key: string): boolean {
-  return (
-    (UI_PREF_KEYS as readonly string[]).includes(key) || (key.startsWith(CTX_PREFIX) && key.length > CTX_PREFIX.length)
-  );
+  return UI_PREF_KEYS.some((k) => k === key) || (key.startsWith(CTX_PREFIX) && key.length > CTX_PREFIX.length);
 }
 
 function defaultStorage(): Storage | null {

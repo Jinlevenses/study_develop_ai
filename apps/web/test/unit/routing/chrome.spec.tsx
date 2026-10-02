@@ -72,11 +72,13 @@ describe('shell chrome', () => {
       app.utils.unmount();
       cleanup();
     }
-    const degraded = renderApp('/map', { responses: [() => jsonResponse(200, homeView({ mode: 'JUDGE_ONLY', degraded: true }))] });
+    const degraded = renderApp('/map', {
+      responses: [() => jsonResponse(200, homeView({ mode: 'JUDGE_ONLY', degraded: true }))],
+    });
     const header = await findHeader();
     expect(await within(header).findByText(/AI: 판단만/)).toBeTruthy();
     expect(within(header).getByText(/격하/)).toBeTruthy();
-    expect(degraded.fetchCalls).toContain('/api/v1/home');
+    expect(degraded.fetchCalls()).toContain('/api/v1/home');
   });
 
   it('UT-WEB-448 학습 모자는 관리 그룹 5항목을 렌더하지 않고 관리 모자는 렌더하며 Header 하단 띠가 강해지고 fathom.hat이 저장·복원된다 [FR-SET-010]', async () => {
@@ -127,7 +129,9 @@ describe('shell chrome', () => {
     admin.unmount();
 
     // 같은 등급은 since 최신 1개
-    const warns = render(<OpsAlertSlot banners={[banner('B', 'warn', 500, null), banner('D', 'warn', 700, null)]} hat="admin" />);
+    const warns = render(
+      <OpsAlertSlot banners={[banner('B', 'warn', 500, null), banner('D', 'warn', 700, null)]} hat="admin" />,
+    );
     expect(warns.container.textContent).toContain('배너 D');
     expect(warns.container.textContent).toContain('+1');
     expect(warns.container.querySelectorAll('a, button')).toHaveLength(0);
@@ -184,7 +188,11 @@ describe('shell chrome', () => {
       expect(useLayoutStore.getState().contextOpen['/map']).toBe(true);
       // 하단 탭
       const tabs = screen.getByRole('navigation', { name: '하단 메뉴' });
-      expect(within(tabs).getAllByRole('link').map((l) => l.getAttribute('aria-label'))).toEqual(['홈', '세션', '지도', '리뷰']);
+      expect(
+        within(tabs)
+          .getAllByRole('link')
+          .map((l) => l.getAttribute('aria-label')),
+      ).toEqual(['홈', '세션', '지도', '리뷰']);
       expect(tabs.className).toContain('md:hidden');
     } finally {
       vi.unstubAllGlobals();

@@ -4,7 +4,7 @@ import { registerCli } from './application/cli/register.js';
 import { registerSession } from './application/session/register.js';
 import { registerStream } from './application/stream/register.js';
 import type { GatewayContext } from './config.js';
-import { gatewayFallbacks } from './config.js';
+import { gatewayFallbacks } from './constants.js';
 import { registerWebShell } from './http/static/register.js';
 import { registerSecurityHeaders } from './http/static/security-headers.js';
 

@@ -126,9 +126,19 @@ export function newAttempt(attemptId: string, sessionId: string = ULID_A) {
 
 /** HomeView 최소 유효 값(ai_chip만 바꿔 쓴다). */
 export function homeView(aiChip: { mode: 'FULL' | 'JUDGE_ONLY' | 'LLM_ONLY' | 'OFFLINE'; degraded: boolean }) {
-  const labels = { FULL: 'AI: 전체', JUDGE_ONLY: 'AI: 판단만', LLM_ONLY: 'AI: 생성만', OFFLINE: 'AI: 오프라인' } as const;
+  const labels = {
+    FULL: 'AI: 전체',
+    JUDGE_ONLY: 'AI: 판단만',
+    LLM_ONLY: 'AI: 생성만',
+    OFFLINE: 'AI: 오프라인',
+  } as const;
   return {
-    primary_action: { kind: 'start_session', label_ko: '세션 시작', suggested: { minutes: 15, energy: 'normal' }, session_id: null },
+    primary_action: {
+      kind: 'start_session',
+      label_ko: '세션 시작',
+      suggested: { minutes: 15, energy: 'normal' },
+      session_id: null,
+    },
     alerts: [],
     energy_default: 'normal',
     minutes_default: 15,

@@ -1,7 +1,6 @@
 import fastifyStatic from '@fastify/static';
 import type { ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { GatewayContext } from '../../config.js';
-import { defaultWebRoot } from '../../config.js';
 import { registerDevProxy } from '../../infra/dev-proxy/dev-proxy.js';
 import { resolveStaticTarget } from '../../infra/static/resolve.js';
 import { registerStaticRoutes } from './static-route.js';
@@ -19,7 +18,7 @@ function decideShell(deps: ServiceDeps<null>, ctx: GatewayContext): Shell {
   if (webRoot !== undefined) {
     return webRoot === null ? { kind: 'none' } : { kind: 'static', root: webRoot };
   }
-  return (profileOverride ?? deps.profile) === 'dev' ? { kind: 'proxy' } : { kind: 'static', root: defaultWebRoot() };
+  return (profileOverride ?? deps.profile) === 'dev' ? { kind: 'proxy' } : { kind: 'static', root: ctx.defaultWebRoot };
 }
 
 export async function registerWebShell(app: ServiceApp, deps: ServiceDeps<null>, ctx: GatewayContext): Promise<void> {

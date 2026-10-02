@@ -1,0 +1,420 @@
+{
+  "taskId": "T-00-12",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "done",
+  "changedFiles": [
+    "services/content/migrations/acquisition/0001_acquisition_core.sql",
+    "services/content/migrations/catalog/0001_catalog_core.sql",
+    "services/content/migrations/catalog/0002_catalog_search.sql",
+    "services/content/migrations/grading/0001_grading_core.sql",
+    "services/content/migrations/itembank/0001_itembank_core.sql",
+    "services/content/migrations/runner/0001_runner_core.sql",
+    "services/content/src/app.ts",
+    "services/content/src/application/acquisition/errors.ts",
+    "services/content/src/application/acquisition/ports.ts",
+    "services/content/src/application/acquisition/register.ts",
+    "services/content/src/application/catalog/errors.ts",
+    "services/content/src/application/catalog/ports.ts",
+    "services/content/src/application/catalog/register.ts",
+    "services/content/src/application/grading/errors.ts",
+    "services/content/src/application/grading/ports.ts",
+    "services/content/src/application/grading/register.ts",
+    "services/content/src/application/itembank/errors.ts",
+    "services/content/src/application/itembank/ports.ts",
+    "services/content/src/application/itembank/register.ts",
+    "services/content/src/application/runner/errors.ts",
+    "services/content/src/application/runner/ports.ts",
+    "services/content/src/application/runner/register.ts",
+    "services/content/src/config.ts",
+    "services/content/src/infra/clients/ai-gateway.client.ts",
+    "services/content/src/infra/db/open.ts",
+    "services/content/src/infra/events/inbox.ts",
+    "services/content/src/infra/events/outbox.ts",
+    "services/content/src/jobs/integrity.ts",
+    "services/content/src/jobs/snapshot.ts",
+    "services/content/src/main.ts",
+    "services/content/test/integration/migrations/migrate.spec.ts",
+    "services/content/test/integration/migrations/modes.spec.ts",
+    "services/content/test/integration/migrations/serve.spec.ts",
+    "services/content/test/integration/migrations/support.ts",
+    "services/gateway/src/app.ts",
+    "services/gateway/src/application/bff/register.ts",
+    "services/gateway/src/application/cli/cli-token.ts",
+    "services/gateway/src/application/cli/handlers.ts",
+    "services/gateway/src/application/cli/register.ts",
+    "services/gateway/src/application/session/crypto.ts",
+    "services/gateway/src/application/session/handlers.ts",
+    "services/gateway/src/application/session/public-auth.ts",
+    "services/gateway/src/application/session/register.ts",
+    "services/gateway/src/application/session/session-key.ts",
+    "services/gateway/src/application/session/session-reader.ts",
+    "services/gateway/src/application/stream/frames.ts",
+    "services/gateway/src/application/stream/hub.ts",
+    "services/gateway/src/application/stream/manifest.ts",
+    "services/gateway/src/application/stream/register.ts",
+    "services/gateway/src/application/stream/ring.ts",
+    "services/gateway/src/config.ts",
+    "services/gateway/src/constants.ts",
+    "services/gateway/src/domain/session/bootstrap-token.ts",
+    "services/gateway/src/domain/session/cookie.ts",
+    "services/gateway/src/domain/session/csrf.ts",
+    "services/gateway/src/domain/session/guards-rate-limit.ts",
+    "services/gateway/src/domain/session/guards.ts",
+    "services/gateway/src/domain/session/ports.ts",
+    "services/gateway/src/http/api/ai.ts",
+    "services/gateway/src/http/api/concepts.ts",
+    "services/gateway/src/http/api/curation.ts",
+    "services/gateway/src/http/api/dialogs.ts",
+    "services/gateway/src/http/api/evidence.ts",
+    "services/gateway/src/http/api/home.ts",
+    "services/gateway/src/http/api/imports.ts",
+    "services/gateway/src/http/api/inbox.ts",
+    "services/gateway/src/http/api/longtasks.ts",
+    "services/gateway/src/http/api/map.ts",
+    "services/gateway/src/http/api/ops.ts",
+    "services/gateway/src/http/api/practice-items.ts",
+    "services/gateway/src/http/api/review.ts",
+    "services/gateway/src/http/api/sessions.ts",
+    "services/gateway/src/http/api/settings.ts",
+    "services/gateway/src/http/cli/routes.ts",
+    "services/gateway/src/http/internal/routes.ts",
+    "services/gateway/src/http/session/routes.ts",
+    "services/gateway/src/http/static/register.ts",
+    "services/gateway/src/http/static/security-headers.ts",
+    "services/gateway/src/http/static/static-route.ts",
+    "services/gateway/src/http/stream/routes.ts",
+    "services/gateway/src/infra/activity/activity.ts",
+    "services/gateway/src/infra/dev-proxy/dev-proxy.ts",
+    "services/gateway/src/infra/peers/error-registry.ts",
+    "services/gateway/src/infra/peers/failure.ts",
+    "services/gateway/src/infra/peers/peers.ts",
+    "services/gateway/src/infra/static/cache-policy.ts",
+    "services/gateway/src/infra/static/resolve.ts",
+    "services/gateway/src/main.ts",
+    "services/gateway/test/integration/fixtures/gateway-entry.ts",
+    "services/gateway/test/integration/process.spec.ts",
+    "services/gateway/test/integration/shell.spec.ts",
+    "services/gateway/test/integration/sse.spec.ts",
+    "services/gateway/test/integration/support.ts",
+    "services/gateway/test/security/gateway.spec.ts",
+    "services/gateway/test/unit/cli.spec.ts",
+    "services/gateway/test/unit/session-domain.spec.ts",
+    "services/gateway/test/unit/session-flow.spec.ts",
+    "services/gateway/test/unit/sse.ts",
+    "services/gateway/test/unit/static.spec.ts",
+    "services/gateway/test/unit/stream.spec.ts",
+    "services/gateway/test/unit/support.ts"
+  ],
+  "testsAdded": [
+    "UT-GW-001",
+    "UT-GW-002",
+    "UT-GW-003",
+    "UT-GW-004",
+    "UT-GW-005",
+    "UT-GW-006",
+    "UT-GW-007",
+    "UT-GW-008",
+    "UT-GW-009",
+    "UT-GW-010",
+    "UT-GW-011",
+    "UT-GW-012",
+    "UT-GW-013",
+    "UT-GW-014",
+    "UT-GW-015",
+    "UT-GW-016",
+    "UT-GW-017",
+    "UT-GW-018",
+    "UT-GW-019",
+    "UT-GW-020",
+    "UT-GW-021",
+    "UT-GW-022",
+    "UT-GW-023",
+    "UT-GW-024",
+    "UT-GW-025",
+    "UT-GW-026",
+    "UT-GW-027",
+    "UT-GW-028",
+    "UT-GW-029",
+    "UT-GW-050",
+    "UT-GW-051",
+    "UT-GW-052",
+    "UT-GW-053",
+    "UT-GW-054",
+    "UT-GW-055",
+    "UT-GW-056",
+    "UT-GW-057",
+    "UT-GW-058",
+    "UT-GW-059",
+    "UT-GW-060",
+    "UT-GW-061",
+    "UT-GW-062",
+    "UT-GW-100",
+    "UT-GW-101",
+    "UT-GW-102",
+    "UT-GW-103",
+    "UT-GW-104",
+    "UT-GW-105",
+    "UT-GW-106",
+    "UT-GW-107",
+    "UT-GW-108",
+    "UT-GW-109",
+    "UT-GW-150",
+    "UT-GW-152",
+    "UT-GW-153",
+    "UT-GW-154",
+    "UT-GW-155",
+    "UT-GW-156",
+    "UT-GW-157",
+    "SEC-GW-002",
+    "SEC-GW-003",
+    "SEC-GW-004",
+    "SEC-GW-005",
+    "SEC-GW-009",
+    "IT-101",
+    "IT-102",
+    "IT-103",
+    "IT-104",
+    "IT-105",
+    "IT-106",
+    "IT-107",
+    "IT-108",
+    "IT-109",
+    "IT-110",
+    "IT-111",
+    "IT-112",
+    "IT-113",
+    "IT-210",
+    "IT-211",
+    "IT-212",
+    "IT-213",
+    "IT-215",
+    "IT-216",
+    "IT-217",
+    "IT-218",
+    "IT-219",
+    "IT-220",
+    "IT-221",
+    "IT-222",
+    "IT-223",
+    "IT-224",
+    "IT-225",
+    "IT-226"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-content typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-content test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-content test:integration",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-gateway typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-gateway test",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-gateway test:integration",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-gateway test:security",
+      "exit": 0
+    },
+    {
+      "cmd": "biome ci services/gateway services/content",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "note": "errors only in other lanes (apps/web, packages/design-tokens css, packages/ui); services/gateway and services/content are biome-clean"
+    },
+    {
+      "cmd": "node tools/gates/check-hooks.mjs",
+      "exit": 0
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "check:boundaries and check:gate-selftest and check:tsconfig-paths PASS; check:deps (10 errors: apps/web, packages/ui, packages/testkit vite, tools/packc, root vite) and check:security (1 error packages/shared-kernel/test redact.spec.ts) fail outside T-00-12 paths"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-12",
+      "exit": 1,
+      "note": "only apps/web files of another lane reported; no services/gateway or services/content file outside allowed_paths"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "GatewayContext gained fields beyond the Brief type: tokens (BootstrapTokenStore shared by IF-GW-001 issue and IF-GW-002 consume), randomBytes, defaultWebRoot, sessionReader, bindServer; activity is created in registerSession (createActivityTracker(clock) as in the Brief) so ctx.activity is mutable/nullable instead of readonly.",
+    "config.ts constants/pure helpers (GATEWAY_LIMITS, DEFAULT_VITE_ORIGIN, gatewayFallbacks, cspFor implementations) live in src/constants.ts and config.ts exposes same-named aliases/wrappers: biome noImportCycles (config -> app -> http/infra -> config) and noBarrelFile forbid importing values from config.ts or re-exporting. defaultWebRoot() stays in config.ts (depth rule) and is handed to the web shell through ctx.defaultWebRoot.",
+    "Last-Event-ID decision order: format error -> unknown_last_event_id; different boot -> gateway_restarted; seq > head -> unknown_last_event_id; seq < oldest-1 -> ring_overflow (Brief list put 'seq > head' before 'boot differs', which would turn a restarted gateway into unknown_last_event_id).",
+    "UT-GW-106: /api requests ignore x-fathom-deadline-ms in T-00-08 (server decides, route default 2000ms), so FakeCall.deadline_header_ms is 1990, not 1490 as the Brief states. Test asserts the real behaviour.",
+    "UT-GW-152: a malformed percent sequence (/%E0%A4%A, /%) is rejected by the Fastify router before any handler with 400 and Fastify's default JSON body (not problem+json, not 404). %2e%2e dot segments are checked over a raw socket (light-my-request folds them) and give 404.",
+    "IT-108/shutdown: createService waits state.waitIdle(grace) before onShutdown hooks, and a hijacked SSE request is never counted out, so shutdown with an open SSE takes the full grace_ms before hub.closeAll runs (exit code still 0).",
+    "ConsumerManifest/inbox: handler files not needed; stream handler (createStreamHandler) lives in application/stream/register.ts, route files in http/** only register (http imported from application register functions).",
+    "IT-108 disconnect case waits for the child 'exit' event (IpcChild.exited) because 'close' never fires after child.disconnect() in Node 22.",
+    "content jobs: contentSnapshotJob/contentIntegrityJob take Parameters<typeof makeSnapshotJob>[0] (ServiceDefinitionBase is not exported from service/service); createContentDefinition builds `base` with satisfies ServiceDefinition<ContentPolicies> then spreads jobs.",
+    "Content test layout: support.ts, migrate.spec.ts (IT-210~213 migrate part,215,216,218 - first draft by a duplicate writer, reviewed and kept), serve.spec.ts (IT-213 serve part,219~221,225,226), modes.spec.ts (IT-217,222~224). IT-214 range was merged into IT-213; IT-227~229 left empty.",
+    "Test IDs split by suffix-free duplicates avoided; extra ids used inside the allotted ranges only (UT-GW-020/021/156 pure-rule tests); UT-GW-030..049, 063..099, 110..149, 158..169 and IT-114..119 unused."
+  ],
+  "escalations": [
+    {
+      "type": "contract_change",
+      "detail": "shared-kernel createFastify: malformed URL percent sequences bypass the pipeline error handler and return Fastify's default {statusCode,error,message} JSON (400), not RFC 9457 problem+json. Candidate CR: set routerOptions.onBadUrl / frameworkErrors in createFastify."
+    },
+    {
+      "type": "ambiguity",
+      "detail": "createService shutdown order (waitIdle before hooks) makes SSE shutdown wait the full grace_ms; candidate CR: run onShutdown hooks that end long-lived streams before waitIdle, or let hijacked requests leave in-flight accounting."
+    },
+    {
+      "type": "ambiguity",
+      "detail": "IF-GW-001 request body BootstrapTokenRequest{purpose} exists in the contract but the Brief does not mention it; purpose is validated and ignored."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-30",
+      "pgm": "PGM-GW-001",
+      "req": [
+        "NFR-SEC-019",
+        "FR-SET-023",
+        "NFR-SEC-002"
+      ],
+      "tests": [
+        "UT-GW-001..003",
+        "UT-GW-005..010",
+        "UT-GW-019..027",
+        "UT-GW-109",
+        "IT-103..106",
+        "IT-109",
+        "SEC-GW-003"
+      ]
+    },
+    {
+      "wp": "WP-00-30",
+      "pgm": "PGM-GW-002",
+      "req": [
+        "IR-016",
+        "NFR-AVL-005"
+      ],
+      "tests": [
+        "UT-GW-050..062",
+        "IT-107..108"
+      ]
+    },
+    {
+      "wp": "WP-00-30",
+      "pgm": "PGM-GW-003",
+      "req": [
+        "AP-12",
+        "NFR-PORT-006",
+        "CR-61"
+      ],
+      "tests": [
+        "UT-GW-150..157",
+        "IT-101..102",
+        "SEC-GW-009"
+      ]
+    },
+    {
+      "wp": "WP-00-30",
+      "pgm": "PGM-GW-004",
+      "req": [
+        "FR-SET-015"
+      ],
+      "tests": [
+        "UT-GW-102..108",
+        "IT-110..111",
+        "SEC-GW-004"
+      ]
+    },
+    {
+      "wp": "WP-00-30",
+      "pgm": "PGM-GW-005",
+      "req": [
+        "FR-AI-010"
+      ],
+      "tests": [
+        "UT-GW-028..029",
+        "IT-112"
+      ]
+    },
+    {
+      "wp": "WP-00-30",
+      "pgm": "PGM-GW-006",
+      "req": [
+        "NFR-SEC-001",
+        "NFR-SEC-002",
+        "NFR-SEC-017",
+        "NFR-SEC-019"
+      ],
+      "tests": [
+        "UT-GW-004",
+        "UT-GW-011..018",
+        "UT-GW-100..101",
+        "SEC-GW-002",
+        "SEC-GW-005",
+        "IT-113"
+      ]
+    },
+    {
+      "wp": "WP-00-31",
+      "pgm": "PGM-CT-200",
+      "req": [
+        "NFR-MAINT-001"
+      ],
+      "tests": [
+        "IT-219",
+        "IT-222..224"
+      ]
+    },
+    {
+      "wp": "WP-00-31",
+      "pgm": "PGM-CT-201",
+      "req": [
+        "DR-020",
+        "ADR-002"
+      ],
+      "tests": [
+        "IT-210..218"
+      ]
+    },
+    {
+      "wp": "WP-00-31",
+      "pgm": "PGM-CT-202",
+      "req": [
+        "NFR-DATA-012",
+        "RK-05"
+      ],
+      "tests": [
+        "IT-220..221"
+      ]
+    },
+    {
+      "wp": "WP-00-31",
+      "pgm": "PGM-CT-203",
+      "req": [
+        "NFR-DATA-013"
+      ],
+      "tests": [
+        "IT-225..226"
+      ]
+    }
+  ],
+  "notes": "WP-00-31 checkpoint passed first (content typecheck + 17 integration tests green, DDL byte-identical to DB-01 5.5, tables 53+7, views 7, FTS5 3, triggers 19). portFallbacks getter works: IT-106 (a) test-profile occupied port -> OS port, (b) dev-profile -> 4848..4856. check-hooks content rows 0 errors. Hijacked SSE and bad-URL findings above are CR candidates; CR candidates hit from Brief section 10: 1,2,3,4,5,6,7,8. A duplicate writer edited services/content and gateway test/unit/support.ts and open-stream.ts midway; its drafts were reviewed (content src/DDL/tests kept after verification, open-stream.ts removed) per coordinator instruction. Gateway/content root gates failing (check:deps, check:security, pnpm lint, check-scope) are caused by other lanes only."
+}

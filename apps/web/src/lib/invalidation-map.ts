@@ -106,7 +106,7 @@ const RULES: Readonly<Record<SseEventType, Rule>> = {
 };
 
 export function isSseEventType(type: string): type is SseEventType {
-  return (SSE_EVENT_TYPES as readonly string[]).includes(type);
+  return SSE_EVENT_TYPES.some((t) => t === type);
 }
 
 /** 이벤트 → 무효화할 query key 목록. 모르는 type·버전·payload 파싱 실패 → `'all'`(Brief 결정). */

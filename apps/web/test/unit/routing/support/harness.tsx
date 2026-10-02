@@ -1,15 +1,15 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { createMemoryHistory, RouterProvider } from '@tanstack/react-router';
-import { cleanup, render, type RenderResult } from '@testing-library/react';
-import { type ReactElement } from 'react';
+import { cleanup, type RenderResult, render } from '@testing-library/react';
+import type { ReactElement } from 'react';
 import { afterEach } from 'vitest';
+import type { ShellDeps } from '../../../../src/features/shell/chrome/shell-deps.js';
+import { createQueueCountsSource, ShellDepsProvider } from '../../../../src/features/shell/chrome/shell-deps.js';
 import { createApiClient } from '../../../../src/lib/api-client.js';
 import { createCsrfStore } from '../../../../src/lib/csrf.js';
 import { createHotkeyManager } from '../../../../src/lib/hotkeys.js';
 import { createQueryClient } from '../../../../src/lib/query-client.js';
 import { createSseConnection } from '../../../../src/lib/sse.js';
-import { createQueueCountsSource, ShellDepsProvider } from '../../../../src/features/shell/chrome/shell-deps.js';
-import type { ShellDeps } from '../../../../src/features/shell/chrome/shell-deps.js';
 import { createAppRouter } from '../../../../src/router.js';
 import { useHatStore } from '../../../../src/stores/hat.js';
 import { useHotkeysStore } from '../../../../src/stores/hotkeys.js';
@@ -39,7 +39,7 @@ export interface RenderedApp {
   readonly router: ReturnType<typeof createAppRouter>;
   readonly deps: ShellDeps;
   readonly sse: ReturnType<typeof createSseConnection>;
-  readonly fetchCalls: string[];
+  readonly fetchCalls: () => string[];
   readonly queueCounts: ReturnType<typeof createQueueCountsSource>;
   readonly es: () => FakeEventSource;
 }
@@ -99,7 +99,7 @@ export function renderApp(path: string, opts: RenderOptions = {}): RenderedApp {
     router,
     deps,
     sse,
-    fetchCalls: f.calls.map((c) => c.url),
+    fetchCalls: () => f.calls.map((c) => c.url),
     queueCounts,
     es: () => {
       const e = FakeEventSource.instances[0];

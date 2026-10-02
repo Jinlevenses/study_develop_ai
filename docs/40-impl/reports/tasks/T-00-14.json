@@ -1,0 +1,300 @@
+{
+  "taskId": "T-00-14",
+  "tier": "T2s",
+  "model_id": "T2s",
+  "status": "partial",
+  "changedFiles": [
+    "apps/web/index.html",
+    "apps/web/public/icons/icon.svg",
+    "apps/web/public/manifest.webmanifest",
+    "apps/web/public/theme-init.js",
+    "apps/web/src/features/practice/renderers/registry.ts",
+    "apps/web/src/features/shell/chrome/ai-chip.tsx",
+    "apps/web/src/features/shell/chrome/app-off-shell.tsx",
+    "apps/web/src/features/shell/chrome/app-shell.tsx",
+    "apps/web/src/features/shell/chrome/boot-gate.tsx",
+    "apps/web/src/features/shell/chrome/connection-chip.tsx",
+    "apps/web/src/features/shell/chrome/context-panel.tsx",
+    "apps/web/src/features/shell/chrome/design-system/badge-section.tsx",
+    "apps/web/src/features/shell/chrome/design-system/component-section.tsx",
+    "apps/web/src/features/shell/chrome/design-system/design-page.tsx",
+    "apps/web/src/features/shell/chrome/design-system/token-section.tsx",
+    "apps/web/src/features/shell/chrome/design-system/type-section.tsx",
+    "apps/web/src/features/shell/chrome/global-hotkeys.ts",
+    "apps/web/src/features/shell/chrome/hat-switch.tsx",
+    "apps/web/src/features/shell/chrome/header.tsx",
+    "apps/web/src/features/shell/chrome/nav-rail.tsx",
+    "apps/web/src/features/shell/chrome/ops-alert-slot.tsx",
+    "apps/web/src/features/shell/chrome/reconnect-screen.tsx",
+    "apps/web/src/features/shell/chrome/route-stub.tsx",
+    "apps/web/src/features/shell/chrome/shell-deps.tsx",
+    "apps/web/src/features/shell/chrome/use-shell-data.ts",
+    "apps/web/src/lib/api-client.ts",
+    "apps/web/src/lib/app-version.ts",
+    "apps/web/src/lib/attempt-queue.ts",
+    "apps/web/src/lib/bootstrap.ts",
+    "apps/web/src/lib/choseong.ts",
+    "apps/web/src/lib/code-block.tsx",
+    "apps/web/src/lib/code-editor.tsx",
+    "apps/web/src/lib/csrf.ts",
+    "apps/web/src/lib/hotkeys.ts",
+    "apps/web/src/lib/idempotency.ts",
+    "apps/web/src/lib/ime.ts",
+    "apps/web/src/lib/invalidation-map.ts",
+    "apps/web/src/lib/markdown.tsx",
+    "apps/web/src/lib/mermaid-figure.tsx",
+    "apps/web/src/lib/not-yet-renderer.tsx",
+    "apps/web/src/lib/query-client.ts",
+    "apps/web/src/lib/query-keys.ts",
+    "apps/web/src/lib/router-context.ts",
+    "apps/web/src/lib/search.ts",
+    "apps/web/src/lib/sse.ts",
+    "apps/web/src/lib/svg-mount.ts",
+    "apps/web/src/lib/sw-register.ts",
+    "apps/web/src/lib/theme.ts",
+    "apps/web/src/lib/ui-prefs.ts",
+    "apps/web/src/main.tsx",
+    "apps/web/src/routeTree.gen.ts",
+    "apps/web/src/router.tsx",
+    "apps/web/src/routing/[_]design.tsx",
+    "apps/web/src/routing/__root.tsx",
+    "apps/web/src/routing/ai.tsx",
+    "apps/web/src/routing/artifacts.$runId.tsx",
+    "apps/web/src/routing/cases.$runId.tsx",
+    "apps/web/src/routing/concepts.$conceptId.tsx",
+    "apps/web/src/routing/curation.tsx",
+    "apps/web/src/routing/dig.$dialogId.tsx",
+    "apps/web/src/routing/evidence.$conceptId.tsx",
+    "apps/web/src/routing/imports.$jobId.tsx",
+    "apps/web/src/routing/inbox.tsx",
+    "apps/web/src/routing/index.tsx",
+    "apps/web/src/routing/map.tsx",
+    "apps/web/src/routing/notes.$blockId.tsx",
+    "apps/web/src/routing/ops.tsx",
+    "apps/web/src/routing/review.weekly.tsx",
+    "apps/web/src/routing/season.tsx",
+    "apps/web/src/routing/session.$sessionId.tsx",
+    "apps/web/src/routing/settings.tsx",
+    "apps/web/src/stores/hat.ts",
+    "apps/web/src/stores/hotkeys.ts",
+    "apps/web/src/stores/layout.ts",
+    "apps/web/src/stores/palette.ts",
+    "apps/web/src/stores/player.ts",
+    "apps/web/src/styles/app.css",
+    "apps/web/test/unit/lib/api-client.spec.ts",
+    "apps/web/test/unit/lib/attempt-queue.spec.ts",
+    "apps/web/test/unit/lib/bootstrap.spec.ts",
+    "apps/web/test/unit/lib/choseong.spec.ts",
+    "apps/web/test/unit/lib/code-block.spec.tsx",
+    "apps/web/test/unit/lib/code-editor.spec.tsx",
+    "apps/web/test/unit/lib/csrf.spec.ts",
+    "apps/web/test/unit/lib/hotkeys.spec.ts",
+    "apps/web/test/unit/lib/idempotency.spec.ts",
+    "apps/web/test/unit/lib/ime.spec.ts",
+    "apps/web/test/unit/lib/invalidation-map.spec.ts",
+    "apps/web/test/unit/lib/markdown.spec.tsx",
+    "apps/web/test/unit/lib/mermaid-figure.spec.tsx",
+    "apps/web/test/unit/lib/misc.spec.ts",
+    "apps/web/test/unit/lib/safety.spec.tsx",
+    "apps/web/test/unit/lib/sse.spec.ts",
+    "apps/web/test/unit/lib/support/events.ts",
+    "apps/web/test/unit/lib/support/fake-event-source.ts",
+    "apps/web/test/unit/lib/support/fixtures.ts",
+    "apps/web/test/unit/lib/svg-mount.spec.ts",
+    "apps/web/test/unit/lib/theme.spec.ts",
+    "apps/web/test/unit/lib/ui-prefs.spec.ts",
+    "apps/web/test/unit/routing/boot-gate.spec.tsx",
+    "apps/web/test/unit/routing/chrome.spec.tsx",
+    "apps/web/test/unit/routing/design-page.spec.tsx",
+    "apps/web/test/unit/routing/registry.spec.tsx",
+    "apps/web/test/unit/routing/routes.spec.tsx",
+    "apps/web/test/unit/routing/static.spec.ts",
+    "apps/web/test/unit/routing/stores.spec.tsx",
+    "apps/web/test/unit/routing/support/harness.tsx",
+    "apps/web/vite.config.ts",
+    "docs/40-impl/reports/tasks/T-00-14.json"
+  ],
+  "testsAdded": [
+    "UT-WEB-001..007",
+    "UT-WEB-010..029",
+    "UT-WEB-030..044",
+    "UT-WEB-202",
+    "UT-WEB-440..459"
+  ],
+  "commands": [
+    {
+      "cmd": "pnpm i --frozen-lockfile --ignore-scripts --offline",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-web typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-web test",
+      "exit": 0,
+      "note": "26 files, 63 tests"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/app-web build (x3, routeTree.gen.ts sha256 identical)",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm typecheck",
+      "exit": 0
+    },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "note": "apps/web: only src/styles/app.css parse error (biome.json lacks css.parser.tailwindDirectives for @source); remaining 8 errors are other lanes (tokens.css etc.)"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "boundaries/tsconfig-paths/gate-selftest PASS; check:deps 10 errors (root/ui/testkit/tools package.json + apps/web package.json devDeps react-is,@testing-library/dom,@types/react*, owned by T-00-01) and check:security 1 error (shared-kernel redact spec) are outside T-00-14 allowed_paths"
+    },
+    {
+      "cmd": "node tools/gates/check-ng-g.mjs / check-typo-ko.mjs",
+      "exit": 1,
+      "note": "errors only in packages/ui (judge-badge Sparkles, <p> text-xs); apps/web 0"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-14",
+      "exit": 1,
+      "note": "8 flagged files are services/gateway/** edited by another lane; 0 apps/web files flagged"
+    },
+    {
+      "cmd": "node tools/gates/check-manifest.mjs --json",
+      "exit": 1,
+      "note": "expected: 21x manifest/e2e-missing + 1 warn; manifest/renderer-key=0, manifest/renderer-missing=0"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "lib/api-client.ts: two irreducible `as` casts (ApiResult<unknown> -> ApiResult<RouteOutput<R>> in call()/query()) because RouteDef erases response types; runtime data is zod-validated first. RouteInput keys are all optional (params/query/body present only when the route defines them).",
+    "vite.config.ts: root package.json has no `version` (T-00-01 file), so readRootVersion falls back to '0.0.0' instead of throwing (Brief says throw) - otherwise vite build can never pass; supervisor readVersion will hit the same gap.",
+    "RendererProps gets an optional `rendererKey` (Brief lists blockId,itemKey only) so the single shared NotYetRenderer can show data-renderer-key/description; NotYetRenderer props = same shape.",
+    "markdown.tsx: rehype-sanitize default schema extended with the `concept` href protocol (needed because urlTransform runs after sanitize); also `//host` protocol-relative URLs are neutralised.",
+    "createAppRouter(ctx, history?) takes an optional memory history (superset of Brief signature) for UT-WEB-441/442.",
+    "stores/layout.ts adds drawerOpen/toggleDrawer/closeDrawer (Mod+\\ below lg opens the context Drawer); stores export factory + default instance each.",
+    "theme.ts additionally exports windowMedia/currentDocTheme/useDocTheme (react hook); watchSystemTheme always re-resolves a11y attrs (contrast/transparency/motion), colour theme only changes when pref=system.",
+    "shell-deps.tsx also exports createQueueCountsSource (external store for attempt-queue counts); boot-gate.tsx exports createBootSignals; boot dedupes per attempt (StrictMode-safe).",
+    "app.css is the exact 4 lines; fonts: d2coding/d2coding-subset.css (pulls ~4MB of woff/ttf into dist). Test support files live in apps/web/test/unit/{lib,routing}/support/ (fixtures, events, fake-event-source, harness)."
+  ],
+  "escalations": [
+    {
+      "type": "scope",
+      "detail": "biome.json (T-00-01) lacks css.parser.tailwindDirectives, so `biome ci` fails to parse apps/web/src/styles/app.css (@source). The Brief requires this exact file content; needs T0/T-00-01 follow-up in biome.json (same as T-00-07 tokens.css)."
+    },
+    {
+      "type": "scope",
+      "detail": "Root package.json has no `version` field; Brief 4.6-1 (define from root version) and supervisor readBundleInfo both assume it. Add version (T-00-01) so APP_VERSION and supervisor app_version match."
+    },
+    {
+      "type": "ambiguity",
+      "detail": "STD-WEB-14 vs DS DN-D5 resolved per Brief 4.0-2 (ui-prefs.ts single localStorage module + public/theme-init.js); CR candidate for T1."
+    }
+  ],
+  "rtmUpdates": [
+    {
+      "wp": "WP-00-25",
+      "pgm": "PGM-WEB-003",
+      "req": [
+        "NFR-SEC-002",
+        "NFR-SEC-019",
+        "FR-SET-023"
+      ],
+      "tests": [
+        "UT-WEB-003",
+        "UT-WEB-004",
+        "UT-WEB-010..018",
+        "UT-WEB-043"
+      ]
+    },
+    {
+      "wp": "WP-00-25",
+      "pgm": "PGM-WEB-004",
+      "req": [
+        "NFR-AVL-002",
+        "NFR-AVL-011",
+        "IR-016"
+      ],
+      "tests": [
+        "UT-WEB-001",
+        "UT-WEB-002",
+        "UT-WEB-005",
+        "UT-WEB-019..029"
+      ]
+    },
+    {
+      "wp": "WP-00-25",
+      "pgm": "PGM-WEB-005",
+      "req": [
+        "FR-UX-003",
+        "FR-UX-004",
+        "FR-UX-005",
+        "FR-UX-006"
+      ],
+      "tests": [
+        "UT-WEB-006",
+        "UT-WEB-007",
+        "UT-WEB-030..036"
+      ]
+    },
+    {
+      "wp": "WP-00-25",
+      "pgm": "PGM-WEB-006",
+      "req": [
+        "FR-UX-014",
+        "NFR-SEC-009"
+      ],
+      "tests": [
+        "UT-WEB-202",
+        "UT-WEB-037..042"
+      ]
+    },
+    {
+      "wp": "WP-00-24",
+      "pgm": "PGM-WEB-001",
+      "req": [
+        "FR-UX-010",
+        "FR-SET-010"
+      ],
+      "tests": [
+        "UT-WEB-447..453",
+        "UT-WEB-455",
+        "UT-WEB-456",
+        "UT-WEB-458",
+        "UT-WEB-459"
+      ]
+    },
+    {
+      "wp": "WP-00-24",
+      "pgm": "PGM-WEB-002",
+      "req": [
+        "FR-UX-012",
+        "FR-UX-016",
+        "FR-STD-033"
+      ],
+      "tests": [
+        "UT-WEB-440",
+        "UT-WEB-442..446",
+        "UT-WEB-457",
+        "UT-WEB-044"
+      ]
+    },
+    {
+      "wp": "WP-00-24",
+      "pgm": "PGM-WEB-040",
+      "req": [
+        "FR-UX-002",
+        "NFR-UX-012"
+      ],
+      "tests": [
+        "UT-WEB-441",
+        "UT-WEB-454"
+      ]
+    }
+  ],
+  "notes": "1) /_design = file route '[_]design.tsx' -> fullPath '/_design' (no D-STD-15 fallback). 2) addExtensions:true kept; routeTree.gen.ts has @ts-nocheck but route/search types infer correctly (verified invalid Link to/search errors). 3) d2coding CSS = d2coding/d2coding-subset.css. 4) check-manifest: renderer-key 0, renderer-missing 0 (only e2e-missing 21 + formats-unverified warn). 5) IT-00 gateway has no /api/v1/home -> chips/slot run on SSE values (home 404 silently ignored); attempt-queue UI/SSE wiring in main.tsx untested in browser (build + dev server transform verified)."
+}

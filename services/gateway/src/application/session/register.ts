@@ -1,6 +1,6 @@
 import type { ServiceApp, ServiceDeps } from '@fathom/shared-kernel/service/service';
 import type { GatewayContext } from '../../config.js';
-import { GATEWAY_LIMITS } from '../../config.js';
+import { GATEWAY_LIMITS } from '../../constants.js';
 import { createRateLimiter } from '../../domain/session/guards-rate-limit.js';
 import { registerInternalRoutes } from '../../http/internal/routes.js';
 import { registerSessionRoutes } from '../../http/session/routes.js';

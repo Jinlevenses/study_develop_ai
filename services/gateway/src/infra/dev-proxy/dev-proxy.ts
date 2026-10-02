@@ -1,7 +1,7 @@
 import fastifyHttpProxy from '@fastify/http-proxy';
 import type { ServiceApp } from '@fathom/shared-kernel/service/service';
 import type { GatewayContext } from '../../config.js';
-import { DEFAULT_VITE_ORIGIN } from '../../config.js';
+import { DEFAULT_VITE_ORIGIN } from '../../constants.js';
 import { guardWebShellRequest } from '../../http/static/static-route.js';
 
 // dev 단일 origin(ARC §14.3) — `http://127.0.0.1:4847` 하나로 Vite(5173)를 중계한다. HMR WebSocket도 같은 origin으로 받는다.
