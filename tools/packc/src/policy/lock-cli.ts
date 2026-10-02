@@ -99,7 +99,10 @@ function topLevelVersion(value: unknown): string | null {
   return typeof v === 'string' ? v : null;
 }
 
-function checkFile(policyDir: string, file: string): Result<{ ref: string; sha256: string; owner: ServiceNameT }, LockProblem> {
+function checkFile(
+  policyDir: string,
+  file: string,
+): Result<{ ref: string; sha256: string; owner: ServiceNameT }, LockProblem> {
   const m = FILE_RE.exec(file);
   const name = m?.[1];
   const k = m?.[2];

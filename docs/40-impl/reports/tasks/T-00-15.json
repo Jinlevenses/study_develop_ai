@@ -1,0 +1,84 @@
+{
+  "taskId": "T-00-15",
+  "tier": "T1",
+  "model_id": "T1",
+  "status": "done",
+  "changedFiles": [
+    "policy/method_policy@v1.yaml",
+    "policy/composer_policy@v1.yaml",
+    "policy/mastery_rules@v1.yaml",
+    "policy/ldi_params@v1.yaml",
+    "policy/gaming_params@v1.yaml",
+    "policy/cbm_params@v1.yaml",
+    "policy/fsrs_params@v1.yaml",
+    "policy/gate_thresholds@v1.yaml",
+    "policy/search_params@v1.yaml",
+    "policy/ai_policy@v1.yaml",
+    "policy/firewall_rules@v1.yaml",
+    "policy/ops_policy@v1.yaml",
+    "policy/policy.lock.json",
+    "tools/packc/src/policy/lock-cli.ts",
+    "tools/packc/test/unit/policy/lock-cli.spec.ts",
+    "tools/packc/test/unit/policy/policy-values.spec.ts"
+  ],
+  "testsAdded": [
+    "UT-PACKC-050",
+    "UT-PACKC-051",
+    "UT-PACKC-052",
+    "UT-PACKC-053",
+    "UT-PACKC-054",
+    "UT-PACKC-055",
+    "UT-PACKC-056",
+    "UT-PACKC-057",
+    "UT-PACKC-058",
+    "UT-PACKC-059"
+  ],
+  "commands": [
+    { "cmd": "pnpm i --frozen-lockfile --ignore-scripts", "exit": 0 },
+    { "cmd": "pnpm policy:lock", "exit": 0 },
+    { "cmd": "pnpm policy:lock --check", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/tool-packc typecheck", "exit": 0 },
+    { "cmd": "pnpm --filter @fathom/tool-packc test", "exit": 0, "note": "2 files, 10 tests" },
+    { "cmd": "pnpm --filter @fathom/shared-kernel test", "exit": 0, "note": "30 files, 196 tests (loadPolicy unchanged)" },
+    {
+      "cmd": "pnpm lint",
+      "exit": 1,
+      "note": "0 diagnostics in T-00-15 files (biome ci on policy/ + tools/packc/src/policy + tools/packc/test/unit/policy = clean; policy.lock.json byte-identical to biome format). Remaining errors are other lanes' in-progress files: apps/web/**, packages/design-tokens/src/tokens.css, services/{ai-gateway,gateway,ops}/**"
+    },
+    {
+      "cmd": "node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "FAIL check:deps (apps/web, packages/ui, packages/testkit, root vite, tools/packc @types/d3-force — package.json files forbidden to this task, pre-existing) and check:security (packages/shared-kernel/test/unit/redact/redact.spec.ts); no finding in T-00-15 files"
+    },
+    {
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-15",
+      "exit": 1,
+      "note": "all violations are concurrent other-lane files (apps/web, services/*); with --changed-from <the 16 T-00-15 files> = exit 0"
+    }
+  ],
+  "graphify": "unavailable",
+  "deviations": [
+    "UT-PACKC-056: CbmParamsV1 monotonicity is a refine on the `score` object, so `correct: [1,1,3]` yields issue path `score` (detail `score correct must be > 0 and strictly increasing; ...`), not `score.correct`. Test asserts /^score .*correct/ for [1,1,3] and additionally asserts detail contains `score.correct` for an element-type violation (`[1,'two',3]`).",
+    "firewall_rules@v1.yaml first-line comment uses the §4.1-1 format (owner · zod); the AI-01 §10.3 consumer note (`소비: ai-gateway egress + content ingress`) moved to a trailing comment on the version line. Body below is AI-01 §10.3 verbatim.",
+    "ai_policy@v1.yaml: AI-01 §12.5 verbatim except cache_ttl_days rewritten as block mapping with per_task expanded to 35 keys (T-00-09 D8); values identical in meaning.",
+    "diffLock: when every ref entry matches but the file bytes differ (formatting/hand edit) it reports `stale policy.lock.json (format)`; unparseable lock → `invalid policy.lock.json` (Brief lists only stale/missing/extra). policy-error lines `error <file> <reason> <detail>` go to stdout (gen.ts convention); engine failures go to stderr.",
+    "lock-cli.ts additionally exports `PolicyName`, `LOCK_FILE` and `listPolicyFiles` (used by tests)."
+  ],
+  "escalations": [
+    {
+      "type": "contract_change",
+      "blocking": false,
+      "detail": "ComposerPolicyV1 (packages/contracts/src/policy/composer_policy.ts, T-00-10) has no `path_weights` key (CR-52·DCP DN-22), so composer_policy@v1.yaml omits it (strict schema). Proposed T-00-10 -r1 additive change: `path_weights: z.record(PathId, S({ track_priority: z.array(TrackId).min(1).max(20), target_level: Level, retention_tier: z.enum(['core','standard','breadth','archive']) }))`, then add `path_weights: {}` and re-run pnpm policy:lock."
+    },
+    {
+      "type": "contract_change",
+      "blocking": false,
+      "detail": "CR candidate: FsrsParamsV1.request_retention keys are content tiers A·B·C, but FR-PRG-005 retention is per retention tier (core .92 · standard .90 · breadth .85 · archive .80). Mapped A→core .92, B→standard .90, C→breadth .85; archive .80 is not representable."
+    }
+  ],
+  "rtmUpdates": [
+    { "wp": "WP-00-26", "pgm": "PGM-PACKC-010", "req": ["FR-CUR-017", "AQ-11", "NFR-MAINT-007"], "tests": ["UT-PACKC-050..058"] },
+    { "wp": "WP-00-26", "pgm": "PGM-PACKC-010", "req": ["FR-PRG-009", "FR-PRG-013", "FR-STD-007", "FR-AI-008"], "tests": ["UT-PACKC-059"] }
+  ],
+  "notes": "① sha256[:12] ai_policy 43b84485e22f · cbm_params 488a310546e8 · composer_policy 738fb7a2c609 · firewall_rules 70a0d560ec8e · fsrs_params 4a8071e529cc · gaming_params b35d2f75e58d · gate_thresholds a2151e68a455 · ldi_params b20772748b2b · mastery_rules 3ff482c6c6cb · method_policy d97f393840c3 · ops_policy d5d22e7c479a · search_params 8fc3f18ead53. ② path_weights omitted (zod has no key) → non-blocking contract_change. ③ No value had to change to fit zod; all Brief values expressed as written (12/12 schema-valid on first lock). ④ provisional: mastery_rules@v1 and ldi_params@v1 carry a `# provisional:` 3rd-line comment; ldi_params.provisional = true. ⑤ T1′ review: router_25 (S·M rows), runtime 8 formats w_format (ml_predict no source), ai_profiles.FULL.sp1_fail = LJ, strip_chars 34 chars, peak_end.wave, request_retention A/B/C mapping; @v2+ files are hashed but not schema-checked until a V2 schema exists."
+}

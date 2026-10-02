@@ -1,7 +1,16 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { contentDbPath, jsonLines, MIGRATIONS_ROOT, openWritable, queryRows, runMode, sha256File, withHome } from './support.js';
+import {
+  contentDbPath,
+  jsonLines,
+  MIGRATIONS_ROOT,
+  openWritable,
+  queryRows,
+  runMode,
+  sha256File,
+  withHome,
+} from './support.js';
 
 const MODULES = ['catalog', 'acquisition', 'itembank', 'grading', 'runner'] as const;
 const INFRA_TABLES = [

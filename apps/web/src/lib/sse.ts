@@ -1,9 +1,9 @@
-import { AiMode } from '@fathom/contracts/common/domain';
 import type { AiMode as AiModeT } from '@fathom/contracts/common/domain';
-import { SessionStatusRoute } from '@fathom/contracts/http/gateway/v1/session';
-import { SseEventData, SseHello, SseResync } from '@fathom/contracts/http/gateway/v1/stream';
-import type { SseEventData as SseEventDataT } from '@fathom/contracts/http/gateway/v1/stream';
+import { AiMode } from '@fathom/contracts/common/domain';
 import { EVENT_PAYLOADS } from '@fathom/contracts/events/registry.gen';
+import { SessionStatusRoute } from '@fathom/contracts/http/gateway/v1/session';
+import type { SseEventData as SseEventDataT } from '@fathom/contracts/http/gateway/v1/stream';
+import { SseEventData, SseHello, SseResync } from '@fathom/contracts/http/gateway/v1/stream';
 import type { ApiClient } from './api-client.js';
 import { type Invalidation, invalidationsFor, SSE_EVENT_TYPES, type SseEventType } from './invalidation-map.js';
 
@@ -131,15 +131,14 @@ export function createSseConnection(deps: SseDeps): SseConnection {
 
   function applySideEffects(type: SseEventType, data: SseEventDataT): void {
     if (type === 'ai.mode.changed') {
-      const mode = AiMode.safeParse(data.payload['mode']);
+      const mode = AiMode.safeParse(data.payload.mode);
       if (mode.success) {
         update({ aiMode: mode.data });
       }
     } else if (type === 'ops.health.changed') {
       const health = EVENT_PAYLOADS['ops.health.changed'][1].safeParse(data.payload);
       if (health.success) {
-        const ready = (svc: string): boolean =>
-          health.data.services.some((s) => s.svc === svc && s.state === 'ready');
+        const ready = (svc: string): boolean => health.data.services.some((s) => s.svc === svc && s.state === 'ready');
         if (ready('content') && ready('learning')) {
           deps.onFlushAttempts();
         }

@@ -64,9 +64,7 @@ const RULES: Readonly<Record<SseEventType, Rule>> = {
   },
   'learning.mastery.changed': (p) => {
     const r = EVENT_PAYLOADS['learning.mastery.changed'][1].safeParse(p);
-    return r.success
-      ? [qk.concept(r.data.concept_id), qk.map(), qk.evidence(r.data.concept_id), qk.tracks()]
-      : ALL;
+    return r.success ? [qk.concept(r.data.concept_id), qk.map(), qk.evidence(r.data.concept_id), qk.tracks()] : ALL;
   },
   'learning.level.promoted': (p) => {
     const r = EVENT_PAYLOADS['learning.level.promoted'][1].safeParse(p);

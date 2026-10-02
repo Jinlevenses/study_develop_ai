@@ -1,0 +1,9 @@
+{
+  "name": "Fathom 깊이",
+  "short_name": "Fathom",
+  "lang": "ko",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

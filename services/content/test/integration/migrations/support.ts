@@ -1,19 +1,19 @@
 import type { ChildProcess } from 'node:child_process';
 import { fork, spawn } from 'node:child_process';
-import { once } from 'node:events';
 import { createHash } from 'node:crypto';
+import { once } from 'node:events';
 import { readFileSync } from 'node:fs';
 import http from 'node:http';
 import type { AddressInfo } from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { BootstrapEnvelope } from '@fathom/contracts/admin/ipc';
+import { loadSqliteRuntime } from '@fathom/shared-kernel/service/service';
+import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
 import { TEST_CALLER_TOKENS } from '@fathom/testkit/contract';
 import { fixedUlid } from '@fathom/testkit/ids';
 import type { TempHome } from '@fathom/testkit/temp-home';
 import { createTempHome } from '@fathom/testkit/temp-home';
-import type { SqlitePort } from '@fathom/shared-kernel/sqlite/sqlite';
-import { loadSqliteRuntime } from '@fathom/shared-kernel/service/service';
 
 // content 통합 테스트 공용 도우미 — 자식 프로세스(`src/main.ts`)를 `--import tsx --conditions=source`로 띄운다(워커 execArgv는 상속되지 않는다).
 
@@ -38,6 +38,20 @@ export function cleanEnv(extra: Record<string, string> = {}): Record<string, str
   return { ...env, ...extra };
 }
 
+const alive: ChildProcess[] = [];
+
+/** afterEach용: 아직 살아 있는 자식을 SIGKILL하고 그 수를 돌려준다(정상 경로에서는 0이어야 한다). */
+export function killAlive(): number {
+  let leftover = 0;
+  for (const child of alive.splice(0)) {
+    if (child.exitCode === null && child.signalCode === null) {
+      leftover += 1;
+      child.kill('SIGKILL');
+    }
+  }
+  return leftover;
+}
+
 const lines = (text: string): string[] => text.split('\n').filter((l) => l !== '');
 
 /** 진입점을 `--mode=...`로 한 번 돌리고 끝날 때까지 기다린다(IPC 없음). */
@@ -50,6 +64,7 @@ export async function runMode(
     env: cleanEnv(env),
     stdio: ['ignore', 'pipe', 'pipe'],
   });
+  alive.push(child);
   let out = '';
   let err = '';
   child.stdout.on('data', (c: Buffer) => {
@@ -89,6 +104,7 @@ export function forkContent(env: Record<string, string> = {}): IpcChild {
     serialization: 'json',
     env: cleanEnv(env),
   });
+  alive.push(child);
   const messages: unknown[] = [];
   const waiters: { type: string; resolve: (m: Record<string, unknown>) => void }[] = [];
   let out = '';
@@ -204,7 +220,9 @@ export function httpRequest(
         path: url,
         method,
         headers: {
-          ...(payload === undefined ? {} : { 'content-type': 'application/json', 'content-length': Buffer.byteLength(payload) }),
+          ...(payload === undefined
+            ? {}
+            : { 'content-type': 'application/json', 'content-length': Buffer.byteLength(payload) }),
           ...headers,
         },
       },

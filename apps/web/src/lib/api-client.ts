@@ -283,7 +283,11 @@ export function createApiClient(deps: ApiClientDeps): ApiClient {
     }
   }
 
-  async function execute(route: RouteDef, input: LooseInput, opts: CallOptions | undefined): Promise<ApiResult<unknown>> {
+  async function execute(
+    route: RouteDef,
+    input: LooseInput,
+    opts: CallOptions | undefined,
+  ): Promise<ApiResult<unknown>> {
     const built = buildRequest(route, input);
     if (!built.ok) {
       return { ok: false, kind: 'contract', status: null, detail: built.detail };
@@ -300,11 +304,19 @@ export function createApiClient(deps: ApiClientDeps): ApiClient {
   }
 
   return {
-    async call<R extends RouteDef>(route: R, input: RouteInput<R>, opts?: CallOptions): Promise<ApiResult<RouteOutput<R>>> {
+    async call<R extends RouteDef>(
+      route: R,
+      input: RouteInput<R>,
+      opts?: CallOptions,
+    ): Promise<ApiResult<RouteOutput<R>>> {
       const result = await execute(route, input, opts);
       return result as ApiResult<RouteOutput<R>>;
     },
-    async query<R extends RouteDef>(route: R, input: RouteInput<R>, opts?: { readonly signal?: AbortSignal }): Promise<RouteOutput<R>> {
+    async query<R extends RouteDef>(
+      route: R,
+      input: RouteInput<R>,
+      opts?: { readonly signal?: AbortSignal },
+    ): Promise<RouteOutput<R>> {
       const result = await execute(route, input, opts);
       if (!result.ok) {
         throw new ApiError(result);

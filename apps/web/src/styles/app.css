@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "@fathom/design-tokens/tokens.css";
+@import "@fathom/design-tokens/typography.css";
+@source "../../../../packages/ui/src";

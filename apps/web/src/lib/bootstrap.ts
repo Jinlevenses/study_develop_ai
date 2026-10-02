@@ -1,5 +1,5 @@
-import { SessionCsrfRoute, SessionExchangeRoute, SessionStatusRoute } from '@fathom/contracts/http/gateway/v1/session';
 import type { SessionStatus as SessionStatusT } from '@fathom/contracts/http/gateway/v1/session';
+import { SessionCsrfRoute, SessionExchangeRoute, SessionStatusRoute } from '@fathom/contracts/http/gateway/v1/session';
 import type { ApiClient, ApiFailure } from './api-client.js';
 import { APP_VERSION } from './app-version.js';
 import type { CsrfStore } from './csrf.js';
