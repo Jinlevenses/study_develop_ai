@@ -19,6 +19,7 @@ import {
   OPS_TOKEN,
   openWritable,
   queryRows,
+  rawRequest,
   runMode,
   SELF_TOKEN,
   withHome,
@@ -125,6 +126,52 @@ describe('content serve 기동 검사', () => {
       expect(JSON.parse(encoded.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
       expect(encodedPost.status).toBe(404);
       expect(JSON.parse(encodedPost.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      svc.child.send({ type: 'shutdown', v: 1, grace_ms: 200 });
+      expect(await svc.exit).toBe(0);
+    });
+  }, 60_000);
+
+  it('IT-228 absolute-form 요청 대상 우회: 원시 소켓 GET http://…/internal/v1/metrics·POST …/admin/quiesce(토큰 없음) → 404 CT-NOTFOUND-900, quiesce 0(정규형은 401) [NFR-SEC-003][NFR-SEC-019]', async () => {
+    await withHome(async (home) => {
+      // Arrange
+      const { svc, port } = await serve(home.path);
+      const base = `http://127.0.0.1:${port}`;
+      const body = JSON.stringify({ epoch_id: fixedUlid(710) });
+      // Act
+      const metrics = await rawRequest(port, [
+        `GET ${base}/internal/v1/metrics HTTP/1.1`,
+        `Host: 127.0.0.1:${port}`,
+        'Connection: close',
+      ]);
+      const quiesce = await rawRequest(
+        port,
+        [
+          `POST ${base}/internal/v1/admin/quiesce HTTP/1.1`,
+          `Host: 127.0.0.1:${port}`,
+          'Connection: close',
+          `Idempotency-Key: ${fixedUlid(711)}`,
+          'Content-Type: application/json',
+          `Content-Length: ${Buffer.byteLength(body)}`,
+        ],
+        body,
+      );
+      const plain = await httpRequest(port, 'GET', '/internal/v1/metrics');
+      // 이어서 정당한 호출자가 quiesce → resume을 정상 수행(앞의 우회 시도가 quiesce를 걸지 않았다면 같은 epoch로 처음 거는 것이라 200)
+      const real = await httpRequest(port, 'POST', '/internal/v1/admin/quiesce', opsHeaders(fixedUlid(712)), {
+        epoch_id: fixedUlid(713),
+      });
+      const resume = await httpRequest(port, 'POST', '/internal/v1/admin/resume', opsHeaders(fixedUlid(714)), {
+        epoch_id: fixedUlid(713),
+        outcome: 'completed',
+      });
+      // Assert
+      expect(metrics.status).toBe(404);
+      expect(JSON.parse(metrics.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      expect(quiesce.status).toBe(404);
+      expect(JSON.parse(quiesce.body)).toMatchObject({ code: 'CT-NOTFOUND-900' });
+      expect(plain.status).toBe(401);
+      expect(real.status).toBe(200);
+      expect(resume.status).toBe(200);
       svc.child.send({ type: 'shutdown', v: 1, grace_ms: 200 });
       expect(await svc.exit).toBe(0);
     });

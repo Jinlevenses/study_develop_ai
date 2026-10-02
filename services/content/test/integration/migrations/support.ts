@@ -5,6 +5,7 @@ import { once } from 'node:events';
 import { readFileSync } from 'node:fs';
 import http from 'node:http';
 import type { AddressInfo } from 'node:net';
+import net from 'node:net';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { BootstrapEnvelope } from '@fathom/contracts/admin/ipc';
@@ -236,6 +237,24 @@ export function httpRequest(
     );
     req.on('error', reject);
     req.end(payload);
+  });
+}
+
+/** 원시 소켓으로 요청 줄을 그대로 보낸다(absolute-form 같은 `http.request`가 만들지 않는 요청 대상용). */
+export function rawRequest(port: number, lines: string[], body = ''): Promise<HttpResult> {
+  return new Promise((resolve, reject) => {
+    const sock = net.connect({ host: '127.0.0.1', port });
+    let text = '';
+    sock.setEncoding('utf8');
+    sock.on('data', (c: string) => {
+      text += c;
+    });
+    sock.on('error', reject);
+    sock.on('close', () => {
+      const [head = '', ...rest] = text.split('\r\n\r\n');
+      resolve({ status: Number(/^HTTP\/1\.1 (\d{3})/.exec(head)?.[1] ?? 0), body: rest.join('\r\n\r\n') });
+    });
+    sock.write(`${lines.join('\r\n')}\r\n\r\n${body}`);
   });
 }
 

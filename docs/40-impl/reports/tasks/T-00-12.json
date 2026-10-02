@@ -213,7 +213,9 @@
     "IT-214",
     "IT-227",
     "UT-GW-066",
-    "UT-GW-067"
+    "UT-GW-067",
+    "UT-GW-116",
+    "IT-228"
   ],
   "commands": [
     {
@@ -267,9 +269,9 @@
       "note": "supplement r1: boundaries, gate-selftest, tsconfig-paths PASS; check:deps (10, other lanes) and check:security (1: packages/shared-kernel/test/unit/redact/redact.spec.ts) fail outside T-00-12 paths"
     },
     {
-      "cmd": "node tools/gates/check-scope.mjs --task T-00-12",
-      "exit": 2,
-      "note": "supplement r1: engine error input-missing (no committed diff to compare; tree is uncommitted). Scope verified by hand: only services/gateway/** and services/content/{src/config.ts,test/integration/migrations/serve.spec.ts} changed"
+      "cmd": "node tools/gates/check-scope.mjs --task T-00-12 --changed-from <changedFiles list>",
+      "exit": 0,
+      "note": "supplement r2: 0 errors over 102 files (list == changedFiles); earlier exit 2 was the uncommitted-tree engine error"
     },
     {
       "cmd": "node --import tsx tools/si-docs/src/cli.ts ids --task T-00-12",
@@ -284,6 +286,26 @@
       "cmd": "node --import tsx --conditions=source tools/si-docs/src/cli.ts ids --task T-00-12",
       "exit": 1,
       "note": "supplement r1: gateway/content have no no-id or duplicate-id hits; remaining out-of-range hits come from the Brief range wording and content no-req hits from [ADR-xx]/[E0-4] tags (T1 to reconcile)"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-gateway typecheck && pnpm --filter @fathom/svc-content typecheck",
+      "exit": 0,
+      "note": "supplement r2"
+    },
+    {
+      "cmd": "pnpm --filter @fathom/svc-gateway test (71) / test:security (5) / pnpm --filter @fathom/svc-content test:integration (19)",
+      "exit": 0,
+      "note": "supplement r2, includes UT-GW-115/116 and IT-228"
+    },
+    {
+      "cmd": "biome ci services/gateway services/content",
+      "exit": 0,
+      "note": "supplement r2"
+    },
+    {
+      "cmd": "pnpm lint / node tools/gates/run-gates.mjs --stage=g1",
+      "exit": 1,
+      "note": "supplement r2: unchanged, failures only in other lanes (design-tokens/app.css lint; check:deps 10, check:security 1 in packages/shared-kernel redact.spec.ts)"
     }
   ],
   "graphify": "unavailable",
@@ -308,7 +330,10 @@
     "SUPPLEMENT r1 (SSE): stream handler attaches 'close'/'error' before the first write and releases at once if the request was already destroyed; hub drops a connection after MAX_STALLED_WRITES (32) consecutive write()==false, and the client write() destroys the response when writableLength exceeds GATEWAY_LIMITS.sseMaxBufferedBytes (1 MiB; new constant). hub.ts was also restructured into module functions over a HubState object (no behaviour change). Tests: UT-GW-066, UT-GW-067, UT-GW-028 (SSE does not touch last_user_activity_at).",
     "SUPPLEMENT r1: peerFailureToAppError logs gateway.peer.unknown_problem_code (dependency+status only) when a downstream problem code is outside the registry; dev-proxy header comment corrected (upgrades DO pass the preHandler in @fastify/http-proxy 11.x); IT-102 extended: upgrade with Host: evil.test -> 421 and never reaches the upstream 'upgrade' listener (checked over a raw socket because Node's http.request reports 'socket hang up' for the non-upgrade 421).",
     "Brief §4.1.9 deviation recorded (T1 minor): http/static/register.ts registers fastifyStatic WITHOUT `root` (serve:false) and passes the root per sendFile call, so a missing web directory only warns at boot instead of failing plugin registration.",
-    "Cleaned-up uncommitted work-tree changes found at the start of this supplement (path.ts, registerPathGuard, classifyPathOf, content isEncodedBypass, cookie/limit constants dedupe, process.spec dev-fallback probe, SEC-GW-005 merge) were reviewed, completed and tested here; they are part of this supplement and need a fresh T1 review."
+    "Cleaned-up uncommitted work-tree changes found at the start of this supplement (path.ts, registerPathGuard, classifyPathOf, content isEncodedBypass, cookie/limit constants dedupe, process.spec dev-fallback probe, SEC-GW-005 merge) were reviewed, completed and tested here; they are part of this supplement and need a fresh T1 review.",
+    "SUPPLEMENT r2 (blocker x2): absolute-form request-target bypass. Node leaves req.url as http://host/api/... while find-my-way routes /api/..., so the raw-prefix pipeline check and isEncodedBypass both passed. Fix: gateway domain/session/path.ts gains isNonOriginForm() and isEncodedBypass() now returns true for any req.url not starting with / (absolute-form, asterisk-form, empty) — covers registerPathGuard (404 GW-NOTFOUND-900), publicAuth (after Host check) and the web shell through the existing call sites; content config.ts isEncodedBypass likewise (404 CT-NOTFOUND-900). Tests: UT-GW-115 extended (absolute-form/*/empty true, //x false), new UT-GW-116 (real listen on port 0, raw socket, no credentials: GET cli/status, POST bootstrap-token, POST cli/shutdown, GET /internal/v1/activity, GET /api/v1/session -> 404 GW-NOTFOUND-900 with no bootstrap_token; canonical -> 401 GW-AUTH-007), new IT-228 (forked content, raw socket GET http://.../internal/v1/metrics and POST .../admin/quiesce without token -> 404 CT-NOTFOUND-900; canonical -> 401; a legitimate ops quiesce afterwards succeeds, proving the bypass attempt did not quiesce). UT-GW-115/116 verified to fail with the new branch removed. content serve-side IT-228 now used (IT-229 still free); content support.ts gained rawRequest().",
+    "SUPPLEMENT r2 (minor): hub.ts send() catch branch now uses dropConnection(conn) (release + client.close()), same as the stall branch.",
+    "SUPPLEMENT r2 (T1 minor, hygiene): content config.ts keeps the guard (app.ts is allowed for this Task but the guard wraps def.register and is tracked for removal with the T-00-08 root-cause CR; isEncodedBypass duplication is forced by the no cross-service import rule). Commit hygiene (r1 code landed inside b9be52e with Task: T-00-14, T-00-15 trailer) is a T0 action: squash all T-00-12 changes into one commit with a Task: T-00-12 trailer; I ran no git commands."
   ],
   "escalations": [
     {
@@ -335,6 +360,11 @@
       "type": "security",
       "target": "T-00-08",
       "detail": "shared-kernel service/pipeline.ts classifies requests for authentication (authenticate(), cache-control, request-id warn, deadline rule) by the RAW req.url prefix, while find-my-way decodes %XX before routing. /%69nternal/... skips the caller-token check in EVERY service and /%61pi/... skips publicAuth. Requested: authenticate on the decoded or matched route path (req.routeOptions.url / route.path) and enforce caller in route.allowedCallers for /api routes. Gateway and content carry defensive canonical-path onRequest guards until then (UT-GW-112~115, IT-227); other services (learning, ai-gateway, ops-api) need the same pipeline fix or their own guard."
+    },
+    {
+      "type": "security",
+      "target": "T-00-08",
+      "detail": "Absolute-form request targets (RFC 9112 3.2.2: GET http://127.0.0.1:<port>/api/... or /internal/...) are a third variant of the same root cause: Node keeps req.url verbatim while find-my-way routes on the path, so shared-kernel service/pipeline.ts raw startsWith(/api/|/internal/) classification skips authentication for them. Verified against gateway (no-credential cli/status 200, bootstrap-token 201) and content (internal metrics/admin quiesce 200) before the r2 guard. Learning, ai-gateway and ops-api are affected until the pipeline classifies on the matched route (req.routeOptions.url / route.path) or rejects any req.url not starting with / before routing. Gateway/content guards: UT-GW-115/116, IT-228."
     }
   ],
   "rtmUpdates": [
@@ -471,5 +501,5 @@
       ]
     }
   ],
-  "notes": "WP-00-31 checkpoint passed first (content typecheck + 17 integration tests green, DDL byte-identical to DB-01 5.5, tables 53+7, views 7, FTS5 3, triggers 19). portFallbacks getter works: IT-106 (a) test-profile occupied port -> OS port, (b) dev-profile -> 4848..4856. check-hooks content rows 0 errors. Hijacked SSE and bad-URL findings above are CR candidates; CR candidates hit from Brief section 10: 1,2,3,4,5,6,7,8. A duplicate writer edited services/content and gateway test/unit/support.ts and open-stream.ts midway; its drafts were reviewed (content src/DDL/tests kept after verification, open-stream.ts removed) per coordinator instruction. Gateway/content root gates failing (check:deps, check:security, pnpm lint, check-scope) are caused by other lanes only. | supplement r1: encoded-path auth bypass fixed in gateway+content (root cause escalated to T-00-08); IDs renumbered; IT-106(b) hardened. Supplement r1 (T1 review findings): blocker/major encoded-path auth bypass fixed in gateway and content with tests; SSE close/backpressure, activity-vs-SSE, dev-proxy upgrade Host check, peer-failure log, test-ID hygiene fixed; static register deviation recorded. graphify unavailable (no graphify-out/graph.json), rg used."
+  "notes": "WP-00-31 checkpoint passed first (content typecheck + 17 integration tests green, DDL byte-identical to DB-01 5.5, tables 53+7, views 7, FTS5 3, triggers 19). portFallbacks getter works: IT-106 (a) test-profile occupied port -> OS port, (b) dev-profile -> 4848..4856. check-hooks content rows 0 errors. Hijacked SSE and bad-URL findings above are CR candidates; CR candidates hit from Brief section 10: 1,2,3,4,5,6,7,8. A duplicate writer edited services/content and gateway test/unit/support.ts and open-stream.ts midway; its drafts were reviewed (content src/DDL/tests kept after verification, open-stream.ts removed) per coordinator instruction. Gateway/content root gates failing (check:deps, check:security, pnpm lint, check-scope) are caused by other lanes only. | supplement r1: encoded-path auth bypass fixed in gateway+content (root cause escalated to T-00-08); IDs renumbered; IT-106(b) hardened. Supplement r1 (T1 review findings): blocker/major encoded-path auth bypass fixed in gateway and content with tests; SSE close/backpressure, activity-vs-SSE, dev-proxy upgrade Host check, peer-failure log, test-ID hygiene fixed; static register deviation recorded. graphify unavailable (no graphify-out/graph.json), rg used. | supplement r2: absolute-form (non origin-form) request-target auth bypass closed in gateway and content with raw-socket tests; hub catch branch closes the socket; check-scope recorded with --changed-from (exit 0). graphify unavailable (no graph.json), rg used."
 }

@@ -1,4 +1,5 @@
 import { readFileSync, statSync, writeFileSync } from 'node:fs';
+import net from 'node:net';
 import path from 'node:path';
 import { Problem } from '@fathom/contracts/common/problem';
 import { ExchangeResponse, SessionStatus } from '@fathom/contracts/http/gateway/v1/session';
@@ -405,6 +406,70 @@ describe('경로 우회 방어 (퍼센트 인코딩)', () => {
     expect(mint.status).toBe(404);
     expect(mint.body).not.toContain('bootstrap_token');
     expect([404, 421]).toContain(evil.status);
+  });
+});
+
+/** 원시 소켓으로 요청 줄을 그대로 보낸다 — light-my-request는 absolute-form 대상을 정규화해 버리므로 실제 listen이 필요하다. */
+function rawRequest(port: number, lines: string[], body = ''): Promise<{ status: number; body: string }> {
+  return new Promise((resolve, reject) => {
+    const sock = net.connect({ host: '127.0.0.1', port });
+    let text = '';
+    sock.setEncoding('utf8');
+    sock.on('data', (c: string) => {
+      text += c;
+    });
+    sock.on('error', reject);
+    sock.on('close', () => {
+      const [head = '', ...rest] = text.split('\r\n\r\n');
+      resolve({ status: Number(/^HTTP\/1\.1 (\d{3})/.exec(head)?.[1] ?? 0), body: rest.join('\r\n\r\n') });
+    });
+    sock.write(`${lines.join('\r\n')}\r\n\r\n${body}`);
+  });
+}
+
+describe('경로 우회 방어 (absolute-form 요청 대상)', () => {
+  it('UT-GW-116 인증 없이 원시 소켓 absolute-form(GET cli/status·POST bootstrap-token·shutdown·GET /internal/v1/activity) → 404 GW-NOTFOUND-900, 토큰·쿠키 발급 0, 정규형은 401 [NFR-SEC-019][NFR-SEC-002][FR-SET-015]', async () => {
+    // Arrange: 실제 소켓에서 listen(포트 0) — 호스트 검사는 실제 포트를 본다
+    let live: number | null = null;
+    const r = await rig({ listenPort: () => live });
+    await r.app.fastify.listen({ port: 0, host: '127.0.0.1' });
+    const addr = r.app.fastify.server.address();
+    live = typeof addr === 'object' && addr !== null ? addr.port : null;
+    expect(live).not.toBeNull();
+    const port = live ?? 0;
+    const base = `http://127.0.0.1:${port}`;
+    const post = JSON.stringify({ purpose: 'open' });
+    const probes: [string, string, string][] = [
+      ['GET', `${base}/api/v1/cli/status`, ''],
+      ['POST', `${base}/api/v1/cli/bootstrap-token`, post],
+      ['POST', `${base}/api/v1/cli/shutdown`, post],
+      ['GET', `${base}/internal/v1/activity`, ''],
+      ['GET', `${base}/api/v1/session`, ''],
+    ];
+    // Act / Assert
+    for (const [method, target, body] of probes) {
+      const res = await rawRequest(
+        port,
+        [
+          `${method} ${target} HTTP/1.1`,
+          `Host: 127.0.0.1:${port}`,
+          'Connection: close',
+          `Idempotency-Key: ${nextKey()}`,
+          ...(body === '' ? [] : ['Content-Type: application/json', `Content-Length: ${Buffer.byteLength(body)}`]),
+        ],
+        body,
+      );
+      expect(res.status, `${method} ${target}`).toBe(404);
+      expect(problem(res.body).code, `${method} ${target}`).toBe('GW-NOTFOUND-900');
+      expect(res.body, `${method} ${target}`).not.toContain('bootstrap_token');
+    }
+    const plain = await rawRequest(port, [
+      'GET /api/v1/cli/status HTTP/1.1',
+      `Host: 127.0.0.1:${port}`,
+      'Connection: close',
+    ]);
+    expect(plain.status).toBe(401);
+    expect(problem(plain.body).code).toBe('GW-AUTH-007');
   });
 });
 

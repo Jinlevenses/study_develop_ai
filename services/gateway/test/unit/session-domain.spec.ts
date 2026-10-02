@@ -197,7 +197,7 @@ describe('가드 · rate limit · 토큰 저장소 (순수 규칙)', () => {
 });
 
 describe('경로 정규형 검사', () => {
-  it('UT-GW-115 isEncodedBypass: 디코딩하면 /api/·/internal/인데 원본이 정규형이 아니면 true, 정규형·무관 경로·잘못된 인코딩은 false [NFR-SEC-019]', () => {
+  it('UT-GW-115 isEncodedBypass: 디코딩하면 /api/·/internal/인데 원본이 정규형이 아니거나 origin-form이 아닌(absolute-form·*) 대상이면 true, 정규형·무관 경로·잘못된 인코딩은 false [NFR-SEC-019]', () => {
     const bypass = [
       '/%61pi/v1/cli/status',
       '/%69nternal/v1/activity?x=1',
@@ -205,6 +205,11 @@ describe('경로 정규형 검사', () => {
       '/api/v1/%63li/status',
       '/api/v1/cli/%62ootstrap-token',
       '/api/v1/%2e%2e/cli/status',
+      'http://127.0.0.1:4747/api/v1/cli/status',
+      'http://127.0.0.1:4747/internal/v1/activity',
+      'HTTP://localhost/api/v1/cli/shutdown',
+      '*',
+      '',
     ];
     const fine = [
       '/api/v1/cli/status',
@@ -212,6 +217,7 @@ describe('경로 정규형 검사', () => {
       '/api/v1/concepts/%ED%95%9C',
       '/api/v1/things/a%20b',
       '/',
+      '//x',
       '/assets/app-%41b.js',
       '/%61bout',
       '/api/v1/%E0%A4%A',
