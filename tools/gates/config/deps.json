@@ -94,14 +94,34 @@
       "units": ["apps/web"]
     },
     {
+      "name": "@testing-library/dom",
+      "version": "10.4.2",
+      "units": ["apps/web", "packages/ui"]
+    },
+    {
       "name": "@testing-library/react",
       "version": "16.3.3",
       "units": ["apps/web", "packages/ui", "packages/testkit"]
     },
     {
+      "name": "@types/d3-force",
+      "version": "3.0.10",
+      "units": ["tools/packc"]
+    },
+    {
       "name": "@types/node",
       "version": "22.20.4",
       "units": ["*"]
+    },
+    {
+      "name": "@types/react",
+      "version": "19.3.0",
+      "units": ["apps/web", "packages/ui"]
+    },
+    {
+      "name": "@types/react-dom",
+      "version": "19.3.0",
+      "units": ["apps/web", "packages/ui"]
     },
     {
       "name": "@typesafe-ai/sdk",
@@ -241,6 +261,11 @@
       "units": ["apps/web", "packages/ui", "packages/testkit"]
     },
     {
+      "name": "react-is",
+      "version": "19.3.0",
+      "units": ["apps/web"]
+    },
+    {
       "name": "react-markdown",
       "version": "10.1.0",
       "units": ["apps/web"]
@@ -308,7 +333,7 @@
     {
       "name": "vite",
       "version": "8.3.1",
-      "units": ["apps/web"]
+      "units": ["(root)", "apps/web", "packages/testkit"]
     },
     {
       "name": "vitest",
@@ -346,7 +371,11 @@
     "playwright-core",
     "@axe-core/playwright",
     "autocannon",
-    "typescript"
+    "typescript",
+    "@testing-library/dom",
+    "@types/react",
+    "@types/react-dom",
+    "@types/d3-force"
   ],
   "forbidden": [
     {

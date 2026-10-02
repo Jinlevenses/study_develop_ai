@@ -71,6 +71,7 @@ export async function readRows(dbPath: string, sql: string, params: Params = [])
   assertSelectOnly(sql);
   const db = await openReadOnly(dbPath);
   try {
+    // sql-ok: 테스트 전용 읽기 헬퍼 — assertSelectOnly()가 SELECT/WITH 단문만 통과시킨다(T-01-01, R3 승인)
     return db.prepare(sql).all(...params);
   } finally {
     db.close();

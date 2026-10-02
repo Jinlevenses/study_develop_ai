@@ -11,3 +11,5 @@ export const G = (x: number, i: number) => x <i;
 export const H = (n: Pair<number>) => n;
 // biome-ignore lint/plugin: 아이콘 폰트 글리프 — 사유가 있는 예외
 export const I = <i>glyph</i>;
+export const PCaptionSm = <p className="text-sm">K11: 캡션 크기(≥ 12.5px)의 p는 허용</p>;
+export const PCaptionXs = <p className="text-xs">K11: 캡션 크기의 p는 허용</p>;

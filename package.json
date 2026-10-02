@@ -1,10 +1,11 @@
 {
   "name": "fathom-workspace",
   "private": true,
+  "version": "0.1.0",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "engines": {
-    "node": ">=22.15.0"
+    "node": ">=22.18.0"
   },
   "scripts": {
     "dev": "node --disable-warning=ExperimentalWarning --import tsx --conditions=source apps/cli/src/main.ts up --profile=dev --foreground",

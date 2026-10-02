@@ -127,9 +127,32 @@ export function checkSource(rel, src, cfg) {
   const share = cfg.network_share;
   const papi = cfg.push_api;
 
-  // NG-G1 / NG-G2 식별자 어휘
+  // NG-G1 / NG-G2 식별자 어휘 — `import { A as B }`·`export { A as B } from`의 원 이름 A는 외부 모듈의 이름이라 건너뛰고
+  // 지역 이름 B만 검사한다(CO-10). import/export 문의 `{ … }` 안에서 바로 뒤가 `as`인 식별자만 해당(표현식 `x as T`는 대상 아님).
+  const importedOriginal = new Set();
+  for (let i = 0; i < all.length; i++) {
+    const kw = all[i];
+    if (kw.t !== 'id' || (kw.v !== 'import' && kw.v !== 'export') || all[i - 1]?.v === '.') {
+      continue;
+    }
+    let j = i + 1;
+    if (all[j]?.t === 'id' && all[j].v === 'type') {
+      j++;
+    }
+    if (kw.v === 'import' && all[j]?.t === 'id' && all[j + 1]?.v === ',') {
+      j += 2; // import Default, { A as B } from '…'
+    }
+    if (all[j]?.v !== '{') {
+      continue;
+    }
+    for (let k = j + 1; k < all.length && all[k].v !== '}'; k++) {
+      if (all[k].t === 'id' && all[k + 1]?.t === 'id' && all[k + 1].v === 'as') {
+        importedOriginal.add(all[k]);
+      }
+    }
+  }
   for (const t of all) {
-    if (t.t !== 'id') {
+    if (t.t !== 'id' || importedOriginal.has(t)) {
       continue;
     }
     const w = snake(t.v);

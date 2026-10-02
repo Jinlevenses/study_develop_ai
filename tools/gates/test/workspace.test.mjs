@@ -307,7 +307,7 @@ describe('워크스페이스 스모크', () => {
     assert.equal(root.private, true);
     assert.equal(root.type, 'module');
     assert.equal(root.packageManager, 'pnpm@10.33.0');
-    assert.equal(root.engines.node, '>=22.15.0');
+    assert.equal(root.engines.node, '>=22.18.0'); // CR-74 (T-01-01)
   });
 
   it('IT-656 17개 단위 5파일·이름·exports·barrel 없음 [NFR-MAINT-005][NFR-MAINT-001]', () => {

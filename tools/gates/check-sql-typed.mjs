@@ -19,6 +19,7 @@ export async function analyze(root, opts = {}) {
   const SQL_CLASSES = new Set(cfg.receivers.types);
   const SQL_METHODS = new Set(cfg.receivers.methods);
   const { SyntaxKind, NodeFlags } = await import('typescript/unstable/ast');
+  const { SymbolFlags } = await import('typescript/unstable/sync');
   const p = await openProject(root);
   const violations = [];
   const textCache = new Map();
@@ -88,7 +89,15 @@ export async function analyze(root, opts = {}) {
         return a.kind === 'ok' && b.kind === 'ok' ? { kind: 'ok' } : a.kind !== 'ok' ? a : b;
       }
       case SyntaxKind.Identifier: {
-        const sym = p.checker.getSymbolAtLocation(n);
+        let sym = p.checker.getSymbolAtLocation(n);
+        if (sym && (sym.flags & SymbolFlags.Alias) !== 0) {
+          // import { X } / { X as Y } / export { X } from — 별칭은 끝(원 선언)까지 해석한다(CO-06). 해석 실패 = 선언 없음 = dynamic.
+          try {
+            sym = p.checker.getAliasedSymbol(sym);
+          } catch {
+            sym = undefined;
+          }
+        }
         const decl = sym?.valueDeclaration?.resolve(p.project);
         if (!decl || decl.kind !== SyntaxKind.VariableDeclaration || !decl.initializer) {
           return { kind: 'dynamic' }; // 매개변수·초기값 없는 바인딩

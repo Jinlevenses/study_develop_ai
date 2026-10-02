@@ -159,9 +159,10 @@ test('UT-GATE-148 typo-ko/px-literal — design-tokens 밖의 px 값은 위반�
   assert.deepEqual(tsx('export const A = <div className="w-[13px]">x</div>;', 'packages/design-tokens/src/t.tsx'), []);
 });
 
-test('UT-GATE-149 typo-ko/body-min — <p>의 text-2xs·xs·sm와 11px 미만 font-size는 위반이고 span·base·11px 이상은 통과한다 [NFR-UX-009]', () => {
-  assert.deepEqual(tsx('export const A = <p className="text-xs">x</p>;'), ['typo-ko/body-min']);
-  assert.deepEqual(tsx('export const A = <p className="mt-2 text-sm">x</p>;'), ['typo-ko/body-min']);
+test('UT-GATE-149 typo-ko/body-min — <p>의 text-2xs(11px)와 11px 미만 font-size는 위반이고 text-xs·sm(캡션 ≥ 12.5px)·span·base·11px 이상은 통과한다 [NFR-UX-009]', () => {
+  assert.deepEqual(tsx('export const A = <p className="text-2xs">x</p>;'), ['typo-ko/body-min']);
+  assert.deepEqual(tsx('export const A = <p className="text-xs">x</p>;'), []);
+  assert.deepEqual(tsx('export const A = <p className="mt-2 text-sm">x</p>;'), []);
   assert.deepEqual(tsx("export const A = <p className={cn('a', 'text-2xs')}>x</p>;"), ['typo-ko/body-min']);
   assert.deepEqual(tsx('export const A = <p className="text-base">x</p>;'), []);
   assert.deepEqual(tsx('export const A = <span className="text-xs">x</span>;'), []);

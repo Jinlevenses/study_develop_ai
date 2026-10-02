@@ -17,7 +17,7 @@ const SECRET_SCAN_INCLUDE = [
   '{apps,services,packages,tools}/*/src/**',
 ];
 const SECRET_EXTS = ['.ts', '.tsx', '.mjs', '.json', '.yaml', '.yml', '.md', '.txt'];
-const SECRET_EXCLUDE = ['evals/sets/secrets-50/**'];
+const SECRET_EXCLUDE = ['evals/sets/secrets-50/**', 'packages/shared-kernel/test/unit/redact/**']; // CR-76: redact 단위 테스트는 가짜 비밀 리터럴이 입력 데이터다
 const SECRET_PATTERNS = [
   /-----BEGIN ([A-Z]+ )?PRIVATE KEY-----/,
   /sk-ant-[A-Za-z0-9_-]{20,}/,

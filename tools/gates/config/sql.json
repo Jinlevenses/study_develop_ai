@@ -2,7 +2,8 @@
   "version": 1,
   "sanctioned_helpers": ["ident", "sqlIdent", "placeholders", "sqlInt"],
   "receivers": { "types": ["DatabaseSync", "SqlitePort"], "methods": ["prepare", "exec"] },
-  "pragma_allow": ["packages/shared-kernel/src/sqlite/**"],
+  "pragma_allow": ["packages/shared-kernel/src/sqlite/**", "packages/shared-kernel/src/service/maintenance.sql.ts"],
+  "dynamic_arg_exempt": ["packages/contracts/src/**"],
   "begin_allow": ["packages/shared-kernel/src/sqlite/**"],
   "like_scope": ["services/content/src/**"],
   "outbox_allow": ["packages/shared-kernel/src/eventing/**"],
@@ -14,7 +15,12 @@
     "ai-cache.db": "services/ai-gateway",
     "ops.db": "services/ops"
   },
-  "db_paths_exempt": ["packages/testkit/**"],
+  "db_paths_exempt": [
+    "packages/testkit/**",
+    "packages/contracts/src/db-hooks.ts",
+    "packages/contracts/src/admin/epoch-manifest.ts",
+    "packages/contracts/src/admin/admin-routes.ts"
+  ],
   "ledger": { "table": "lr_event", "writer": "services/learning/src/infra/ledger/ledger-writer.ts" },
   "content_ingest": {
     "serving_tables": [

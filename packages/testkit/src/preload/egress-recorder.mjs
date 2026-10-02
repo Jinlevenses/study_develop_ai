@@ -4,6 +4,7 @@
 //   FATHOM_EGRESS_MODE = record(기본) | block   — block이면 기록 후 연결은 ECONNREFUSED, DNS는 ENOTFOUND로 비동기 실패(spawn은 기록만)
 //   FATHOM_HOME        — 없으면 <os.tmpdir()>/fathom-egress/ 에 기록
 // preload이므로 패치 설치(최상위 부작용)와 동기 appendFileSync를 허용한다.
+import childProcess from 'node:child_process';
 import dns from 'node:dns';
 import dnsPromises from 'node:dns/promises';
 import fs from 'node:fs';
@@ -14,14 +15,11 @@ import path from 'node:path';
 import tls from 'node:tls';
 
 const INSTALLED = Symbol.for('fathom.egress-recorder.installed');
-// child_process는 boundaries.json `builtin_restricted`(spawn 소유 경로 한정) 대상이다. 이 파일은 spawn하지 않고 감쌀 뿐이라
-// 정적 import 대신 `process.getBuiltinModule`로 받는다(escalation: scope — T1이 boundaries.json 허용 경로에 추가 결정).
-const childProcess = process.getBuiltinModule('node:child_process');
+// child_process는 boundaries.json `builtin_restricted`(CR-72: `packages/testkit/src/preload/**` 허용) 대상이다.
+// 이 파일은 spawn하지 않고 감쌀 뿐이다. 기본 import = CJS exports 객체이므로 아래 패치가 모든 소비자에게 보인다.
 
 function install() {
-  // biome-ignore lint/style/noProcessEnv: 테스트 전용 preload — 제품 env 표(§8.3) 밖의 testkit 전용 변수(escalation: scope 기록)
   const block = process.env.FATHOM_EGRESS_MODE === 'block';
-  // biome-ignore lint/style/noProcessEnv: 테스트 전용 preload — FATHOM_HOME을 직접 읽는다(shared-kernel 의존 0)
   const home = process.env.FATHOM_HOME;
   const dir = home ? path.join(home, 'tmp', 'egress') : path.join(os.tmpdir(), 'fathom-egress');
   const file = path.join(dir, `${process.pid}.jsonl`);

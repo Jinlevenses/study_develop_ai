@@ -38,6 +38,7 @@
       "child_process": [
         "packages/shared-kernel/src/proc/**",
         "packages/shared-kernel/src/jobs/**",
+        "packages/testkit/src/preload/**",
         "services/content/src/infra/runner/**",
         "services/ops/src/supervisor/**",
         "apps/cli/src/lib/supervisor-launch.ts",

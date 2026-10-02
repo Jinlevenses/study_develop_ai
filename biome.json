@@ -8,6 +8,7 @@
       "!**/dist",
       "!**/*.gen.ts",
       "!spikes",
+      "!packages/contracts/.snapshots",
       "!tools/gates/fixtures",
       "!tools/packc/fixtures",
       "!tools/biome-plugins/__snapshots__",
@@ -66,6 +67,7 @@
     {
       "includes": [
         "packages/shared-kernel/src/config/**",
+        "packages/testkit/src/preload/**",
         "tools/**",
         "**/test/**",
         "tests/**",

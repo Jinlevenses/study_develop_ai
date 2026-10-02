@@ -229,11 +229,9 @@ export function checkSource(rel, src) {
     if (hasNumeric && !tagClassTokens(tokens, tag, lineOf).includes('num')) {
       add(line, 'typo-ko/tabular-nums', `<${tag.name} data-numeric> lacks the "num" class (tabular-nums, K7)`);
     }
-    if (
-      tag.name === 'p' &&
-      tagClassTokens(tokens, tag, lineOf).some((c) => ['text-2xs', 'text-xs', 'text-sm'].includes(c))
-    ) {
-      add(line, 'typo-ko/body-min', '<p> body text below the 15px minimum: text-2xs/xs/sm (K11)');
+    // DS-01 §12 K11: 본문 ≥ 15px, 캡션 ≥ 12.5px — `<p>`는 캡션으로도 쓰이므로 12.5px 미만(text-2xs 11px)만 위반(CO-10 오탐 정정).
+    if (tag.name === 'p' && tagClassTokens(tokens, tag, lineOf).includes('text-2xs')) {
+      add(line, 'typo-ko/body-min', '<p> text below the 12.5px caption minimum: text-2xs (K11)');
     }
   }
 

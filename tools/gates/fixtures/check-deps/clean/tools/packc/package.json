@@ -1,0 +1,10 @@
+{
+  "name": "@fathom/tool-packc",
+  "private": true,
+  "dependencies": {
+    "d3-force": "3.0.0"
+  },
+  "devDependencies": {
+    "@types/d3-force": "3.0.10"
+  }
+}

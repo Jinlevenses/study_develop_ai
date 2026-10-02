@@ -48,6 +48,12 @@ export function loadSqlConfig(configPath) {
       bad(`${k} must be a string array`);
     }
   }
+  // CR-70: dynamic_arg_exempt — 이 경로에서는 sql/dynamic-arg만 끈다(키 누락 = 빈 배열, 배열이 아니면 engine/config).
+  if (cfg.dynamic_arg_exempt === undefined) {
+    cfg.dynamic_arg_exempt = [];
+  } else if (!isStrArray(cfg.dynamic_arg_exempt)) {
+    bad('dynamic_arg_exempt must be a string array');
+  }
   if (!isObject(cfg.receivers) || !isStrArray(cfg.receivers.types) || !isStrArray(cfg.receivers.methods)) {
     bad('receivers must be {types[], methods[]}');
   }
@@ -308,6 +314,7 @@ function scanCalls(rel, src, tokens, cfg, push) {
   const regexNames = regexBoundNames(tokens);
   const lines = src.split('\n');
   const escaped = (line) => ESCAPE_TAGS.some((tag) => hasEscape(lines, line, tag));
+  const dynamicExempt = matchAny(rel, cfg.dynamic_arg_exempt ?? []);
   const scan = (list) => {
     for (let i = 0; i < list.length; i++) {
       const t = list[i];
@@ -340,6 +347,9 @@ function scanCalls(rel, src, tokens, cfg, push) {
       }
       const callEscaped = escaped(t.line) || escaped(callLine);
       const add = (line, rule, message) => {
+        if (rule === 'sql/dynamic-arg' && dynamicExempt) {
+          return;
+        }
         if (!callEscaped && !escaped(line)) {
           push({ file: rel, line, rule, message });
         }
