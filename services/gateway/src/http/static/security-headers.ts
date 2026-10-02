@@ -26,7 +26,7 @@ function retryAfterSeconds(payload: unknown): string {
 
 /**
  * 경로 우회 방어(UT-GW-112~115 · SEC-GW-002 · NFR-SEC-019) — 라우터는 `%XX`를 풀고 매칭하지만 공통 파이프라인의 인증은 원본 접두사를 본다.
- * 디코딩하면 `/api/`·`/internal/`인데 원본이 정규형이 아닌 요청(`/%61pi/…`, `/api/v1/%63li/…`)은 어느 핸들러에도 닿기 전에 404로 거른다.
+ * 디코딩하면 `/api/`·`/internal/`인데 원본이 정규형이 아닌 요청(`/%61pi/…`, `/api/v1/%63li/…`)·origin-form이 아닌 요청 대상(`GET http://127.0.0.1:4747/api/…`)은 어느 핸들러에도 닿기 전에 404로 거른다.
  * 파이프라인 훅 뒤에 등록되지만 핸들러보다 앞이라(onRequest 순차 실행) 인증 누락이 응답으로 새지 않는다.
  * 근본 원인(shared-kernel pipeline.ts의 원본 접두사 분류)은 T-00-08에 security 에스컬레이션으로 올렸다 — 수정이 들어와도 이 방어는 무해한 이중 방어다.
  */

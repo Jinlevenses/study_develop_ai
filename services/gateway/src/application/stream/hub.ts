@@ -76,7 +76,7 @@ function send(conn: Connection, chunk: string): void {
       return;
     }
   } catch {
-    conn.release(); // 쓰기 실패 = 연결 해제(STD-ASY-10)
+    dropConnection(conn); // 쓰기 실패 = 연결 해제 + 소켓 닫기(STD-ASY-10)
     return;
   }
   conn.stalled += 1;

@@ -17,10 +17,14 @@ const ENCODED_UNRESERVED_RE = /%(?:4[1-9A-Fa-f]|5[0-9Aa]|6[1-9A-Fa-f]|7[0-9Aa]|3
 
 /**
  * SEC 경로 우회 방어 — 라우터는 `%XX`를 풀고 매칭하지만 공통 파이프라인의 호출자 인증은 원본 접두사(`/internal/`)를 본다.
- * 디코딩하면 `/internal/`·`/api/`인데 원본이 정규형이 아닌 요청(`/%69nternal/…`)은 핸들러 전에 404로 거른다.
+ * 디코딩하면 `/internal/`·`/api/`인데 원본이 정규형이 아닌 요청(`/%69nternal/…`)과 origin-form이 아닌 요청 대상(`http://host/internal/…`)은 핸들러 전에 404로 거른다.
  * 근본 원인(shared-kernel pipeline.ts)은 T-00-08에 security 에스컬레이션으로 올렸다 — 그 수정이 들어오면 이 방어는 중복이 된다.
  */
 export function isEncodedBypass(url: string): boolean {
+  // origin-form이 아닌 요청 대상(absolute-form `http://host/internal/…`)은 Node가 `req.url`을 그대로 두는데 라우터는 경로로 매칭한다(RFC 9112 §3.2.2).
+  if (!url.startsWith('/')) {
+    return true;
+  }
   const q = url.indexOf('?');
   const raw = q >= 0 ? url.slice(0, q) : url;
   let decoded: string;

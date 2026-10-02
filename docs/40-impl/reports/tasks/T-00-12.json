@@ -61,6 +61,7 @@
     "services/gateway/src/domain/session/csrf.ts",
     "services/gateway/src/domain/session/guards-rate-limit.ts",
     "services/gateway/src/domain/session/guards.ts",
+    "services/gateway/src/domain/session/path.ts",
     "services/gateway/src/domain/session/ports.ts",
     "services/gateway/src/http/api/ai.ts",
     "services/gateway/src/http/api/concepts.ts",
@@ -199,7 +200,20 @@
     "IT-223",
     "IT-224",
     "IT-225",
-    "IT-226"
+    "IT-226",
+    "UT-GW-063",
+    "UT-GW-064",
+    "UT-GW-065",
+    "UT-GW-110",
+    "UT-GW-111",
+    "UT-GW-112",
+    "UT-GW-113",
+    "UT-GW-114",
+    "UT-GW-115",
+    "IT-214",
+    "IT-227",
+    "UT-GW-066",
+    "UT-GW-067"
   ],
   "commands": [
     {
@@ -241,7 +255,7 @@
     {
       "cmd": "pnpm lint",
       "exit": 1,
-      "note": "errors only in other lanes (apps/web, packages/design-tokens css, packages/ui); services/gateway and services/content are biome-clean"
+      "note": "supplement r1: errors only in other lanes (apps/web/src/styles/app.css, packages/design-tokens css); services/gateway and services/content biome-clean"
     },
     {
       "cmd": "node tools/gates/check-hooks.mjs",
@@ -250,12 +264,26 @@
     {
       "cmd": "node tools/gates/run-gates.mjs --stage=g1",
       "exit": 1,
-      "note": "check:boundaries and check:gate-selftest and check:tsconfig-paths PASS; check:deps (10 errors: apps/web, packages/ui, packages/testkit vite, tools/packc, root vite) and check:security (1 error packages/shared-kernel/test redact.spec.ts) fail outside T-00-12 paths"
+      "note": "supplement r1: boundaries, gate-selftest, tsconfig-paths PASS; check:deps (10, other lanes) and check:security (1: packages/shared-kernel/test/unit/redact/redact.spec.ts) fail outside T-00-12 paths"
     },
     {
       "cmd": "node tools/gates/check-scope.mjs --task T-00-12",
+      "exit": 2,
+      "note": "supplement r1: engine error input-missing (no committed diff to compare; tree is uncommitted). Scope verified by hand: only services/gateway/** and services/content/{src/config.ts,test/integration/migrations/serve.spec.ts} changed"
+    },
+    {
+      "cmd": "node --import tsx tools/si-docs/src/cli.ts ids --task T-00-12",
       "exit": 1,
-      "note": "only apps/web files of another lane reported; no services/gateway or services/content file outside allowed_paths"
+      "note": "no si/title no-id and no si/duplicate-id left for services/gateway|content; remaining out-of-range/no-req lines are tool-wide (also UT-GW-001) or pre-existing; other lanes' duplicates (UT-OP-197/198) not ours"
+    },
+    {
+      "cmd": "biome check services/gateway services/content",
+      "exit": 0
+    },
+    {
+      "cmd": "node --import tsx --conditions=source tools/si-docs/src/cli.ts ids --task T-00-12",
+      "exit": 1,
+      "note": "supplement r1: gateway/content have no no-id or duplicate-id hits; remaining out-of-range hits come from the Brief range wording and content no-req hits from [ADR-xx]/[E0-4] tags (T1 to reconcile)"
     }
   ],
   "graphify": "unavailable",
@@ -269,8 +297,18 @@
     "ConsumerManifest/inbox: handler files not needed; stream handler (createStreamHandler) lives in application/stream/register.ts, route files in http/** only register (http imported from application register functions).",
     "IT-108 disconnect case waits for the child 'exit' event (IpcChild.exited) because 'close' never fires after child.disconnect() in Node 22.",
     "content jobs: contentSnapshotJob/contentIntegrityJob take Parameters<typeof makeSnapshotJob>[0] (ServiceDefinitionBase is not exported from service/service); createContentDefinition builds `base` with satisfies ServiceDefinition<ContentPolicies> then spreads jobs.",
-    "Content test layout: support.ts, migrate.spec.ts (IT-210~213 migrate part,215,216,218 - first draft by a duplicate writer, reviewed and kept), serve.spec.ts (IT-213 serve part,219~221,225,226), modes.spec.ts (IT-217,222~224). IT-214 range was merged into IT-213; IT-227~229 left empty.",
-    "Test IDs split by suffix-free duplicates avoided; extra ids used inside the allotted ranges only (UT-GW-020/021/156 pure-rule tests); UT-GW-030..049, 063..099, 110..149, 158..169 and IT-114..119 unused."
+    "Content test layout: support.ts, migrate.spec.ts (IT-210~213 migrate part,215,216,218), serve.spec.ts (IT-214 serve part,219~221,225~227), modes.spec.ts (IT-217,222~224). IT-228~229 left empty.",
+    "SUPPLEMENT r1 (security blocker/major): percent-encoded path bypass. New pure module services/gateway/src/domain/session/path.ts (isEncodedBypass: decoded path starts with /api/ or /internal/ but raw path is not canonical, i.e. prefix or an unreserved char is %-encoded). Applied in (a) an onRequest guard registerPathGuard() in http/static/security-headers.ts (registered first in registerAll; runs after the T-00-08 pipeline hook but before any handler, answers 404 GW-NOTFOUND-900), (b) publicAuth (classifies on the decoded path; 404 for non-canonical), (c) guardWebShellRequest (decoded classification, so /%61pi/v1/nope is 404 not SPA index). Same guard for content: wrapped def.register in services/content/src/config.ts (registerGuarded adds the onRequest hook then calls registerAll) because app.ts is frozen; answers 404 CT-NOTFOUND-900 on /%69nternal/... . Root cause (shared-kernel pipeline.ts authenticate()/onRequest use raw req.url) escalated below.",
+    "SUPPLEMENT r1 (IDs): UT-GW-100a/021a/058a/060a/057b renumbered to UT-GW-110/111/063/064/065; SEC-GW-005a/005b merged into one SEC-GW-005 test (Brief range SEC-GW-002~005,009 has no free number; 006~008 belong to T-00-16); content serve-side IT-213 -> IT-214; IT-112/IT-113 split into two tests. New tests: UT-GW-112 (no auth, /%61pi,/%69nternal,/api%2Fv1,/api/v1/%63li), UT-GW-113 (cookie-only + CSRF/Origin to encoded cli routes, bad Host), UT-GW-114 (static SPA fallback), UT-GW-115 (pure path rule), IT-227 (content serve), plus encoded bad-Host probes appended to SEC-GW-002. Verified UT-GW-112/113/115 fail when the guard is disabled.",
+    "SUPPLEMENT r1: IT-106(b) now binds-probes 4848~4856 and skips only when all 9 are busy; otherwise asserts the port is in range (a [] portFallbacks getter now fails). createSseHub split into module-level helpers (<=60 lines each). Cookie limits: cookie.ts exports COOKIE_MAX_AGE_S/COOKIE_FUTURE_SKEW_S/COOKIE_ROLL_AFTER_S and constants.ts GATEWAY_LIMITS reads them (single source).",
+    "SUPPLEMENT r1 dev-proxy HMR upgrade (reviewer minor): not a gap. @fastify/http-proxy with websocket:true routes upgrades through fastify routing, so the preHandler Host 421 applies; IT-102 asserts evil-Host upgrade = 421 with upstream untouched (comment in dev-proxy.ts updated accordingly). Recorded as dependency note: relies on @fastify/http-proxy handleUpgrade behaviour.",
+    "SUPPLEMENT r1 (blocker): gateway now rejects percent-encoded guarded prefixes. New pure module domain/session/path.ts (isEncodedBypass/classifyPathOf/isGuardedPath/rawPathOf); registerPathGuard (http/static/security-headers.ts) is an onRequest hook that returns 404 GW-NOTFOUND-900 when the decoded path starts with /api/ or /internal/ but the raw path is not canonical; publicAuth classifies CLI/stream/exchange on the decoded path and also rejects non-canonical paths after the Host check; static handler/SPA fallback use the decoded path for the /api|/internal 404. The hook runs after the shared-kernel pipeline hook (the pipeline cannot be changed here), but before any handler. Covered by UT-GW-112~115 and SEC-GW-002 (Host: evil.test variants).",
+    "SUPPLEMENT r1 (major): content has the same guard in config.ts (registerGuarded wraps registerAll; isEncodedBypass duplicated because services must not import each other; 404 CT-NOTFOUND-900). Covered by IT-227 (/%69nternal/... without token -> 404, canonical path -> 401).",
+    "SUPPLEMENT r1 (test IDs): letter-suffixed IDs renamed into unused slots (UT-GW-100a->110, 021a->111, 058a->063, 060a->064, 057b->065); SEC-GW-005a/b merged into one SEC-GW-005 test; IT-213 serve half renamed IT-214. New tests use UT-GW-066/067/112~115, IT-227. Tag [NFR-PORT-006]/[FR-SET-015] added to titles that lacked a requirement ID (RTM PGM-GW-003/004). IT-113 (stderr 0) split out of IT-112 so each test carries one ID.",
+    "SUPPLEMENT r1 (SSE): stream handler attaches 'close'/'error' before the first write and releases at once if the request was already destroyed; hub drops a connection after MAX_STALLED_WRITES (32) consecutive write()==false, and the client write() destroys the response when writableLength exceeds GATEWAY_LIMITS.sseMaxBufferedBytes (1 MiB; new constant). hub.ts was also restructured into module functions over a HubState object (no behaviour change). Tests: UT-GW-066, UT-GW-067, UT-GW-028 (SSE does not touch last_user_activity_at).",
+    "SUPPLEMENT r1: peerFailureToAppError logs gateway.peer.unknown_problem_code (dependency+status only) when a downstream problem code is outside the registry; dev-proxy header comment corrected (upgrades DO pass the preHandler in @fastify/http-proxy 11.x); IT-102 extended: upgrade with Host: evil.test -> 421 and never reaches the upstream 'upgrade' listener (checked over a raw socket because Node's http.request reports 'socket hang up' for the non-upgrade 421).",
+    "Brief §4.1.9 deviation recorded (T1 minor): http/static/register.ts registers fastifyStatic WITHOUT `root` (serve:false) and passes the root per sendFile call, so a missing web directory only warns at boot instead of failing plugin registration.",
+    "Cleaned-up uncommitted work-tree changes found at the start of this supplement (path.ts, registerPathGuard, classifyPathOf, content isEncodedBypass, cookie/limit constants dedupe, process.spec dev-fallback probe, SEC-GW-005 merge) were reviewed, completed and tested here; they are part of this supplement and need a fresh T1 review."
   ],
   "escalations": [
     {
@@ -284,6 +322,19 @@
     {
       "type": "ambiguity",
       "detail": "IF-GW-001 request body BootstrapTokenRequest{purpose} exists in the contract but the Brief does not mention it; purpose is validated and ignored."
+    },
+    {
+      "type": "security",
+      "detail": "T-00-08 shared-kernel service/pipeline.ts: onRequest and authenticate() classify /api/ and /internal/ by raw req.url while find-my-way decodes %XX before routing, so /%61pi/... and /%69nternal/... skip auth in every service (SEC, NFR-SEC-002/003/019). Fix at the root: choose the auth class from the matched route (req.routeOptions.config.route.path / allowedCallers) or reject non-canonical encodings in the pipeline; also compare caller kind with allowedCallers for /api. Workarounds here: gateway registerPathGuard + publicAuth, content registerGuarded (config.ts); they become redundant once fixed. Other services (learning, ai-gateway, ops) need the same until the root fix lands."
+    },
+    {
+      "type": "dependency",
+      "detail": "dev proxy HMR upgrade Host check depends on @fastify/http-proxy routing websocket upgrades through fastify preHandler (verified by IT-102)."
+    },
+    {
+      "type": "security",
+      "target": "T-00-08",
+      "detail": "shared-kernel service/pipeline.ts classifies requests for authentication (authenticate(), cache-control, request-id warn, deadline rule) by the RAW req.url prefix, while find-my-way decodes %XX before routing. /%69nternal/... skips the caller-token check in EVERY service and /%61pi/... skips publicAuth. Requested: authenticate on the decoded or matched route path (req.routeOptions.url / route.path) and enforce caller in route.allowedCallers for /api routes. Gateway and content carry defensive canonical-path onRequest guards until then (UT-GW-112~115, IT-227); other services (learning, ai-gateway, ops-api) need the same pipeline fix or their own guard."
     }
   ],
   "rtmUpdates": [
@@ -369,7 +420,9 @@
         "UT-GW-100..101",
         "SEC-GW-002",
         "SEC-GW-005",
-        "IT-113"
+        "IT-113",
+        "UT-GW-110..115",
+        "UT-GW-063..065"
       ]
     },
     {
@@ -380,7 +433,9 @@
       ],
       "tests": [
         "IT-219",
-        "IT-222..224"
+        "IT-222..224",
+        "IT-214",
+        "IT-227"
       ]
     },
     {
@@ -416,5 +471,5 @@
       ]
     }
   ],
-  "notes": "WP-00-31 checkpoint passed first (content typecheck + 17 integration tests green, DDL byte-identical to DB-01 5.5, tables 53+7, views 7, FTS5 3, triggers 19). portFallbacks getter works: IT-106 (a) test-profile occupied port -> OS port, (b) dev-profile -> 4848..4856. check-hooks content rows 0 errors. Hijacked SSE and bad-URL findings above are CR candidates; CR candidates hit from Brief section 10: 1,2,3,4,5,6,7,8. A duplicate writer edited services/content and gateway test/unit/support.ts and open-stream.ts midway; its drafts were reviewed (content src/DDL/tests kept after verification, open-stream.ts removed) per coordinator instruction. Gateway/content root gates failing (check:deps, check:security, pnpm lint, check-scope) are caused by other lanes only."
+  "notes": "WP-00-31 checkpoint passed first (content typecheck + 17 integration tests green, DDL byte-identical to DB-01 5.5, tables 53+7, views 7, FTS5 3, triggers 19). portFallbacks getter works: IT-106 (a) test-profile occupied port -> OS port, (b) dev-profile -> 4848..4856. check-hooks content rows 0 errors. Hijacked SSE and bad-URL findings above are CR candidates; CR candidates hit from Brief section 10: 1,2,3,4,5,6,7,8. A duplicate writer edited services/content and gateway test/unit/support.ts and open-stream.ts midway; its drafts were reviewed (content src/DDL/tests kept after verification, open-stream.ts removed) per coordinator instruction. Gateway/content root gates failing (check:deps, check:security, pnpm lint, check-scope) are caused by other lanes only. | supplement r1: encoded-path auth bypass fixed in gateway+content (root cause escalated to T-00-08); IDs renumbered; IT-106(b) hardened. Supplement r1 (T1 review findings): blocker/major encoded-path auth bypass fixed in gateway and content with tests; SSE close/backpressure, activity-vs-SSE, dev-proxy upgrade Host check, peer-failure log, test-ID hygiene fixed; static register deviation recorded. graphify unavailable (no graphify-out/graph.json), rg used."
 }
